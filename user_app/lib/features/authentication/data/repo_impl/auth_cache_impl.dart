@@ -1,0 +1,36 @@
+
+import 'package:dartz/dartz.dart';
+import 'package:customer/core/data/cache/client/base_cache_repository.dart';
+import 'package:customer/core/data/cache/preference/shared_preference_constants.dart';
+import 'package:customer/core/domain/error/failure.dart';
+import '../../domain/model/auth_login_req.dart';
+import '../../domain/model/user_info.dart';
+import '../../domain/repository/auth_repository.dart';
+import 'auth_http_impl.dart';
+
+class AuthCacheImpl extends BaseCacheRepository implements AuthRepository {
+  final AuthHttpImpl authHttpImpl;
+
+  AuthCacheImpl(super.cache, this.authHttpImpl);
+
+  @override
+  Future<Either<Failure, UserInfo>> login(AuthLoginReq req) async {
+    Either<Failure, UserInfo> result = await authHttpImpl.login(req);
+
+    if (result.isRight()) {
+      UserInfo? userInfo = result.fold((l) => null, (r) => r);
+      await cache.forever(
+          SharedPreferenceConstant.customerInfo, userInfo!.toJsonString());
+
+      await authHttpImpl.jwtUpdated();
+    }
+
+    return result;
+  }
+
+  @override
+  Future<void> jwtUpdated() async {
+    await authHttpImpl.jwtUpdated();
+  }
+
+}
