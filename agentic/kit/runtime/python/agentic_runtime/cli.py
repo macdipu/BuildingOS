@@ -48,6 +48,10 @@ def _cmd_approve(args, store, orch):
     return orch.approve(args.run_id, args.gate, args.by, args.decision, args.comment)
 
 
+def _cmd_approve_auto(args, store, orch):
+    return orch.approve_auto(args.run_id, args.gate, args.reason)
+
+
 def _cmd_context(args, store, orch):
     return orch.record_context(args.run_id, args.paths)
 
@@ -155,6 +159,7 @@ def _cmd_cancel(args, store, orch):
 COMMANDS = {
     'init': _cmd_init, 'list': _cmd_list, 'start': _cmd_start, 'show': _cmd_show,
     'eligible': _cmd_eligible, 'transition': _cmd_transition, 'approve': _cmd_approve,
+    'approve-auto': _cmd_approve_auto,
     'context': _cmd_context, 'timing': _cmd_timing, 'result': _cmd_result,
     'reopen': _cmd_reopen, 'recover': _cmd_recover, 'repair-marker': _cmd_repair_marker,
     'task-start': _cmd_task_start, 'call-tool': _cmd_call_tool, 'task-finish': _cmd_task_finish,
@@ -194,6 +199,10 @@ def main(argv=None):
     approval.add_argument('--by', required=True)
     approval.add_argument('--decision', choices=['APPROVED', 'REJECTED'], default='APPROVED')
     approval.add_argument('--comment', default='')
+    approve_auto = sub.add_parser('approve-auto', help='Unattended approval for a narrow, evidence-gated low-risk technical-gate class (never release/uat)')
+    approve_auto.add_argument('run_id')
+    approve_auto.add_argument('--gate', choices=['technical'], required=True)
+    approve_auto.add_argument('--reason', required=True)
     context = sub.add_parser('context')
     context.add_argument('run_id')
     context.add_argument('paths', nargs='+', help='Reviewed scope files, relative to --repo from start')
@@ -245,7 +254,7 @@ def main(argv=None):
     close_session.add_argument('--blockers', default='')
     close_session.add_argument('--decisions', default='', help='Notable decisions made this session')
     close_session.add_argument('--next-action', default='', dest='next_action')
-    close_session.add_argument('--status', default='COMPLETED')
+    close_session.add_argument('--status', required=True, help='The run\'s actual status right now, e.g. COMPLETED, BLOCKED, IN_PROGRESS -- no default, so a blocked run can\'t be silently written up as COMPLETED')
     close_session.add_argument('--repo', type=Path, default=REPO_ROOT)
     args = parser.parse_args(argv)
     try:

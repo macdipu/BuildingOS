@@ -37,3 +37,30 @@ def evaluate(stage, approvals):
     gate = REQUIRED_GATES.get(stage)
     reasons = ["Missing required approval gate: " + gate] if gate and not approvals.get(gate, False) else []
     return PolicyDecision(not reasons, reasons)
+
+
+# Unattended approval is only ever wired to the 'technical' gate (see
+# Orchestrator.approve_auto); 'release' and 'uat' always require a real human,
+# no matter how this set changes.
+AUTO_APPROVAL_WORK_TYPES = {"bug", "hotfix"}
+
+
+def auto_approval_eligible(work_type, context_files, technical_result):
+    """Conservative, evidence-gated check for an unattended technical-gate approval.
+
+    Every condition must hold; missing or ambiguous evidence fails closed. The
+    verdict field checked here (outputs.verdict == TECHNICAL_READY) is the same
+    field technical-readiness-verifier already emits for human reviewers -- this
+    does not invent a new trust signal, it just acts on the existing one when the
+    blast radius is small enough (single reviewed file, bug/hotfix only).
+    """
+    if work_type not in AUTO_APPROVAL_WORK_TYPES:
+        return False, "auto-approval only covers bug/hotfix work items"
+    if not context_files or len(context_files) > 1:
+        return False, "auto-approval requires a single reviewed scope file"
+    if not isinstance(technical_result, dict) or technical_result.get("status") != "READY":
+        return False, "technical stage evidence is not READY"
+    outputs = technical_result.get("outputs")
+    if not isinstance(outputs, dict) or outputs.get("verdict") != "TECHNICAL_READY":
+        return False, "technical-readiness-verifier did not attest TECHNICAL_READY"
+    return True, ""
