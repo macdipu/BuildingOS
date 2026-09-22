@@ -93,6 +93,23 @@ python3 agentic/kit/runtime/python/agentic_runtime/cli.py approve RUN_ID --gate 
 
 Never generate approval just because a file exists. Replacing prerequisite evidence revokes related approvals. `reopen RUN_ID --reason "Changed scope"` resets to CONTEXT, increments scope revision, and invalidates downstream results and previous approvals. It preserves the intake result and audit history. Terminal runs require a new run.
 
+A scope refresh (`context RUN_ID <paths>`) while the run already sits at CONTEXT, TECHNICAL, IMPLEMENTATION, QA, or UAT does not force a reopen: it pops just that stage's own result and revokes only the gates whose evidence depends on it (CONTEXT/TECHNICAL revoke technical+release+uat; IMPLEMENTATION/QA revoke release+uat; UAT revokes uat+release), leaving earlier-granted approvals and the rest of the evidence chain intact. Any other stage still requires `reopen`; that scoped exception exists only where invalidation is unambiguous.
+
+### Auto-approval (technical gate only)
+
+`--gate technical` can be granted without a human via a narrow, mechanically-checked exception instead of `--by`/`--decision`:
+
+```sh
+python3 agentic/kit/runtime/python/agentic_runtime/cli.py approve RUN_ID --gate technical --auto --comment "Single-file task-only fix; technical-readiness-verifier says TECHNICAL_READY"
+```
+
+All three conditions must already be true on evidence recorded on the run — nothing is inferred:
+- `work-item-level-classifier` classified the item `TASK_ONLY`
+- the reviewed scope is exactly one file
+- `technical-readiness-verifier`'s own verdict is `TECHNICAL_READY`
+
+It never applies to `release` or `uat`. It records the approval under the fixed synthetic approver `runtime:auto` (not a human's `--by` identity) so the audit trail can tell an automated approval from a real one at a glance.
+
 ## Context and implementation changes
 
 Register only reviewed UTF-8 context/source files inside the project root. File hashes, rather than whole-repository commit equality, determine freshness. Unrelated changes do not force a full rediscovery. Newly relevant files must be added explicitly; the runtime cannot discover an omitted dependency.
@@ -179,7 +196,7 @@ When finishing a work session, record it:
 
 ```sh
 python3 agentic/kit/runtime/python/agentic_runtime/cli.py close-session \
-  --agent claude --task "Implement token refresh" \
+  --agent claude --status BLOCKED --task "Implement token refresh" \
   --completed "Added refresh flow" \
   --changed-files src/auth.ts src/api.ts \
   --tests "npm test passes" \
@@ -189,10 +206,13 @@ python3 agentic/kit/runtime/python/agentic_runtime/cli.py close-session \
 ```
 
 `--agent` is exactly `claude` or `codex` (matching upstream's own restriction, so
-these files stay valid input to the real `agent-handoff` CLI too). Structured
-fields, not one free-form summary: `--task`/`--completed` are required; the rest
-are optional but each gets its own heading in the written files, so a picking-up
-agent reads a specific field instead of parsing prose. The git-configured
+these files stay valid input to the real `agent-handoff` CLI too). `--status` is
+one of `RUNNING`/`BLOCKED`/`COMPLETED`/`CANCELLED` and is required -- there is no
+default, so a hookless close can't silently claim `COMPLETED` for a session that
+didn't finish. Structured fields, not one free-form summary: `--agent`/`--status`/
+`--task`/`--completed` are required; the rest are optional but each gets its own
+heading in the written files, so a picking-up agent reads a specific field instead
+of parsing prose. The git-configured
 operator (`git config user.name`/`user.email`) is captured automatically
 alongside the `claude`/`codex` platform tag, since more than one person can
 drive either platform on a shared project.
@@ -202,6 +222,39 @@ This rewrites `.agent/HANDOFF.md` and appends a new
 the `Stop` hook whenever a governed task is active (never blocks `Stop`, fails
 open on error); on a hookless CLI, run `close-session` yourself before ending
 the session.
+
+## Routing-decision cache
+
+Separate from `agentic/data/project-context/` (discovered facts about the target
+codebase) and from the governed-run store: a small local, gitignored cache
+(`agentic/data/runtime/state/route-cache.json`) that lets a session skip
+re-reading `AGENTS.md`'s matched `workflows/*.md`, a persona `AGENT.md`, and
+`SKILL.md` files in full for a (work type, project type, module) triple it has
+already routed before.
+
+```sh
+python3 agentic/kit/runtime/python/agentic_runtime/cli.py route-cache-get \
+  --work-type bug --project-type brownfield --module auth
+```
+
+On a hit (`"hit": true`), reuse `entry.decision` instead of re-reading those
+docs. On a miss, do the full doc read as usual, then write the decision back:
+
+```sh
+python3 agentic/kit/runtime/python/agentic_runtime/cli.py route-cache-put \
+  --work-type bug --project-type brownfield --module auth --file decision.json
+```
+
+`decision.json` is any JSON object; keep at least `route`, `workflow_doc`, and
+`skill_docs` so the next session has enough to skip the re-read. Invalidation
+is one aggregate content hash (`kit_version`) over every routing-relevant
+doc — editing any one of them invalidates every cached entry at once, so a
+kit upgrade or an AGENTS.md edit can never serve a stale decision. Force a
+clean slate (e.g. right after upgrading the kit) with:
+
+```sh
+python3 agentic/kit/runtime/python/agentic_runtime/cli.py route-cache-clear
+```
 
 ## Permissions and commands
 

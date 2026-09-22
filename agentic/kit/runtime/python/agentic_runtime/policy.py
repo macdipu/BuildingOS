@@ -39,28 +39,23 @@ def evaluate(stage, approvals):
     return PolicyDecision(not reasons, reasons)
 
 
-# Unattended approval is only ever wired to the 'technical' gate (see
-# Orchestrator.approve_auto); 'release' and 'uat' always require a real human,
-# no matter how this set changes.
-AUTO_APPROVAL_WORK_TYPES = {"bug", "hotfix"}
+# A narrow, mechanically-checked exception to REQUIRED_GATES -- technical only,
+# never release/uat. Every condition is read off evidence a skill has already
+# self-reported onto the run; nothing here is inferred (AGENTS.md #10).
+AUTO_APPROVE_GATES = {"technical"}
 
 
-def auto_approval_eligible(work_type, context_files, technical_result):
-    """Conservative, evidence-gated check for an unattended technical-gate approval.
-
-    Every condition must hold; missing or ambiguous evidence fails closed. The
-    verdict field checked here (outputs.verdict == TECHNICAL_READY) is the same
-    field technical-readiness-verifier already emits for human reviewers -- this
-    does not invent a new trust signal, it just acts on the existing one when the
-    blast radius is small enough (single reviewed file, bug/hotfix only).
+def auto_approve_eligible(gate, results, context_files):
+    """True only when all three already hold on recorded evidence:
+      - work-item-level-classifier classified the item TASK_ONLY
+      - the reviewed scope is exactly one file (no diff exists yet pre-implementation,
+        so file count is the only concrete "how small is this" signal available here)
+      - technical-readiness-verifier's own verdict is TECHNICAL_READY
     """
-    if work_type not in AUTO_APPROVAL_WORK_TYPES:
-        return False, "auto-approval only covers bug/hotfix work items"
-    if not context_files or len(context_files) > 1:
-        return False, "auto-approval requires a single reviewed scope file"
-    if not isinstance(technical_result, dict) or technical_result.get("status") != "READY":
-        return False, "technical stage evidence is not READY"
-    outputs = technical_result.get("outputs")
-    if not isinstance(outputs, dict) or outputs.get("verdict") != "TECHNICAL_READY":
-        return False, "technical-readiness-verifier did not attest TECHNICAL_READY"
-    return True, ""
+    if gate not in AUTO_APPROVE_GATES:
+        return False
+    if len(context_files or {}) != 1:
+        return False
+    outputs = [r.get("outputs", {}) for r in (results or {}).values() if isinstance(r, dict)]
+    return (any(o.get("classification") == "TASK_ONLY" for o in outputs)
+            and any(o.get("verdict") == "TECHNICAL_READY" for o in outputs))

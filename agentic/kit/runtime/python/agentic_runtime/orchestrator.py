@@ -7,11 +7,31 @@ from pathlib import Path
 from .context import snapshot, snapshot_state
 from .contracts import SUCCESS_STATUSES, validate_result
 from .models import WorkflowRun
-from .policy import auto_approval_eligible, evaluate, workflow_route
+from .policy import auto_approve_eligible, evaluate, workflow_route
 from .registry import SkillRegistry, ToolRegistry
 from .security import redact_value
 from .timing import durations, now
 from .tools import NATIVE_TOOL_CAPABILITY, command_rule, validate_write
+
+# Gates whose evidence depends on scope files reviewed at each stage; a scope
+# change there makes those gates' evidence suspect without invalidating the
+# whole run. Stages absent here have no established precedent for a scoped
+# invalidation and still require a full reopen.
+_STAGE_GATE_REVOKE = {
+    'CONTEXT': ('technical', 'release', 'uat'),
+    'TECHNICAL': ('technical', 'release', 'uat'),
+    'IMPLEMENTATION': ('release', 'uat'),
+    'QA': ('release', 'uat'),
+    'UAT': ('uat', 'release'),
+}
+
+# Recorded as the approver on an auto-approved gate (see Orchestrator.auto_approve)
+# so the audit trail can tell an automated approval from a human's at a glance.
+AUTO_APPROVER = 'runtime:auto'
+
+
+def _gate_prerequisite(gate, work_type):
+    return {'technical': 'CONTEXT' if work_type == 'existing_task' else 'TECHNICAL', 'release': 'QA', 'uat': 'UAT'}.get(gate)
 
 
 class Orchestrator:
@@ -83,19 +103,6 @@ class Orchestrator:
         self._current_config(run)
         return self.registry.eligible(run.stage)
 
-    # Stages whose own evidence can be invalidated in place when reviewed scope
-    # files change, instead of forcing a full reopen() back to bare INTAKE.
-    # Earlier stages' evidence (and any stage not listed here) is left untouched --
-    # only this stage's result and the approvals resting on it are revoked, so a
-    # governed run doesn't have to redo CONTEXT/IMPACT work just because TECHNICAL
-    # went stale.
-    _SCOPED_INVALIDATION_GATES = {
-        'CONTEXT': ('technical', 'release', 'uat'),
-        'IMPACT': ('technical', 'release', 'uat'),
-        'TECHNICAL': ('technical', 'release', 'uat'),
-        'IMPLEMENTATION': ('release', 'uat'),
-    }
-
     def record_context(self, run_id, paths):
         with self.store.transaction():
             run = self._run(run_id)
@@ -104,11 +111,11 @@ class Orchestrator:
             recorded = snapshot(run.metadata['repo'], paths)
             previous = run.metadata.get('context')
             changed = bool(previous) and previous['files'] != recorded['files']
-            if changed and run.stage != 'INTAKE' and run.stage not in self._SCOPED_INVALIDATION_GATES:
+            if changed and run.stage not in {'INTAKE', *_STAGE_GATE_REVOKE}:
                 raise ValueError('Scope files changed after review; reopen the run to invalidate downstream evidence')
-            if changed and run.stage in self._SCOPED_INVALIDATION_GATES:
+            if changed and run.stage in _STAGE_GATE_REVOKE:
                 run.metadata['results'].pop(run.stage, None)
-                self._revoke(run, self._SCOPED_INVALIDATION_GATES[run.stage])
+                self._revoke(run, _STAGE_GATE_REVOKE[run.stage])
             run.metadata['context'] = recorded
             self._save(run, 'CONTEXT_REFRESHED', {'paths': paths})
         return run
@@ -154,7 +161,7 @@ class Orchestrator:
             self._current_config(run)
             if run.metadata['active_task'] and decision == 'APPROVED':
                 raise ValueError('Cannot approve while a task is active')
-            prerequisite = {'technical': 'CONTEXT' if run.work_type == 'existing_task' else 'TECHNICAL', 'release': 'QA', 'uat': 'UAT'}.get(gate)
+            prerequisite = _gate_prerequisite(gate, run.work_type)
             if prerequisite not in run.metadata['route']:
                 raise ValueError('Gate is not applicable to this workflow')
             if decision == 'APPROVED':
@@ -165,19 +172,13 @@ class Orchestrator:
             self._save(run, 'APPROVAL_RECORDED', {'gate': gate, 'decision': decision, 'by': approver})
         return run
 
-    def approve_auto(self, run_id, gate, reason):
-        """Unattended approval for a narrow, evidence-gated low-risk class of change.
-
-        Deliberately a separate code path from approve(): it can never be pointed at
-        'release' or 'uat', it never accepts or fabricates a human --by name (the
-        approver of record is always the literal string 'auto:policy'), and every
-        eligibility condition comes from evidence a skill already submitted -- see
-        policy.auto_approval_eligible. AGENTS.md item 10 ("never infer human
-        approval") still applies to release/uat and to anything this function's
-        eligibility check rejects.
-        """
-        if gate != 'technical':
-            raise ValueError('Auto-approval is only available for the technical gate')
+    def auto_approve(self, run_id, gate, reason):
+        """A narrow, mechanically-checked exception to the human approval gate --
+        technical only, never release/uat -- for evidence a skill has already
+        self-reported onto the run (see policy.auto_approve_eligible). Recorded
+        under the fixed AUTO_APPROVER approver so the audit trail stays
+        distinguishable from a human's approval at a glance; never infers or
+        fabricates human sign-off (AGENTS.md #10)."""
         if not reason.strip():
             raise ValueError('Auto-approval requires a reason')
         with self.store.transaction():
@@ -185,16 +186,17 @@ class Orchestrator:
             self._current_config(run)
             if run.metadata['active_task']:
                 raise ValueError('Cannot approve while a task is active')
-            prerequisite = 'CONTEXT' if run.work_type == 'existing_task' else 'TECHNICAL'
+            prerequisite = _gate_prerequisite(gate, run.work_type)
             if prerequisite not in run.metadata['route']:
                 raise ValueError('Gate is not applicable to this workflow')
-            technical_result = run.metadata['results'].get(prerequisite, {})
-            context_files = list(run.metadata.get('context', {}).get('files', {}))
-            eligible, why = auto_approval_eligible(run.work_type, context_files, technical_result)
-            if not eligible:
-                raise ValueError('Not eligible for auto-approval: ' + why)
+            if run.metadata['results'].get(prerequisite, {}).get('status') not in SUCCESS_STATUSES:
+                raise ValueError('Approval needs ready evidence for ' + prerequisite)
             self._fresh(run)
-            self.store.approval(run_id, gate, 'auto:policy', 'APPROVED', reason, now(), run.metadata['scope_revision'])
+            context_files = run.metadata.get('context', {}).get('files', {})
+            if not auto_approve_eligible(gate, run.metadata['results'], context_files):
+                raise ValueError('Not eligible for auto-approval: requires a recorded TASK_ONLY '
+                                  'classification, a single-file scope, and a TECHNICAL_READY verdict')
+            self.store.approval(run_id, gate, AUTO_APPROVER, 'APPROVED', reason, now(), run.metadata['scope_revision'])
             self._save(run, 'AUTO_APPROVAL_RECORDED', {'gate': gate, 'reason': reason})
         return run
 
@@ -292,7 +294,7 @@ class Orchestrator:
             run.metadata['attempts'][key] = attempts + 1
             task = {'id': uuid.uuid4().hex, 'skill': skill, 'started_at': now(), 'tool_calls': 0}
             run.metadata['active_task'] = task
-            self._revoke(run, {'CONTEXT': ('technical', 'release', 'uat'), 'TECHNICAL': ('technical', 'release', 'uat'), 'QA': ('release', 'uat'), 'UAT': ('uat', 'release')}.get(run.stage, ()))
+            self._revoke(run, _STAGE_GATE_REVOKE.get(run.stage, ()))
             run.metadata['results'].pop(run.stage, None)
             run.status = 'RUNNING'
             self.store.timing(run_id, task['id'], 'STARTED', task['started_at'], {'skill': skill, 'retry_count': attempts})
