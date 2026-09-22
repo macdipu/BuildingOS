@@ -1,0 +1,47 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://buildingos.internal/contracts/kafka/event-envelope.schema.json",
+  "title": "BuildingOS Kafka event envelope",
+  "description": "Versioned transport envelope for events published to Kafka (SRS-BOS-001 PF-03). Carries no invented business payload; the `data` field shape is owned by the publishing domain and defined in its own contract when implemented.",
+  "type": "object",
+  "required": ["eventId", "eventType", "eventVersion", "occurredAt", "producer", "correlationId", "data"],
+  "additionalProperties": false,
+  "properties": {
+    "eventId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Unique identifier for this event instance; used for consumer-side idempotency."
+    },
+    "eventType": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+\\.[a-z0-9-]+$",
+      "description": "Dot-separated event type, e.g. 'identity.platform-metadata'. Versioned separately via eventVersion."
+    },
+    "eventVersion": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Version of this event type's payload schema; incremented on a breaking change to `data`."
+    },
+    "occurredAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "UTC timestamp the producing service recorded the event."
+    },
+    "producer": {
+      "type": "string",
+      "description": "Publishing service name, e.g. 'identity-service'."
+    },
+    "correlationId": {
+      "type": "string",
+      "description": "Correlation identifier propagated from the originating request (see platform-web CorrelationFilter)."
+    },
+    "buildingId": {
+      "type": "string",
+      "description": "Building the event pertains to, when applicable. Omitted for platform-scoped events with no single building."
+    },
+    "data": {
+      "type": "object",
+      "description": "Domain-owned payload. Empty/no-op for foundation smoke checks; real business payloads are defined when the first business writer implements idempotency/outbox alongside this envelope."
+    }
+  }
+}

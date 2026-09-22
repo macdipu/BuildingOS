@@ -1,0 +1,10 @@
+
+/agentic/data/runtime/state/
+/agentic/data/runtime/logs/
+/agentic/data/artifacts/
+/agentic-backups/
+__pycache__/
+*.py[cod]
+/infra/docker/.env
+target/
+.DS_Store

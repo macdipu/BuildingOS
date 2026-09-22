@@ -1,0 +1,8 @@
+{
+  "mode": "local-harness",
+  "agent": "codex",
+  "frameworks": [],
+  "unknowns": [
+    "Framework not detected; register reviewed project build/test commands"
+  ]
+}

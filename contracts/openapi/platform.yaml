@@ -1,0 +1,103 @@
+openapi: 3.0.3
+info:
+  title: BuildingOS platform foundation API
+  version: "0.1.0"
+  description: >
+    Exact operational routes for the BOS-001 platform foundation milestone.
+    Read-only service metadata only; no business data or mutation.
+servers:
+  - url: http://localhost:8080
+    description: Local gateway
+paths:
+  /api/v1/platform/identity:
+    get:
+      summary: Identity service metadata (via gateway)
+      description: Gateway forwards to identity-service's internal /internal/platform/info.
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Metadata envelope
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiEnvelopeMetadata" }
+        "401":
+          description: Missing/expired/wrong-audience/wrong-issuer/bad-signature token
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "503":
+          description: Downstream identity-service unavailable (sanitized)
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+  /api/v1/platform/building:
+    get:
+      summary: Building service metadata (via gateway)
+      description: Gateway forwards to building-service's internal /internal/platform/info.
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Metadata envelope
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiEnvelopeMetadata" }
+        "401":
+          description: Missing/expired/wrong-audience/wrong-issuer/bad-signature token
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "503":
+          description: Downstream building-service unavailable (sanitized)
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+  /internal/platform/info:
+    get:
+      summary: Service metadata (direct, identity-service or building-service)
+      description: >
+        Same route and behavior on both services; distinguished by which service instance answers.
+        Not exposed publicly outside the gateway in a deployed environment.
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Metadata envelope
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiEnvelopeMetadata" }
+        "401":
+          description: Missing/expired/wrong-audience/wrong-issuer/bad-signature token
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    ApiEnvelopeMetadata:
+      type: object
+      required: [success, data, meta, traceId]
+      properties:
+        success: { type: boolean, enum: [true] }
+        data:
+          type: object
+          required: [service]
+          properties:
+            service: { type: string, example: identity-service }
+        meta: { type: object }
+        traceId: { type: string, format: uuid }
+    ApiError:
+      type: object
+      required: [success, code, message, traceId]
+      properties:
+        success: { type: boolean, enum: [false] }
+        code:
+          type: string
+          enum: [AUTH_REQUIRED, ACCESS_DENIED, SERVICE_UNAVAILABLE]
+        message: { type: string }
+        traceId: { type: string, format: uuid }

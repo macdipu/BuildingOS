@@ -1,1 +1,27 @@
-{}
+{
+  "new_feature:brownfield:buildingos": {
+    "cached_at": "2026-09-22T08:45:22.379020+00:00",
+    "decision": {
+      "classification": "STORY_TASK",
+      "context_workflow_doc": "agentic/kit/workflows/brownfield.md",
+      "gate": "Scope-bound technical approval before implementation; no single-file auto-approval exception",
+      "planning": "NO_REPLAN",
+      "route": "INTAKE -> CONTEXT -> REQUIREMENTS -> TECHNICAL -> IMPLEMENTATION -> REVIEW -> QA -> RELEASE -> COMPLETED",
+      "scope": "BOS-001 platform foundation; existing Flutter integration seams and greenfield backend",
+      "skill_docs": [
+        "agentic/kit/skills/agentic-sdlc-orchestrator/SKILL.md",
+        "agentic/kit/skills/document-intake-adapter/SKILL.md",
+        "agentic/kit/skills/project-discovery-agent/SKILL.md",
+        "agentic/kit/skills/business-requirement-analyzer/SKILL.md",
+        "agentic/kit/skills/technical-architecture-planner/SKILL.md",
+        "agentic/kit/skills/technical-spec-generator/SKILL.md",
+        "agentic/kit/skills/adr-generator/SKILL.md",
+        "agentic/kit/skills/work-item-level-classifier/SKILL.md",
+        "agentic/kit/skills/task-breakdown-agent/SKILL.md",
+        "agentic/kit/skills/technical-readiness-verifier/SKILL.md"
+      ],
+      "workflow_doc": "agentic/kit/workflows/new-feature.md"
+    },
+    "kit_version": "997f6a5d5a93da63efaaea3a35db1bb30e1aef8bf9b6544a5a187bc1267da094"
+  }
+}

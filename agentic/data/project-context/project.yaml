@@ -1,7 +1,19 @@
-project: CHANGE_ME
-project_type: unknown
-context_status: MISSING
-repositories: []
-modules: []
-integrations: []
+project: BuildingOS
+project_type: brownfield
+context_status: AVAILABLE
+repositories:
+  - path: .
+    role: monorepo
+modules:
+  - name: user_app
+    path: user_app
+    status: EXISTING_TEMPLATE
+  - name: backend
+    path: backend
+    status: PLANNED
+integrations:
+  - name: PostgreSQL
+    status: PLANNED
+  - name: Kafka
+    status: PLANNED
 last_indexed_revision: null
