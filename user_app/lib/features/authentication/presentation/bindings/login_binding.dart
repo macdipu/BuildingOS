@@ -8,6 +8,8 @@ import 'package:customer/features/authentication/domain/repository/auth_reposito
 import 'package:customer/features/authentication/presentation/login/controller/login_screen_controller.dart';
 import 'package:customer/features/authentication/presentation/reset_pin/controller/reset_pin_controller.dart';
 import '../../domain/use_case/do_login_use_case.dart';
+import '../../domain/use_case/start_otp_use_case.dart';
+import '../../domain/use_case/verify_otp_use_case.dart';
 
 class LoginBinding extends Bindings {
   @override
@@ -24,6 +26,16 @@ class LoginBinding extends Bindings {
 
     Get.lazyPut<DoLoginUseCase>(
       () => DoLoginUseCase(Get.find<AuthRepository>()),
+      fenix: true,
+    );
+
+    Get.lazyPut<StartOtpUseCase>(
+      () => StartOtpUseCase(Get.find<AuthRepository>()),
+      fenix: true,
+    );
+
+    Get.lazyPut<VerifyOtpUseCase>(
+      () => VerifyOtpUseCase(Get.find<AuthRepository>()),
       fenix: true,
     );
 

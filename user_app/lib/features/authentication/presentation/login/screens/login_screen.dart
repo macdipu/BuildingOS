@@ -1,5 +1,6 @@
 import 'package:flutter/services.dart';
 import 'package:customer/core/presentation/theme/theme_extensions.dart';
+import 'package:customer/core/presentation/utils/state_status.dart';
 import 'package:customer/core/presentation/widgets/images/round_image.dart';
 import 'package:customer/core/presentation/widgets/text_field/custom_text_field.dart';
 import 'package:customer/core/presentation/widgets/buttons/common_button.dart';
@@ -39,10 +40,6 @@ class _LoginScreenState extends State<LoginScreen> {
                   _branding(),
                   const SizedBox(height: 40),
                   _phoneNumber(),
-                  const SizedBox(height: 16),
-                  _passwordInput(),
-                  const SizedBox(height: 16),
-                  _pinReset(),
                   const SizedBox(height: 16),
                   _submitButton(),
                   const SizedBox(height: 8),
@@ -105,45 +102,6 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  Widget _passwordInput() {
-    return Obx(() {
-      return CustomTextField(
-        controller: _controller.pinController,
-        label: TextEnum.pin.tr,
-        obscureText: _controller.obscureText.value,
-        keyboardType: TextInputType.number,
-        inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-        suffixIcon: IconButton(
-          icon: Icon(
-            _controller.obscureText.value
-                ? Icons.visibility_off_outlined
-                : Icons.visibility_outlined,
-          ),
-          onPressed: _controller.toggleObscureText,
-        ),
-      );
-    });
-  }
-
-  Widget _pinReset() {
-    return Align(
-      alignment: Alignment.centerLeft,
-      child: GestureDetector(
-        onTap: () {
-          // Get.toNamed(AppRoutes.forgotPin);
-        },
-        child: Text(
-          TextEnum.forgotPin.tr,
-          style: TextStyle(
-            color: context.primary,
-            fontSize: 14,
-            fontWeight: FontWeight.w500,
-          ),
-        ),
-      ),
-    );
-  }
-
   Widget _bottomImage() {
     return Align(
       alignment: Alignment.bottomCenter,
@@ -156,16 +114,19 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   Widget _submitButton() {
-    return CommonButton.elevated(
-      title: TextEnum.next.tr,
-      height: 48,
-      width: MediaQuery.of(context).size.width - 32,
-      onTap: () async {
-        final success = await _controller.login();
-        if (success) {
-          Get.offAllNamed(AppRoutes.appShell);
-        }
-      },
+    return Obx(
+      () => CommonButton.elevated(
+        title: TextEnum.next.tr,
+        height: 48,
+        width: MediaQuery.of(context).size.width - 32,
+        isLoading: _controller.status.value == StateStatus.loading,
+        onTap: () async {
+          final success = await _controller.requestOtp();
+          if (success) {
+            Get.toNamed(AppRoutes.loginOtpVerify);
+          }
+        },
+      ),
     );
   }
 

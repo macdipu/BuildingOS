@@ -5,8 +5,9 @@ class RepositoryUnavailableException implements Exception {
 class ApiException implements Exception {
   final int code;
   final String message;
+  final dynamic body;
 
-  ApiException(this.code, this.message);
+  ApiException(this.code, this.message, [this.body]);
 
   @override
   String toString() {
@@ -19,7 +20,7 @@ class BadRequestException extends ApiException {
 }
 
 class UnauthorizedException extends ApiException {
-  UnauthorizedException(String message) : super(401, message);
+  UnauthorizedException(String message, [dynamic body]) : super(401, message, body);
 }
 
 class ForbiddenException extends ApiException {

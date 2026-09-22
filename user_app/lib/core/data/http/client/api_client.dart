@@ -162,7 +162,7 @@ class ApiClient {
       if (code >= 200 && code < 300) {
         return Resource(response: response.data, messageCode: code);
       } else if (code == 401) {
-        throw UnauthorizedException('unauthorized exception');
+        throw UnauthorizedException('unauthorized exception', response.data);
       } else if (code == 403) {
         throw ForbiddenException('forbidden exception');
       } else if (code == 417) {

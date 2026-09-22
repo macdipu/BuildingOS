@@ -10,6 +10,7 @@ class UserInfo {
   final String accessToken;
   final String? refreshToken;
   final String? email;
+  final List<String> platformRoles;
 
   UserInfo({
     this.phoneNumber,
@@ -19,6 +20,7 @@ class UserInfo {
     required this.accessToken,
     required this.refreshToken,
     this.email,
+    this.platformRoles = const [],
   });
 
   Map<String, dynamic> toJson() => {
@@ -29,6 +31,7 @@ class UserInfo {
         'access_token': accessToken,
         'refresh_token': refreshToken,
         'email': email,
+        'platform_roles': platformRoles,
       };
 
   factory UserInfo.fromJson(Map<String, dynamic> json) => UserInfo(
@@ -41,6 +44,10 @@ class UserInfo {
         accessToken: json['access_token'],
         refreshToken: json['refresh_token'],
         email: json['email'],
+        platformRoles: (json['platform_roles'] as List<dynamic>?)
+                ?.map((e) => e.toString())
+                .toList() ??
+            const [],
       );
 
   factory UserInfo.fromApiJson(Map<String, dynamic> json) {
@@ -53,6 +60,18 @@ class UserInfo {
       accessToken: token['accessToken'],
       refreshToken: token['refreshToken'],
       email: user['email'],
+    );
+  }
+
+  factory UserInfo.fromOtpVerifyJson(Map<String, dynamic> json) {
+    final user = json['user'] as Map<String, dynamic>;
+    return UserInfo(
+      phoneNumber: user['phone'] != null ? PhoneNumber(user['phone']) : null,
+      accessToken: json['accessToken'] as String,
+      refreshToken: null,
+      platformRoles: (user['platformRoles'] as List<dynamic>? ?? [])
+          .map((e) => e.toString())
+          .toList(),
     );
   }
 

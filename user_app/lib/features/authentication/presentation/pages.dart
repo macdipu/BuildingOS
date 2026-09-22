@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 
 import 'login/screens/login_screen.dart';
+import 'login/screens/login_otp_verify_screen.dart';
 import 'reset_pin/screen/forgot_pin_screen.dart';
 import 'reset_pin/screen/forgot_pin_otp_verify.dart';
 import 'reset_pin/screen/reset_pin_screen.dart';
@@ -13,6 +14,11 @@ class AuthPages {
     GetPage(
       name: AppRoutes.login,
       page: () => const LoginScreen(),
+      binding: LoginBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.loginOtpVerify,
+      page: () => const LoginOtpVerifyScreen(),
       binding: LoginBinding(),
     ),
     GetPage(

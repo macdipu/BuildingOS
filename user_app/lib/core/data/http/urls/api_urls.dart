@@ -21,6 +21,12 @@ class ApiUrl implements AuthenticationApiUrls, DashboardApiUrls {
   String get registrationUrl => throw UnimplementedError();
 
   @override
+  String get otpStartUrl => "${baseUrl}v1/auth/otp/start";
+
+  @override
+  String get otpVerifyUrl => "${baseUrl}v1/auth/otp/verify";
+
+  @override
   String get getDashboardData => throw UnimplementedError();
 
   String get refreshTokenUrl => '${baseUrl}auth/refresh-token';
