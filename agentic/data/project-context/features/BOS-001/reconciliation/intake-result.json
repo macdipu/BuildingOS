@@ -1,0 +1,17 @@
+{
+  "status": "READY",
+  "evidence": [
+    "agentic/data/project-context/features/BOS-001/FEATURE.md",
+    "agentic/data/project-context/features/BOS-001/TASKS.md",
+    "agentic/data/project-context/features/BOS-001/QA-ACCEPTANCE.md"
+  ],
+  "blocking_issues": [],
+  "open_questions": [],
+  "recommended_next_step": "Reconcile committed baseline",
+  "outputs": {
+    "verdict": "INTAKE_READY",
+    "commit": "463db1a",
+    "supersedes": "RUN-F9BD7D203B614576A5B7B61637E5E05F",
+    "scope": "Same approved BOS-001 foundation; no BOS-002 implementation"
+  }
+}

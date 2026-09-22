@@ -1,4 +1,24 @@
 {
+  "existing_task:brownfield:platform-foundation": {
+    "cached_at": "2026-09-22T10:57:50.294646+00:00",
+    "decision": {
+      "persona_docs": [
+        "agentic/kit/agents/db-integration-agent/AGENT.md",
+        "agentic/kit/agents/security-devops-agent/AGENT.md",
+        "agentic/kit/agents/qa-agent/AGENT.md"
+      ],
+      "planning": "NO_REPLAN",
+      "route": "existing_task -> CONTEXT -> IMPLEMENTATION -> REVIEW -> QA -> RELEASE",
+      "scope": "Resume existing approved BOS-001; repair review findings, preserve technical approval provenance; release gate separate",
+      "skill_docs": [
+        "agentic/kit/skills/implementation-agent/SKILL.md",
+        "agentic/kit/skills/code-review-agent/SKILL.md",
+        "agentic/kit/skills/automated-qa-agent/SKILL.md"
+      ],
+      "workflow_doc": "agentic/kit/workflows/brownfield.md"
+    },
+    "kit_version": "997f6a5d5a93da63efaaea3a35db1bb30e1aef8bf9b6544a5a187bc1267da094"
+  },
   "new_feature:brownfield:buildingos": {
     "cached_at": "2026-09-22T08:45:22.379020+00:00",
     "decision": {
@@ -19,6 +39,33 @@
         "agentic/kit/skills/work-item-level-classifier/SKILL.md",
         "agentic/kit/skills/task-breakdown-agent/SKILL.md",
         "agentic/kit/skills/technical-readiness-verifier/SKILL.md"
+      ],
+      "workflow_doc": "agentic/kit/workflows/new-feature.md"
+    },
+    "kit_version": "997f6a5d5a93da63efaaea3a35db1bb30e1aef8bf9b6544a5a187bc1267da094"
+  },
+  "new_feature:brownfield:identity-building": {
+    "cached_at": "2026-09-22T11:10:09.377669+00:00",
+    "decision": {
+      "classification": "STORY_TASK (provisional)",
+      "context_workflow": "agentic/kit/workflows/brownfield.md",
+      "planning": "BACKLOG_ONLY",
+      "route": [
+        "INTAKE",
+        "CONTEXT",
+        "REQUIREMENTS",
+        "TECHNICAL",
+        "PLANNING",
+        "COMPLETED"
+      ],
+      "scope": "BOS-002 planning; no implementation approval; explicit provider/bootstrap/authorization/ownership decisions required",
+      "skill_docs": [
+        "agentic/kit/skills/agentic-sdlc-orchestrator/SKILL.md",
+        "agentic/kit/skills/document-intake-adapter/SKILL.md",
+        "agentic/kit/skills/baseline-verifier/SKILL.md",
+        "agentic/kit/skills/business-requirement-analyzer/SKILL.md",
+        "agentic/kit/skills/srs-generator/SKILL.md",
+        "agentic/kit/skills/work-item-level-classifier/SKILL.md"
       ],
       "workflow_doc": "agentic/kit/workflows/new-feature.md"
     },

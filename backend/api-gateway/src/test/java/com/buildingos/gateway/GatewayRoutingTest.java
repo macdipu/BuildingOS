@@ -127,4 +127,16 @@ class GatewayRoutingTest {
         assertThat(call("/api/v1/platform/identity", null, "X-Building-Id", "some-building").statusCode())
                 .isEqualTo(401);
     }
+
+    @Test
+    void otpStartIsPubliclyReachableWithoutAToken() throws Exception {
+        var request = HttpRequest.newBuilder(URI.create("http://127.0.0.1:" + port + "/api/v1/auth/otp/start"))
+                .POST(HttpRequest.BodyPublishers.ofString("{\"phone\":\"+8801700000000\"}"))
+                .header("Content-Type", "application/json")
+                .build();
+        var response = HTTP.send(request, HttpResponse.BodyHandlers.ofString());
+        assertThat(response.statusCode()).isEqualTo(200);
+        assertThat(response.body()).contains("otp-start");
+        assertThat(identityStub.lastCorrelationHeader()).isNotBlank();
+    }
 }

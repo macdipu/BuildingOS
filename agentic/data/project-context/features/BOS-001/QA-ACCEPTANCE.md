@@ -43,3 +43,13 @@ decision.
 
 No production readiness, deployment, or release approval. No business/financial
 functionality exists yet — foundation endpoints return service metadata only.
+
+## Continuation verification — 2026-09-22
+
+See [CONTINUATION-REVIEW.md](CONTINUATION-REVIEW.md) and
+[reconciliation/checks.json](reconciliation/checks.json) for the fresh governed checks
+against `463db1a` plus the continuation changes. PF-02 now additionally covers actual
+fresh bootstrap with apostrophes/backslashes in passwords; PF-03 verifies the exact
+produced record survives broker container recreation, not just process restart.
+PF-08 now has explicit startup commands for all application JARs in the runbook.
+Historical Flutter and image-build results above are reused, not presented as reruns.

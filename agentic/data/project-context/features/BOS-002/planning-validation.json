@@ -1,0 +1,7 @@
+{
+  "scope": "BOS-002 provider/development-OTP planning update",
+  "markdown_links": "PASS: all current local Markdown links resolve",
+  "latest_user_decision": "Development OTP is the six-character string 000000; replaceable provider layer required.",
+  "application_tests": "Not run: no application code changed. Provider behavior is specified, not implemented.",
+  "historical_check_limit": "The earlier optional git diff check was denied by requirements run_command capability; no denied command was bypassed."
+}

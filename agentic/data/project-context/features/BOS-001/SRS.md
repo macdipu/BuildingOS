@@ -1,5 +1,5 @@
 # SRS-BOS-001 — Platform foundation
-Status: Requirements prepared for technical review. Source: ../../BuildingOS_BRD_Agentic_Development.md.
+Status: Approved BOS-001 scope implemented; release approval pending. Source: ../../BuildingOS_BRD_Agentic_Development.md.
 This milestone enables development; it does not claim the product's MVP acceptance scenarios are implemented.
 
 ## Actors and flows

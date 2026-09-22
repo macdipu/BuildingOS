@@ -61,13 +61,17 @@ public class PlatformWebConfiguration {
     }
 
     @Bean
-    SecurityFilterChain security(HttpSecurity http, ObjectMapper mapper) throws Exception {
+    SecurityFilterChain security(HttpSecurity http, ObjectMapper mapper, SecuritySettings settings) throws Exception {
         http.csrf(csrf -> csrf.disable()).cors(Customizer.withDefaults())
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-            .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/actuator/health", "/actuator/health/**").permitAll()
-                .requestMatchers("/actuator/**").hasAuthority("SCOPE_platform.observe")
-                .anyRequest().authenticated())
+            .authorizeHttpRequests(auth -> {
+                auth.requestMatchers("/actuator/health", "/actuator/health/**").permitAll();
+                if (!settings.publicPaths().isEmpty()) {
+                    auth.requestMatchers(settings.publicPaths().toArray(String[]::new)).permitAll();
+                }
+                auth.requestMatchers("/actuator/**").hasAuthority("SCOPE_platform.observe");
+                auth.anyRequest().authenticated();
+            })
             .oauth2ResourceServer(oauth -> oauth.jwt(Customizer.withDefaults())
                 .authenticationEntryPoint((request, response, error) -> {
                     response.setStatus(401);
@@ -97,8 +101,8 @@ public class PlatformWebConfiguration {
     CorsConfigurationSource corsConfigurationSource(SecuritySettings settings) {
         var configuration = new CorsConfiguration();
         configuration.setAllowedOrigins(settings.allowedOrigins());
-        configuration.setAllowedMethods(List.of("GET", "OPTIONS"));
-        configuration.setAllowedHeaders(List.of("Authorization", CorrelationFilter.HEADER));
+        configuration.setAllowedMethods(List.of("GET", "POST", "OPTIONS"));
+        configuration.setAllowedHeaders(List.of("Authorization", "Content-Type", CorrelationFilter.HEADER));
         configuration.setExposedHeaders(List.of(CorrelationFilter.HEADER));
         configuration.setAllowCredentials(false);
         var source = new UrlBasedCorsConfigurationSource();

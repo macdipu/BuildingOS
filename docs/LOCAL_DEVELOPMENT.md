@@ -40,14 +40,64 @@ sh scripts/verify-platform.sh
 Starts Postgres and Kafka via `infra/docker/compose.yaml`, waits for health, runs Flyway
 migrations (fresh + rerun) for identity-service and building-service, checks that each
 service's database role cannot connect to the other's database, round-trips a uniquely
-named Kafka smoke topic, then restarts both containers and confirms the data/roles
-survived. Nonzero exit on any failure.
+named Kafka smoke topic, then restarts both containers and checks database access. It also recreates the Kafka
+container and consumes the same record again to verify named-volume persistence. A
+disposable PostgreSQL container checks bootstrap with apostrophes/backslashes in passwords. Nonzero exit on any failure.
 
 To just bring the infrastructure up without the full check pass:
 
 ```sh
 docker compose -f infra/docker/compose.yaml up -d postgres kafka
 ```
+
+## Start the applications
+
+Compose runs infrastructure only. After the build and infrastructure check, run the
+three application JARs in separate terminals from the repository root. Each terminal
+needs these shared variables; supply an existing issuer and JWKS endpoint you control:
+
+```sh
+set -a
+. infra/docker/.env
+set +a
+export JWT_ISSUER='https://your-issuer.example'
+export JWT_JWK_SET_URI='https://your-issuer.example/.well-known/jwks.json'
+export JWT_AUDIENCE='buildingos-local'
+```
+
+These URLs are placeholders, not a bundled identity provider. Real phone/Google login
+is BOS-002. The tests start their own temporary JWKS fixture and generate test tokens.
+To use your own HTTP-only local issuer, explicitly set `SPRING_PROFILES_ACTIVE=local`
+in each terminal; HTTP issuer/JWKS URLs are rejected outside `local`/`test` profiles.
+
+Identity terminal:
+
+```sh
+DB_URL=jdbc:postgresql://localhost:5432/identity_db \
+DB_USERNAME=identity_app DB_PASSWORD="$IDENTITY_DB_PASSWORD" SERVER_PORT=8081 \
+java -jar backend/identity-service/target/identity-service-0.1.0-SNAPSHOT.jar
+```
+
+Building terminal:
+
+```sh
+DB_URL=jdbc:postgresql://localhost:5432/building_db \
+DB_USERNAME=building_app DB_PASSWORD="$BUILDING_DB_PASSWORD" SERVER_PORT=8082 \
+java -jar backend/building-service/target/building-service-0.1.0-SNAPSHOT.jar
+```
+
+Gateway terminal:
+
+```sh
+IDENTITY_SERVICE_URL=http://localhost:8081 BUILDING_SERVICE_URL=http://localhost:8082 \
+SERVER_PORT=8080 java -jar backend/api-gateway/target/api-gateway-0.1.0-SNAPSHOT.jar
+```
+
+Check `/actuator/health/readiness` on ports 8080, 8081, and 8082. Unauthenticated
+requests to gateway `/api/v1/platform/identity` and `/api/v1/platform/building`, or
+direct service `/internal/platform/info`, must return 401. A bearer token signed by
+your configured issuer with the configured audience is required for metadata; metrics
+also require `platform.observe` scope. Stop each application with Ctrl-C.
 
 ## Check
 

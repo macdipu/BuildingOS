@@ -10,10 +10,10 @@ modules:
     status: EXISTING_TEMPLATE
   - name: backend
     path: backend
-    status: PLANNED
+    status: IMPLEMENTED_LOCAL
 integrations:
   - name: PostgreSQL
-    status: PLANNED
+    status: VERIFIED_LOCAL
   - name: Kafka
-    status: PLANNED
+    status: VERIFIED_LOCAL
 last_indexed_revision: null

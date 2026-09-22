@@ -13,7 +13,7 @@ class PlatformWebConfigurationTest {
     private final PlatformWebConfiguration config = new PlatformWebConfiguration();
 
     private SecuritySettings settings(String scheme) {
-        return new SecuritySettings(scheme + "://issuer.example/realm", "aud", scheme + "://issuer.example/jwks", List.of());
+        return new SecuritySettings(scheme + "://issuer.example/realm", "aud", scheme + "://issuer.example/jwks", List.of(), List.of());
     }
 
     @Test

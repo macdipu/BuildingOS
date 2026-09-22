@@ -1,0 +1,133 @@
+{
+  "maven": {
+    "command": "mvn",
+    "args": [
+      "-B",
+      "-f",
+      "backend/pom.xml",
+      "verify"
+    ],
+    "returncode": 0,
+    "stdout": "06:00\",\"@version\":\"1\",\"message\":\"http_request method=GET status=401\",\"logger_name\":\"com.buildingos.platform.web.CorrelationFilter\",\"thread_name\":\"http-nio-auto-1-exec-2\",\"level\":\"INFO\",\"level_value\":20000,\"traceId\":\"b4959272-427e-4bc2-afdb-42cef019b9b0\"}\n{\"@timestamp\":\"2026-09-22T16:57:28.230811+06:00\",\"@version\":\"1\",\"message\":\"http_request method=GET status=200\",\"logger_name\":\"com.buildingos.platform.web.CorrelationFilter\",\"thread_name\":\"http-nio-auto-1-exec-3\",\"level\":\"INFO\",\"level_value\":20000,\"traceId\":\"a59e7808-9610-4ddf-8f63-ec63966a0a09\"}\n{\"@timestamp\":\"2026-09-22T16:57:28.244252+06:00\",\"@version\":\"1\",\"message\":\"http_request method=GET status=401\",\"logger_name\":\"com.buildingos.platform.web.CorrelationFilter\",\"thread_name\":\"http-nio-auto-1-exec-4\",\"level\":\"INFO\",\"level_value\":20000,\"traceId\":\"1860fdd4-9e3f-463c-91a8-917e4aac6d07\"}\n{\"@timestamp\":\"2026-09-22T16:57:28.258603+06:00\",\"@version\":\"1\",\"message\":\"http_request method=GET status=200\",\"logger_name\":\"com.buildingos.platform.web.CorrelationFilter\",\"thread_name\":\"http-nio-auto-1-exec-5\",\"level\":\"INFO\",\"level_value\":20000,\"traceId\":\"d665075c-e1c8-4f48-a590-faeaf6c5def9\"}\n{\"@timestamp\":\"2026-09-22T16:57:28.432029+06:00\",\"@version\":\"1\",\"message\":\"http_request method=GET status=401\",\"logger_name\":\"com.buildingos.platform.web.CorrelationFilter\",\"thread_name\":\"http-nio-auto-1-exec-6\",\"level\":\"INFO\",\"level_value\":20000,\"traceId\":\"4edd4f7b-1ecb-4984-a728-094df87fb412\"}\n{\"@timestamp\":\"2026-09-22T16:57:28.443249+06:00\",\"@version\":\"1\",\"message\":\"http_request method=GET status=401\",\"logger_name\":\"com.buildingos.platform.web.CorrelationFilter\",\"thread_name\":\"http-nio-auto-1-exec-7\",\"level\":\"INFO\",\"level_value\":20000,\"traceId\":\"63858698-0254-4328-8b8a-e7c0ce20c285\"}\n{\"@timestamp\":\"2026-09-22T16:57:28.454629+06:00\",\"@version\":\"1\",\"message\":\"http_request method=GET status=401\",\"logger_name\":\"com.buildingos.platform.web.CorrelationFilter\",\"thread_name\":\"http-nio-auto-1-exec-8\",\"level\":\"INFO\",\"level_value\":20000,\"traceId\":\"035ad5c7-cd2d-45b5-bb54-95921e4650ce\"}\n{\"@timestamp\":\"2026-09-22T16:57:28.461598+06:00\",\"@version\":\"1\",\"message\":\"http_request method=GET status=401\",\"logger_name\":\"com.buildingos.platform.web.CorrelationFilter\",\"thread_name\":\"http-nio-auto-1-exec-9\",\"level\":\"INFO\",\"level_value\":20000,\"traceId\":\"923670e3-a929-4238-9e68-de3ad6ff69be\"}\n[INFO] Tests run: 9, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 4.161 s -- in com.buildingos.gateway.GatewayRoutingTest\n[INFO] Running com.buildingos.gateway.GatewayDownstreamUnavailableTest\n{\"@timestamp\":\"2026-09-22T16:57:28.472154+06:00\",\"@version\":\"1\",\"message\":\"Could not detect default configuration classes for test class [com.buildingos.gateway.GatewayDownstreamUnavailableTest]: GatewayDownstreamUnavailableTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.\",\"logger_name\":\"org.springframework.test.context.support.AnnotationConfigContextLoaderUtils\",\"thread_name\":\"main\",\"level\":\"INFO\",\"level_value\":20000,\"tags\":[\"COMMONS-LOGGING\"]}\n{\"@timestamp\":\"2026-09-22T16:57:28.473937+06:00\",\"@version\":\"1\",\"message\":\"Found @SpringBootConfiguration com.buildingos.gateway.GatewayApplication for test class com.buildingos.gateway.GatewayDownstreamUnavailableTest\",\"logger_name\":\"org.springframework.boot.test.context.SpringBootTestContextBootstrapper\",\"thread_name\":\"main\",\"level\":\"INFO\",\"level_value\":20000,\"tags\":[\"COMMONS-LOGGING\"]}\n{\"@timestamp\":\"2026-09-22T16:57:28.476224+06:00\",\"@version\":\"1\",\"message\":\"Could not detect default configuration classes for test class [com.buildingos.gateway.GatewayDownstreamUnavailableTest]: GatewayDownstreamUnavailableTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.\",\"logger_name\":\"org.springframework.test.context.support.AnnotationConfigContextLoaderUtils\",\"thread_name\":\"main\",\"level\":\"INFO\",\"level_value\":20000,\"tags\":[\"COMMONS-LOGGING\"]}\n{\"@timestamp\":\"2026-09-22T16:57:28.478359+06:00\",\"@version\":\"1\",\"message\":\"Found @SpringBootConfiguration com.buildingos.gateway.GatewayApplication for test class com.buildingos.gateway.GatewayDownstreamUnavailableTest\",\"logger_name\":\"org.springframework.boot.test.context.SpringBootTestContextBootstrapper\",\"thread_name\":\"main\",\"level\":\"INFO\",\"level_value\":20000,\"tags\":[\"COMMONS-LOGGING\"]}\n{\"@timestamp\":\"2026-09-22T16:57:28.597666+06:00\",\"@version\":\"1\",\"message\":\"Starting GatewayDownstreamUnavailableTest using Java 17.0.16 with PID 55895 (started by dipu in /Volumes/dipu_1tb/projects/chowdhuryelab/BuildingOS/backend/api-gateway)\",\"logger_name\":\"com.buildingos.gateway.GatewayDownstreamUnavailableTest\",\"thread_name\":\"main\",\"level\":\"INFO\",\"level_value\":20000,\"tags\":[\"COMMONS-LOGGING\"]}\n{\"@timestamp\":\"2026-09-22T16:57:28.598215+06:00\",\"@version\":\"1\",\"message\":\"The following 1 profile is active: \\\"test\\\"\",\"logger_name\":\"com.buildingos.gateway.GatewayDownstreamUnavailableTest\",\"thread_name\":\"main\",\"level\":\"INFO\",\"level_value\":20000,\"tags\":[\"COMMONS-LOGGING\"]}\n{\"@timestamp\":\"2026-09-22T16:57:28.77247+06:00\",\"@version\":\"1\",\"message\":\"BeanFactory id=46088ee1-03c5-33ca-aa27-e5f3e660fb3f\",\"logger_name\":\"org.springframework.cloud.context.scope.GenericScope\",\"thread_name\":\"main\",\"level\":\"INFO\",\"level_value\":20000,\"tags\":[\"COMMONS-LOGGING\"]}\n{\"@timestamp\":\"2026-09-22T16:57:28.79103+06:00\",\"@version\":\"1\",\"message\":\"Tomcat initialized with port 0 (http)\",\"logger_name\":\"org.springframework.boot.tomcat.TomcatWebServer\",\"thread_name\":\"main\",\"level\":\"INFO\",\"level_value\":20000,\"tags\":[\"COMMONS-LOGGING\"]}\n{\"@timestamp\":\"2026-09-22T16:57:28.792438+06:00\",\"@version\":\"1\",\"message\":\"Starting service [Tomcat]\",\"logger_name\":\"org.apache.catalina.core.StandardService\",\"thread_name\":\"main\",\"level\":\"INFO\",\"level_value\":20000}\n{\"@timestamp\":\"2026-09-22T16:57:28.792824+06:00\",\"@version\":\"1\",\"message\":\"Starting Servlet engine: [Apache Tomcat/11.0.24]\",\"logger_name\":\"org.apache.catalina.core.StandardEngine\",\"thread_name\":\"main\",\"level\":\"INFO\",\"level_value\":20000}\n{\"@timestamp\":\"2026-09-22T16:57:28.808774+06:00\",\"@version\":\"1\",\"message\":\"Root WebApplicationContext: initialization completed in 208 ms\",\"logger_name\":\"org.springframework.boot.web.context.servlet.WebApplicationContextInitializer\",\"thread_name\":\"main\",\"level\":\"INFO\",\"level_value\":20000,\"tags\":[\"COMMONS-LOGGING\"]}\n{\"@timestamp\":\"2026-09-22T16:57:29.008589+06:00\",\"@version\":\"1\",\"message\":\"Exposing 3 endpoints beneath base path '/actuator'\",\"logger_name\":\"org.springframework.boot.actuate.endpoint.web.EndpointLinksResolver\",\"thread_name\":\"main\",\"level\":\"INFO\",\"level_value\":20000,\"tags\":[\"COMMONS-LOGGING\"]}\n{\"@timestamp\":\"2026-09-22T16:57:29.02224+06:00\",\"@version\":\"1\",\"message\":\"Tomcat started on port 51800 (http) with context path '/'\",\"logger_name\":\"org.springframework.boot.tomcat.TomcatWebServer\",\"thread_name\":\"main\",\"level\":\"INFO\",\"level_value\":20000,\"tags\":[\"COMMONS-LOGGING\"]}\n{\"@timestamp\":\"2026-09-22T16:57:29.033045+06:00\",\"@version\":\"1\",\"message\":\"Started GatewayDownstreamUnavailableTest in 0.467 seconds (process running for 5.172)\",\"logger_name\":\"com.buildingos.gateway.GatewayDownstreamUnavailableTest\",\"thread_name\":\"main\",\"level\":\"INFO\",\"level_value\":20000,\"tags\":[\"COMMONS-LOGGING\"]}\n{\"@timestamp\":\"2026-09-22T16:57:29.04273+06:00\",\"@version\":\"1\",\"message\":\"Initializing Spring DispatcherServlet 'dispatcherServlet'\",\"logger_name\":\"org.apache.catalina.core.ContainerBase.[Tomcat-1].[localhost].[/]\",\"thread_name\":\"http-nio-auto-2-exec-1\",\"level\":\"INFO\",\"level_value\":20000}\n{\"@timestamp\":\"2026-09-22T16:57:29.043057+06:00\",\"@version\":\"1\",\"message\":\"Initializing Servlet 'dispatcherServlet'\",\"logger_name\":\"org.springframework.web.servlet.DispatcherServlet\",\"thread_name\":\"http-nio-auto-2-exec-1\",\"level\":\"INFO\",\"level_value\":20000,\"tags\":[\"COMMONS-LOGGING\"]}\n{\"@timestamp\":\"2026-09-22T16:57:29.044236+06:00\",\"@version\":\"1\",\"message\":\"Completed initialization in 1 ms\",\"logger_name\":\"org.springframework.web.servlet.DispatcherServlet\",\"thread_name\":\"http-nio-auto-2-exec-1\",\"level\":\"INFO\",\"level_value\":20000,\"tags\":[\"COMMONS-LOGGING\"]}\n{\"@timestamp\":\"2026-09-22T16:57:29.065902+06:00\",\"@version\":\"1\",\"message\":\"http_request method=GET status=503\",\"logger_name\":\"com.buildingos.platform.web.CorrelationFilter\",\"thread_name\":\"http-nio-auto-2-exec-1\",\"level\":\"INFO\",\"level_value\":20000,\"traceId\":\"0a5a9071-31fa-4d3f-9840-37f1b75805c2\"}\n[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.600 s -- in com.buildingos.gateway.GatewayDownstreamUnavailableTest\n[INFO] \n[INFO] Results:\n[INFO] \n[INFO] Tests run: 10, Failures: 0, Errors: 0, Skipped: 0\n[INFO] \n[INFO] \n[INFO] --- jar:3.5.1:jar (default-jar) @ api-gateway ---\n[INFO] \n[INFO] --- spring-boot:4.1.1:repackage (repackage) @ api-gateway ---\n[INFO] Replacing main artifact /Volumes/dipu_1tb/projects/chowdhuryelab/BuildingOS/backend/api-gateway/target/api-gateway-0.1.0-SNAPSHOT.jar with repackaged archive, adding nested dependencies in BOOT-INF/.\n[INFO] The original artifact has been renamed to /Volumes/dipu_1tb/projects/chowdhuryelab/BuildingOS/backend/api-gateway/target/api-gateway-0.1.0-SNAPSHOT.jar.original\n[INFO] ------------------------------------------------------------------------\n[INFO] Reactor Summary for buildingos-backend 0.1.0-SNAPSHOT:\n[INFO] \n[INFO] buildingos-backend ................................. SUCCESS [  0.002 s]\n[INFO] platform-web ....................................... SUCCESS [  1.832 s]\n[INFO] identity-service ................................... SUCCESS [ 51.357 s]\n[INFO] building-service ................................... SUCCESS [ 49.227 s]\n[INFO] api-gateway ........................................ SUCCESS [  9.834 s]\n[INFO] ------------------------------------------------------------------------\n[INFO] BUILD SUCCESS\n[INFO] ------------------------------------------------------------------------\n[INFO] Total time:  01:52 min\n[INFO] Finished at: 2026-09-22T16:57:33+06:00\n[INFO] ------------------------------------------------------------------------\n",
+    "stderr": "OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader classes because bootstrap classpath has been appended\nOpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader classes because bootstrap classpath has been appended\nOpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader classes because bootstrap classpath has been appended\n"
+  },
+  "platform": {
+    "command": "sh",
+    "args": [
+      "scripts/verify-platform.sh"
+    ],
+    "returncode": 0,
+    "stdout": "==> Starting Postgres and Kafka\n==> Postgres and Kafka are healthy\n==> Quoted-password bootstrap passed\n==> Running and re-running Flyway migrations (identity-service)\n==> Running and re-running Flyway migrations (building-service)\n==> Checking database role isolation\n==> Database role isolation confirmed\n==> Kafka broker smoke round trip\n==> Kafka broker smoke round trip passed\n==> Restarting Postgres and Kafka to verify state persists\n==> Restart and Kafka volume persistence confirmed\nVERIFY PASSED\n",
+    "stderr": " Container buildingos-platform-postgres-1 Running \n Container buildingos-platform-kafka-1 Running \n Container buildingos-platform-postgres-1 Restarting \n Container buildingos-platform-kafka-1 Restarting \n Container buildingos-platform-postgres-1 Started \n Container buildingos-platform-kafka-1 Started \n Container buildingos-platform-kafka-1 Recreate \n Container buildingos-platform-kafka-1 Recreated \n Container buildingos-platform-kafka-1 Starting \n Container buildingos-platform-kafka-1 Started \n"
+  },
+  "contracts": {
+    "command": "python3",
+    "args": [
+      "scripts/check-contracts.py"
+    ],
+    "returncode": 0,
+    "stdout": "CONTRACT CHECKS PASSED\n",
+    "stderr": ""
+  },
+  "compose": {
+    "command": "docker",
+    "args": [
+      "compose",
+      "-f",
+      "infra/docker/compose.yaml",
+      "config",
+      "--quiet"
+    ],
+    "returncode": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  "diff": {
+    "command": "git",
+    "args": [
+      "diff",
+      "--check"
+    ],
+    "returncode": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  "test_suites": [
+    {
+      "suite": "com.buildingos.gateway.GatewayDownstreamUnavailableTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "suite": "com.buildingos.gateway.GatewayRoutingTest",
+      "tests": 9,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "suite": "com.buildingos.building.platform.GetServiceMetadataTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "suite": "com.buildingos.building.platform.PlatformMetadataSecurityTest",
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "suite": "com.buildingos.building.platform.ReadinessDatabaseDownTest",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "suite": "com.buildingos.identity.platform.GetServiceMetadataTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "suite": "com.buildingos.identity.platform.PlatformMetadataSecurityTest",
+      "tests": 9,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "suite": "com.buildingos.identity.platform.ReadinessDatabaseDownTest",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "suite": "com.buildingos.platform.web.PlatformWebConfigurationTest",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  ],
+  "baseline_commit": "463db1a",
+  "notes": [
+    "Maven and platform checks initially blocked by OS sandbox; rerun with explicit elevated execution approval succeeded.",
+    "Final platform script, including anonymous-volume cleanup and signal handling, rerun successfully during governed QA.",
+    "Flutter and image builds reuse prior recorded evidence; no backend Java, Dockerfile, or user_app code changes."
+  ],
+  "verified_file_sha256": {
+    "infra/docker/compose.yaml": "032467db295c9d5c2a04a0ceeed487aed234785b5825698f575e0048107de6db",
+    "infra/docker/postgres/init/01-identity-db.sh": "73def2843c85ca653acaf7148cf88d18d627bd928801e26598c18297813fe56f",
+    "infra/docker/postgres/init/02-building-db.sh": "691e214f72d709eb5e854557e83607e3447c08228451215337d8479997598f81",
+    "scripts/verify-platform.sh": "af8e8ac3e50f564ff6ad4c46c0a862361ffc186757b77503173ebcce8d473346",
+    "docs/LOCAL_DEVELOPMENT.md": "cd1bd08e413c8a5f2f67d37b5d9beb7b84ba5365b9c06f0a58bd58b9994379d2"
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "status": "READY",
+  "evidence": [
+    "agentic/data/project-context/BuildingOS_BRD_Agentic_Development.md",
+    "agentic/data/project-context/features/BOS-010/FEATURE.md",
+    "agentic/data/project-context/context-index.yaml"
+  ],
+  "blocking_issues": [],
+  "open_questions": [
+    "Q-01 identity provider/OTP policy (carried from BOS-002, phone-only working interpretation)",
+    "Q-02 first SUPER_ADMIN bootstrap mechanism (carried from BOS-002 as a candidate decision, needs re-confirmation under the platform-role model)",
+    "Building application review policy: who can approve/reject (SUPER_ADMIN vs PLATFORM_ADMIN), and any auto-approval conditions",
+    "Subscription plan definitions/pricing/trial length (business decision, BRD intentionally leaves plan specifics open)",
+    "Back-office web app technology confirmation (BRD suggests Flutter Web but does not mandate it)",
+    "Assisted onboarding / support-session scope limits and audit review workflow specifics"
+  ],
+  "recommended_next_step": "Refresh identity/building/subscription/back-office source context, then extract source-backed requirements and pending business decisions",
+  "outputs": {
+    "verdict": "INTAKE_READY",
+    "scope": "BOS-010 full restart: global identity, platform roles, building application/approval lifecycle, units/ownership, subscription/entitlements, back-office console",
+    "classification": "EPIC (provisional)",
+    "sprint_handling": "TBD_PENDING_PLANNING",
+    "supersedes": ["BOS-001", "BOS-002"],
+    "input_mode": "document-first (BRD)",
+    "project_type": "brownfield",
+    "project_type_note": "Repo has an existing BOS-001 skeleton (gateway/identity-service/building-service, no business logic) and a generic user_app starter; classified brownfield at repo level, but the identity/building/subscription/back-office domain itself has no prior implementation to reconcile (greenfield within this module) per AGENTS.md work-item classification rule."
+  }
+}

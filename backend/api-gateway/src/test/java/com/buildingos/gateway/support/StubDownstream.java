@@ -22,6 +22,15 @@ public final class StubDownstream implements AutoCloseable {
                 os.write(body);
             }
         });
+        server.createContext("/api/v1/auth/otp/start", exchange -> {
+            lastCorrelationHeader.set(exchange.getRequestHeaders().getFirst("X-Correlation-Id"));
+            byte[] body = "{\"success\":true,\"data\":{\"stub\":\"otp-start\"},\"meta\":{},\"traceId\":\"stub\"}".getBytes();
+            exchange.getResponseHeaders().add("Content-Type", "application/json");
+            exchange.sendResponseHeaders(200, body.length);
+            try (var os = exchange.getResponseBody()) {
+                os.write(body);
+            }
+        });
         server.start();
         baseUrl = "http://127.0.0.1:" + server.getAddress().getPort();
     }

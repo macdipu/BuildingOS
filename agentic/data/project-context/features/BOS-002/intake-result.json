@@ -1,0 +1,18 @@
+{
+  "status": "READY",
+  "evidence": [
+    "agentic/data/project-context/features/BOS-002/FEATURE.md"
+  ],
+  "blocking_issues": [],
+  "open_questions": [
+    "Q-01 identity provider/OTP policy",
+    "Q-02 first SUPER_ADMIN and building access provisioning"
+  ],
+  "recommended_next_step": "Refresh identity/building/client context",
+  "outputs": {
+    "verdict": "INTAKE_READY",
+    "scope": "BOS-002 planning only",
+    "classification": "STORY_TASK",
+    "sprint_handling": "BACKLOG_ONLY"
+  }
+}

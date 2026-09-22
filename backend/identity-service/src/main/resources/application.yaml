@@ -9,6 +9,10 @@ platform:
     audience: ${JWT_AUDIENCE}
     jwk-set-uri: ${JWT_JWK_SET_URI}
     allowed-origins: ${CORS_ALLOWED_ORIGINS:}
+    public-paths:
+      - /api/v1/auth/otp/start
+      - /api/v1/auth/otp/verify
+      - /.well-known/jwks.json
 management:
   endpoints:
     web:

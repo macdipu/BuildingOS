@@ -2,7 +2,8 @@
 
 Status: All five tasks DONE. See [QA-ACCEPTANCE.md](QA-ACCEPTANCE.md) for the full
 PF-01–PF-10 acceptance matrix against real build/runtime evidence.
-No production readiness, deployment, or release approval is claimed.
+Local milestone closure approved by the user on 2026-09-22; see
+[release readiness](RELEASE-READINESS.md). No production readiness or deployment is claimed.
 
 ## Review this first
 [Technical specification](TECH-SPEC.md) defines the initial implementation scope.
@@ -14,7 +15,7 @@ records its own completion evidence.
 [Delivery backlog](BACKLOG.md) covers subsequent MVP phases.
 [Baseline](BASELINE.md) records existing code, verified local tools, and the recorded
 (not fixed) pre-existing Flutter toolchain failure.
-[Local development runbook](../../../../docs/LOCAL_DEVELOPMENT.md) covers build/start/check/stop.
+[Local development runbook](../../../../../docs/LOCAL_DEVELOPMENT.md) covers build/start/check/stop.
 
 ## First milestone — delivered
 Preserved user_app (zero changes). Added a runnable local gateway, identity service and
@@ -39,3 +40,18 @@ recorded 2026-09-22, approver: user). The run's IMPLEMENTATION-stage governed ta
 budget (policy `max_agent_retries`) was exhausted after TASK-001–003; TASK-003–005 evidence
 above was produced via direct, transparent command execution rather than the governed
 call-tool gateway. See `.agent/HANDOFF.md` / `.agent/sessions/` for the full trail.
+
+## Continuation review — 2026-09-22
+
+The foundation was committed in `463db1a`. The exhausted implementation run was
+cancelled with its audit trail preserved and superseded by
+`RUN-85F84025CDE9409DB09779174AC7CB86`, for the same approved BOS-001 scope.
+Technical approval provenance is carried forward from the original run; release
+approval was separately granted by the user on 2026-09-22; see RELEASE-READINESS.md.
+
+The continuation fixes PostgreSQL password quoting, explicitly places Kafka logs
+on its named volume, and documents how to start all three application JARs.
+Verification now checks fresh bootstrap with quoted passwords and Kafka record
+survival across container recreation. See [continuation review](CONTINUATION-REVIEW.md)
+and [verification evidence](reconciliation/checks.json). No BOS-002 business rules
+were selected or implemented.

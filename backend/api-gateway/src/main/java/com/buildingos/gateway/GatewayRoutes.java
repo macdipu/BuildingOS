@@ -18,7 +18,10 @@ public class GatewayRoutes {
     RouterFunction<ServerResponse> routes(
             @Value("${IDENTITY_SERVICE_URL}") String identityUrl,
             @Value("${BUILDING_SERVICE_URL}") String buildingUrl) {
-        return metadataRoute("identity", identityUrl).and(metadataRoute("building", buildingUrl));
+        return metadataRoute("identity", identityUrl)
+                .and(metadataRoute("building", buildingUrl))
+                .and(otpRoute("start", identityUrl))
+                .and(otpRoute("verify", identityUrl));
     }
 
     private RouterFunction<ServerResponse> metadataRoute(String service, String target) {
@@ -26,6 +29,16 @@ public class GatewayRoutes {
                 .GET("/api/v1/platform/" + service, http())
                 .before(uri(target))
                 .before(setPath("/internal/platform/info"))
+                .before(request -> setRequestHeader(CorrelationFilter.HEADER,
+                        CorrelationFilter.traceId(request.servletRequest())).apply(request))
+                .build();
+    }
+
+    private RouterFunction<ServerResponse> otpRoute(String step, String identityTarget) {
+        String path = "/api/v1/auth/otp/" + step;
+        return route("otp-" + step)
+                .POST(path, http())
+                .before(uri(identityTarget))
                 .before(request -> setRequestHeader(CorrelationFilter.HEADER,
                         CorrelationFilter.traceId(request.servletRequest())).apply(request))
                 .build();

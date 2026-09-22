@@ -1,6 +1,7 @@
 # TECH-SPEC-BOS-001 — First runnable platform
 ## Status
-Prepared for technical approval. No backend implementation or runtime pass is claimed.
+Approved design implemented in `463db1a`; continuation remediation and verification are
+recorded in CONTINUATION-REVIEW.md. Release approval remains pending.
 
 ## Requirement-to-component mapping
 PF-01/PF-10 → user_app baseline, backend Maven modules.
@@ -16,7 +17,10 @@ PF-09 → BACKLOG.md.
 - backend/api-gateway/: application, route config, security/correlation components, integration tests, Dockerfile.
 - backend/identity-service/: application, platform metadata use case/controller, security config, migration, tests, Dockerfile.
 - backend/building-service/: same foundation structure under com.buildingos.building; no shared persistence implementation.
-- infra/docker/compose.yaml: PostgreSQL, Kafka, gateway and the two services; health checks and named volumes.
+- infra/docker/compose.yaml: PostgreSQL and Kafka with health checks and named volumes.
+  The gateway and two services run as separately configured JARs or images; the runbook
+  documents JAR startup. This is the delivered local topology, differing from the original
+  plan to include application services in Compose.
 - infra/docker/postgres/: database/role bootstrap with per-service privileges.
 - contracts/openapi/platform.yaml: metadata and error schemas, bearer security, gateway routes.
 - contracts/kafka/event-envelope.schema.json: versioned transport envelope; no invented business payload.

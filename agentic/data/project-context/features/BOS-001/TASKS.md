@@ -2,7 +2,7 @@
 Classification: STORY_TASK. Sprint handling: NO_REPLAN for the initial bounded milestone.
 No existing approved tasks or sprint commitments were found.
 
-Status: ALL FIVE TASKS DONE (2026-09-22). See [QA-ACCEPTANCE.md](../QA-ACCEPTANCE.md) for
+Status: ALL FIVE TASKS DONE (2026-09-22). See [QA-ACCEPTANCE.md](QA-ACCEPTANCE.md) for
 the SRS acceptance matrix and each task file for its own completion evidence.
 
 | Story | Outcome | Tasks |
@@ -23,3 +23,6 @@ These are category assignments, not permission to spawn additional agents.
 
 All tasks require technical gate approval before code changes.
 Whole-product sequencing and deferred business questions remain in BACKLOG.md and SRS.md.
+
+Continuation review remediation for TASK-002/TASK-004/TASK-005 is recorded in
+[CONTINUATION-REVIEW.md](CONTINUATION-REVIEW.md). Release approval remains pending.

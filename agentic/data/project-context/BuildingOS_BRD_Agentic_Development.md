@@ -13,7 +13,7 @@
 
 # 1. Product Vision
 
-BuildingOS is a building operations and rental-management platform for apartment buildings, committees, owners, managers, and tenants.
+BuildingOS is a multi-tenant SaaS building operations and rental-management platform for apartment buildings, committees, owners, managers, tenants, and BuildingOS platform operators. A single user identity may participate in many buildings and may own multiple units across multiple buildings.
 
 The system centralizes:
 
@@ -48,7 +48,7 @@ The platform must support buildings where one owner can own multiple units, one 
 5. Create structured building-management workflows.
 6. Maintain historical ownership, tenancy, rent, and expense data.
 7. Support offline field usage and safe later synchronization.
-8. Support future SaaS multi-building expansion.
+8. Operate as a SaaS platform supporting many independently managed buildings, building-level subscriptions, and users who participate in or own units across multiple buildings.
 9. Establish reliable auditability for financial and administrative actions.
 10. Keep backend services independently deployable and independently scalable.
 
@@ -59,7 +59,11 @@ The platform must support buildings where one owner can own multiple units, one 
 ## 3.1 In Scope
 
 - User authentication
-- Building onboarding
+- Building application and self-service onboarding
+- Back-office building review, approval, rejection, suspension, and activation
+- Assisted onboarding by authorized BuildingOS staff
+- Building-level subscription and entitlement management
+- Cross-building user/property portfolio
 - Role assignment
 - Unit management
 - Ownership
@@ -84,10 +88,11 @@ The platform must support buildings where one owner can own multiple units, one 
 - Offline operation
 - Sync engine
 - Audit trail
-- Multi-building SaaS readiness
+- Multi-building SaaS tenancy and subscription enforcement
 
 ## 3.2 Future / Optional Scope
 
+- Automated subscription billing/payment collection
 - Integrated payment gateway
 - bKash/Nagad merchant APIs
 - Utility billing
@@ -109,14 +114,67 @@ The platform must support buildings where one owner can own multiple units, one 
 ## 4.1 System Roles
 
 ### SUPER_ADMIN
-Platform operator.
+Highest BuildingOS platform authority. This is a platform-scoped role and is not tied to one building.
 
 Permissions:
-- Create building
-- Manage subscription
-- Manage building admin
-- View system health
+- Review/approve/reject building applications
+- Create, activate, suspend, and archive buildings
+- Manage building subscriptions, plans, and entitlements
+- Assign/remove Building Admins
+- Assign onboarding/support staff
+- View platform-wide operational dashboards
+- View platform audit/security events subject to policy
 - Configure platform-level policies
+
+### PLATFORM_ADMIN
+Day-to-day BuildingOS back-office operator. Permissions are narrower than `SUPER_ADMIN` and must be explicitly granted.
+
+Typical permissions:
+- Review building applications
+- Manage building lifecycle
+- Manage building subscription state
+- Assign Building Admins
+- View operational building metadata
+- Add internal back-office notes
+
+### ONBOARDING_AGENT
+BuildingOS staff member who assists customers during initial setup through a temporary, scoped onboarding assignment.
+
+Typical permissions:
+- View assigned onboarding cases
+- Configure approved building setup data within granted scope
+- Bulk-create floors/units
+- Assist with owner/member invitations
+- Configure initial building settings
+- Mark onboarding tasks complete
+
+Restrictions:
+- No implicit access to unrelated buildings
+- No permanent building membership unless separately granted
+- No unrestricted financial access
+- Every assisted action must be audited
+
+### SUPPORT_AGENT
+BuildingOS support operator with temporary, reason-bound, auditable assistance access.
+
+Typical permissions:
+- View support cases assigned to the agent
+- Request/start scoped support sessions
+- Assist users with configuration and navigation
+
+Restrictions:
+- No silent or unrestricted impersonation
+- Sensitive financial/admin actions are blocked or require elevated approval
+- Support access expires automatically
+
+### SUBSCRIPTION_ADMIN
+Optional platform role for SaaS commercial operations.
+
+Typical permissions:
+- Manage plans and plan availability
+- Assign/change building plans
+- Manage trial, grace-period, suspension, cancellation, and reactivation states
+- View subscription history and entitlement state
 
 ### BUILDING_ADMIN
 Highest building-level authority.
@@ -197,9 +255,11 @@ Read-only access.
 
 # 5. Role Authorization Model
 
-Authorization must be context-aware.
+Authorization must distinguish **platform context** from **building context**.
 
-A user can have different roles in different buildings.
+Platform-scoped roles (`SUPER_ADMIN`, `PLATFORM_ADMIN`, `ONBOARDING_AGENT`, `SUPPORT_AGENT`, `SUBSCRIPTION_ADMIN`) are managed separately from building memberships.
+
+A user can have different roles in different buildings. A user's ownership of a unit is a separate domain relationship and must not be inferred only from the `OWNER` role.
 
 Example:
 
@@ -210,11 +270,20 @@ User A
  └─ Building 3 → TENANT
 ```
 
-Use:
+Use separate authorization relationships:
 
 ```text
+platform_user_role
 user_building_role
 ```
+
+Ownership is modeled separately:
+
+```text
+user -> ownership -> unit -> building
+```
+
+One user may therefore own multiple units in one building and units across many buildings while also holding different operational roles in each building.
 
 Each request must include active building context.
 
@@ -315,6 +384,8 @@ Responsibilities:
 - Roles
 - Permissions
 - Invitations
+- Platform roles
+- Temporary support/onboarding access grants
 - Device tokens
 - Session security
 
@@ -328,6 +399,9 @@ Core entities:
 - RolePermission
 - UserRole
 - Invitation
+- PlatformRole
+- PlatformUserRole
+- SupportAccessGrant
 - DeviceRegistration
 
 Publishes:
@@ -337,6 +411,9 @@ Publishes:
 - `building.member.added`
 - `building.member.removed`
 - `role.assigned`
+- `platform.role.assigned`
+- `support.access.granted`
+- `support.access.revoked`
 - `device.registered`
 
 ---
@@ -345,6 +422,10 @@ Publishes:
 
 Responsibilities:
 
+- Building application
+- Building approval/lifecycle state
+- Building onboarding progress
+- Assisted onboarding assignment metadata
 - Building
 - Floor
 - Flat/unit
@@ -358,6 +439,10 @@ Responsibilities:
 
 Core entities:
 
+- BuildingApplication
+- BuildingApplicationReview
+- BuildingOnboarding
+- AssistedOnboardingSession
 - Building
 - Floor
 - Unit
@@ -380,6 +465,15 @@ OTHER
 
 Publishes:
 
+- `building.application.created`
+- `building.application.submitted`
+- `building.application.info_requested`
+- `building.application.approved`
+- `building.application.rejected`
+- `building.onboarding.started`
+- `building.onboarding.completed`
+- `building.activated`
+- `building.suspended`
 - `building.created`
 - `building.updated`
 - `unit.created`
@@ -699,6 +793,64 @@ Each domain service can expose `/sync`, but a dedicated sync orchestration servi
 
 ---
 
+## 8.12 Subscription & Entitlement Service
+
+BuildingOS is a SaaS product. Subscription state is a platform concern and must not be embedded in rental or finance-domain entities.
+
+Responsibilities:
+
+- Subscription plans
+- Building subscription lifecycle
+- Trial management
+- Plan changes
+- Grace period / suspension state
+- Feature entitlements
+- Usage-limit enforcement metadata
+- Subscription history
+- Future billing-provider integration
+
+Core entities:
+
+- SubscriptionPlan
+- BuildingSubscription
+- SubscriptionChange
+- Entitlement
+- BuildingEntitlement
+- SubscriptionUsageSnapshot
+
+Subscription states:
+
+```text
+TRIAL
+ACTIVE
+PAST_DUE
+GRACE_PERIOD
+SUSPENDED
+CANCELLED
+EXPIRED
+```
+
+Rules:
+
+- Subscription is building-level by default.
+- A user's membership in multiple buildings does not merge those buildings' subscriptions.
+- Subscription controls product access/entitlements; it does not define building roles or ownership.
+- Back-office admins may change subscription state only through audited use cases.
+- Automated charging/payment gateway integration may be added later without changing the subscription domain model.
+
+Publishes:
+
+- `subscription.started`
+- `subscription.plan_changed`
+- `subscription.trial_ending`
+- `subscription.past_due`
+- `subscription.suspended`
+- `subscription.reactivated`
+- `subscription.cancelled`
+- `building.entitlements.changed`
+
+---
+
 # 9. Microservice Data Ownership
 
 | Domain | Owning Service | Database |
@@ -714,6 +866,7 @@ Each domain service can expose `/sync`, but a dedicated sync orchestration servi
 | Read models | Reporting | reporting_db |
 | Audit records | Audit | audit_db |
 | Sync metadata | Sync | sync_db |
+| Plans / subscriptions / entitlements | Subscription | subscription_db |
 
 Database-per-service is mandatory.
 
@@ -1060,7 +1213,28 @@ PATCH  /api/v1/work-orders/{id}/status
 
 POST   /api/v1/announcements
 POST   /api/v1/meetings
+
+POST   /api/v1/building-applications
+GET    /api/v1/building-applications/{id}
+POST   /api/v1/building-applications/{id}/submit
+GET    /api/v1/buildings/{buildingId}/onboarding
+PATCH  /api/v1/buildings/{buildingId}/onboarding
+
+GET    /api/v1/platform/building-applications
+POST   /api/v1/platform/building-applications/{id}/approve
+POST   /api/v1/platform/building-applications/{id}/reject
+POST   /api/v1/platform/building-applications/{id}/request-information
+POST   /api/v1/platform/buildings/{buildingId}/assign-admin
+POST   /api/v1/platform/buildings/{buildingId}/assign-onboarding-agent
+
+GET    /api/v1/platform/subscriptions
+GET    /api/v1/platform/buildings/{buildingId}/subscription
+POST   /api/v1/platform/buildings/{buildingId}/subscription/change-plan
+POST   /api/v1/platform/buildings/{buildingId}/subscription/suspend
+POST   /api/v1/platform/buildings/{buildingId}/subscription/reactivate
 ```
+
+Platform endpoints require platform-scoped permissions and must never rely only on an active `buildingId` claim.
 
 Standard response:
 
@@ -1720,7 +1894,8 @@ UI:
 - Loading indicator
 
 Navigation:
-- Logged in -> Building Selector / Dashboard
+- Logged in with one building and no global action required -> Dashboard
+- Logged in with multiple buildings, pending invitations, building applications, or cross-building ownership -> My Buildings / Portfolio
 - Logged out -> Login
 
 ---
@@ -1762,24 +1937,47 @@ Rules:
 
 ---
 
-# 42. Building Selector Screen
+# 42. My Buildings / Building Selector Screen
 
 Purpose:
-User with access to multiple buildings selects active context.
+Provide the user's global entry point across all buildings before entering one active building context.
 
-Data:
+A single user account may:
+- belong to many buildings
+- have different roles in each building
+- own multiple units in one building
+- own units across multiple buildings
+- be a tenant in one building and an owner/admin in another
+
+Data per building card:
 - Building name
 - Address
-- User roles
+- Building lifecycle status
+- User roles in that building
+- Number of units owned by the user
 - Pending alerts
+- Subscription/access warning when relevant and user is authorized to see it
+
+Sections:
+- `My Buildings`
+- `My Properties` — aggregated owned units across buildings
+- `Pending Invitations`
+- `Building Applications` — applications submitted by the user
 
 Buttons:
 - `Open Building`
-- `Add Building` if authorized
-- `Join Building` optional
+- `Add Building`
+- `Join Building` / `Accept Invitation`
+- `Continue Onboarding` when the user administers a building still being configured
+- `View Application` for pending building applications
+
+Rules:
+- Selecting a building establishes `activeBuildingId` and resolves that building's roles/permissions.
+- Global portfolio screens must not require pretending that all ownership belongs to one active building.
+- `OWNER` role alone is not proof of ownership; property cards are derived from active Ownership records.
 
 Backend:
-Identity + Building
+Identity + Building + Reporting
 
 ---
 
@@ -3049,7 +3247,8 @@ No manual production schema changes.
 ```text
 buildingos/
 ├─ apps/
-│  └─ buildingos_flutter/
+│  ├─ buildingos_flutter/
+│  └─ buildingos_backoffice_web/
 ├─ backend/
 │  ├─ api-gateway/
 │  ├─ identity-service/
@@ -3062,7 +3261,8 @@ buildingos/
 │  ├─ document-service/
 │  ├─ reporting-service/
 │  ├─ audit-service/
-│  └─ sync-service/
+│  ├─ sync-service/
+│  └─ subscription-service/
 ├─ contracts/
 │  ├─ openapi/
 │  └─ kafka/
@@ -3255,25 +3455,94 @@ UI strings must use localization keys.
 
 # 110. SaaS Multi-Tenancy
 
-Primary tenant boundary:
+BuildingOS is a multi-tenant SaaS platform. The primary operational tenant boundary is:
 
 ```text
 building_id
 ```
 
-All business data must be scoped by building.
+All building-domain business data must be scoped by building.
 
 At minimum:
-- application-level enforcement
-- indexes include building_id where relevant
-- authorization validates membership
+- application-level tenant enforcement
+- indexes include `building_id` where relevant
+- authorization validates membership and active building context
+- platform/back-office APIs use separate platform permissions rather than ordinary building membership
+- cross-building queries are exposed only through explicit portfolio/reporting use cases
 
-Future organization support:
+## 110.1 Global User Identity
+
+A `User` is global to BuildingOS and must not be duplicated per building.
+
+Example:
+
+```text
+User Rahim
+├─ Building A -> OWNER + COMMITTEE
+│  ├─ Flat 4A -> 100% ownership
+│  └─ Flat 4B -> 50% ownership
+├─ Building B -> OWNER
+│  └─ Flat 8C -> 100% ownership
+├─ Building C -> BUILDING_ADMIN
+└─ Building D -> TENANT
+```
+
+Membership, ownership, and tenancy are separate relationships.
+
+## 110.2 Building as SaaS Customer Account
+
+By default each approved building is an independently managed SaaS customer/account with its own:
+
+- lifecycle state
+- Building Admins
+- configuration
+- data boundary
+- subscription
+- entitlements
+- usage limits
+- audit trail
+
+Building lifecycle:
+
+```text
+APPLICATION_DRAFT
+SUBMITTED
+UNDER_REVIEW
+MORE_INFORMATION_REQUIRED
+APPROVED
+ONBOARDING
+ACTIVE
+SUSPENDED
+ARCHIVED
+REJECTED
+```
+
+A submitted application must not automatically become an active production building.
+
+## 110.3 Building-Level Subscription
+
+Default model:
+
+```text
+Building A -> Subscription A
+Building B -> Subscription B
+Building C -> Subscription C
+```
+
+A user who owns flats in several buildings does not receive one combined subscription automatically.
+
+Subscription controls entitlements such as enabled modules, unit limits, storage, reporting capability, or support tier. It must not be used as a substitute for authorization.
+
+## 110.4 Future Organization Support
+
+Property-management companies or enterprise customers may later group multiple buildings:
 
 ```text
 organization
   -> buildings
 ```
+
+This must not require changing the global User, BuildingMembership, Unit, Ownership, or BuildingSubscription model.
 
 ---
 
@@ -3293,6 +3562,24 @@ owner_dashboard_view
 - maintenance_due
 - updated_at
 ```
+
+Cross-building owner portfolio projection:
+
+```text
+owner_portfolio_view
+- owner_user_id
+- building_id
+- unit_id
+- ownership_share
+- occupancy_status
+- expected_rent_month
+- collected_rent_month
+- outstanding_rent
+- maintenance_due
+- updated_at
+```
+
+This projection powers `My Properties` without weakening building-level authorization. The user may only see properties for which active ownership grants access.
 
 Committee finance projection:
 
@@ -3583,11 +3870,29 @@ A Flutter feature is done only when:
 ## Phase 1 – Identity + Building Core
 
 - Auth
-- Membership
-- Roles
-- Building
+- Global user identity
+- Platform roles
+- Building memberships and building roles
+- Building applications
+- Back-office application review/approval
+- Building lifecycle
+- Initial Building Admin assignment
+- Building onboarding progress
 - Units
-- Ownership
+- Ownership, including cross-building ownership
+- Invitations
+
+## Phase 1B – SaaS Operations + Assisted Onboarding
+
+- Back-office web application shell
+- Platform building dashboard
+- Assisted onboarding assignment/session
+- Scoped support access
+- Subscription plans
+- Building subscriptions
+- Entitlements
+- Trial/suspension/reactivation lifecycle
+- Audit for all platform-admin actions
 
 ## Phase 2 – Rental Core
 
@@ -3647,26 +3952,34 @@ A Flutter feature is done only when:
 
 MVP must include:
 
-1. Login
-2. Building
-3. Unit
-4. Ownership
-5. Tenant
-6. Lease
-7. Rent invoice
-8. Rent payment
-9. Receipt
-10. Maintenance invoice
-11. Maintenance payment
-12. Expense
-13. Owner dashboard
-14. Manager dashboard
-15. Tenant dashboard
-16. Committee dashboard
-17. Announcement
-18. Offline-safe payment entry
-19. Basic reports
-20. Audit for financial operations
+1. Login and global user identity
+2. My Buildings / active-building selection
+3. Building application submission
+4. Back-office building review, approval/rejection, and activation
+5. Initial Building Admin assignment
+6. Guided building onboarding
+7. Assisted onboarding assignment with scoped/audited access
+8. Basic subscription plan, status, and entitlement management
+9. Building
+10. Unit
+11. Ownership, including multiple units across multiple buildings
+12. Cross-building owner `My Properties` portfolio
+13. Tenant
+14. Lease
+15. Rent invoice
+16. Rent payment
+17. Receipt
+18. Maintenance invoice
+19. Maintenance payment
+20. Expense
+21. Owner dashboard
+22. Manager dashboard
+23. Tenant dashboard
+24. Committee dashboard
+25. Announcement
+26. Offline-safe payment entry
+27. Basic reports
+28. Audit for financial and platform-administration operations
 
 ---
 
@@ -3674,6 +3987,10 @@ MVP must include:
 
 Can defer:
 
+- Automated subscription charging / payment-provider integration
+- Organization-level consolidated billing
+- Promotional campaign management
+- Advanced support ticketing/CRM
 - Chat
 - Full accounting double-entry ledger
 - Direct payment gateway
@@ -4231,6 +4548,64 @@ System:
 
 ---
 
+## Scenario F – Building Application and Approval
+
+A new customer submits a building application.
+
+System:
+- creates a non-active `BuildingApplication`
+- back-office operator reviews the application
+- operator may request additional information, reject, or approve
+- approval creates/links the Building record and assigns the initial Building Admin
+- building enters `ONBOARDING`, not immediately `ACTIVE`
+- every review decision is audited
+
+---
+
+## Scenario G – Assisted Onboarding
+
+A Building Admin requests help configuring 60 units.
+
+System:
+- creates an assisted onboarding session
+- platform operator assigns an `ONBOARDING_AGENT`
+- agent receives temporary scoped access only to that building/setup scope
+- agent bulk-creates floors/units and assists with invitations
+- customer can review progress
+- session expires or is explicitly completed
+- all agent actions are recorded in the audit trail
+
+---
+
+## Scenario H – One Owner, Multiple Buildings
+
+One user owns two flats in Building A and one flat in Building B.
+
+System:
+- maintains one global User account
+- stores three independent Ownership records
+- user sees both buildings in `My Buildings`
+- `My Properties` aggregates the three owned units
+- selecting Building A shows only Building A context/permissions
+- Building B subscription and Building A subscription remain independent
+
+---
+
+## Scenario I – Subscription Suspension
+
+A building subscription is suspended by an authorized platform operator.
+
+System:
+- records the subscription state transition and reason
+- recalculates building entitlements/access policy
+- does not delete building data
+- does not alter ownership, leases, or payment history
+- exposes a clear restricted-access state to authorized users
+- reactivation restores permitted features according to the current plan
+- all changes are audited
+
+---
+
 # 144. Critical Anti-Patterns to Avoid
 
 Do not:
@@ -4247,6 +4622,12 @@ Do not:
 - Auto-resolve financial sync conflicts.
 - Use generic global `controller/service/repository` package structure.
 - Couple reporting screens to many live cross-service joins.
+- Duplicate the same human User record per building.
+- Treat the `OWNER` role as the ownership record.
+- Auto-activate a self-registered building without back-office approval when approval is required by policy.
+- Give onboarding/support agents permanent or unrestricted building access.
+- Put subscription state directly into rental/finance records.
+- Use subscription entitlements as a replacement for building authorization.
 
 ---
 
@@ -4267,6 +4648,7 @@ document-service
 reporting-service
 audit-service
 sync-service
+subscription-service
 ```
 
 If deployment overhead is initially too high, `work-service` and `communication-service` can still remain separate modules but be deployed together temporarily. Domain boundaries must remain intact so they can split later without code redesign.
@@ -4275,28 +4657,34 @@ If deployment overhead is initially too high, `work-service` and `communication-
 
 # 146. MVP Success Criteria
 
-BuildingOS MVP is successful when one real building can:
+BuildingOS MVP is successful when the SaaS platform can:
 
-1. Register building and units.
-2. Map owners to units.
-3. Register tenants.
-4. Create leases.
-5. Generate monthly rent.
-6. Collect full/partial/advance rent.
-7. Issue receipts.
-8. Generate maintenance fees.
-9. Collect maintenance.
-10. Record common expenses.
-11. Track current outstanding amounts.
-12. Create and track building work.
-13. Publish announcements.
-14. Maintain meeting decisions.
-15. Give owner/manager/tenant/committee role-specific dashboards.
-16. Operate basic rent collection offline.
-17. Synchronize safely without duplicate payment.
-18. Export core financial reports.
-19. Preserve financial and ownership history.
-20. Produce complete audit trace for critical actions.
+1. Maintain one global user identity across many buildings.
+2. Accept a new building application without immediately activating the building.
+3. Let authorized back-office staff review, request information, approve/reject, activate, suspend, and inspect building lifecycle state.
+4. Assign the initial Building Admin after approval.
+5. Complete self-service or assisted building onboarding.
+6. Assign temporary, scoped, auditable onboarding/support access.
+7. Assign and manage a building-level subscription plan/status/entitlements.
+8. Register building floors and units efficiently, including bulk setup.
+9. Map owners to units, including co-ownership and ownership across multiple buildings.
+10. Give owners a cross-building `My Properties` view while preserving per-building authorization.
+11. Register tenants.
+12. Create leases.
+13. Generate monthly rent.
+14. Collect full/partial/advance rent.
+15. Issue receipts.
+16. Generate and collect maintenance fees.
+17. Record common expenses.
+18. Track current outstanding amounts.
+19. Create and track building work.
+20. Publish announcements and maintain meeting decisions.
+21. Give owner/manager/tenant/committee role-specific dashboards.
+22. Operate basic rent collection offline.
+23. Synchronize safely without duplicate payment.
+24. Export core financial reports.
+25. Preserve financial, ownership, subscription, and administrative history.
+26. Produce complete audit trace for critical financial and platform-admin actions.
 
 ---
 
@@ -4323,10 +4711,13 @@ For backend:
 - Flyway migrations.
 - OpenAPI contracts.
 - Permission enforcement at backend.
+- Separate platform-role authorization from building-role authorization.
+- Building-level subscription/entitlement enforcement through explicit application services.
 - Unit + integration tests.
 
 For Flutter:
 - Feature-first Clean Architecture.
+- Global My Buildings / My Properties context before building-scoped navigation where applicable.
 - GetX for controller/state/DI.
 - Drift for offline cache and pending mutations.
 - Repository + use case.
@@ -4366,6 +4757,775 @@ After this BRD, create:
 11. `DOCKER_LOCAL_SETUP.md`
 12. `DEPLOYMENT_ARCHITECTURE.md`
 13. `TEST_STRATEGY.md`
-14. `ADRs/`
+14. `ADMIN_BACKOFFICE_SPEC.md`
+15. `SUBSCRIPTION_DOMAIN.md`
+16. `ONBOARDING_FLOW.md`
+17. `ADRs/`
 
 These should reference this BRD and must not redefine domain rules inconsistently.
+
+---
+
+# 149. SaaS Back-Office Administration, Building Approval, Subscription & Onboarding
+
+Status: **CORE PRODUCT SCOPE**.
+
+BuildingOS is a SaaS platform. The back-office console is the operator control plane used by authorized BuildingOS staff to manage customer buildings, onboarding, subscriptions, support access, and platform-level lifecycle operations. It is separate from the ordinary building-resident/owner operational experience.
+
+## 149.1 Back-Office Application
+
+Recommended delivery:
+
+```text
+buildingos_backoffice_web
+```
+
+The back-office application may use Flutter Web to stay aligned with the primary client stack, but it must remain a distinct application surface with its own navigation and platform permission checks.
+
+The back-office UI contains no authoritative business logic. All operations go through API Gateway/backend use cases.
+
+Primary platform roles:
+
+```text
+SUPER_ADMIN
+PLATFORM_ADMIN
+ONBOARDING_AGENT
+SUPPORT_AGENT
+SUBSCRIPTION_ADMIN
+```
+
+## 149.2 Back-Office Navigation
+
+```text
+Dashboard
+
+Buildings
+├─ Applications
+├─ Under Review
+├─ Onboarding
+├─ Active Buildings
+├─ Suspended Buildings
+└─ Archived Buildings
+
+Users
+├─ Platform Users
+├─ Building Admins
+├─ Onboarding Agents
+└─ Support Agents
+
+Subscriptions
+├─ Plans
+├─ Building Subscriptions
+├─ Trials
+├─ Past Due / Grace Period
+└─ Suspended / Cancelled
+
+Support
+├─ Assisted Onboarding
+├─ Active Support Sessions
+└─ Support History
+
+System
+├─ Platform Settings
+├─ Feature / Entitlement Configuration
+├─ Audit Logs
+└─ System Health
+```
+
+## 149.3 Building Application Sources
+
+A building may enter BuildingOS through:
+
+```text
+SELF_SERVICE
+ASSISTED
+BACK_OFFICE
+SALES
+IMPORT
+```
+
+All sources create or attach to a `BuildingApplication` before activation unless an explicitly authorized migration/import workflow bypasses ordinary customer review.
+
+Suggested entity:
+
+```text
+BuildingApplication
+- id
+- application_number
+- applicant_user_id
+- building_name
+- building_type
+- address
+- district
+- area
+- postal_code optional
+- total_floors optional
+- estimated_units
+- applicant_relationship
+- contact_name
+- contact_phone
+- contact_email optional
+- management_type optional
+- verification_document_refs
+- source
+- assisted_by optional
+- status
+- submitted_at optional
+- reviewed_at optional
+- reviewed_by optional
+- rejection_reason optional
+- internal_notes optional
+- created_at
+- updated_at
+```
+
+The applicant does not automatically become the final Building Admin merely because they submitted the application.
+
+## 149.4 Building Application State Machine
+
+```text
+DRAFT
+  -> SUBMITTED
+  -> UNDER_REVIEW
+      -> MORE_INFORMATION_REQUIRED -> SUBMITTED
+      -> REJECTED
+      -> APPROVED
+  -> ONBOARDING
+  -> ACTIVE
+```
+
+Operational lifecycle after activation:
+
+```text
+ACTIVE
+  -> SUSPENDED
+  -> ACTIVE
+  -> ARCHIVED
+```
+
+Rules:
+
+- A submitted application is not an active tenant/building.
+- Approval decisions require an authorized platform role.
+- Rejection/request-information actions require a reason/message.
+- Activation requires an assigned Building Admin and minimum onboarding prerequisites.
+- Suspension does not delete customer data or historical records.
+- Every state transition is audited.
+
+## 149.5 Back-Office Building Application Review Screen
+
+Display:
+
+- Application number
+- Building name/type
+- Full address
+- Applicant identity/contact
+- Applicant relationship to building
+- Estimated floor/unit count
+- Verification documents
+- Application source
+- Submission date
+- Review history
+- Internal notes
+- Possible duplicate-building matches
+
+Actions:
+
+- `Start Review`
+- `Approve`
+- `Reject`
+- `Request More Information`
+- `Assign Onboarding Agent`
+- `Add Internal Note`
+- `Open Applicant Profile`
+
+Sensitive actions require confirmation and audit reason.
+
+## 149.6 Duplicate Building Detection
+
+Before approval, BuildingOS should flag possible duplicate registrations using available normalized signals such as:
+
+- building name
+- address
+- road/area/district
+- holding number when available
+- approximate coordinates when provided by the user/device
+- known contact numbers
+
+Possible matches are review signals only. The system must not automatically merge buildings.
+
+If an already-active building appears to be the intended building, the applicant may instead be directed to request/accept membership access.
+
+## 149.7 Approval to Building Creation
+
+On approval:
+
+1. Persist the approval decision.
+2. Create or activate the canonical `Building` record.
+3. Create initial tenant-safe configuration.
+4. Assign the approved initial `BUILDING_ADMIN`.
+5. Create `BuildingOnboarding` state.
+6. Create or attach an initial building subscription/trial according to platform policy.
+7. Emit `building.application.approved` and related lifecycle events.
+8. Move the building to `ONBOARDING`.
+
+Approval does not require all units, owners, tenants, or finance settings to already exist.
+
+## 149.8 Building Onboarding Modes
+
+Supported modes:
+
+```text
+SELF_SERVICE
+ASSISTED
+BACK_OFFICE_SETUP
+```
+
+All modes use the same domain validation and produce the same canonical Building/Unit/Ownership records.
+
+## 149.9 Guided Building Onboarding Flow
+
+Recommended sequence:
+
+```text
+1. Building Information
+2. Building Structure / Floors
+3. Units
+4. Owners / Ownership
+5. Committee & Staff
+6. Maintenance Configuration
+7. Rent Management Configuration
+8. Payment Methods
+9. Invitations
+10. Review
+11. Activate / Finish Setup
+```
+
+The flow is resumable. Do not require completion in one session.
+
+### Step 1 — Building Information
+
+Fields:
+
+- Building name
+- Building type (`RESIDENTIAL`, `COMMERCIAL`, `MIXED`)
+- Address
+- Area/district/postal code
+- Primary building contact
+- Optional logo/photo
+- Optional construction metadata
+
+### Step 2 — Structure / Floors
+
+Allow:
+
+- add floors individually
+- generate floor ranges
+- represent basement/ground/roof/common floors
+- configure a default unit naming pattern
+
+### Step 3 — Units
+
+Allow bulk generation/import for:
+
+```text
+FLAT
+PARKING
+STORAGE
+COMMERCIAL
+COMMON
+OTHER
+```
+
+Bulk operations:
+
+- generate units by floor/count/pattern
+- duplicate floor layout
+- CSV/Excel import
+- edit generated rows before save
+
+### Step 4 — Owners / Ownership
+
+Ownership is not the same as building membership.
+
+```text
+User -> Ownership -> Unit -> Building
+```
+
+Rules:
+
+- Reuse a global User when phone/identity matches an existing BuildingOS user.
+- One user may own many units in the same building.
+- One user may own units across many buildings.
+- A unit may have multiple co-owners.
+- Ownership percentages and effective dates are preserved historically.
+- A pending owner may be represented by an invitation until the person claims/links their account.
+
+### Step 5 — Committee & Staff
+
+Building Admin may invite/assign:
+
+- Committee
+- Property/Rent Manager
+- Accountant
+- Viewer/Auditor
+- other configured building roles
+
+Human titles such as President, Secretary, or Treasurer are metadata and must not replace permission-based authorization.
+
+### Step 6 — Maintenance Configuration
+
+Configure building maintenance policy using existing domain options such as:
+
+- fixed building rate
+- unit-specific rate
+- area-based rate
+- owner category
+- custom rate
+
+### Step 7 — Rent Management Configuration
+
+Support:
+
+```text
+CENTRALIZED
+OWNER_MANAGED
+MIXED
+DISABLED
+```
+
+Not every owner/unit must use centralized BuildingOS rent collection.
+
+### Step 8 — Payment Methods
+
+Enable allowed payment methods and references. Direct bKash/Nagad/payment-gateway settlement can remain a later integration.
+
+### Step 9 — Invitations
+
+Allow bulk invitations for owners, committee members, managers, and tenants.
+
+### Step 10 — Review
+
+Show missing required data, optional incomplete setup, validation conflicts, and onboarding progress.
+
+### Step 11 — Activation / Completion
+
+Minimum activation prerequisites should include:
+
+- approved building
+- at least one active Building Admin
+- required building identity/address data
+- at least one valid unit for ordinary residential operation, unless migration policy permits otherwise
+- accepted platform terms/policies where applicable
+
+Optional setup may continue after activation.
+
+## 149.10 Onboarding Progress Model
+
+```text
+BuildingOnboarding
+- building_id
+- mode
+- current_step
+- completed_steps
+- completion_percentage
+- status
+- started_at
+- last_updated_at
+- completed_at optional
+- assisted_session_id optional
+```
+
+Statuses:
+
+```text
+NOT_STARTED
+IN_PROGRESS
+WAITING_FOR_CUSTOMER
+READY_FOR_ACTIVATION
+COMPLETED
+```
+
+## 149.11 Assisted Onboarding
+
+BuildingOS staff may assist customers without becoming permanent members of the building.
+
+```text
+AssistedOnboardingSession
+- id
+- building_id
+- assigned_agent_user_id
+- requested_by_user_id optional
+- status
+- access_scope
+- reason
+- started_at
+- expires_at
+- completed_at optional
+- notes optional
+```
+
+Statuses:
+
+```text
+REQUESTED
+ASSIGNED
+IN_PROGRESS
+WAITING_FOR_CUSTOMER
+COMPLETED
+CANCELLED
+EXPIRED
+```
+
+Rules:
+
+- Agent access is building-specific and scope-limited.
+- Access must expire automatically.
+- No implicit rent/payment/financial visibility unless the assistance scope explicitly requires and policy permits it.
+- All mutations identify both the acting platform user and the customer/building context.
+- The customer can see that assisted onboarding is active.
+
+## 149.12 Support Assistance / Controlled Impersonation
+
+BuildingOS must not implement unrestricted silent impersonation.
+
+If support needs to act in a customer's context, create an auditable `SupportSession` or `SupportAccessGrant` containing:
+
+```text
+- support_session_id
+- platform_user_id
+- target_user_id optional
+- building_id
+- reason
+- permission_scope
+- approved_by optional
+- started_at
+- expires_at
+- ended_at optional
+```
+
+High-risk actions such as payment reversal, ownership transfer, Building Admin removal, or unrestricted financial export should be blocked during ordinary support sessions or require an elevated, separately audited approval.
+
+## 149.13 Multi-Building / Multi-Property User Model
+
+A single user may simultaneously be:
+
+```text
+Building A -> OWNER + COMMITTEE
+Building B -> OWNER
+Building C -> BUILDING_ADMIN
+Building D -> TENANT
+```
+
+And may own:
+
+```text
+Building A -> Flat 4A -> 100%
+Building A -> Flat 4B -> 50%
+Building B -> Flat 8C -> 100%
+Building B -> Parking P12 -> 100%
+```
+
+This remains one `User` account.
+
+Required relationships:
+
+```text
+User 1 --- * BuildingMembership * --- 1 Building
+User 1 --- * Ownership          * --- 1 Unit
+Unit * --- 1 Building
+```
+
+The system must never create a separate user identity merely because the same person joins another building.
+
+## 149.14 My Properties — Cross-Building Owner Portfolio
+
+Owners need a global portfolio separate from a single-building dashboard.
+
+Summary may include:
+
+- total units owned
+- number of buildings
+- occupied/vacant units
+- expected monthly rent
+- collected rent
+- outstanding rent
+- maintenance due
+
+Each property row includes:
+
+- building
+- unit
+- ownership percentage
+- occupancy
+- tenant summary when permitted
+- rent summary when permitted
+- maintenance due
+
+Opening a property switches to or deep-links into that building's authorized context.
+
+## 149.15 Subscription Domain
+
+Subscription is building-level by default.
+
+```text
+SubscriptionPlan
+- id
+- code
+- name
+- status
+- billing_cycle_options
+- unit_limit optional
+- user_limit optional
+- storage_limit optional
+- enabled_features / entitlement policy
+- created_at
+- updated_at
+```
+
+```text
+BuildingSubscription
+- id
+- building_id
+- plan_id
+- status
+- trial_start optional
+- trial_end optional
+- billing_cycle
+- started_at
+- current_period_start optional
+- current_period_end optional
+- grace_until optional
+- cancelled_at optional
+- suspended_at optional
+- suspension_reason optional
+- created_at
+- updated_at
+```
+
+Subscription states:
+
+```text
+TRIAL
+ACTIVE
+PAST_DUE
+GRACE_PERIOD
+SUSPENDED
+CANCELLED
+EXPIRED
+```
+
+Back-office actions:
+
+- start/extend/end trial
+- assign/change plan
+- suspend/reactivate
+- cancel
+- inspect subscription history
+- inspect effective entitlements
+
+All changes are audited.
+
+## 149.16 Entitlements
+
+Feature availability should be resolved from subscription/plan entitlements, for example:
+
+```text
+rent_management.enabled
+maintenance.enabled
+work_orders.enabled
+reports.pdf_export
+reports.excel_export
+offline_sync.enabled
+max_units
+max_users
+storage_limit_mb
+support_tier
+```
+
+Rules:
+
+- Backend is authoritative for entitlement enforcement.
+- Flutter/back-office UIs may hide/disable unavailable functionality for UX but cannot enforce policy alone.
+- Subscription suspension must not delete customer data.
+- Read-only or restricted behavior during grace/suspension is policy-driven and explicit.
+
+## 149.17 Back-Office Building Detail Screen
+
+Tabs:
+
+```text
+Overview
+Application
+Verification
+Admins
+Members
+Units
+Onboarding
+Subscription
+Support
+Activity
+Audit
+```
+
+Header should expose:
+
+- building name
+- lifecycle status
+- location summary
+- unit count
+- active membership count
+- Building Admins
+- onboarding completion
+- subscription plan/status
+
+Actions by permission:
+
+- `Open Building Summary`
+- `Assign Building Admin`
+- `Assign Onboarding Agent`
+- `Request Information`
+- `Change Subscription`
+- `Suspend / Reactivate Building`
+- `Start Support Session`
+- `View Audit`
+
+## 149.18 Back-Office SaaS Dashboard
+
+Recommended operational metrics:
+
+- total buildings by lifecycle state
+- applications awaiting review
+- buildings in onboarding
+- active/suspended buildings
+- subscriptions by plan/status
+- trials ending soon
+- onboarding cases requiring action
+- active support sessions
+
+Financial SaaS revenue metrics may be added once automated billing/provider integrations exist.
+
+## 149.19 API Requirements
+
+Customer/onboarding APIs:
+
+```text
+POST  /api/v1/building-applications
+GET   /api/v1/building-applications/{id}
+POST  /api/v1/building-applications/{id}/submit
+GET   /api/v1/buildings/{buildingId}/onboarding
+PATCH /api/v1/buildings/{buildingId}/onboarding
+POST  /api/v1/buildings/{buildingId}/units/bulk
+POST  /api/v1/buildings/{buildingId}/invitations/bulk
+```
+
+Platform APIs:
+
+```text
+GET  /api/v1/platform/building-applications
+GET  /api/v1/platform/building-applications/{id}
+POST /api/v1/platform/building-applications/{id}/approve
+POST /api/v1/platform/building-applications/{id}/reject
+POST /api/v1/platform/building-applications/{id}/request-information
+
+POST /api/v1/platform/buildings/{buildingId}/assign-admin
+POST /api/v1/platform/buildings/{buildingId}/assign-onboarding-agent
+POST /api/v1/platform/buildings/{buildingId}/suspend
+POST /api/v1/platform/buildings/{buildingId}/reactivate
+
+GET  /api/v1/platform/subscription-plans
+POST /api/v1/platform/subscription-plans
+GET  /api/v1/platform/buildings/{buildingId}/subscription
+POST /api/v1/platform/buildings/{buildingId}/subscription/change-plan
+POST /api/v1/platform/buildings/{buildingId}/subscription/suspend
+POST /api/v1/platform/buildings/{buildingId}/subscription/reactivate
+
+POST /api/v1/platform/support-sessions
+POST /api/v1/platform/support-sessions/{id}/end
+```
+
+## 149.20 Event Requirements
+
+```text
+building.application.created
+building.application.submitted
+building.application.review_started
+building.application.info_requested
+building.application.approved
+building.application.rejected
+building.onboarding.started
+building.onboarding.step_completed
+building.onboarding.completed
+building.activated
+building.suspended
+building.reactivated
+building.admin.assigned
+building.admin.removed
+onboarding.agent.assigned
+onboarding.session.completed
+support.session.started
+support.session.ended
+owner.invited
+owner.invitation.accepted
+subscription.started
+subscription.plan_changed
+subscription.past_due
+subscription.suspended
+subscription.reactivated
+subscription.cancelled
+building.entitlements.changed
+```
+
+All events follow the common event envelope, outbox, versioning, and idempotent-consumer rules defined elsewhere in this BRD.
+
+## 149.21 Audit Requirements
+
+Audit at minimum:
+
+- application state transitions
+- approval/rejection actor and reason
+- building activation/suspension/reactivation
+- Building Admin assignment/removal
+- onboarding-agent assignment and all assisted mutations
+- support-session creation/termination and actions
+- subscription plan/status changes
+- entitlement changes
+- bulk unit/owner imports
+
+Back-office internal notes should be access-controlled and must not leak into ordinary building-member views.
+
+## 149.22 Security Boundaries
+
+- Platform roles are not automatically building roles.
+- Building Admins cannot grant themselves platform roles.
+- Onboarding/support agents receive no access to buildings unless assigned or explicitly granted.
+- Platform endpoints require platform permission checks.
+- Ordinary building APIs continue to enforce building membership and `activeBuildingId`.
+- Cross-building owner portfolio queries verify ownership/membership per returned record.
+- Subscription status never grants access to data a user is otherwise unauthorized to view.
+- Support access is temporary, reason-bound, scope-limited, and auditable.
+
+## 149.23 MVP Subscription Boundary
+
+MVP includes:
+
+- plan definitions
+- building-to-plan assignment
+- trial status
+- active/suspended/cancelled lifecycle
+- entitlements
+- back-office manual plan/status management
+- audit history
+
+MVP does **not** require:
+
+- automatic card charging
+- bKash/Nagad subscription collection
+- invoices for BuildingOS SaaS fees
+- tax/VAT automation
+- dunning automation
+- organization-level consolidated billing
+
+These can be integrated later without redesigning building tenancy or subscription state.
+
+---

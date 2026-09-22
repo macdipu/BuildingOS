@@ -37,6 +37,37 @@ wait_healthy postgres
 wait_healthy kafka
 echo "==> Postgres and Kafka are healthy"
 
+# Exercise the actual bootstrap scripts against a disposable cluster with quoted
+# passwords. The project databases and volumes are never reset by this check.
+BOOTSTRAP_CONTAINER="buildingos-bootstrap-check-$$"
+cleanup() {
+    docker rm -fv "$BOOTSTRAP_CONTAINER" >/dev/null 2>&1 || true
+}
+trap cleanup EXIT
+trap 'exit 130' INT
+trap 'exit 143' HUP TERM
+POSTGRES_IMAGE=$($COMPOSE images -q postgres)
+TEST_PASSWORD="bootstrap'quote\\slash"
+docker run -d --name "$BOOTSTRAP_CONTAINER" --network none \
+    -e POSTGRES_PASSWORD=bootstrap-test-only \
+    -e "IDENTITY_DB_PASSWORD=$TEST_PASSWORD" -e "BUILDING_DB_PASSWORD=$TEST_PASSWORD" \
+    -v "$ROOT_DIR/infra/docker/postgres/init:/docker-entrypoint-initdb.d:ro" \
+    "$POSTGRES_IMAGE" >/dev/null
+tries=30
+while ! docker exec "$BOOTSTRAP_CONTAINER" pg_isready -h localhost -U postgres >/dev/null 2>&1; do
+    tries=$((tries - 1))
+    [ "$tries" -gt 0 ] || fail "quoted-password bootstrap did not become ready"
+    sleep 2
+done
+for domain in identity building; do
+    docker exec -e "PGPASSWORD=$TEST_PASSWORD" "$BOOTSTRAP_CONTAINER" \
+        psql -h localhost -U "${domain}_app" -d "${domain}_db" -v ON_ERROR_STOP=1 \
+        -tAc 'select 1' >/dev/null || fail "quoted-password bootstrap failed for $domain"
+done
+cleanup
+trap - EXIT HUP INT TERM
+echo "==> Quoted-password bootstrap passed"
+
 echo "==> Running and re-running Flyway migrations (identity-service)"
 mvn -q -B -f backend/pom.xml -pl identity-service flyway:migrate -Dflyway.password="$IDENTITY_DB_PASSWORD"
 mvn -q -B -f backend/pom.xml -pl identity-service flyway:migrate -Dflyway.password="$IDENTITY_DB_PASSWORD"
@@ -63,16 +94,15 @@ fi
 echo "==> Database role isolation confirmed"
 
 echo "==> Kafka broker smoke round trip"
-TOPIC="platform-smoke-$(date +%s)"
+TOPIC="platform-smoke-$(date +%s)-$$"
 $COMPOSE exec -T kafka /opt/kafka/bin/kafka-topics.sh --bootstrap-server localhost:9092 \
     --create --topic "$TOPIC" --partitions 1 --replication-factor 1 >/dev/null
-echo "smoke-$(date +%s)" | $COMPOSE exec -T kafka /opt/kafka/bin/kafka-console-producer.sh \
+SENT="smoke-$(date +%s)-$$"
+printf '%s\n' "$SENT" | $COMPOSE exec -T kafka /opt/kafka/bin/kafka-console-producer.sh \
     --bootstrap-server localhost:9092 --topic "$TOPIC" >/dev/null
 RECEIVED=$($COMPOSE exec -T kafka /opt/kafka/bin/kafka-console-consumer.sh \
     --bootstrap-server localhost:9092 --topic "$TOPIC" --from-beginning --max-messages 1 --timeout-ms 15000 2>/dev/null || true)
-[ -n "$RECEIVED" ] || fail "kafka smoke round trip produced no message"
-$COMPOSE exec -T kafka /opt/kafka/bin/kafka-topics.sh --bootstrap-server localhost:9092 \
-    --delete --topic "$TOPIC" >/dev/null
+[ "$RECEIVED" = "$SENT" ] || fail "kafka smoke round trip payload mismatch"
 echo "==> Kafka broker smoke round trip passed"
 
 echo "==> Restarting Postgres and Kafka to verify state persists"
@@ -81,6 +111,15 @@ wait_healthy postgres
 wait_healthy kafka
 psql_as identity_app "$IDENTITY_DB_PASSWORD" identity_db || fail "identity_app lost access to identity_db after restart"
 psql_as building_app "$BUILDING_DB_PASSWORD" building_db || fail "building_app lost access to building_db after restart"
-echo "==> Restart persistence confirmed"
+# A restart preserves the container writable layer too. Recreate the broker to
+# prove the named volume actually holds its records, then consume the same data.
+$COMPOSE up -d --force-recreate kafka
+wait_healthy kafka
+RECEIVED=$($COMPOSE exec -T kafka /opt/kafka/bin/kafka-console-consumer.sh \
+    --bootstrap-server localhost:9092 --topic "$TOPIC" --from-beginning --max-messages 1 --timeout-ms 15000 2>/dev/null || true)
+[ "$RECEIVED" = "$SENT" ] || fail "Kafka record did not survive container recreation"
+$COMPOSE exec -T kafka /opt/kafka/bin/kafka-topics.sh --bootstrap-server localhost:9092 \
+    --delete --topic "$TOPIC" >/dev/null
+echo "==> Restart and Kafka volume persistence confirmed"
 
 echo "VERIFY PASSED"
