@@ -105,7 +105,7 @@ blocking defects**. Agent review is not human approval.
 
 | Sev | Location | Finding | Disposition |
 |---|---|---|---|
-| Medium (pre-existing) | `user_app/.../auth_cache_impl.dart:48`, `core/data/cache/client/preference_cache.dart` | `UserInfo` JSON incl. access token persisted via SharedPreferences, not secure storage | Follow-up; must be fixed before production auth (TASK-003) |
+| ~~Medium~~ Withdrawn (QA) | `user_app/.../auth_cache_impl.dart:48` | Claimed token persisted in plaintext SharedPreferences | **False positive**: `core/data/cache/preference/shared_preference.dart:5` wraps `FlutterSecureStorage`; device shows `customer_info` only in encrypted `FlutterSecureStorage.xml` |
 | Low | `identity/.../domain/OtpChallenge.java:13` | `now.isAfter(expiresAt)` accepts the exact expiry instant | Follow-up: `!now.isBefore(expiresAt)` |
 | Low | `user_app/.../api_client.dart:36` | Debug builds log OTP/phone request bodies | Accepted: `enabled: kDebugMode`, release silent |
 | Info | `DevelopmentOtpCodeVerifier.java:19` | Non-constant-time compare | Not a defect: local/test-only, fixed code is public |
@@ -118,3 +118,23 @@ Verified no behavior change from `dart fix`: `firebase_messaging` 16.2.1
 Test gaps (follow-up, non-blocking): concurrent double-verify, full JWT claim
 assertions (`iss`/`aud`/`exp`/`iat`), CORS preflight on public auth paths.
 Still required for QA: live device login/resend and Flutter-to-backend flow.
+
+## QA (2026-09-23, automated-qa-agent, live device)
+
+Environment: Android emulator `Pixel_4a` (API 37, debug build, `fvm flutter run`,
+`API_BASE_URL=http://localhost:8080/` via `adb reverse`); Postgres (compose);
+identity-service `:8081` (`SPRING_PROFILES_ACTIVE=local`, local RSA issuer) and
+api-gateway `:8080` from the verified jars. Seed phone `01306999005`.
+
+| # | Step | Expected | Observed | Result |
+|---|---|---|---|---|
+| 1 | Enter phone, Next | `POST /api/v1/auth/otp/start` 200 → OTP screen | 200, attempt issued, `/login_otp_verify` ([01](qa/01-login.png), [02](qa/02-otp.png)) | PASS |
+| 2 | Code `111111`, Verify | 401 `OTP_INVALID_CODE`, stay, error shown | 401 `OTP_INVALID_CODE`; "Incorrect code. Please try again." ([03](qa/03-wrong-code.png)) | PASS |
+| 3 | Resend after 60 s timer | New `otp/start`, new attemptId | 200, new attempt `e87b0c10…` | PASS |
+| 4 | Code `000000`, Verify | 200 with new attemptId → app shell, back stack cleared | Verify sent new attemptId; 200; stack `[/app_shell]` ([05](qa/05-verified.png)) | PASS |
+| 5 | Session persisted | `customer_info` stored | Present in encrypted `FlutterSecureStorage.xml` only | PASS |
+| 6 | Cold restart | not specified | Lands on `/login` (`AppPages.initial` static) ([06](qa/06-cold-restart.png)) | GAP (no requirement) |
+
+Gap (needs business decision, not inferred): auto-restore of a persisted, unexpired
+session on launch is not specified in TASK-002; the app always starts at login.
+Verdict: QA READY for TASK-001/TASK-002 local/test slice. Not UAT/release approval.
