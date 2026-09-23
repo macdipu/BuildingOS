@@ -1,6 +1,6 @@
 # TASK-004 — Architecture conformance cleanup (backend + Flutter)
 
-## Status: IMPLEMENTED (2026-09-23) incl. Revisions 1-2; REVIEW next
+## Status: COMPLETED (2026-09-23) — run RUN-512386534E7849B9AEDA5CBCFBD5690D; commits 0909ba2, 4e70551; review/QA in ../REVIEW-TASK-004.md
 
 Runs before TASK-003 (on hold). Source: architecture audit 2026-09-23 and operator rule:
 every feature follows **Clean Architecture + feature-first + use case + repository
