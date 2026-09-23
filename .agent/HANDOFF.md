@@ -1,13 +1,13 @@
-Last updated: 2026-09-23T13:39:08.867953+00:00
+Last updated: 2026-09-23T14:16:35.145131+00:00
 Last agent: claude
 Operator: macdipu <c.dipu0@gmail.com>
-Current status: RUNNING
+Current status: COMPLETED
 
 ## Task
 BOS-010 F5a revenue foundation (RUN-4ABC6B2BAC974B0E878CA39C9A27AE00)
 
 ## Completed
-Model changed by operator to user-level subscriptions + one-time building creation fee (D-22..D-27, supersede D-15/D-19/D-21). Requirements rev 2 + TECH-SPEC rev 2 written; run reopened (scope_revision 1) and back at TECHNICAL. Design docs committed.
+subscription-service built: plans, per-user subscriptions, free tier, one-time creation fee; mvn verify 147/0; live gateway smoke; technical + release approved; run COMPLETED; committed.
 
 ## Changed Files
 (none)
@@ -22,16 +22,37 @@ Model changed by operator to user-level subscriptions + one-time building creati
 (none)
 
 ## Next Action
-Obtain operator technical approval of subscription-plans/TECH-SPEC.md rev 2, then IMPLEMENTATION on SAME run. Then restart building-application slice (approval requires creation fee, D-26).
+Operator: add SUBSCRIPTION_DB_PASSWORD to infra/docker/.env, then run scripts/verify-platform.sh. Next slice: building application (new run; D-12..D-14, D-26 approval calls fee status API; document storage decision needed).
 
 ## Git Snapshot
 ```text
 Branch: main
-Recent commit: 31235ea BOS-010 TASK-007: canonical BD mobile phone format in account-service
+Recent commit: be9ae2f BOS-010: align docs and task index with current state
 Status:
-M .agent/HANDOFF.md
- M agentic/data/project-context/features/BOS-010/DECISIONS.md
-?? .agent/sessions/2026-09-23T13-30-42-705Z-claude.md
-?? agentic/data/project-context/features/BOS-010/f2-intake-result.json
-?? agentic/data/project-context/features/BOS-010/subscription-plans/
+M .github/workflows/platform.yml
+ M agentic/data/project-context/context-index.yaml
+ M agentic/data/project-context/features/BOS-010/README.md
+ M agentic/data/project-context/features/BOS-010/TASKS.md
+ M agentic/data/project-context/features/BOS-010/subscription-plans/REQUIREMENTS.md
+ M agentic/data/project-context/features/BOS-010/subscription-plans/TECH-SPEC.md
+ M backend/api-gateway/src/main/java/com/buildingos/gateway/routing/config/GatewayRouteConfig.java
+ M backend/api-gateway/src/test/java/com/buildingos/gateway/GatewayDownstreamUnavailableTest.java
+ M backend/api-gateway/src/test/java/com/buildingos/gateway/GatewayRoutingTest.java
+ M backend/api-gateway/src/test/java/com/buildingos/gateway/support/StubDownstream.java
+ M backend/platform-web/src/main/java/com/buildingos/platform/web/config/PlatformWebConfiguration.java
+ M backend/pom.xml
+ M contracts/openapi/platform.yaml
+ M docs/ARCHITECTURE.md
+ M docs/LOCAL_DEVELOPMENT.md
+ M infra/docker/.env.example
+ M infra/docker/compose.yaml
+ M scripts/verify-platform.sh
+?? agentic/data/project-context/features/BOS-010/subscription-plans/REVIEW.md
+?? agentic/data/project-context/features/BOS-010/subscription-plans/implementation-result.json
+?? agentic/data/project-context/features/BOS-010/subscription-plans/qa-result.json
+?? agentic/data/project-context/features/BOS-010/subscription-plans/release-result.json
+?? agentic/data/project-context/features/BOS-010/subscription-plans/review-result.json
+?? backend/subscription-service/
+?? docs/REVENUE_MODEL.md
+?? infra/docker/postgres/init/03-subscription-db.sh
 ```

@@ -3,8 +3,8 @@
 Current checkpoint (2026-09-23): TASK-001/002 released for local/test use;
 TASK-003 (signing keys, provider-neutral OTP; production fails closed until an SMS adapter and
 signing key exist), TASK-004/005 (architecture cleanup, login polish), TASK-006 (429 message) and
-TASK-007 (canonical phone `01XXXXXXXXX`) completed. Next: F5a revenue foundation at TECHNICAL,
-awaiting approval; then building application (D-11). See [task sequence](TASKS.md).
+TASK-007 (canonical phone `01XXXXXXXXX`) completed. F5a revenue foundation (`subscription-service`) completed.
+Next: building application (D-11, D-26). See [task sequence](TASKS.md).
 
 Supersedes [BOS-001](../BOS-001) and [BOS-002](../BOS-002) after the operator asked to
 restart from INTAKE under the revised BRD (multi-tenant SaaS: global identity,

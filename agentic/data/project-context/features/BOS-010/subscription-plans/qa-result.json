@@ -1,0 +1,18 @@
+{
+  "status": "READY",
+  "evidence": [
+    "agentic/data/project-context/features/BOS-010/subscription-plans/REVIEW.md"
+  ],
+  "blocking_issues": [],
+  "open_questions": [],
+  "recommended_next_step": "Operator release decision.",
+  "outputs": {
+    "verdict": "READY",
+    "checks": [
+      "mvn verify 147/0",
+      "check-contracts PASSED",
+      "disposable DB isolation + migrate x2",
+      "live gateway smoke"
+    ]
+  }
+}

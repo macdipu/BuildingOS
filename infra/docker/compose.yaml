@@ -9,6 +9,7 @@ services:
       POSTGRES_DB: postgres
       ACCOUNT_DB_PASSWORD: ${ACCOUNT_DB_PASSWORD:?set in infra/docker/.env}
       BUILDING_DB_PASSWORD: ${BUILDING_DB_PASSWORD:?set in infra/docker/.env}
+      SUBSCRIPTION_DB_PASSWORD: ${SUBSCRIPTION_DB_PASSWORD:?set in infra/docker/.env}
     ports:
       - "127.0.0.1:5432:5432"
     volumes:

@@ -1,0 +1,20 @@
+{
+  "status": "READY",
+  "evidence": [
+    "backend/subscription-service/pom.xml",
+    "backend/subscription-service/src/main/resources/db/migration/V2__revenue_foundation.sql",
+    "docs/REVENUE_MODEL.md"
+  ],
+  "blocking_issues": [],
+  "open_questions": [],
+  "recommended_next_step": "Code review.",
+  "outputs": {
+    "verdict": "READY",
+    "checks": [
+      "mvn verify 147/0",
+      "check-contracts PASSED",
+      "disposable DB isolation + migrate x2",
+      "live gateway smoke"
+    ]
+  }
+}

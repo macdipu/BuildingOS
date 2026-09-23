@@ -105,7 +105,7 @@ public class PlatformWebConfiguration {
     CorsConfigurationSource corsConfigurationSource(SecuritySettings settings) {
         var configuration = new CorsConfiguration();
         configuration.setAllowedOrigins(settings.allowedOrigins());
-        configuration.setAllowedMethods(List.of("GET", "POST", "OPTIONS"));
+        configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "OPTIONS"));
         configuration.setAllowedHeaders(List.of("Authorization", "Content-Type", CorrelationFilter.HEADER));
         configuration.setExposedHeaders(List.of(CorrelationFilter.HEADER));
         configuration.setAllowCredentials(false);

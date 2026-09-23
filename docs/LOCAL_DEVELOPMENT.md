@@ -1,7 +1,8 @@
 # Local development — BOS-001 platform foundation
 
-Scope: gateway, account-service, building-service, their local Postgres/Kafka infrastructure,
-and the shared platform-web library, including BOS-010 phone OTP authentication.
+Scope: gateway, account-service, building-service, subscription-service, their local Postgres/Kafka
+infrastructure, and the shared platform-web library, including BOS-010 phone OTP authentication
+and the revenue foundation ([REVENUE_MODEL.md](REVENUE_MODEL.md)).
 
 ## Prerequisites
 
@@ -20,6 +21,10 @@ cp infra/docker/.env.example infra/docker/.env
 
 `infra/docker/.env` is gitignored. Never commit real credentials; the example file holds
 placeholders only.
+
+Existing checkouts: add `SUBSCRIPTION_DB_PASSWORD=...` to your `infra/docker/.env` (new in
+BOS-010 F5a). Postgres init scripts only run on a fresh volume; `scripts/verify-platform.sh`
+creates `subscription_db` in an existing volume if it is missing.
 
 ## Build
 
@@ -87,14 +92,23 @@ DB_USERNAME=building_app DB_PASSWORD="$BUILDING_DB_PASSWORD" SERVER_PORT=8082 \
 java -jar backend/building-service/target/building-service-0.1.0-SNAPSHOT.jar
 ```
 
+Subscription terminal:
+
+```sh
+DB_URL=jdbc:postgresql://localhost:5432/subscription_db \
+DB_USERNAME=subscription_app DB_PASSWORD="$SUBSCRIPTION_DB_PASSWORD" SERVER_PORT=8083 \
+java -jar backend/subscription-service/target/subscription-service-0.1.0-SNAPSHOT.jar
+```
+
 Gateway terminal:
 
 ```sh
 ACCOUNT_SERVICE_URL=http://localhost:8081 BUILDING_SERVICE_URL=http://localhost:8082 \
+SUBSCRIPTION_SERVICE_URL=http://localhost:8083 \
 SERVER_PORT=8080 java -jar backend/api-gateway/target/api-gateway-0.1.0-SNAPSHOT.jar
 ```
 
-Check `/actuator/health/readiness` on ports 8080, 8081, and 8082. Unauthenticated
+Check `/actuator/health/readiness` on ports 8080, 8081, 8082, and 8083. Unauthenticated
 requests to gateway `/api/v1/platform/account` and `/api/v1/platform/building`, or
 direct service `/internal/platform/info`, must return 401. A bearer token signed by
 your configured issuer with the configured audience is required for metadata; metrics

@@ -10,6 +10,8 @@ import java.time.Instant;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.test.context.ActiveProfiles;
@@ -25,6 +27,7 @@ class GatewayRoutingTest {
     private static JwtFixtures fixtures;
     private static StubDownstream accountStub;
     private static StubDownstream buildingStub;
+    private static StubDownstream subscriptionStub;
     private static final HttpClient HTTP = HttpClient.newHttpClient();
 
     @LocalServerPort
@@ -35,6 +38,7 @@ class GatewayRoutingTest {
         fixtures = new JwtFixtures();
         accountStub = new StubDownstream("account-service");
         buildingStub = new StubDownstream("building-service");
+        subscriptionStub = new StubDownstream("subscription-service");
     }
 
     @AfterAll
@@ -42,6 +46,7 @@ class GatewayRoutingTest {
         fixtures.close();
         accountStub.close();
         buildingStub.close();
+        subscriptionStub.close();
     }
 
     @DynamicPropertySource
@@ -51,6 +56,7 @@ class GatewayRoutingTest {
         registry.add("platform.security.jwk-set-uri", () -> fixtures.jwkSetUri);
         registry.add("ACCOUNT_SERVICE_URL", () -> accountStub.baseUrl);
         registry.add("BUILDING_SERVICE_URL", () -> buildingStub.baseUrl);
+        registry.add("SUBSCRIPTION_SERVICE_URL", () -> subscriptionStub.baseUrl);
     }
 
     private HttpResponse<String> call(String path, String bearerToken, String extraHeaderName, String extraHeaderValue)
@@ -83,6 +89,43 @@ class GatewayRoutingTest {
         assertThat(response.statusCode()).isEqualTo(200);
         assertThat(response.body()).contains("\"service\":\"building-service\"");
         assertThat(buildingStub.lastCorrelationHeader()).isNotBlank();
+    }
+
+    @Test
+    void validTokenForwardsToSubscriptionServiceMetadata() throws Exception {
+        var response = call("/api/v1/platform/subscription", validToken(), null, null);
+        assertThat(response.statusCode()).isEqualTo(200);
+        assertThat(response.body()).contains("\"service\":\"subscription-service\"");
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"/api/v1/platform/subscription-plans", "/api/v1/platform/subscription-plans/abc",
+            "/api/v1/platform/free-tier", "/api/v1/platform/users/abc/subscription",
+            "/api/v1/platform/fees/BUILDING_CREATION/status", "/api/v1/me/plans", "/api/v1/me/entitlements"})
+    void revenueApiPathsForwardUnchangedWithBearerToken(String path) throws Exception {
+        String token = validToken();
+        var response = call(path, token, null, null);
+        assertThat(response.statusCode()).isEqualTo(200);
+        assertThat(response.body()).contains("\"service\":\"subscription-service\"", "\"path\":\"" + path + "\"");
+        assertThat(subscriptionStub.lastAuthorization()).isEqualTo("Bearer " + token);
+    }
+
+    @Test
+    void revenueWritesForwardPutAndPost() throws Exception {
+        for (String method : new String[] {"PUT", "POST"}) {
+            var request = HttpRequest.newBuilder(URI.create("http://127.0.0.1:" + port + "/api/v1/platform/free-tier"))
+                    .method(method, HttpRequest.BodyPublishers.ofString("{}"))
+                    .header("Authorization", "Bearer " + validToken())
+                    .header("Content-Type", "application/json").build();
+            var response = HTTP.send(request, HttpResponse.BodyHandlers.ofString());
+            assertThat(response.statusCode()).isEqualTo(200);
+            assertThat(response.body()).contains("\"method\":\"" + method + "\"");
+        }
+    }
+
+    @Test
+    void revenueApiRequiresTokenAtGateway() throws Exception {
+        assertThat(call("/api/v1/me/entitlements", null, null, null).statusCode()).isEqualTo(401);
     }
 
     @Test

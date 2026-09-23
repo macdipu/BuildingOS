@@ -60,6 +60,7 @@ jobs:
       - run: mvn -B -f backend/pom.xml package -DskipTests
       - run: docker build --tag buildingos/account-service:ci backend/account-service
       - run: docker build --tag buildingos/building-service:ci backend/building-service
+      - run: docker build --tag buildingos/subscription-service:ci backend/subscription-service
       - run: docker build --tag buildingos/api-gateway:ci backend/api-gateway
 
   flutter-baseline:

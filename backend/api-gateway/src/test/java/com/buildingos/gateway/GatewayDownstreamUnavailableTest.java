@@ -46,6 +46,7 @@ class GatewayDownstreamUnavailableTest {
         registry.add("platform.security.jwk-set-uri", () -> fixtures.jwkSetUri);
         registry.add("ACCOUNT_SERVICE_URL", () -> UNREACHABLE);
         registry.add("BUILDING_SERVICE_URL", () -> UNREACHABLE);
+        registry.add("SUBSCRIPTION_SERVICE_URL", () -> UNREACHABLE);
     }
 
     @Test

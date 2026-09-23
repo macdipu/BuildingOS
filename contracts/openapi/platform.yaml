@@ -4,7 +4,7 @@ info:
   version: "0.1.0"
   description: >
     Exact operational routes for the BOS-001 platform foundation milestone.
-    Read-only service metadata only; no business data or mutation.
+    Service metadata plus BOS-010 F5a revenue APIs (subscription-service).
 servers:
   - url: http://localhost:8080
     description: Local gateway
@@ -53,6 +53,541 @@ paths:
           content:
             application/json:
               schema: { $ref: "#/components/schemas/ApiError" }
+  /api/v1/platform/subscription:
+    get:
+      summary: "Subscription service metadata (via gateway)"
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: "Success envelope"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiEnvelope" }
+        "401":
+          description: "Missing or invalid token"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+  /api/v1/platform/subscription-plans:
+    get:
+      summary: "List plans (revenue admin)"
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: "Success envelope"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiEnvelope" }
+        "401":
+          description: "Missing or invalid token"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "403":
+          description: "ACCESS_DENIED (no revenue-admin platform role) or PLAN_NOT_SELF_SERVICE"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+    post:
+      summary: "Create plan (revenue admin, BOS-010 F5a)"
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { type: object }
+      responses:
+        "201":
+          description: "Success envelope"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiEnvelope" }
+        "400":
+          description: "INVALID_REQUEST"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "401":
+          description: "Missing or invalid token"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "403":
+          description: "ACCESS_DENIED (no revenue-admin platform role) or PLAN_NOT_SELF_SERVICE"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "409":
+          description: "PLAN_CODE_TAKEN, PLAN_RETIRED, BILLING_CYCLE_NOT_OFFERED, ALREADY_SUBSCRIBED, FEE_NOT_CONFIGURED or CURRENCY_MISMATCH"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+  /api/v1/platform/subscription-plans/{planId}:
+    get:
+      summary: "Get plan"
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: planId
+          in: path
+          required: true
+          schema: { type: string }
+      responses:
+        "200":
+          description: "Success envelope"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiEnvelope" }
+        "401":
+          description: "Missing or invalid token"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "403":
+          description: "ACCESS_DENIED (no revenue-admin platform role) or PLAN_NOT_SELF_SERVICE"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "404":
+          description: "PLAN_NOT_FOUND or SUBSCRIPTION_NOT_FOUND"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+    put:
+      summary: "Edit plan; applies immediately to subscribers"
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: planId
+          in: path
+          required: true
+          schema: { type: string }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { type: object }
+      responses:
+        "200":
+          description: "Success envelope"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiEnvelope" }
+        "400":
+          description: "INVALID_REQUEST"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "401":
+          description: "Missing or invalid token"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "403":
+          description: "ACCESS_DENIED (no revenue-admin platform role) or PLAN_NOT_SELF_SERVICE"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "404":
+          description: "PLAN_NOT_FOUND or SUBSCRIPTION_NOT_FOUND"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "409":
+          description: "PLAN_CODE_TAKEN, PLAN_RETIRED, BILLING_CYCLE_NOT_OFFERED, ALREADY_SUBSCRIBED, FEE_NOT_CONFIGURED or CURRENCY_MISMATCH"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+  /api/v1/platform/subscription-plans/{planId}/retire:
+    post:
+      summary: "Retire plan (one-way)"
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: planId
+          in: path
+          required: true
+          schema: { type: string }
+      responses:
+        "200":
+          description: "Success envelope"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiEnvelope" }
+        "401":
+          description: "Missing or invalid token"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "403":
+          description: "ACCESS_DENIED (no revenue-admin platform role) or PLAN_NOT_SELF_SERVICE"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "404":
+          description: "PLAN_NOT_FOUND or SUBSCRIPTION_NOT_FOUND"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+  /api/v1/platform/free-tier:
+    get:
+      summary: "Free-tier entitlements every user gets"
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: "Success envelope"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiEnvelope" }
+        "401":
+          description: "Missing or invalid token"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "403":
+          description: "ACCESS_DENIED (no revenue-admin platform role) or PLAN_NOT_SELF_SERVICE"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+    put:
+      summary: "Replace free-tier entitlements"
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { type: object }
+      responses:
+        "200":
+          description: "Success envelope"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiEnvelope" }
+        "400":
+          description: "INVALID_REQUEST"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "401":
+          description: "Missing or invalid token"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "403":
+          description: "ACCESS_DENIED (no revenue-admin platform role) or PLAN_NOT_SELF_SERVICE"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+  /api/v1/platform/users/{userId}/subscription:
+    get:
+      summary: "A user's active subscription and effective entitlements"
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema: { type: string }
+      responses:
+        "200":
+          description: "Success envelope"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiEnvelope" }
+        "401":
+          description: "Missing or invalid token"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "403":
+          description: "ACCESS_DENIED (no revenue-admin platform role) or PLAN_NOT_SELF_SERVICE"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "404":
+          description: "PLAN_NOT_FOUND or SUBSCRIPTION_NOT_FOUND"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+    post:
+      summary: "Admin grants a plan to a user"
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema: { type: string }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { type: object }
+      responses:
+        "201":
+          description: "Success envelope"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiEnvelope" }
+        "400":
+          description: "INVALID_REQUEST"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "401":
+          description: "Missing or invalid token"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "403":
+          description: "ACCESS_DENIED (no revenue-admin platform role) or PLAN_NOT_SELF_SERVICE"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "404":
+          description: "PLAN_NOT_FOUND or SUBSCRIPTION_NOT_FOUND"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "409":
+          description: "PLAN_CODE_TAKEN, PLAN_RETIRED, BILLING_CYCLE_NOT_OFFERED, ALREADY_SUBSCRIBED, FEE_NOT_CONFIGURED or CURRENCY_MISMATCH"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+  /api/v1/platform/fees/{feeCode}:
+    get:
+      summary: "One-time fee schedule (e.g. BUILDING_CREATION)"
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: feeCode
+          in: path
+          required: true
+          schema: { type: string }
+      responses:
+        "200":
+          description: "Success envelope"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiEnvelope" }
+        "400":
+          description: "INVALID_REQUEST"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "401":
+          description: "Missing or invalid token"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "403":
+          description: "ACCESS_DENIED (no revenue-admin platform role) or PLAN_NOT_SELF_SERVICE"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "409":
+          description: "PLAN_CODE_TAKEN, PLAN_RETIRED, BILLING_CYCLE_NOT_OFFERED, ALREADY_SUBSCRIBED, FEE_NOT_CONFIGURED or CURRENCY_MISMATCH"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+    put:
+      summary: "Set fee amount, currency and whether it is required"
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: feeCode
+          in: path
+          required: true
+          schema: { type: string }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { type: object }
+      responses:
+        "200":
+          description: "Success envelope"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiEnvelope" }
+        "400":
+          description: "INVALID_REQUEST"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "401":
+          description: "Missing or invalid token"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "403":
+          description: "ACCESS_DENIED (no revenue-admin platform role) or PLAN_NOT_SELF_SERVICE"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+  /api/v1/platform/fees/{feeCode}/payments:
+    post:
+      summary: "Record an offline (MANUAL) payment against a reference"
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: feeCode
+          in: path
+          required: true
+          schema: { type: string }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { type: object }
+      responses:
+        "201":
+          description: "Success envelope"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiEnvelope" }
+        "400":
+          description: "INVALID_REQUEST"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "401":
+          description: "Missing or invalid token"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "403":
+          description: "ACCESS_DENIED (no revenue-admin platform role) or PLAN_NOT_SELF_SERVICE"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "409":
+          description: "PLAN_CODE_TAKEN, PLAN_RETIRED, BILLING_CYCLE_NOT_OFFERED, ALREADY_SUBSCRIBED, FEE_NOT_CONFIGURED or CURRENCY_MISMATCH"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+  /api/v1/platform/fees/{feeCode}/status:
+    get:
+      summary: "SETTLED, UNPAID or NOT_REQUIRED for a reference"
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: feeCode
+          in: path
+          required: true
+          schema: { type: string }
+        - name: referenceType
+          in: query
+          required: true
+          schema: { type: string }
+        - name: referenceId
+          in: query
+          required: true
+          schema: { type: string }
+      responses:
+        "200":
+          description: "Success envelope"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiEnvelope" }
+        "400":
+          description: "INVALID_REQUEST"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "401":
+          description: "Missing or invalid token"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "403":
+          description: "ACCESS_DENIED (no revenue-admin platform role) or PLAN_NOT_SELF_SERVICE"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "409":
+          description: "PLAN_CODE_TAKEN, PLAN_RETIRED, BILLING_CYCLE_NOT_OFFERED, ALREADY_SUBSCRIBED, FEE_NOT_CONFIGURED or CURRENCY_MISMATCH"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+  /api/v1/me/plans:
+    get:
+      summary: "Active self-service plans the caller may pick"
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: "Success envelope"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiEnvelope" }
+        "401":
+          description: "Missing or invalid token"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+  /api/v1/me/subscription:
+    post:
+      summary: "Caller subscribes to a self-service plan (free for now)"
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { type: object }
+      responses:
+        "201":
+          description: "Success envelope"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiEnvelope" }
+        "400":
+          description: "INVALID_REQUEST"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "401":
+          description: "Missing or invalid token"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "403":
+          description: "ACCESS_DENIED (no revenue-admin platform role) or PLAN_NOT_SELF_SERVICE"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "404":
+          description: "PLAN_NOT_FOUND or SUBSCRIPTION_NOT_FOUND"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "409":
+          description: "PLAN_CODE_TAKEN, PLAN_RETIRED, BILLING_CYCLE_NOT_OFFERED, ALREADY_SUBSCRIBED, FEE_NOT_CONFIGURED or CURRENCY_MISMATCH"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+  /api/v1/me/entitlements:
+    get:
+      summary: "Caller's effective entitlements: free tier plus own plan"
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: "Success envelope"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiEnvelope" }
+        "401":
+          description: "Missing or invalid token"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
   /internal/platform/info:
     get:
       summary: Service metadata (direct, account-service or building-service)
@@ -79,6 +614,14 @@ components:
       scheme: bearer
       bearerFormat: JWT
   schemas:
+    ApiEnvelope:
+      type: object
+      required: [success, data, traceId]
+      properties:
+        success: { type: boolean }
+        data: {}
+        meta: { type: object }
+        traceId: { type: string }
     ApiEnvelopeMetadata:
       type: object
       required: [success, data, meta, traceId]

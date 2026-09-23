@@ -1,6 +1,6 @@
 # BOS-010 F5a — Technical design: subscription-service (revenue foundation)
 
-Status: TECHNICAL READY (revision 2) — awaiting operator technical approval.
+Status: IMPLEMENTED (revision 2, approved 2026-09-23) — see [REVIEW.md](REVIEW.md) for deviations (jsonb billing cycles, `/me/plans`).
 Requirements: [REQUIREMENTS.md](REQUIREMENTS.md) RV-01..RV-11. Architecture:
 [docs/ARCHITECTURE.md](../../../../../../docs/ARCHITECTURE.md). Mirrors existing services.
 

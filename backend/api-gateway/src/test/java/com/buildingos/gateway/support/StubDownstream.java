@@ -9,6 +9,7 @@ public final class StubDownstream implements AutoCloseable {
     private final HttpServer server;
     public final String baseUrl;
     private final AtomicReference<String> lastCorrelationHeader = new AtomicReference<>();
+    private final AtomicReference<String> lastAuthorization = new AtomicReference<>();
 
     public StubDownstream(String service) throws Exception {
         server = HttpServer.create(new InetSocketAddress("127.0.0.1", 0), 0);
@@ -31,8 +32,24 @@ public final class StubDownstream implements AutoCloseable {
                 os.write(body);
             }
         });
+        server.createContext("/api/v1/", exchange -> {
+            lastCorrelationHeader.set(exchange.getRequestHeaders().getFirst("X-Correlation-Id"));
+            lastAuthorization.set(exchange.getRequestHeaders().getFirst("Authorization"));
+            byte[] body = ("{\"success\":true,\"data\":{\"service\":\"" + service + "\",\"method\":\""
+                    + exchange.getRequestMethod() + "\",\"path\":\"" + exchange.getRequestURI().getPath()
+                    + "\"},\"meta\":{},\"traceId\":\"stub\"}").getBytes();
+            exchange.getResponseHeaders().add("Content-Type", "application/json");
+            exchange.sendResponseHeaders(200, body.length);
+            try (var os = exchange.getResponseBody()) {
+                os.write(body);
+            }
+        });
         server.start();
         baseUrl = "http://127.0.0.1:" + server.getAddress().getPort();
+    }
+
+    public String lastAuthorization() {
+        return lastAuthorization.get();
     }
 
     public String lastCorrelationHeader() {

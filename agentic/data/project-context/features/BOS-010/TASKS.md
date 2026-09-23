@@ -26,8 +26,8 @@ Do not commit without an explicit operator request.
 
 | Slice | Outcome | Status |
 |---|---|---|
-| [F5a revenue foundation](subscription-plans/REQUIREMENTS.md) | `subscription-service`: plans, per-user subscriptions, free tier, one-time building-creation fee ([design](subscription-plans/TECH-SPEC.md)) | TECHNICAL (rev 2) — awaiting technical approval; run `RUN-4ABC6B2BAC974B0E878CA39C9A27AE00` |
-| F2 building application & lifecycle | Apply → review → approve (needs creation fee, D-26) → onboarding; D-12..D-14 scope | Sequenced after F5a (D-11); intake run `RUN-28CD3436B6534AE087FF73B03B8F5E4D` cancelled, restart later |
+| [F5a revenue foundation](subscription-plans/REQUIREMENTS.md) | `subscription-service`: plans, per-user subscriptions, free tier, one-time building-creation fee ([design](subscription-plans/TECH-SPEC.md)) | COMPLETED 2026-09-23 (local/test); [review/QA](subscription-plans/REVIEW.md); run `RUN-4ABC6B2BAC974B0E878CA39C9A27AE00` |
+| F2 building application & lifecycle | Apply → review → approve (needs creation fee, D-26) → onboarding; D-12..D-14 scope | Next — restart with a new run (earlier intake run `RUN-28CD3436B6534AE087FF73B03B8F5E4D` cancelled); approval calls the creation-fee status API |
 | Units & ownership | Carried BOS-002 domain | Not started |
 | Back-office console | UI for the above | Not started; needs D-09/D-10 |
 

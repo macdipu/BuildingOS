@@ -17,7 +17,8 @@ command -v mvn >/dev/null 2>&1 || fail "mvn is required"
 
 # shellcheck disable=SC1090
 . "$ENV_FILE"
-export POSTGRES_SUPERUSER_PASSWORD ACCOUNT_DB_PASSWORD BUILDING_DB_PASSWORD
+[ -n "${SUBSCRIPTION_DB_PASSWORD:-}" ] || fail "SUBSCRIPTION_DB_PASSWORD missing from $ENV_FILE (see infra/docker/.env.example)"
+export POSTGRES_SUPERUSER_PASSWORD ACCOUNT_DB_PASSWORD BUILDING_DB_PASSWORD SUBSCRIPTION_DB_PASSWORD
 
 echo "==> Starting Postgres and Kafka"
 $COMPOSE up -d postgres kafka
@@ -37,6 +38,13 @@ wait_healthy postgres
 wait_healthy kafka
 echo "==> Postgres and Kafka are healthy"
 
+# Init scripts run only when the data volume is first created. Add databases introduced
+# later (subscription_db, BOS-010 F5a) to an existing volume, idempotently.
+if ! $COMPOSE exec -T postgres psql -U postgres -tAc "select 1 from pg_roles where rolname='subscription_app'" | grep -q 1; then
+    echo "==> Creating subscription_db in the existing Postgres volume"
+    $COMPOSE exec -T -e SUBSCRIPTION_DB_PASSWORD postgres bash /docker-entrypoint-initdb.d/03-subscription-db.sh
+fi
+
 # Exercise the actual bootstrap scripts against a disposable cluster with quoted
 # passwords. The project databases and volumes are never reset by this check.
 BOOTSTRAP_CONTAINER="buildingos-bootstrap-check-$$"
@@ -51,6 +59,7 @@ TEST_PASSWORD="bootstrap'quote\\slash"
 docker run -d --name "$BOOTSTRAP_CONTAINER" --network none \
     -e POSTGRES_PASSWORD=bootstrap-test-only \
     -e "ACCOUNT_DB_PASSWORD=$TEST_PASSWORD" -e "BUILDING_DB_PASSWORD=$TEST_PASSWORD" \
+    -e "SUBSCRIPTION_DB_PASSWORD=$TEST_PASSWORD" \
     -v "$ROOT_DIR/infra/docker/postgres/init:/docker-entrypoint-initdb.d:ro" \
     "$POSTGRES_IMAGE" >/dev/null
 tries=30
@@ -59,7 +68,7 @@ while ! docker exec "$BOOTSTRAP_CONTAINER" pg_isready -h localhost -U postgres >
     [ "$tries" -gt 0 ] || fail "quoted-password bootstrap did not become ready"
     sleep 2
 done
-for domain in account building; do
+for domain in account building subscription; do
     docker exec -e "PGPASSWORD=$TEST_PASSWORD" "$BOOTSTRAP_CONTAINER" \
         psql -h localhost -U "${domain}_app" -d "${domain}_db" -v ON_ERROR_STOP=1 \
         -tAc 'select 1' >/dev/null || fail "quoted-password bootstrap failed for $domain"
@@ -76,6 +85,10 @@ echo "==> Running and re-running Flyway migrations (building-service)"
 mvn -q -B -f backend/pom.xml -pl building-service flyway:migrate -Dflyway.password="$BUILDING_DB_PASSWORD"
 mvn -q -B -f backend/pom.xml -pl building-service flyway:migrate -Dflyway.password="$BUILDING_DB_PASSWORD"
 
+echo "==> Running and re-running Flyway migrations (subscription-service)"
+mvn -q -B -f backend/pom.xml -pl subscription-service flyway:migrate -Dflyway.password="$SUBSCRIPTION_DB_PASSWORD"
+mvn -q -B -f backend/pom.xml -pl subscription-service flyway:migrate -Dflyway.password="$SUBSCRIPTION_DB_PASSWORD"
+
 psql_as() {
     role="$1"; password="$2"; db="$3"
     PGPASSWORD="$password" $COMPOSE exec -T -e PGPASSWORD postgres \
@@ -90,6 +103,18 @@ if psql_as account_app "$ACCOUNT_DB_PASSWORD" building_db; then
 fi
 if psql_as building_app "$BUILDING_DB_PASSWORD" account_db; then
     fail "building_app was able to connect to account_db (isolation broken)"
+fi
+psql_as subscription_app "$SUBSCRIPTION_DB_PASSWORD" subscription_db || fail "subscription_app could not connect to subscription_db"
+for other in account_db building_db; do
+    if psql_as subscription_app "$SUBSCRIPTION_DB_PASSWORD" "$other"; then
+        fail "subscription_app was able to connect to $other (isolation broken)"
+    fi
+done
+if psql_as account_app "$ACCOUNT_DB_PASSWORD" subscription_db; then
+    fail "account_app was able to connect to subscription_db (isolation broken)"
+fi
+if psql_as building_app "$BUILDING_DB_PASSWORD" subscription_db; then
+    fail "building_app was able to connect to subscription_db (isolation broken)"
 fi
 echo "==> Database role isolation confirmed"
 
@@ -111,6 +136,7 @@ wait_healthy postgres
 wait_healthy kafka
 psql_as account_app "$ACCOUNT_DB_PASSWORD" account_db || fail "account_app lost access to account_db after restart"
 psql_as building_app "$BUILDING_DB_PASSWORD" building_db || fail "building_app lost access to building_db after restart"
+psql_as subscription_app "$SUBSCRIPTION_DB_PASSWORD" subscription_db || fail "subscription_app lost access to subscription_db after restart"
 # A restart preserves the container writable layer too. Recreate the broker to
 # prove the named volume actually holds its records, then consume the same data.
 $COMPOSE up -d --force-recreate kafka

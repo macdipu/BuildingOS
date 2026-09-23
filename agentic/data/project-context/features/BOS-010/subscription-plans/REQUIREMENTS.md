@@ -1,6 +1,6 @@
 # BOS-010 F5a — Revenue foundation: plans, user subscriptions, free tier, creation fee
 
-Status: READY (revision 2, 2026-09-23 — operator changed the model to user-level subscriptions;
+Status: COMPLETED 2026-09-23 ([review/QA](REVIEW.md)). Requirements revision 2 (2026-09-23 — operator changed the model to user-level subscriptions;
 D-22..D-27 supersede D-15, D-19, D-21).
 Run: `RUN-4ABC6B2BAC974B0E878CA39C9A27AE00` (new_feature, FEATURE, NO_REPLAN).
 Source: BRD §149.15–149.16, §149.19, §149.21–149.23 as amended by

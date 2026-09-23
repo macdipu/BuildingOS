@@ -36,6 +36,7 @@ BuildingOS/
 │   ├── api-gateway/
 │   ├── account-service/
 │   ├── building-service/
+│   ├── subscription-service/ plans, per-user subscriptions, free tier, one-time fees (BOS-010 F5a)
 │   └── platform-web/        shared web kernel (library, not a service)
 ├── user_app/                Flutter mobile app (GetX)
 ├── contracts/
@@ -43,7 +44,7 @@ BuildingOS/
 │   └── kafka/               event envelope schemas
 ├── infra/docker/            compose.yaml, postgres init
 ├── scripts/                 verify-platform.sh, verify-flutter.sh, check-contracts.py
-└── docs/                    this file, LOCAL_DEVELOPMENT.md
+└── docs/                    this file, LOCAL_DEVELOPMENT.md, AUTH_CONFIGURATION.md, REVENUE_MODEL.md
 ```
 
 ## Backend service (example: account-service)

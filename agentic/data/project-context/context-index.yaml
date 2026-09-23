@@ -68,11 +68,8 @@ features:
     updated: "2026-09-23"
     completed_tasks: [TASK-001, TASK-002, TASK-003, TASK-004, TASK-005, TASK-006, TASK-007]
     last_commit: a6bc0b3
-    active_slice: F5a-revenue-foundation
-    active_run_id: RUN-4ABC6B2BAC974B0E878CA39C9A27AE00
-    active_stage: TECHNICAL
-    active_approval: TECHNICAL_PENDING
-    next_slice: F2-building-application (sequenced after F5a, D-11)
+    completed_slices: [F5a-revenue-foundation (RUN-4ABC6B2BAC974B0E878CA39C9A27AE00)]
+    next_slice: F2-building-application (D-11; approval needs creation fee, D-26)
     resolved: [D-01, D-02, D-07, D-08, D-11, D-12, D-13, D-14, D-16, D-17, D-18, D-20, D-22, D-23, D-24, D-25, D-26, D-27]
     superseded: [D-15, D-19, D-21]
     open: [D-09-backoffice-technology, D-10-support-session-scopes, document-storage-technology]
