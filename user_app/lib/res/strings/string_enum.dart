@@ -11,14 +11,17 @@ enum TextEnum {
   about(en: "About", bn: "সম্পর্কে"),
   contactUs(en: "Contact Us", bn: "যোগাযোগ করুন"),
   loginDescription(
-      en: "Enter your credentials to login",
-      bn: "লগইন করতে আপনার তথ্য দিন"),
+      en: "Enter your credentials to login", bn: "লগইন করতে আপনার তথ্য দিন"),
   loginUpperText(en: "Login to continue", bn: "চালিয়ে যাওয়ার জন্য লগইন করুন"),
   next(en: "Next", bn: "পরবর্তী"),
   otpResend(
-      en: "OTP will be sent again in @time",
-      bn: '@time এবার OTP পাঠাবেন'
-  ),
+      en: "OTP will be sent again in @time", bn: '@time এবার OTP পাঠাবেন'),
+
+  otpVerification(en: "OTP Verification", bn: "OTP যাচাইকরণ"),
+  otpSentTo(
+      en: "Please check, a verification code has been sent to @phone",
+      bn: "@phone নম্বরে একটি যাচাইকরণ কোড পাঠানো হয়েছে"),
+  changeNumber(en: "Change Number", bn: "নম্বর পরিবর্তন করুন"),
 
   phoneNumber(en: "Phone Number", bn: "ফোন নম্বর"),
   pin(en: "PIN", bn: "পিন"),

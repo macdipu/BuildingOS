@@ -8,6 +8,7 @@ import 'package:customer/core/widgets/buttons/common_button.dart';
 import 'package:customer/core/widgets/buttons/otp_resend_timer.dart';
 import 'package:customer/core/widgets/pin/common_pin_input.dart';
 import 'package:customer/app/routes/app_routes.dart';
+import 'package:customer/res/strings/string_enum.dart';
 
 import 'package:customer/features/authentication/presentation/widgets/intro_header.dart';
 import 'package:customer/features/authentication/presentation/controllers/login_screen_controller.dart';
@@ -24,42 +25,42 @@ class _LoginOtpVerifyScreenState extends State<LoginOtpVerifyScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        appBar: CommonAppbar(),
-        body: Container(
-          padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-          child: ListView(
-            shrinkWrap: true,
-            children: [
-              const SizedBox(height: 18),
-              Obx(
-                () => IntroHeader(
-                  title: 'OTP Verification',
-                  introText: 'Please check, a verification code has been sent to '
+    return Scaffold(
+      appBar: CommonAppbar(),
+      body: SafeArea(
+        child: ListView(
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
+          children: [
+            Obx(
+              () => IntroHeader(
+                title: TextEnum.otpVerification.tr,
+                introText: TextEnum.otpSentTo.trParams({
+                  'phone':
                       '+88 ${_controller.phoneNumber.value?.withoutCountryCode ?? ''}',
+                }),
+              ),
+            ),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: TextButton(
+                onPressed: Get.back,
+                style: TextButton.styleFrom(
+                  minimumSize: const Size(48, 48),
+                  padding: EdgeInsets.zero,
+                  tapTargetSize: MaterialTapTargetSize.padded,
+                ),
+                child: Text(
+                  TextEnum.changeNumber.tr,
+                  style: const TextStyle(
+                      fontSize: 14, fontWeight: FontWeight.w500),
                 ),
               ),
-              Align(
-                alignment: Alignment.centerLeft,
-                child: GestureDetector(
-                  onTap: Get.back,
-                  child: Text(
-                    'Change Number',
-                    style: TextStyle(
-                      color: Theme.of(context).colorScheme.primary,
-                      fontSize: 14,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(height: 16),
-              _otpInput(),
-              const SizedBox(height: 16),
-              _verifyButton(),
-            ],
-          ),
+            ),
+            const SizedBox(height: 24),
+            _otpInput(),
+            const SizedBox(height: 24),
+            _verifyButton(),
+          ],
         ),
       ),
     );
@@ -97,7 +98,7 @@ class _LoginOtpVerifyScreenState extends State<LoginOtpVerifyScreen> {
   Widget _verifyButton() {
     return Obx(
       () => CommonButton.elevated(
-        title: 'Verify',
+        title: TextEnum.verify.tr,
         isLoading: _controller.status.value == StateStatus.loading,
         onTap: () async {
           final success = await _controller.verifyOtp();

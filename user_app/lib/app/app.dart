@@ -8,6 +8,8 @@ import 'package:customer/core/controllers/locale_controller.dart';
 import 'package:customer/core/controllers/theme_controller.dart';
 import 'package:customer/core/services/navigation/navigation_history_observer.dart';
 import 'package:customer/core/services/navigation/navigation_service.dart';
+import 'package:customer/core/widgets/images/app_svg.dart';
+import 'package:customer/res/resources.dart';
 import 'package:customer/res/strings/app_translations.dart';
 import 'package:customer/res/strings/string_enum.dart';
 import 'package:flutter/material.dart';
@@ -32,6 +34,7 @@ class _MyAppState extends State<MyApp> {
     _sessionExpirySubscription = Get.find<SessionExpiryNotifier>()
         .onExpired
         .listen((_) => Get.offAllNamed(AppRoutes.login));
+    unawaited(AppSvg.precache(Resources.drawable.splashImage));
   }
 
   @override

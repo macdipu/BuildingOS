@@ -2,7 +2,7 @@ import 'dart:async';
 import 'package:flutter/services.dart';
 import 'package:customer/app/theme/theme_extensions.dart';
 import 'package:customer/core/utils/state_status.dart';
-import 'package:customer/core/widgets/images/round_image.dart';
+import 'package:customer/core/widgets/images/app_svg.dart';
 import 'package:customer/core/widgets/text_field/custom_text_field.dart';
 import 'package:customer/core/widgets/buttons/common_button.dart';
 import 'package:flutter/material.dart';
@@ -26,30 +26,25 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
       body: SafeArea(
-        child: Stack(
-          children: [
-            _bottomImage(),
-            SingleChildScrollView(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: Column(
-                children: [
-                  const SizedBox(height: 58),
-                  _switchLocaleButton(),
-                  const SizedBox(height: 40),
-                  _branding(),
-                  const SizedBox(height: 40),
-                  _phoneNumber(),
-                  const SizedBox(height: 16),
-                  _submitButton(),
-                  const SizedBox(height: 8),
-                  // _createAccountLink(),
-                ],
-              ),
-            ),
-
-          ],
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              const SizedBox(height: 16),
+              _switchLocaleButton(),
+              const SizedBox(height: 48),
+              _branding(),
+              const SizedBox(height: 24),
+              _heading(),
+              const SizedBox(height: 24),
+              _phoneNumber(),
+              const SizedBox(height: 24),
+              _submitButton(),
+              const SizedBox(height: 24),
+            ],
+          ),
         ),
       ),
     );
@@ -86,9 +81,19 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   Widget _branding() {
-    return CRoundImage(
-      height: 72,
-      imagePath: Resources.drawable.splashImage,
+    return Center(
+      child: AppSvg(
+        assetPath: Resources.drawable.splashImage,
+        height: 96,
+      ),
+    );
+  }
+
+  Widget _heading() {
+    return Text(
+      TextEnum.loginUpperText.tr,
+      textAlign: TextAlign.center,
+      style: Theme.of(context).textTheme.headlineSmall,
     );
   }
 
@@ -103,22 +108,10 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  Widget _bottomImage() {
-    return Align(
-      alignment: Alignment.bottomCenter,
-      child: CRoundImage(
-        imagePath: Resources.drawable.splashImage,
-        width: MediaQuery.of(context).size.width,
-        fit: BoxFit.cover,
-      ),
-    );
-  }
-
   Widget _submitButton() {
     return Obx(
       () => CommonButton.elevated(
         title: TextEnum.next.tr,
-        width: MediaQuery.of(context).size.width - 32,
         isLoading: _controller.status.value == StateStatus.loading,
         onTap: () async {
           final success = await _controller.requestOtp();
@@ -129,5 +122,4 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
     );
   }
-
 }
