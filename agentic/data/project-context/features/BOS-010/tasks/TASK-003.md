@@ -1,6 +1,6 @@
 # TASK-003 — Production token issuance + provider-neutral OTP/SMS adapter (backend)
 
-## Status: IMPLEMENTED, REVIEWED ([review](../REVIEW-TASK-003.md)) — QA READY — COMPLETED ([release](../RELEASE-TASK-003.md), 2026-09-23)
+## Status: COMPLETED (2026-09-23) — run RUN-0CF5A7A84513476697D476E1334896C1; commit 6e4c250; [review/QA](../REVIEW-TASK-003.md), [release](../RELEASE-TASK-003.md)
 
 First run `RUN-E94BAA68F8F4403FBDAC06C6B1A8E1AB` was approved (2026-09-23) then cancelled
 before any code change at operator request. Restart as a new run after TASK-004;

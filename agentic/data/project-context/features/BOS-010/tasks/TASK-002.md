@@ -1,6 +1,6 @@
 # TASK-002 — Flutter (`user_app`) phone+OTP login integration
 
-## Status: IMPLEMENTED; 22 Flutter tests pass; strict analysis clean; live flow QA outstanding
+## Status: COMPLETED (2026-09-23) — live device QA passed ([REVIEW-QA.md](../REVIEW-QA.md) QA section); released local/test ([RELEASE.md](../RELEASE.md))
 
 2026-09-23 continuation: see [review/QA checkpoint](../REVIEW-QA.md). Added nine
 HTTP contract/persistence tests using the real client/repositories and a loopback

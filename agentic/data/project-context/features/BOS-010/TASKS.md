@@ -10,7 +10,7 @@ recreating planning artifacts; TASK-003 uses TASK_ONLY / NO_REPLAN.
 | [TASK-002](tasks/TASK-002.md) | Flutter phone OTP integration | COMPLETED; automated and live QA in [REVIEW-QA.md](REVIEW-QA.md) |
 | [TASK-004](tasks/TASK-004.md) | Architecture conformance and account-service rename | COMPLETED; [review/QA](REVIEW-TASK-004.md) |
 | [TASK-005](tasks/TASK-005.md) | Locale toggle and login/OTP polish | COMPLETED; [review/QA](REVIEW-TASK-005.md) |
-| [TASK-003](tasks/TASK-003.md) | Account-service signing keys and provider-neutral OTP/SMS boundary; vendor deferred | IMPLEMENTED (technical gate approved 2026-09-23); backend 80 / Flutter 32 tests green; [review](REVIEW-TASK-003.md) READY; COMPLETED; [release](RELEASE-TASK-003.md) local/test, production fail-closed |
+| [TASK-003](tasks/TASK-003.md) | Account-service signing keys and provider-neutral OTP/SMS boundary; vendor deferred | COMPLETED; [review/QA](REVIEW-TASK-003.md), [release](RELEASE-TASK-003.md) local/test, production fail-closed |
 | [TASK-006](tasks/TASK-006.md) | App-owned message for OTP start rate limit (429) | COMPLETED; [review/QA](REVIEW-TASK-006.md) |
 | [TASK-007](tasks/TASK-007.md) | Canonical BD mobile phone format `01XXXXXXXXX` in account-service | COMPLETED; [review/QA](REVIEW-TASK-007.md) |
 
@@ -22,6 +22,13 @@ validation plan. Implementation evidence:
 
 Do not commit without an explicit operator request.
 
-Later features under this EPIC (not yet intake'd, see FEATURE.md/DECISIONS.md):
-building application & lifecycle; units & ownership; subscription & entitlements;
-back-office console (needs D-09/D-10).
+## Feature slices (after the identity slice)
+
+| Slice | Outcome | Status |
+|---|---|---|
+| [F5a revenue foundation](subscription-plans/REQUIREMENTS.md) | `subscription-service`: plans, per-user subscriptions, free tier, one-time building-creation fee ([design](subscription-plans/TECH-SPEC.md)) | TECHNICAL (rev 2) — awaiting technical approval; run `RUN-4ABC6B2BAC974B0E878CA39C9A27AE00` |
+| F2 building application & lifecycle | Apply → review → approve (needs creation fee, D-26) → onboarding; D-12..D-14 scope | Sequenced after F5a (D-11); intake run `RUN-28CD3436B6534AE087FF73B03B8F5E4D` cancelled, restart later |
+| Units & ownership | Carried BOS-002 domain | Not started |
+| Back-office console | UI for the above | Not started; needs D-09/D-10 |
+
+Revenue model is per-user (D-22..D-27), superseding the BRD's building-level subscription.

@@ -64,25 +64,23 @@ features:
   BOS-010:
     status: IN_PROGRESS
     path: agentic/data/project-context/features/BOS-010
-    stage: IMPLEMENTATION
-    approval: TECHNICAL_APPROVED
-    approved_by: "macdipu <c.dipu0@gmail.com>"
-    approval_note: 'Operator said "now start development" (2026-09-22), recorded as technical-gate approval for TASK-001 scope'
     planning: EPIC_PROVISIONAL
-    run_id: RUN-D10A3F4277E7424F938E3BC2C46E9A2D
-    blockers: []
-    resolved: [D-07-platform-admin-full-approval-authority, D-08-admin-configured-subscription-plans]
-    task_001_status: IMPLEMENTED_AND_TESTED_BACKEND_ONLY
-    task_001_test_evidence: "51/51 backend tests pass (independently re-verified via surefire reports, not just agent claim)"
-    task_002_flutter_integration: IMPLEMENTED_22_TESTS_PASS_QA_INCOMPLETE
-    task_003_production_token_issuance: NOT_STARTED
-    git_status: "TASK-002 committed as 39842eb; continuation QA additions uncommitted"
-    run_status: BLOCKED
-    continuation_checkpoint: agentic/data/project-context/features/BOS-010/REVIEW-QA.md
-    continuation_blocker: "900-second execution budget and implementation retry allowance exhausted; operator-authorized recovery required"
-    otp_provider: development-fixed-code-adapter
-    development_otp: "000000"
+    updated: "2026-09-23"
+    completed_tasks: [TASK-001, TASK-002, TASK-003, TASK-004, TASK-005, TASK-006, TASK-007]
+    last_commit: a6bc0b3
+    active_slice: F5a-revenue-foundation
+    active_run_id: RUN-4ABC6B2BAC974B0E878CA39C9A27AE00
+    active_stage: TECHNICAL
+    active_approval: TECHNICAL_PENDING
+    next_slice: F2-building-application (sequenced after F5a, D-11)
+    resolved: [D-01, D-02, D-07, D-08, D-11, D-12, D-13, D-14, D-16, D-17, D-18, D-20, D-22, D-23, D-24, D-25, D-26, D-27]
+    superseded: [D-15, D-19, D-21]
+    open: [D-09-backoffice-technology, D-10-support-session-scopes, document-storage-technology]
+    brd_deviations: [D-22-per-user-subscriptions, D-26-creation-fee-instead-of-approval-subscription]
+    otp_provider: development-fixed-code-adapter (local/test); sms provider boundary, no vendor
+    phone_format: canonical 01XXXXXXXXX (TASK-007)
     admin_bootstrap: deploy-time-seed-script-carried-from-BOS-002
+    task_index: agentic/data/project-context/features/BOS-010/TASKS.md
     note: >-
       Full-restart work item for the revised BRD: global user identity,
       building application/approval lifecycle, units/ownership, subscription/

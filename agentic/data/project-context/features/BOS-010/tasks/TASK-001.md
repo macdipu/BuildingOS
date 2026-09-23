@@ -1,6 +1,6 @@
 # TASK-001 — Global identity, platform roles, seed SUPER_ADMIN, phone+OTP login
 
-## Status: DONE (backend), verified by tests. Flutter integration is TASK-002.
+## Status: COMPLETED (2026-09-23) — backend; released local/test ([RELEASE.md](../RELEASE.md)). Flutter integration is TASK-002.
 
 ## Acceptance criteria
 

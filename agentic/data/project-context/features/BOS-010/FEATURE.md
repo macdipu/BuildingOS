@@ -23,7 +23,8 @@ domain model itself:
 - A building is no longer created directly; it goes through a
   `BuildingApplication` state machine (`DRAFT → SUBMITTED → UNDER_REVIEW → ... →
   ONBOARDING → ACTIVE`, §110.2, §149.3–149.7) with back-office review/approval.
-- Subscription/entitlements are now a first-class, building-level SaaS concern
+- Subscription/entitlements are now a first-class SaaS concern (BRD: building-level; **superseded
+  2026-09-23 by operator decisions D-22..D-27: per-user subscriptions + one-time building-creation fee**)
   (§8.12, §110.3, §149.15–149.16), enforced by a new `subscription-service`.
 - A back-office web application (`buildingos_backoffice_web`, §149.1) is now in scope,
   alongside the existing `user_app` Flutter mobile client.
@@ -34,7 +35,7 @@ Reusing BOS-002's REQUIREMENTS/DECISIONS as-is would mean building the wrong sha
 identity/building domain and then reconciling it later. This restart re-derives scope
 from the current BRD instead.
 
-## Existing baseline (reusable, not a constraint on the new model)
+## Existing baseline at intake, 2026-09-22 (historical; `identity-service` since renamed `account-service`, TASK-004)
 
 - `backend/`: `api-gateway`, `identity-service`, `building-service` exist as a runnable
   local skeleton (BOS-001, commit `463db1a`) — health/readiness, JWT validation at
