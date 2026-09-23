@@ -43,8 +43,7 @@ class LoginScreenController extends BaseController {
         otpAttemptId.value = result.attemptId;
         succeeded = true;
       },
-      onError: (message) =>
-          CustomSnackbar.error(message ?? 'Failed to send OTP'),
+      onError: (message) => CustomSnackbar.error(otpStartErrorMessage(message)),
     );
     return succeeded;
   }
@@ -92,6 +91,15 @@ class LoginScreenController extends BaseController {
     phoneNumberController.dispose();
     otpController.dispose();
     super.onClose();
+  }
+}
+
+String otpStartErrorMessage(String? code) {
+  switch (code) {
+    case 'OTP_RATE_LIMITED':
+      return 'Too many code requests. Please wait before trying again.';
+    default:
+      return code ?? 'Failed to send OTP';
   }
 }
 

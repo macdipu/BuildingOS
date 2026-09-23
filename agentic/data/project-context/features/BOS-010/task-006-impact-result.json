@@ -1,0 +1,21 @@
+{
+  "status": "READY",
+  "evidence": [
+    "agentic/data/project-context/features/BOS-010/tasks/TASK-006.md"
+  ],
+  "blocking_issues": [],
+  "open_questions": [],
+  "recommended_next_step": "Technical readiness.",
+  "outputs": {
+    "impact": "LOW",
+    "modules": [
+      "user_app/features/authentication"
+    ],
+    "api_change": false,
+    "db_change": false,
+    "flows": [
+      "login Next",
+      "OTP resend"
+    ]
+  }
+}

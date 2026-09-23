@@ -1,0 +1,22 @@
+{
+  "status": "READY",
+  "evidence": [
+    "agentic/data/project-context/features/BOS-010/tasks/TASK-006.md"
+  ],
+  "blocking_issues": [],
+  "open_questions": [],
+  "recommended_next_step": "Scoped context for user_app auth start path.",
+  "outputs": {
+    "work_item": "BOS-010 TASK-006",
+    "work_type": "change_request",
+    "project_type": "brownfield",
+    "hierarchy": "TASK_ONLY",
+    "planning": "NO_REPLAN",
+    "source": "TASK-003 recorded follow-up",
+    "exclusions": [
+      "Localization",
+      "Backend",
+      "ApiClient"
+    ]
+  }
+}

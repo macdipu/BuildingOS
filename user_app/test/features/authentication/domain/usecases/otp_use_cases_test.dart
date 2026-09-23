@@ -6,7 +6,7 @@ import 'package:customer/features/authentication/domain/repositories/auth_reposi
 import 'package:customer/features/authentication/domain/usecases/start_otp_use_case.dart';
 import 'package:customer/features/authentication/domain/usecases/verify_otp_use_case.dart';
 import 'package:customer/features/authentication/presentation/controllers/login_screen_controller.dart'
-    show otpErrorMessage;
+    show otpErrorMessage, otpStartErrorMessage;
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -137,6 +137,19 @@ void main() {
         () {
       expect(otpErrorMessage(null), isNotEmpty);
       expect(otpErrorMessage('SOMETHING_NEW'), isNotEmpty);
+    });
+  });
+
+  group('otpStartErrorMessage', () {
+    test('maps OTP_RATE_LIMITED to a readable wait message', () {
+      final message = otpStartErrorMessage('OTP_RATE_LIMITED');
+      expect(message, isNot(contains('OTP_')));
+      expect(message, contains('wait'));
+    });
+
+    test('keeps other start failures unchanged', () {
+      expect(otpStartErrorMessage('Server said no'), 'Server said no');
+      expect(otpStartErrorMessage(null), 'Failed to send OTP');
     });
   });
 }

@@ -14,6 +14,9 @@ class AuthRemoteDataSource extends BaseHttpRepository {
   Future<OtpStartResultModel> startOtp(PhoneNumber phoneNumber) async {
     final response = await client
         .post(_urls.otpStartUrl, {'phone': phoneNumber.withoutCountryCode});
+    if (response.messageCode == 429) {
+      throw const ServerException('OTP_RATE_LIMITED');
+    }
     if (response.messageCode != 200) {
       throw ServerException(response.message ?? 'Failed to send OTP');
     }

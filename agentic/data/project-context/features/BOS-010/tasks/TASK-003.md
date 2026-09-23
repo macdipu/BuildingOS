@@ -82,7 +82,7 @@ microservice ownership (account-service owns `account_db`).
 - Refresh tokens, session revocation, device binding (D-03 unresolved).
 - Key-management service integration beyond a mounted JWK Set file; automated rotation.
 - Flutter changes, except that the app must handle the new 429 `OTP_RATE_LIMITED`
-  code — handled as a generic error today; a dedicated message is a follow-up.
+  code — dedicated message delivered by [TASK-006](TASK-006.md).
 
 ## Acceptance
 

@@ -1,0 +1,14 @@
+{
+  "status": "READY",
+  "evidence": [
+    "agentic/data/project-context/features/BOS-010/tasks/TASK-006.md"
+  ],
+  "blocking_issues": [],
+  "open_questions": [],
+  "recommended_next_step": "Impact analysis.",
+  "outputs": {
+    "verdict": "CONTEXT_READY",
+    "revision": "d1425d1",
+    "finding": "429 currently surfaces server message text verbatim via Resource.message"
+  }
+}

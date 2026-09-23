@@ -214,6 +214,22 @@ void main() {
     });
   }
 
+  test('start rate limit maps to OTP_RATE_LIMITED', () async {
+    responseStatus = 429;
+    responseBody = {
+      'success': false,
+      'code': 'OTP_RATE_LIMITED',
+      'message': 'Please wait before requesting another code',
+    };
+
+    final result = await repository.startOtp(phone);
+
+    result.fold(
+      (failure) => expect(failure.message, 'OTP_RATE_LIMITED'),
+      (_) => fail('Expected rate limit failure'),
+    );
+  });
+
   test('server failure cannot create a session', () async {
     responseStatus = 500;
     responseBody = {'code': 'INTERNAL_ERROR', 'message': 'Unexpected error'};
