@@ -1,6 +1,6 @@
 package com.buildingos.gateway;
 
-import com.buildingos.platform.web.PlatformWebConfiguration;
+import com.buildingos.platform.web.config.PlatformWebConfiguration;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Import;

@@ -9,10 +9,10 @@ servers:
   - url: http://localhost:8080
     description: Local gateway
 paths:
-  /api/v1/platform/identity:
+  /api/v1/platform/account:
     get:
-      summary: Identity service metadata (via gateway)
-      description: Gateway forwards to identity-service's internal /internal/platform/info.
+      summary: Account service metadata (via gateway)
+      description: Gateway forwards to account-service's internal /internal/platform/info.
       security:
         - bearerAuth: []
       responses:
@@ -27,7 +27,7 @@ paths:
             application/json:
               schema: { $ref: "#/components/schemas/ApiError" }
         "503":
-          description: Downstream identity-service unavailable (sanitized)
+          description: Downstream account-service unavailable (sanitized)
           content:
             application/json:
               schema: { $ref: "#/components/schemas/ApiError" }
@@ -55,7 +55,7 @@ paths:
               schema: { $ref: "#/components/schemas/ApiError" }
   /internal/platform/info:
     get:
-      summary: Service metadata (direct, identity-service or building-service)
+      summary: Service metadata (direct, account-service or building-service)
       description: >
         Same route and behavior on both services; distinguished by which service instance answers.
         Not exposed publicly outside the gateway in a deployed environment.
@@ -88,7 +88,7 @@ components:
           type: object
           required: [service]
           properties:
-            service: { type: string, example: identity-service }
+            service: { type: string, example: account-service }
         meta: { type: object }
         traceId: { type: string, format: uuid }
     ApiError:

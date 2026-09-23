@@ -23,7 +23,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 class GatewayRoutingTest {
 
     private static JwtFixtures fixtures;
-    private static StubDownstream identityStub;
+    private static StubDownstream accountStub;
     private static StubDownstream buildingStub;
     private static final HttpClient HTTP = HttpClient.newHttpClient();
 
@@ -33,14 +33,14 @@ class GatewayRoutingTest {
     @BeforeAll
     static void startFixtures() throws Exception {
         fixtures = new JwtFixtures();
-        identityStub = new StubDownstream("identity-service");
+        accountStub = new StubDownstream("account-service");
         buildingStub = new StubDownstream("building-service");
     }
 
     @AfterAll
     static void stopFixtures() {
         fixtures.close();
-        identityStub.close();
+        accountStub.close();
         buildingStub.close();
     }
 
@@ -49,7 +49,7 @@ class GatewayRoutingTest {
         registry.add("platform.security.issuer", fixtures::issuer);
         registry.add("platform.security.audience", () -> "gateway-platform");
         registry.add("platform.security.jwk-set-uri", () -> fixtures.jwkSetUri);
-        registry.add("IDENTITY_SERVICE_URL", () -> identityStub.baseUrl);
+        registry.add("ACCOUNT_SERVICE_URL", () -> accountStub.baseUrl);
         registry.add("BUILDING_SERVICE_URL", () -> buildingStub.baseUrl);
     }
 
@@ -70,11 +70,11 @@ class GatewayRoutingTest {
     }
 
     @Test
-    void validTokenForwardsToIdentityService() throws Exception {
-        var response = call("/api/v1/platform/identity", validToken(), null, null);
+    void validTokenForwardsToAccountService() throws Exception {
+        var response = call("/api/v1/platform/account", validToken(), null, null);
         assertThat(response.statusCode()).isEqualTo(200);
-        assertThat(response.body()).contains("\"service\":\"identity-service\"");
-        assertThat(identityStub.lastCorrelationHeader()).isNotBlank();
+        assertThat(response.body()).contains("\"service\":\"account-service\"");
+        assertThat(accountStub.lastCorrelationHeader()).isNotBlank();
     }
 
     @Test
@@ -87,44 +87,44 @@ class GatewayRoutingTest {
 
     @Test
     void correlationIdIsPropagatedAndReturned() throws Exception {
-        var response = call("/api/v1/platform/identity", validToken(), null, null);
+        var response = call("/api/v1/platform/account", validToken(), null, null);
         String returned = response.headers().firstValue("X-Correlation-Id").orElse(null);
         assertThat(returned).isNotBlank();
-        assertThat(identityStub.lastCorrelationHeader()).isEqualTo(returned);
+        assertThat(accountStub.lastCorrelationHeader()).isEqualTo(returned);
     }
 
     @Test
     void missingTokenRejectedAtGateway() throws Exception {
-        assertThat(call("/api/v1/platform/identity", null, null, null).statusCode()).isEqualTo(401);
+        assertThat(call("/api/v1/platform/account", null, null, null).statusCode()).isEqualTo(401);
     }
 
     @Test
     void expiredTokenRejectedAtGateway() throws Exception {
         String token = fixtures.token(fixtures.issuer(), "gateway-platform", Instant.now().minusSeconds(600));
-        assertThat(call("/api/v1/platform/identity", token, null, null).statusCode()).isEqualTo(401);
+        assertThat(call("/api/v1/platform/account", token, null, null).statusCode()).isEqualTo(401);
     }
 
     @Test
     void wrongAudienceRejectedAtGateway() throws Exception {
         String token = fixtures.token(fixtures.issuer(), "wrong-audience", Instant.now().plusSeconds(300));
-        assertThat(call("/api/v1/platform/identity", token, null, null).statusCode()).isEqualTo(401);
+        assertThat(call("/api/v1/platform/account", token, null, null).statusCode()).isEqualTo(401);
     }
 
     @Test
     void wrongIssuerRejectedAtGateway() throws Exception {
         String token = fixtures.token("http://wrong-issuer.invalid", "gateway-platform", Instant.now().plusSeconds(300));
-        assertThat(call("/api/v1/platform/identity", token, null, null).statusCode()).isEqualTo(401);
+        assertThat(call("/api/v1/platform/account", token, null, null).statusCode()).isEqualTo(401);
     }
 
     @Test
     void badSignatureRejectedAtGateway() throws Exception {
         String token = fixtures.tokenSignedByOtherKey(fixtures.issuer(), "gateway-platform");
-        assertThat(call("/api/v1/platform/identity", token, null, null).statusCode()).isEqualTo(401);
+        assertThat(call("/api/v1/platform/account", token, null, null).statusCode()).isEqualTo(401);
     }
 
     @Test
     void spoofedHeaderDoesNotGrantAccess() throws Exception {
-        assertThat(call("/api/v1/platform/identity", null, "X-Building-Id", "some-building").statusCode())
+        assertThat(call("/api/v1/platform/account", null, "X-Building-Id", "some-building").statusCode())
                 .isEqualTo(401);
     }
 
@@ -137,6 +137,6 @@ class GatewayRoutingTest {
         var response = HTTP.send(request, HttpResponse.BodyHandlers.ofString());
         assertThat(response.statusCode()).isEqualTo(200);
         assertThat(response.body()).contains("otp-start");
-        assertThat(identityStub.lastCorrelationHeader()).isNotBlank();
+        assertThat(accountStub.lastCorrelationHeader()).isNotBlank();
     }
 }

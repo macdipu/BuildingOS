@@ -1,5 +1,7 @@
 # Agentic Development Kit
 
+> **BuildingOS project:** code structure and layering rules for every service and feature are in [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md); local setup in [docs/LOCAL_DEVELOPMENT.md](docs/LOCAL_DEVELOPMENT.md).
+
 A reusable set of 34 specialist skills, SDLC workflows, and a local Python reference harness for coordinating software work with explicit evidence and approval gates.
 
 Start with [adoption](agentic/ADOPTION.md), browse the [skill catalog](agentic/SKILL-CATALOG.md), or read the [runtime guide](agentic/kit/runtime/README.md). The full [workflow guide](agentic/README.md) explains context reuse, requirements, conditional planning, implementation, QA, and release readiness.

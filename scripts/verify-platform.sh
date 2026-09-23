@@ -17,7 +17,7 @@ command -v mvn >/dev/null 2>&1 || fail "mvn is required"
 
 # shellcheck disable=SC1090
 . "$ENV_FILE"
-export POSTGRES_SUPERUSER_PASSWORD IDENTITY_DB_PASSWORD BUILDING_DB_PASSWORD
+export POSTGRES_SUPERUSER_PASSWORD ACCOUNT_DB_PASSWORD BUILDING_DB_PASSWORD
 
 echo "==> Starting Postgres and Kafka"
 $COMPOSE up -d postgres kafka
@@ -50,7 +50,7 @@ POSTGRES_IMAGE=$($COMPOSE images -q postgres)
 TEST_PASSWORD="bootstrap'quote\\slash"
 docker run -d --name "$BOOTSTRAP_CONTAINER" --network none \
     -e POSTGRES_PASSWORD=bootstrap-test-only \
-    -e "IDENTITY_DB_PASSWORD=$TEST_PASSWORD" -e "BUILDING_DB_PASSWORD=$TEST_PASSWORD" \
+    -e "ACCOUNT_DB_PASSWORD=$TEST_PASSWORD" -e "BUILDING_DB_PASSWORD=$TEST_PASSWORD" \
     -v "$ROOT_DIR/infra/docker/postgres/init:/docker-entrypoint-initdb.d:ro" \
     "$POSTGRES_IMAGE" >/dev/null
 tries=30
@@ -59,7 +59,7 @@ while ! docker exec "$BOOTSTRAP_CONTAINER" pg_isready -h localhost -U postgres >
     [ "$tries" -gt 0 ] || fail "quoted-password bootstrap did not become ready"
     sleep 2
 done
-for domain in identity building; do
+for domain in account building; do
     docker exec -e "PGPASSWORD=$TEST_PASSWORD" "$BOOTSTRAP_CONTAINER" \
         psql -h localhost -U "${domain}_app" -d "${domain}_db" -v ON_ERROR_STOP=1 \
         -tAc 'select 1' >/dev/null || fail "quoted-password bootstrap failed for $domain"
@@ -68,9 +68,9 @@ cleanup
 trap - EXIT HUP INT TERM
 echo "==> Quoted-password bootstrap passed"
 
-echo "==> Running and re-running Flyway migrations (identity-service)"
-mvn -q -B -f backend/pom.xml -pl identity-service flyway:migrate -Dflyway.password="$IDENTITY_DB_PASSWORD"
-mvn -q -B -f backend/pom.xml -pl identity-service flyway:migrate -Dflyway.password="$IDENTITY_DB_PASSWORD"
+echo "==> Running and re-running Flyway migrations (account-service)"
+mvn -q -B -f backend/pom.xml -pl account-service flyway:migrate -Dflyway.password="$ACCOUNT_DB_PASSWORD"
+mvn -q -B -f backend/pom.xml -pl account-service flyway:migrate -Dflyway.password="$ACCOUNT_DB_PASSWORD"
 
 echo "==> Running and re-running Flyway migrations (building-service)"
 mvn -q -B -f backend/pom.xml -pl building-service flyway:migrate -Dflyway.password="$BUILDING_DB_PASSWORD"
@@ -83,13 +83,13 @@ psql_as() {
 }
 
 echo "==> Checking database role isolation"
-psql_as identity_app "$IDENTITY_DB_PASSWORD" identity_db || fail "identity_app could not connect to identity_db"
+psql_as account_app "$ACCOUNT_DB_PASSWORD" account_db || fail "account_app could not connect to account_db"
 psql_as building_app "$BUILDING_DB_PASSWORD" building_db || fail "building_app could not connect to building_db"
-if psql_as identity_app "$IDENTITY_DB_PASSWORD" building_db; then
-    fail "identity_app was able to connect to building_db (isolation broken)"
+if psql_as account_app "$ACCOUNT_DB_PASSWORD" building_db; then
+    fail "account_app was able to connect to building_db (isolation broken)"
 fi
-if psql_as building_app "$BUILDING_DB_PASSWORD" identity_db; then
-    fail "building_app was able to connect to identity_db (isolation broken)"
+if psql_as building_app "$BUILDING_DB_PASSWORD" account_db; then
+    fail "building_app was able to connect to account_db (isolation broken)"
 fi
 echo "==> Database role isolation confirmed"
 
@@ -109,7 +109,7 @@ echo "==> Restarting Postgres and Kafka to verify state persists"
 $COMPOSE restart postgres kafka
 wait_healthy postgres
 wait_healthy kafka
-psql_as identity_app "$IDENTITY_DB_PASSWORD" identity_db || fail "identity_app lost access to identity_db after restart"
+psql_as account_app "$ACCOUNT_DB_PASSWORD" account_db || fail "account_app lost access to account_db after restart"
 psql_as building_app "$BUILDING_DB_PASSWORD" building_db || fail "building_app lost access to building_db after restart"
 # A restart preserves the container writable layer too. Recreate the broker to
 # prove the named volume actually holds its records, then consume the same data.

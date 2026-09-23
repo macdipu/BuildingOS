@@ -19,6 +19,13 @@ This file is the canonical repository-level instruction entrypoint for agentic d
 13. Record agent start/end timing and relevant task telemetry through the harness.
 14. Preserve traceability from request -> requirements -> design -> tasks -> implementation -> QA -> release.
 
+## Code architecture
+
+All BuildingOS code (every backend service and every Flutter feature) must follow
+[docs/ARCHITECTURE.md](docs/ARCHITECTURE.md): Clean Architecture, feature-first, one
+use case per action, repository pattern, SOLID, microservices in one monorepo. ArchUnit
+and the Flutter layer-rules test enforce it; fix the code, never weaken the rule.
+
 ## Input modes
 
 The system supports both:

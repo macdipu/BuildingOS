@@ -7,7 +7,7 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: ${POSTGRES_SUPERUSER_PASSWORD:?set in infra/docker/.env}
       POSTGRES_DB: postgres
-      IDENTITY_DB_PASSWORD: ${IDENTITY_DB_PASSWORD:?set in infra/docker/.env}
+      ACCOUNT_DB_PASSWORD: ${ACCOUNT_DB_PASSWORD:?set in infra/docker/.env}
       BUILDING_DB_PASSWORD: ${BUILDING_DB_PASSWORD:?set in infra/docker/.env}
     ports:
       - "127.0.0.1:5432:5432"
