@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:skeletonizer/skeletonizer.dart';
@@ -101,7 +102,7 @@ class _LoginOtpVerifyScreenState extends State<LoginOtpVerifyScreen> {
         onTap: () async {
           final success = await _controller.verifyOtp();
           if (success) {
-            Get.offAllNamed(AppRoutes.appShell);
+            unawaited(Get.offAllNamed(AppRoutes.appShell));
           }
         },
       ),

@@ -1,4 +1,8 @@
-# BOS-010 — Planning in progress (full restart)
+# BOS-010 — Identity slice implementation and verification
+
+Current checkpoint (2026-09-23): IMPLEMENTATION, budget extended by operator.
+TASK-001 and TASK-002 are implemented; backend verify 51/51, Flutter 22/22, strict
+analysis clean. Live mobile flow verification remains outstanding. See [review/QA checkpoint](REVIEW-QA.md) for evidence and recovery steps.
 
 Supersedes [BOS-001](../BOS-001) and [BOS-002](../BOS-002) after the operator asked to
 restart from INTAKE under the revised BRD (multi-tenant SaaS: global identity,
@@ -11,7 +15,7 @@ supersession record.
 - [Requirements draft](REQUIREMENTS.md)
 - [Decisions requiring resolution](DECISIONS.md)
 
-Current gate: REQUIREMENTS, READY. D-01 (dev OTP `000000`) and D-02 (deploy-time
+Requirements gate: READY. D-01 (dev OTP `000000`) and D-02 (deploy-time
 seed-script first `SUPER_ADMIN`, phone `01306999005`) carry forward from BOS-002,
 unchanged. D-07/D-08 are now resolved:
 
@@ -29,17 +33,16 @@ open as technical-design inputs, deferred to TECHNICAL, not REQUIREMENTS blocker
 - [Technical spec (TASK-001 slice)](TECH-SPEC.md)
 - [Task sequence](TASKS.md) / [TASK-001 detail](tasks/TASK-001.md)
 
-Current gate: TECHNICAL, READY. TASK-001 (global identity, platform roles, seed
+Technical gate: READY. TASK-001 (global identity, platform roles, seed
 SUPER_ADMIN, phone+OTP login, local token issuance) is **implemented and tested** —
 backend only. 51/51 backend tests pass (`mvn test` from `backend/`). D-09/D-10 remain
 open but are deferred to later, un-started features (back-office console; assisted
 onboarding/support), not blockers for TASK-001.
 
-Run: `RUN-D10A3F4277E7424F938E3BC2C46E9A2D`. Transition to IMPLEMENTATION hit a stale
-context error (docs written after the last `context` registration); run is parked at
-TECHNICAL/RUNNING, not corrupted — re-run `context` with the current file list, then
-`transition ... IMPLEMENTATION` to continue the governed sequence, or treat TASK-001 as
-done and move directly to TASK-002 (Flutter integration) / TASK-003 (production token
-issuance) as ordinary engineering. Building application/lifecycle, units/ownership,
+Run: `RUN-D10A3F4277E7424F938E3BC2C46E9A2D`. TASK-002 Flutter integration was committed
+as `39842eb`; this session added HTTP contract tests and corrected verification
+reporting. The run needs operator-authorized budget recovery, then a scoped context
+refresh and updated implementation evidence before REVIEW/QA. TASK-003 production
+token issuance is not started. Building application/lifecycle, units/ownership,
 subscription/entitlements, and the back-office console remain separate, un-started
 features under this EPIC.

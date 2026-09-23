@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter/services.dart';
 import 'package:customer/core/presentation/theme/theme_extensions.dart';
 import 'package:customer/core/presentation/utils/state_status.dart';
@@ -117,13 +118,12 @@ class _LoginScreenState extends State<LoginScreen> {
     return Obx(
       () => CommonButton.elevated(
         title: TextEnum.next.tr,
-        height: 48,
         width: MediaQuery.of(context).size.width - 32,
         isLoading: _controller.status.value == StateStatus.loading,
         onTap: () async {
           final success = await _controller.requestOtp();
           if (success) {
-            Get.toNamed(AppRoutes.loginOtpVerify);
+            unawaited(Get.toNamed(AppRoutes.loginOtpVerify));
           }
         },
       ),

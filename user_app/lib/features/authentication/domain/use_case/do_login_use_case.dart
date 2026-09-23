@@ -13,7 +13,7 @@ class DoLoginUseCase extends UseCaseWithParams<bool, AuthLoginReq> {
   @override
   ResultFuture<bool> call(AuthLoginReq params) async {
   final userInfo = await authRepository.login(params);
-  return userInfo.fold((l) => left(l), (r) => Right(true));
+  return userInfo.fold((l) => left(l), (r) => const Right(true));
   
 
   }

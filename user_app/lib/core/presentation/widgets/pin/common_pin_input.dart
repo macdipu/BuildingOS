@@ -51,10 +51,8 @@ class _CommonPinInputFieldState extends State<CommonPinInputField> {
                 textInputAction: TextInputAction.next,
                 controller: widget.controller ?? TextEditingController(),
                 length: 6,
-                obscureText: false,
                 pinAnimationType: PinAnimationType.fade,
                 animationDuration: const Duration(milliseconds: 300),
-                keyboardType: TextInputType.number,
                 autofillHints: [AutofillHints.oneTimeCode],
                 defaultPinTheme: PinTheme(
                   width: 40,

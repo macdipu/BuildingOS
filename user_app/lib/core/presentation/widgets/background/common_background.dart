@@ -32,7 +32,6 @@ class CommonBackground extends StatelessWidget {
                       context.primary.withValues(alpha: 0.14),
                       AppColors.heroGradientStart.resolve(context),
                     ],
-                    center: const Alignment(0, 0),
                   ),
                 ),
               ),

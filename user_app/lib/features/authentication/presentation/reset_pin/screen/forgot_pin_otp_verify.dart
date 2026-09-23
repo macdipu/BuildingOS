@@ -29,14 +29,14 @@ class ForgotPinOtpVerify extends GetView<ForgotPinController> {
     return Form(
       key: _formKey,
       child: Container(
-        padding: EdgeInsets.symmetric(
+        padding: const EdgeInsets.symmetric(
           vertical: 8,
           horizontal: 16,
         ),
         child: ListView(
           shrinkWrap: true,
           children: [
-            SizedBox(height: 18),
+            const SizedBox(height: 18),
             IntroHeader(
               title: 'OTP Verification',
               introText:

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -29,7 +31,7 @@ class ResetPinScreen extends GetView<ForgotPinController> {
     return Form(
       key: _formKey,
       child: Container(
-        padding: EdgeInsets.symmetric(
+        padding: const EdgeInsets.symmetric(
           vertical: 8,
           horizontal:16,
         ),
@@ -86,7 +88,7 @@ class ResetPinScreen extends GetView<ForgotPinController> {
         title: 'Reset PIN',
         isLoading: controller.status.value.isLoading,
         onTap: () async {
-          Get.toNamed(AppRoutes.resetPinSuccess);
+          unawaited(Get.toNamed(AppRoutes.resetPinSuccess));
           if (_formKey.currentState!.validate()) {
             await controller.sootOtp();
           }

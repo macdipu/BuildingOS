@@ -46,7 +46,7 @@ class PhoneNumber {
       return '+880$digits';
     }
 
-    throw FormatException('Invalid phone number format');
+    throw const FormatException('Invalid phone number format');
   }
 
   static bool _isValid(String value) {

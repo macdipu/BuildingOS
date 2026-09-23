@@ -1,6 +1,6 @@
 #!/bin/sh
-# Scoped Flutter verification for user_app. Nonzero exit on analyze/test failure.
-# Does not fix unrelated pre-existing template debt; records failures rather than papering over them.
+# Scoped Flutter verification for user_app. Run both checks even if one fails.
+# Preserve strict analyzer failure reporting, including existing template lints.
 set -eu
 
 ROOT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
@@ -11,10 +11,18 @@ command -v fvm >/dev/null 2>&1 || { echo "VERIFY FAILED: fvm is required" >&2; e
 
 cd "$APP_DIR"
 
+analyze_status=0
+test_status=0
+
 echo "==> fvm flutter analyze --no-pub (user_app)"
-fvm flutter analyze --no-pub
+fvm flutter analyze --no-pub || analyze_status=$?
 
 echo "==> fvm flutter test --no-pub (user_app)"
-fvm flutter test --no-pub
+fvm flutter test --no-pub || test_status=$?
+
+if [ "$analyze_status" -ne 0 ] || [ "$test_status" -ne 0 ]; then
+    echo "VERIFY FAILED: analyze=$analyze_status test=$test_status" >&2
+    exit 1
+fi
 
 echo "VERIFY PASSED"

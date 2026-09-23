@@ -44,6 +44,29 @@
     },
     "kit_version": "997f6a5d5a93da63efaaea3a35db1bb30e1aef8bf9b6544a5a187bc1267da094"
   },
+  "new_feature:brownfield:identity": {
+    "cached_at": "2026-09-23T05:54:02.231790+00:00",
+    "decision": {
+      "route": [
+        "INTAKE",
+        "CONTEXT",
+        "REQUIREMENTS",
+        "TECHNICAL",
+        "IMPLEMENTATION",
+        "REVIEW",
+        "QA",
+        "RELEASE",
+        "COMPLETED"
+      ],
+      "scope": "Review and QA for existing BOS-010 TASK-001/TASK-002; no replan",
+      "skill_docs": [
+        "agentic/kit/skills/code-review-agent/SKILL.md",
+        "agentic/kit/skills/automated-qa-agent/SKILL.md"
+      ],
+      "workflow_doc": "agentic/kit/workflows/brownfield.md"
+    },
+    "kit_version": "126c76e44934af61f35804801ac6dd53fe4af47fab07c87a91c57a669e66ba94"
+  },
   "new_feature:brownfield:identity-building": {
     "cached_at": "2026-09-22T11:10:09.377669+00:00",
     "decision": {

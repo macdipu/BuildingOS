@@ -35,10 +35,8 @@ class ApiClient {
       ..interceptors.add(
         PrettyDioLogger(
           requestHeader: true,
-          request: true,
           requestBody: true,
-          responseBody: true,
-          error: true,
+          // ignore: avoid_redundant_argument_values
           enabled: kDebugMode,
         ),
       );

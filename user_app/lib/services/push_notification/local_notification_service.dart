@@ -20,8 +20,6 @@ class LocalNotificationService {
       'zaytoon Notification',
       description: 'Notification For Ranks',
       importance: Importance.high,
-      playSound: true,
-      enableVibration: true,
     );
 
     await _flutterLocalNotifications
@@ -34,9 +32,7 @@ class LocalNotificationService {
 
     const DarwinInitializationSettings initializationSettingsIOS =
         DarwinInitializationSettings(
-      requestAlertPermission: true,
-      requestBadgePermission: true,
-      requestSoundPermission: true,
+
     );
 
     const InitializationSettings initializationSettings =
@@ -67,8 +63,6 @@ class LocalNotificationService {
       importance: Importance.high,
       priority: Priority.high,
       color: AppColors.brandPrimary,
-      playSound: true,
-      enableVibration: true,
     );
 
     const iOSNotificationDetails = DarwinNotificationDetails(
@@ -92,7 +86,7 @@ class LocalNotificationService {
   }
 
   Future<String?> getAppLaunchPayload() async {
-    NotificationAppLaunchDetails? details =
+    final NotificationAppLaunchDetails? details =
         await _flutterLocalNotifications.getNotificationAppLaunchDetails();
 
     return (details?.didNotificationLaunchApp ?? false)

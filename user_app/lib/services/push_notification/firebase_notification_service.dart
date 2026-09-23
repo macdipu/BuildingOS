@@ -44,7 +44,7 @@ class FirebaseNotificationService {
   }
 
   Future<String?> getAppLaunchPayload() async {
-    RemoteMessage? message = await _firebaseMessaging.getInitialMessage();
+    final RemoteMessage? message = await _firebaseMessaging.getInitialMessage();
     if (message == null) return null;
 
     return jsonEncode(message.data);
@@ -78,7 +78,7 @@ class FirebaseNotificationService {
 
   Future<void> _convertRemoteNotificationAndShowAsLocal(
       RemoteMessage message) async {
-    RemoteNotification? notification = message.notification;
+    final RemoteNotification? notification = message.notification;
 
     await _localNotification.show(
       title: (notification != null && notification.title != null)
@@ -95,15 +95,7 @@ class FirebaseNotificationService {
     if (kIsWeb) return false;
 
     try {
-      NotificationSettings settings = await _firebaseMessaging.requestPermission(
-        alert: true,
-        announcement: false,
-        badge: true,
-        carPlay: false,
-        criticalAlert: false,
-        provisional: false,
-        sound: true,
-      );
+      final NotificationSettings settings = await _firebaseMessaging.requestPermission();
 
       debugPrint('Notification permission: ${settings.authorizationStatus}');
 
@@ -125,7 +117,7 @@ class FirebaseNotificationService {
 
   Future<String?> _getAndLogFCMToken() async {
     try {
-      String? token = await _firebaseMessaging.getToken();
+      final String? token = await _firebaseMessaging.getToken();
       debugPrint('FCM Token: $token');
       return token;
     } catch (e) {

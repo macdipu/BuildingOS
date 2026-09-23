@@ -31,7 +31,6 @@ class CurrencyInputField extends StatelessWidget {
         enabled: enabled,
         keyboardType: const TextInputType.numberWithOptions(
           decimal: true,
-          signed: false,
         ),
         inputFormatters: [
           CurrencyInputFormatter(

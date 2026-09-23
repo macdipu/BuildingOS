@@ -83,7 +83,7 @@ class CustomCurrencyFormatter extends AbstractCurrencyFormatter {
       // Keep only the last dot as decimal separator
       final parts = cleaned.split('.');
       if (parts.length > 1) {
-        cleaned = '${parts.sublist(0, parts.length - 1).join('')}.${parts.last}';
+        cleaned = '${parts.sublist(0, parts.length - 1).join()}.${parts.last}';
       }
     }
 
@@ -141,7 +141,7 @@ class CurrencyInputFormatter extends TextInputFormatter {
     final int cursorPosition = newValue.selection.baseOffset;
 
     // Clean the text - remove all non-digit and non-decimal characters
-    String cleanText = newValue.text.replaceAll(RegExp(r'[^\d.]'), '');
+    final String cleanText = newValue.text.replaceAll(RegExp(r'[^\d.]'), '');
 
     // Prevent multiple decimal points
     if (cleanText.split('.').length > 2) {

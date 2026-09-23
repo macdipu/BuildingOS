@@ -362,17 +362,17 @@ class _Shadows {
 class _Duration {
    _Duration();
 
-  final Duration ms100 = Duration(milliseconds: 100);
+  final Duration ms100 = const Duration(milliseconds: 100);
 
-  final Duration ms150 = Duration(milliseconds: 150);
+  final Duration ms150 = const Duration(milliseconds: 150);
 
-  final Duration ms200 = Duration(milliseconds: 200);
+  final Duration ms200 = const Duration(milliseconds: 200);
 
-  final Duration ms300 = Duration(milliseconds: 300);
+  final Duration ms300 = const Duration(milliseconds: 300);
 
-  final Duration ms500 = Duration(milliseconds: 500);
+  final Duration ms500 = const Duration(milliseconds: 500);
 
-  final Duration ms800 = Duration(milliseconds: 800);
+  final Duration ms800 = const Duration(milliseconds: 800);
 
-  final Duration s1 = Duration(seconds: 1);
+  final Duration s1 = const Duration(seconds: 1);
 }

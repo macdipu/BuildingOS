@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:customer/core/presentation/utils/state_status.dart';
@@ -28,14 +29,14 @@ class ForgotPinScreen extends GetView<ForgotPinController> {
     return Form(
       key: _formKey,
       child: Container(
-        padding: EdgeInsets.symmetric(
+        padding: const EdgeInsets.symmetric(
           vertical: 8,
           horizontal:16,
         ),
         child:ListView(
           shrinkWrap: true,
           children: [
-            SizedBox(height: 18,),
+            const SizedBox(height: 18,),
             IntroHeader(
               title: 'Reset PIN',
               introText: 'Please enter your registered Phone Number.',
@@ -79,7 +80,7 @@ class ForgotPinScreen extends GetView<ForgotPinController> {
         onTap: () async {
           if (_formKey.currentState!.validate()) {
             await controller.sootOtp();
-            Get.toNamed(AppRoutes.forgotPinOtpVerify);
+            unawaited(Get.toNamed(AppRoutes.forgotPinOtpVerify));
           }
         },
       );

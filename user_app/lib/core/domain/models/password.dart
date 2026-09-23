@@ -5,7 +5,7 @@ class Password {
 
   factory Password(String input) {
     if (!_isValid(input)) {
-      throw FormatException('Invalid password');
+      throw const FormatException('Invalid password');
     }
     return Password._(input);
   }

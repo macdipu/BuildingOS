@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:customer/core/presentation/widgets/appbar/common_appbar.dart';
@@ -29,17 +30,16 @@ class ResetPinSuccess extends GetView<ForgotPinController> {
     return Form(
       key: _formKey,
       child: Container(
-        padding: EdgeInsets.symmetric(
+        padding: const EdgeInsets.symmetric(
           vertical: 8,
           horizontal: 16,
         ),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             CRoundImage(imagePath: Resources.drawable.loginUpperImage),
-            Text('PIN Changed!', style: TextStyle(fontSize:20, fontWeight: FontWeight.w500) ,),
-            Text('Your PIN has been Changed successfully!', style: TextStyle(fontSize:14) , textAlign: TextAlign.center,),
+            const Text('PIN Changed!', style: TextStyle(fontSize:20, fontWeight: FontWeight.w500) ,),
+            const Text('Your PIN has been Changed successfully!', style: TextStyle(fontSize:14) , textAlign: TextAlign.center,),
             _continue_btn(),
           ],
         ),
@@ -53,7 +53,7 @@ class ResetPinSuccess extends GetView<ForgotPinController> {
       key: const ValueKey("continue_button"),
       title: 'Continue',
       onTap: () async {
-          Get.offAllNamed(AppRoutes.login,);
+          unawaited(Get.offAllNamed(AppRoutes.login));
       },
     );
   }

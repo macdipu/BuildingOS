@@ -129,7 +129,7 @@ class CImageFactory {
       shape: BoxShape.circle,
       fit: BoxFit.cover,
       onTap: onTap,
-      placeholderWidget: AnyImageView(imagePath: 'assets/images/default_avatar.png',) ,
+      placeholderWidget: const AnyImageView(imagePath: 'assets/images/default_avatar.png',) ,
     );
   }
 

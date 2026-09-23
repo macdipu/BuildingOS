@@ -17,7 +17,7 @@ class AuthCacheImpl extends BaseCacheRepository implements AuthRepository {
 
   @override
   Future<Either<Failure, UserInfo>> login(AuthLoginReq req) async {
-    Either<Failure, UserInfo> result = await authHttpImpl.login(req);
+    final Either<Failure, UserInfo> result = await authHttpImpl.login(req);
     await _persistIfSuccessful(result);
     return result;
   }
@@ -44,7 +44,7 @@ class AuthCacheImpl extends BaseCacheRepository implements AuthRepository {
 
   Future<void> _persistIfSuccessful(Either<Failure, UserInfo> result) async {
     if (result.isRight()) {
-      UserInfo? userInfo = result.fold((l) => null, (r) => r);
+      final UserInfo? userInfo = result.fold((l) => null, (r) => r);
       await cache.forever(
           SharedPreferenceConstant.customerInfo, userInfo!.toJsonString());
 

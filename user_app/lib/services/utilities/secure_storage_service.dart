@@ -4,14 +4,14 @@ import 'package:customer/core/presentation/utils/task_runner.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 /// A service to securely store sensitive data like JWT tokens or API keys.
-/// 
+///
 /// Uses [FlutterSecureStorage] which utilizes Keychain (iOS) and Keystore (Android).
 class SecureStorageService {
   SecureStorageService._();
   static final SecureStorageService instance = SecureStorageService._();
 
   final _storage = const FlutterSecureStorage(
-    aOptions: AndroidOptions.defaultOptions,
+
   );
 
   /// Write a sensitive value to secure storage.

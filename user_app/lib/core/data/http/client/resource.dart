@@ -20,7 +20,6 @@ class Resource<T> {
       message: response['message'],
       messageCode: response['messageCode'],
       isReadOnly: response['isReadOnly'],
-      status: ResourceStatus.success,
     );
   }
 

@@ -1,6 +1,13 @@
 # TASK-002 — Flutter (`user_app`) phone+OTP login integration
 
-## Status: DONE, verified by tests (implemented, tested, and independently re-verified in-session)
+## Status: IMPLEMENTED; 22 Flutter tests pass; strict analysis clean; live flow QA outstanding
+
+2026-09-23 continuation: see [review/QA checkpoint](../REVIEW-QA.md). Added nine
+HTTP contract/persistence tests using the real client/repositories and a loopback
+server, with an in-memory device-storage boundary. No mocking dependency needed.
+The earlier verification account below is historical: analysis was not a clean
+gate (informational lints return exit 1). Recovery continuation cleared all
+145 infos (`flutter analyze`: no issues). Live device/back-end flow remains unverified.
 
 Wires the TASK-001 backend OTP endpoints into the existing GetX auth feature
 (`user_app/lib/features/authentication/`). Scope is the login flow only — the
@@ -53,7 +60,7 @@ log redaction noted in BASELINE.md are explicitly out of scope for this task.
 - New `UserInfo.platformRoles` (default `const []`) and `UserInfo.fromOtpVerifyJson`
   unwrap the `/verify` response's `data.user.platformRoles`; existing
   `fromJson`/`fromApiJson`/`toJson` callers unaffected.
-- Test coverage is use-case level (fake `AuthRepository`), not `AuthHttpImpl`/
+- Original test coverage was use-case level (fake `AuthRepository`), not `AuthHttpImpl`/
   `AuthCacheImpl` directly — those need a real `ApiClient`/`PreferenceCache`
   (Dio/platform channels) to construct and there's no mocking library in the
   project; adding one was judged out of scope for this task.
