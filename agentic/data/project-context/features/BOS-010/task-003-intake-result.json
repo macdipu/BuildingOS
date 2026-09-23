@@ -1,0 +1,37 @@
+{
+  "status": "READY",
+  "evidence": [
+    "agentic/data/project-context/features/BOS-010/tasks/TASK-003.md",
+    "agentic/data/project-context/features/BOS-010/tasks/TASK-004.md"
+  ],
+  "blocking_issues": [],
+  "open_questions": [],
+  "recommended_next_step": "Refresh post-TASK-004 baseline and present required technical reapproval before implementation.",
+  "outputs": {
+    "source_request": "continue",
+    "work_item": "BOS-010 TASK-003",
+    "work_type": "existing_task",
+    "project_type": "brownfield",
+    "hierarchy": "TASK_ONLY",
+    "planning": "NO_REPLAN",
+    "objective": "Resume production token issuance and provider-neutral OTP adapter after completed architecture cleanup.",
+    "scope": "Existing TASK-003 scope and acceptance; account-service is issuer, SMS vendor deferred.",
+    "exclusions": [
+      "Live SMS vendor",
+      "Refresh tokens",
+      "Deployment",
+      "Flutter implementation"
+    ],
+    "constraints": [
+      "Clean Architecture",
+      "JDBC",
+      "Explicit technical reapproval required by TASK-003"
+    ],
+    "acceptance_criteria": "TASK-003 Acceptance 1–6",
+    "references": [
+      "tasks/TASK-003.md",
+      "tasks/TASK-004.md",
+      "docs/ARCHITECTURE.md"
+    ]
+  }
+}

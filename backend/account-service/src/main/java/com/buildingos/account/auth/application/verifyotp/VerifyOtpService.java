@@ -1,6 +1,6 @@
 package com.buildingos.account.auth.application.verifyotp;
 
-import com.buildingos.account.auth.application.port.out.OtpCodeVerifier;
+import com.buildingos.account.auth.application.port.out.OtpProvider;
 import com.buildingos.account.auth.application.port.out.TokenIssuer;
 import com.buildingos.account.auth.domain.model.OtpChallenge;
 import com.buildingos.account.auth.domain.repository.OtpChallengeRepository;
@@ -9,12 +9,12 @@ import java.time.Clock;
 
 public final class VerifyOtpService implements VerifyOtpUseCase {
     private final OtpChallengeRepository challenges;
-    private final OtpCodeVerifier codeVerifier;
+    private final OtpProvider codeVerifier;
     private final UserRepository users;
     private final TokenIssuer tokenIssuer;
     private final Clock clock;
 
-    public VerifyOtpService(OtpChallengeRepository challenges, OtpCodeVerifier codeVerifier,
+    public VerifyOtpService(OtpChallengeRepository challenges, OtpProvider codeVerifier,
             UserRepository users, TokenIssuer tokenIssuer, Clock clock) {
         this.challenges = challenges;
         this.codeVerifier = codeVerifier;
@@ -50,7 +50,7 @@ public final class VerifyOtpService implements VerifyOtpUseCase {
         if (challenge.attemptCount() > OtpChallenge.MAX_ATTEMPTS) {
             return new VerifyOtpResult.Rejected(VerifyOtpResult.Reason.ATTEMPTS_EXHAUSTED);
         }
-        if (!codeVerifier.isValidCode(phone, code)) {
+        if (!codeVerifier.verify(challenge, code)) {
             return new VerifyOtpResult.Rejected(VerifyOtpResult.Reason.INVALID_CODE);
         }
         boolean consumedNow = challenges.consume(attemptId, clock.instant());

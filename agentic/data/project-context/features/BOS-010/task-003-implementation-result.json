@@ -1,0 +1,33 @@
+{
+  "status": "READY",
+  "evidence": [
+    "backend/account-service/src/main/java/com/buildingos/account/auth/application/port/out/OtpProvider.java",
+    "backend/account-service/src/main/java/com/buildingos/account/auth/application/port/out/SmsSender.java",
+    "backend/account-service/src/main/java/com/buildingos/account/auth/infrastructure/security/HashedCodeOtpProvider.java",
+    "backend/account-service/src/main/java/com/buildingos/account/auth/infrastructure/security/RsaJwtIssuer.java",
+    "backend/account-service/src/main/java/com/buildingos/account/auth/infrastructure/config/AuthConfiguration.java",
+    "backend/account-service/src/main/resources/db/migration/V3__otp_code_hash.sql",
+    "docs/AUTH_CONFIGURATION.md"
+  ],
+  "blocking_issues": [],
+  "open_questions": [],
+  "recommended_next_step": "Independent code/security review of TASK-003 diff (REVIEW stage), then QA evidence against Acceptance 1-6.",
+  "outputs": {
+    "scope": "BOS-010 TASK-003 scope items 1-5 implemented; no SMS vendor adapter (deferred by operator decision)",
+    "changes": [
+      "OtpCodeVerifier replaced by OtpProvider port; SmsSender port with no production adapter",
+      "DevelopmentOtpProvider (local/test only) and HashedCodeOtpProvider (SecureRandom 6 digits, HMAC-SHA256 challenge-bound hash, constant-time verify)",
+      "RsaJwtIssuer replaces LocalRsaJwtIssuer: mounted JWK Set, active kid, public-only JWKS, configurable TTL, fail-closed validation",
+      "Profile gates removed from AuthConfiguration, AuthController, JwkSetController; SuperAdmin seeding stays local/test",
+      "Advisory-lock serialized start limits: 60s cooldown, 5/rolling hour -> HTTP 429 OTP_RATE_LIMITED",
+      "OtpChallenge expiry exclusive at instant; consume rechecks expiry",
+      "V3 migration: nullable code_hash + (phone, created_at) index"
+    ],
+    "checks": [
+      "mvn -B -f backend/pom.xml verify: exit 0, 80 tests, 0 failures (Docker/Testcontainers)",
+      "sh scripts/verify-flutter.sh: VERIFY PASSED, 32 tests",
+      "ArchUnit rules unchanged and passing"
+    ],
+    "not_done": "Production SMS login unusable until a real SmsSender adapter lands in later work"
+  }
+}

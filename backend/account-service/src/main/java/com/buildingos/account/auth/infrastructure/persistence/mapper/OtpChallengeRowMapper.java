@@ -16,6 +16,7 @@ public final class OtpChallengeRowMapper implements RowMapper<OtpChallenge> {
                 rs.getTimestamp("created_at").toInstant(),
                 rs.getTimestamp("expires_at").toInstant(),
                 rs.getInt("attempt_count"),
-                rs.getTimestamp("consumed_at") == null ? null : rs.getTimestamp("consumed_at").toInstant());
+                rs.getTimestamp("consumed_at") == null ? null : rs.getTimestamp("consumed_at").toInstant(),
+                rs.getString("code_hash"));
     }
 }

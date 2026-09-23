@@ -1,8 +1,9 @@
 # BOS-010 — Identity slice implementation and verification
 
-Current checkpoint (2026-09-23): IMPLEMENTATION, budget extended by operator.
-TASK-001 and TASK-002 are implemented; backend verify 51/51, Flutter 22/22, strict
-analysis clean. Live mobile flow verification remains outstanding. See [review/QA checkpoint](REVIEW-QA.md) for evidence and recovery steps.
+Current checkpoint (2026-09-23): TASK-001/002 released for local/test use;
+TASK-004 architecture cleanup and TASK-005 login polish completed. TASK-003 is
+completed (released for local/test; production fails closed until SMS adapter + signing key). See
+[TASK-003 readiness](TASK-003-READINESS.md) and [task sequence](TASKS.md).
 
 Supersedes [BOS-001](../BOS-001) and [BOS-002](../BOS-002) after the operator asked to
 restart from INTAKE under the revised BRD (multi-tenant SaaS: global identity,
@@ -39,10 +40,11 @@ backend only. 51/51 backend tests pass (`mvn test` from `backend/`). D-09/D-10 r
 open but are deferred to later, un-started features (back-office console; assisted
 onboarding/support), not blockers for TASK-001.
 
-Run: `RUN-D10A3F4277E7424F938E3BC2C46E9A2D`. TASK-002 Flutter integration was committed
-as `39842eb`; this session added HTTP contract tests and corrected verification
-reporting. The run needs operator-authorized budget recovery, then a scoped context
-refresh and updated implementation evidence before REVIEW/QA. TASK-003 production
-token issuance is not started. Building application/lifecycle, units/ownership,
-subscription/entitlements, and the back-office console remain separate, un-started
-features under this EPIC.
+The TASK-001/002 run `RUN-D10A3F4277E7424F938E3BC2C46E9A2D` is completed;
+see [release evidence](RELEASE.md). Historical test counts above describe that slice.
+Current TASK-003 run: `RUN-0CF5A7A84513476697D476E1334896C1`, COMPLETED 2026-09-23;
+see [release evidence](RELEASE-TASK-003.md).
+Issuer and provider scope are already decided: account-service issues tokens;
+real SMS vendor deferred, provider boundary plus test sender only.
+Building application/lifecycle, units/ownership, subscription/entitlements, and the
+back-office console remain separate, un-started features under this EPIC.

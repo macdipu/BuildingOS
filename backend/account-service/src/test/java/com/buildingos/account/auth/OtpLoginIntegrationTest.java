@@ -135,11 +135,19 @@ class OtpLoginIntegrationTest {
 
     @Test
     void wrongCodeIsRejectedWithUnauthorized() throws Exception {
-        UUID attemptId = startChallenge(OTHER_PHONE);
+        UUID attemptId = startChallenge("+8801711113333");
         var verifyResponse = post("/api/v1/auth/otp/verify",
-                "{\"attemptId\":\"" + attemptId + "\",\"phone\":\"" + OTHER_PHONE + "\",\"code\":\"111111\"}");
+                "{\"attemptId\":\"" + attemptId + "\",\"phone\":\"+8801711113333\",\"code\":\"111111\"}");
         assertThat(verifyResponse.statusCode()).isEqualTo(401);
         assertThat(verifyResponse.body()).contains("OTP_INVALID_CODE");
+    }
+
+    @Test
+    void repeatedStartReturnsRateLimited() throws Exception {
+        startChallenge("+8801711114444");
+        var response = post("/api/v1/auth/otp/start", "{\"phone\":\"+8801711114444\"}");
+        assertThat(response.statusCode()).isEqualTo(429);
+        assertThat(response.body()).contains("OTP_RATE_LIMITED");
     }
 
     @Test

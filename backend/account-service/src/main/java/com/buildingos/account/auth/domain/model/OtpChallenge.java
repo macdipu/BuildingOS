@@ -3,24 +3,11 @@ package com.buildingos.account.auth.domain.model;
 import java.time.Instant;
 import java.util.UUID;
 
-/**
- * Server-held OTP challenge state (attempt id, phone binding, expiry, attempt count,
- * consumption). Mirrors the contract recorded in the superseded BOS-002 OTP-PROVIDER.md.
- */
 public record OtpChallenge(UUID id, String phone, Instant createdAt, Instant expiresAt,
-        int attemptCount, Instant consumedAt) {
-
-    public boolean isExpired(Instant now) {
-        return now.isAfter(expiresAt);
-    }
-
-    public boolean isConsumed() {
-        return consumedAt != null;
-    }
-
-    public boolean attemptsExhausted() {
-        return attemptCount >= MAX_ATTEMPTS;
-    }
-
+        int attemptCount, Instant consumedAt, String codeHash) {
     public static final int MAX_ATTEMPTS = 5;
+
+    public boolean isExpired(Instant now) { return !now.isBefore(expiresAt); }
+    public boolean isConsumed() { return consumedAt != null; }
+    public boolean attemptsExhausted() { return attemptCount >= MAX_ATTEMPTS; }
 }

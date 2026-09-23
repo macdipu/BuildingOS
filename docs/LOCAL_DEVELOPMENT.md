@@ -1,7 +1,7 @@
 # Local development — BOS-001 platform foundation
 
 Scope: gateway, account-service, building-service, their local Postgres/Kafka infrastructure,
-and the shared platform-web library. No business features live here yet.
+and the shared platform-web library, including BOS-010 phone OTP authentication.
 
 ## Prerequisites
 
@@ -54,21 +54,22 @@ docker compose -f infra/docker/compose.yaml up -d postgres kafka
 
 Compose runs infrastructure only. After the build and infrastructure check, run the
 three application JARs in separate terminals from the repository root. Each terminal
-needs these shared variables; supply an existing issuer and JWKS endpoint you control:
+needs these shared variables for the local account-service issuer:
 
 ```sh
 set -a
 . infra/docker/.env
 set +a
-export JWT_ISSUER='https://your-issuer.example'
-export JWT_JWK_SET_URI='https://your-issuer.example/.well-known/jwks.json'
+export SPRING_PROFILES_ACTIVE=local
+export JWT_ISSUER='http://localhost:8081'
+export JWT_JWK_SET_URI='http://localhost:8081/.well-known/jwks.json'
 export JWT_AUDIENCE='buildingos-local'
 ```
 
-These URLs are placeholders, not a bundled identity provider. Real phone/Google login
-is BOS-002. The tests start their own temporary JWKS fixture and generate test tokens.
-To use your own HTTP-only local issuer, explicitly set `SPRING_PROFILES_ACTIVE=local`
-in each terminal; HTTP issuer/JWKS URLs are rejected outside `local`/`test` profiles.
+Account-service generates a temporary signing key in local/test when no key file is
+configured, and development OTP accepts `000000`. Tokens from that key become invalid
+after restart. HTTP issuer/JWKS URLs are rejected outside local/test. Production
+configuration and the deferred SMS adapter are described in [authentication configuration](AUTH_CONFIGURATION.md).
 
 Account terminal:
 

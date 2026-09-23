@@ -1,24 +1,24 @@
 # BOS-010 implementation sequence (identity & platform roles feature only)
 
-Classification: provisional EPIC at the work-item level (see FEATURE.md); this
-document covers only its first feature slice — identity, platform roles, phone+OTP
-login. No route in this run has a separate PLANNING stage (route:
-INTAKE → CONTEXT → REQUIREMENTS → TECHNICAL → IMPLEMENTATION → REVIEW → QA → RELEASE →
-COMPLETED); task breakdown for this slice is recorded here as part of TECHNICAL.
-
-Status: TASK-001 (backend) and TASK-002 (Flutter) implemented. Continuation QA:
-backend verify 51/51, Flutter 22/22, strict analysis clean; live mobile flow
-evidence remains outstanding. See [review/QA checkpoint](REVIEW-QA.md). TASK-003 not started.
+BOS-010 remains a provisional EPIC (see FEATURE.md). This sequence covers the
+identity, platform roles, and phone OTP slice. Execute existing tasks without
+recreating planning artifacts; TASK-003 uses TASK_ONLY / NO_REPLAN.
 
 | Task | Outcome | Status |
 |---|---|---|
-| [TASK-001](tasks/TASK-001.md) | Global user identity, platform roles, seed SUPER_ADMIN, phone+OTP login, local token issuance (backend) | DONE (backend); see TECH-SPEC.md |
-| [TASK-002](tasks/TASK-002.md) | Flutter (`user_app`) integration: wire the new OTP endpoints into the existing GetX auth feature (repository, controller, session storage, error/loading states) | DONE, verified by tests |
-| TASK-003 | Production token-issuance path: replace/complement the local RSA issuer with an operator-configured external issuer story, and a real OTP/SMS provider adapter behind `OtpCodeVerifier` | NOT STARTED |
+| [TASK-001](tasks/TASK-001.md) | Backend global identity, roles, seed SUPER_ADMIN, development login | COMPLETED; local/test release in [RELEASE.md](RELEASE.md) |
+| [TASK-002](tasks/TASK-002.md) | Flutter phone OTP integration | COMPLETED; automated and live QA in [REVIEW-QA.md](REVIEW-QA.md) |
+| [TASK-004](tasks/TASK-004.md) | Architecture conformance and account-service rename | COMPLETED; [review/QA](REVIEW-TASK-004.md) |
+| [TASK-005](tasks/TASK-005.md) | Locale toggle and login/OTP polish | COMPLETED; [review/QA](REVIEW-TASK-005.md) |
+| [TASK-003](tasks/TASK-003.md) | Account-service signing keys and provider-neutral OTP/SMS boundary; vendor deferred | IMPLEMENTED (technical gate approved 2026-09-23); backend 80 / Flutter 32 tests green; [review](REVIEW-TASK-003.md) READY; COMPLETED; [release](RELEASE-TASK-003.md) local/test, production fail-closed |
 
-Sequence: TASK-001 (done), TASK-002 (done) → TASK-003 can proceed independently.
-TASK-002 was committed as `39842eb` before this session. The 2026-09-23 QA additions
-are uncommitted. Do not commit without an explicit operator request.
+Continuation run: `RUN-0CF5A7A84513476697D476E1334896C1`.
+The old TASK-003 run was cancelled before code changes. TASK-004 is now complete.
+[Post-cleanup readiness](TASK-003-READINESS.md) records the concrete design and
+validation plan. Implementation evidence:
+[task-003-implementation-result.json](task-003-implementation-result.json).
+
+Do not commit without an explicit operator request.
 
 Later features under this EPIC (not yet intake'd, see FEATURE.md/DECISIONS.md):
 building application & lifecycle; units & ownership; subscription & entitlements;

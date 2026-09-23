@@ -1,4 +1,48 @@
 {
+  "change_request:brownfield:user_app": {
+    "cached_at": "2026-09-23T10:45:50.195618+00:00",
+    "decision": {
+      "persona": "mobile-agent",
+      "planning": "NO_REPLAN",
+      "route": [
+        "INTAKE",
+        "CONTEXT",
+        "IMPACT",
+        "TECHNICAL",
+        "IMPLEMENTATION",
+        "REVIEW",
+        "QA",
+        "RELEASE",
+        "COMPLETED"
+      ],
+      "skill_docs": [
+        "agentic/kit/agents/mobile-agent/AGENT.md",
+        "agentic/kit/skills/implementation-agent/SKILL.md",
+        "agentic/kit/skills/device-preview-agent/SKILL.md",
+        "agentic/kit/skills/code-review-agent/SKILL.md",
+        "agentic/kit/skills/automated-qa-agent/SKILL.md"
+      ],
+      "workflow_doc": "agentic/kit/workflows/brownfield.md"
+    },
+    "kit_version": "9d27e69f0c7d9ec1b500e0332a2fcda082d5402f36e35db385d376c6c6bd1c82"
+  },
+  "existing_task:brownfield:account-service": {
+    "cached_at": "2026-09-23T11:49:57.323198+00:00",
+    "decision": {
+      "decision": "Resume existing TASK-003 after TASK-004; refresh scoped baseline and obtain explicitly required technical reapproval. Load implementation and DB persona skills upon implementation pickup.",
+      "persona_doc": "agentic/kit/agents/be-agent/AGENT.md",
+      "route": "existing_task:NO_REPLAN:INTAKE->CONTEXT->IMPLEMENTATION->REVIEW->QA->RELEASE->COMPLETED",
+      "skill_docs": [
+        "agentic/kit/skills/prompt-intake-adapter/SKILL.md",
+        "agentic/kit/skills/baseline-verifier/SKILL.md"
+      ],
+      "workflow_doc": [
+        "agentic/kit/workflows/routing.md",
+        "agentic/kit/workflows/brownfield.md"
+      ]
+    },
+    "kit_version": "9d27e69f0c7d9ec1b500e0332a2fcda082d5402f36e35db385d376c6c6bd1c82"
+  },
   "existing_task:brownfield:platform-foundation": {
     "cached_at": "2026-09-22T10:57:50.294646+00:00",
     "decision": {

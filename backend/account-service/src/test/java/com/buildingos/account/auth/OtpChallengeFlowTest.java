@@ -12,6 +12,8 @@ import com.buildingos.account.auth.domain.model.User;
 import com.buildingos.account.auth.domain.repository.OtpChallengeRepository;
 import com.buildingos.account.auth.domain.repository.UserRepository;
 import java.time.Clock;
+import java.time.Duration;
+import com.buildingos.account.auth.infrastructure.security.DevelopmentOtpProvider;
 import java.time.Instant;
 import java.time.ZoneOffset;
 import java.util.HashMap;
@@ -37,22 +39,23 @@ class OtpChallengeFlowTest {
     };
 
     private final OtpChallengeRepository repository = new OtpChallengeRepository() {
-        @Override public OtpChallenge start(String phone, Instant startedAt, Instant expiresAt) {
-            var challenge = new OtpChallenge(UUID.randomUUID(), phone, startedAt, expiresAt, 0, null);
+        @Override public Optional<OtpChallenge> start(String phone, Instant startedAt, Instant expiresAt, Duration cooldown, int maxPerHour) {
+            var challenge = new OtpChallenge(UUID.randomUUID(), phone, startedAt, expiresAt, 0, null, null);
             store.put(challenge.id(), challenge);
-            return challenge;
+            return Optional.of(challenge);
         }
+        @Override public void saveCodeHash(UUID id, String hash) { throw new UnsupportedOperationException(); }
         @Override public Optional<OtpChallenge> find(UUID attemptId) { return Optional.ofNullable(store.get(attemptId)); }
         @Override public OtpChallenge recordAttempt(UUID attemptId) {
             var c = store.get(attemptId);
-            var updated = new OtpChallenge(c.id(), c.phone(), c.createdAt(), c.expiresAt(), c.attemptCount() + 1, c.consumedAt());
+            var updated = new OtpChallenge(c.id(), c.phone(), c.createdAt(), c.expiresAt(), c.attemptCount() + 1, c.consumedAt(), c.codeHash());
             store.put(attemptId, updated);
             return updated;
         }
         @Override public boolean consume(UUID attemptId, Instant consumedAt) {
             var c = store.get(attemptId);
             if (c.isConsumed()) return false;
-            store.put(attemptId, new OtpChallenge(c.id(), c.phone(), c.createdAt(), c.expiresAt(), c.attemptCount(), consumedAt));
+            store.put(attemptId, new OtpChallenge(c.id(), c.phone(), c.createdAt(), c.expiresAt(), c.attemptCount(), consumedAt, c.codeHash()));
             return true;
         }
     };
@@ -70,9 +73,9 @@ class OtpChallengeFlowTest {
 
     private final TokenIssuer tokenIssuer = (userId, phone, roles) -> new TokenIssuer.IssuedToken("fake-token-" + userId, 900);
 
-    private final StartOtpService startService = new StartOtpService(repository, clock);
+    private final StartOtpService startService = new StartOtpService(repository, new DevelopmentOtpProvider(), clock, Duration.ofSeconds(60), 5);
     private final VerifyOtpService verifyService =
-            new VerifyOtpService(repository, (phone, code) -> "000000".equals(code), userRepository, tokenIssuer, clock);
+            new VerifyOtpService(repository, new DevelopmentOtpProvider(), userRepository, tokenIssuer, clock);
 
     @Test
     void correctCodeVerifiesAndIssuesSession() {
@@ -107,7 +110,7 @@ class OtpChallengeFlowTest {
     @Test
     void expiredChallengeIsRejected() {
         var started = startService.execute(new StartOtpCommand(PHONE));
-        now.set(now.get().plus(StartOtpService.CHALLENGE_TTL).plusSeconds(1));
+        now.set(now.get().plus(StartOtpService.CHALLENGE_TTL));
         var result = verifyService.execute(new VerifyOtpCommand(started.attemptId(), PHONE, "000000"));
         assertThat(result).isEqualTo(new VerifyOtpResult.Rejected(VerifyOtpResult.Reason.EXPIRED));
     }

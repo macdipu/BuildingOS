@@ -72,12 +72,12 @@ account-service/
     │   │   │   │   │                     SeedSuperAdminService
     │   │   │   │   ├── getpublickeys/    GetPublicSigningKeysQuery, GetPublicSigningKeysUseCase,
     │   │   │   │   │                     GetPublicSigningKeysService
-    │   │   │   │   └── port/out/         OtpCodeVerifier, TokenIssuer, SigningKeyProvider
+    │   │   │   │   └── port/out/         OtpProvider, SmsSender, TokenIssuer, SigningKeyProvider
     │   │   │   ├── infrastructure/
     │   │   │   │   ├── persistence/
     │   │   │   │   │   ├── repository/   JdbcUserRepositoryAdapter, JdbcOtpChallengeRepositoryAdapter
     │   │   │   │   │   └── mapper/       UserRowMapper, OtpChallengeRowMapper
-    │   │   │   │   ├── security/         DevelopmentOtpCodeVerifier, LocalRsaJwtIssuer
+    │   │   │   │   ├── security/         DevelopmentOtpProvider, HashedCodeOtpProvider, RsaJwtIssuer
     │   │   │   │   ├── seed/             SuperAdminSeeder (runner → SeedSuperAdminUseCase)
     │   │   │   │   └── config/           AuthConfiguration (bean wiring only)
     │   │   │   └── presentation/
