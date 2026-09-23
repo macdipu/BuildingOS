@@ -1,6 +1,6 @@
 # TASK-005 — user_app: async locale toggle, login SVG precache, login/OTP layout polish
 
-## Status: TECHNICAL (awaiting operator approval)
+## Status: COMPLETED (2026-09-23) — run RUN-8ED649CAEBFA46CD8E6EC1EB2BB9FCBF; commit 61e40e9; evidence in ../REVIEW-TASK-005.md
 
 Category: Mobile (`mobile-agent`). Scope: `user_app/` only; no backend, API, or auth-flow change.
 Source: operator prompt 2026-09-23 (pasted change description + "also change login and otp ui"),
