@@ -1,0 +1,16 @@
+{
+  "status": "READY",
+  "evidence": [
+    "docs/ARCHITECTURE.md",
+    "backend/api-gateway/src/main/java/com/buildingos/gateway/routing/config/GatewayRouteConfig.java",
+    "infra/docker/postgres/init/02-building-db.sh"
+  ],
+  "blocking_issues": [],
+  "open_questions": [],
+  "recommended_next_step": "Requirements.",
+  "outputs": {
+    "verdict": "CONTEXT_READY",
+    "revision": "31235ea",
+    "finding": "No subscription-service; wiring pattern from building-service/account-service"
+  }
+}

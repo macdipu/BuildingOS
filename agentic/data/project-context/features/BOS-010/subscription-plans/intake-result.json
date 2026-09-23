@@ -1,0 +1,16 @@
+{
+  "status": "READY",
+  "evidence": [
+    "agentic/data/project-context/features/BOS-010/subscription-plans/REQUIREMENTS.md"
+  ],
+  "blocking_issues": [],
+  "open_questions": [],
+  "recommended_next_step": "Context.",
+  "outputs": {
+    "work_item": "BOS-010 F5a subscription plans",
+    "work_type": "new_feature",
+    "project_type": "greenfield module in brownfield repo",
+    "hierarchy": "FEATURE",
+    "planning": "NO_REPLAN"
+  }
+}

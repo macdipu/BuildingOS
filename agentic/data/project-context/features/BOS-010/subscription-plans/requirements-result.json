@@ -1,0 +1,23 @@
+{
+  "status": "READY",
+  "evidence": [
+    "agentic/data/project-context/features/BOS-010/subscription-plans/REQUIREMENTS.md",
+    "agentic/data/project-context/features/BOS-010/DECISIONS.md"
+  ],
+  "blocking_issues": [],
+  "open_questions": [],
+  "recommended_next_step": "Technical design.",
+  "outputs": {
+    "verdict": "REQUIREMENTS_READY",
+    "revision": 2,
+    "ids": "RV-01..RV-11",
+    "decisions": [
+      "D-22",
+      "D-23",
+      "D-24",
+      "D-25",
+      "D-26",
+      "D-27"
+    ]
+  }
+}
