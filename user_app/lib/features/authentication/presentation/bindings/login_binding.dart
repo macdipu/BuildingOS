@@ -1,31 +1,33 @@
+import 'package:customer/core/database/client/preference_cache.dart';
+import 'package:customer/core/network/client/api_client.dart';
+import 'package:customer/core/network/urls/api_urls.dart';
+import 'package:customer/features/authentication/data/datasources/auth_local_datasource.dart';
+import 'package:customer/features/authentication/data/datasources/auth_remote_datasource.dart';
+import 'package:customer/features/authentication/data/repositories/auth_repository_impl.dart';
+import 'package:customer/features/authentication/domain/repositories/auth_repository.dart';
+import 'package:customer/features/authentication/domain/usecases/start_otp_use_case.dart';
+import 'package:customer/features/authentication/domain/usecases/verify_otp_use_case.dart';
+import 'package:customer/features/authentication/presentation/controllers/login_screen_controller.dart';
 import 'package:get/get.dart';
-import 'package:customer/core/data/cache/client/preference_cache.dart';
-import 'package:customer/core/data/http/client/api_client.dart';
-import 'package:customer/core/data/http/urls/api_urls.dart';
-import 'package:customer/features/authentication/data/repo_impl/auth_cache_impl.dart';
-import 'package:customer/features/authentication/data/repo_impl/auth_http_impl.dart';
-import 'package:customer/features/authentication/domain/repository/auth_repository.dart';
-import 'package:customer/features/authentication/presentation/login/controller/login_screen_controller.dart';
-import 'package:customer/features/authentication/presentation/reset_pin/controller/reset_pin_controller.dart';
-import '../../domain/use_case/do_login_use_case.dart';
-import '../../domain/use_case/start_otp_use_case.dart';
-import '../../domain/use_case/verify_otp_use_case.dart';
 
 class LoginBinding extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut<AuthHttpImpl>(
-      () => AuthHttpImpl(Get.find<ApiClient>(), Get.find<ApiUrl>()),
+    Get.lazyPut<AuthRemoteDataSource>(
+      () => AuthRemoteDataSource(Get.find<ApiClient>(), Get.find<ApiUrl>()),
+      fenix: true,
+    );
+
+    Get.lazyPut<AuthLocalDataSource>(
+      () => AuthLocalDataSource(Get.find<PreferenceCache>()),
       fenix: true,
     );
 
     Get.lazyPut<AuthRepository>(
-      () => AuthCacheImpl(Get.find<PreferenceCache>(), Get.find<AuthHttpImpl>()),
-      fenix: true,
-    );
-
-    Get.lazyPut<DoLoginUseCase>(
-      () => DoLoginUseCase(Get.find<AuthRepository>()),
+      () => AuthRepositoryImpl(
+        Get.find<AuthRemoteDataSource>(),
+        Get.find<AuthLocalDataSource>(),
+      ),
       fenix: true,
     );
 
@@ -39,8 +41,7 @@ class LoginBinding extends Bindings {
       fenix: true,
     );
 
-    Get.lazyPut<LoginScreenController>(() => LoginScreenController(), fenix: true);
-
-    Get.lazyPut<ForgotPinController>(() => ForgotPinController(), fenix: true);
+    Get.lazyPut<LoginScreenController>(() => LoginScreenController(),
+        fenix: true);
   }
 }

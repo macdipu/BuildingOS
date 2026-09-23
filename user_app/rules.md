@@ -44,7 +44,7 @@ context.textTheme
 Theme.of(context).colorScheme
 Theme.of(context).textTheme
 ```
-`[VERIFIED]` This repo's pattern is `context.colorScheme` / `context.primary` / `context.onSurface` etc. via the `ThemeExtensions on BuildContext` extension in `lib/core/presentation/theme/theme_extensions.dart` — not `Theme.of(context).extension<T>()`. Use semantic aliases only: `primary`, `secondary`, `tertiary`, `surface`, `error`, `outline`, etc. (see that file for the full alias list).
+`[VERIFIED]` This repo's pattern is `context.colorScheme` / `context.primary` / `context.onSurface` etc. via the `ThemeExtensions on BuildContext` extension in `lib/app/theme/theme_extensions.dart` — not `Theme.of(context).extension<T>()`. Use semantic aliases only: `primary`, `secondary`, `tertiary`, `surface`, `error`, `outline`, etc. (see that file for the full alias list).
 
 ## Never use inside widgets/screens
 ```dart
@@ -53,9 +53,9 @@ Color(0xFF...)
 HexColor(...)
 const Color(...)
 ```
-Hardcoded colors are only allowed inside `lib/core/presentation/theme/color_schemes.dart` and other centralized theme definition files.
+Hardcoded colors are only allowed inside `lib/app/theme/color_schemes.dart` and other centralized theme definition files.
 
-`[VERIFIED — existing debt]` `flutter analyze`-style grep currently finds raw `Color(0xFF...)` / named `Colors.*` outside theme files in ~19 places (e.g. `frosted_glass.dart`, `glass_text_field.dart`, `animated_icon_button.dart`, several feature screens). Treat these as legacy debt to migrate opportunistically — do not add new ones, and prefer fixing on touch.
+`[VERIFIED — existing debt]` `flutter analyze`-style grep currently finds raw `Color(0xFF...)` / named `Colors.*` outside theme files in a handful of places (e.g. `common_button.dart`, `common_appbar.dart`, `custom_snackbar.dart`, `show_app_sheet.dart` under `lib/core/widgets/`). Treat these as legacy debt to migrate opportunistically — do not add new ones, and prefer fixing on touch.
 
 ## Adding a new color
 1. Check `color_schemes.dart` first.
@@ -76,7 +76,7 @@ Always `context.textTheme` / `Theme.of(context).textTheme`. No inline `TextStyle
 
 # 6. Spacing Rules
 
-`[VERIFIED]` Correct tokens for this repo (`lib/core/presentation/theme/app_dimensions.dart`):
+`[VERIFIED]` Correct tokens for this repo (`lib/app/theme/app_dimensions.dart`):
 ```dart
 AppDimens.spacing.s16      // or context.dimens.spacing.s16
 AppDimens.radius.br12      // or context.dimens.radius.br12
@@ -95,7 +95,7 @@ unless introducing a new global token in `app_dimensions.dart`.
 
 # 7. Component Rules
 
-Reuse existing components first. Before creating Button / Card / Tile / Dialog / Sheet / Input / Avatar / Badge / Loading / Empty / Error widget — search `lib/core/presentation/widgets/` (see `app_sheet/`, `buttons/`, `text_field/`, `snackbar/`, `loading_view/`, `show_dialog/`, etc.). Do not duplicate.
+Reuse existing components first. Before creating Button / Card / Tile / Dialog / Sheet / Input / Avatar / Badge / Loading / Empty / Error widget — search `lib/core/widgets/` (see `app_sheet/`, `buttons/`, `text_field/`, `snackbar/`, `loading_view/`, `show_dialog/`, etc.). Do not duplicate.
 
 ---
 
@@ -109,31 +109,33 @@ Rules: snake_case, lowercase start, min 2 chars, no Dart reserved words, run fro
 
 Produces (`lib/features/<name>/`):
 ```
-data/model/<name>_list_response.dart
-data/repo_impl/<name>_http_impl.dart
-data/repo_impl/<name>_cache_impl.dart
-domain/entity/<name>_item.dart
-domain/repo/<name>_repository.dart
-domain/usecase/<name>_use_case.dart
+data/models/<name>_list_response.dart
+data/mappers/<name>_mapper.dart
+data/datasources/<name>_remote_datasource.dart
+data/datasources/<name>_local_datasource.dart
+data/repositories/<name>_repository_impl.dart
+domain/entities/<name>_item.dart
+domain/repositories/<name>_repository.dart
+domain/usecases/<name>_use_case.dart
 presentation/bindings/<name>_binding.dart
-presentation/controller/<name>_screen_controller.dart
-presentation/screens/<name>_screen.dart
-presentation/pages.dart
+presentation/controllers/<name>_screen_controller.dart
+presentation/pages/<name>_screen.dart
+presentation/<name>_pages.dart
 ```
 
 After generating:
-1. Add entity fields (`domain/entity`)
-2. Add response fields and DTO mappings (`fromJson`, `toJson`, `fromEntity`, `toEntity`) in `data/model`
-3. Set an absolute `_endpoint` in `data/repo_impl/<name>_http_impl.dart` (search `TODO`)
-4. Keep DTO mappings compatible with cached data, or bump the cache-key version
-5. Import and spread `...XxxPages.routes` into `lib/res/routes/app_pages.dart`
-6. Navigate with `XxxPages.routeName`; optionally expose an alias in `AppRoutes`
-7. The generated binding already wires `HttpImpl → CacheImpl → Repository → UseCase → Controller` with `Get.lazyPut(..., fenix: true)`
+1. Add entity fields (`domain/entities`)
+2. Add response fields and DTO JSON (`fromJson`, `toJson`) in `data/models`; update `toEntity` in `data/mappers`
+3. Set an absolute `_endpoint` in `data/datasources/<name>_remote_datasource.dart` (search `TODO`)
+4. Keep DTO JSON compatible with cached data, or bump the cache-key version in `<name>_local_datasource.dart`
+5. Import `presentation/<name>_pages.dart` and spread `...XxxPages.routes` into `lib/app/routes/app_pages.dart`
+6. Navigate with `XxxPages.routeName`; optionally expose an alias in `lib/app/routes/app_routes.dart`
+7. The generated binding already wires `RemoteDataSource + LocalDataSource → RepositoryImpl → UseCase → Controller` with `Get.lazyPut(..., fenix: true)`
 8. Customize/localize the UI and test initial load, errors, Retry, and refresh
 
 The generator reads the package name from `pubspec.yaml` and formats its output.
 Use `--dry-run` to preview paths; overwriting requires `--force` and replaces
-customizations in the ten generated files. Refresh and Retry bypass the cache.
+customizations in the twelve generated files. Refresh and Retry bypass the cache.
 Run `flutter test test/tool/feature_generator_test.dart` after generator changes.
 
 Never bypass architecture layers.
@@ -145,10 +147,10 @@ Never bypass architecture layers.
 Do **not** create a new feature. Update the existing one.
 
 ```
-UI → Controller → UseCase → Repository (interface) → RepoImpl (Cache→Http) → ApiClient
+UI → Controller → UseCase → Repository (interface) → RepositoryImpl (Local→Remote DataSource) → ApiClient
 ```
 
-Steps: add repository method → add use case → add request/response models → implement in `XxxHttpImpl` → update `XxxCacheImpl` if cached → update controller (via `doAction<T>`) → update UI → handle loading/error/empty.
+Steps: add repository method → add use case → add request/response models (+ mappers) → implement in `XxxRemoteDataSource` → update `XxxLocalDataSource` if cached → wire in `XxxRepositoryImpl` → update controller (via `doAction<T>`) → update UI → handle loading/error/empty.
 
 Never call `ApiClient` directly from a Controller or a widget.
 
@@ -156,8 +158,9 @@ Never call `ApiClient` directly from a Controller or a widget.
 
 # 10. Repository Rules
 
-`XxxHttpImpl` — HTTP call, returns `Either<Failure, T>` (mapped from `Resource`).
-`XxxCacheImpl` — wraps the Http impl, persists to `PreferenceCache` on success, is what gets registered as `XxxRepository` in the Binding.
+`XxxRemoteDataSource` (`data/datasources/`) — HTTP call via `BaseHttpRepository`, returns DTOs or throws `ServerException`.
+`XxxLocalDataSource` (`data/datasources/`) — reads/writes DTOs in `PreferenceCache` via `BaseCacheRepository`.
+`XxxRepositoryImpl` (`data/repositories/`) — combines both, maps to entities, returns `Either<Failure, T>`; registered as `XxxRepository` in the Binding.
 Controllers never touch `ApiClient` or `Dio` directly.
 
 ---
@@ -212,7 +215,7 @@ Standard Dart/Effective Dart conventions otherwise.
 
 # 16. Before Creating Anything
 
-Does this exist already? Can it be reused / moved to `core/` / made generic? Does it follow the layer boundaries in `CLAUDE.md`? Does it follow the theme/dimension tokens above? Never introduce duplicate functionality.
+Does this exist already? Can it be reused / moved to `core/` / made generic? Does it follow the layer boundaries in `CLAUDE.md` / `../docs/ARCHITECTURE.md`? Does it follow the theme/dimension tokens above? Never introduce duplicate functionality.
 
 ---
 
@@ -222,9 +225,9 @@ Does this exist already? Can it be reused / moved to `core/` / made generic? Doe
 * ✅ Uses `context.colorScheme` / `context.textTheme` / `AppDimens`
 * ✅ Light & Dark mode both verified
 * ✅ No duplicate widgets/logic — checked `core/` first
-* ✅ Clean Architecture layers respected (UI → Controller → UseCase → Repository → RepoImpl → ApiClient)
+* ✅ Clean Architecture layers respected (UI → Controller → UseCase → Repository → RepositoryImpl → DataSource → ApiClient)
 * ✅ Controllers contain no JSON parsing / direct API calls
-* ✅ Generated page routes registered in `app_pages.dart` (optional aliases in `app_routes.dart`)
+* ✅ Generated page routes registered in `lib/app/routes/app_pages.dart` (optional aliases in `app_routes.dart`)
 * ✅ `devAutoFill`-style code wrapped in `assert()`
 * ✅ No unnecessary dependencies
 * ✅ `flutter analyze` clean

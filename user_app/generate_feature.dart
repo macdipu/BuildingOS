@@ -112,8 +112,9 @@ void main(List<String> arguments) {
     stdout.writeln('Generated ${files.length} files in lib/features/$name.');
     stdout.writeln('Next steps:');
     stdout.writeln(
-        '  1. Configure the endpoint in data/repo_impl/${name}_http_impl.dart.');
-    stdout.writeln('  2. Update the entity and DTO mappings in data/model/.');
+        '  1. Configure the endpoint in data/datasources/${name}_remote_datasource.dart.');
+    stdout.writeln(
+        '  2. Update the entity, models in data/models/ and data/mappers/.');
     stdout.writeln(
         '  3. Import ${type}Pages and spread ...${type}Pages.routes in AppPages.routes.');
     stdout.writeln('  4. Navigate with Get.toNamed(${type}Pages.routeName).');
@@ -126,7 +127,7 @@ void main(List<String> arguments) {
 String readPackageName(Directory root) {
   final pubspec = File('${root.path}/pubspec.yaml');
   if (!pubspec.existsSync() ||
-      !File('${root.path}/lib/core/domain/usecase/usecase.dart').existsSync()) {
+      !File('${root.path}/lib/core/usecases/usecase.dart').existsSync()) {
     throw StateError(
         'Run from the template project root (pubspec.yaml and lib/core are required).');
   }

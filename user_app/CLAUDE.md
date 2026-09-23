@@ -1,5 +1,7 @@
 # Clean Architecture GetX — Project Guide
 
+Canonical layout and layer rules: [`../docs/ARCHITECTURE.md`](../docs/ARCHITECTURE.md) ("Flutter app").
+
 ## Stack
 Flutter + GetX state management + Clean Architecture (data/domain/presentation per feature)
 
@@ -25,11 +27,11 @@ Run/build with the matching file, e.g. `flutter run --dart-define-from-file=.env
 dart generate_feature.dart user_profile
 ```
 After generating:
-1. Update entity fields in `domain/entity/`
-2. Update response DTO and entity/cache mappings in `data/model/`
-3. Set the absolute `_endpoint` URL in `data/repo_impl/xxx_http_impl.dart` (search TODO)
-4. Import and spread `...FeaturePages.routes` in `lib/res/routes/app_pages.dart`
-5. Navigate using `FeaturePages.routeName`; a central `AppRoutes` alias is optional
+1. Update entity fields in `domain/entities/`
+2. Update response DTO in `data/models/` and entity mappings in `data/mappers/`
+3. Set the absolute `_endpoint` URL in `data/datasources/xxx_remote_datasource.dart` (search TODO)
+4. Import `presentation/xxx_pages.dart` and spread `...XxxPages.routes` in `lib/app/routes/app_pages.dart`
+5. Navigate using `XxxPages.routeName`; a central alias in `lib/app/routes/app_routes.dart` is optional
 
 The generator detects the package name, formats output, and requires `--force`
 to overwrite an existing feature. Use `--dry-run` to preview paths. Refresh and
@@ -40,16 +42,16 @@ after changing generator templates in `tool/feature_generator/templates.dart`.
 
 ### Layer boundaries — never cross these:
 - `core/` NEVER imports from `features/`
-- `core/domain/` NEVER imports Flutter framework or GetX
-- `features/xxx/domain/` ONLY imports `core/domain/`
-- `features/xxx/data/` MAY import `core/data/` and `core/domain/`
-- `features/xxx/presentation/` MAY import `core/presentation/` and feature domain
+- `core/network/` and `core/database/` NEVER import `app/` (or `features/`)
+- `features/xxx/domain/` NEVER imports `flutter`, `get`, `dio`, `data/` or `presentation/`
+- `features/xxx/data/` NEVER imports `presentation/`
+- Features NEVER import another feature's internals
 
 ### DI rules:
 - ALWAYS use `Get.find<T>()` in widget/controller field initializers (binding provides it)
 - NEVER use `Get.put(Controller())` inside a widget State class
 - Register with `Get.lazyPut(..., fenix: true)` in Bindings
-- Global singletons (ApiClient, PreferenceCache, etc.) registered in `app_flavour.dart`
+- Global singletons (ApiClient, PreferenceCache, etc.) registered in `lib/app/config/app_flavour.dart`
 
 ### State management:
 - Async operations → use `doAction<T>()` from `BaseController`
@@ -64,8 +66,8 @@ after changing generator templates in `tool/feature_generator/templates.dart`.
 - `devAutoFill` test helpers MUST be wrapped in `assert(() { ... }())`
 
 ### Code style:
-- Entities in `domain/entity/` are PURE Dart — no fromJson/toJson
-- DTOs in `data/model/` handle all JSON serialization
+- Entities in `domain/entities/` are PURE Dart — no fromJson/toJson
+- DTOs in `data/models/` handle all JSON serialization; `data/mappers/` convert DTO → entity
 - No `!` (bang) on nullable unless provably non-null at that point
 - No `print()` — use `debugPrint()` or Logger
 - No comments explaining WHAT — only WHY (non-obvious constraints/workarounds)
@@ -74,24 +76,32 @@ after changing generator templates in `tool/feature_generator/templates.dart`.
 ```
 lib/
 ├── app/
-│   ├── flavours/    — AppConfig (compile-time env), bootstrap DI
-│   ├── shell/       — Bottom nav shell + binding
-│   └── views/       — MyApp root widget
+│   ├── app.dart     — MyApp root widget
+│   ├── config/      — AppConfig (compile-time env), bootstrap DI (app_flavour.dart)
+│   ├── routes/      — AppPages, AppRoutes, global navigator
+│   ├── theme/       — color schemes, text theme, dimensions, theme extensions
+│   └── shell/       — Bottom nav shell + binding
 ├── core/
-│   ├── data/        — HTTP client, cache, DTOs
-│   ├── domain/      — Failures, use case base classes, shared value objects
-│   └── presentation/ — BaseController, theme, widgets, hooks
+│   ├── network/     — HTTP client, API URLs
+│   ├── database/    — cache client, secure/plain preferences
+│   ├── auth/        — JWT, session-expiry notifier
+│   ├── errors/      — failures, exceptions
+│   ├── usecases/    — base UseCase
+│   ├── entities/    — shared value objects (e.g. PhoneNumber)
+│   ├── controllers/ — BaseController, theme/locale controllers
+│   ├── services/    — navigation, push notifications, platform utilities
+│   ├── utils/       — extensions, hooks, helpers
+│   └── widgets/     — shared widgets
 ├── features/
 │   └── xxx/
-│       ├── data/    — model (DTO), repo_impl (http + cache)
-│       ├── domain/  — entity, repo (interface), usecase
-│       └── presentation/ — bindings, controller, screens
-├── res/             — routes, strings, drawables
-└── services/        — Platform integrations (notifications, biometrics, etc.)
+│       ├── data/    — models (DTO), datasources (remote, local), repositories (impl), mappers
+│       ├── domain/  — entities, repositories (interface), usecases
+│       └── presentation/ — pages, widgets, controllers, bindings, xxx_pages.dart
+└── res/             — strings, drawables
 ```
 
 ## Known TODOs (do before production)
-- [ ] Enable Firebase (`app_flavour.dart` TODO comment)
+- [ ] Enable Firebase (`lib/app/config/app_flavour.dart` TODO comment)
 - [ ] Add `google-services.json` / `GoogleService-Info.plist`
 - [ ] Replace `flutter_secure_storage` stub calls with actual secure token storage
 - [ ] Write unit tests for all UseCases and repository implementations

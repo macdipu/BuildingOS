@@ -2,13 +2,15 @@
 
 A Flutter project with Clean Architecture and automated feature generation.
 
+Layout and layer rules: see [`../docs/ARCHITECTURE.md`](../docs/ARCHITECTURE.md) ("Flutter app").
+
 ---
 
 ## ⚙️ Environment Setup
 
 Config (`API_BASE_URL`, `API_VERSION`, `APP_DEBUG`, `DEFAULT_LOCALE`, `DEVICE_SECRET`)
 is injected at build time via `--dart-define-from-file`, not `.env`/`flutter_dotenv`.
-Values live in `.env/*.json`, read in `lib/app/flavours/app_config.dart`.
+Values live in `.env/*.json`, read in `lib/app/config/app_config.dart`.
 
 ```text
 .env/
@@ -56,9 +58,9 @@ fvm dart run generate_feature.dart user_profile --dry-run
 fvm dart run generate_feature.dart user_profile
 ```
 
-The generator reads the package name from `pubspec.yaml`, creates ten formatted
+The generator reads the package name from `pubspec.yaml`, creates twelve formatted
 Dart files, and refuses to overwrite an existing feature unless you pass
-`--force`. `--force` replaces the ten generated files, including customizations;
+`--force`. `--force` replaces the twelve generated files, including customizations;
 it preserves other files. Use `--help` for usage. Names must be lowercase
 snake_case (for example `user_profile`), with no empty segments or reserved words.
 
@@ -67,44 +69,48 @@ Generated structure:
 ```text
 lib/features/user_profile/
 ├── data/
-│   ├── model/user_profile_list_response.dart
-│   └── repo_impl/
-│       ├── user_profile_http_impl.dart
-│       └── user_profile_cache_impl.dart
+│   ├── models/user_profile_list_response.dart
+│   ├── mappers/user_profile_mapper.dart
+│   ├── datasources/
+│   │   ├── user_profile_remote_datasource.dart
+│   │   └── user_profile_local_datasource.dart
+│   └── repositories/user_profile_repository_impl.dart
 ├── domain/
-│   ├── entity/user_profile_item.dart
-│   ├── repo/user_profile_repository.dart
-│   └── usecase/user_profile_use_case.dart
+│   ├── entities/user_profile_item.dart
+│   ├── repositories/user_profile_repository.dart
+│   └── usecases/user_profile_use_case.dart
 └── presentation/
     ├── bindings/user_profile_binding.dart
-    ├── controller/user_profile_screen_controller.dart
-    ├── screens/user_profile_screen.dart
-    └── pages.dart
+    ├── controllers/user_profile_screen_controller.dart
+    ├── pages/user_profile_screen.dart
+    └── user_profile_pages.dart
 ```
 
 Complete the feature in these steps:
 
-1. Add business fields to `domain/entity/user_profile_item.dart`.
-2. Update the DTO's `fromJson`, `toJson`, `fromEntity`, and `toEntity` mappings in
-   `data/model/user_profile_list_response.dart`. These mappings also serialize
+1. Add business fields to `domain/entities/user_profile_item.dart`.
+2. Update the DTO's `fromJson`/`toJson` in
+   `data/models/user_profile_list_response.dart` and the `toEntity` mapping in
+   `data/mappers/user_profile_mapper.dart`. The DTO JSON also serializes
    the cache, so keep them consistent. The default response envelope uses
    `Success`, `Data`, and `ErrorMessage`, with `id`/`name` item fields.
-3. Set `_endpoint` in `data/repo_impl/user_profile_http_impl.dart` to your absolute
+3. Set `_endpoint` in `data/datasources/user_profile_remote_datasource.dart` to your absolute
    API URL, or replace it with your URL provider. The default implementation uses
    `authorizedGet`, so authentication must already be initialized. Until an
    endpoint is configured, it returns a visible configuration error without
    making a request.
-4. Import the generated pages into `lib/res/routes/app_pages.dart` and add
+4. Import the generated pages into `lib/app/routes/app_pages.dart` and add
    `...UserProfilePages.routes` to `AppPages.routes`. Use your actual package name
    in the import, or use a relative import:
 
    ```dart
-   import '../../features/user_profile/presentation/pages.dart';
+   import '../../features/user_profile/presentation/user_profile_pages.dart';
    ```
 
 5. Navigate with `Get.toNamed(UserProfilePages.routeName)`. Generated pages own
    their route constant, so they compile before registration. If you prefer
-   central route constants, add an alias to `AppRoutes` yourself.
+   central route constants, add an alias to `AppRoutes`
+   (`lib/app/routes/app_routes.dart`) yourself.
 6. Customize and localize the generated screen's text, then test the API mapping
    and screen with your data.
 
@@ -119,8 +125,8 @@ Generated behavior:
 - The screen supports loading, empty, error/retry, data, and refresh states.
   Short and empty lists remain scrollable for pull-to-refresh.
 - Unexpected controller failures reset loading and show an inline error.
-- DTOs own serialization; domain entities remain pure Dart. Bindings connect
-  HTTP → cache repository → use case → controller.
+- DTOs own serialization; mappers convert DTOs to pure-Dart domain entities.
+  Bindings connect remote + local data sources → repository → use case → controller.
 
 The generated cache key is feature-scoped and versioned. For user-specific data,
 include the account ID in the cache key or clear that feature's data on logout.

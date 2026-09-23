@@ -86,7 +86,7 @@ Map<String, String> featureFiles(String name, String packageName) {
 }
 
 const _templates = <String, String>{
-  'domain/entity/@name_item.dart': r'''
+  'domain/entities/@name_item.dart': r'''
 class @typeItem {
   final String? id;
   final String? name;
@@ -100,18 +100,18 @@ class @typeItemList {
   const @typeItemList({this.items = const []});
 }
 ''',
-  'domain/repo/@name_repository.dart': r'''
-import 'package:@package/core/domain/usecase/usecase.dart';
-import '../entity/@name_item.dart';
+  'domain/repositories/@name_repository.dart': r'''
+import 'package:@package/core/usecases/usecase.dart';
+import '../entities/@name_item.dart';
 
 abstract class @typeRepository {
   ResultFuture<@typeItemList> get@typeList({bool forceRefresh = false});
 }
 ''',
-  'domain/usecase/@name_use_case.dart': r'''
-import 'package:@package/core/domain/usecase/usecase.dart';
-import '../entity/@name_item.dart';
-import '../repo/@name_repository.dart';
+  'domain/usecases/@name_use_case.dart': r'''
+import 'package:@package/core/usecases/usecase.dart';
+import '../entities/@name_item.dart';
+import '../repositories/@name_repository.dart';
 
 class @typeUseCase extends UseCaseWithParams<@typeItemList, bool> {
   final @typeRepository _repo;
@@ -123,9 +123,7 @@ class @typeUseCase extends UseCaseWithParams<@typeItemList, bool> {
       _repo.get@typeList(forceRefresh: forceRefresh);
 }
 ''',
-  'data/model/@name_list_response.dart': r'''
-import '../../domain/entity/@name_item.dart';
-
+  'data/models/@name_list_response.dart': r'''
 class @typeListResponse {
   final bool? success;
   final List<@typeItemData> data;
@@ -155,46 +153,115 @@ class @typeItemData {
   factory @typeItemData.fromJson(Map<String, dynamic> json) =>
       @typeItemData(id: json['id'] as String?, name: json['name'] as String?);
 
-  factory @typeItemData.fromEntity(@typeItem item) =>
-      @typeItemData(id: item.id, name: item.name);
-
   Map<String, dynamic> toJson() => {'id': id, 'name': name};
-
-  @typeItem toEntity() => @typeItem(id: id, name: name);
 }
 ''',
-  'data/repo_impl/@name_http_impl.dart': r'''
-import 'package:dartz/dartz.dart';
-import 'package:@package/core/data/http/client/base_http_repository.dart';
-import 'package:@package/core/domain/error/failure.dart';
-import 'package:@package/core/domain/usecase/usecase.dart';
-import '../../domain/entity/@name_item.dart';
-import '../../domain/repo/@name_repository.dart';
-import '../model/@name_list_response.dart';
+  'data/mappers/@name_mapper.dart': r'''
+import '../../domain/entities/@name_item.dart';
+import '../models/@name_list_response.dart';
 
-class @typeHttpImpl extends BaseHttpRepository implements @typeRepository {
+extension @typeItemDataMapper on @typeItemData {
+  @typeItem toEntity() => @typeItem(id: id, name: name);
+}
+
+extension @typeItemDataListMapper on List<@typeItemData> {
+  @typeItemList toEntity() =>
+      @typeItemList(items: map((item) => item.toEntity()).toList());
+}
+''',
+  'data/datasources/@name_remote_datasource.dart': r'''
+import 'package:@package/core/errors/api_exceptions.dart';
+import 'package:@package/core/network/client/base_http_repository.dart';
+import '../models/@name_list_response.dart';
+
+abstract class @typeRemoteDataSource {
+  Future<List<@typeItemData>> fetchItems();
+}
+
+class @typeRemoteDataSourceImpl extends BaseHttpRepository implements @typeRemoteDataSource {
   // TODO: Set an absolute API URL (ApiClient currently has no Dio baseUrl).
   static const _endpoint = '';
 
-  @typeHttpImpl(super.client);
+  @typeRemoteDataSourceImpl(super.client);
+
+  @override
+  Future<List<@typeItemData>> fetchItems() async {
+    if (_endpoint.isEmpty) {
+      throw const ServerException('Configure the @name API endpoint.');
+    }
+    final response = await client.authorizedGet(_endpoint);
+    final code = response.messageCode ?? 0;
+    if (code < 200 || code >= 300) {
+      throw ServerException(response.message ?? 'Failed to fetch data');
+    }
+    if (code == 204) return const [];
+    final dto = @typeListResponse.fromJson(response.response as Map<String, dynamic>);
+    if (dto.success == false) {
+      throw ServerException(dto.errorMessage ?? 'Failed to fetch data');
+    }
+    return dto.data;
+  }
+}
+''',
+  'data/datasources/@name_local_datasource.dart': r'''
+import 'dart:convert';
+import 'package:@package/core/database/client/base_cache_repository.dart';
+import '../models/@name_list_response.dart';
+
+class @typeLocalDataSource extends BaseCacheRepository {
+  static const _cacheKey = 'feature:@name:v1';
+  static const _cacheDuration = Duration(days: 1);
+
+  @typeLocalDataSource(super.cache);
+
+  Future<List<@typeItemData>?> read() async {
+    final cached = await cache.get(_cacheKey);
+    if (cached == null) return null;
+    return (jsonDecode(cached) as List<dynamic>)
+        .map((item) => @typeItemData.fromJson(item as Map<String, dynamic>))
+        .toList();
+  }
+
+  Future<void> write(List<@typeItemData> items) => cache.put(
+        _cacheKey,
+        jsonEncode(items.map((item) => item.toJson()).toList()),
+        _cacheDuration,
+      );
+}
+''',
+  'data/repositories/@name_repository_impl.dart': r'''
+import 'package:dartz/dartz.dart';
+import 'package:@package/core/errors/api_exceptions.dart';
+import 'package:@package/core/errors/failure.dart';
+import 'package:@package/core/usecases/usecase.dart';
+import '../../domain/entities/@name_item.dart';
+import '../../domain/repositories/@name_repository.dart';
+import '../datasources/@name_local_datasource.dart';
+import '../datasources/@name_remote_datasource.dart';
+import '../mappers/@name_mapper.dart';
+import '../models/@name_list_response.dart';
+
+class @typeRepositoryImpl implements @typeRepository {
+  final @typeRemoteDataSource _remote;
+  final @typeLocalDataSource _local;
+
+  const @typeRepositoryImpl(this._remote, this._local);
 
   @override
   ResultFuture<@typeItemList> get@typeList({bool forceRefresh = false}) async {
-    if (_endpoint.isEmpty) {
-      return const Left(ServerFailure('Configure the @name API endpoint.'));
+    if (!forceRefresh) {
+      try {
+        final cached = await _local.read();
+        if (cached != null) return Right(cached.toEntity());
+      } on Object {
+        // A corrupt or unavailable cache must not prevent a remote fetch.
+      }
     }
+    final List<@typeItemData> items;
     try {
-      final response = await client.authorizedGet(_endpoint);
-      final code = response.messageCode ?? 0;
-      if (code < 200 || code >= 300) {
-        return Left(ServerFailure(response.message ?? 'Failed to fetch data'));
-      }
-      if (code == 204) return const Right(@typeItemList());
-      final dto = @typeListResponse.fromJson(response.response as Map<String, dynamic>);
-      if (dto.success == false) {
-        return Left(ServerFailure(dto.errorMessage ?? 'Failed to fetch data'));
-      }
-      return Right(@typeItemList(items: dto.data.map((item) => item.toEntity()).toList()));
+      items = await _remote.fetchItems();
+    } on ServerException catch (e) {
+      return Left(ServerFailure(e.message));
     } on FormatException {
       return const Left(ParsingFailure('The server returned invalid data.'));
     } on TypeError {
@@ -202,64 +269,22 @@ class @typeHttpImpl extends BaseHttpRepository implements @typeRepository {
     } on Object {
       return const Left(ConnectionFailure('Unable to load data. Please try again.'));
     }
-  }
-}
-''',
-  'data/repo_impl/@name_cache_impl.dart': r'''
-import 'dart:convert';
-import 'package:dartz/dartz.dart';
-import 'package:@package/core/data/cache/client/base_cache_repository.dart';
-import 'package:@package/core/domain/usecase/usecase.dart';
-import '../../domain/entity/@name_item.dart';
-import '../../domain/repo/@name_repository.dart';
-import '../model/@name_list_response.dart';
-
-class @typeCacheImpl extends BaseCacheRepository implements @typeRepository {
-  static const _cacheKey = 'feature:@name:v1';
-  static const _cacheDuration = Duration(days: 1);
-
-  final @typeRepository _remote;
-
-  @typeCacheImpl(super.cache, this._remote);
-
-  @override
-  ResultFuture<@typeItemList> get@typeList({bool forceRefresh = false}) async {
-    if (!forceRefresh) {
-      try {
-        final cached = await cache.get(_cacheKey);
-        if (cached != null) {
-          final data = jsonDecode(cached) as List<dynamic>;
-          return Right(@typeItemList(items: data
-              .map((item) => @typeItemData.fromJson(item as Map<String, dynamic>).toEntity())
-              .toList()));
-        }
-      } on Object {
-        // A corrupt or unavailable cache must not prevent a remote fetch.
-      }
+    try {
+      await _local.write(items);
+    } on Object {
+      // Cache persistence is best effort; fresh data is still usable.
     }
-    final result = await _remote.get@typeList(forceRefresh: forceRefresh);
-    return result.fold(
-      (failure) => Left(failure),
-      (items) async {
-        try {
-          final data = items.items.map((item) => @typeItemData.fromEntity(item).toJson()).toList();
-          await cache.put(_cacheKey, jsonEncode(data), _cacheDuration);
-        } on Object {
-          // Cache persistence is best effort; fresh data is still usable.
-        }
-        return Right(items);
-      },
-    );
+    return Right(items.toEntity());
   }
 }
 ''',
-  'presentation/controller/@name_screen_controller.dart': r'''
+  'presentation/controllers/@name_screen_controller.dart': r'''
 import 'dart:async';
 import 'package:get/get.dart';
-import 'package:@package/core/presentation/controllers/base_controller.dart';
-import 'package:@package/core/presentation/utils/state_status.dart';
-import '../../domain/entity/@name_item.dart';
-import '../../domain/usecase/@name_use_case.dart';
+import 'package:@package/core/controllers/base_controller.dart';
+import 'package:@package/core/utils/state_status.dart';
+import '../../domain/entities/@name_item.dart';
+import '../../domain/usecases/@name_use_case.dart';
 
 class @typeScreenController extends BaseController {
   final @typeUseCase _useCase = Get.find<@typeUseCase>();
@@ -298,11 +323,11 @@ class @typeScreenController extends BaseController {
   }
 }
 ''',
-  'presentation/screens/@name_screen.dart': r'''
+  'presentation/pages/@name_screen.dart': r'''
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:@package/core/presentation/theme/app_dimensions.dart';
-import '../controller/@name_screen_controller.dart';
+import 'package:@package/app/theme/app_dimensions.dart';
+import '../controllers/@name_screen_controller.dart';
 
 class @typeScreen extends StatelessWidget {
   const @typeScreen({super.key});
@@ -380,20 +405,31 @@ class @typeScreen extends StatelessWidget {
 ''',
   'presentation/bindings/@name_binding.dart': r'''
 import 'package:get/get.dart';
-import 'package:@package/core/data/cache/client/preference_cache.dart';
-import 'package:@package/core/data/http/client/api_client.dart';
-import '../../data/repo_impl/@name_cache_impl.dart';
-import '../../data/repo_impl/@name_http_impl.dart';
-import '../../domain/repo/@name_repository.dart';
-import '../../domain/usecase/@name_use_case.dart';
-import '../controller/@name_screen_controller.dart';
+import 'package:@package/core/database/client/preference_cache.dart';
+import 'package:@package/core/network/client/api_client.dart';
+import '../../data/datasources/@name_local_datasource.dart';
+import '../../data/datasources/@name_remote_datasource.dart';
+import '../../data/repositories/@name_repository_impl.dart';
+import '../../domain/repositories/@name_repository.dart';
+import '../../domain/usecases/@name_use_case.dart';
+import '../controllers/@name_screen_controller.dart';
 
 class @typeBinding extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut<@typeHttpImpl>(() => @typeHttpImpl(Get.find<ApiClient>()), fenix: true);
+    Get.lazyPut<@typeRemoteDataSource>(
+      () => @typeRemoteDataSourceImpl(Get.find<ApiClient>()),
+      fenix: true,
+    );
+    Get.lazyPut<@typeLocalDataSource>(
+      () => @typeLocalDataSource(Get.find<PreferenceCache>()),
+      fenix: true,
+    );
     Get.lazyPut<@typeRepository>(
-      () => @typeCacheImpl(Get.find<PreferenceCache>(), Get.find<@typeHttpImpl>()),
+      () => @typeRepositoryImpl(
+        Get.find<@typeRemoteDataSource>(),
+        Get.find<@typeLocalDataSource>(),
+      ),
       fenix: true,
     );
     Get.lazyPut<@typeUseCase>(() => @typeUseCase(Get.find<@typeRepository>()), fenix: true);
@@ -401,10 +437,10 @@ class @typeBinding extends Bindings {
   }
 }
 ''',
-  'presentation/pages.dart': r'''
+  'presentation/@name_pages.dart': r'''
 import 'package:get/get.dart';
 import 'bindings/@name_binding.dart';
-import 'screens/@name_screen.dart';
+import 'pages/@name_screen.dart';
 
 class @typePages {
   static const routeName = '/@name';

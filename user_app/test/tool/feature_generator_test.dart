@@ -42,7 +42,7 @@ dev_dependencies:
 flutter:
   uses-material-design: true
 ''');
-    final marker = File('${fixture.path}/lib/core/domain/usecase/usecase.dart');
+    final marker = File('${fixture.path}/lib/core/usecases/usecase.dart');
     marker.parent.createSync(recursive: true);
     marker.writeAsStringSync('');
   });
@@ -103,7 +103,7 @@ flutter:
   test('requires force for overwrite and preserves unrelated files', () async {
     expect((await run(['sample_items'])).exitCode, 0);
     final entity = File(
-        '${fixture.path}/lib/features/sample_items/domain/entity/sample_items_item.dart');
+        '${fixture.path}/lib/features/sample_items/domain/entities/sample_items_item.dart');
     entity.writeAsStringSync('// customized');
     final extra = File('${entity.parent.path}/custom.dart')
       ..writeAsStringSync('// keep');
@@ -172,7 +172,7 @@ flutter:
             .listSync(recursive: true)
             .whereType<File>()
             .length,
-        10);
+        12);
     final analyzed = await Process.run(
         dart, ['analyze', '--fatal-infos', featurePath],
         workingDirectory: fixture.path);

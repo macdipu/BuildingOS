@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'app/flavours/app_flavour.dart';
-import 'app/views/app.dart';
+import 'package:customer/app/config/app_flavour.dart';
+import 'package:customer/app/app.dart';
 
 void main(List<String> args) async {
   WidgetsFlutterBinding.ensureInitialized();
