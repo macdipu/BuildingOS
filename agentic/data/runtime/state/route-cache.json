@@ -1,4 +1,30 @@
 {
+  "change_request:brownfield:account-service": {
+    "cached_at": "2026-09-23T12:57:05.690328+00:00",
+    "decision": {
+      "persona": "be-agent",
+      "planning": "NO_REPLAN",
+      "route": [
+        "INTAKE",
+        "CONTEXT",
+        "IMPACT",
+        "TECHNICAL",
+        "IMPLEMENTATION",
+        "REVIEW",
+        "QA",
+        "RELEASE",
+        "COMPLETED"
+      ],
+      "skill_docs": [
+        "agentic/kit/agents/be-agent/AGENT.md",
+        "agentic/kit/skills/implementation-agent/SKILL.md",
+        "agentic/kit/skills/code-review-agent/SKILL.md",
+        "agentic/kit/skills/automated-qa-agent/SKILL.md"
+      ],
+      "workflow_doc": "agentic/kit/workflows/brownfield.md"
+    },
+    "kit_version": "9d27e69f0c7d9ec1b500e0332a2fcda082d5402f36e35db385d376c6c6bd1c82"
+  },
   "change_request:brownfield:user_app": {
     "cached_at": "2026-09-23T10:45:50.195618+00:00",
     "decision": {

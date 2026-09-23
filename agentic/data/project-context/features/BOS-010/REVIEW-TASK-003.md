@@ -26,7 +26,7 @@ Findings:
 1. Fixed (low, test quality): `AuthStartupTest` asserted only `hasFailed()` for
    `development` outside local/test; that context also fails on missing signing keys, so the
    guard was untested. Now asserts the root-cause message for both provider guards.
-2. Follow-up, pre-existing (medium): phone strings are not canonicalized (only an optional
+2. Resolved by [TASK-007](tasks/TASK-007.md) (canonical `01XXXXXXXXX`). Was: follow-up, pre-existing (medium): phone strings are not canonicalized (only an optional
    leading `+` is folded for limits). `01711…` and `+8801711…` are distinct challenges and
    distinct users, so limits can be multiplied by format variants. Needs a business rule
    (canonical E.164 / BD numbering) — not invented here; resolve before a real SMS vendor.

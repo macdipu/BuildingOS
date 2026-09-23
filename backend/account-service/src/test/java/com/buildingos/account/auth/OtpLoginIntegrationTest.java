@@ -151,6 +151,20 @@ class OtpLoginIntegrationTest {
     }
 
     @Test
+    void rateLimitIsSharedAcrossPhoneForms() throws Exception {
+        startChallenge("+8801711115555");
+        var response = post("/api/v1/auth/otp/start", "{\"phone\":\"01711115555\"}");
+        assertThat(response.statusCode()).isEqualTo(429);
+    }
+
+    @Test
+    void nonBangladeshMobileNumberIsRejectedAtStart() throws Exception {
+        var response = post("/api/v1/auth/otp/start", "{\"phone\":\"+14155550123\"}");
+        assertThat(response.statusCode()).isEqualTo(400);
+        assertThat(response.body()).contains("INVALID_REQUEST");
+    }
+
+    @Test
     void jwksEndpointIsPubliclyReachableWithoutAToken() throws Exception {
         var response = HTTP.send(HttpRequest.newBuilder(URI.create(base() + "/.well-known/jwks.json")).GET().build(),
                 HttpResponse.BodyHandlers.ofString());

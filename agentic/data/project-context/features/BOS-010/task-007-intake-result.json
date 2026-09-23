@@ -1,0 +1,17 @@
+{
+  "status": "READY",
+  "evidence": [
+    "agentic/data/project-context/features/BOS-010/tasks/TASK-007.md"
+  ],
+  "blocking_issues": [],
+  "open_questions": [],
+  "recommended_next_step": "Scoped context.",
+  "outputs": {
+    "work_item": "BOS-010 TASK-007",
+    "work_type": "change_request",
+    "project_type": "brownfield",
+    "hierarchy": "TASK_ONLY",
+    "planning": "NO_REPLAN",
+    "source": "TASK-003 review finding 2; operator chose local 01XXXXXXXXX, no migration"
+  }
+}

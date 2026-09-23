@@ -7,7 +7,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 public interface OtpChallengeRepository {
-    /** Atomically checks per-phone limits and inserts; empty means rate limited. */
+    /** Atomically checks per-phone limits (canonical phone) and inserts; empty means rate limited. */
     Optional<OtpChallenge> start(String phone, Instant now, Instant expiresAt, Duration cooldown, int maxPerHour);
     void saveCodeHash(UUID attemptId, String codeHash);
     Optional<OtpChallenge> find(UUID attemptId);

@@ -1,5 +1,6 @@
 package com.buildingos.account.auth.application.seedsuperadmin;
 
+import com.buildingos.account.auth.domain.model.PhoneNumber;
 import com.buildingos.account.auth.domain.model.PlatformRole;
 import com.buildingos.account.auth.domain.repository.UserRepository;
 
@@ -12,7 +13,7 @@ public final class SeedSuperAdminService implements SeedSuperAdminUseCase {
 
     @Override
     public void execute(SeedSuperAdminCommand command) {
-        var user = users.findOrCreateByPhone(command.phone());
+        var user = users.findOrCreateByPhone(PhoneNumber.parse(command.phone()).value());
         users.grantPlatformRole(user.id(), PlatformRole.SUPER_ADMIN);
     }
 }

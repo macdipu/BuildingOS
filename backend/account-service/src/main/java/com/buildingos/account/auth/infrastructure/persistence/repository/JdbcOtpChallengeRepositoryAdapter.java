@@ -30,15 +30,13 @@ public class JdbcOtpChallengeRepositoryAdapter implements OtpChallengeRepository
             Duration cooldown, int maxPerHour) {
         return transaction.execute(status -> {
             // A transaction-scoped database lock serializes starts across service instances.
-            // Ignore an optional '+' for locking/counting so it cannot bypass limits.
-            String rateKey = phone.startsWith("+") ? phone.substring(1) : phone;
-            jdbc.query("SELECT pg_advisory_xact_lock(hashtextextended(?, 0))", rs -> { }, rateKey);
+            jdbc.query("SELECT pg_advisory_xact_lock(hashtextextended(?, 0))", rs -> { }, phone);
             Integer count = jdbc.queryForObject(
-                    "SELECT count(*) FROM otp_challenge WHERE phone IN (?, ?) AND created_at > ?",
-                    Integer.class, rateKey, "+" + rateKey, Timestamp.from(now.minus(Duration.ofHours(1))));
+                    "SELECT count(*) FROM otp_challenge WHERE phone = ? AND created_at > ?",
+                    Integer.class, phone, Timestamp.from(now.minus(Duration.ofHours(1))));
             Integer recent = jdbc.queryForObject(
-                    "SELECT count(*) FROM otp_challenge WHERE phone IN (?, ?) AND created_at > ?",
-                    Integer.class, rateKey, "+" + rateKey, Timestamp.from(now.minus(cooldown)));
+                    "SELECT count(*) FROM otp_challenge WHERE phone = ? AND created_at > ?",
+                    Integer.class, phone, Timestamp.from(now.minus(cooldown)));
             if (count >= maxPerHour || recent > 0) return Optional.empty();
             return Optional.of(jdbc.queryForObject(
                     "INSERT INTO otp_challenge (phone, created_at, expires_at) VALUES (?, ?, ?) RETURNING " + COLUMNS,

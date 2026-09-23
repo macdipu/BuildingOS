@@ -6,6 +6,7 @@ import com.buildingos.account.auth.application.verifyotp.*;
 import com.buildingos.account.auth.domain.model.*;
 import com.buildingos.account.auth.domain.repository.UserRepository;
 import com.buildingos.account.auth.infrastructure.persistence.repository.JdbcOtpChallengeRepositoryAdapter;
+import com.buildingos.account.auth.infrastructure.security.DevelopmentOtpProvider;
 import com.buildingos.account.auth.infrastructure.security.HashedCodeOtpProvider;
 import java.time.*;
 import java.util.*;
@@ -26,7 +27,7 @@ class OtpProviderIntegrationTest {
             DockerImageName.parse("postgres@sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24")
                     .asCompatibleSubstituteFor("postgres"));
     static final Instant NOW = Instant.parse("2026-01-01T00:00:00Z");
-    static final String PHONE = "+8801700000000";
+    static final String PHONE = "01700000000";
     JdbcTemplate jdbc;
     JdbcOtpChallengeRepositoryAdapter repository;
     RecordingSmsSender sender;
@@ -99,16 +100,23 @@ class OtpProviderIntegrationTest {
         assertThat(repository.start(PHONE, boundary, boundary.plusSeconds(300), Duration.ofSeconds(60), 5)).isPresent();
     }
 
-    @Test void concurrentStartsAcrossConnectionsCannotBypassLimits() throws Exception {
-        var pool = Executors.newFixedThreadPool(8);
-        var barrier = new CyclicBarrier(8);
+    @Test void concurrentStartsInAnyPhoneFormCannotBypassLimits() throws Exception {
+        var service = start(new DevelopmentOtpProvider());
+        var forms = List.of(PHONE, "880" + PHONE.substring(1), "+880" + PHONE.substring(1));
+        var pool = Executors.newFixedThreadPool(9);
+        var barrier = new CyclicBarrier(9);
         try {
             var futures = new ArrayList<Future<Boolean>>();
-            for (int i = 0; i < 8; i++) {
-                final String phone = i % 2 == 0 ? PHONE : PHONE.substring(1);
+            for (int i = 0; i < 9; i++) {
+                final String phone = forms.get(i % 3);
                 futures.add(pool.submit(() -> {
                     barrier.await(10, TimeUnit.SECONDS);
-                    return repository.start(phone, NOW, NOW.plusSeconds(300), Duration.ofSeconds(60), 5).isPresent();
+                    try {
+                        service.execute(new StartOtpCommand(phone));
+                        return true;
+                    } catch (OtpRateLimitedException limited) {
+                        return false;
+                    }
                 }));
             }
             int accepted = 0;

@@ -12,6 +12,7 @@ recreating planning artifacts; TASK-003 uses TASK_ONLY / NO_REPLAN.
 | [TASK-005](tasks/TASK-005.md) | Locale toggle and login/OTP polish | COMPLETED; [review/QA](REVIEW-TASK-005.md) |
 | [TASK-003](tasks/TASK-003.md) | Account-service signing keys and provider-neutral OTP/SMS boundary; vendor deferred | IMPLEMENTED (technical gate approved 2026-09-23); backend 80 / Flutter 32 tests green; [review](REVIEW-TASK-003.md) READY; COMPLETED; [release](RELEASE-TASK-003.md) local/test, production fail-closed |
 | [TASK-006](tasks/TASK-006.md) | App-owned message for OTP start rate limit (429) | COMPLETED; [review/QA](REVIEW-TASK-006.md) |
+| [TASK-007](tasks/TASK-007.md) | Canonical BD mobile phone format `01XXXXXXXXX` in account-service | COMPLETED; [review/QA](REVIEW-TASK-007.md) |
 
 Continuation run: `RUN-0CF5A7A84513476697D476E1334896C1`.
 The old TASK-003 run was cancelled before code changes. TASK-004 is now complete.

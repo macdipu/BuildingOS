@@ -42,11 +42,15 @@ and deployment are outside TASK-003.
 
 ## OTP behavior and errors
 
+Phone numbers (BOS-010 TASK-007): only Bangladesh mobile numbers are accepted, as
+`01[3-9]XXXXXXXX`, `8801[3-9]XXXXXXXX`, or `+8801[3-9]XXXXXXXX` (digits only). All forms are
+stored, rate-limited, and returned as `01XXXXXXXXX`. Other input → HTTP 400
+`INVALID_REQUEST` on start; on verify it is rejected as `OTP_PHONE_MISMATCH`.
+
 Start and verify retain their existing request and success envelopes.
 `POST /api/v1/auth/otp/start` returns HTTP 429 with `ApiError.code=OTP_RATE_LIMITED`
 during cooldown or after five starts in the rolling hour. Limits apply to development
-and SMS providers. An optional leading plus cannot bypass the per-phone limit; this
-does not introduce general phone-number normalization.
+and SMS providers. Limits are per canonical phone number (see below).
 
 SMS mode generates six digits, stores only a challenge-bound HMAC-SHA256, then invokes
 the sender once. The plaintext code exists only transiently for delivery. A failed

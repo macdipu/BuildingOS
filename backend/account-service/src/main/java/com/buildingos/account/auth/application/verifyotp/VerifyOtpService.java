@@ -3,6 +3,7 @@ package com.buildingos.account.auth.application.verifyotp;
 import com.buildingos.account.auth.application.port.out.OtpProvider;
 import com.buildingos.account.auth.application.port.out.TokenIssuer;
 import com.buildingos.account.auth.domain.model.OtpChallenge;
+import com.buildingos.account.auth.domain.model.PhoneNumber;
 import com.buildingos.account.auth.domain.repository.OtpChallengeRepository;
 import com.buildingos.account.auth.domain.repository.UserRepository;
 import java.time.Clock;
@@ -26,13 +27,18 @@ public final class VerifyOtpService implements VerifyOtpUseCase {
     @Override
     public VerifyOtpResult execute(VerifyOtpCommand command) {
         var attemptId = command.attemptId();
-        var phone = command.phone();
         var code = command.code();
         var found = challenges.find(attemptId);
         if (found.isEmpty()) {
             return new VerifyOtpResult.Rejected(VerifyOtpResult.Reason.UNKNOWN_ATTEMPT);
         }
         OtpChallenge challenge = found.get();
+        String phone;
+        try {
+            phone = PhoneNumber.parse(command.phone()).value();
+        } catch (IllegalArgumentException invalid) {
+            return new VerifyOtpResult.Rejected(VerifyOtpResult.Reason.PHONE_MISMATCH);
+        }
         if (!challenge.phone().equals(phone)) {
             return new VerifyOtpResult.Rejected(VerifyOtpResult.Reason.PHONE_MISMATCH);
         }

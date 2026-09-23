@@ -1,0 +1,14 @@
+{
+  "status": "READY",
+  "evidence": [
+    "agentic/data/project-context/features/BOS-010/tasks/TASK-007.md"
+  ],
+  "blocking_issues": [],
+  "open_questions": [],
+  "recommended_next_step": "Impact.",
+  "outputs": {
+    "verdict": "CONTEXT_READY",
+    "revision": "6033884",
+    "finding": "App and seed already send/store 01XXXXXXXXX; backend treats formats as distinct"
+  }
+}

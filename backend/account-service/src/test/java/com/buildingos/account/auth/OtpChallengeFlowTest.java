@@ -83,7 +83,7 @@ class OtpChallengeFlowTest {
         var result = verifyService.execute(new VerifyOtpCommand(started.attemptId(), PHONE, "000000"));
         assertThat(result).isInstanceOf(VerifyOtpResult.Verified.class);
         var verified = (VerifyOtpResult.Verified) result;
-        assertThat(verified.phone()).isEqualTo(PHONE);
+        assertThat(verified.phone()).isEqualTo("01700000000");
         assertThat(verified.accessToken()).startsWith("fake-token-");
     }
 
@@ -98,6 +98,21 @@ class OtpChallengeFlowTest {
     void unknownAttemptIsRejected() {
         var result = verifyService.execute(new VerifyOtpCommand(UUID.randomUUID(), PHONE, "000000"));
         assertThat(result).isEqualTo(new VerifyOtpResult.Rejected(VerifyOtpResult.Reason.UNKNOWN_ATTEMPT));
+    }
+
+    @Test
+    void anyAcceptedPhoneFormVerifiesTheSameCanonicalUser() {
+        var started = startService.execute(new StartOtpCommand("01700000000"));
+        var result = verifyService.execute(new VerifyOtpCommand(started.attemptId(), "8801700000000", "000000"));
+        assertThat(result).isInstanceOf(VerifyOtpResult.Verified.class);
+        assertThat(((VerifyOtpResult.Verified) result).phone()).isEqualTo("01700000000");
+    }
+
+    @Test
+    void unparseablePhoneAtVerifyIsAMismatch() {
+        var started = startService.execute(new StartOtpCommand(PHONE));
+        var result = verifyService.execute(new VerifyOtpCommand(started.attemptId(), "not-a-phone", "000000"));
+        assertThat(result).isEqualTo(new VerifyOtpResult.Rejected(VerifyOtpResult.Reason.PHONE_MISMATCH));
     }
 
     @Test
