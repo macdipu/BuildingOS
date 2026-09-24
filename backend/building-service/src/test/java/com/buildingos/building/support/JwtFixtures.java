@@ -46,11 +46,18 @@ public final class JwtFixtures implements AutoCloseable {
 
     /** Token shaped like auth-service's: {@code sub} = user id plus {@code platform_roles}. */
     public String userToken(String audience, UUID userId, java.util.List<String> platformRoles) throws Exception {
+        return userToken(audience, userId, platformRoles, null);
+    }
+
+    /** Adds auth-service's canonical {@code phone} claim; null omits it. */
+    public String userToken(String audience, UUID userId, java.util.List<String> platformRoles, String phone)
+            throws Exception {
         JWTClaimsSet claims = new JWTClaimsSet.Builder()
                 .issuer(issuer())
                 .audience(audience)
                 .subject(userId.toString())
                 .claim("platform_roles", platformRoles)
+                .claim("phone", phone)
                 .issueTime(Date.from(Instant.now().minusSeconds(10)))
                 .expirationTime(Date.from(Instant.now().plusSeconds(300)))
                 .build();

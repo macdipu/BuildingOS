@@ -51,6 +51,12 @@ public class JdbcBuildingRepositoryAdapter implements BuildingRepository {
     }
 
     @Override
+    public Optional<Building> findByIdForShare(UUID id) {
+        return jdbc.query("SELECT " + COLUMNS + " FROM building WHERE id = ? FOR SHARE", this::map, id)
+                .stream().findFirst();
+    }
+
+    @Override
     public Optional<Building> findByApplication(UUID applicationId) {
         return jdbc.query("SELECT " + COLUMNS + " FROM building WHERE application_id = ?", this::map, applicationId)
                 .stream().findFirst();
