@@ -18,6 +18,10 @@ modules:
     scope: platform-foundation
     runtime_verified: true
 project_docs:
+  ARCHITECTURE:
+    status: DRAFT
+    path: agentic/data/project-context/ARCHITECTURE.md
+    note: Scoped synthesis of delivered BOS-010 services and proposed F4; not human-approved.
   BRD:
     status: DRAFT
     path: agentic/data/project-context/BuildingOS_BRD_Agentic_Development.md
@@ -25,9 +29,9 @@ project_docs:
       User-designated source; technical approval tracked independently.
       Revised 2026-09-22: adds SaaS back-office/subscription/onboarding domain
       as CORE PRODUCT SCOPE (roles in §4, Subscription Service §8.12, building
-      application/lifecycle §110.2-110.3, full spec §149, Phase 1B). Not yet a
-      tracked feature under agentic/data/project-context/features/; needs its
-      own intake before implementation. Fixed an unclosed 4-backtick fence at
+      application/lifecycle §110.2-110.3, full spec §149, Phase 1B). Tracked by
+      BOS-010; identity, revenue foundation and F2 delivered for local/test;
+      F4 units/ownership approved; implementation in progress. Fixed an unclosed 4-backtick fence at
       line 1 (paste artifact) that broke markdown rendering of the whole file.
 features:
   BOS-001:
@@ -65,14 +69,19 @@ features:
     status: IN_PROGRESS
     path: agentic/data/project-context/features/BOS-010
     planning: EPIC_PROVISIONAL
-    updated: "2026-09-23"
-    completed_tasks: [TASK-001, TASK-002, TASK-003, TASK-004, TASK-005, TASK-006, TASK-007]
-    last_commit: a6bc0b3
-    completed_slices: [F5a-revenue-foundation (RUN-4ABC6B2BAC974B0E878CA39C9A27AE00)]
-    next_slice: F2-building-application (D-11; approval needs creation fee, D-26)
-    resolved: [D-01, D-02, D-07, D-08, D-11, D-12, D-13, D-14, D-16, D-17, D-18, D-20, D-22, D-23, D-24, D-25, D-26, D-27]
+    updated: "2026-09-24"
+    completed_tasks: [TASK-001, TASK-002, TASK-003, TASK-004, TASK-005, TASK-006, TASK-007, TASK-008]
+    last_commit: d619735
+    completed_slices: [F5a-revenue-foundation (RUN-4ABC6B2BAC974B0E878CA39C9A27AE00), F2-building-application (RUN-5AC974860CB74DA790FDBA00532A15A2)]
+    current_slice: F4-units-ownership
+    current_run: RUN-0BF1AD2443404B03BE7350F0C91BD0C0
+    current_stage: IMPLEMENTATION
+    current_review_packet: agentic/data/project-context/features/BOS-010/units-ownership/APPROVAL.md
+    completed_subtasks: [F4-T1a]
+    next_action: F4-T1 remainder (membership/invitation use cases and authoritative access checks)
+    resolved: [D-01, D-02, D-07, D-08, D-11, D-12, D-13, D-14, D-16, D-17, D-18, D-20, D-22, D-23, D-24, D-25, D-26, D-27, D-28, D-29, D-30, D-31, D-32, F4-UO-D01, F4-UO-D02, F4-UO-D03, F4-UO-D04, ADR-F4-001]
     superseded: [D-15, D-19, D-21]
-    open: [D-09-backoffice-technology, D-10-support-session-scopes, document-storage-technology]
+    open: [D-09-backoffice-technology, D-10-support-session-scopes]
     brd_deviations: [D-22-per-user-subscriptions, D-26-creation-fee-instead-of-approval-subscription]
     otp_provider: development-fixed-code-adapter (local/test); sms provider boundary, no vendor
     phone_format: canonical 01XXXXXXXXX (TASK-007)

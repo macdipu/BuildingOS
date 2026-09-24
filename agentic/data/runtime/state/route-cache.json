@@ -185,5 +185,35 @@
       "workflow_doc": "agentic/kit/workflows/new-feature.md"
     },
     "kit_version": "997f6a5d5a93da63efaaea3a35db1bb30e1aef8bf9b6544a5a187bc1267da094"
+  },
+  "new_feature:brownfield:units-ownership": {
+    "cached_at": "2026-09-24T09:30:35.134644+00:00",
+    "decision": {
+      "hierarchy": "FEATURE_WITH_TASKS",
+      "planning": "NO_REPLAN",
+      "route": [
+        "INTAKE",
+        "CONTEXT",
+        "REQUIREMENTS",
+        "TECHNICAL",
+        "IMPLEMENTATION",
+        "REVIEW",
+        "QA",
+        "RELEASE",
+        "COMPLETED"
+      ],
+      "skill_docs": [
+        "agentic/kit/skills/prompt-intake-adapter/SKILL.md",
+        "agentic/kit/skills/baseline-verifier/SKILL.md",
+        "agentic/kit/skills/business-requirement-analyzer/SKILL.md",
+        "agentic/kit/skills/technical-architecture-planner/SKILL.md"
+      ],
+      "workflow_doc": "agentic/kit/workflows/brownfield.md",
+      "workflow_docs": [
+        "agentic/kit/workflows/routing.md",
+        "agentic/kit/workflows/new-feature.md"
+      ]
+    },
+    "kit_version": "d6ec5d7cf06b0dec1254434a4f4894c76adc63a567f2a8b02910ce9237188c53"
   }
 }

@@ -29,7 +29,7 @@ Follow the repository commit policy: commit after a governed task finishes with 
 |---|---|---|
 | [F5a revenue foundation](subscription-plans/REQUIREMENTS.md) | `subscription-service`: plans, per-user subscriptions, free tier, one-time building-creation fee ([design](subscription-plans/TECH-SPEC.md)) | COMPLETED 2026-09-23 (local/test); [review/QA](subscription-plans/REVIEW.md); run `RUN-4ABC6B2BAC974B0E878CA39C9A27AE00` |
 | [F2 building application & lifecycle](building-application/REQUIREMENTS.md) | Apply → review → approve (creation fee, D-26; admin provisioned in auth-service, D-29) → onboarding → activate/suspend (D-30); documents in MinIO/S3 (D-28); Flutter submit flow ([design](building-application/TECH-SPEC.md)) | COMPLETED 2026-09-24 (local/test); T1–T5 done; [review/QA](building-application/REVIEW.md) READY (backend 197/0, live smoke, Flutter 50/0); operator confirmed device check and approved [release](building-application/RELEASE.md); run `RUN-5AC974860CB74DA790FDBA00532A15A2` |
-| Units & ownership | Carried BOS-002 domain | Not started |
+| [F4 units & ownership](units-ownership/FEATURE.md) | Carried BOS-002 domain reconciled with F2; [requirements](units-ownership/REQUIREMENTS.md), [decisions](units-ownership/DECISIONS.md), [delivery proposal](units-ownership/DELIVERY-PLAN.md) | Requirements/design approved; IMPLEMENTATION in progress — [F4-T1a](units-ownership/tasks/F4-T1a.md) done; run `RUN-0BF1AD2443404B03BE7350F0C91BD0C0` |
 | Back-office console | UI for the above | Not started; needs D-09/D-10 |
 
 Revenue model is per-user (D-22..D-27), superseding the BRD's building-level subscription.
