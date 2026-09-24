@@ -44,7 +44,7 @@ public final class JwtFixtures implements AutoCloseable {
         return sign(rsaJwk, issuer, audience, expiry);
     }
 
-    /** Token shaped like account-service's: {@code sub} = user id plus {@code platform_roles}. */
+    /** Token shaped like auth-service's: {@code sub} = user id plus {@code platform_roles}. */
     public String userToken(String audience, UUID userId, java.util.List<String> platformRoles) throws Exception {
         JWTClaimsSet claims = new JWTClaimsSet.Builder()
                 .issuer(issuer())

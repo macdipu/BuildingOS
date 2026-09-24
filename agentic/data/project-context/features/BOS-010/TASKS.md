@@ -13,6 +13,7 @@ recreating planning artifacts; TASK-003 uses TASK_ONLY / NO_REPLAN.
 | [TASK-003](tasks/TASK-003.md) | Account-service signing keys and provider-neutral OTP/SMS boundary; vendor deferred | COMPLETED; [review/QA](REVIEW-TASK-003.md), [release](RELEASE-TASK-003.md) local/test, production fail-closed |
 | [TASK-006](tasks/TASK-006.md) | App-owned message for OTP start rate limit (429) | COMPLETED; [review/QA](REVIEW-TASK-006.md) |
 | [TASK-007](tasks/TASK-007.md) | Canonical BD mobile phone format `01XXXXXXXXX` in account-service | COMPLETED; [review/QA](REVIEW-TASK-007.md) |
+| [TASK-008](tasks/TASK-008.md) | Rename `account-service` to `auth-service` (dir, artifact, package, DB, env, gateway route) | COMPLETED 2026-09-24; `mvn verify` 147/0 |
 
 Continuation run: `RUN-0CF5A7A84513476697D476E1334896C1`.
 The old TASK-003 run was cancelled before code changes. TASK-004 is now complete.

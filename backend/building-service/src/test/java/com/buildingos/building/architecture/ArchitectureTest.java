@@ -47,8 +47,8 @@ class ArchitectureTest {
                     ROOT + ".controllers..", ROOT + ".services..", ROOT + ".repositories..", ROOT + ".entities..");
 
     @ArchTest
-    static final ArchRule neverDependsOnAccountService = noClasses()
-            .should().dependOnClassesThat().resideInAPackage("com.buildingos.account..");
+    static final ArchRule neverDependsOnAuthService = noClasses()
+            .should().dependOnClassesThat().resideInAPackage("com.buildingos.auth..");
 
     @ArchTest
     static final ArchRule sharesOnlyPlatformWebKernel = noClasses()

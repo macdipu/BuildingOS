@@ -1,6 +1,6 @@
 # Local development — BOS-001 platform foundation
 
-Scope: gateway, account-service, building-service, subscription-service, their local Postgres/Kafka
+Scope: gateway, auth-service, building-service, subscription-service, their local Postgres/Kafka
 infrastructure, and the shared platform-web library, including BOS-010 phone OTP authentication
 and the revenue foundation ([REVENUE_MODEL.md](REVENUE_MODEL.md)).
 
@@ -32,7 +32,7 @@ creates `subscription_db` in an existing volume if it is missing.
 mvn -B -f backend/pom.xml verify
 ```
 
-Compiles, unit-tests and packages all four modules (`platform-web`, `account-service`,
+Compiles, unit-tests and packages all four modules (`platform-web`, `auth-service`,
 `building-service`, `api-gateway`). Security/readiness integration tests use an ephemeral
 Testcontainers Postgres and a local fixture JWKS server — no external services required.
 
@@ -43,7 +43,7 @@ sh scripts/verify-platform.sh
 ```
 
 Starts Postgres and Kafka via `infra/docker/compose.yaml`, waits for health, runs Flyway
-migrations (fresh + rerun) for account-service and building-service, checks that each
+migrations (fresh + rerun) for auth-service and building-service, checks that each
 service's database role cannot connect to the other's database, round-trips a uniquely
 named Kafka smoke topic, then restarts both containers and checks database access. It also recreates the Kafka
 container and consumes the same record again to verify named-volume persistence. A
@@ -59,7 +59,7 @@ docker compose -f infra/docker/compose.yaml up -d postgres kafka
 
 Compose runs infrastructure only. After the build and infrastructure check, run the
 three application JARs in separate terminals from the repository root. Each terminal
-needs these shared variables for the local account-service issuer:
+needs these shared variables for the local auth-service issuer:
 
 ```sh
 set -a
@@ -71,17 +71,17 @@ export JWT_JWK_SET_URI='http://localhost:8081/.well-known/jwks.json'
 export JWT_AUDIENCE='buildingos-local'
 ```
 
-Account-service generates a temporary signing key in local/test when no key file is
+Auth-service generates a temporary signing key in local/test when no key file is
 configured, and development OTP accepts `000000`. Tokens from that key become invalid
 after restart. HTTP issuer/JWKS URLs are rejected outside local/test. Production
 configuration and the deferred SMS adapter are described in [authentication configuration](AUTH_CONFIGURATION.md).
 
-Account terminal:
+Auth terminal:
 
 ```sh
-DB_URL=jdbc:postgresql://localhost:5432/account_db \
-DB_USERNAME=account_app DB_PASSWORD="$ACCOUNT_DB_PASSWORD" SERVER_PORT=8081 \
-java -jar backend/account-service/target/account-service-0.1.0-SNAPSHOT.jar
+DB_URL=jdbc:postgresql://localhost:5432/auth_db \
+DB_USERNAME=auth_app DB_PASSWORD="$AUTH_DB_PASSWORD" SERVER_PORT=8081 \
+java -jar backend/auth-service/target/auth-service-0.1.0-SNAPSHOT.jar
 ```
 
 Building terminal:
@@ -103,13 +103,13 @@ java -jar backend/subscription-service/target/subscription-service-0.1.0-SNAPSHO
 Gateway terminal:
 
 ```sh
-ACCOUNT_SERVICE_URL=http://localhost:8081 BUILDING_SERVICE_URL=http://localhost:8082 \
+AUTH_SERVICE_URL=http://localhost:8081 BUILDING_SERVICE_URL=http://localhost:8082 \
 SUBSCRIPTION_SERVICE_URL=http://localhost:8083 \
 SERVER_PORT=8080 java -jar backend/api-gateway/target/api-gateway-0.1.0-SNAPSHOT.jar
 ```
 
 Check `/actuator/health/readiness` on ports 8080, 8081, 8082, and 8083. Unauthenticated
-requests to gateway `/api/v1/platform/account` and `/api/v1/platform/building`, or
+requests to gateway `/api/v1/platform/auth` and `/api/v1/platform/building`, or
 direct service `/internal/platform/info`, must return 401. A bearer token signed by
 your configured issuer with the configured audience is required for metadata; metrics
 also require `platform.observe` scope. Stop each application with Ctrl-C.
@@ -139,7 +139,7 @@ Named volumes (`postgres_data`, `kafka_data`) are retained on an ordinary `down`
 
 ```sh
 mvn -B -f backend/pom.xml package -DskipTests
-docker build --tag buildingos/account-service:local backend/account-service
+docker build --tag buildingos/auth-service:local backend/auth-service
 docker build --tag buildingos/building-service:local backend/building-service
 docker build --tag buildingos/api-gateway:local backend/api-gateway
 ```

@@ -1,7 +1,7 @@
-# Account authentication configuration
+# Auth service configuration
 
 BOS-010 TASK-003 adds persistent RSA signing keys and a provider-neutral SMS boundary.
-The account service issues access tokens. A production SMS adapter is intentionally
+The auth service issues access tokens. A production SMS adapter is intentionally
 not included: selecting SMS without an `SmsSender` bean fails startup.
 
 ## Configuration
@@ -12,14 +12,14 @@ not included: selecting SMS without an `SmsSender` bean fails startup.
 | `OTP_CODE_PEPPER` | Required for SMS; secret containing at least 32 UTF-8 bytes |
 | `OTP_RESEND_COOLDOWN` | ISO-8601 duration, default `PT60S`, must be positive |
 | `OTP_MAX_STARTS_PER_HOUR` | Positive integer, default 5 |
-| `ACCOUNT_SIGNING_JWKS_PATH` | Mounted JWK Set JSON; required outside local/test |
-| `ACCOUNT_SIGNING_ACTIVE_KID` | Required with a key file; identifies an RSA private signing key |
-| `ACCOUNT_ACCESS_TOKEN_TTL` | ISO-8601 duration, default `PT15M`, at least one second |
+| `AUTH_SIGNING_JWKS_PATH` | Mounted JWK Set JSON; required outside local/test |
+| `AUTH_SIGNING_ACTIVE_KID` | Required with a key file; identifies an RSA private signing key |
+| `AUTH_ACCESS_TOKEN_TTL` | ISO-8601 duration, default `PT15M`, at least one second |
 | `JWT_ISSUER`, `JWT_JWK_SET_URI`, `JWT_AUDIENCE` | Existing validation settings; HTTPS URLs required outside local/test |
 
 The equivalent Spring properties are `buildingos.otp.provider`,
 `buildingos.otp.code-pepper`, `buildingos.otp.cooldown`,
-`buildingos.otp.max-per-hour`, and `buildingos.account.{signing-jwks-path,signing-active-kid,access-token-ttl}`.
+`buildingos.otp.max-per-hour`, and `buildingos.auth.{signing-jwks-path,signing-active-kid,access-token-ttl}`.
 
 Local/test may generate an in-memory RSA key only when no key path or active kid is
 configured. A bad explicit configuration never falls back to a generated key.

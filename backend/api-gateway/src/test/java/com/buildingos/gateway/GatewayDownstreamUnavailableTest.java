@@ -44,7 +44,7 @@ class GatewayDownstreamUnavailableTest {
         registry.add("platform.security.issuer", fixtures::issuer);
         registry.add("platform.security.audience", () -> "gateway-platform");
         registry.add("platform.security.jwk-set-uri", () -> fixtures.jwkSetUri);
-        registry.add("ACCOUNT_SERVICE_URL", () -> UNREACHABLE);
+        registry.add("AUTH_SERVICE_URL", () -> UNREACHABLE);
         registry.add("BUILDING_SERVICE_URL", () -> UNREACHABLE);
         registry.add("SUBSCRIPTION_SERVICE_URL", () -> UNREACHABLE);
     }
@@ -52,7 +52,7 @@ class GatewayDownstreamUnavailableTest {
     @Test
     void downstreamUnavailableReturnsSanitized503() throws Exception {
         String token = fixtures.token(fixtures.issuer(), "gateway-platform", Instant.now().plusSeconds(300));
-        var request = HttpRequest.newBuilder(URI.create("http://127.0.0.1:" + port + "/api/v1/platform/account"))
+        var request = HttpRequest.newBuilder(URI.create("http://127.0.0.1:" + port + "/api/v1/platform/auth"))
                 .header("Authorization", "Bearer " + token)
                 .GET().build();
         var response = HTTP.send(request, HttpResponse.BodyHandlers.ofString());

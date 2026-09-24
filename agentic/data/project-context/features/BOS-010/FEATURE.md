@@ -35,7 +35,7 @@ Reusing BOS-002's REQUIREMENTS/DECISIONS as-is would mean building the wrong sha
 identity/building domain and then reconciling it later. This restart re-derives scope
 from the current BRD instead.
 
-## Existing baseline at intake, 2026-09-22 (historical; `identity-service` since renamed `account-service`, TASK-004)
+## Existing baseline at intake, 2026-09-22 (historical; `identity-service` since renamed `account-service`, TASK-004, then `auth-service`, TASK-008)
 
 - `backend/`: `api-gateway`, `identity-service`, `building-service` exist as a runnable
   local skeleton (BOS-001, commit `463db1a`) — health/readiness, JWT validation at

@@ -45,7 +45,7 @@ The TASK-001/002 run `RUN-D10A3F4277E7424F938E3BC2C46E9A2D` is completed;
 see [release evidence](RELEASE.md). Historical test counts above describe that slice.
 Current TASK-003 run: `RUN-0CF5A7A84513476697D476E1334896C1`, COMPLETED 2026-09-23;
 see [release evidence](RELEASE-TASK-003.md).
-Issuer and provider scope are already decided: account-service issues tokens;
+Issuer and provider scope are already decided: auth-service (renamed from account-service, TASK-008) issues tokens;
 real SMS vendor deferred, provider boundary plus test sender only.
 Building application/lifecycle, units/ownership, subscription/entitlements, and the
 back-office console remain separate, un-started features under this EPIC.

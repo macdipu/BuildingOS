@@ -15,7 +15,7 @@
     "eventType": {
       "type": "string",
       "pattern": "^[a-z0-9-]+\\.[a-z0-9-]+$",
-      "description": "Dot-separated event type, e.g. 'account.platform-metadata'. Versioned separately via eventVersion."
+      "description": "Dot-separated event type, e.g. 'auth.platform-metadata'. Versioned separately via eventVersion."
     },
     "eventVersion": {
       "type": "integer",
@@ -29,7 +29,7 @@
     },
     "producer": {
       "type": "string",
-      "description": "Publishing service name, e.g. 'account-service'."
+      "description": "Publishing service name, e.g. 'auth-service'."
     },
     "correlationId": {
       "type": "string",

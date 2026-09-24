@@ -18,7 +18,7 @@ command -v mvn >/dev/null 2>&1 || fail "mvn is required"
 # shellcheck disable=SC1090
 . "$ENV_FILE"
 [ -n "${SUBSCRIPTION_DB_PASSWORD:-}" ] || fail "SUBSCRIPTION_DB_PASSWORD missing from $ENV_FILE (see infra/docker/.env.example)"
-export POSTGRES_SUPERUSER_PASSWORD ACCOUNT_DB_PASSWORD BUILDING_DB_PASSWORD SUBSCRIPTION_DB_PASSWORD
+export POSTGRES_SUPERUSER_PASSWORD AUTH_DB_PASSWORD BUILDING_DB_PASSWORD SUBSCRIPTION_DB_PASSWORD
 
 echo "==> Starting Postgres and Kafka"
 $COMPOSE up -d postgres kafka
@@ -58,7 +58,7 @@ POSTGRES_IMAGE=$($COMPOSE images -q postgres)
 TEST_PASSWORD="bootstrap'quote\\slash"
 docker run -d --name "$BOOTSTRAP_CONTAINER" --network none \
     -e POSTGRES_PASSWORD=bootstrap-test-only \
-    -e "ACCOUNT_DB_PASSWORD=$TEST_PASSWORD" -e "BUILDING_DB_PASSWORD=$TEST_PASSWORD" \
+    -e "AUTH_DB_PASSWORD=$TEST_PASSWORD" -e "BUILDING_DB_PASSWORD=$TEST_PASSWORD" \
     -e "SUBSCRIPTION_DB_PASSWORD=$TEST_PASSWORD" \
     -v "$ROOT_DIR/infra/docker/postgres/init:/docker-entrypoint-initdb.d:ro" \
     "$POSTGRES_IMAGE" >/dev/null
@@ -68,7 +68,7 @@ while ! docker exec "$BOOTSTRAP_CONTAINER" pg_isready -h localhost -U postgres >
     [ "$tries" -gt 0 ] || fail "quoted-password bootstrap did not become ready"
     sleep 2
 done
-for domain in account building subscription; do
+for domain in auth building subscription; do
     docker exec -e "PGPASSWORD=$TEST_PASSWORD" "$BOOTSTRAP_CONTAINER" \
         psql -h localhost -U "${domain}_app" -d "${domain}_db" -v ON_ERROR_STOP=1 \
         -tAc 'select 1' >/dev/null || fail "quoted-password bootstrap failed for $domain"
@@ -77,9 +77,9 @@ cleanup
 trap - EXIT HUP INT TERM
 echo "==> Quoted-password bootstrap passed"
 
-echo "==> Running and re-running Flyway migrations (account-service)"
-mvn -q -B -f backend/pom.xml -pl account-service flyway:migrate -Dflyway.password="$ACCOUNT_DB_PASSWORD"
-mvn -q -B -f backend/pom.xml -pl account-service flyway:migrate -Dflyway.password="$ACCOUNT_DB_PASSWORD"
+echo "==> Running and re-running Flyway migrations (auth-service)"
+mvn -q -B -f backend/pom.xml -pl auth-service flyway:migrate -Dflyway.password="$AUTH_DB_PASSWORD"
+mvn -q -B -f backend/pom.xml -pl auth-service flyway:migrate -Dflyway.password="$AUTH_DB_PASSWORD"
 
 echo "==> Running and re-running Flyway migrations (building-service)"
 mvn -q -B -f backend/pom.xml -pl building-service flyway:migrate -Dflyway.password="$BUILDING_DB_PASSWORD"
@@ -96,22 +96,22 @@ psql_as() {
 }
 
 echo "==> Checking database role isolation"
-psql_as account_app "$ACCOUNT_DB_PASSWORD" account_db || fail "account_app could not connect to account_db"
+psql_as auth_app "$AUTH_DB_PASSWORD" auth_db || fail "auth_app could not connect to auth_db"
 psql_as building_app "$BUILDING_DB_PASSWORD" building_db || fail "building_app could not connect to building_db"
-if psql_as account_app "$ACCOUNT_DB_PASSWORD" building_db; then
-    fail "account_app was able to connect to building_db (isolation broken)"
+if psql_as auth_app "$AUTH_DB_PASSWORD" building_db; then
+    fail "auth_app was able to connect to building_db (isolation broken)"
 fi
-if psql_as building_app "$BUILDING_DB_PASSWORD" account_db; then
-    fail "building_app was able to connect to account_db (isolation broken)"
+if psql_as building_app "$BUILDING_DB_PASSWORD" auth_db; then
+    fail "building_app was able to connect to auth_db (isolation broken)"
 fi
 psql_as subscription_app "$SUBSCRIPTION_DB_PASSWORD" subscription_db || fail "subscription_app could not connect to subscription_db"
-for other in account_db building_db; do
+for other in auth_db building_db; do
     if psql_as subscription_app "$SUBSCRIPTION_DB_PASSWORD" "$other"; then
         fail "subscription_app was able to connect to $other (isolation broken)"
     fi
 done
-if psql_as account_app "$ACCOUNT_DB_PASSWORD" subscription_db; then
-    fail "account_app was able to connect to subscription_db (isolation broken)"
+if psql_as auth_app "$AUTH_DB_PASSWORD" subscription_db; then
+    fail "auth_app was able to connect to subscription_db (isolation broken)"
 fi
 if psql_as building_app "$BUILDING_DB_PASSWORD" subscription_db; then
     fail "building_app was able to connect to subscription_db (isolation broken)"
@@ -134,7 +134,7 @@ echo "==> Restarting Postgres and Kafka to verify state persists"
 $COMPOSE restart postgres kafka
 wait_healthy postgres
 wait_healthy kafka
-psql_as account_app "$ACCOUNT_DB_PASSWORD" account_db || fail "account_app lost access to account_db after restart"
+psql_as auth_app "$AUTH_DB_PASSWORD" auth_db || fail "auth_app lost access to auth_db after restart"
 psql_as building_app "$BUILDING_DB_PASSWORD" building_db || fail "building_app lost access to building_db after restart"
 psql_as subscription_app "$SUBSCRIPTION_DB_PASSWORD" subscription_db || fail "subscription_app lost access to subscription_db after restart"
 # A restart preserves the container writable layer too. Recreate the broker to

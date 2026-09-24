@@ -58,7 +58,7 @@ jobs:
           java-version: "17"
           cache: maven
       - run: mvn -B -f backend/pom.xml package -DskipTests
-      - run: docker build --tag buildingos/account-service:ci backend/account-service
+      - run: docker build --tag buildingos/auth-service:ci backend/auth-service
       - run: docker build --tag buildingos/building-service:ci backend/building-service
       - run: docker build --tag buildingos/subscription-service:ci backend/subscription-service
       - run: docker build --tag buildingos/api-gateway:ci backend/api-gateway

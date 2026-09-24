@@ -34,7 +34,7 @@ Sources: BRD §10–12 (Spring), §36 (Flutter).
 BuildingOS/
 ├── backend/                 Maven multi-module (pom.xml)
 │   ├── api-gateway/
-│   ├── account-service/
+│   ├── auth-service/
 │   ├── building-service/
 │   ├── subscription-service/ plans, per-user subscriptions, free tier, one-time fees (BOS-010 F5a)
 │   └── platform-web/        shared web kernel (library, not a service)
@@ -47,16 +47,16 @@ BuildingOS/
 └── docs/                    this file, LOCAL_DEVELOPMENT.md, AUTH_CONFIGURATION.md, REVENUE_MODEL.md
 ```
 
-## Backend service (example: account-service)
+## Backend service (example: auth-service)
 
 ```text
-account-service/
+auth-service/
 ├── pom.xml
 ├── Dockerfile
 └── src/
     ├── main/
-    │   ├── java/com/buildingos/account/
-    │   │   ├── AccountApplication.java
+    │   ├── java/com/buildingos/auth/
+    │   │   ├── AuthApplication.java
     │   │   ├── auth/                                  ← feature
     │   │   │   ├── domain/
     │   │   │   │   ├── model/            User, OtpChallenge, PlatformRole
@@ -91,7 +91,7 @@ account-service/
     │   └── resources/
     │       ├── application.yaml
     │       └── db/migration/             V<n>__<name>.sql (Flyway, forward-only)
-    └── test/java/com/buildingos/account/
+    └── test/java/com/buildingos/auth/
         ├── architecture/                 ArchitectureTest (ArchUnit)
         ├── auth/
         ├── servicemeta/

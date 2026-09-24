@@ -1,0 +1,57 @@
+server:
+  port: 8080
+  error:
+    include-message: never
+    include-stacktrace: never
+platform:
+  security:
+    issuer: ${JWT_ISSUER}
+    audience: ${JWT_AUDIENCE}
+    jwk-set-uri: ${JWT_JWK_SET_URI}
+    allowed-origins: ${CORS_ALLOWED_ORIGINS:}
+    public-paths:
+      - /api/v1/auth/otp/start
+      - /api/v1/auth/otp/verify
+      - /.well-known/jwks.json
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,prometheus
+  endpoint:
+    health:
+      probes:
+        enabled: true
+      show-details: never
+      group:
+        liveness:
+          include: livenessState
+        readiness:
+          include: readinessState,db
+logging:
+  structured:
+    format:
+      console: logstash
+spring:
+  application:
+    name: auth-service
+  datasource:
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    hikari:
+      initialization-fail-timeout: -1
+  flyway:
+    enabled: true
+    clean-disabled: true
+    validate-on-migrate: true
+
+buildingos:
+  otp:
+    code-pepper: ${OTP_CODE_PEPPER:}
+    cooldown: ${OTP_RESEND_COOLDOWN:PT60S}
+    max-per-hour: ${OTP_MAX_STARTS_PER_HOUR:5}
+  auth:
+    signing-jwks-path: ${AUTH_SIGNING_JWKS_PATH:}
+    signing-active-kid: ${AUTH_SIGNING_ACTIVE_KID:}
+    access-token-ttl: ${AUTH_ACCESS_TOKEN_TTL:PT15M}

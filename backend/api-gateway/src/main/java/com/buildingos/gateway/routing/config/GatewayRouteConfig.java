@@ -17,10 +17,10 @@ import static org.springframework.web.servlet.function.RequestPredicates.path;
 public class GatewayRouteConfig {
     @Bean
     RouterFunction<ServerResponse> routes(
-            @Value("${ACCOUNT_SERVICE_URL}") String accountUrl,
+            @Value("${AUTH_SERVICE_URL}") String authUrl,
             @Value("${BUILDING_SERVICE_URL}") String buildingUrl,
             @Value("${SUBSCRIPTION_SERVICE_URL}") String subscriptionUrl) {
-        return metadataRoute("account", accountUrl)
+        return metadataRoute("auth", authUrl)
                 .and(metadataRoute("building", buildingUrl))
                 .and(metadataRoute("subscription", subscriptionUrl))
                 .and(passThroughRoute("subscription-api", subscriptionUrl,
@@ -28,8 +28,8 @@ public class GatewayRouteConfig {
                         "/api/v1/platform/free-tier", "/api/v1/platform/users/*/subscription",
                         "/api/v1/platform/fees/**", "/api/v1/me/plans", "/api/v1/me/subscription",
                         "/api/v1/me/entitlements"))
-                .and(otpRoute("start", accountUrl))
-                .and(otpRoute("verify", accountUrl));
+                .and(otpRoute("start", authUrl))
+                .and(otpRoute("verify", authUrl));
     }
 
     private RouterFunction<ServerResponse> metadataRoute(String service, String target) {
@@ -56,11 +56,11 @@ public class GatewayRouteConfig {
                 .build();
     }
 
-    private RouterFunction<ServerResponse> otpRoute(String step, String accountTarget) {
+    private RouterFunction<ServerResponse> otpRoute(String step, String authTarget) {
         String path = "/api/v1/auth/otp/" + step;
         return route("otp-" + step)
                 .POST(path, http())
-                .before(uri(accountTarget))
+                .before(uri(authTarget))
                 .before(request -> setRequestHeader(CorrelationFilter.HEADER,
                         CorrelationFilter.traceId(request.servletRequest())).apply(request))
                 .build();

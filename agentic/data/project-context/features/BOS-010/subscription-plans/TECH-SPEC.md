@@ -98,6 +98,6 @@ configured → 409, manual payments → SETTLED, audit rows, 401/403. ArchUnit, 
 No real charging, prices, trials, renewal/expiry, cancel/suspend; no enforcement inside other
 services yet (they will call `/me/entitlements` or a later internal API); no UI; no Kafka.
 Only `SUPER_ADMIN` exists today (no role-management API) — tests mint tokens for other roles.
-User ids are not validated against account-service (separate DB); ids come from JWT `sub`.
+User ids are not validated against auth-service (separate DB); ids come from JWT `sub`.
 
 Estimate: agent ~3 h across 1–2 sessions; human ~20–30 min review + API smoke.

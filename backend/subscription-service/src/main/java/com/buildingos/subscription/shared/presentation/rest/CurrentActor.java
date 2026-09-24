@@ -7,7 +7,7 @@ import java.util.Set;
 import java.util.UUID;
 import org.springframework.security.oauth2.jwt.Jwt;
 
-/** Builds the caller from account-service's access token: {@code sub} = user id, {@code platform_roles} claim. */
+/** Builds the caller from auth-service's access token: {@code sub} = user id, {@code platform_roles} claim. */
 public final class CurrentActor {
     private CurrentActor() {}
 
