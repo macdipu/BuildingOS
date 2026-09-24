@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:customer/features/building_application/presentation/building_application_pages.dart';
+import 'package:customer/res/strings/string_enum.dart';
 import 'package:get/get.dart';
 import 'app_shell_controller.dart';
 
@@ -46,7 +48,7 @@ class AppShell extends StatelessWidget {
   Widget _buildBody(int index) {
     switch (index) {
       case 0:
-        return const _PlaceholderScreen(label: 'Home');
+        return const _HomeTab();
       case 1:
         return const _PlaceholderScreen(label: 'Explore');
       case 2:
@@ -68,6 +70,23 @@ class _PlaceholderScreen extends StatelessWidget {
       child: Text(
         label,
         style: Theme.of(context).textTheme.headlineMedium,
+      ),
+    );
+  }
+}
+
+class _HomeTab extends StatelessWidget {
+  const _HomeTab();
+
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+      child: Center(
+        child: FilledButton.icon(
+          onPressed: () => Get.toNamed(BuildingApplicationPages.list),
+          icon: const Icon(Icons.apartment_outlined),
+          label: Text(TextEnum.buildingApplications.tr),
+        ),
       ),
     );
   }

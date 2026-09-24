@@ -52,7 +52,7 @@ disposable PostgreSQL container checks bootstrap with apostrophes/backslashes in
 To just bring the infrastructure up without the full check pass:
 
 ```sh
-docker compose -f infra/docker/compose.yaml up -d postgres kafka
+docker compose -f infra/docker/compose.yaml up -d postgres kafka minio minio-init
 ```
 
 ## Start the applications
@@ -89,8 +89,27 @@ Building terminal:
 ```sh
 DB_URL=jdbc:postgresql://localhost:5432/building_db \
 DB_USERNAME=building_app DB_PASSWORD="$BUILDING_DB_PASSWORD" SERVER_PORT=8082 \
+AUTH_SERVICE_URL=http://localhost:8081 SUBSCRIPTION_SERVICE_URL=http://localhost:8083 \
+DOCUMENTS_S3_ENDPOINT=http://localhost:9000 DOCUMENTS_S3_PATH_STYLE=true \
+DOCUMENTS_S3_ACCESS_KEY="$MINIO_ROOT_USER" DOCUMENTS_S3_SECRET_KEY="$MINIO_ROOT_PASSWORD" \
 java -jar backend/building-service/target/building-service-0.1.0-SNAPSHOT.jar
 ```
+
+Verification documents (BOS-010 F2, D-28) are stored in MinIO bucket `building-documents`, created
+private by the one-shot `minio-init` service. Console: http://localhost:9001 (root credentials from
+`infra/docker/.env`). In production leave `DOCUMENTS_S3_ENDPOINT`/keys empty and point
+`DOCUMENTS_S3_BUCKET`/`DOCUMENTS_S3_REGION` at S3; the AWS default credential chain (instance/task
+role) is used. Limits: `DOCUMENTS_MAX_SIZE_BYTES` (default 10 MB), `DOCUMENTS_MAX_PER_APPLICATION`
+(default 10); PDF/JPEG/PNG only, detected from file content. No virus scanning yet — required before
+production.
+
+building-service calls auth-service (`POST /internal/users/provision`, initial building admin, D-29) and
+subscription-service (creation-fee status, D-26) directly — not through the gateway — relaying the approving
+admin's access token. Both URLs are required; the gateway never routes `/internal/**`.
+
+With all services running, `sh scripts/smoke-building-application.sh` exercises the F2 flow end to end through the
+gateway (development OTP; creates smoke data). It stops if the `BUILDING_CREATION` fee is not configured; pass
+`SMOKE_SET_FEE=1` only on a throwaway local database to set a test value.
 
 Subscription terminal:
 

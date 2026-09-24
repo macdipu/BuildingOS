@@ -1,7 +1,7 @@
 # BOS-010 decision register
 
 Status: RESOLVED at REQUIREMENTS level. D-01/D-02 carry forward from BOS-002 as
-pre-confirmed candidates. D-07/D-08 and D-11..D-27 are resolved by the operator (D-15/D-19/D-21 superseded by
+pre-confirmed candidates. D-07/D-08 and D-11..D-32 are resolved by the operator (D-15/D-19/D-21 superseded by
 D-22..D-27). D-09/D-10 remain technical-design inputs, not REQUIREMENTS blockers.
 
 | ID | Decision needed | Known source constraint | Needed before |
@@ -29,6 +29,11 @@ D-22..D-27). D-09/D-10 remain technical-design inputs, not REQUIREMENTS blockers
 | D-25 | RESOLVED: user subscriptions are granted both by a back-office admin assigning a plan and by the user self-subscribing in the app; no charge for now. | Operator decision, 2026-09-23 | Grant use cases |
 | D-26 | RESOLVED: approval no longer attaches a subscription (replaces BA-03 step 6 / §149.7 step 6); it requires the creation fee to be recorded (D-24). D-11 sequencing still holds: this revenue slice precedes building application. | Operator decision, 2026-09-23 | Building-application approval |
 | D-27 | RESOLVED: the revenue model must be changeable without redesign — subscriber type, free-tier features, fee amounts and whether a fee is required are configuration/data; entitlement resolution and payment collection sit behind replaceable ports. | Operator instruction, 2026-09-23 | Whole F5a design |
+| D-28 | RESOLVED: verification documents are stored in S3-compatible object storage — MinIO in local compose, AWS S3 (or compatible) in production by configuration — behind a `DocumentStorage` port in building-service. | Operator decision, 2026-09-24 | F2 document upload; infra |
+| D-29 | RESOLVED: the initial `BUILDING_ADMIN` chosen by phone (D-12) is provisioned in auth-service (find-or-create user by canonical phone); building-service stores the returned user id. | Operator decision, 2026-09-24 | F2 approve use case; auth-service internal provisioning endpoint |
+| D-30 | RESOLVED (interim): until the onboarding/units slices land, a platform admin `Activate` action moves `ONBOARDING → ACTIVE` when the building has an assigned `BUILDING_ADMIN`; the ≥1-unit prerequisite (§149.9 step 11, ON-02) is added with the units slice. | Operator decision, 2026-09-24 | F2 activate use case; later ON-02 |
+| D-31 | RESOLVED: `applicant_relationship` ∈ `OWNER, COMMITTEE_MEMBER, PROPERTY_MANAGER, DEVELOPER, OTHER` (OTHER carries a free-text note). | Operator decision, 2026-09-24 | F2 application model |
+| D-32 | RESOLVED: optional `management_type` ∈ `SELF_MANAGED, OWNERS_COMMITTEE, MANAGEMENT_COMPANY, DEVELOPER_MANAGED`. | Operator decision, 2026-09-24 | F2 application model |
 
 D-09 and D-10 are technical-design inputs, not REQUIREMENTS blockers (same treatment as
 D-04-D-06 in the superseded BOS-002 register).

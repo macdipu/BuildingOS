@@ -44,6 +44,21 @@ public final class JwtFixtures implements AutoCloseable {
         return sign(rsaJwk, issuer, audience, expiry);
     }
 
+    /** Token shaped like auth-service's: {@code sub} = user id plus {@code platform_roles}. */
+    public String userToken(String audience, UUID userId, java.util.List<String> platformRoles) throws Exception {
+        JWTClaimsSet claims = new JWTClaimsSet.Builder()
+                .issuer(issuer())
+                .audience(audience)
+                .subject(userId.toString())
+                .claim("platform_roles", platformRoles)
+                .issueTime(Date.from(Instant.now().minusSeconds(10)))
+                .expirationTime(Date.from(Instant.now().plusSeconds(300)))
+                .build();
+        SignedJWT jwt = new SignedJWT(new JWSHeader.Builder(JWSAlgorithm.RS256).keyID(rsaJwk.getKeyID()).build(), claims);
+        jwt.sign(new RSASSASigner(rsaJwk));
+        return jwt.serialize();
+    }
+
     public String tokenSignedByOtherKey(String issuer, String audience) throws Exception {
         return sign(generateKey(), issuer, audience, Instant.now().plusSeconds(300));
     }

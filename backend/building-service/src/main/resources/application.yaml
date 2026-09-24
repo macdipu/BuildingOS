@@ -41,3 +41,26 @@ spring:
     enabled: true
     clean-disabled: true
     validate-on-migrate: true
+  servlet:
+    multipart:
+      max-file-size: ${DOCUMENTS_MAX_SIZE_BYTES:10485760}B
+      max-request-size: ${DOCUMENTS_MAX_REQUEST_BYTES:11534336}B
+buildingos:
+  documents:
+    max-size-bytes: ${DOCUMENTS_MAX_SIZE_BYTES:10485760}
+    max-per-application: ${DOCUMENTS_MAX_PER_APPLICATION:10}
+    s3:
+      endpoint: ${DOCUMENTS_S3_ENDPOINT:}
+      region: ${DOCUMENTS_S3_REGION:us-east-1}
+      bucket: ${DOCUMENTS_S3_BUCKET:building-documents}
+      access-key: ${DOCUMENTS_S3_ACCESS_KEY:}
+      secret-key: ${DOCUMENTS_S3_SECRET_KEY:}
+      path-style: ${DOCUMENTS_S3_PATH_STYLE:false}
+  services:
+    auth-url: ${AUTH_SERVICE_URL}
+    subscription-url: ${SUBSCRIPTION_SERVICE_URL}
+    connect-timeout: ${SERVICE_CONNECT_TIMEOUT:PT2S}
+    read-timeout: ${SERVICE_READ_TIMEOUT:PT5S}
+  duplicates:
+    radius-meters: ${DUPLICATE_RADIUS_METERS:100}
+    ignored-tokens: [building, bldg, tower, bhaban, bhabon, house, road, rd, lane, the]

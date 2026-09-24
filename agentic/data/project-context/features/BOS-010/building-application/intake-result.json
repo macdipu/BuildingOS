@@ -1,0 +1,28 @@
+{
+  "status": "READY",
+  "evidence": [
+    "agentic/data/project-context/features/BOS-010/DECISIONS.md",
+    "agentic/data/project-context/features/BOS-010/REQUIREMENTS.md"
+  ],
+  "blocking_issues": [],
+  "open_questions": [],
+  "recommended_next_step": "Context.",
+  "outputs": {
+    "work_item": "BOS-010 F2 building application & lifecycle",
+    "work_type": "new_feature",
+    "project_type": "brownfield (building-service skeleton)",
+    "hierarchy": "FEATURE",
+    "planning": "NO_REPLAN",
+    "decisions": [
+      "D-12",
+      "D-13",
+      "D-14",
+      "D-26",
+      "D-28",
+      "D-29",
+      "D-30",
+      "D-31",
+      "D-32"
+    ]
+  }
+}

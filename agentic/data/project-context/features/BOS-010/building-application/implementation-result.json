@@ -1,0 +1,31 @@
+{
+  "status": "READY",
+  "evidence": [
+    "backend/building-service/src/main/resources/db/migration/V2__building_application.sql",
+    "backend/building-service/src/main/resources/db/migration/V3__application_document.sql",
+    "backend/building-service/src/main/resources/db/migration/V4__building.sql",
+    "backend/auth-service/src/main/java/com/buildingos/auth/auth/application/provisionuser/ProvisionUserService.java",
+    "backend/api-gateway/src/main/java/com/buildingos/gateway/routing/config/GatewayRouteConfig.java",
+    "contracts/openapi/platform.yaml",
+    "infra/docker/compose.yaml",
+    "scripts/smoke-building-application.sh",
+    "user_app/lib/features/building_application",
+    "agentic/data/project-context/features/BOS-010/building-application/TECH-SPEC.md"
+  ],
+  "blocking_issues": [],
+  "open_questions": [
+    "Bangla strings need native-speaker review",
+    "No virus scanning of uploads before production"
+  ],
+  "recommended_next_step": "Code review.",
+  "outputs": {
+    "verdict": "READY",
+    "checks": [
+      "backend mvn verify 197/0",
+      "check-contracts PASSED + Redocly valid",
+      "live smoke on isolated full stack PASSED",
+      "flutter analyze no issues",
+      "flutter test 50/0"
+    ]
+  }
+}

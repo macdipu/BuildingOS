@@ -18,10 +18,13 @@ command -v mvn >/dev/null 2>&1 || fail "mvn is required"
 # shellcheck disable=SC1090
 . "$ENV_FILE"
 [ -n "${SUBSCRIPTION_DB_PASSWORD:-}" ] || fail "SUBSCRIPTION_DB_PASSWORD missing from $ENV_FILE (see infra/docker/.env.example)"
-export POSTGRES_SUPERUSER_PASSWORD AUTH_DB_PASSWORD BUILDING_DB_PASSWORD SUBSCRIPTION_DB_PASSWORD
+[ -n "${MINIO_ROOT_USER:-}" ] && [ -n "${MINIO_ROOT_PASSWORD:-}" ] \
+    || fail "MINIO_ROOT_USER/MINIO_ROOT_PASSWORD missing from $ENV_FILE (see infra/docker/.env.example)"
+export POSTGRES_SUPERUSER_PASSWORD AUTH_DB_PASSWORD BUILDING_DB_PASSWORD SUBSCRIPTION_DB_PASSWORD \
+    MINIO_ROOT_USER MINIO_ROOT_PASSWORD
 
-echo "==> Starting Postgres and Kafka"
-$COMPOSE up -d postgres kafka
+echo "==> Starting Postgres, Kafka and MinIO"
+$COMPOSE up -d postgres kafka minio minio-init
 
 wait_healthy() {
     service="$1"
@@ -36,6 +39,18 @@ wait_healthy() {
 }
 wait_healthy postgres
 wait_healthy kafka
+wait_healthy minio
+
+echo "==> Checking the verification-document bucket exists and is private"
+init_exit=""
+tries=30
+while [ "$tries" -gt 0 ]; do
+    init_exit=$($COMPOSE ps -a --format '{{.State}} {{.ExitCode}}' minio-init 2>/dev/null || echo "")
+    case "$init_exit" in exited*) break ;; esac
+    tries=$((tries - 1))
+    sleep 2
+done
+[ "$init_exit" = "exited 0" ] || fail "minio-init did not create the document bucket ($init_exit)"
 echo "==> Postgres and Kafka are healthy"
 
 # Init scripts run only when the data volume is first created. Add databases introduced

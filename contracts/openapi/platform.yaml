@@ -4,7 +4,8 @@ info:
   version: "0.1.0"
   description: >
     Exact operational routes for the BOS-001 platform foundation milestone.
-    Service metadata plus BOS-010 F5a revenue APIs (subscription-service).
+    Service metadata plus BOS-010 F5a revenue APIs (subscription-service) and F2 building
+    application & lifecycle APIs (building-service).
 servers:
   - url: http://localhost:8080
     description: Local gateway
@@ -588,6 +589,860 @@ paths:
           content:
             application/json:
               schema: { $ref: "#/components/schemas/ApiError" }
+  /api/v1/building-applications:
+    post:
+      summary: "Start a draft building application (any authenticated user)"
+      description: >
+        All fields optional while drafting. BOS-010 F2 AP-01/AP-02; building-service.
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/BuildingApplicationRequest" }
+      responses:
+        "201":
+          description: "Created envelope"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiEnvelope" }
+        "400":
+          description: "INVALID_REQUEST"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "401":
+          description: "Missing or invalid token"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+  /api/v1/me/building-applications:
+    get:
+      summary: "Caller's own applications, newest first"
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: "Success envelope"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiEnvelope" }
+        "401":
+          description: "Missing or invalid token"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+  /api/v1/building-applications/{applicationId}:
+    get:
+      summary: "Application detail (applicant or platform admin)"
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: applicationId
+          in: path
+          required: true
+          schema: { type: string }
+      responses:
+        "200":
+          description: "Success envelope"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiEnvelope" }
+        "401":
+          description: "Missing or invalid token"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "404":
+          description: "APPLICATION_NOT_FOUND (also for applications the caller does not own)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+    put:
+      summary: "Replace draft fields (applicant, DRAFT or MORE_INFORMATION_REQUIRED)"
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: applicationId
+          in: path
+          required: true
+          schema: { type: string }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/BuildingApplicationRequest" }
+      responses:
+        "200":
+          description: "Success envelope"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiEnvelope" }
+        "400":
+          description: "INVALID_REQUEST"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "401":
+          description: "Missing or invalid token"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "404":
+          description: "APPLICATION_NOT_FOUND (also for applications the caller does not own)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "409":
+          description: "NOT_EDITABLE"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+  /api/v1/building-applications/{applicationId}/submit:
+    post:
+      summary: "Submit (DRAFT/MORE_INFORMATION_REQUIRED to SUBMITTED)"
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: applicationId
+          in: path
+          required: true
+          schema: { type: string }
+      responses:
+        "200":
+          description: "Success envelope"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiEnvelope" }
+        "400":
+          description: "INVALID_REQUEST or APPLICATION_INCOMPLETE (message lists missing fields)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "401":
+          description: "Missing or invalid token"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "404":
+          description: "APPLICATION_NOT_FOUND (also for applications the caller does not own)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "409":
+          description: "INVALID_TRANSITION"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+  /api/v1/building-applications/{applicationId}/history:
+    get:
+      summary: "Audited status transitions (no internal notes)"
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: applicationId
+          in: path
+          required: true
+          schema: { type: string }
+      responses:
+        "200":
+          description: "Success envelope"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiEnvelope" }
+        "401":
+          description: "Missing or invalid token"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "404":
+          description: "APPLICATION_NOT_FOUND (also for applications the caller does not own)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+  /api/v1/building-applications/{applicationId}/documents:
+    get:
+      summary: "Verification document metadata"
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: applicationId
+          in: path
+          required: true
+          schema: { type: string }
+      responses:
+        "200":
+          description: "Success envelope"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiEnvelope" }
+        "401":
+          description: "Missing or invalid token"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "404":
+          description: "APPLICATION_NOT_FOUND (also for applications the caller does not own)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+    post:
+      summary: "Upload a verification document (applicant, while editable)"
+      description: >
+        Stored in S3-compatible storage (D-28). Type detected from bytes; file name is display metadata only.
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: applicationId
+          in: path
+          required: true
+          schema: { type: string }
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema: { $ref: "#/components/schemas/DocumentUpload" }
+      responses:
+        "201":
+          description: "Created envelope"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiEnvelope" }
+        "400":
+          description: "INVALID_REQUEST"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "401":
+          description: "Missing or invalid token"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "404":
+          description: "APPLICATION_NOT_FOUND (also for applications the caller does not own)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "409":
+          description: "NOT_EDITABLE or DOCUMENT_LIMIT_REACHED"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "413":
+          description: "DOCUMENT_TOO_LARGE"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "415":
+          description: "UNSUPPORTED_DOCUMENT_TYPE (PDF, JPEG, PNG by content)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "503":
+          description: "DEPENDENCY_UNAVAILABLE (object storage)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+  /api/v1/building-applications/{applicationId}/documents/{documentId}:
+    get:
+      summary: "Download a document (applicant or platform admin)"
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: applicationId
+          in: path
+          required: true
+          schema: { type: string }
+        - name: documentId
+          in: path
+          required: true
+          schema: { type: string }
+      responses:
+        "200":
+          description: "Document bytes, Content-Disposition attachment"
+          content:
+            application/octet-stream:
+              schema: { $ref: "#/components/schemas/DocumentBytes" }
+        "401":
+          description: "Missing or invalid token"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "404":
+          description: "APPLICATION_NOT_FOUND or DOCUMENT_NOT_FOUND (also for applications the caller does not own)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "503":
+          description: "DEPENDENCY_UNAVAILABLE"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+    delete:
+      summary: "Remove a document (applicant, while editable)"
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: applicationId
+          in: path
+          required: true
+          schema: { type: string }
+        - name: documentId
+          in: path
+          required: true
+          schema: { type: string }
+      responses:
+        "204":
+          description: "Removed"
+        "401":
+          description: "Missing or invalid token"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "404":
+          description: "APPLICATION_NOT_FOUND or DOCUMENT_NOT_FOUND (also for applications the caller does not own)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "409":
+          description: "NOT_EDITABLE"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+  /api/v1/platform/building-applications:
+    get:
+      summary: "Review queue (drafts never listed)"
+      description: >
+        meta carries page, size, total.
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: status
+          in: query
+          required: false
+          schema: { type: string }
+        - name: page
+          in: query
+          required: false
+          schema: { type: integer }
+        - name: size
+          in: query
+          required: false
+          schema: { type: integer }
+      responses:
+        "200":
+          description: "Success envelope"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiEnvelope" }
+        "400":
+          description: "INVALID_REQUEST (status=DRAFT, size > 100)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "401":
+          description: "Missing or invalid token"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "403":
+          description: "ACCESS_DENIED (requires SUPER_ADMIN or PLATFORM_ADMIN)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+  /api/v1/platform/building-applications/{applicationId}/start-review:
+    post:
+      summary: "SUBMITTED to UNDER_REVIEW"
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: applicationId
+          in: path
+          required: true
+          schema: { type: string }
+      responses:
+        "200":
+          description: "Success envelope"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiEnvelope" }
+        "400":
+          description: "INVALID_REQUEST"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "401":
+          description: "Missing or invalid token"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "403":
+          description: "ACCESS_DENIED (requires SUPER_ADMIN or PLATFORM_ADMIN)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "404":
+          description: "APPLICATION_NOT_FOUND (also for applications the caller does not own)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "409":
+          description: "INVALID_TRANSITION"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+  /api/v1/platform/building-applications/{applicationId}/request-information:
+    post:
+      summary: "UNDER_REVIEW to MORE_INFORMATION_REQUIRED (message shown to applicant)"
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: applicationId
+          in: path
+          required: true
+          schema: { type: string }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/MessageRequest" }
+      responses:
+        "200":
+          description: "Success envelope"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiEnvelope" }
+        "400":
+          description: "INVALID_REQUEST"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "401":
+          description: "Missing or invalid token"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "403":
+          description: "ACCESS_DENIED (requires SUPER_ADMIN or PLATFORM_ADMIN)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "404":
+          description: "APPLICATION_NOT_FOUND (also for applications the caller does not own)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "409":
+          description: "INVALID_TRANSITION"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+  /api/v1/platform/building-applications/{applicationId}/reject:
+    post:
+      summary: "UNDER_REVIEW to REJECTED (reason required)"
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: applicationId
+          in: path
+          required: true
+          schema: { type: string }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/ReasonRequest" }
+      responses:
+        "200":
+          description: "Success envelope"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiEnvelope" }
+        "400":
+          description: "INVALID_REQUEST"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "401":
+          description: "Missing or invalid token"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "403":
+          description: "ACCESS_DENIED (requires SUPER_ADMIN or PLATFORM_ADMIN)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "404":
+          description: "APPLICATION_NOT_FOUND (also for applications the caller does not own)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "409":
+          description: "INVALID_TRANSITION"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+  /api/v1/platform/building-applications/{applicationId}/approve:
+    post:
+      summary: "Approve: creation fee settled, admin provisioned, building created in ONBOARDING"
+      description: >
+        D-12, D-26, D-29. Data is {application, buildingId, buildingStatus}. No subscription is attached.
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: applicationId
+          in: path
+          required: true
+          schema: { type: string }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/ApproveRequest" }
+      responses:
+        "200":
+          description: "Success envelope"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiEnvelope" }
+        "400":
+          description: "INVALID_REQUEST (adminPhone, reason)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "401":
+          description: "Missing or invalid token"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "403":
+          description: "ACCESS_DENIED (requires SUPER_ADMIN or PLATFORM_ADMIN)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "404":
+          description: "APPLICATION_NOT_FOUND (also for applications the caller does not own)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "409":
+          description: "INVALID_TRANSITION, CREATION_FEE_UNPAID or FEE_NOT_CONFIGURED"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "503":
+          description: "DEPENDENCY_UNAVAILABLE (subscription-service or auth-service); nothing changed"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+  /api/v1/platform/building-applications/{applicationId}/duplicates:
+    get:
+      summary: "Possible duplicate applications/buildings (review signals only)"
+      description: >
+        Each item has kind, id, reference, status and matchedOn (NAME, ADDRESS, CONTACT_PHONE, COORDINATES). BRD 149.6.
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: applicationId
+          in: path
+          required: true
+          schema: { type: string }
+      responses:
+        "200":
+          description: "Success envelope"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiEnvelope" }
+        "401":
+          description: "Missing or invalid token"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "403":
+          description: "ACCESS_DENIED (requires SUPER_ADMIN or PLATFORM_ADMIN)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "404":
+          description: "APPLICATION_NOT_FOUND (also for applications the caller does not own)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+  /api/v1/platform/building-applications/{applicationId}/notes:
+    get:
+      summary: "Internal notes (never shown to applicant)"
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: applicationId
+          in: path
+          required: true
+          schema: { type: string }
+      responses:
+        "200":
+          description: "Success envelope"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiEnvelope" }
+        "401":
+          description: "Missing or invalid token"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "403":
+          description: "ACCESS_DENIED (requires SUPER_ADMIN or PLATFORM_ADMIN)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "404":
+          description: "APPLICATION_NOT_FOUND (also for applications the caller does not own)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+    post:
+      summary: "Add an internal note"
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: applicationId
+          in: path
+          required: true
+          schema: { type: string }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/NoteRequest" }
+      responses:
+        "201":
+          description: "Created envelope"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiEnvelope" }
+        "400":
+          description: "INVALID_REQUEST"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "401":
+          description: "Missing or invalid token"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "403":
+          description: "ACCESS_DENIED (requires SUPER_ADMIN or PLATFORM_ADMIN)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "404":
+          description: "APPLICATION_NOT_FOUND (also for applications the caller does not own)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+  /api/v1/platform/buildings/{buildingId}:
+    get:
+      summary: "Building with memberships"
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: buildingId
+          in: path
+          required: true
+          schema: { type: string }
+      responses:
+        "200":
+          description: "Success envelope"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiEnvelope" }
+        "401":
+          description: "Missing or invalid token"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "403":
+          description: "ACCESS_DENIED (requires SUPER_ADMIN or PLATFORM_ADMIN)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "404":
+          description: "BUILDING_NOT_FOUND (also for applications the caller does not own)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+  /api/v1/platform/buildings/{buildingId}/activate:
+    post:
+      summary: "ONBOARDING to ACTIVE (needs an active BUILDING_ADMIN, interim D-30)"
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: buildingId
+          in: path
+          required: true
+          schema: { type: string }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/ReasonRequest" }
+      responses:
+        "200":
+          description: "Success envelope"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiEnvelope" }
+        "400":
+          description: "INVALID_REQUEST (reason required)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "401":
+          description: "Missing or invalid token"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "403":
+          description: "ACCESS_DENIED (requires SUPER_ADMIN or PLATFORM_ADMIN)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "404":
+          description: "BUILDING_NOT_FOUND (also for applications the caller does not own)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "409":
+          description: "INVALID_TRANSITION or NO_BUILDING_ADMIN"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+  /api/v1/platform/buildings/{buildingId}/suspend:
+    post:
+      summary: "ACTIVE to SUSPENDED (deletes nothing)"
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: buildingId
+          in: path
+          required: true
+          schema: { type: string }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/ReasonRequest" }
+      responses:
+        "200":
+          description: "Success envelope"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiEnvelope" }
+        "400":
+          description: "INVALID_REQUEST (reason required)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "401":
+          description: "Missing or invalid token"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "403":
+          description: "ACCESS_DENIED (requires SUPER_ADMIN or PLATFORM_ADMIN)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "404":
+          description: "BUILDING_NOT_FOUND (also for applications the caller does not own)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "409":
+          description: "INVALID_TRANSITION"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+  /api/v1/platform/buildings/{buildingId}/reactivate:
+    post:
+      summary: "SUSPENDED to ACTIVE"
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: buildingId
+          in: path
+          required: true
+          schema: { type: string }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/ReasonRequest" }
+      responses:
+        "200":
+          description: "Success envelope"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiEnvelope" }
+        "400":
+          description: "INVALID_REQUEST (reason required)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "401":
+          description: "Missing or invalid token"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "403":
+          description: "ACCESS_DENIED (requires SUPER_ADMIN or PLATFORM_ADMIN)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "404":
+          description: "BUILDING_NOT_FOUND (also for applications the caller does not own)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "409":
+          description: "INVALID_TRANSITION"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+  /internal/users/provision:
+    post:
+      summary: "auth-service: find or create a user by phone (service-to-service, D-29)"
+      description: >
+        Called by building-service with the approver's relayed token. Never routed by the gateway. Grants no roles.
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/ProvisionUserRequest" }
+      responses:
+        "200":
+          description: "Success envelope"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiEnvelope" }
+        "400":
+          description: "INVALID_REQUEST (not a Bangladesh mobile number)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "401":
+          description: "Missing or invalid token"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "403":
+          description: "ACCESS_DENIED (relayed token lacks SUPER_ADMIN/PLATFORM_ADMIN)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
   /internal/platform/info:
     get:
       summary: Service metadata (direct, auth-service or building-service)
@@ -634,6 +1489,59 @@ components:
             service: { type: string, example: auth-service }
         meta: { type: object }
         traceId: { type: string, format: uuid }
+    BuildingApplicationRequest:
+      type: object
+      properties:
+        buildingName: { type: string, maxLength: 200 }
+        buildingType: { type: string, enum: [RESIDENTIAL, COMMERCIAL, MIXED] }
+        address: { type: string, maxLength: 500 }
+        area: { type: string, maxLength: 120 }
+        district: { type: string, maxLength: 120 }
+        postalCode: { type: string, maxLength: 16 }
+        totalFloors: { type: integer, minimum: 1 }
+        estimatedUnits: { type: integer, minimum: 1 }
+        applicantRelationship: { type: string, enum: [OWNER, COMMITTEE_MEMBER, PROPERTY_MANAGER, DEVELOPER, OTHER] }
+        relationshipNote: { type: string, maxLength: 200, description: Required at submit when applicantRelationship is OTHER }
+        contactName: { type: string, maxLength: 200 }
+        contactPhone: { type: string, description: "01XXXXXXXXX, 8801XXXXXXXXX or +8801XXXXXXXXX; stored as 01XXXXXXXXX" }
+        contactEmail: { type: string, format: email }
+        managementType: { type: string, enum: [SELF_MANAGED, OWNERS_COMMITTEE, MANAGEMENT_COMPANY, DEVELOPER_MANAGED] }
+        latitude: { type: number, minimum: -90, maximum: 90 }
+        longitude: { type: number, minimum: -180, maximum: 180 }
+    DocumentUpload:
+      type: object
+      required: [file]
+      properties:
+        file: { type: string, format: binary }
+    DocumentBytes:
+      type: string
+      format: binary
+    MessageRequest:
+      type: object
+      required: [message]
+      properties:
+        message: { type: string, maxLength: 1000 }
+    ReasonRequest:
+      type: object
+      required: [reason]
+      properties:
+        reason: { type: string, maxLength: 1000 }
+    ApproveRequest:
+      type: object
+      required: [adminPhone, reason]
+      properties:
+        adminPhone: { type: string, description: Initial BUILDING_ADMIN; review UI pre-fills the applicant contact phone }
+        reason: { type: string, maxLength: 1000 }
+    NoteRequest:
+      type: object
+      required: [body]
+      properties:
+        body: { type: string, maxLength: 2000 }
+    ProvisionUserRequest:
+      type: object
+      required: [phone]
+      properties:
+        phone: { type: string }
     ApiError:
       type: object
       required: [success, code, message, traceId]
@@ -641,6 +1549,7 @@ components:
         success: { type: boolean, enum: [false] }
         code:
           type: string
-          enum: [AUTH_REQUIRED, ACCESS_DENIED, SERVICE_UNAVAILABLE]
+          description: Stable error code; each operation lists the codes it may return.
+          example: ACCESS_DENIED
         message: { type: string }
         traceId: { type: string, format: uuid }

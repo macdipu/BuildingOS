@@ -1,13 +1,13 @@
-Last updated: 2026-09-23T14:16:35.145131+00:00
+Last updated: 2026-09-24T08:10:08.396704+00:00
 Last agent: claude
 Operator: macdipu <c.dipu0@gmail.com>
-Current status: COMPLETED
+Current status: BLOCKED
 
 ## Task
-BOS-010 F5a revenue foundation (RUN-4ABC6B2BAC974B0E878CA39C9A27AE00)
+BOS-010 F2 building application & lifecycle (RUN-5AC974860CB74DA790FDBA00532A15A2), QA done
 
 ## Completed
-subscription-service built: plans, per-user subscriptions, free tier, one-time creation fee; mvn verify 147/0; live gateway smoke; technical + release approved; run COMPLETED; committed.
+Implementation resubmitted after operator budget adjustment; code review (1 Flutter fix) and automated QA READY: backend 197/0, contracts, live smoke, Flutter 50/0. REVIEW.md written.
 
 ## Changed Files
 (none)
@@ -22,37 +22,65 @@ subscription-service built: plans, per-user subscriptions, free tier, one-time c
 (none)
 
 ## Next Action
-Operator: add SUBSCRIPTION_DB_PASSWORD to infra/docker/.env, then run scripts/verify-platform.sh. Next slice: building application (new run; D-12..D-14, D-26 approval calls fee status API; document storage decision needed).
+Operator: device check of Flutter flow, then approve release gate (approve --gate release). Agent then records release-result and completes the run. Nothing committed.
 
 ## Git Snapshot
 ```text
 Branch: main
-Recent commit: be9ae2f BOS-010: align docs and task index with current state
+Recent commit: 8e66061 chnage service name
 Status:
-M .github/workflows/platform.yml
- M agentic/data/project-context/context-index.yaml
- M agentic/data/project-context/features/BOS-010/README.md
+M .agent/HANDOFF.md
+ M agentic/data/project-context/features/BOS-010/DECISIONS.md
  M agentic/data/project-context/features/BOS-010/TASKS.md
- M agentic/data/project-context/features/BOS-010/subscription-plans/REQUIREMENTS.md
- M agentic/data/project-context/features/BOS-010/subscription-plans/TECH-SPEC.md
  M backend/api-gateway/src/main/java/com/buildingos/gateway/routing/config/GatewayRouteConfig.java
- M backend/api-gateway/src/test/java/com/buildingos/gateway/GatewayDownstreamUnavailableTest.java
  M backend/api-gateway/src/test/java/com/buildingos/gateway/GatewayRoutingTest.java
  M backend/api-gateway/src/test/java/com/buildingos/gateway/support/StubDownstream.java
- M backend/platform-web/src/main/java/com/buildingos/platform/web/config/PlatformWebConfiguration.java
- M backend/pom.xml
+ M backend/auth-service/src/main/java/com/buildingos/auth/auth/infrastructure/config/AuthConfiguration.java
+ M backend/auth-service/src/test/java/com/buildingos/auth/support/JwtFixtures.java
+ M backend/building-service/pom.xml
+ M backend/building-service/src/main/resources/application.yaml
+ M backend/building-service/src/test/java/com/buildingos/building/support/JwtFixtures.java
  M contracts/openapi/platform.yaml
- M docs/ARCHITECTURE.md
  M docs/LOCAL_DEVELOPMENT.md
  M infra/docker/.env.example
  M infra/docker/compose.yaml
  M scripts/verify-platform.sh
-?? agentic/data/project-context/features/BOS-010/subscription-plans/REVIEW.md
-?? agentic/data/project-context/features/BOS-010/subscription-plans/implementation-result.json
-?? agentic/data/project-context/features/BOS-010/subscription-plans/qa-result.json
-?? agentic/data/project-context/features/BOS-010/subscription-plans/release-result.json
-?? agentic/data/project-context/features/BOS-010/subscription-plans/review-result.json
-?? backend/subscription-service/
-?? docs/REVENUE_MODEL.md
-?? infra/docker/postgres/init/03-subscription-db.sh
+ M user_app/lib/app/routes/app_pages.dart
+ M user_app/lib/app/shell/app_shell.dart
+ M user_app/lib/core/network/client/api_client.dart
+ M user_app/lib/core/network/urls/api_urls.dart
+ M user_app/lib/res/strings/string_enum.dart
+ M user_app/pubspec.lock
+?? .agent/sessions/2026-09-24T05-08-41-351Z-claude.md
+?? .agent/sessions/2026-09-24T05-31-30-575Z-claude.md
+?? .agent/sessions/2026-09-24T05-51-51-454Z-claude.md
+?? .agent/sessions/2026-09-24T06-03-12-530Z-claude.md
+?? .agent/sessions/2026-09-24T06-39-11-766Z-claude.md
+?? .agent/sessions/2026-09-24T07-05-39-575Z-claude.md
+?? .agent/sessions/2026-09-24T07-28-15-675Z-claude.md
+?? agentic/data/project-context/features/BOS-010/building-application/
+?? backend/auth-service/src/main/java/com/buildingos/auth/auth/application/provisionuser/
+?? backend/auth-service/src/main/java/com/buildingos/auth/auth/presentation/rest/UserProvisioningController.java
+?? backend/auth-service/src/main/java/com/buildingos/auth/auth/presentation/rest/request/ProvisionUserRequest.java
+?? backend/auth-service/src/main/java/com/buildingos/auth/auth/presentation/rest/response/ProvisionedUserResponse.java
+?? backend/auth-service/src/test/java/com/buildingos/auth/auth/UserProvisioningIntegrationTest.java
+?? backend/building-service/src/main/java/com/buildingos/building/building/
+?? backend/building-service/src/main/java/com/buildingos/building/buildingapplication/
+?? backend/building-service/src/main/java/com/buildingos/building/document/
+?? backend/building-service/src/main/java/com/buildingos/building/duplicate/
+?? backend/building-service/src/main/java/com/buildingos/building/note/
+?? backend/building-service/src/main/java/com/buildingos/building/shared/
+?? backend/building-service/src/main/resources/db/migration/V2__building_application.sql
+?? backend/building-service/src/main/resources/db/migration/V3__application_document.sql
+?? backend/building-service/src/main/resources/db/migration/V4__building.sql
+?? backend/building-service/src/test/java/com/buildingos/building/building/
+?? backend/building-service/src/test/java/com/buildingos/building/buildingapplication/
+?? backend/building-service/src/test/java/com/buildingos/building/document/
+?? backend/building-service/src/test/java/com/buildingos/building/duplicate/
+?? backend/building-service/src/test/java/com/buildingos/building/support/DownstreamStubs.java
+?? backend/building-service/src/test/resources/
+?? scripts/smoke-building-application.sh
+?? user_app/lib/core/network/urls/building_application_api_urls.dart
+?? user_app/lib/features/building_application/
+?? user_app/test/features/building_application/
 ```

@@ -171,6 +171,7 @@ class ApiClient {
       } else {
         return Resource(
           status: ResourceStatus.failed,
+          response: response.data,
           messageCode: code,
           message: response.data != null ? response.data['message'] : 'Failed',
         );

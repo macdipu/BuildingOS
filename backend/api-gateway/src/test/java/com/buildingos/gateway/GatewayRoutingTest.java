@@ -123,6 +123,49 @@ class GatewayRoutingTest {
         }
     }
 
+    @ParameterizedTest
+    @ValueSource(strings = {"/api/v1/building-applications", "/api/v1/building-applications/abc/submit",
+            "/api/v1/building-applications/abc/documents/def", "/api/v1/me/building-applications",
+            "/api/v1/platform/building-applications", "/api/v1/platform/building-applications/abc/duplicates",
+            "/api/v1/platform/buildings/abc", "/api/v1/platform/buildings/abc/activate"})
+    void buildingApiPathsForwardUnchangedWithBearerToken(String path) throws Exception {
+        String token = validToken();
+        var response = call(path, token, null, null);
+        assertThat(response.statusCode()).isEqualTo(200);
+        assertThat(response.body()).contains("\"service\":\"building-service\"", "\"path\":\"" + path + "\"");
+        assertThat(buildingStub.lastAuthorization()).isEqualTo("Bearer " + token);
+    }
+
+    @Test
+    void documentUploadStreamsMultipartBodyIntact() throws Exception {
+        byte[] file = new byte[2 * 1024 * 1024];
+        new java.util.Random(7).nextBytes(file);
+        String boundary = "----gw" + java.util.UUID.randomUUID();
+        var body = new java.io.ByteArrayOutputStream();
+        body.write(("--" + boundary + "\r\nContent-Disposition: form-data; name=\"file\"; filename=\"deed.pdf\"\r\n"
+                + "Content-Type: application/pdf\r\n\r\n").getBytes(java.nio.charset.StandardCharsets.UTF_8));
+        body.write(file);
+        body.write(("\r\n--" + boundary + "--\r\n").getBytes(java.nio.charset.StandardCharsets.UTF_8));
+        var request = HttpRequest.newBuilder(URI.create("http://127.0.0.1:" + port
+                        + "/api/v1/building-applications/abc/documents"))
+                .POST(HttpRequest.BodyPublishers.ofByteArray(body.toByteArray()))
+                .header("Authorization", "Bearer " + validToken())
+                .header("Content-Type", "multipart/form-data; boundary=" + boundary).build();
+        var response = HTTP.send(request, HttpResponse.BodyHandlers.ofString());
+        assertThat(response.statusCode()).isEqualTo(200);
+        assertThat(buildingStub.lastBody()).isEqualTo(body.toByteArray());
+        assertThat(buildingStub.lastContentType()).startsWith("multipart/form-data").contains("boundary=" + boundary);
+    }
+
+    @Test
+    void internalPathsAreNeverRouted() throws Exception {
+        for (String path : new String[] {"/internal/users/provision", "/internal/platform/info"}) {
+            var response = call(path, validToken(), null, null);
+            assertThat(response.statusCode()).isNotEqualTo(200);
+            assertThat(response.body()).doesNotContain("auth-service", "building-service");
+        }
+    }
+
     @Test
     void revenueApiRequiresTokenAtGateway() throws Exception {
         assertThat(call("/api/v1/me/entitlements", null, null, null).statusCode()).isEqualTo(401);

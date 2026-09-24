@@ -8,6 +8,8 @@ import com.buildingos.auth.auth.application.port.out.SmsSender;
 import com.buildingos.auth.auth.application.port.out.TokenIssuer;
 import com.buildingos.auth.auth.application.seedsuperadmin.SeedSuperAdminService;
 import com.buildingos.auth.auth.application.seedsuperadmin.SeedSuperAdminUseCase;
+import com.buildingos.auth.auth.application.provisionuser.ProvisionUserService;
+import com.buildingos.auth.auth.application.provisionuser.ProvisionUserUseCase;
 import com.buildingos.auth.auth.application.startotp.StartOtpService;
 import com.buildingos.auth.auth.application.startotp.StartOtpUseCase;
 import com.buildingos.auth.auth.application.verifyotp.VerifyOtpService;
@@ -52,6 +54,11 @@ public class AuthConfiguration {
     @Bean
     GetPublicSigningKeysUseCase getPublicSigningKeys(SigningKeyProvider signingKeys) {
         return new GetPublicSigningKeysService(signingKeys);
+    }
+
+    @Bean
+    ProvisionUserUseCase provisionUser(UserRepository users) {
+        return new ProvisionUserService(users);
     }
 
     @Bean

@@ -28,6 +28,10 @@ public class GatewayRouteConfig {
                         "/api/v1/platform/free-tier", "/api/v1/platform/users/*/subscription",
                         "/api/v1/platform/fees/**", "/api/v1/me/plans", "/api/v1/me/subscription",
                         "/api/v1/me/entitlements"))
+                .and(passThroughRoute("building-api", buildingUrl,
+                        "/api/v1/building-applications", "/api/v1/building-applications/**",
+                        "/api/v1/me/building-applications", "/api/v1/platform/building-applications",
+                        "/api/v1/platform/building-applications/**", "/api/v1/platform/buildings/**"))
                 .and(otpRoute("start", authUrl))
                 .and(otpRoute("verify", authUrl));
     }
