@@ -11,17 +11,14 @@ import com.buildingos.building.building.domain.repository.BuildingRepository;
 import com.buildingos.building.membership.domain.model.BuildingInvitation;
 import com.buildingos.building.membership.domain.model.InvitationStatus;
 import com.buildingos.building.membership.domain.repository.BuildingInvitationRepository;
+import com.buildingos.building.shared.application.Fingerprints;
 import com.buildingos.building.shared.application.port.out.UnitOfWork;
 import com.buildingos.building.shared.domain.model.AuditEntry;
 import com.buildingos.building.shared.domain.model.RecordedOperation;
 import com.buildingos.building.shared.domain.repository.AuditRepository;
 import com.buildingos.building.shared.domain.repository.OperationRepository;
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.time.Clock;
 import java.time.Instant;
-import java.util.HexFormat;
 import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
@@ -60,7 +57,7 @@ public final class ClaimInvitationService implements ClaimInvitationUseCase {
             throw new IllegalArgumentException("operationId is required");
         }
         UUID user = identity.userId();
-        String fingerprint = fingerprint(command.invitationId());
+        String fingerprint = Fingerprints.of(ACTION, command.invitationId());
         return unitOfWork.inTransaction(() -> {
             var located = addressedTo(identity, command.invitationId());
             var building = buildings.findByIdForUpdate(located.buildingId()).orElseThrow();
@@ -119,15 +116,5 @@ public final class ClaimInvitationService implements ClaimInvitationUseCase {
         audit.append(AuditEntry.of(buildingId, user, action, MembershipAudit.MEMBERSHIP, granted.id(), CLAIM_REASON,
                 existing.map(MembershipAudit::of).orElse(Map.of()), MembershipAudit.of(granted), now));
         return granted;
-    }
-
-    private static String fingerprint(UUID invitationId) {
-        try {
-            byte[] digest = MessageDigest.getInstance("SHA-256")
-                    .digest((ACTION + ":" + invitationId).getBytes(StandardCharsets.UTF_8));
-            return HexFormat.of().formatHex(digest);
-        } catch (NoSuchAlgorithmException impossible) {
-            throw new IllegalStateException(impossible);
-        }
     }
 }

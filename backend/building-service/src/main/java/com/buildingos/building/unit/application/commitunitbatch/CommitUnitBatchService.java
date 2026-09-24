@@ -9,6 +9,7 @@ import com.buildingos.building.unit.application.batch.UnitBatchValidator;
 import com.buildingos.building.membership.application.MembershipErrors;
 import com.buildingos.building.membership.application.BuildingAccess;
 import com.buildingos.building.shared.application.Actor;
+import com.buildingos.building.shared.application.Fingerprints;
 import com.buildingos.building.shared.application.port.out.UnitOfWork;
 import com.buildingos.building.shared.domain.model.AuditEntry;
 import com.buildingos.building.shared.domain.model.RecordedOperation;
@@ -19,14 +20,9 @@ import com.buildingos.building.unit.domain.model.Unit;
 import com.buildingos.building.unit.domain.model.UnitBatch;
 import com.buildingos.building.unit.domain.repository.FloorRepository;
 import com.buildingos.building.unit.domain.repository.UnitBatchRepository;
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.time.Clock;
-import java.util.HexFormat;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.UUID;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -110,17 +106,8 @@ public final class CommitUnitBatchService implements CommitUnitBatchUseCase {
     }
 
     private static String fingerprint(List<BatchRowInput> rows) {
-        String canonical = rows.stream().map(r -> String.join("\u001f", Objects.toString(r.number(), ""),
-                        Objects.toString(r.floorId(), ""), Objects.toString(r.floorLabel(), ""),
-                        Objects.toString(r.type(), ""), Objects.toString(r.areaSqft(), ""),
-                        Objects.toString(r.bedrooms(), ""), Objects.toString(r.defaultMaintenanceRate(), ""),
-                        Objects.toString(r.notes(), "")))
-                .collect(Collectors.joining("\u001e"));
-        try {
-            return HexFormat.of().formatHex(MessageDigest.getInstance("SHA-256")
-                    .digest((ACTION + "\u001d" + canonical).getBytes(StandardCharsets.UTF_8)));
-        } catch (NoSuchAlgorithmException impossible) {
-            throw new IllegalStateException(impossible);
-        }
+        return Fingerprints.of(ACTION, rows.stream().map(r -> Fingerprints.of(r.number(), r.floorId(), r.floorLabel(),
+                r.type(), r.areaSqft(), r.bedrooms(), r.defaultMaintenanceRate(), r.notes()))
+                .collect(Collectors.joining(",")));
     }
 }

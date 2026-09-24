@@ -1,0 +1,20 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://buildingos.internal/contracts/kafka/ownership-transferred.v1.schema.json",
+  "title": "ownership.transferred v1 data",
+  "description": "`data` of the event envelope (event-envelope.schema.json) with eventType `ownership.transferred`, eventVersion 1, producer `building-service` (TECH-SPEC-F4 Observability, UO-10). Identifiers and share only: no contact details or document contents. Written to building_outbox in the transfer's transaction; the same eventId is used on every delivery attempt.",
+  "type": "object",
+  "required": ["transferId", "buildingId", "unitId", "sourceOwnerUserId", "recipientUserId", "share", "effectiveDate", "effectiveAt", "revision"],
+  "additionalProperties": false,
+  "properties": {
+    "transferId": {"type": "string", "format": "uuid"},
+    "buildingId": {"type": "string", "format": "uuid"},
+    "unitId": {"type": "string", "format": "uuid"},
+    "sourceOwnerUserId": {"type": "string", "format": "uuid"},
+    "recipientUserId": {"type": "string", "format": "uuid"},
+    "share": {"type": "number", "exclusiveMinimum": 0, "maximum": 100, "description": "Percentage points moved, at most 4 decimals."},
+    "effectiveDate": {"type": "string", "format": "date", "description": "Asia/Dhaka calendar date of the change."},
+    "effectiveAt": {"type": "string", "format": "date-time", "description": "Server instant the change took effect."},
+    "revision": {"type": "integer", "minimum": 1, "description": "Unit ownership revision; orders same-day changes."}
+  }
+}
