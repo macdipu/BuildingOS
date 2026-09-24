@@ -2,8 +2,10 @@ package com.buildingos.building.unit.domain.repository;
 
 import com.buildingos.building.unit.domain.model.Unit;
 import com.buildingos.building.unit.domain.model.UnitType;
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.UUID;
 
 public interface UnitRepository {
@@ -16,4 +18,6 @@ public interface UnitRepository {
     long count(UUID buildingId, UUID floorId, UnitType type);
     long countByBuilding(UUID buildingId);
     boolean numberTaken(UUID buildingId, String normalizedNumber, UUID exceptUnitId);
+    /** The subset of {@code normalizedNumbers} already used in the building. */
+    Set<String> takenNumbers(UUID buildingId, Collection<String> normalizedNumbers);
 }

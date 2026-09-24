@@ -48,6 +48,10 @@ spring:
 buildingos:
   membership:
     invitation-ttl: ${MEMBERSHIP_INVITATION_TTL:P7D}
+  units:
+    batch:
+      max-rows: ${UNIT_BATCH_MAX_ROWS:500}
+      max-sheet-bytes: ${UNIT_BATCH_MAX_SHEET_BYTES:1048576}
   documents:
     max-size-bytes: ${DOCUMENTS_MAX_SIZE_BYTES:10485760}
     max-per-application: ${DOCUMENTS_MAX_PER_APPLICATION:10}

@@ -8,8 +8,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.UUID;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -79,6 +82,25 @@ public class JdbcUnitRepositoryAdapter implements UnitRepository {
                         + "WHERE building_id = ? AND normalized_number = ? AND id IS DISTINCT FROM CAST(? AS uuid))", Boolean.class,
                 buildingId, normalizedNumber, exceptUnitId));
     }
+
+    @Override
+    public Set<String> takenNumbers(UUID buildingId, Collection<String> normalizedNumbers) {
+        if (normalizedNumbers.isEmpty()) {
+            return Set.of();
+        }
+        return new HashSet<>(jdbc.query(connection -> {
+            var statement = connection.prepareStatement("SELECT normalized_number FROM building_unit "
+                    + "WHERE building_id = ? AND normalized_number = ANY (?)");
+            statement.setObject(1, buildingId);
+            statement.setArray(2, connection.createArrayOf("varchar", normalizedNumbers.toArray()));
+            return statement;
+        }, (rs, row) -> rs.getString(1)));
+    }
+
+    /** Shared with the batch adapter so both map rows identically. */
+    static String columns() { return COLUMNS; }
+
+    Unit mapRow(ResultSet rs, int row) throws SQLException { return map(rs, row); }
 
     private static String filter(UUID floorId, UnitType type) {
         return " WHERE building_id = ?" + (floorId == null ? "" : " AND floor_id = ?")
