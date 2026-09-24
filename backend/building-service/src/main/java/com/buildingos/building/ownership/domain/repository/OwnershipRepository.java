@@ -3,6 +3,7 @@ package com.buildingos.building.ownership.domain.repository;
 import com.buildingos.building.ownership.domain.model.OwnershipChange;
 import com.buildingos.building.ownership.domain.model.OwnedProperty;
 import com.buildingos.building.ownership.domain.model.OwnershipHistory;
+import com.buildingos.building.ownership.domain.model.OwnershipTransfer;
 import com.buildingos.building.ownership.domain.model.UnitOwnership;
 import java.util.List;
 import java.util.Optional;
@@ -21,4 +22,6 @@ public interface OwnershipRepository {
     List<OwnedProperty> propertiesOf(UUID userId, int page, int size);
     long countPropertiesOf(UUID userId);
     long countOwnedUnits(UUID buildingId, UUID userId);
+    /** A transfer of this unit in this building; any other parent looks missing. */
+    Optional<OwnershipTransfer> findTransfer(UUID buildingId, UUID unitId, UUID transferId);
 }

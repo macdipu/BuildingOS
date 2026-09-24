@@ -30,7 +30,7 @@ public record ApplicationDocument(UUID id, UUID applicationId, String objectKey,
     }
 
     /** Last path segment, control characters and quotes removed, bounded; "document" when nothing is left. */
-    static String displayName(String raw) {
+    public static String displayName(String raw) {
         if (raw == null) {
             return "document";
         }

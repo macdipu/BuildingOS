@@ -101,7 +101,8 @@ private by the one-shot `minio-init` service. Console: http://localhost:9001 (ro
 `DOCUMENTS_S3_BUCKET`/`DOCUMENTS_S3_REGION` at S3; the AWS default credential chain (instance/task
 role) is used. Limits: `DOCUMENTS_MAX_SIZE_BYTES` (default 10 MB), `DOCUMENTS_MAX_PER_APPLICATION`
 (default 10); PDF/JPEG/PNG only, detected from file content. No virus scanning yet — required before
-production.
+production. Ownership transfer documents (BOS-010 F4) use the same bucket and content rules under
+`ownership-transfers/`, capped by `OWNERSHIP_MAX_DOCUMENTS_PER_TRANSFER` (default 10).
 
 Ownership events (BOS-010 F4, UO-10) are written to `building_outbox` in the same transaction as the
 change and published to Kafka by an in-service worker: topic `ownership.transferred` (created on

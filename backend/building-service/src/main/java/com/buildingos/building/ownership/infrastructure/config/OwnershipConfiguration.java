@@ -1,8 +1,19 @@
 package com.buildingos.building.ownership.infrastructure.config;
 
 import com.buildingos.building.building.domain.repository.BuildingMembershipRepository;
+import com.buildingos.building.document.application.port.out.DocumentStorage;
+import com.buildingos.building.document.domain.model.DocumentPolicy;
 import com.buildingos.building.membership.application.BuildingAccess;
 import com.buildingos.building.ownership.application.OwnershipWrites;
+import com.buildingos.building.ownership.application.TransferDocuments;
+import com.buildingos.building.ownership.application.downloadtransferdocument.DownloadTransferDocumentService;
+import com.buildingos.building.ownership.application.downloadtransferdocument.DownloadTransferDocumentUseCase;
+import com.buildingos.building.ownership.application.listtransferdocuments.ListTransferDocumentsService;
+import com.buildingos.building.ownership.application.listtransferdocuments.ListTransferDocumentsUseCase;
+import com.buildingos.building.ownership.application.removetransferdocument.RemoveTransferDocumentService;
+import com.buildingos.building.ownership.application.removetransferdocument.RemoveTransferDocumentUseCase;
+import com.buildingos.building.ownership.application.uploadtransferdocument.UploadTransferDocumentService;
+import com.buildingos.building.ownership.application.uploadtransferdocument.UploadTransferDocumentUseCase;
 import com.buildingos.building.ownership.application.assignownership.AssignOwnershipService;
 import com.buildingos.building.ownership.application.assignownership.AssignOwnershipUseCase;
 import com.buildingos.building.ownership.application.getcurrentownerships.GetCurrentOwnershipsService;
@@ -14,6 +25,7 @@ import com.buildingos.building.ownership.application.listmyproperties.ListMyProp
 import com.buildingos.building.ownership.application.transferownership.TransferOwnershipService;
 import com.buildingos.building.ownership.application.transferownership.TransferOwnershipUseCase;
 import com.buildingos.building.ownership.domain.repository.OwnershipRepository;
+import com.buildingos.building.ownership.domain.repository.TransferDocumentRepository;
 import com.buildingos.building.shared.application.port.out.UnitOfWork;
 import com.buildingos.building.shared.domain.repository.AuditRepository;
 import com.buildingos.building.shared.domain.repository.OperationRepository;
@@ -59,5 +71,37 @@ public class OwnershipConfiguration {
     GetOwnershipHistoryUseCase getOwnershipHistory(BuildingAccess access, OwnershipRepository ownership,
             UnitOfWork uow) {
         return new GetOwnershipHistoryService(access, ownership, uow);
+    }
+
+    @Bean
+    TransferDocuments transferDocuments(BuildingAccess access, OwnershipRepository ownership,
+            DocumentStorage storage) {
+        return new TransferDocuments(access, ownership, storage);
+    }
+
+    @Bean
+    UploadTransferDocumentUseCase uploadTransferDocument(TransferDocuments transfers,
+            TransferDocumentRepository documents, DocumentStorage storage, DocumentPolicy policy, AuditRepository audit,
+            UnitOfWork uow, Clock clock, OwnershipProperties properties) {
+        return new UploadTransferDocumentService(transfers, documents, storage, policy, audit, uow, clock,
+                properties.maxDocumentsPerTransfer());
+    }
+
+    @Bean
+    ListTransferDocumentsUseCase listTransferDocuments(TransferDocuments transfers,
+            TransferDocumentRepository documents, UnitOfWork uow) {
+        return new ListTransferDocumentsService(transfers, documents, uow);
+    }
+
+    @Bean
+    DownloadTransferDocumentUseCase downloadTransferDocument(TransferDocuments transfers,
+            TransferDocumentRepository documents, DocumentStorage storage, UnitOfWork uow) {
+        return new DownloadTransferDocumentService(transfers, documents, storage, uow);
+    }
+
+    @Bean
+    RemoveTransferDocumentUseCase removeTransferDocument(TransferDocuments transfers,
+            TransferDocumentRepository documents, AuditRepository audit, UnitOfWork uow, Clock clock) {
+        return new RemoveTransferDocumentService(transfers, documents, audit, uow, clock);
     }
 }

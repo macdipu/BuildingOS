@@ -126,6 +126,12 @@ public class JdbcOwnershipRepositoryAdapter implements OwnershipRepository {
                 + "AND end_revision IS NULL", Long.class, buildingId, userId);
     }
 
+    @Override
+    public Optional<OwnershipTransfer> findTransfer(UUID buildingId, UUID unitId, UUID transferId) {
+        return jdbc.query("SELECT " + TRANSFER_COLUMNS + " FROM ownership_transfer WHERE building_id = ? "
+                + "AND unit_id = ? AND id = ?", this::transfer, buildingId, unitId, transferId).stream().findFirst();
+    }
+
     private OwnershipPeriod period(ResultSet rs, int row) throws SQLException {
         Timestamp end = rs.getTimestamp("end_at");
         long endValue = rs.getLong("end_revision");

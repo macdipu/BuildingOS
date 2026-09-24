@@ -63,6 +63,7 @@ buildingos:
       max-sheet-bytes: ${UNIT_BATCH_MAX_SHEET_BYTES:1048576}
   ownership:
     zone: ${OWNERSHIP_ZONE:Asia/Dhaka}
+    max-documents-per-transfer: ${OWNERSHIP_MAX_DOCUMENTS_PER_TRANSFER:10}
   outbox:
     enabled: ${OUTBOX_PUBLISHER_ENABLED:true}
     poll-interval: ${OUTBOX_POLL_INTERVAL:PT1S}
