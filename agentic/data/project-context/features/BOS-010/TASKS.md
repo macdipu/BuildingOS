@@ -21,14 +21,14 @@ The old TASK-003 run was cancelled before code changes. TASK-004 is now complete
 validation plan. Implementation evidence:
 [task-003-implementation-result.json](task-003-implementation-result.json).
 
-Do not commit without an explicit operator request.
+Follow the repository commit policy: commit after a governed task finishes with green checks, or on an explicit operator request.
 
 ## Feature slices (after the identity slice)
 
 | Slice | Outcome | Status |
 |---|---|---|
 | [F5a revenue foundation](subscription-plans/REQUIREMENTS.md) | `subscription-service`: plans, per-user subscriptions, free tier, one-time building-creation fee ([design](subscription-plans/TECH-SPEC.md)) | COMPLETED 2026-09-23 (local/test); [review/QA](subscription-plans/REVIEW.md); run `RUN-4ABC6B2BAC974B0E878CA39C9A27AE00` |
-| [F2 building application & lifecycle](building-application/REQUIREMENTS.md) | Apply → review → approve (creation fee, D-26; admin provisioned in auth-service, D-29) → onboarding → activate/suspend (D-30); documents in MinIO/S3 (D-28); Flutter submit flow ([design](building-application/TECH-SPEC.md)) | Technical approved 2026-09-24; T1–T5 done; [review/QA](building-application/REVIEW.md) READY (backend 197/0, live smoke, Flutter 50/0); awaiting operator device check + release approval; run `RUN-5AC974860CB74DA790FDBA00532A15A2` |
+| [F2 building application & lifecycle](building-application/REQUIREMENTS.md) | Apply → review → approve (creation fee, D-26; admin provisioned in auth-service, D-29) → onboarding → activate/suspend (D-30); documents in MinIO/S3 (D-28); Flutter submit flow ([design](building-application/TECH-SPEC.md)) | COMPLETED 2026-09-24 (local/test); T1–T5 done; [review/QA](building-application/REVIEW.md) READY (backend 197/0, live smoke, Flutter 50/0); operator confirmed device check and approved [release](building-application/RELEASE.md); run `RUN-5AC974860CB74DA790FDBA00532A15A2` |
 | Units & ownership | Carried BOS-002 domain | Not started |
 | Back-office console | UI for the above | Not started; needs D-09/D-10 |
 

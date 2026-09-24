@@ -1,0 +1,18 @@
+{
+  "route": [
+    "INTAKE",
+    "CONTEXT",
+    "REQUIREMENTS",
+    "TECHNICAL",
+    "IMPLEMENTATION",
+    "REVIEW",
+    "QA",
+    "RELEASE",
+    "COMPLETED"
+  ],
+  "workflow_doc": "agentic/kit/workflows/brownfield.md",
+  "skill_docs": [
+    "agentic/kit/skills/release-readiness-agent/SKILL.md"
+  ],
+  "planning": "NO_REPLAN"
+}
