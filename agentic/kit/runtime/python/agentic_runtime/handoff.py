@@ -34,6 +34,7 @@ from agentic_runtime.timing import durations
 
 VALID_AGENTS = ("claude", "codex")
 PICKUP_SECTIONS = ("Task", "Completed", "Blockers", "Decisions", "Next Action")
+NOTE_SECTIONS = PICKUP_SECTIONS + ("Changed Files", "Tests", "Runtime", "Commits", "Git Snapshot", "Git Status")
 PICKUP_LIMIT = 4000
 
 
@@ -309,11 +310,10 @@ def read_latest_session(repo_root, exclude: Optional[Path] = None) -> Optional[s
 
 
 def _split_sections(text: str):
-    header, *chunks = re.split(r"^## ", text, flags=re.M)
-    sections = {}
-    for chunk in chunks:
-        title, _, body = chunk.partition("\n")
-        sections[title.strip()] = body.strip()
+    """Split on the note's own section titles only, so a `## ` line inside free-text
+    fields (task, completed, ...) stays part of that field."""
+    header, *chunks = re.split(rf"^## ({'|'.join(map(re.escape, NOTE_SECTIONS))})[ \t]*$", text, flags=re.M)
+    sections = {title: body.strip() for title, body in zip(chunks[::2], chunks[1::2])}
     return header.strip(), sections
 
 
@@ -323,7 +323,7 @@ def _runtime_line(runtime: str) -> str:
 
 
 def note_run_id(text: str) -> Optional[str]:
-    match = re.search(r"^- Run: (\S+)", text, flags=re.M)
+    match = re.search(r"^- Run: (\S+)", _split_sections(text)[1].get("Runtime", ""), flags=re.M)
     return match.group(1) if match else None
 
 

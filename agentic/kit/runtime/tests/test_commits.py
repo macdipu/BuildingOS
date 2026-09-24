@@ -106,6 +106,14 @@ class CommitTests(HarnessCase):
                               decisions='', next_action='n')
         self.assertIn('LATEST SESSION', handoff.pickup_summary(self.root))
 
+    def test_condense_note_ignores_headings_and_run_lines_in_free_text(self):
+        note = handoff.render_handoff(
+            last_agent='claude', operator='o', status='RUNNING', task='t\n- Run: FAKE',
+            completed='a\n## Sub heading\nkept', changed_files=[], tests='', blockers='', decisions='',
+            next_action='n', git_snapshot_text='## main', runtime='- Run: RUN-1\n- Stage: X')
+        self.assertEqual(handoff.note_run_id(note), 'RUN-1')
+        self.assertIn('## Sub heading\nkept', handoff.condense_note(note))
+
     def test_pickup_cli_is_condensed_unless_full(self):
         self.init_repo()
         self.commit('a.txt', 'chore: seed\n')
