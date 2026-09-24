@@ -1,5 +1,6 @@
 package com.buildingos.building.unit.application.listunits;
 
+import com.buildingos.building.unit.application.UnitReadScope;
 import com.buildingos.building.unit.application.UnitView;
 import com.buildingos.building.membership.application.BuildingAccess;
 import com.buildingos.building.shared.application.Actor;
@@ -13,7 +14,7 @@ import java.util.UUID;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-/** Admin/platform unit list; owner-filtered reads arrive with ownership allocations (F4-T4, UO-D01). */
+/** Admins list every unit; an owner lists only units they currently own (UO-D01, UO-08). */
 public final class ListUnitsService implements ListUnitsUseCase {
     private final BuildingAccess access;
     private final FloorRepository floors;
@@ -32,13 +33,13 @@ public final class ListUnitsService implements ListUnitsUseCase {
     public Page<UnitView> execute(Actor actor, ListUnitsQuery query) {
         Page.validate(query.page(), query.size());
         return unitOfWork.inTransaction(() -> {
-            access.requireAdminToRead(actor, query.buildingId());
+            var owner = UnitReadScope.ownerFilter(actor, access.requireMemberToRead(actor, query.buildingId()));
             Map<UUID, Floor> byId = floors.findByBuilding(query.buildingId()).stream()
                     .collect(Collectors.toMap(Floor::id, Function.identity()));
-            var items = units.findByBuilding(query.buildingId(), query.floorId(), query.type(), query.page(),
+            var items = units.findByBuilding(query.buildingId(), query.floorId(), query.type(), owner, query.page(),
                     query.size()).stream().map(u -> new UnitView(u, byId.get(u.details().floorId()))).toList();
             return new Page<>(items, query.page(), query.size(),
-                    units.count(query.buildingId(), query.floorId(), query.type()));
+                    units.count(query.buildingId(), query.floorId(), query.type(), owner));
         });
     }
 }

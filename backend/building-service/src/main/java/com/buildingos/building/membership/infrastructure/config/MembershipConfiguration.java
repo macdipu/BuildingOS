@@ -22,6 +22,7 @@ import com.buildingos.building.membership.application.revokeinvitation.RevokeInv
 import com.buildingos.building.membership.application.revokemembership.RevokeMembershipService;
 import com.buildingos.building.membership.application.revokemembership.RevokeMembershipUseCase;
 import com.buildingos.building.membership.domain.repository.BuildingInvitationRepository;
+import com.buildingos.building.ownership.domain.repository.OwnershipRepository;
 import com.buildingos.building.shared.application.port.out.UnitOfWork;
 import com.buildingos.building.shared.domain.repository.AuditRepository;
 import com.buildingos.building.shared.domain.repository.OperationRepository;
@@ -82,8 +83,8 @@ public class MembershipConfiguration {
 
     @Bean
     ListMyBuildingsUseCase listMyBuildings(BuildingRepository buildings, BuildingMembershipRepository memberships,
-            UnitOfWork uow) {
-        return new ListMyBuildingsService(buildings, memberships, uow);
+            OwnershipRepository ownership, UnitOfWork uow) {
+        return new ListMyBuildingsService(buildings, memberships, ownership, uow);
     }
 
     @Bean

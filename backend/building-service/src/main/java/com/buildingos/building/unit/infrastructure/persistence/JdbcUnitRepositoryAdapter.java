@@ -57,23 +57,30 @@ public class JdbcUnitRepositoryAdapter implements UnitRepository {
     }
 
     @Override
-    public List<Unit> findByBuilding(UUID buildingId, UUID floorId, UnitType type, int page, int size) {
-        var args = filterArgs(buildingId, floorId, type);
+    public List<Unit> findByBuilding(UUID buildingId, UUID floorId, UnitType type, UUID ownerUserId, int page,
+            int size) {
+        var args = filterArgs(buildingId, floorId, type, ownerUserId);
         args.add(size);
         args.add((long) page * size);
-        return jdbc.query("SELECT " + COLUMNS + " FROM building_unit" + filter(floorId, type)
+        return jdbc.query("SELECT " + COLUMNS + " FROM building_unit" + filter(floorId, type, ownerUserId)
                 + " ORDER BY normalized_number, id LIMIT ? OFFSET ?", this::map, args.toArray());
     }
 
     @Override
-    public long count(UUID buildingId, UUID floorId, UnitType type) {
-        return jdbc.queryForObject("SELECT count(*) FROM building_unit" + filter(floorId, type), Long.class,
-                filterArgs(buildingId, floorId, type).toArray());
+    public long count(UUID buildingId, UUID floorId, UnitType type, UUID ownerUserId) {
+        return jdbc.queryForObject("SELECT count(*) FROM building_unit" + filter(floorId, type, ownerUserId), Long.class,
+                filterArgs(buildingId, floorId, type, ownerUserId).toArray());
+    }
+
+    @Override
+    public boolean currentlyOwnedBy(UUID unitId, UUID userId) {
+        return Boolean.TRUE.equals(jdbc.queryForObject("SELECT EXISTS (SELECT 1 FROM ownership_period "
+                + "WHERE unit_id = ? AND owner_user_id = ? AND end_revision IS NULL)", Boolean.class, unitId, userId));
     }
 
     @Override
     public long countByBuilding(UUID buildingId) {
-        return count(buildingId, null, null);
+        return count(buildingId, null, null, null);
     }
 
     @Override
@@ -102,12 +109,14 @@ public class JdbcUnitRepositoryAdapter implements UnitRepository {
 
     Unit mapRow(ResultSet rs, int row) throws SQLException { return map(rs, row); }
 
-    private static String filter(UUID floorId, UnitType type) {
+    private static String filter(UUID floorId, UnitType type, UUID ownerUserId) {
         return " WHERE building_id = ?" + (floorId == null ? "" : " AND floor_id = ?")
-                + (type == null ? "" : " AND unit_type = ?");
+                + (type == null ? "" : " AND unit_type = ?")
+                + (ownerUserId == null ? "" : " AND EXISTS (SELECT 1 FROM ownership_period p WHERE p.unit_id = "
+                        + "building_unit.id AND p.owner_user_id = ? AND p.end_revision IS NULL)");
     }
 
-    private static List<Object> filterArgs(UUID buildingId, UUID floorId, UnitType type) {
+    private static List<Object> filterArgs(UUID buildingId, UUID floorId, UnitType type, UUID ownerUserId) {
         List<Object> args = new ArrayList<>();
         args.add(buildingId);
         if (floorId != null) {
@@ -115,6 +124,9 @@ public class JdbcUnitRepositoryAdapter implements UnitRepository {
         }
         if (type != null) {
             args.add(type.name());
+        }
+        if (ownerUserId != null) {
+            args.add(ownerUserId);
         }
         return args;
     }

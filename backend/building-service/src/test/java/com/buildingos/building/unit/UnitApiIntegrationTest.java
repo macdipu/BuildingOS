@@ -244,7 +244,9 @@ class UnitApiIntegrationTest {
     void accessFollowsCurrentMembershipAndSuspendedBuildingsAreReadOnly() throws Exception {
         UUID owner = UUID.randomUUID();
         member(building, owner, "OWNER");
-        assertThat(send("GET", base(building) + "/units", token(owner), null).status()).isEqualTo(403);
+        assertThat(send("GET", base(building) + "/units", token(owner), null).body().path("meta").path("total")
+                .asInt()).isZero();
+        assertThat(send("GET", base(building) + "/floors", token(owner), null).status()).isEqualTo(403);
         assertThat(floor(building, token(owner), "Roof", 9).status()).isEqualTo(403);
         assertThat(send("GET", base(building) + "/units", token(UUID.randomUUID()), null).code())
                 .isEqualTo("BUILDING_NOT_FOUND");

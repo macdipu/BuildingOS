@@ -49,7 +49,7 @@ public final class UnitBatchGenerator {
 
     private List<Unit> templateUnits(UUID buildingId, GenerateSpec spec, BatchLimits limits) {
         floors.findInBuilding(buildingId, spec.templateFloorId()).orElseThrow(UnitErrors::floorNotFound);
-        var template = units.findByBuilding(buildingId, spec.templateFloorId(), null, 0, limits.maxRows());
+        var template = units.findByBuilding(buildingId, spec.templateFloorId(), null, null, 0, limits.maxRows());
         if (template.isEmpty()) {
             throw BatchRejectedException.invalid("TEMPLATE_FLOOR_EMPTY", "The template floor has no units");
         }

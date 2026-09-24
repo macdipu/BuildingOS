@@ -3,12 +3,15 @@ package com.buildingos.building.ownership.presentation.rest;
 import com.buildingos.building.ownership.application.OwnershipResult;
 import com.buildingos.building.ownership.application.assignownership.AssignOwnershipCommand;
 import com.buildingos.building.ownership.application.assignownership.AssignOwnershipUseCase;
+import com.buildingos.building.ownership.application.getcurrentownerships.GetCurrentOwnershipsQuery;
+import com.buildingos.building.ownership.application.getcurrentownerships.GetCurrentOwnershipsUseCase;
 import com.buildingos.building.ownership.application.getownershiphistory.GetOwnershipHistoryQuery;
 import com.buildingos.building.ownership.application.getownershiphistory.GetOwnershipHistoryUseCase;
 import com.buildingos.building.ownership.application.transferownership.TransferOwnershipCommand;
 import com.buildingos.building.ownership.application.transferownership.TransferOwnershipUseCase;
 import com.buildingos.building.ownership.presentation.rest.request.AssignOwnershipRequest;
 import com.buildingos.building.ownership.presentation.rest.request.TransferOwnershipRequest;
+import com.buildingos.building.ownership.presentation.rest.response.CurrentOwnershipResponse;
 import com.buildingos.building.ownership.presentation.rest.response.OwnershipHistoryResponse;
 import com.buildingos.building.ownership.presentation.rest.response.OwnershipResponse;
 import com.buildingos.building.shared.presentation.rest.CurrentActor;
@@ -34,12 +37,14 @@ public class OwnershipController {
     private final AssignOwnershipUseCase assign;
     private final TransferOwnershipUseCase transfer;
     private final GetOwnershipHistoryUseCase history;
+    private final GetCurrentOwnershipsUseCase current;
 
     public OwnershipController(AssignOwnershipUseCase assign, TransferOwnershipUseCase transfer,
-            GetOwnershipHistoryUseCase history) {
+            GetOwnershipHistoryUseCase history, GetCurrentOwnershipsUseCase current) {
         this.assign = assign;
         this.transfer = transfer;
         this.history = history;
+        this.current = current;
     }
 
     @PostMapping("/ownerships")
@@ -60,6 +65,13 @@ public class OwnershipController {
                 body.sourceOwnerUserId(), body.recipientUserId(), body.share(), body.effectiveDate(), body.reference(),
                 body.reason(), body.expectedVersion(), body.operationId()));
         return reply(result, request);
+    }
+
+    @GetMapping("/ownerships")
+    public ApiEnvelope<CurrentOwnershipResponse> current(@AuthenticationPrincipal Jwt jwt,
+            @PathVariable UUID buildingId, @PathVariable UUID unitId, HttpServletRequest request) {
+        var result = current.execute(CurrentActor.from(jwt), new GetCurrentOwnershipsQuery(buildingId, unitId));
+        return ApiEnvelope.of(CurrentOwnershipResponse.of(result), CorrelationFilter.traceId(request));
     }
 
     @GetMapping("/ownership-history")

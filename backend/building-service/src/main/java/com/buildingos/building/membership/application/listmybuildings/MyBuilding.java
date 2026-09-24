@@ -4,7 +4,8 @@ import com.buildingos.building.building.domain.model.Building;
 import com.buildingos.building.building.domain.model.BuildingRole;
 import java.util.Set;
 
-public record MyBuilding(Building building, Set<BuildingRole> roles) {
+/** {@code ownedUnitCount} counts the caller's current allocations in this building. */
+public record MyBuilding(Building building, Set<BuildingRole> roles, long ownedUnitCount) {
     public MyBuilding {
         roles = Set.copyOf(roles);
     }
