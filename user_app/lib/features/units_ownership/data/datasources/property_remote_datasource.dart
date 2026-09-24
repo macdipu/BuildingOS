@@ -89,4 +89,82 @@ class PropertyRemoteDataSource {
           : 'UNAVAILABLE',
     );
   }
+
+  dynamic _documentResult(
+    Resource response, {
+    bool bytes = false,
+    bool noContent = false,
+  }) {
+    final raw = response.response;
+    final payload = raw is Response ? raw.data : raw;
+    final status = raw is Response ? raw.statusCode : response.messageCode;
+    if (status == 403 || status == 404)
+      throw const PropertyException('ACCESS_DENIED');
+    if (status == 204 && noContent) return null;
+    if (status != null && status >= 200 && status < 300) {
+      if (bytes && payload is List<int>) return payload;
+      if (payload is Map && payload['success'] == true) return payload['data'];
+    }
+    throw PropertyException(
+      payload is Map && payload['code'] is String
+          ? payload['code']
+          : 'UNAVAILABLE',
+    );
+  }
+
+  Future<void> uploadDocument(
+    String path,
+    String filePath,
+    String reason,
+  ) async {
+    try {
+      if (await File(filePath).length() > 10 * 1024 * 1024)
+        throw const PropertyException('FILE_TOO_LARGE');
+      final extension = filePath.toLowerCase().split('.').last;
+      final mime = switch (extension) {
+        'pdf' => 'application/pdf',
+        'jpg' || 'jpeg' => 'image/jpeg',
+        'png' => 'image/png',
+        _ => null,
+      };
+      if (mime == null) throw const PropertyException('DOCUMENT_UNSUPPORTED');
+      final part = await MultipartFile.fromFile(
+        filePath,
+        contentType: DioMediaType.parse(mime),
+      );
+      _documentResult(
+        await client.authorizedPost('${baseUrl}v1/$path', {
+          'file': part,
+          'reason': reason,
+        }, isFormData: true),
+      );
+    } on ForbiddenException {
+      throw const PropertyException('ACCESS_DENIED');
+    }
+  }
+
+  Future<List<int>> download(String path) async {
+    try {
+      return (_documentResult(
+            await client.authorizedGetBytes('${baseUrl}v1/$path'),
+            bytes: true,
+          )
+          as List<int>);
+    } on ForbiddenException {
+      throw const PropertyException('ACCESS_DENIED');
+    }
+  }
+
+  Future<void> removeDocument(String path, String reason) async {
+    try {
+      _documentResult(
+        await client.authorizedDeleteWithBody('${baseUrl}v1/$path', {
+          'reason': reason,
+        }),
+        noContent: true,
+      );
+    } on ForbiddenException {
+      throw const PropertyException('ACCESS_DENIED');
+    }
+  }
 }

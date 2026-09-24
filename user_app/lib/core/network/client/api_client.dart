@@ -33,8 +33,7 @@ class ApiClient {
     _dio = Dio()
       ..interceptors.add(
         PrettyDioLogger(
-          requestHeader: true,
-          requestBody: true,
+          responseBody: false,
           // ignore: avoid_redundant_argument_values
           enabled: kDebugMode,
         ),
@@ -47,7 +46,10 @@ class ApiClient {
   bool hasToken() => _token != null;
 
   Future<void> setToken() async {
-    final cached = await _cache.get(SharedPreferenceConstant.customerInfo, secure: true);
+    final cached = await _cache.get(
+      SharedPreferenceConstant.customerInfo,
+      secure: true,
+    );
     if (cached != null) {
       final json = jsonDecode(cached) as Map<String, dynamic>;
       _token = JWT(
@@ -68,7 +70,10 @@ class ApiClient {
     return _get(uri, false, queryParams);
   }
 
-  Future<Resource> authorizedGet(String uri, {Map<String, dynamic>? queryParams}) async {
+  Future<Resource> authorizedGet(
+    String uri, {
+    Map<String, dynamic>? queryParams,
+  }) async {
     return _handleAuthorizationError(() => _get(uri, true, queryParams));
   }
 
@@ -76,17 +81,29 @@ class ApiClient {
     return _post(uri, false, data);
   }
 
-  Future<Resource> authorizedPost(String uri, Map<String, dynamic> data, {bool? isFormData = false}) async {
-    return _handleAuthorizationError(() => _post(uri, true, data, isFormData: isFormData));
+  Future<Resource> authorizedPost(
+    String uri,
+    Map<String, dynamic> data, {
+    bool? isFormData = false,
+  }) async {
+    return _handleAuthorizationError(
+      () => _post(uri, true, data, isFormData: isFormData),
+    );
   }
 
-  Future<Resource> authorizedPut(String uri, Map<String, dynamic> data, {bool? isFormData = false}) async {
+  Future<Resource> authorizedPut(
+    String uri,
+    Map<String, dynamic> data, {
+    bool? isFormData = false,
+  }) async {
     final hasFile = _processFiles(data);
     return _getDataOrHandleDioError(() async {
       final options = await _makeOptions(true);
       return _dio.put(
         uri,
-        data: hasFile || isFormData == true ? FormData.fromMap(data).clone() : data,
+        data: hasFile || isFormData == true
+            ? FormData.fromMap(data).clone()
+            : data,
         options: options,
       );
     });
@@ -100,20 +117,53 @@ class ApiClient {
     return _handleAuthorizationError(() => _delete(uri, true));
   }
 
-  Future<Resource> _get(String uri, bool tokenize, Map<String, dynamic>? queryParams) async {
+  /// Authenticated binary downloads keep tokens out of browser URLs.
+  Future<Resource> authorizedGetBytes(String uri) async =>
+      _handleAuthorizationError(
+        () => _getDataOrHandleDioError(() async {
+          final options = await _makeOptions(true);
+          return _dio.get(
+            uri,
+            options: options.copyWith(responseType: ResponseType.bytes),
+          );
+        }),
+      );
+
+  Future<Resource> authorizedDeleteWithBody(
+    String uri,
+    Map<String, dynamic> body,
+  ) async => _handleAuthorizationError(
+    () => _getDataOrHandleDioError(() async {
+      final options = await _makeOptions(true);
+      return _dio.delete(uri, data: body, options: options);
+    }),
+  );
+
+  Future<Resource> _get(
+    String uri,
+    bool tokenize,
+    Map<String, dynamic>? queryParams,
+  ) async {
     return _getDataOrHandleDioError(() async {
       final options = await _makeOptions(tokenize);
       return _dio.get(uri, queryParameters: queryParams, options: options);
     });
   }
 
-  Future<Resource> _post(String uri, bool tokenize, Map<String, dynamic>? data, {bool? isFormData}) async {
+  Future<Resource> _post(
+    String uri,
+    bool tokenize,
+    Map<String, dynamic>? data, {
+    bool? isFormData,
+  }) async {
     final hasFile = data != null ? _processFiles(data) : false;
     return _getDataOrHandleDioError(() async {
       final options = await _makeOptions(tokenize);
       return _dio.post(
         uri,
-        data: hasFile || isFormData == true ? FormData.fromMap(data!).clone() : data,
+        data: hasFile || isFormData == true
+            ? FormData.fromMap(data!).clone()
+            : data,
         options: options,
       );
     });
@@ -130,7 +180,9 @@ class ApiClient {
     bool hasFile = false;
     data.forEach((key, value) {
       if (value is List<File>) {
-        data[key] = value.map((f) => MultipartFile.fromFileSync(f.path)).toList();
+        data[key] = value
+            .map((f) => MultipartFile.fromFileSync(f.path))
+            .toList();
         hasFile = true;
       } else if (value is File) {
         data[key] = MultipartFile.fromFileSync(value.path);
@@ -212,12 +264,16 @@ class ApiClient {
     return {
       'Accept': 'application/json',
       'Platform': Platform.isIOS ? 'ios' : 'android',
-      'Accept-language': getx.Get.locale?.languageCode ?? AppTranslations.supportedLocales.first.languageCode,
+      'Accept-language':
+          getx.Get.locale?.languageCode ??
+          AppTranslations.supportedLocales.first.languageCode,
       'Version': version,
     };
   }
 
-  Future<Map<String, dynamic>> _addAuthHeader(Map<String, dynamic> headers) async {
+  Future<Map<String, dynamic>> _addAuthHeader(
+    Map<String, dynamic> headers,
+  ) async {
     final token = await _getValidToken();
     headers['authorization'] = 'Bearer ${token.getToken()}';
     return headers;
@@ -271,20 +327,34 @@ class ApiClient {
 
   Future<void> _refreshToken() async {
     final refreshToken = getToken()?.getRefreshToken();
-    final response = await post(_url.refreshTokenUrl, {'refresh_token': refreshToken});
+    final response = await post(_url.refreshTokenUrl, {
+      'refresh_token': refreshToken,
+    });
     if (response.messageCode == 200) {
       final data = response.response as Map<String, dynamic>;
       final newAccess = data['access_token'] as String? ?? '';
       final newRefresh = data['refresh_token'] as String? ?? '';
 
-      final cached = await _cache.get(SharedPreferenceConstant.customerInfo, secure: true);
-      final json = cached != null ? (jsonDecode(cached) as Map<String, dynamic>) : <String, dynamic>{};
+      final cached = await _cache.get(
+        SharedPreferenceConstant.customerInfo,
+        secure: true,
+      );
+      final json = cached != null
+          ? (jsonDecode(cached) as Map<String, dynamic>)
+          : <String, dynamic>{};
       json['access_token'] = newAccess;
       json['refresh_token'] = newRefresh;
-      await _cache.forever(SharedPreferenceConstant.customerInfo, jsonEncode(json), secure: true);
+      await _cache.forever(
+        SharedPreferenceConstant.customerInfo,
+        jsonEncode(json),
+        secure: true,
+      );
       await setToken();
     } else {
-      throw ApiException(response.messageCode ?? 400, response.message ?? 'Failed to refresh token');
+      throw ApiException(
+        response.messageCode ?? 400,
+        response.message ?? 'Failed to refresh token',
+      );
     }
   }
 }

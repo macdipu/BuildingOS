@@ -1,3 +1,6 @@
+import '../../data/repositories/ownership_repository_impl.dart';
+import '../../domain/repositories/ownership_repository.dart';
+import '../../domain/usecases/ownership_use_cases.dart';
 import 'package:get/get.dart';
 import 'package:customer/core/network/client/api_client.dart';
 import 'package:customer/core/network/urls/api_urls.dart';
@@ -102,6 +105,42 @@ class PropertyBinding extends Bindings {
     );
     Get.lazyPut(
       () => CommitUnitBatch(Get.find<PropertyRepository>()),
+      fenix: true,
+    );
+    Get.lazyPut<OwnershipRepository>(
+      () => OwnershipRepositoryImpl(Get.find()),
+      fenix: true,
+    );
+    Get.lazyPut(
+      () => GetCurrentOwnership(Get.find<OwnershipRepository>()),
+      fenix: true,
+    );
+    Get.lazyPut(
+      () => GetOwnershipHistory(Get.find<OwnershipRepository>()),
+      fenix: true,
+    );
+    Get.lazyPut(
+      () => AssignUnitOwnership(Get.find<OwnershipRepository>()),
+      fenix: true,
+    );
+    Get.lazyPut(
+      () => TransferUnitOwnership(Get.find<OwnershipRepository>()),
+      fenix: true,
+    );
+    Get.lazyPut(
+      () => ListTransferFiles(Get.find<OwnershipRepository>()),
+      fenix: true,
+    );
+    Get.lazyPut(
+      () => UploadTransferFile(Get.find<OwnershipRepository>()),
+      fenix: true,
+    );
+    Get.lazyPut(
+      () => DownloadTransferFile(Get.find<OwnershipRepository>()),
+      fenix: true,
+    );
+    Get.lazyPut(
+      () => RemoveTransferFile(Get.find<OwnershipRepository>()),
       fenix: true,
     );
   }

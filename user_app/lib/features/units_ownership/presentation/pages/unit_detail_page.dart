@@ -1,3 +1,4 @@
+import 'ownership_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:customer/res/strings/string_enum.dart';
@@ -41,6 +42,22 @@ class UnitDetailPage extends StatelessWidget {
               tooltip: TextEnum.uoRefresh.tr,
               onPressed: reload,
               icon: const Icon(Icons.refresh),
+            ),
+            OutlinedButton(
+              onPressed: () async {
+                await Navigator.push(
+                  context,
+                  MaterialPageRoute<void>(
+                    builder: (_) => OwnershipPage(
+                      buildingId: buildingId,
+                      unitId: unitId,
+                      unitNumber: u.number,
+                    ),
+                  ),
+                );
+                if (context.mounted) reload();
+              },
+              child: Text(TextEnum.uoOwnership.tr),
             ),
             if (data.$1.canEditUnits)
               PropertyAction(

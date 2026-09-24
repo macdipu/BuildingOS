@@ -8,7 +8,7 @@
     "status": "BLOCKED",
     "dry_run": false,
     "created_at": "2026-09-24T11:15:32.383326+00:00",
-    "updated_at": "2026-09-24T14:32:49.540368+00:00",
+    "updated_at": "2026-09-24T14:46:56.561228+00:00",
     "metadata": {
       "runtime_version": 2,
       "repo": "../../..",
@@ -107,30 +107,28 @@
         "IMPLEMENTATION": {
           "status": "PARTIAL",
           "evidence": [
-            "agentic/data/project-context/features/BOS-010/units-ownership/tasks/F4-T7.md",
+            "agentic/data/project-context/features/BOS-010/units-ownership/tasks/F4-T8.md",
             "user_app/lib/features/units_ownership",
             "user_app/test/features/units_ownership",
-            "sh scripts/verify-flutter.sh: PASS, analyze=0, 60 tests passed",
+            "sh scripts/verify-flutter.sh: PASS, analyze=0, 67 tests passed",
             "git diff --check: PASS"
           ],
           "blocking_issues": [],
           "open_questions": [],
-          "recommended_next_step": "Implement F4-T8 ownership assignment, transfers, documents and history; then F4-T9 QA.",
+          "recommended_next_step": "Run F4-T9 QA with device evidence.",
           "outputs": {
-            "subtask": "F4-T7",
+            "subtask": "F4-T8",
             "subtask_status": "COMPLETED",
             "remaining": [
-              "F4-T8",
               "F4-T9"
-            ],
-            "sdk_configuration": "Generated package configuration and SDK-pinned lock entries synchronized with FVM Flutter 3.44.4."
+            ]
           }
         }
       },
       "attempts": {
         "0:INTAKE:document-intake-adapter": 1,
         "0:CONTEXT:baseline-verifier": 1,
-        "0:IMPLEMENTATION:implementation-agent": 10
+        "0:IMPLEMENTATION:implementation-agent": 11
       },
       "active_task": null,
       "context": {
@@ -2488,6 +2486,436 @@
         "active_task": null
       },
       "created_at": "2026-09-24T14:32:49.540368+00:00"
+    },
+    {
+      "run_id": "RUN-C73FA516545143FAA9B35B168EEFE0C9",
+      "stage": "IMPLEMENTATION",
+      "status": "RUNNING",
+      "payload": {
+        "results": {
+          "INTAKE": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/units-ownership/APPROVAL.md",
+              "agentic/data/project-context/features/BOS-010/units-ownership/DELIVERY-PLAN.md",
+              "agentic/data/project-context/features/BOS-010/units-ownership/tasks/F4-T1a.md",
+              "agentic/data/project-context/features/BOS-010/units-ownership/tasks/F4-T1b.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Verify context and record the operator's technical approval, then resume F4-T1b from the working tree.",
+            "outputs": {
+              "work_item": "BOS-010 F4 units and ownership",
+              "work_type": "existing_task",
+              "hierarchy": "FEATURE_WITH_TASKS",
+              "planning": "NO_REPLAN",
+              "project_type": "brownfield",
+              "supersedes_run": "RUN-0BF1AD2443404B03BE7350F0C91BD0C0 (CANCELLED for kit upgrade 1482131)",
+              "completed_subtasks": [
+                "F4-T1a (b820ead)"
+              ],
+              "next_subtask": "F4-T1b"
+            }
+          },
+          "CONTEXT": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/units-ownership/BASELINE.md",
+              "docs/ARCHITECTURE.md",
+              "backend/building-service/src/main/resources/db/migration/V5__building_membership_invitations.sql",
+              "agentic/data/project-context/features/BOS-010/units-ownership/TECH-SPEC.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Record the operator's technical approval for the approved F4 design, then implement F4-T1b.",
+            "outputs": {
+              "context": "AVAILABLE",
+              "project_type": "brownfield",
+              "verdict": "CONTEXT_READY",
+              "baseline": "F4-T1a committed b820ead; building-service verify 60/0 at that commit"
+            }
+          }
+        },
+        "attempts": {
+          "0:INTAKE:document-intake-adapter": 1,
+          "0:CONTEXT:baseline-verifier": 1,
+          "0:IMPLEMENTATION:implementation-agent": 11
+        },
+        "active_task": {
+          "id": "4fe275de58274ffe97d803b7e6ae8fc9",
+          "skill": "implementation-agent",
+          "started_at": "2026-09-24T14:33:00.130319+00:00",
+          "tool_calls": 0
+        }
+      },
+      "created_at": "2026-09-24T14:33:00.132681+00:00"
+    },
+    {
+      "run_id": "RUN-C73FA516545143FAA9B35B168EEFE0C9",
+      "stage": "IMPLEMENTATION",
+      "status": "RUNNING",
+      "payload": {
+        "active_task": {
+          "id": "4fe275de58274ffe97d803b7e6ae8fc9",
+          "skill": "implementation-agent",
+          "started_at": "2026-09-24T14:33:00.130319+00:00",
+          "tool_calls": 1
+        }
+      },
+      "created_at": "2026-09-24T14:40:53.028755+00:00"
+    },
+    {
+      "run_id": "RUN-C73FA516545143FAA9B35B168EEFE0C9",
+      "stage": "IMPLEMENTATION",
+      "status": "RUNNING",
+      "payload": {
+        "active_task": {
+          "id": "4fe275de58274ffe97d803b7e6ae8fc9",
+          "skill": "implementation-agent",
+          "started_at": "2026-09-24T14:33:00.130319+00:00",
+          "tool_calls": 2
+        }
+      },
+      "created_at": "2026-09-24T14:40:53.090869+00:00"
+    },
+    {
+      "run_id": "RUN-C73FA516545143FAA9B35B168EEFE0C9",
+      "stage": "IMPLEMENTATION",
+      "status": "RUNNING",
+      "payload": {
+        "active_task": {
+          "id": "4fe275de58274ffe97d803b7e6ae8fc9",
+          "skill": "implementation-agent",
+          "started_at": "2026-09-24T14:33:00.130319+00:00",
+          "tool_calls": 3
+        }
+      },
+      "created_at": "2026-09-24T14:40:53.155368+00:00"
+    },
+    {
+      "run_id": "RUN-C73FA516545143FAA9B35B168EEFE0C9",
+      "stage": "IMPLEMENTATION",
+      "status": "RUNNING",
+      "payload": {
+        "active_task": {
+          "id": "4fe275de58274ffe97d803b7e6ae8fc9",
+          "skill": "implementation-agent",
+          "started_at": "2026-09-24T14:33:00.130319+00:00",
+          "tool_calls": 4
+        }
+      },
+      "created_at": "2026-09-24T14:40:53.217874+00:00"
+    },
+    {
+      "run_id": "RUN-C73FA516545143FAA9B35B168EEFE0C9",
+      "stage": "IMPLEMENTATION",
+      "status": "RUNNING",
+      "payload": {
+        "active_task": {
+          "id": "4fe275de58274ffe97d803b7e6ae8fc9",
+          "skill": "implementation-agent",
+          "started_at": "2026-09-24T14:33:00.130319+00:00",
+          "tool_calls": 5
+        }
+      },
+      "created_at": "2026-09-24T14:40:53.279003+00:00"
+    },
+    {
+      "run_id": "RUN-C73FA516545143FAA9B35B168EEFE0C9",
+      "stage": "IMPLEMENTATION",
+      "status": "RUNNING",
+      "payload": {
+        "active_task": {
+          "id": "4fe275de58274ffe97d803b7e6ae8fc9",
+          "skill": "implementation-agent",
+          "started_at": "2026-09-24T14:33:00.130319+00:00",
+          "tool_calls": 6
+        }
+      },
+      "created_at": "2026-09-24T14:40:53.340630+00:00"
+    },
+    {
+      "run_id": "RUN-C73FA516545143FAA9B35B168EEFE0C9",
+      "stage": "IMPLEMENTATION",
+      "status": "RUNNING",
+      "payload": {
+        "active_task": {
+          "id": "4fe275de58274ffe97d803b7e6ae8fc9",
+          "skill": "implementation-agent",
+          "started_at": "2026-09-24T14:33:00.130319+00:00",
+          "tool_calls": 7
+        }
+      },
+      "created_at": "2026-09-24T14:40:53.403156+00:00"
+    },
+    {
+      "run_id": "RUN-C73FA516545143FAA9B35B168EEFE0C9",
+      "stage": "IMPLEMENTATION",
+      "status": "RUNNING",
+      "payload": {
+        "active_task": {
+          "id": "4fe275de58274ffe97d803b7e6ae8fc9",
+          "skill": "implementation-agent",
+          "started_at": "2026-09-24T14:33:00.130319+00:00",
+          "tool_calls": 8
+        }
+      },
+      "created_at": "2026-09-24T14:40:53.465720+00:00"
+    },
+    {
+      "run_id": "RUN-C73FA516545143FAA9B35B168EEFE0C9",
+      "stage": "IMPLEMENTATION",
+      "status": "RUNNING",
+      "payload": {
+        "active_task": {
+          "id": "4fe275de58274ffe97d803b7e6ae8fc9",
+          "skill": "implementation-agent",
+          "started_at": "2026-09-24T14:33:00.130319+00:00",
+          "tool_calls": 9
+        }
+      },
+      "created_at": "2026-09-24T14:40:53.526846+00:00"
+    },
+    {
+      "run_id": "RUN-C73FA516545143FAA9B35B168EEFE0C9",
+      "stage": "IMPLEMENTATION",
+      "status": "RUNNING",
+      "payload": {
+        "active_task": {
+          "id": "4fe275de58274ffe97d803b7e6ae8fc9",
+          "skill": "implementation-agent",
+          "started_at": "2026-09-24T14:33:00.130319+00:00",
+          "tool_calls": 10
+        }
+      },
+      "created_at": "2026-09-24T14:40:53.589627+00:00"
+    },
+    {
+      "run_id": "RUN-C73FA516545143FAA9B35B168EEFE0C9",
+      "stage": "IMPLEMENTATION",
+      "status": "RUNNING",
+      "payload": {
+        "active_task": {
+          "id": "4fe275de58274ffe97d803b7e6ae8fc9",
+          "skill": "implementation-agent",
+          "started_at": "2026-09-24T14:33:00.130319+00:00",
+          "tool_calls": 11
+        }
+      },
+      "created_at": "2026-09-24T14:40:53.652168+00:00"
+    },
+    {
+      "run_id": "RUN-C73FA516545143FAA9B35B168EEFE0C9",
+      "stage": "IMPLEMENTATION",
+      "status": "RUNNING",
+      "payload": {
+        "active_task": {
+          "id": "4fe275de58274ffe97d803b7e6ae8fc9",
+          "skill": "implementation-agent",
+          "started_at": "2026-09-24T14:33:00.130319+00:00",
+          "tool_calls": 12
+        }
+      },
+      "created_at": "2026-09-24T14:40:53.714165+00:00"
+    },
+    {
+      "run_id": "RUN-C73FA516545143FAA9B35B168EEFE0C9",
+      "stage": "IMPLEMENTATION",
+      "status": "RUNNING",
+      "payload": {
+        "active_task": {
+          "id": "4fe275de58274ffe97d803b7e6ae8fc9",
+          "skill": "implementation-agent",
+          "started_at": "2026-09-24T14:33:00.130319+00:00",
+          "tool_calls": 13
+        }
+      },
+      "created_at": "2026-09-24T14:40:53.777229+00:00"
+    },
+    {
+      "run_id": "RUN-C73FA516545143FAA9B35B168EEFE0C9",
+      "stage": "IMPLEMENTATION",
+      "status": "RUNNING",
+      "payload": {
+        "active_task": {
+          "id": "4fe275de58274ffe97d803b7e6ae8fc9",
+          "skill": "implementation-agent",
+          "started_at": "2026-09-24T14:33:00.130319+00:00",
+          "tool_calls": 14
+        }
+      },
+      "created_at": "2026-09-24T14:40:53.842269+00:00"
+    },
+    {
+      "run_id": "RUN-C73FA516545143FAA9B35B168EEFE0C9",
+      "stage": "IMPLEMENTATION",
+      "status": "RUNNING",
+      "payload": {
+        "active_task": {
+          "id": "4fe275de58274ffe97d803b7e6ae8fc9",
+          "skill": "implementation-agent",
+          "started_at": "2026-09-24T14:33:00.130319+00:00",
+          "tool_calls": 15
+        }
+      },
+      "created_at": "2026-09-24T14:40:53.907419+00:00"
+    },
+    {
+      "run_id": "RUN-C73FA516545143FAA9B35B168EEFE0C9",
+      "stage": "IMPLEMENTATION",
+      "status": "RUNNING",
+      "payload": {
+        "active_task": {
+          "id": "4fe275de58274ffe97d803b7e6ae8fc9",
+          "skill": "implementation-agent",
+          "started_at": "2026-09-24T14:33:00.130319+00:00",
+          "tool_calls": 16
+        }
+      },
+      "created_at": "2026-09-24T14:40:53.970992+00:00"
+    },
+    {
+      "run_id": "RUN-C73FA516545143FAA9B35B168EEFE0C9",
+      "stage": "IMPLEMENTATION",
+      "status": "RUNNING",
+      "payload": {
+        "active_task": {
+          "id": "4fe275de58274ffe97d803b7e6ae8fc9",
+          "skill": "implementation-agent",
+          "started_at": "2026-09-24T14:33:00.130319+00:00",
+          "tool_calls": 17
+        }
+      },
+      "created_at": "2026-09-24T14:40:55.838126+00:00"
+    },
+    {
+      "run_id": "RUN-C73FA516545143FAA9B35B168EEFE0C9",
+      "stage": "IMPLEMENTATION",
+      "status": "RUNNING",
+      "payload": {
+        "active_task": {
+          "id": "4fe275de58274ffe97d803b7e6ae8fc9",
+          "skill": "implementation-agent",
+          "started_at": "2026-09-24T14:33:00.130319+00:00",
+          "tool_calls": 18
+        }
+      },
+      "created_at": "2026-09-24T14:42:18.110758+00:00"
+    },
+    {
+      "run_id": "RUN-C73FA516545143FAA9B35B168EEFE0C9",
+      "stage": "IMPLEMENTATION",
+      "status": "RUNNING",
+      "payload": {
+        "active_task": {
+          "id": "4fe275de58274ffe97d803b7e6ae8fc9",
+          "skill": "implementation-agent",
+          "started_at": "2026-09-24T14:33:00.130319+00:00",
+          "tool_calls": 19
+        }
+      },
+      "created_at": "2026-09-24T14:42:18.178602+00:00"
+    },
+    {
+      "run_id": "RUN-C73FA516545143FAA9B35B168EEFE0C9",
+      "stage": "IMPLEMENTATION",
+      "status": "RUNNING",
+      "payload": {
+        "active_task": {
+          "id": "4fe275de58274ffe97d803b7e6ae8fc9",
+          "skill": "implementation-agent",
+          "started_at": "2026-09-24T14:33:00.130319+00:00",
+          "tool_calls": 20
+        }
+      },
+      "created_at": "2026-09-24T14:42:35.851347+00:00"
+    },
+    {
+      "run_id": "RUN-C73FA516545143FAA9B35B168EEFE0C9",
+      "stage": "IMPLEMENTATION",
+      "status": "RUNNING",
+      "payload": {
+        "active_task": {
+          "id": "4fe275de58274ffe97d803b7e6ae8fc9",
+          "skill": "implementation-agent",
+          "started_at": "2026-09-24T14:33:00.130319+00:00",
+          "tool_calls": 21
+        }
+      },
+      "created_at": "2026-09-24T14:44:09.973699+00:00"
+    },
+    {
+      "run_id": "RUN-C73FA516545143FAA9B35B168EEFE0C9",
+      "stage": "IMPLEMENTATION",
+      "status": "BLOCKED",
+      "payload": {
+        "results": {
+          "INTAKE": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/units-ownership/APPROVAL.md",
+              "agentic/data/project-context/features/BOS-010/units-ownership/DELIVERY-PLAN.md",
+              "agentic/data/project-context/features/BOS-010/units-ownership/tasks/F4-T1a.md",
+              "agentic/data/project-context/features/BOS-010/units-ownership/tasks/F4-T1b.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Verify context and record the operator's technical approval, then resume F4-T1b from the working tree.",
+            "outputs": {
+              "work_item": "BOS-010 F4 units and ownership",
+              "work_type": "existing_task",
+              "hierarchy": "FEATURE_WITH_TASKS",
+              "planning": "NO_REPLAN",
+              "project_type": "brownfield",
+              "supersedes_run": "RUN-0BF1AD2443404B03BE7350F0C91BD0C0 (CANCELLED for kit upgrade 1482131)",
+              "completed_subtasks": [
+                "F4-T1a (b820ead)"
+              ],
+              "next_subtask": "F4-T1b"
+            }
+          },
+          "CONTEXT": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/units-ownership/BASELINE.md",
+              "docs/ARCHITECTURE.md",
+              "backend/building-service/src/main/resources/db/migration/V5__building_membership_invitations.sql",
+              "agentic/data/project-context/features/BOS-010/units-ownership/TECH-SPEC.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Record the operator's technical approval for the approved F4 design, then implement F4-T1b.",
+            "outputs": {
+              "context": "AVAILABLE",
+              "project_type": "brownfield",
+              "verdict": "CONTEXT_READY",
+              "baseline": "F4-T1a committed b820ead; building-service verify 60/0 at that commit"
+            }
+          },
+          "IMPLEMENTATION": {
+            "status": "PARTIAL",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/units-ownership/tasks/F4-T8.md",
+              "user_app/lib/features/units_ownership",
+              "user_app/test/features/units_ownership",
+              "sh scripts/verify-flutter.sh: PASS, analyze=0, 67 tests passed",
+              "git diff --check: PASS"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Run F4-T9 QA with device evidence.",
+            "outputs": {
+              "subtask": "F4-T8",
+              "subtask_status": "COMPLETED",
+              "remaining": [
+                "F4-T9"
+              ]
+            }
+          }
+        },
+        "active_task": null
+      },
+      "created_at": "2026-09-24T14:46:56.561228+00:00"
     }
   ],
   "approvals": [
@@ -2739,6 +3167,26 @@
       "ts": "2026-09-24T14:32:49.539910+00:00",
       "metadata": {
         "duration_ms": 1009279,
+        "result_status": "PARTIAL"
+      }
+    },
+    {
+      "run_id": "RUN-C73FA516545143FAA9B35B168EEFE0C9",
+      "task": "4fe275de58274ffe97d803b7e6ae8fc9",
+      "event": "STARTED",
+      "ts": "2026-09-24T14:33:00.130319+00:00",
+      "metadata": {
+        "skill": "implementation-agent",
+        "retry_count": 10
+      }
+    },
+    {
+      "run_id": "RUN-C73FA516545143FAA9B35B168EEFE0C9",
+      "task": "4fe275de58274ffe97d803b7e6ae8fc9",
+      "event": "COMPLETED",
+      "ts": "2026-09-24T14:46:56.560627+00:00",
+      "metadata": {
+        "duration_ms": 836430,
         "result_status": "PARTIAL"
       }
     }
@@ -4299,6 +4747,404 @@
         }
       },
       "created_at": "2026-09-24T14:32:49.540368+00:00"
+    },
+    {
+      "run_id": "RUN-C73FA516545143FAA9B35B168EEFE0C9",
+      "event": "COMMIT_RECORDED",
+      "payload": {
+        "sha": "7a81efc",
+        "subject": "feat(units-ownership): add building, invitation and unit mobile flows",
+        "work_item": "BOS-010-F4",
+        "task": "F4-T7",
+        "run": "RUN-C73FA516545143FAA9B35B168EEFE0C9",
+        "commit_trigger": "task-finish"
+      },
+      "created_at": "2026-09-24T14:33:00.016426+00:00"
+    },
+    {
+      "run_id": "RUN-C73FA516545143FAA9B35B168EEFE0C9",
+      "event": "TASK_STARTED",
+      "payload": {
+        "skill": "implementation-agent"
+      },
+      "created_at": "2026-09-24T14:33:00.132681+00:00"
+    },
+    {
+      "run_id": "RUN-C73FA516545143FAA9B35B168EEFE0C9",
+      "event": "TOOL_STARTED",
+      "payload": {
+        "name": "write_file",
+        "call_key": "0:agentic/data/project-context/features/BOS-010/units-ownership/tasks/F4-T8.md-2db86cd61461"
+      },
+      "created_at": "2026-09-24T14:40:53.028755+00:00"
+    },
+    {
+      "run_id": "RUN-C73FA516545143FAA9B35B168EEFE0C9",
+      "event": "TOOL_COMPLETED",
+      "payload": {
+        "name": "write_file"
+      },
+      "created_at": "2026-09-24T14:40:53.032317+00:00"
+    },
+    {
+      "run_id": "RUN-C73FA516545143FAA9B35B168EEFE0C9",
+      "event": "TOOL_STARTED",
+      "payload": {
+        "name": "write_file",
+        "call_key": "0:user_app/test/features/units_ownership/ownership_repository_test.dart-8c2f594d112a"
+      },
+      "created_at": "2026-09-24T14:40:53.090869+00:00"
+    },
+    {
+      "run_id": "RUN-C73FA516545143FAA9B35B168EEFE0C9",
+      "event": "TOOL_COMPLETED",
+      "payload": {
+        "name": "write_file"
+      },
+      "created_at": "2026-09-24T14:40:53.094470+00:00"
+    },
+    {
+      "run_id": "RUN-C73FA516545143FAA9B35B168EEFE0C9",
+      "event": "TOOL_STARTED",
+      "payload": {
+        "name": "write_file",
+        "call_key": "0:user_app/test/features/units_ownership/ownership_form_test.dart-6c7de42ccfd6"
+      },
+      "created_at": "2026-09-24T14:40:53.155368+00:00"
+    },
+    {
+      "run_id": "RUN-C73FA516545143FAA9B35B168EEFE0C9",
+      "event": "TOOL_COMPLETED",
+      "payload": {
+        "name": "write_file"
+      },
+      "created_at": "2026-09-24T14:40:53.159152+00:00"
+    },
+    {
+      "run_id": "RUN-C73FA516545143FAA9B35B168EEFE0C9",
+      "event": "TOOL_STARTED",
+      "payload": {
+        "name": "write_file",
+        "call_key": "0:user_app/lib/res/strings/string_enum.dart-949d776735b1"
+      },
+      "created_at": "2026-09-24T14:40:53.217874+00:00"
+    },
+    {
+      "run_id": "RUN-C73FA516545143FAA9B35B168EEFE0C9",
+      "event": "TOOL_COMPLETED",
+      "payload": {
+        "name": "write_file"
+      },
+      "created_at": "2026-09-24T14:40:53.221532+00:00"
+    },
+    {
+      "run_id": "RUN-C73FA516545143FAA9B35B168EEFE0C9",
+      "event": "TOOL_STARTED",
+      "payload": {
+        "name": "write_file",
+        "call_key": "0:user_app/lib/core/network/client/api_client.dart-ba73b663d90f"
+      },
+      "created_at": "2026-09-24T14:40:53.279003+00:00"
+    },
+    {
+      "run_id": "RUN-C73FA516545143FAA9B35B168EEFE0C9",
+      "event": "TOOL_COMPLETED",
+      "payload": {
+        "name": "write_file"
+      },
+      "created_at": "2026-09-24T14:40:53.282737+00:00"
+    },
+    {
+      "run_id": "RUN-C73FA516545143FAA9B35B168EEFE0C9",
+      "event": "TOOL_STARTED",
+      "payload": {
+        "name": "write_file",
+        "call_key": "0:user_app/lib/features/units_ownership/data/datasources/property_remote_datasource.dart-0d303fc5e690"
+      },
+      "created_at": "2026-09-24T14:40:53.340630+00:00"
+    },
+    {
+      "run_id": "RUN-C73FA516545143FAA9B35B168EEFE0C9",
+      "event": "TOOL_COMPLETED",
+      "payload": {
+        "name": "write_file"
+      },
+      "created_at": "2026-09-24T14:40:53.344354+00:00"
+    },
+    {
+      "run_id": "RUN-C73FA516545143FAA9B35B168EEFE0C9",
+      "event": "TOOL_STARTED",
+      "payload": {
+        "name": "write_file",
+        "call_key": "0:user_app/lib/features/units_ownership/data/repositories/ownership_repository_impl.dart-ad19d3ef83d2"
+      },
+      "created_at": "2026-09-24T14:40:53.403156+00:00"
+    },
+    {
+      "run_id": "RUN-C73FA516545143FAA9B35B168EEFE0C9",
+      "event": "TOOL_COMPLETED",
+      "payload": {
+        "name": "write_file"
+      },
+      "created_at": "2026-09-24T14:40:53.406853+00:00"
+    },
+    {
+      "run_id": "RUN-C73FA516545143FAA9B35B168EEFE0C9",
+      "event": "TOOL_STARTED",
+      "payload": {
+        "name": "write_file",
+        "call_key": "0:user_app/lib/features/units_ownership/data/mappers/ownership_mapper.dart-f6fe789c3e46"
+      },
+      "created_at": "2026-09-24T14:40:53.465720+00:00"
+    },
+    {
+      "run_id": "RUN-C73FA516545143FAA9B35B168EEFE0C9",
+      "event": "TOOL_COMPLETED",
+      "payload": {
+        "name": "write_file"
+      },
+      "created_at": "2026-09-24T14:40:53.469473+00:00"
+    },
+    {
+      "run_id": "RUN-C73FA516545143FAA9B35B168EEFE0C9",
+      "event": "TOOL_STARTED",
+      "payload": {
+        "name": "write_file",
+        "call_key": "0:user_app/lib/features/units_ownership/domain/repositories/ownership_repository.dart-afcf19073a1f"
+      },
+      "created_at": "2026-09-24T14:40:53.526846+00:00"
+    },
+    {
+      "run_id": "RUN-C73FA516545143FAA9B35B168EEFE0C9",
+      "event": "TOOL_COMPLETED",
+      "payload": {
+        "name": "write_file"
+      },
+      "created_at": "2026-09-24T14:40:53.531317+00:00"
+    },
+    {
+      "run_id": "RUN-C73FA516545143FAA9B35B168EEFE0C9",
+      "event": "TOOL_STARTED",
+      "payload": {
+        "name": "write_file",
+        "call_key": "0:user_app/lib/features/units_ownership/domain/usecases/ownership_use_cases.dart-6cd8457e7f68"
+      },
+      "created_at": "2026-09-24T14:40:53.589627+00:00"
+    },
+    {
+      "run_id": "RUN-C73FA516545143FAA9B35B168EEFE0C9",
+      "event": "TOOL_COMPLETED",
+      "payload": {
+        "name": "write_file"
+      },
+      "created_at": "2026-09-24T14:40:53.593455+00:00"
+    },
+    {
+      "run_id": "RUN-C73FA516545143FAA9B35B168EEFE0C9",
+      "event": "TOOL_STARTED",
+      "payload": {
+        "name": "write_file",
+        "call_key": "0:user_app/lib/features/units_ownership/domain/entities/ownership_models.dart-1e77f9423f41"
+      },
+      "created_at": "2026-09-24T14:40:53.652168+00:00"
+    },
+    {
+      "run_id": "RUN-C73FA516545143FAA9B35B168EEFE0C9",
+      "event": "TOOL_COMPLETED",
+      "payload": {
+        "name": "write_file"
+      },
+      "created_at": "2026-09-24T14:40:53.656275+00:00"
+    },
+    {
+      "run_id": "RUN-C73FA516545143FAA9B35B168EEFE0C9",
+      "event": "TOOL_STARTED",
+      "payload": {
+        "name": "write_file",
+        "call_key": "0:user_app/lib/features/units_ownership/presentation/bindings/property_binding.dart-5258cd3a2615"
+      },
+      "created_at": "2026-09-24T14:40:53.714165+00:00"
+    },
+    {
+      "run_id": "RUN-C73FA516545143FAA9B35B168EEFE0C9",
+      "event": "TOOL_COMPLETED",
+      "payload": {
+        "name": "write_file"
+      },
+      "created_at": "2026-09-24T14:40:53.717996+00:00"
+    },
+    {
+      "run_id": "RUN-C73FA516545143FAA9B35B168EEFE0C9",
+      "event": "TOOL_STARTED",
+      "payload": {
+        "name": "write_file",
+        "call_key": "0:user_app/lib/features/units_ownership/presentation/pages/ownership_form_page.dart-eea9303fae6d"
+      },
+      "created_at": "2026-09-24T14:40:53.777229+00:00"
+    },
+    {
+      "run_id": "RUN-C73FA516545143FAA9B35B168EEFE0C9",
+      "event": "TOOL_COMPLETED",
+      "payload": {
+        "name": "write_file"
+      },
+      "created_at": "2026-09-24T14:40:53.781097+00:00"
+    },
+    {
+      "run_id": "RUN-C73FA516545143FAA9B35B168EEFE0C9",
+      "event": "TOOL_STARTED",
+      "payload": {
+        "name": "write_file",
+        "call_key": "0:user_app/lib/features/units_ownership/presentation/pages/unit_detail_page.dart-f4df07fe1c4e"
+      },
+      "created_at": "2026-09-24T14:40:53.842269+00:00"
+    },
+    {
+      "run_id": "RUN-C73FA516545143FAA9B35B168EEFE0C9",
+      "event": "TOOL_COMPLETED",
+      "payload": {
+        "name": "write_file"
+      },
+      "created_at": "2026-09-24T14:40:53.846231+00:00"
+    },
+    {
+      "run_id": "RUN-C73FA516545143FAA9B35B168EEFE0C9",
+      "event": "TOOL_STARTED",
+      "payload": {
+        "name": "write_file",
+        "call_key": "0:user_app/lib/features/units_ownership/presentation/pages/transfer_files_page.dart-489a0ef17407"
+      },
+      "created_at": "2026-09-24T14:40:53.907419+00:00"
+    },
+    {
+      "run_id": "RUN-C73FA516545143FAA9B35B168EEFE0C9",
+      "event": "TOOL_COMPLETED",
+      "payload": {
+        "name": "write_file"
+      },
+      "created_at": "2026-09-24T14:40:53.911398+00:00"
+    },
+    {
+      "run_id": "RUN-C73FA516545143FAA9B35B168EEFE0C9",
+      "event": "TOOL_STARTED",
+      "payload": {
+        "name": "write_file",
+        "call_key": "0:user_app/lib/features/units_ownership/presentation/pages/ownership_page.dart-b7ac892ca9e9"
+      },
+      "created_at": "2026-09-24T14:40:53.970992+00:00"
+    },
+    {
+      "run_id": "RUN-C73FA516545143FAA9B35B168EEFE0C9",
+      "event": "TOOL_COMPLETED",
+      "payload": {
+        "name": "write_file"
+      },
+      "created_at": "2026-09-24T14:40:53.975006+00:00"
+    },
+    {
+      "run_id": "RUN-C73FA516545143FAA9B35B168EEFE0C9",
+      "event": "TOOL_STARTED",
+      "payload": {
+        "name": "run_command",
+        "call_key": "0:f4-t8-verify-1"
+      },
+      "created_at": "2026-09-24T14:40:55.838126+00:00"
+    },
+    {
+      "run_id": "RUN-C73FA516545143FAA9B35B168EEFE0C9",
+      "event": "TOOL_COMPLETED",
+      "payload": {
+        "name": "run_command"
+      },
+      "created_at": "2026-09-24T14:41:15.564793+00:00"
+    },
+    {
+      "run_id": "RUN-C73FA516545143FAA9B35B168EEFE0C9",
+      "event": "TOOL_STARTED",
+      "payload": {
+        "name": "write_file",
+        "call_key": "0:user_app/lib/core/network/client/api_client.dart-b8ced3ec7f1a"
+      },
+      "created_at": "2026-09-24T14:42:18.110758+00:00"
+    },
+    {
+      "run_id": "RUN-C73FA516545143FAA9B35B168EEFE0C9",
+      "event": "TOOL_COMPLETED",
+      "payload": {
+        "name": "write_file"
+      },
+      "created_at": "2026-09-24T14:42:18.115919+00:00"
+    },
+    {
+      "run_id": "RUN-C73FA516545143FAA9B35B168EEFE0C9",
+      "event": "TOOL_STARTED",
+      "payload": {
+        "name": "write_file",
+        "call_key": "0:user_app/test/features/units_ownership/ownership_form_test.dart-630312543700"
+      },
+      "created_at": "2026-09-24T14:42:18.178602+00:00"
+    },
+    {
+      "run_id": "RUN-C73FA516545143FAA9B35B168EEFE0C9",
+      "event": "TOOL_COMPLETED",
+      "payload": {
+        "name": "write_file"
+      },
+      "created_at": "2026-09-24T14:42:18.182675+00:00"
+    },
+    {
+      "run_id": "RUN-C73FA516545143FAA9B35B168EEFE0C9",
+      "event": "TOOL_STARTED",
+      "payload": {
+        "name": "run_command",
+        "call_key": "0:f4-t8-verify-2"
+      },
+      "created_at": "2026-09-24T14:42:35.851347+00:00"
+    },
+    {
+      "run_id": "RUN-C73FA516545143FAA9B35B168EEFE0C9",
+      "event": "TOOL_COMPLETED",
+      "payload": {
+        "name": "run_command"
+      },
+      "created_at": "2026-09-24T14:42:52.908272+00:00"
+    },
+    {
+      "run_id": "RUN-C73FA516545143FAA9B35B168EEFE0C9",
+      "event": "TOOL_STARTED",
+      "payload": {
+        "name": "run_command",
+        "call_key": "0:f4-regression-maven-1"
+      },
+      "created_at": "2026-09-24T14:44:09.973699+00:00"
+    },
+    {
+      "run_id": "RUN-C73FA516545143FAA9B35B168EEFE0C9",
+      "event": "RESULT_RECORDED",
+      "payload": {
+        "skill": "implementation-agent",
+        "result": {
+          "status": "PARTIAL",
+          "evidence": [
+            "agentic/data/project-context/features/BOS-010/units-ownership/tasks/F4-T8.md",
+            "user_app/lib/features/units_ownership",
+            "user_app/test/features/units_ownership",
+            "sh scripts/verify-flutter.sh: PASS, analyze=0, 67 tests passed",
+            "git diff --check: PASS"
+          ],
+          "blocking_issues": [],
+          "open_questions": [],
+          "recommended_next_step": "Run F4-T9 QA with device evidence.",
+          "outputs": {
+            "subtask": "F4-T8",
+            "subtask_status": "COMPLETED",
+            "remaining": [
+              "F4-T9"
+            ]
+          }
+        }
+      },
+      "created_at": "2026-09-24T14:46:56.561228+00:00"
     }
   ],
   "tool_calls": {
@@ -4723,6 +5569,181 @@
         "path": "agentic/data/project-context/features/BOS-010/units-ownership/f4-t7-result.json",
         "bytes_written": 746
       }
+    },
+    "0:agentic/data/project-context/features/BOS-010/units-ownership/tasks/F4-T8.md-2db86cd61461": {
+      "request_hash": "7e745488efdb7478d0c3d17239e84936182f3f27a57852467316331fc7b0fdd9",
+      "status": "COMPLETED",
+      "result": {
+        "path": "agentic/data/project-context/features/BOS-010/units-ownership/tasks/F4-T8.md",
+        "bytes_written": 644
+      }
+    },
+    "0:user_app/test/features/units_ownership/ownership_repository_test.dart-8c2f594d112a": {
+      "request_hash": "a32778d35b2b9a63654b24525cc655a02720eda88c27e645bc70107fb815e5d9",
+      "status": "COMPLETED",
+      "result": {
+        "path": "user_app/test/features/units_ownership/ownership_repository_test.dart",
+        "bytes_written": 3601
+      }
+    },
+    "0:user_app/test/features/units_ownership/ownership_form_test.dart-6c7de42ccfd6": {
+      "request_hash": "01f04397d6eb0664df74d14cc5225ca20798efb0cc53ffc5559af27708fd03e4",
+      "status": "COMPLETED",
+      "result": {
+        "path": "user_app/test/features/units_ownership/ownership_form_test.dart",
+        "bytes_written": 4362
+      }
+    },
+    "0:user_app/lib/res/strings/string_enum.dart-949d776735b1": {
+      "request_hash": "1661133e73b4cca166f10f6bc41cdf5b8352141ea844e8569d9132ba7f2b34b3",
+      "status": "COMPLETED",
+      "result": {
+        "path": "user_app/lib/res/strings/string_enum.dart",
+        "bytes_written": 21685
+      }
+    },
+    "0:user_app/lib/core/network/client/api_client.dart-ba73b663d90f": {
+      "request_hash": "ac6bd80c3457de8b431f04ff05f6ed76a186d1c176155d47f8cee7f0d834dd1d",
+      "status": "COMPLETED",
+      "result": {
+        "path": "user_app/lib/core/network/client/api_client.dart",
+        "bytes_written": 10900
+      }
+    },
+    "0:user_app/lib/features/units_ownership/data/datasources/property_remote_datasource.dart-0d303fc5e690": {
+      "request_hash": "018350e9c3dcf6aaa6c89e20e602560d39038bc2279656ec331e37691845bf80",
+      "status": "COMPLETED",
+      "result": {
+        "path": "user_app/lib/features/units_ownership/data/datasources/property_remote_datasource.dart",
+        "bytes_written": 5847
+      }
+    },
+    "0:user_app/lib/features/units_ownership/data/repositories/ownership_repository_impl.dart-ad19d3ef83d2": {
+      "request_hash": "d7340655360fb404067919a0de558c574395550afdd4367b19b5b5778a55bf0e",
+      "status": "COMPLETED",
+      "result": {
+        "path": "user_app/lib/features/units_ownership/data/repositories/ownership_repository_impl.dart",
+        "bytes_written": 2650
+      }
+    },
+    "0:user_app/lib/features/units_ownership/data/mappers/ownership_mapper.dart-f6fe789c3e46": {
+      "request_hash": "142a7e872fc805b5fefb2e3bcd8d9fbcb97c782db1257d941c4196c482011479",
+      "status": "COMPLETED",
+      "result": {
+        "path": "user_app/lib/features/units_ownership/data/mappers/ownership_mapper.dart",
+        "bytes_written": 1826
+      }
+    },
+    "0:user_app/lib/features/units_ownership/domain/repositories/ownership_repository.dart-afcf19073a1f": {
+      "request_hash": "100702077e9da081b56c53b36bf57387783fce3dd3e59585a91dbf2b13415e7c",
+      "status": "COMPLETED",
+      "result": {
+        "path": "user_app/lib/features/units_ownership/domain/repositories/ownership_repository.dart",
+        "bytes_written": 894
+      }
+    },
+    "0:user_app/lib/features/units_ownership/domain/usecases/ownership_use_cases.dart-6cd8457e7f68": {
+      "request_hash": "1e86174c839b2dc356caf55e51ab5d17289cbb8c2302a6ca6dd1251fbf2e8f3a",
+      "status": "COMPLETED",
+      "result": {
+        "path": "user_app/lib/features/units_ownership/domain/usecases/ownership_use_cases.dart",
+        "bytes_written": 2285
+      }
+    },
+    "0:user_app/lib/features/units_ownership/domain/entities/ownership_models.dart-1e77f9423f41": {
+      "request_hash": "4787431734569aadd856c611aab89b6f48be2db98c452a80199d5cf608268adc",
+      "status": "COMPLETED",
+      "result": {
+        "path": "user_app/lib/features/units_ownership/domain/entities/ownership_models.dart",
+        "bytes_written": 2104
+      }
+    },
+    "0:user_app/lib/features/units_ownership/presentation/bindings/property_binding.dart-5258cd3a2615": {
+      "request_hash": "978939049f30d64891fdf51a2a90c3f4950123a13f1f140630fe3cbc65971a34",
+      "status": "COMPLETED",
+      "result": {
+        "path": "user_app/lib/features/units_ownership/presentation/bindings/property_binding.dart",
+        "bytes_written": 4192
+      }
+    },
+    "0:user_app/lib/features/units_ownership/presentation/pages/ownership_form_page.dart-eea9303fae6d": {
+      "request_hash": "14760b85c4313b6f4460aa22fda0d7de4946a6a1e23e9951701719eb1849f66c",
+      "status": "COMPLETED",
+      "result": {
+        "path": "user_app/lib/features/units_ownership/presentation/pages/ownership_form_page.dart",
+        "bytes_written": 8475
+      }
+    },
+    "0:user_app/lib/features/units_ownership/presentation/pages/unit_detail_page.dart-f4df07fe1c4e": {
+      "request_hash": "130e0f1c7cf4c1b4660898124d04ced41cd953cc570e48d9adddee18bd35ce38",
+      "status": "COMPLETED",
+      "result": {
+        "path": "user_app/lib/features/units_ownership/presentation/pages/unit_detail_page.dart",
+        "bytes_written": 3112
+      }
+    },
+    "0:user_app/lib/features/units_ownership/presentation/pages/transfer_files_page.dart-489a0ef17407": {
+      "request_hash": "e8d97c122d4fd558cf26701845505093b27f24a342f210faa6167e396c6eae0c",
+      "status": "COMPLETED",
+      "result": {
+        "path": "user_app/lib/features/units_ownership/presentation/pages/transfer_files_page.dart",
+        "bytes_written": 5273
+      }
+    },
+    "0:user_app/lib/features/units_ownership/presentation/pages/ownership_page.dart-b7ac892ca9e9": {
+      "request_hash": "4bb318f3c46118ad19e551337fe38a650a00c62b8745ca4e351326a18dbb5fae",
+      "status": "COMPLETED",
+      "result": {
+        "path": "user_app/lib/features/units_ownership/presentation/pages/ownership_page.dart",
+        "bytes_written": 5227
+      }
+    },
+    "0:f4-t8-verify-1": {
+      "request_hash": "afeb58f8564762f543c051082636066998b70b93f81d69b30f564aec581d2574",
+      "status": "COMPLETED",
+      "result": {
+        "command": "sh",
+        "args": [
+          "scripts/verify-flutter.sh"
+        ],
+        "returncode": 1,
+        "stdout": "\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u255d\n00:01 +41: /Volumes/dipu_1tb/projects/chowdhuryelab/BuildingOS/user_app/test/features/units_ownership/ownership_form_test.dart: transfer requires review and retries exactly the same confirmed payload\n00:01 +42: /Volumes/dipu_1tb/projects/chowdhuryelab/BuildingOS/user_app/test/features/units_ownership/ownership_form_test.dart: transfer requires review and retries exactly the same confirmed payload\n00:01 +42: /Volumes/dipu_1tb/projects/chowdhuryelab/BuildingOS/user_app/test/features/authentication/data/repositories/otp_repository_http_test.dart: start rate limit maps to OTP_RATE_LIMITED\n\n\u2554\u2563 Request \u2551 POST \n\u2551  http://127.0.0.1:58910/api/v1/auth/otp/start\n\u255a\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u255d\n00:01 +43: /Volumes/dipu_1tb/projects/chowdhuryelab/BuildingOS/user_app/test/features/units_ownership/ownership_form_test.dart: transfer requires review and retries exactly the same confirmed payload\n00:01 +43: /Volumes/dipu_1tb/projects/chowdhuryelab/BuildingOS/user_app/test/features/authentication/data/repositories/otp_repository_http_test.dart: start rate limit maps to OTP_RATE_LIMITED\n\n\u2554\u2563 Response \u2551 POST \u2551 Status: 429 Status 429  \u2551 Time: 5 ms\n\u2551  http://127.0.0.1:58910/api/v1/auth/otp/start\n\u255a\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u255d\n00:01 +44: /Volumes/dipu_1tb/projects/chowdhuryelab/BuildingOS/user_app/test/features/units_ownership/ownership_form_test.dart: transfer requires review and retries exactly the same confirmed payload\n00:01 +45: /Volumes/dipu_1tb/projects/chowdhuryelab/BuildingOS/user_app/test/features/units_ownership/ownership_form_test.dart: transfer requires review and retries exactly the same confirmed payload\n00:01 +46: /Volumes/dipu_1tb/projects/chowdhuryelab/BuildingOS/user_app/test/features/units_ownership/ownership_form_test.dart: transfer requires review and retries exactly the same confirmed payload\n00:01 +46: /Volumes/dipu_1tb/projects/chowdhuryelab/BuildingOS/user_app/test/features/authentication/data/repositories/otp_repository_http_test.dart: server failure cannot create a session\n\n\u2554\u2563 Request \u2551 POST \n\u2551  http://127.0.0.1:58912/api/v1/auth/otp/verify\n\u255a\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u255d\n00:01 +47: /Volumes/dipu_1tb/projects/chowdhuryelab/BuildingOS/user_app/test/features/units_ownership/ownership_form_test.dart: transfer requires review and retries exactly the same confirmed payload\n00:01 +48: /Volumes/dipu_1tb/projects/chowdhuryelab/BuildingOS/user_app/test/features/units_ownership/ownership_form_test.dart: transfer requires review and retries exactly the same confirmed payload\n00:01 +48: /Volumes/dipu_1tb/projects/chowdhuryelab/BuildingOS/user_app/test/features/authentication/data/repositories/otp_repository_http_test.dart: server failure cannot create a session\n\n\u2554\u2563 Response \u2551 POST \u2551 Status: 500 Internal Server Error  \u2551 Time: 4 ms\n\u2551  http://127.0.0.1:58912/api/v1/auth/otp/verify\n\u255a\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u255d\n00:01 +49: /Volumes/dipu_1tb/projects/chowdhuryelab/BuildingOS/user_app/test/features/units_ownership/ownership_form_test.dart: transfer requires review and retries exactly the same confirmed payload\n00:01 +50: /Volumes/dipu_1tb/projects/chowdhuryelab/BuildingOS/user_app/test/features/units_ownership/ownership_form_test.dart: transfer requires review and retries exactly the same confirmed payload\n00:01 +50: /Volumes/dipu_1tb/projects/chowdhuryelab/BuildingOS/user_app/test/features/authentication/data/repositories/otp_repository_http_test.dart: failed token refresh clears the session and signals expiry\n\n\u2554\u2563 Request \u2551 POST \n\u2551  http://127.0.0.1:58914/api/v1/me\n\u255a\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u255d\n\n\u2554\u2563 Response \u2551 POST \u2551 Status: 401 Unauthorized  \u2551 Time: 4 ms\n\u2551  http://127.0.0.1:58914/api/v1/me\n\u255a\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u255d\n\u001b[38;5;196m\u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u001b[0m\n\u001b[38;5;196m\u2502 #0   ApiClient._handleAuthorizationError (package:customer/core/network/client/api_client.dart:201:15)\u001b[0m\n\u001b[38;5;196m\u2502 #1   <asynchronous suspension>\u001b[0m\n\u001b[38;5;196m\u251c\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u001b[0m\n\u001b[38;5;196m\u2502 \u26d4 Authorization Error: 401, Message: unauthorized exception\u001b[0m\n\u001b[38;5;196m\u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u001b[0m\n\n\u2554\u2563 Request \u2551 POST \n\u2551  http://127.0.0.1:58914/api/auth/refresh-token\n\u255a\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u255d\n\n\u2554\u2563 Response \u2551 POST \u2551 Status: 401 Unauthorized  \u2551 Time: 4 ms\n\u2551  http://127.0.0.1:58914/api/auth/refresh-token\n\u255a\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u255d\n00:01 +51: /Volumes/dipu_1tb/projects/chowdhuryelab/BuildingOS/user_app/test/features/units_ownership/ownership_form_test.dart: transfer requires review and retries exactly the same confirmed payload\n00:02 +52: /Volumes/dipu_1tb/projects/chowdhuryelab/BuildingOS/user_app/test/features/units_ownership/ownership_form_test.dart: transfer requires review and retries exactly the same confirmed payload\n00:02 +53: /Volumes/dipu_1tb/projects/chowdhuryelab/BuildingOS/user_app/test/features/units_ownership/ownership_form_test.dart: transfer requires review and retries exactly the same confirmed payload\n00:02 +54: /Volumes/dipu_1tb/projects/chowdhuryelab/BuildingOS/user_app/test/features/units_ownership/ownership_form_test.dart: transfer requires review and retries exactly the same confirmed payload\n00:02 +55: /Volumes/dipu_1tb/projects/chowdhuryelab/BuildingOS/user_app/test/features/units_ownership/ownership_form_test.dart: transfer requires review and retries exactly the same confirmed payload\n00:02 +56: /Volumes/dipu_1tb/projects/chowdhuryelab/BuildingOS/user_app/test/features/units_ownership/ownership_form_test.dart: transfer requires review and retries exactly the same confirmed payload\n00:02 +57: /Volumes/dipu_1tb/projects/chowdhuryelab/BuildingOS/user_app/test/features/units_ownership/ownership_form_test.dart: transfer requires review and retries exactly the same confirmed payload\n00:02 +58: /Volumes/dipu_1tb/projects/chowdhuryelab/BuildingOS/user_app/test/features/units_ownership/ownership_form_test.dart: transfer requires review and retries exactly the same confirmed payload\n00:02 +59: /Volumes/dipu_1tb/projects/chowdhuryelab/BuildingOS/user_app/test/features/units_ownership/ownership_form_test.dart: transfer requires review and retries exactly the same confirmed payload\n00:02 +60: /Volumes/dipu_1tb/projects/chowdhuryelab/BuildingOS/user_app/test/features/units_ownership/ownership_form_test.dart: transfer requires review and retries exactly the same confirmed payload\n00:02 +61: /Volumes/dipu_1tb/projects/chowdhuryelab/BuildingOS/user_app/test/features/units_ownership/ownership_form_test.dart: transfer requires review and retries exactly the same confirmed payload\n\u2550\u2550\u2561 EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK \u255e\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\nThe following assertion was thrown running a test:\npumpAndSettle timed out\n\nWhen the exception was thrown, this was the stack:\n#0      WidgetTester.pumpAndSettle.<anonymous closure> (package:flutter_test/src/widget_tester.dart:717:11)\n<asynchronous suspension>\n#1      TestAsyncUtils.guard.<anonymous closure> (package:flutter_test/src/test_async_utils.dart:130:27)\n<asynchronous suspension>\n#2      main.<anonymous closure> (file:///Volumes/dipu_1tb/projects/chowdhuryelab/BuildingOS/user_app/test/features/units_ownership/ownership_form_test.dart:103:7)\n<asynchronous suspension>\n#3      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)\n<asynchronous suspension>\n#4      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1952:5)\n<asynchronous suspension>\n<asynchronous suspension>\n(elided one frame from package:stack_trace)\n\nThe test description was:\n  transfer requires review and retries exactly the same confirmed payload\n\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\n00:02 +61 -1: /Volumes/dipu_1tb/projects/chowdhuryelab/BuildingOS/user_app/test/tool/feature_generator_test.dart: dry-run makes no feature files and invalid options fail\n00:02 +61 -1: /Volumes/dipu_1tb/projects/chowdhuryelab/BuildingOS/user_app/test/features/units_ownership/ownership_form_test.dart: transfer requires review and retries exactly the same confirmed payload [E]\n  Test failed. See exception logs above.\n  The test description was: transfer requires review and retries exactly the same confirmed payload\n  \n00:02 +62 -1: /Volumes/dipu_1tb/projects/chowdhuryelab/BuildingOS/user_app/test/tool/feature_generator_test.dart: wrong project root fails without writing files\n00:03 +63 -1: /Volumes/dipu_1tb/projects/chowdhuryelab/BuildingOS/user_app/test/tool/feature_generator_test.dart: requires force for overwrite and preserves unrelated files\n00:03 +64 -1: /Volumes/dipu_1tb/projects/chowdhuryelab/BuildingOS/user_app/test/tool/feature_generator_test.dart: refuses writes through symbolic links even with force\n00:04 +65 -1: /Volumes/dipu_1tb/projects/chowdhuryelab/BuildingOS/user_app/test/tool/feature_generator_test.dart: renamed project output analyzes and passes behavior/widget tests\n00:11 +66 -1: Some tests failed.\n\nFailing tests:\n  /Volumes/dipu_1tb/projects/chowdhuryelab/BuildingOS/user_app/test/features/units_ownership/ownership_form_test.dart: transfer requires review and retries exactly the same confirmed payload\n",
+        "stderr": "2 issues found. (ran in 5.2s)\nVERIFY FAILED: analyze=1 test=1\n"
+      }
+    },
+    "0:user_app/lib/core/network/client/api_client.dart-b8ced3ec7f1a": {
+      "request_hash": "938c169446117c8147c1c93ec2185a300f49bbf36ee7aa7edee762a92f43899b",
+      "status": "COMPLETED",
+      "result": {
+        "path": "user_app/lib/core/network/client/api_client.dart",
+        "bytes_written": 10838
+      }
+    },
+    "0:user_app/test/features/units_ownership/ownership_form_test.dart-630312543700": {
+      "request_hash": "baf61c5663789e36147c3b04abdcd113967a28d55961a54d3656be2090b14ba3",
+      "status": "COMPLETED",
+      "result": {
+        "path": "user_app/test/features/units_ownership/ownership_form_test.dart",
+        "bytes_written": 4413
+      }
+    },
+    "0:f4-t8-verify-2": {
+      "request_hash": "afeb58f8564762f543c051082636066998b70b93f81d69b30f564aec581d2574",
+      "status": "COMPLETED",
+      "result": {
+        "command": "sh",
+        "args": [
+          "scripts/verify-flutter.sh"
+        ],
+        "returncode": 0,
+        "stdout": "olumes/dipu_1tb/projects/chowdhuryelab/BuildingOS/user_app/test/features/authentication/data/repositories/otp_repository_http_test.dart: 401 OTP_EXPIRED survives HTTP parsing without overwriting the session\n\n\u2554\u2563 Request \u2551 POST \n\u2551  http://127.0.0.1:59428/api/v1/auth/otp/verify\n\u255a\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u255d\n\n\u2554\u2563 Response \u2551 POST \u2551 Status: 401 Unauthorized  \u2551 Time: 3 ms\n\u2551  http://127.0.0.1:59428/api/v1/auth/otp/verify\n\u255a\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u255d\n00:02 +39: /Volumes/dipu_1tb/projects/chowdhuryelab/BuildingOS/user_app/test/features/building_application/presentation/application_list_screen_test.dart: shows applications with number and localized status\n00:02 +39: /Volumes/dipu_1tb/projects/chowdhuryelab/BuildingOS/user_app/test/features/authentication/data/repositories/otp_repository_http_test.dart: 401 OTP_ATTEMPTS_EXHAUSTED survives HTTP parsing without overwriting the session\n\n\u2554\u2563 Request \u2551 POST \n\u2551  http://127.0.0.1:59430/api/v1/auth/otp/verify\n\u255a\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u255d\n\n\u2554\u2563 Response \u2551 POST \u2551 Status: 401 Unauthorized  \u2551 Time: 4 ms\n\u2551  http://127.0.0.1:59430/api/v1/auth/otp/verify\n\u255a\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u255d\n00:02 +40: /Volumes/dipu_1tb/projects/chowdhuryelab/BuildingOS/user_app/test/features/building_application/presentation/application_list_screen_test.dart: shows applications with number and localized status\n00:02 +40: /Volumes/dipu_1tb/projects/chowdhuryelab/BuildingOS/user_app/test/features/authentication/data/repositories/otp_repository_http_test.dart: 401 OTP_INVALID_CODE survives HTTP parsing without overwriting the session\n\n\u2554\u2563 Request \u2551 POST \n\u2551  http://127.0.0.1:59432/api/v1/auth/otp/verify\n\u255a\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u255d\n\n\u2554\u2563 Response \u2551 POST \u2551 Status: 401 Unauthorized  \u2551 Time: 3 ms\n\u2551  http://127.0.0.1:59432/api/v1/auth/otp/verify\n\u255a\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u255d\n00:02 +41: /Volumes/dipu_1tb/projects/chowdhuryelab/BuildingOS/user_app/test/features/building_application/presentation/application_list_screen_test.dart: shows applications with number and localized status\n00:02 +41: /Volumes/dipu_1tb/projects/chowdhuryelab/BuildingOS/user_app/test/features/authentication/data/repositories/otp_repository_http_test.dart: start rate limit maps to OTP_RATE_LIMITED\n\n\u2554\u2563 Request \u2551 POST \n\u2551  http://127.0.0.1:59434/api/v1/auth/otp/start\n\u255a\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u255d\n\n\u2554\u2563 Response \u2551 POST \u2551 Status: 429 Status 429  \u2551 Time: 4 ms\n\u2551  http://127.0.0.1:59434/api/v1/auth/otp/start\n\u255a\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u255d\n00:02 +42: /Volumes/dipu_1tb/projects/chowdhuryelab/BuildingOS/user_app/test/features/building_application/presentation/application_list_screen_test.dart: shows applications with number and localized status\n00:02 +42: /Volumes/dipu_1tb/projects/chowdhuryelab/BuildingOS/user_app/test/features/authentication/data/repositories/otp_repository_http_test.dart: server failure cannot create a session\n\n\u2554\u2563 Request \u2551 POST \n\u2551  http://127.0.0.1:59436/api/v1/auth/otp/verify\n\u255a\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u255d\n\n\u2554\u2563 Response \u2551 POST \u2551 Status: 500 Internal Server Error  \u2551 Time: 3 ms\n\u2551  http://127.0.0.1:59436/api/v1/auth/otp/verify\n\u255a\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u255d\n00:02 +43: /Volumes/dipu_1tb/projects/chowdhuryelab/BuildingOS/user_app/test/features/building_application/presentation/application_list_screen_test.dart: shows applications with number and localized status\n00:02 +43: /Volumes/dipu_1tb/projects/chowdhuryelab/BuildingOS/user_app/test/features/authentication/data/repositories/otp_repository_http_test.dart: failed token refresh clears the session and signals expiry\n\n\u2554\u2563 Request \u2551 POST \n\u2551  http://127.0.0.1:59438/api/v1/me\n\u255a\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u255d\n\n\u2554\u2563 Response \u2551 POST \u2551 Status: 401 Unauthorized  \u2551 Time: 3 ms\n\u2551  http://127.0.0.1:59438/api/v1/me\n\u255a\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u255d\n\u001b[38;5;196m\u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u001b[0m\n\u001b[38;5;196m\u2502 #0   ApiClient._handleAuthorizationError (package:customer/core/network/client/api_client.dart:199:15)\u001b[0m\n\u001b[38;5;196m\u2502 #1   <asynchronous suspension>\u001b[0m\n\u001b[38;5;196m\u251c\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u2504\u001b[0m\n\u001b[38;5;196m\u2502 \u26d4 Authorization Error: 401, Message: unauthorized exception\u001b[0m\n\u001b[38;5;196m\u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u001b[0m\n\n\u2554\u2563 Request \u2551 POST \n\u2551  http://127.0.0.1:59438/api/auth/refresh-token\n\u255a\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u255d\n\n\u2554\u2563 Response \u2551 POST \u2551 Status: 401 Unauthorized  \u2551 Time: 2 ms\n\u2551  http://127.0.0.1:59438/api/auth/refresh-token\n\u255a\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u255d\n00:03 +44: /Volumes/dipu_1tb/projects/chowdhuryelab/BuildingOS/user_app/test/features/building_application/presentation/application_list_screen_test.dart: shows applications with number and localized status\n00:03 +45: /Volumes/dipu_1tb/projects/chowdhuryelab/BuildingOS/user_app/test/features/building_application/presentation/application_list_screen_test.dart: shows applications with number and localized status\n00:03 +46: /Volumes/dipu_1tb/projects/chowdhuryelab/BuildingOS/user_app/test/features/building_application/presentation/application_list_screen_test.dart: shows applications with number and localized status\n00:03 +47: /Volumes/dipu_1tb/projects/chowdhuryelab/BuildingOS/user_app/test/features/building_application/presentation/application_list_screen_test.dart: shows applications with number and localized status\n00:03 +48: /Volumes/dipu_1tb/projects/chowdhuryelab/BuildingOS/user_app/test/features/building_application/presentation/application_list_screen_test.dart: shows applications with number and localized status\n00:03 +49: /Volumes/dipu_1tb/projects/chowdhuryelab/BuildingOS/user_app/test/features/building_application/presentation/application_list_screen_test.dart: shows applications with number and localized status\n00:03 +50: /Volumes/dipu_1tb/projects/chowdhuryelab/BuildingOS/user_app/test/features/building_application/presentation/application_list_screen_test.dart: shows applications with number and localized status\n00:03 +51: /Volumes/dipu_1tb/projects/chowdhuryelab/BuildingOS/user_app/test/features/building_application/presentation/application_list_screen_test.dart: shows applications with number and localized status\n00:03 +52: /Volumes/dipu_1tb/projects/chowdhuryelab/BuildingOS/user_app/test/features/building_application/presentation/application_list_screen_test.dart: shows applications with number and localized status\n00:03 +53: /Volumes/dipu_1tb/projects/chowdhuryelab/BuildingOS/user_app/test/features/building_application/presentation/application_list_screen_test.dart: shows applications with number and localized status\n00:03 +54: /Volumes/dipu_1tb/projects/chowdhuryelab/BuildingOS/user_app/test/features/building_application/presentation/application_list_screen_test.dart: shows applications with number and localized status\n00:03 +55: /Volumes/dipu_1tb/projects/chowdhuryelab/BuildingOS/user_app/test/features/building_application/presentation/application_list_screen_test.dart: shows applications with number and localized status\n00:03 +56: /Volumes/dipu_1tb/projects/chowdhuryelab/BuildingOS/user_app/test/features/building_application/presentation/application_list_screen_test.dart: shows applications with number and localized status\n00:03 +57: /Volumes/dipu_1tb/projects/chowdhuryelab/BuildingOS/user_app/test/features/building_application/presentation/application_list_screen_test.dart: shows applications with number and localized status\n00:03 +58: /Volumes/dipu_1tb/projects/chowdhuryelab/BuildingOS/user_app/test/features/building_application/presentation/application_list_screen_test.dart: shows applications with number and localized status\n00:03 +59: /Volumes/dipu_1tb/projects/chowdhuryelab/BuildingOS/user_app/test/features/building_application/presentation/application_list_screen_test.dart: shows applications with number and localized status\n00:03 +60: /Volumes/dipu_1tb/projects/chowdhuryelab/BuildingOS/user_app/test/tool/feature_generator_test.dart: dry-run makes no feature files and invalid options fail\n00:03 +61: /Volumes/dipu_1tb/projects/chowdhuryelab/BuildingOS/user_app/test/tool/feature_generator_test.dart: dry-run makes no feature files and invalid options fail\n00:03 +62: /Volumes/dipu_1tb/projects/chowdhuryelab/BuildingOS/user_app/test/tool/feature_generator_test.dart: dry-run makes no feature files and invalid options fail\n00:03 +63: /Volumes/dipu_1tb/projects/chowdhuryelab/BuildingOS/user_app/test/tool/feature_generator_test.dart: wrong project root fails without writing files\n00:04 +64: /Volumes/dipu_1tb/projects/chowdhuryelab/BuildingOS/user_app/test/tool/feature_generator_test.dart: requires force for overwrite and preserves unrelated files\n00:04 +65: /Volumes/dipu_1tb/projects/chowdhuryelab/BuildingOS/user_app/test/tool/feature_generator_test.dart: refuses writes through symbolic links even with force\n00:05 +66: /Volumes/dipu_1tb/projects/chowdhuryelab/BuildingOS/user_app/test/tool/feature_generator_test.dart: renamed project output analyzes and passes behavior/widget tests\n00:11 +67: All tests passed!\nVERIFY PASSED\n",
+        "stderr": ""
+      }
+    },
+    "0:f4-regression-maven-1": {
+      "request_hash": "d26c892959d39b869f3911358e6d207ef53aa6c902af349707c1f716058da546",
+      "status": "STARTED",
+      "result": null
     }
   }
 }
