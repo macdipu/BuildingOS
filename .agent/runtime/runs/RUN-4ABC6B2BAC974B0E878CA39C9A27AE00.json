@@ -1,0 +1,2673 @@
+{
+  "run": {
+    "run_id": "RUN-4ABC6B2BAC974B0E878CA39C9A27AE00",
+    "project": "BuildingOS",
+    "work_type": "new_feature",
+    "title": "BOS-010 F5a: subscription plans (plan CRUD) backend",
+    "stage": "COMPLETED",
+    "status": "COMPLETED",
+    "dry_run": false,
+    "created_at": "2026-09-23T13:18:41.639765+00:00",
+    "updated_at": "2026-09-23T14:16:35.004073+00:00",
+    "metadata": {
+      "runtime_version": 2,
+      "repo": "../../..",
+      "route": [
+        "INTAKE",
+        "CONTEXT",
+        "REQUIREMENTS",
+        "TECHNICAL",
+        "IMPLEMENTATION",
+        "REVIEW",
+        "QA",
+        "RELEASE",
+        "COMPLETED"
+      ],
+      "planning": "NO_REPLAN",
+      "scope_revision": 1,
+      "config_hash": "70b1f3f256a7d5cabb8fb3f1b16caebda54573166f642abe33620c51d76783b1",
+      "skill_pins": {
+        "adr-generator": "37b87ceae41931e7df58f2ef5c9fcf3445388213582bd819351c17e095b4809e",
+        "agentic-sdlc-orchestrator": "241d5fb550dd198ced2ea5886df1f80d61b6e4df52056d766bad96d955fecc6b",
+        "api-contract-discovery-agent": "d69fc7cfc2f675bc19c809e5344dea8bf4e1e2d93f7aaaa612938434bb98c5b2",
+        "architecture-reverse-engineer": "107d6d10555d8a72d081e927b73adf875416bf9a4dd0df3bfd49ac69f82174c0",
+        "automated-qa-agent": "3cec92ed01d2911b9db9a54e6985f2e4c17e036ac839f5d7155ce27276b8102f",
+        "baseline-verifier": "948f2c681d6af99a0702fbb74620763667ef24242e101a55f6261f04f519d92e",
+        "brownfield-risk-analyzer": "d5da84ce6cc2c321d64e155c4efd4adc9826a0d4202056c44b73a4a108bcb599",
+        "business-requirement-analyzer": "c6d4f6cafd51a87d2304dc94c9c804e1585f639579638bfd46f7fcc59ec95a41",
+        "change-impact-analyzer": "ed5d3a96e9d0f3cbd878bd869aede9d4981c5bd2d56a2d65b74a75e50e712ab1",
+        "code-review-agent": "f95ee9b1ea892cd4aa4ecadc60246be9ad083669696889c96e788d9e3f0462b7",
+        "database-discovery-agent": "a9bf3867174c95eddbd83511e35079310ac79f511867591d64893c5007e1a791",
+        "device-preview-agent": "2dcccd3e894bcec5e81cfa4b40616f5d073b709320a9e155dc0c93de2a52e904",
+        "document-intake-adapter": "b773708a14af67828446bf84da63f1fb7bab07bf531f7c7a48a0a6b6f6cfd37e",
+        "effort-estimation-agent": "6ba73a7f3f15bbd622e95f1f14f709e7112ebd90433a44781be453f6e2977b1a",
+        "epic-verifier": "bf72ce9f4f91d3b0cd1f3669f2fe13dcd581b485b594fb8fdf7de5f64b5a03e7",
+        "history-analysis-agent": "6b2de7ce22f04464beb115a847b2831e7e42cd3cf6132ffba134ce2b42d1a8d0",
+        "implementation-agent": "369621d9f2bed8a62ab3b14e6108ad218202b4fb4171267933b122b470badf8b",
+        "intake-change-classifier": "b1102a78f041cb71b7456c2739225ba1ceca6b9b227bd7a6511d38db891c30c7",
+        "project-discovery-agent": "5ed25348cec052c3b95f58555ab62ec6ecb5cd4d23a9cfe052e6cb4f62387fe5",
+        "prompt-intake-adapter": "c3ab8c873b2c76e8aea61f808c9714f6e667d475772468a6e5a13f772f3a124e",
+        "release-readiness-agent": "8db12e3d8be626e8524e83c6ea4523293e24404765dade480c3c9a2600c6443c",
+        "requirement-reconstruction-agent": "5b65ac066f3ad5768ef3b949190a67af94bcd96196616f354b890796d97100a8",
+        "requirement-ui-verifier": "855d48036a9aa44e1283235e66899ed06151fb042e70bdebe73f5a0ce2144dfd",
+        "runtime-discovery-agent": "0c0b51066a093bfd52c08425554b8e3415930f82099fcbe0589180ca541d09e2",
+        "sprint-planner": "8193d9f44eea32eef72586a7dbee096f8014676434f719fe047d0a58360ec728",
+        "sprint-readiness-verifier": "b44dcdf8f2032ebddc7ba43c78219ff5fbd15c4f7e1f8b3959782bda33c97374",
+        "srs-generator": "f84a0c95661e2e2a29bc71b6ad6a6ffaf8163440965205f1956b6b3e7c000305",
+        "task-breakdown-agent": "0872087d99f7695ed8a4aa6b585323d29f7df905b56fcb5ca2c06d6f9a680f30",
+        "technical-architecture-planner": "7a37e8b1f49d8e4ce21721b7050475f178413c94a92e4065b3405c58ca482d23",
+        "technical-readiness-verifier": "aa888a9ae421d6fd6f5238435b76c191712bcfa3920df26f67ba7b304ec827f1",
+        "technical-spec-generator": "2d58206e630d0024c78371d3747ea6d86cf17ec2038367e9389dc2961dcc4fd0",
+        "test-baseline-agent": "58a93639efbf78373edf8cb64020e16721f65b5ba30eb271b886d79d49e0fbbf",
+        "user-flow-discovery-agent": "50f20be315ac1d62af72b88d9372a4d29684aa26094ac235c89c77e08c67ef91",
+        "web-preview-agent": "dfab7cd287b98b18637db38fcee208b28bc95a3447bb0ea7cfb12cddb3732eb4",
+        "work-item-level-classifier": "78d23d76d06e905cbe22854091e2a595110d12a31526444a0ebe6aedab77e9d5"
+      },
+      "results": {
+        "INTAKE": {
+          "status": "READY",
+          "evidence": [
+            "agentic/data/project-context/features/BOS-010/subscription-plans/REQUIREMENTS.md"
+          ],
+          "blocking_issues": [],
+          "open_questions": [],
+          "recommended_next_step": "Context.",
+          "outputs": {
+            "work_item": "BOS-010 F5a subscription plans",
+            "work_type": "new_feature",
+            "project_type": "greenfield module in brownfield repo",
+            "hierarchy": "FEATURE",
+            "planning": "NO_REPLAN"
+          }
+        },
+        "CONTEXT": {
+          "status": "READY",
+          "evidence": [
+            "docs/ARCHITECTURE.md",
+            "backend/api-gateway/src/main/java/com/buildingos/gateway/routing/config/GatewayRouteConfig.java",
+            "infra/docker/postgres/init/02-building-db.sh"
+          ],
+          "blocking_issues": [],
+          "open_questions": [],
+          "recommended_next_step": "Requirements.",
+          "outputs": {
+            "verdict": "CONTEXT_READY",
+            "revision": "31235ea",
+            "finding": "No subscription-service; wiring pattern from building-service/account-service"
+          }
+        },
+        "REQUIREMENTS": {
+          "status": "READY",
+          "evidence": [
+            "agentic/data/project-context/features/BOS-010/subscription-plans/REQUIREMENTS.md",
+            "agentic/data/project-context/features/BOS-010/DECISIONS.md"
+          ],
+          "blocking_issues": [],
+          "open_questions": [],
+          "recommended_next_step": "Technical design.",
+          "outputs": {
+            "verdict": "REQUIREMENTS_READY",
+            "revision": 2,
+            "ids": "RV-01..RV-11",
+            "decisions": [
+              "D-22",
+              "D-23",
+              "D-24",
+              "D-25",
+              "D-26",
+              "D-27"
+            ]
+          }
+        },
+        "TECHNICAL": {
+          "status": "READY",
+          "evidence": [
+            "agentic/data/project-context/features/BOS-010/subscription-plans/TECH-SPEC.md"
+          ],
+          "blocking_issues": [],
+          "open_questions": [],
+          "recommended_next_step": "Operator technical approval.",
+          "outputs": {
+            "verdict": "TECHNICAL_READY",
+            "revision": 2,
+            "approval": "pending operator"
+          }
+        },
+        "IMPLEMENTATION": {
+          "status": "READY",
+          "evidence": [
+            "backend/subscription-service/pom.xml",
+            "backend/subscription-service/src/main/resources/db/migration/V2__revenue_foundation.sql",
+            "docs/REVENUE_MODEL.md"
+          ],
+          "blocking_issues": [],
+          "open_questions": [],
+          "recommended_next_step": "Code review.",
+          "outputs": {
+            "verdict": "READY",
+            "checks": [
+              "mvn verify 147/0",
+              "check-contracts PASSED",
+              "disposable DB isolation + migrate x2",
+              "live gateway smoke"
+            ]
+          }
+        },
+        "REVIEW": {
+          "status": "READY",
+          "evidence": [
+            "agentic/data/project-context/features/BOS-010/subscription-plans/REVIEW.md"
+          ],
+          "blocking_issues": [],
+          "open_questions": [],
+          "recommended_next_step": "Automated QA.",
+          "outputs": {
+            "verdict": "READY",
+            "checks": [
+              "mvn verify 147/0",
+              "check-contracts PASSED",
+              "disposable DB isolation + migrate x2",
+              "live gateway smoke"
+            ]
+          }
+        },
+        "QA": {
+          "status": "READY",
+          "evidence": [
+            "agentic/data/project-context/features/BOS-010/subscription-plans/REVIEW.md"
+          ],
+          "blocking_issues": [],
+          "open_questions": [],
+          "recommended_next_step": "Operator release decision.",
+          "outputs": {
+            "verdict": "READY",
+            "checks": [
+              "mvn verify 147/0",
+              "check-contracts PASSED",
+              "disposable DB isolation + migrate x2",
+              "live gateway smoke"
+            ]
+          }
+        },
+        "RELEASE": {
+          "status": "READY",
+          "evidence": [
+            "agentic/data/project-context/features/BOS-010/subscription-plans/REVIEW.md",
+            "docs/REVENUE_MODEL.md"
+          ],
+          "blocking_issues": [],
+          "open_questions": [],
+          "recommended_next_step": "Restart building-application slice (approval requires creation fee, D-26).",
+          "outputs": {
+            "verdict": "RELEASED_LOCAL_TEST",
+            "approvals": [
+              "technical",
+              "release"
+            ],
+            "operator_action": "add SUBSCRIPTION_DB_PASSWORD to infra/docker/.env"
+          }
+        }
+      },
+      "attempts": {
+        "0:INTAKE:prompt-intake-adapter": 1,
+        "0:CONTEXT:baseline-verifier": 1,
+        "0:REQUIREMENTS:business-requirement-analyzer": 1,
+        "0:TECHNICAL:technical-architecture-planner": 1,
+        "1:CONTEXT:baseline-verifier": 1,
+        "1:REQUIREMENTS:business-requirement-analyzer": 1,
+        "1:TECHNICAL:technical-architecture-planner": 2,
+        "1:IMPLEMENTATION:implementation-agent": 1,
+        "1:REVIEW:code-review-agent": 1,
+        "1:QA:automated-qa-agent": 1,
+        "1:RELEASE:release-readiness-agent": 1
+      },
+      "active_task": null,
+      "context": {
+        "files": {
+          "agentic/data/project-context/features/BOS-010/subscription-plans/REQUIREMENTS.md": "167c41afa787a1ce3a71fe79a27c2649398b969da71857e0936f186ea776a059",
+          "agentic/data/project-context/features/BOS-010/subscription-plans/TECH-SPEC.md": "f02f742acfd2f4c996f2f1ab598160b3298afd7ba33582888d90521d37c1c945",
+          "agentic/data/project-context/features/BOS-010/DECISIONS.md": "b8ebfafcb78496998051699f5f9dab1e938e6293f6bef130893e31c0a423fe78",
+          "docs/ARCHITECTURE.md": "4cd0ff76486127b2e6406192c68b7ac09b1b46242e002523646fefdf0c21b0ed",
+          "backend/api-gateway/src/main/java/com/buildingos/gateway/routing/config/GatewayRouteConfig.java": "506fb5c3e9bb2d786c3306fdaa3966197531c62234cd7882811f66e023b312c9"
+        }
+      },
+      "budget_overrides": {
+        "max_task_seconds": 14400
+      }
+    }
+  },
+  "checkpoints": [
+    {
+      "run_id": "RUN-4ABC6B2BAC974B0E878CA39C9A27AE00",
+      "stage": "INTAKE",
+      "status": "RUNNING",
+      "payload": {
+        "runtime_version": 2,
+        "repo": "../../..",
+        "route": [
+          "INTAKE",
+          "CONTEXT",
+          "REQUIREMENTS",
+          "TECHNICAL",
+          "IMPLEMENTATION",
+          "REVIEW",
+          "QA",
+          "RELEASE",
+          "COMPLETED"
+        ],
+        "planning": "NO_REPLAN",
+        "scope_revision": 0,
+        "config_hash": "70b1f3f256a7d5cabb8fb3f1b16caebda54573166f642abe33620c51d76783b1",
+        "skill_pins": {
+          "adr-generator": "37b87ceae41931e7df58f2ef5c9fcf3445388213582bd819351c17e095b4809e",
+          "agentic-sdlc-orchestrator": "241d5fb550dd198ced2ea5886df1f80d61b6e4df52056d766bad96d955fecc6b",
+          "api-contract-discovery-agent": "d69fc7cfc2f675bc19c809e5344dea8bf4e1e2d93f7aaaa612938434bb98c5b2",
+          "architecture-reverse-engineer": "107d6d10555d8a72d081e927b73adf875416bf9a4dd0df3bfd49ac69f82174c0",
+          "automated-qa-agent": "3cec92ed01d2911b9db9a54e6985f2e4c17e036ac839f5d7155ce27276b8102f",
+          "baseline-verifier": "948f2c681d6af99a0702fbb74620763667ef24242e101a55f6261f04f519d92e",
+          "brownfield-risk-analyzer": "d5da84ce6cc2c321d64e155c4efd4adc9826a0d4202056c44b73a4a108bcb599",
+          "business-requirement-analyzer": "c6d4f6cafd51a87d2304dc94c9c804e1585f639579638bfd46f7fcc59ec95a41",
+          "change-impact-analyzer": "ed5d3a96e9d0f3cbd878bd869aede9d4981c5bd2d56a2d65b74a75e50e712ab1",
+          "code-review-agent": "f95ee9b1ea892cd4aa4ecadc60246be9ad083669696889c96e788d9e3f0462b7",
+          "database-discovery-agent": "a9bf3867174c95eddbd83511e35079310ac79f511867591d64893c5007e1a791",
+          "device-preview-agent": "2dcccd3e894bcec5e81cfa4b40616f5d073b709320a9e155dc0c93de2a52e904",
+          "document-intake-adapter": "b773708a14af67828446bf84da63f1fb7bab07bf531f7c7a48a0a6b6f6cfd37e",
+          "effort-estimation-agent": "6ba73a7f3f15bbd622e95f1f14f709e7112ebd90433a44781be453f6e2977b1a",
+          "epic-verifier": "bf72ce9f4f91d3b0cd1f3669f2fe13dcd581b485b594fb8fdf7de5f64b5a03e7",
+          "history-analysis-agent": "6b2de7ce22f04464beb115a847b2831e7e42cd3cf6132ffba134ce2b42d1a8d0",
+          "implementation-agent": "369621d9f2bed8a62ab3b14e6108ad218202b4fb4171267933b122b470badf8b",
+          "intake-change-classifier": "b1102a78f041cb71b7456c2739225ba1ceca6b9b227bd7a6511d38db891c30c7",
+          "project-discovery-agent": "5ed25348cec052c3b95f58555ab62ec6ecb5cd4d23a9cfe052e6cb4f62387fe5",
+          "prompt-intake-adapter": "c3ab8c873b2c76e8aea61f808c9714f6e667d475772468a6e5a13f772f3a124e",
+          "release-readiness-agent": "8db12e3d8be626e8524e83c6ea4523293e24404765dade480c3c9a2600c6443c",
+          "requirement-reconstruction-agent": "5b65ac066f3ad5768ef3b949190a67af94bcd96196616f354b890796d97100a8",
+          "requirement-ui-verifier": "855d48036a9aa44e1283235e66899ed06151fb042e70bdebe73f5a0ce2144dfd",
+          "runtime-discovery-agent": "0c0b51066a093bfd52c08425554b8e3415930f82099fcbe0589180ca541d09e2",
+          "sprint-planner": "8193d9f44eea32eef72586a7dbee096f8014676434f719fe047d0a58360ec728",
+          "sprint-readiness-verifier": "b44dcdf8f2032ebddc7ba43c78219ff5fbd15c4f7e1f8b3959782bda33c97374",
+          "srs-generator": "f84a0c95661e2e2a29bc71b6ad6a6ffaf8163440965205f1956b6b3e7c000305",
+          "task-breakdown-agent": "0872087d99f7695ed8a4aa6b585323d29f7df905b56fcb5ca2c06d6f9a680f30",
+          "technical-architecture-planner": "7a37e8b1f49d8e4ce21721b7050475f178413c94a92e4065b3405c58ca482d23",
+          "technical-readiness-verifier": "aa888a9ae421d6fd6f5238435b76c191712bcfa3920df26f67ba7b304ec827f1",
+          "technical-spec-generator": "2d58206e630d0024c78371d3747ea6d86cf17ec2038367e9389dc2961dcc4fd0",
+          "test-baseline-agent": "58a93639efbf78373edf8cb64020e16721f65b5ba30eb271b886d79d49e0fbbf",
+          "user-flow-discovery-agent": "50f20be315ac1d62af72b88d9372a4d29684aa26094ac235c89c77e08c67ef91",
+          "web-preview-agent": "dfab7cd287b98b18637db38fcee208b28bc95a3447bb0ea7cfb12cddb3732eb4",
+          "work-item-level-classifier": "78d23d76d06e905cbe22854091e2a595110d12a31526444a0ebe6aedab77e9d5"
+        },
+        "results": {},
+        "attempts": {},
+        "active_task": null
+      },
+      "created_at": "2026-09-23T13:18:41.644415+00:00"
+    },
+    {
+      "run_id": "RUN-4ABC6B2BAC974B0E878CA39C9A27AE00",
+      "stage": "INTAKE",
+      "status": "RUNNING",
+      "payload": {
+        "context": {
+          "files": {
+            "agentic/data/project-context/features/BOS-010/subscription-plans/REQUIREMENTS.md": "d36e8828f09dde8701d833599664c763f60e2a0a2fae33298d5deb42e69f987f",
+            "agentic/data/project-context/features/BOS-010/subscription-plans/TECH-SPEC.md": "75783f9cd83c4afc2e94fac67a1cad11056dc2ab6056715f28862a41256f6383",
+            "agentic/data/project-context/features/BOS-010/DECISIONS.md": "37dd272296c9cdb4ebb71033ea05c70c5d2cfeff10c7f2eb8ccc9e354ea748dc",
+            "docs/ARCHITECTURE.md": "68fffea8e3217340ed87a529a4302164270920d7008659c0065b385a25d6bc47",
+            "backend/api-gateway/src/main/java/com/buildingos/gateway/routing/config/GatewayRouteConfig.java": "e2735cf9edcf23bd3393621424a1684b77f491c61f48003de409580ccad970be"
+          }
+        }
+      },
+      "created_at": "2026-09-23T13:30:41.958926+00:00"
+    },
+    {
+      "run_id": "RUN-4ABC6B2BAC974B0E878CA39C9A27AE00",
+      "stage": "INTAKE",
+      "status": "RUNNING",
+      "payload": {
+        "attempts": {
+          "0:INTAKE:prompt-intake-adapter": 1
+        },
+        "active_task": {
+          "id": "df602e5ad3164de79d49d6b30af18f8a",
+          "skill": "prompt-intake-adapter",
+          "started_at": "2026-09-23T13:30:42.019307+00:00",
+          "tool_calls": 0
+        }
+      },
+      "created_at": "2026-09-23T13:30:42.019666+00:00"
+    },
+    {
+      "run_id": "RUN-4ABC6B2BAC974B0E878CA39C9A27AE00",
+      "stage": "INTAKE",
+      "status": "RUNNING",
+      "payload": {
+        "results": {
+          "INTAKE": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/subscription-plans/REQUIREMENTS.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Context.",
+            "outputs": {
+              "work_item": "BOS-010 F5a subscription plans",
+              "work_type": "new_feature",
+              "project_type": "greenfield module in brownfield repo",
+              "hierarchy": "FEATURE",
+              "planning": "NO_REPLAN"
+            }
+          }
+        },
+        "active_task": null
+      },
+      "created_at": "2026-09-23T13:30:42.091827+00:00"
+    },
+    {
+      "run_id": "RUN-4ABC6B2BAC974B0E878CA39C9A27AE00",
+      "stage": "CONTEXT",
+      "status": "RUNNING",
+      "payload": {},
+      "created_at": "2026-09-23T13:30:42.136619+00:00"
+    },
+    {
+      "run_id": "RUN-4ABC6B2BAC974B0E878CA39C9A27AE00",
+      "stage": "CONTEXT",
+      "status": "RUNNING",
+      "payload": {
+        "attempts": {
+          "0:INTAKE:prompt-intake-adapter": 1,
+          "0:CONTEXT:baseline-verifier": 1
+        },
+        "active_task": {
+          "id": "2e2895984d0548d1955e047c3589257d",
+          "skill": "baseline-verifier",
+          "started_at": "2026-09-23T13:30:42.184398+00:00",
+          "tool_calls": 0
+        }
+      },
+      "created_at": "2026-09-23T13:30:42.185136+00:00"
+    },
+    {
+      "run_id": "RUN-4ABC6B2BAC974B0E878CA39C9A27AE00",
+      "stage": "CONTEXT",
+      "status": "RUNNING",
+      "payload": {
+        "results": {
+          "INTAKE": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/subscription-plans/REQUIREMENTS.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Context.",
+            "outputs": {
+              "work_item": "BOS-010 F5a subscription plans",
+              "work_type": "new_feature",
+              "project_type": "greenfield module in brownfield repo",
+              "hierarchy": "FEATURE",
+              "planning": "NO_REPLAN"
+            }
+          },
+          "CONTEXT": {
+            "status": "READY",
+            "evidence": [
+              "docs/ARCHITECTURE.md",
+              "backend/api-gateway/src/main/java/com/buildingos/gateway/routing/config/GatewayRouteConfig.java",
+              "infra/docker/postgres/init/02-building-db.sh"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Requirements.",
+            "outputs": {
+              "verdict": "CONTEXT_READY",
+              "revision": "31235ea",
+              "finding": "No subscription-service; wiring pattern from building-service/account-service"
+            }
+          }
+        },
+        "active_task": null
+      },
+      "created_at": "2026-09-23T13:30:42.256928+00:00"
+    },
+    {
+      "run_id": "RUN-4ABC6B2BAC974B0E878CA39C9A27AE00",
+      "stage": "REQUIREMENTS",
+      "status": "RUNNING",
+      "payload": {},
+      "created_at": "2026-09-23T13:30:42.302685+00:00"
+    },
+    {
+      "run_id": "RUN-4ABC6B2BAC974B0E878CA39C9A27AE00",
+      "stage": "REQUIREMENTS",
+      "status": "RUNNING",
+      "payload": {
+        "attempts": {
+          "0:INTAKE:prompt-intake-adapter": 1,
+          "0:CONTEXT:baseline-verifier": 1,
+          "0:REQUIREMENTS:business-requirement-analyzer": 1
+        },
+        "active_task": {
+          "id": "022ad9d2b0db48739ed9ea522f6fe1ed",
+          "skill": "business-requirement-analyzer",
+          "started_at": "2026-09-23T13:30:42.357686+00:00",
+          "tool_calls": 0
+        }
+      },
+      "created_at": "2026-09-23T13:30:42.358070+00:00"
+    },
+    {
+      "run_id": "RUN-4ABC6B2BAC974B0E878CA39C9A27AE00",
+      "stage": "REQUIREMENTS",
+      "status": "RUNNING",
+      "payload": {
+        "results": {
+          "INTAKE": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/subscription-plans/REQUIREMENTS.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Context.",
+            "outputs": {
+              "work_item": "BOS-010 F5a subscription plans",
+              "work_type": "new_feature",
+              "project_type": "greenfield module in brownfield repo",
+              "hierarchy": "FEATURE",
+              "planning": "NO_REPLAN"
+            }
+          },
+          "CONTEXT": {
+            "status": "READY",
+            "evidence": [
+              "docs/ARCHITECTURE.md",
+              "backend/api-gateway/src/main/java/com/buildingos/gateway/routing/config/GatewayRouteConfig.java",
+              "infra/docker/postgres/init/02-building-db.sh"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Requirements.",
+            "outputs": {
+              "verdict": "CONTEXT_READY",
+              "revision": "31235ea",
+              "finding": "No subscription-service; wiring pattern from building-service/account-service"
+            }
+          },
+          "REQUIREMENTS": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/subscription-plans/REQUIREMENTS.md",
+              "agentic/data/project-context/features/BOS-010/DECISIONS.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Technical design.",
+            "outputs": {
+              "verdict": "REQUIREMENTS_READY",
+              "ids": "SP-01..SP-10",
+              "decisions": [
+                "D-15",
+                "D-16",
+                "D-17",
+                "D-18",
+                "D-19",
+                "D-20",
+                "D-21"
+              ]
+            }
+          }
+        },
+        "active_task": null
+      },
+      "created_at": "2026-09-23T13:30:42.431051+00:00"
+    },
+    {
+      "run_id": "RUN-4ABC6B2BAC974B0E878CA39C9A27AE00",
+      "stage": "TECHNICAL",
+      "status": "RUNNING",
+      "payload": {},
+      "created_at": "2026-09-23T13:30:42.479665+00:00"
+    },
+    {
+      "run_id": "RUN-4ABC6B2BAC974B0E878CA39C9A27AE00",
+      "stage": "TECHNICAL",
+      "status": "RUNNING",
+      "payload": {
+        "attempts": {
+          "0:INTAKE:prompt-intake-adapter": 1,
+          "0:CONTEXT:baseline-verifier": 1,
+          "0:REQUIREMENTS:business-requirement-analyzer": 1,
+          "0:TECHNICAL:technical-architecture-planner": 1
+        },
+        "active_task": {
+          "id": "d935129faf1f432f9ad5085fd8e84f2b",
+          "skill": "technical-architecture-planner",
+          "started_at": "2026-09-23T13:30:42.528749+00:00",
+          "tool_calls": 0
+        }
+      },
+      "created_at": "2026-09-23T13:30:42.530069+00:00"
+    },
+    {
+      "run_id": "RUN-4ABC6B2BAC974B0E878CA39C9A27AE00",
+      "stage": "TECHNICAL",
+      "status": "RUNNING",
+      "payload": {
+        "results": {
+          "INTAKE": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/subscription-plans/REQUIREMENTS.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Context.",
+            "outputs": {
+              "work_item": "BOS-010 F5a subscription plans",
+              "work_type": "new_feature",
+              "project_type": "greenfield module in brownfield repo",
+              "hierarchy": "FEATURE",
+              "planning": "NO_REPLAN"
+            }
+          },
+          "CONTEXT": {
+            "status": "READY",
+            "evidence": [
+              "docs/ARCHITECTURE.md",
+              "backend/api-gateway/src/main/java/com/buildingos/gateway/routing/config/GatewayRouteConfig.java",
+              "infra/docker/postgres/init/02-building-db.sh"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Requirements.",
+            "outputs": {
+              "verdict": "CONTEXT_READY",
+              "revision": "31235ea",
+              "finding": "No subscription-service; wiring pattern from building-service/account-service"
+            }
+          },
+          "REQUIREMENTS": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/subscription-plans/REQUIREMENTS.md",
+              "agentic/data/project-context/features/BOS-010/DECISIONS.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Technical design.",
+            "outputs": {
+              "verdict": "REQUIREMENTS_READY",
+              "ids": "SP-01..SP-10",
+              "decisions": [
+                "D-15",
+                "D-16",
+                "D-17",
+                "D-18",
+                "D-19",
+                "D-20",
+                "D-21"
+              ]
+            }
+          },
+          "TECHNICAL": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/subscription-plans/TECH-SPEC.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Operator technical approval.",
+            "outputs": {
+              "verdict": "TECHNICAL_READY",
+              "approval": "pending operator"
+            }
+          }
+        },
+        "active_task": null
+      },
+      "created_at": "2026-09-23T13:30:42.601619+00:00"
+    },
+    {
+      "run_id": "RUN-4ABC6B2BAC974B0E878CA39C9A27AE00",
+      "stage": "CONTEXT",
+      "status": "RUNNING",
+      "payload": {
+        "scope_revision": 1,
+        "results": {
+          "INTAKE": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/subscription-plans/REQUIREMENTS.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Context.",
+            "outputs": {
+              "work_item": "BOS-010 F5a subscription plans",
+              "work_type": "new_feature",
+              "project_type": "greenfield module in brownfield repo",
+              "hierarchy": "FEATURE",
+              "planning": "NO_REPLAN"
+            }
+          }
+        },
+        "_removed": [
+          "context"
+        ]
+      },
+      "created_at": "2026-09-23T13:36:59.624192+00:00"
+    },
+    {
+      "run_id": "RUN-4ABC6B2BAC974B0E878CA39C9A27AE00",
+      "stage": "CONTEXT",
+      "status": "RUNNING",
+      "payload": {
+        "context": {
+          "files": {
+            "agentic/data/project-context/features/BOS-010/subscription-plans/REQUIREMENTS.md": "167c41afa787a1ce3a71fe79a27c2649398b969da71857e0936f186ea776a059",
+            "agentic/data/project-context/features/BOS-010/subscription-plans/TECH-SPEC.md": "f02f742acfd2f4c996f2f1ab598160b3298afd7ba33582888d90521d37c1c945",
+            "agentic/data/project-context/features/BOS-010/DECISIONS.md": "584f6e05d34ac7fc7342e49107f6a474f0ea646d81b19095948e31dc0a849859",
+            "docs/ARCHITECTURE.md": "68fffea8e3217340ed87a529a4302164270920d7008659c0065b385a25d6bc47",
+            "backend/api-gateway/src/main/java/com/buildingos/gateway/routing/config/GatewayRouteConfig.java": "e2735cf9edcf23bd3393621424a1684b77f491c61f48003de409580ccad970be"
+          }
+        }
+      },
+      "created_at": "2026-09-23T13:37:08.824771+00:00"
+    },
+    {
+      "run_id": "RUN-4ABC6B2BAC974B0E878CA39C9A27AE00",
+      "stage": "CONTEXT",
+      "status": "RUNNING",
+      "payload": {
+        "attempts": {
+          "0:INTAKE:prompt-intake-adapter": 1,
+          "0:CONTEXT:baseline-verifier": 1,
+          "0:REQUIREMENTS:business-requirement-analyzer": 1,
+          "0:TECHNICAL:technical-architecture-planner": 1,
+          "1:CONTEXT:baseline-verifier": 1
+        },
+        "active_task": {
+          "id": "9a0d3eb3605a407bb0ffa9581759d543",
+          "skill": "baseline-verifier",
+          "started_at": "2026-09-23T13:37:08.873552+00:00",
+          "tool_calls": 0
+        }
+      },
+      "created_at": "2026-09-23T13:37:08.875170+00:00"
+    },
+    {
+      "run_id": "RUN-4ABC6B2BAC974B0E878CA39C9A27AE00",
+      "stage": "CONTEXT",
+      "status": "RUNNING",
+      "payload": {
+        "results": {
+          "INTAKE": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/subscription-plans/REQUIREMENTS.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Context.",
+            "outputs": {
+              "work_item": "BOS-010 F5a subscription plans",
+              "work_type": "new_feature",
+              "project_type": "greenfield module in brownfield repo",
+              "hierarchy": "FEATURE",
+              "planning": "NO_REPLAN"
+            }
+          },
+          "CONTEXT": {
+            "status": "READY",
+            "evidence": [
+              "docs/ARCHITECTURE.md",
+              "backend/api-gateway/src/main/java/com/buildingos/gateway/routing/config/GatewayRouteConfig.java",
+              "infra/docker/postgres/init/02-building-db.sh"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Requirements.",
+            "outputs": {
+              "verdict": "CONTEXT_READY",
+              "revision": "31235ea",
+              "finding": "No subscription-service; wiring pattern from building-service/account-service"
+            }
+          }
+        },
+        "active_task": null
+      },
+      "created_at": "2026-09-23T13:37:08.947222+00:00"
+    },
+    {
+      "run_id": "RUN-4ABC6B2BAC974B0E878CA39C9A27AE00",
+      "stage": "REQUIREMENTS",
+      "status": "RUNNING",
+      "payload": {},
+      "created_at": "2026-09-23T13:37:08.993271+00:00"
+    },
+    {
+      "run_id": "RUN-4ABC6B2BAC974B0E878CA39C9A27AE00",
+      "stage": "REQUIREMENTS",
+      "status": "RUNNING",
+      "payload": {
+        "attempts": {
+          "0:INTAKE:prompt-intake-adapter": 1,
+          "0:CONTEXT:baseline-verifier": 1,
+          "0:REQUIREMENTS:business-requirement-analyzer": 1,
+          "0:TECHNICAL:technical-architecture-planner": 1,
+          "1:CONTEXT:baseline-verifier": 1,
+          "1:REQUIREMENTS:business-requirement-analyzer": 1
+        },
+        "active_task": {
+          "id": "c316e3592ad34accb01e991789a5742d",
+          "skill": "business-requirement-analyzer",
+          "started_at": "2026-09-23T13:37:09.042660+00:00",
+          "tool_calls": 0
+        }
+      },
+      "created_at": "2026-09-23T13:37:09.043150+00:00"
+    },
+    {
+      "run_id": "RUN-4ABC6B2BAC974B0E878CA39C9A27AE00",
+      "stage": "REQUIREMENTS",
+      "status": "RUNNING",
+      "payload": {
+        "results": {
+          "INTAKE": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/subscription-plans/REQUIREMENTS.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Context.",
+            "outputs": {
+              "work_item": "BOS-010 F5a subscription plans",
+              "work_type": "new_feature",
+              "project_type": "greenfield module in brownfield repo",
+              "hierarchy": "FEATURE",
+              "planning": "NO_REPLAN"
+            }
+          },
+          "CONTEXT": {
+            "status": "READY",
+            "evidence": [
+              "docs/ARCHITECTURE.md",
+              "backend/api-gateway/src/main/java/com/buildingos/gateway/routing/config/GatewayRouteConfig.java",
+              "infra/docker/postgres/init/02-building-db.sh"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Requirements.",
+            "outputs": {
+              "verdict": "CONTEXT_READY",
+              "revision": "31235ea",
+              "finding": "No subscription-service; wiring pattern from building-service/account-service"
+            }
+          },
+          "REQUIREMENTS": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/subscription-plans/REQUIREMENTS.md",
+              "agentic/data/project-context/features/BOS-010/DECISIONS.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Technical design.",
+            "outputs": {
+              "verdict": "REQUIREMENTS_READY",
+              "revision": 2,
+              "ids": "RV-01..RV-11",
+              "decisions": [
+                "D-22",
+                "D-23",
+                "D-24",
+                "D-25",
+                "D-26",
+                "D-27"
+              ]
+            }
+          }
+        },
+        "active_task": null
+      },
+      "created_at": "2026-09-23T13:37:09.115477+00:00"
+    },
+    {
+      "run_id": "RUN-4ABC6B2BAC974B0E878CA39C9A27AE00",
+      "stage": "TECHNICAL",
+      "status": "RUNNING",
+      "payload": {},
+      "created_at": "2026-09-23T13:37:09.161343+00:00"
+    },
+    {
+      "run_id": "RUN-4ABC6B2BAC974B0E878CA39C9A27AE00",
+      "stage": "TECHNICAL",
+      "status": "RUNNING",
+      "payload": {
+        "attempts": {
+          "0:INTAKE:prompt-intake-adapter": 1,
+          "0:CONTEXT:baseline-verifier": 1,
+          "0:REQUIREMENTS:business-requirement-analyzer": 1,
+          "0:TECHNICAL:technical-architecture-planner": 1,
+          "1:CONTEXT:baseline-verifier": 1,
+          "1:REQUIREMENTS:business-requirement-analyzer": 1,
+          "1:TECHNICAL:technical-architecture-planner": 1
+        },
+        "active_task": {
+          "id": "6da35d72739d4a2486a65acdf998104b",
+          "skill": "technical-architecture-planner",
+          "started_at": "2026-09-23T13:37:09.211978+00:00",
+          "tool_calls": 0
+        }
+      },
+      "created_at": "2026-09-23T13:37:09.214145+00:00"
+    },
+    {
+      "run_id": "RUN-4ABC6B2BAC974B0E878CA39C9A27AE00",
+      "stage": "TECHNICAL",
+      "status": "RUNNING",
+      "payload": {
+        "results": {
+          "INTAKE": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/subscription-plans/REQUIREMENTS.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Context.",
+            "outputs": {
+              "work_item": "BOS-010 F5a subscription plans",
+              "work_type": "new_feature",
+              "project_type": "greenfield module in brownfield repo",
+              "hierarchy": "FEATURE",
+              "planning": "NO_REPLAN"
+            }
+          },
+          "CONTEXT": {
+            "status": "READY",
+            "evidence": [
+              "docs/ARCHITECTURE.md",
+              "backend/api-gateway/src/main/java/com/buildingos/gateway/routing/config/GatewayRouteConfig.java",
+              "infra/docker/postgres/init/02-building-db.sh"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Requirements.",
+            "outputs": {
+              "verdict": "CONTEXT_READY",
+              "revision": "31235ea",
+              "finding": "No subscription-service; wiring pattern from building-service/account-service"
+            }
+          },
+          "REQUIREMENTS": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/subscription-plans/REQUIREMENTS.md",
+              "agentic/data/project-context/features/BOS-010/DECISIONS.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Technical design.",
+            "outputs": {
+              "verdict": "REQUIREMENTS_READY",
+              "revision": 2,
+              "ids": "RV-01..RV-11",
+              "decisions": [
+                "D-22",
+                "D-23",
+                "D-24",
+                "D-25",
+                "D-26",
+                "D-27"
+              ]
+            }
+          },
+          "TECHNICAL": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/subscription-plans/TECH-SPEC.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Operator technical approval.",
+            "outputs": {
+              "verdict": "TECHNICAL_READY",
+              "revision": 2,
+              "approval": "pending operator"
+            }
+          }
+        },
+        "active_task": null
+      },
+      "created_at": "2026-09-23T13:37:09.285448+00:00"
+    },
+    {
+      "run_id": "RUN-4ABC6B2BAC974B0E878CA39C9A27AE00",
+      "stage": "TECHNICAL",
+      "status": "RUNNING",
+      "payload": {
+        "results": {
+          "INTAKE": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/subscription-plans/REQUIREMENTS.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Context.",
+            "outputs": {
+              "work_item": "BOS-010 F5a subscription plans",
+              "work_type": "new_feature",
+              "project_type": "greenfield module in brownfield repo",
+              "hierarchy": "FEATURE",
+              "planning": "NO_REPLAN"
+            }
+          },
+          "CONTEXT": {
+            "status": "READY",
+            "evidence": [
+              "docs/ARCHITECTURE.md",
+              "backend/api-gateway/src/main/java/com/buildingos/gateway/routing/config/GatewayRouteConfig.java",
+              "infra/docker/postgres/init/02-building-db.sh"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Requirements.",
+            "outputs": {
+              "verdict": "CONTEXT_READY",
+              "revision": "31235ea",
+              "finding": "No subscription-service; wiring pattern from building-service/account-service"
+            }
+          },
+          "REQUIREMENTS": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/subscription-plans/REQUIREMENTS.md",
+              "agentic/data/project-context/features/BOS-010/DECISIONS.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Technical design.",
+            "outputs": {
+              "verdict": "REQUIREMENTS_READY",
+              "revision": 2,
+              "ids": "RV-01..RV-11",
+              "decisions": [
+                "D-22",
+                "D-23",
+                "D-24",
+                "D-25",
+                "D-26",
+                "D-27"
+              ]
+            }
+          }
+        },
+        "context": {
+          "files": {
+            "agentic/data/project-context/features/BOS-010/subscription-plans/REQUIREMENTS.md": "167c41afa787a1ce3a71fe79a27c2649398b969da71857e0936f186ea776a059",
+            "agentic/data/project-context/features/BOS-010/subscription-plans/TECH-SPEC.md": "f02f742acfd2f4c996f2f1ab598160b3298afd7ba33582888d90521d37c1c945",
+            "agentic/data/project-context/features/BOS-010/DECISIONS.md": "b8ebfafcb78496998051699f5f9dab1e938e6293f6bef130893e31c0a423fe78",
+            "docs/ARCHITECTURE.md": "68fffea8e3217340ed87a529a4302164270920d7008659c0065b385a25d6bc47",
+            "backend/api-gateway/src/main/java/com/buildingos/gateway/routing/config/GatewayRouteConfig.java": "e2735cf9edcf23bd3393621424a1684b77f491c61f48003de409580ccad970be"
+          }
+        }
+      },
+      "created_at": "2026-09-23T13:40:49.949925+00:00"
+    },
+    {
+      "run_id": "RUN-4ABC6B2BAC974B0E878CA39C9A27AE00",
+      "stage": "TECHNICAL",
+      "status": "RUNNING",
+      "payload": {
+        "budget_overrides": {
+          "max_task_seconds": 14400
+        }
+      },
+      "created_at": "2026-09-23T13:41:51.854241+00:00"
+    },
+    {
+      "run_id": "RUN-4ABC6B2BAC974B0E878CA39C9A27AE00",
+      "stage": "TECHNICAL",
+      "status": "RUNNING",
+      "payload": {
+        "budget_overrides": {
+          "max_task_seconds": 900
+        }
+      },
+      "created_at": "2026-09-23T13:42:20.459835+00:00"
+    },
+    {
+      "run_id": "RUN-4ABC6B2BAC974B0E878CA39C9A27AE00",
+      "stage": "TECHNICAL",
+      "status": "RUNNING",
+      "payload": {
+        "attempts": {
+          "0:INTAKE:prompt-intake-adapter": 1,
+          "0:CONTEXT:baseline-verifier": 1,
+          "0:REQUIREMENTS:business-requirement-analyzer": 1,
+          "0:TECHNICAL:technical-architecture-planner": 1,
+          "1:CONTEXT:baseline-verifier": 1,
+          "1:REQUIREMENTS:business-requirement-analyzer": 1,
+          "1:TECHNICAL:technical-architecture-planner": 2
+        },
+        "active_task": {
+          "id": "3021d6bffd814f1fae285c6c5040a5f4",
+          "skill": "technical-architecture-planner",
+          "started_at": "2026-09-23T13:42:20.513002+00:00",
+          "tool_calls": 0
+        }
+      },
+      "created_at": "2026-09-23T13:42:20.515651+00:00"
+    },
+    {
+      "run_id": "RUN-4ABC6B2BAC974B0E878CA39C9A27AE00",
+      "stage": "TECHNICAL",
+      "status": "RUNNING",
+      "payload": {
+        "results": {
+          "INTAKE": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/subscription-plans/REQUIREMENTS.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Context.",
+            "outputs": {
+              "work_item": "BOS-010 F5a subscription plans",
+              "work_type": "new_feature",
+              "project_type": "greenfield module in brownfield repo",
+              "hierarchy": "FEATURE",
+              "planning": "NO_REPLAN"
+            }
+          },
+          "CONTEXT": {
+            "status": "READY",
+            "evidence": [
+              "docs/ARCHITECTURE.md",
+              "backend/api-gateway/src/main/java/com/buildingos/gateway/routing/config/GatewayRouteConfig.java",
+              "infra/docker/postgres/init/02-building-db.sh"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Requirements.",
+            "outputs": {
+              "verdict": "CONTEXT_READY",
+              "revision": "31235ea",
+              "finding": "No subscription-service; wiring pattern from building-service/account-service"
+            }
+          },
+          "REQUIREMENTS": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/subscription-plans/REQUIREMENTS.md",
+              "agentic/data/project-context/features/BOS-010/DECISIONS.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Technical design.",
+            "outputs": {
+              "verdict": "REQUIREMENTS_READY",
+              "revision": 2,
+              "ids": "RV-01..RV-11",
+              "decisions": [
+                "D-22",
+                "D-23",
+                "D-24",
+                "D-25",
+                "D-26",
+                "D-27"
+              ]
+            }
+          },
+          "TECHNICAL": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/subscription-plans/TECH-SPEC.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Operator technical approval.",
+            "outputs": {
+              "verdict": "TECHNICAL_READY",
+              "revision": 2,
+              "approval": "pending operator"
+            }
+          }
+        },
+        "active_task": null
+      },
+      "created_at": "2026-09-23T13:42:20.588815+00:00"
+    },
+    {
+      "run_id": "RUN-4ABC6B2BAC974B0E878CA39C9A27AE00",
+      "stage": "TECHNICAL",
+      "status": "RUNNING",
+      "payload": {},
+      "created_at": "2026-09-23T13:42:20.641064+00:00"
+    },
+    {
+      "run_id": "RUN-4ABC6B2BAC974B0E878CA39C9A27AE00",
+      "stage": "IMPLEMENTATION",
+      "status": "RUNNING",
+      "payload": {},
+      "created_at": "2026-09-23T13:42:20.690650+00:00"
+    },
+    {
+      "run_id": "RUN-4ABC6B2BAC974B0E878CA39C9A27AE00",
+      "stage": "IMPLEMENTATION",
+      "status": "RUNNING",
+      "payload": {
+        "budget_overrides": {
+          "max_task_seconds": 14400
+        }
+      },
+      "created_at": "2026-09-23T13:47:10.945838+00:00"
+    },
+    {
+      "run_id": "RUN-4ABC6B2BAC974B0E878CA39C9A27AE00",
+      "stage": "IMPLEMENTATION",
+      "status": "RUNNING",
+      "payload": {
+        "attempts": {
+          "0:INTAKE:prompt-intake-adapter": 1,
+          "0:CONTEXT:baseline-verifier": 1,
+          "0:REQUIREMENTS:business-requirement-analyzer": 1,
+          "0:TECHNICAL:technical-architecture-planner": 1,
+          "1:CONTEXT:baseline-verifier": 1,
+          "1:REQUIREMENTS:business-requirement-analyzer": 1,
+          "1:TECHNICAL:technical-architecture-planner": 2,
+          "1:IMPLEMENTATION:implementation-agent": 1
+        },
+        "active_task": {
+          "id": "3bfbd753441c4eaba4820feab77810a1",
+          "skill": "implementation-agent",
+          "started_at": "2026-09-23T13:47:11.010907+00:00",
+          "tool_calls": 0
+        }
+      },
+      "created_at": "2026-09-23T13:47:11.013545+00:00"
+    },
+    {
+      "run_id": "RUN-4ABC6B2BAC974B0E878CA39C9A27AE00",
+      "stage": "IMPLEMENTATION",
+      "status": "RUNNING",
+      "payload": {
+        "results": {
+          "INTAKE": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/subscription-plans/REQUIREMENTS.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Context.",
+            "outputs": {
+              "work_item": "BOS-010 F5a subscription plans",
+              "work_type": "new_feature",
+              "project_type": "greenfield module in brownfield repo",
+              "hierarchy": "FEATURE",
+              "planning": "NO_REPLAN"
+            }
+          },
+          "CONTEXT": {
+            "status": "READY",
+            "evidence": [
+              "docs/ARCHITECTURE.md",
+              "backend/api-gateway/src/main/java/com/buildingos/gateway/routing/config/GatewayRouteConfig.java",
+              "infra/docker/postgres/init/02-building-db.sh"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Requirements.",
+            "outputs": {
+              "verdict": "CONTEXT_READY",
+              "revision": "31235ea",
+              "finding": "No subscription-service; wiring pattern from building-service/account-service"
+            }
+          },
+          "REQUIREMENTS": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/subscription-plans/REQUIREMENTS.md",
+              "agentic/data/project-context/features/BOS-010/DECISIONS.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Technical design.",
+            "outputs": {
+              "verdict": "REQUIREMENTS_READY",
+              "revision": 2,
+              "ids": "RV-01..RV-11",
+              "decisions": [
+                "D-22",
+                "D-23",
+                "D-24",
+                "D-25",
+                "D-26",
+                "D-27"
+              ]
+            }
+          },
+          "TECHNICAL": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/subscription-plans/TECH-SPEC.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Operator technical approval.",
+            "outputs": {
+              "verdict": "TECHNICAL_READY",
+              "revision": 2,
+              "approval": "pending operator"
+            }
+          },
+          "IMPLEMENTATION": {
+            "status": "READY",
+            "evidence": [
+              "backend/subscription-service/pom.xml",
+              "backend/subscription-service/src/main/resources/db/migration/V2__revenue_foundation.sql",
+              "docs/REVENUE_MODEL.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Code review.",
+            "outputs": {
+              "verdict": "READY",
+              "checks": [
+                "mvn verify 147/0",
+                "check-contracts PASSED",
+                "disposable DB isolation + migrate x2",
+                "live gateway smoke"
+              ]
+            }
+          }
+        },
+        "active_task": null,
+        "context": {
+          "files": {
+            "agentic/data/project-context/features/BOS-010/subscription-plans/REQUIREMENTS.md": "167c41afa787a1ce3a71fe79a27c2649398b969da71857e0936f186ea776a059",
+            "agentic/data/project-context/features/BOS-010/subscription-plans/TECH-SPEC.md": "f02f742acfd2f4c996f2f1ab598160b3298afd7ba33582888d90521d37c1c945",
+            "agentic/data/project-context/features/BOS-010/DECISIONS.md": "b8ebfafcb78496998051699f5f9dab1e938e6293f6bef130893e31c0a423fe78",
+            "docs/ARCHITECTURE.md": "4cd0ff76486127b2e6406192c68b7ac09b1b46242e002523646fefdf0c21b0ed",
+            "backend/api-gateway/src/main/java/com/buildingos/gateway/routing/config/GatewayRouteConfig.java": "506fb5c3e9bb2d786c3306fdaa3966197531c62234cd7882811f66e023b312c9"
+          }
+        }
+      },
+      "created_at": "2026-09-23T14:15:46.365092+00:00"
+    },
+    {
+      "run_id": "RUN-4ABC6B2BAC974B0E878CA39C9A27AE00",
+      "stage": "REVIEW",
+      "status": "RUNNING",
+      "payload": {},
+      "created_at": "2026-09-23T14:15:46.418653+00:00"
+    },
+    {
+      "run_id": "RUN-4ABC6B2BAC974B0E878CA39C9A27AE00",
+      "stage": "REVIEW",
+      "status": "RUNNING",
+      "payload": {
+        "attempts": {
+          "0:INTAKE:prompt-intake-adapter": 1,
+          "0:CONTEXT:baseline-verifier": 1,
+          "0:REQUIREMENTS:business-requirement-analyzer": 1,
+          "0:TECHNICAL:technical-architecture-planner": 1,
+          "1:CONTEXT:baseline-verifier": 1,
+          "1:REQUIREMENTS:business-requirement-analyzer": 1,
+          "1:TECHNICAL:technical-architecture-planner": 2,
+          "1:IMPLEMENTATION:implementation-agent": 1,
+          "1:REVIEW:code-review-agent": 1
+        },
+        "active_task": {
+          "id": "ae1500a81bad41378181fce33413cb2b",
+          "skill": "code-review-agent",
+          "started_at": "2026-09-23T14:15:46.475814+00:00",
+          "tool_calls": 0
+        }
+      },
+      "created_at": "2026-09-23T14:15:46.476615+00:00"
+    },
+    {
+      "run_id": "RUN-4ABC6B2BAC974B0E878CA39C9A27AE00",
+      "stage": "REVIEW",
+      "status": "RUNNING",
+      "payload": {
+        "results": {
+          "INTAKE": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/subscription-plans/REQUIREMENTS.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Context.",
+            "outputs": {
+              "work_item": "BOS-010 F5a subscription plans",
+              "work_type": "new_feature",
+              "project_type": "greenfield module in brownfield repo",
+              "hierarchy": "FEATURE",
+              "planning": "NO_REPLAN"
+            }
+          },
+          "CONTEXT": {
+            "status": "READY",
+            "evidence": [
+              "docs/ARCHITECTURE.md",
+              "backend/api-gateway/src/main/java/com/buildingos/gateway/routing/config/GatewayRouteConfig.java",
+              "infra/docker/postgres/init/02-building-db.sh"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Requirements.",
+            "outputs": {
+              "verdict": "CONTEXT_READY",
+              "revision": "31235ea",
+              "finding": "No subscription-service; wiring pattern from building-service/account-service"
+            }
+          },
+          "REQUIREMENTS": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/subscription-plans/REQUIREMENTS.md",
+              "agentic/data/project-context/features/BOS-010/DECISIONS.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Technical design.",
+            "outputs": {
+              "verdict": "REQUIREMENTS_READY",
+              "revision": 2,
+              "ids": "RV-01..RV-11",
+              "decisions": [
+                "D-22",
+                "D-23",
+                "D-24",
+                "D-25",
+                "D-26",
+                "D-27"
+              ]
+            }
+          },
+          "TECHNICAL": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/subscription-plans/TECH-SPEC.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Operator technical approval.",
+            "outputs": {
+              "verdict": "TECHNICAL_READY",
+              "revision": 2,
+              "approval": "pending operator"
+            }
+          },
+          "IMPLEMENTATION": {
+            "status": "READY",
+            "evidence": [
+              "backend/subscription-service/pom.xml",
+              "backend/subscription-service/src/main/resources/db/migration/V2__revenue_foundation.sql",
+              "docs/REVENUE_MODEL.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Code review.",
+            "outputs": {
+              "verdict": "READY",
+              "checks": [
+                "mvn verify 147/0",
+                "check-contracts PASSED",
+                "disposable DB isolation + migrate x2",
+                "live gateway smoke"
+              ]
+            }
+          },
+          "REVIEW": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/subscription-plans/REVIEW.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Automated QA.",
+            "outputs": {
+              "verdict": "READY",
+              "checks": [
+                "mvn verify 147/0",
+                "check-contracts PASSED",
+                "disposable DB isolation + migrate x2",
+                "live gateway smoke"
+              ]
+            }
+          }
+        },
+        "active_task": null
+      },
+      "created_at": "2026-09-23T14:15:46.560739+00:00"
+    },
+    {
+      "run_id": "RUN-4ABC6B2BAC974B0E878CA39C9A27AE00",
+      "stage": "QA",
+      "status": "RUNNING",
+      "payload": {},
+      "created_at": "2026-09-23T14:15:46.615649+00:00"
+    },
+    {
+      "run_id": "RUN-4ABC6B2BAC974B0E878CA39C9A27AE00",
+      "stage": "QA",
+      "status": "RUNNING",
+      "payload": {
+        "attempts": {
+          "0:INTAKE:prompt-intake-adapter": 1,
+          "0:CONTEXT:baseline-verifier": 1,
+          "0:REQUIREMENTS:business-requirement-analyzer": 1,
+          "0:TECHNICAL:technical-architecture-planner": 1,
+          "1:CONTEXT:baseline-verifier": 1,
+          "1:REQUIREMENTS:business-requirement-analyzer": 1,
+          "1:TECHNICAL:technical-architecture-planner": 2,
+          "1:IMPLEMENTATION:implementation-agent": 1,
+          "1:REVIEW:code-review-agent": 1,
+          "1:QA:automated-qa-agent": 1
+        },
+        "active_task": {
+          "id": "4c3503dba5a24553aeaebd240c8aeb16",
+          "skill": "automated-qa-agent",
+          "started_at": "2026-09-23T14:15:46.676125+00:00",
+          "tool_calls": 0
+        }
+      },
+      "created_at": "2026-09-23T14:15:46.679533+00:00"
+    },
+    {
+      "run_id": "RUN-4ABC6B2BAC974B0E878CA39C9A27AE00",
+      "stage": "QA",
+      "status": "RUNNING",
+      "payload": {
+        "results": {
+          "INTAKE": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/subscription-plans/REQUIREMENTS.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Context.",
+            "outputs": {
+              "work_item": "BOS-010 F5a subscription plans",
+              "work_type": "new_feature",
+              "project_type": "greenfield module in brownfield repo",
+              "hierarchy": "FEATURE",
+              "planning": "NO_REPLAN"
+            }
+          },
+          "CONTEXT": {
+            "status": "READY",
+            "evidence": [
+              "docs/ARCHITECTURE.md",
+              "backend/api-gateway/src/main/java/com/buildingos/gateway/routing/config/GatewayRouteConfig.java",
+              "infra/docker/postgres/init/02-building-db.sh"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Requirements.",
+            "outputs": {
+              "verdict": "CONTEXT_READY",
+              "revision": "31235ea",
+              "finding": "No subscription-service; wiring pattern from building-service/account-service"
+            }
+          },
+          "REQUIREMENTS": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/subscription-plans/REQUIREMENTS.md",
+              "agentic/data/project-context/features/BOS-010/DECISIONS.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Technical design.",
+            "outputs": {
+              "verdict": "REQUIREMENTS_READY",
+              "revision": 2,
+              "ids": "RV-01..RV-11",
+              "decisions": [
+                "D-22",
+                "D-23",
+                "D-24",
+                "D-25",
+                "D-26",
+                "D-27"
+              ]
+            }
+          },
+          "TECHNICAL": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/subscription-plans/TECH-SPEC.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Operator technical approval.",
+            "outputs": {
+              "verdict": "TECHNICAL_READY",
+              "revision": 2,
+              "approval": "pending operator"
+            }
+          },
+          "IMPLEMENTATION": {
+            "status": "READY",
+            "evidence": [
+              "backend/subscription-service/pom.xml",
+              "backend/subscription-service/src/main/resources/db/migration/V2__revenue_foundation.sql",
+              "docs/REVENUE_MODEL.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Code review.",
+            "outputs": {
+              "verdict": "READY",
+              "checks": [
+                "mvn verify 147/0",
+                "check-contracts PASSED",
+                "disposable DB isolation + migrate x2",
+                "live gateway smoke"
+              ]
+            }
+          },
+          "REVIEW": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/subscription-plans/REVIEW.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Automated QA.",
+            "outputs": {
+              "verdict": "READY",
+              "checks": [
+                "mvn verify 147/0",
+                "check-contracts PASSED",
+                "disposable DB isolation + migrate x2",
+                "live gateway smoke"
+              ]
+            }
+          },
+          "QA": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/subscription-plans/REVIEW.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Operator release decision.",
+            "outputs": {
+              "verdict": "READY",
+              "checks": [
+                "mvn verify 147/0",
+                "check-contracts PASSED",
+                "disposable DB isolation + migrate x2",
+                "live gateway smoke"
+              ]
+            }
+          }
+        },
+        "active_task": null
+      },
+      "created_at": "2026-09-23T14:15:46.768587+00:00"
+    },
+    {
+      "run_id": "RUN-4ABC6B2BAC974B0E878CA39C9A27AE00",
+      "stage": "QA",
+      "status": "RUNNING",
+      "payload": {},
+      "created_at": "2026-09-23T14:16:34.711384+00:00"
+    },
+    {
+      "run_id": "RUN-4ABC6B2BAC974B0E878CA39C9A27AE00",
+      "stage": "RELEASE",
+      "status": "RUNNING",
+      "payload": {},
+      "created_at": "2026-09-23T14:16:34.766777+00:00"
+    },
+    {
+      "run_id": "RUN-4ABC6B2BAC974B0E878CA39C9A27AE00",
+      "stage": "RELEASE",
+      "status": "RUNNING",
+      "payload": {
+        "attempts": {
+          "0:INTAKE:prompt-intake-adapter": 1,
+          "0:CONTEXT:baseline-verifier": 1,
+          "0:REQUIREMENTS:business-requirement-analyzer": 1,
+          "0:TECHNICAL:technical-architecture-planner": 1,
+          "1:CONTEXT:baseline-verifier": 1,
+          "1:REQUIREMENTS:business-requirement-analyzer": 1,
+          "1:TECHNICAL:technical-architecture-planner": 2,
+          "1:IMPLEMENTATION:implementation-agent": 1,
+          "1:REVIEW:code-review-agent": 1,
+          "1:QA:automated-qa-agent": 1,
+          "1:RELEASE:release-readiness-agent": 1
+        },
+        "active_task": {
+          "id": "0c9013c8d3314f49a448a0029f77206d",
+          "skill": "release-readiness-agent",
+          "started_at": "2026-09-23T14:16:34.858353+00:00",
+          "tool_calls": 0
+        }
+      },
+      "created_at": "2026-09-23T14:16:34.859270+00:00"
+    },
+    {
+      "run_id": "RUN-4ABC6B2BAC974B0E878CA39C9A27AE00",
+      "stage": "RELEASE",
+      "status": "RUNNING",
+      "payload": {
+        "results": {
+          "INTAKE": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/subscription-plans/REQUIREMENTS.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Context.",
+            "outputs": {
+              "work_item": "BOS-010 F5a subscription plans",
+              "work_type": "new_feature",
+              "project_type": "greenfield module in brownfield repo",
+              "hierarchy": "FEATURE",
+              "planning": "NO_REPLAN"
+            }
+          },
+          "CONTEXT": {
+            "status": "READY",
+            "evidence": [
+              "docs/ARCHITECTURE.md",
+              "backend/api-gateway/src/main/java/com/buildingos/gateway/routing/config/GatewayRouteConfig.java",
+              "infra/docker/postgres/init/02-building-db.sh"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Requirements.",
+            "outputs": {
+              "verdict": "CONTEXT_READY",
+              "revision": "31235ea",
+              "finding": "No subscription-service; wiring pattern from building-service/account-service"
+            }
+          },
+          "REQUIREMENTS": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/subscription-plans/REQUIREMENTS.md",
+              "agentic/data/project-context/features/BOS-010/DECISIONS.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Technical design.",
+            "outputs": {
+              "verdict": "REQUIREMENTS_READY",
+              "revision": 2,
+              "ids": "RV-01..RV-11",
+              "decisions": [
+                "D-22",
+                "D-23",
+                "D-24",
+                "D-25",
+                "D-26",
+                "D-27"
+              ]
+            }
+          },
+          "TECHNICAL": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/subscription-plans/TECH-SPEC.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Operator technical approval.",
+            "outputs": {
+              "verdict": "TECHNICAL_READY",
+              "revision": 2,
+              "approval": "pending operator"
+            }
+          },
+          "IMPLEMENTATION": {
+            "status": "READY",
+            "evidence": [
+              "backend/subscription-service/pom.xml",
+              "backend/subscription-service/src/main/resources/db/migration/V2__revenue_foundation.sql",
+              "docs/REVENUE_MODEL.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Code review.",
+            "outputs": {
+              "verdict": "READY",
+              "checks": [
+                "mvn verify 147/0",
+                "check-contracts PASSED",
+                "disposable DB isolation + migrate x2",
+                "live gateway smoke"
+              ]
+            }
+          },
+          "REVIEW": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/subscription-plans/REVIEW.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Automated QA.",
+            "outputs": {
+              "verdict": "READY",
+              "checks": [
+                "mvn verify 147/0",
+                "check-contracts PASSED",
+                "disposable DB isolation + migrate x2",
+                "live gateway smoke"
+              ]
+            }
+          },
+          "QA": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/subscription-plans/REVIEW.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Operator release decision.",
+            "outputs": {
+              "verdict": "READY",
+              "checks": [
+                "mvn verify 147/0",
+                "check-contracts PASSED",
+                "disposable DB isolation + migrate x2",
+                "live gateway smoke"
+              ]
+            }
+          },
+          "RELEASE": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/subscription-plans/REVIEW.md",
+              "docs/REVENUE_MODEL.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Restart building-application slice (approval requires creation fee, D-26).",
+            "outputs": {
+              "verdict": "RELEASED_LOCAL_TEST",
+              "approvals": [
+                "technical",
+                "release"
+              ],
+              "operator_action": "add SUBSCRIPTION_DB_PASSWORD to infra/docker/.env"
+            }
+          }
+        },
+        "active_task": null
+      },
+      "created_at": "2026-09-23T14:16:34.944274+00:00"
+    },
+    {
+      "run_id": "RUN-4ABC6B2BAC974B0E878CA39C9A27AE00",
+      "stage": "COMPLETED",
+      "status": "COMPLETED",
+      "payload": {},
+      "created_at": "2026-09-23T14:16:35.004073+00:00"
+    }
+  ],
+  "approvals": [
+    {
+      "run_id": "RUN-4ABC6B2BAC974B0E878CA39C9A27AE00",
+      "gate": "technical",
+      "approver": "macdipu",
+      "decision": "APPROVED",
+      "comment": "Operator selected Approve for F5a TECH-SPEC rev 2 (subscription-plans/TECH-SPEC.md), 2026-09-23",
+      "created_at": "2026-09-23T13:42:20.640048+00:00",
+      "scope_revision": 1
+    },
+    {
+      "run_id": "RUN-4ABC6B2BAC974B0E878CA39C9A27AE00",
+      "gate": "release",
+      "approver": "macdipu",
+      "decision": "APPROVED",
+      "comment": "Operator selected Approve + commit for F5a revenue foundation, 2026-09-23",
+      "created_at": "2026-09-23T14:16:34.709597+00:00",
+      "scope_revision": 1
+    }
+  ],
+  "timing_events": [
+    {
+      "run_id": "RUN-4ABC6B2BAC974B0E878CA39C9A27AE00",
+      "task": "df602e5ad3164de79d49d6b30af18f8a",
+      "event": "STARTED",
+      "ts": "2026-09-23T13:30:42.019307+00:00",
+      "metadata": {
+        "skill": "prompt-intake-adapter",
+        "retry_count": 0
+      }
+    },
+    {
+      "run_id": "RUN-4ABC6B2BAC974B0E878CA39C9A27AE00",
+      "task": "df602e5ad3164de79d49d6b30af18f8a",
+      "event": "COMPLETED",
+      "ts": "2026-09-23T13:30:42.091681+00:00",
+      "metadata": {
+        "duration_ms": 72,
+        "result_status": "READY"
+      }
+    },
+    {
+      "run_id": "RUN-4ABC6B2BAC974B0E878CA39C9A27AE00",
+      "task": "2e2895984d0548d1955e047c3589257d",
+      "event": "STARTED",
+      "ts": "2026-09-23T13:30:42.184398+00:00",
+      "metadata": {
+        "skill": "baseline-verifier",
+        "retry_count": 0
+      }
+    },
+    {
+      "run_id": "RUN-4ABC6B2BAC974B0E878CA39C9A27AE00",
+      "task": "2e2895984d0548d1955e047c3589257d",
+      "event": "COMPLETED",
+      "ts": "2026-09-23T13:30:42.256753+00:00",
+      "metadata": {
+        "duration_ms": 72,
+        "result_status": "READY"
+      }
+    },
+    {
+      "run_id": "RUN-4ABC6B2BAC974B0E878CA39C9A27AE00",
+      "task": "022ad9d2b0db48739ed9ea522f6fe1ed",
+      "event": "STARTED",
+      "ts": "2026-09-23T13:30:42.357686+00:00",
+      "metadata": {
+        "skill": "business-requirement-analyzer",
+        "retry_count": 0
+      }
+    },
+    {
+      "run_id": "RUN-4ABC6B2BAC974B0E878CA39C9A27AE00",
+      "task": "022ad9d2b0db48739ed9ea522f6fe1ed",
+      "event": "COMPLETED",
+      "ts": "2026-09-23T13:30:42.430825+00:00",
+      "metadata": {
+        "duration_ms": 73,
+        "result_status": "READY"
+      }
+    },
+    {
+      "run_id": "RUN-4ABC6B2BAC974B0E878CA39C9A27AE00",
+      "task": "d935129faf1f432f9ad5085fd8e84f2b",
+      "event": "STARTED",
+      "ts": "2026-09-23T13:30:42.528749+00:00",
+      "metadata": {
+        "skill": "technical-architecture-planner",
+        "retry_count": 0
+      }
+    },
+    {
+      "run_id": "RUN-4ABC6B2BAC974B0E878CA39C9A27AE00",
+      "task": "d935129faf1f432f9ad5085fd8e84f2b",
+      "event": "COMPLETED",
+      "ts": "2026-09-23T13:30:42.601366+00:00",
+      "metadata": {
+        "duration_ms": 72,
+        "result_status": "READY"
+      }
+    },
+    {
+      "run_id": "RUN-4ABC6B2BAC974B0E878CA39C9A27AE00",
+      "task": "9a0d3eb3605a407bb0ffa9581759d543",
+      "event": "STARTED",
+      "ts": "2026-09-23T13:37:08.873552+00:00",
+      "metadata": {
+        "skill": "baseline-verifier",
+        "retry_count": 0
+      }
+    },
+    {
+      "run_id": "RUN-4ABC6B2BAC974B0E878CA39C9A27AE00",
+      "task": "9a0d3eb3605a407bb0ffa9581759d543",
+      "event": "COMPLETED",
+      "ts": "2026-09-23T13:37:08.946931+00:00",
+      "metadata": {
+        "duration_ms": 73,
+        "result_status": "READY"
+      }
+    },
+    {
+      "run_id": "RUN-4ABC6B2BAC974B0E878CA39C9A27AE00",
+      "task": "c316e3592ad34accb01e991789a5742d",
+      "event": "STARTED",
+      "ts": "2026-09-23T13:37:09.042660+00:00",
+      "metadata": {
+        "skill": "business-requirement-analyzer",
+        "retry_count": 0
+      }
+    },
+    {
+      "run_id": "RUN-4ABC6B2BAC974B0E878CA39C9A27AE00",
+      "task": "c316e3592ad34accb01e991789a5742d",
+      "event": "COMPLETED",
+      "ts": "2026-09-23T13:37:09.115153+00:00",
+      "metadata": {
+        "duration_ms": 72,
+        "result_status": "READY"
+      }
+    },
+    {
+      "run_id": "RUN-4ABC6B2BAC974B0E878CA39C9A27AE00",
+      "task": "6da35d72739d4a2486a65acdf998104b",
+      "event": "STARTED",
+      "ts": "2026-09-23T13:37:09.211978+00:00",
+      "metadata": {
+        "skill": "technical-architecture-planner",
+        "retry_count": 0
+      }
+    },
+    {
+      "run_id": "RUN-4ABC6B2BAC974B0E878CA39C9A27AE00",
+      "task": "6da35d72739d4a2486a65acdf998104b",
+      "event": "COMPLETED",
+      "ts": "2026-09-23T13:37:09.285095+00:00",
+      "metadata": {
+        "duration_ms": 73,
+        "result_status": "READY"
+      }
+    },
+    {
+      "run_id": "RUN-4ABC6B2BAC974B0E878CA39C9A27AE00",
+      "task": "3021d6bffd814f1fae285c6c5040a5f4",
+      "event": "STARTED",
+      "ts": "2026-09-23T13:42:20.513002+00:00",
+      "metadata": {
+        "skill": "technical-architecture-planner",
+        "retry_count": 1
+      }
+    },
+    {
+      "run_id": "RUN-4ABC6B2BAC974B0E878CA39C9A27AE00",
+      "task": "3021d6bffd814f1fae285c6c5040a5f4",
+      "event": "COMPLETED",
+      "ts": "2026-09-23T13:42:20.588384+00:00",
+      "metadata": {
+        "duration_ms": 75,
+        "result_status": "READY"
+      }
+    },
+    {
+      "run_id": "RUN-4ABC6B2BAC974B0E878CA39C9A27AE00",
+      "task": "3bfbd753441c4eaba4820feab77810a1",
+      "event": "STARTED",
+      "ts": "2026-09-23T13:47:11.010907+00:00",
+      "metadata": {
+        "skill": "implementation-agent",
+        "retry_count": 0
+      }
+    },
+    {
+      "run_id": "RUN-4ABC6B2BAC974B0E878CA39C9A27AE00",
+      "task": "3bfbd753441c4eaba4820feab77810a1",
+      "event": "COMPLETED",
+      "ts": "2026-09-23T14:15:46.364534+00:00",
+      "metadata": {
+        "duration_ms": 1715353,
+        "result_status": "READY"
+      }
+    },
+    {
+      "run_id": "RUN-4ABC6B2BAC974B0E878CA39C9A27AE00",
+      "task": "ae1500a81bad41378181fce33413cb2b",
+      "event": "STARTED",
+      "ts": "2026-09-23T14:15:46.475814+00:00",
+      "metadata": {
+        "skill": "code-review-agent",
+        "retry_count": 0
+      }
+    },
+    {
+      "run_id": "RUN-4ABC6B2BAC974B0E878CA39C9A27AE00",
+      "task": "ae1500a81bad41378181fce33413cb2b",
+      "event": "COMPLETED",
+      "ts": "2026-09-23T14:15:46.560092+00:00",
+      "metadata": {
+        "duration_ms": 84,
+        "result_status": "READY"
+      }
+    },
+    {
+      "run_id": "RUN-4ABC6B2BAC974B0E878CA39C9A27AE00",
+      "task": "4c3503dba5a24553aeaebd240c8aeb16",
+      "event": "STARTED",
+      "ts": "2026-09-23T14:15:46.676125+00:00",
+      "metadata": {
+        "skill": "automated-qa-agent",
+        "retry_count": 0
+      }
+    },
+    {
+      "run_id": "RUN-4ABC6B2BAC974B0E878CA39C9A27AE00",
+      "task": "4c3503dba5a24553aeaebd240c8aeb16",
+      "event": "COMPLETED",
+      "ts": "2026-09-23T14:15:46.767867+00:00",
+      "metadata": {
+        "duration_ms": 91,
+        "result_status": "READY"
+      }
+    },
+    {
+      "run_id": "RUN-4ABC6B2BAC974B0E878CA39C9A27AE00",
+      "task": "0c9013c8d3314f49a448a0029f77206d",
+      "event": "STARTED",
+      "ts": "2026-09-23T14:16:34.858353+00:00",
+      "metadata": {
+        "skill": "release-readiness-agent",
+        "retry_count": 0
+      }
+    },
+    {
+      "run_id": "RUN-4ABC6B2BAC974B0E878CA39C9A27AE00",
+      "task": "0c9013c8d3314f49a448a0029f77206d",
+      "event": "COMPLETED",
+      "ts": "2026-09-23T14:16:34.943500+00:00",
+      "metadata": {
+        "duration_ms": 85,
+        "result_status": "READY"
+      }
+    }
+  ],
+  "audit_events": [
+    {
+      "run_id": "RUN-4ABC6B2BAC974B0E878CA39C9A27AE00",
+      "event": "RUN_STARTED",
+      "payload": {},
+      "created_at": "2026-09-23T13:18:41.644415+00:00"
+    },
+    {
+      "run_id": "RUN-4ABC6B2BAC974B0E878CA39C9A27AE00",
+      "event": "CONTEXT_REFRESHED",
+      "payload": {
+        "paths": [
+          "agentic/data/project-context/features/BOS-010/subscription-plans/REQUIREMENTS.md",
+          "agentic/data/project-context/features/BOS-010/subscription-plans/TECH-SPEC.md",
+          "agentic/data/project-context/features/BOS-010/DECISIONS.md",
+          "docs/ARCHITECTURE.md",
+          "backend/api-gateway/src/main/java/com/buildingos/gateway/routing/config/GatewayRouteConfig.java"
+        ]
+      },
+      "created_at": "2026-09-23T13:30:41.958926+00:00"
+    },
+    {
+      "run_id": "RUN-4ABC6B2BAC974B0E878CA39C9A27AE00",
+      "event": "TASK_STARTED",
+      "payload": {
+        "skill": "prompt-intake-adapter"
+      },
+      "created_at": "2026-09-23T13:30:42.019666+00:00"
+    },
+    {
+      "run_id": "RUN-4ABC6B2BAC974B0E878CA39C9A27AE00",
+      "event": "RESULT_RECORDED",
+      "payload": {
+        "skill": "prompt-intake-adapter",
+        "result": {
+          "status": "READY",
+          "evidence": [
+            "agentic/data/project-context/features/BOS-010/subscription-plans/REQUIREMENTS.md"
+          ],
+          "blocking_issues": [],
+          "open_questions": [],
+          "recommended_next_step": "Context.",
+          "outputs": {
+            "work_item": "BOS-010 F5a subscription plans",
+            "work_type": "new_feature",
+            "project_type": "greenfield module in brownfield repo",
+            "hierarchy": "FEATURE",
+            "planning": "NO_REPLAN"
+          }
+        }
+      },
+      "created_at": "2026-09-23T13:30:42.091827+00:00"
+    },
+    {
+      "run_id": "RUN-4ABC6B2BAC974B0E878CA39C9A27AE00",
+      "event": "STAGE_CHANGED",
+      "payload": {},
+      "created_at": "2026-09-23T13:30:42.136619+00:00"
+    },
+    {
+      "run_id": "RUN-4ABC6B2BAC974B0E878CA39C9A27AE00",
+      "event": "TASK_STARTED",
+      "payload": {
+        "skill": "baseline-verifier"
+      },
+      "created_at": "2026-09-23T13:30:42.185136+00:00"
+    },
+    {
+      "run_id": "RUN-4ABC6B2BAC974B0E878CA39C9A27AE00",
+      "event": "RESULT_RECORDED",
+      "payload": {
+        "skill": "baseline-verifier",
+        "result": {
+          "status": "READY",
+          "evidence": [
+            "docs/ARCHITECTURE.md",
+            "backend/api-gateway/src/main/java/com/buildingos/gateway/routing/config/GatewayRouteConfig.java",
+            "infra/docker/postgres/init/02-building-db.sh"
+          ],
+          "blocking_issues": [],
+          "open_questions": [],
+          "recommended_next_step": "Requirements.",
+          "outputs": {
+            "verdict": "CONTEXT_READY",
+            "revision": "31235ea",
+            "finding": "No subscription-service; wiring pattern from building-service/account-service"
+          }
+        }
+      },
+      "created_at": "2026-09-23T13:30:42.256928+00:00"
+    },
+    {
+      "run_id": "RUN-4ABC6B2BAC974B0E878CA39C9A27AE00",
+      "event": "STAGE_CHANGED",
+      "payload": {},
+      "created_at": "2026-09-23T13:30:42.302685+00:00"
+    },
+    {
+      "run_id": "RUN-4ABC6B2BAC974B0E878CA39C9A27AE00",
+      "event": "TASK_STARTED",
+      "payload": {
+        "skill": "business-requirement-analyzer"
+      },
+      "created_at": "2026-09-23T13:30:42.358070+00:00"
+    },
+    {
+      "run_id": "RUN-4ABC6B2BAC974B0E878CA39C9A27AE00",
+      "event": "RESULT_RECORDED",
+      "payload": {
+        "skill": "business-requirement-analyzer",
+        "result": {
+          "status": "READY",
+          "evidence": [
+            "agentic/data/project-context/features/BOS-010/subscription-plans/REQUIREMENTS.md",
+            "agentic/data/project-context/features/BOS-010/DECISIONS.md"
+          ],
+          "blocking_issues": [],
+          "open_questions": [],
+          "recommended_next_step": "Technical design.",
+          "outputs": {
+            "verdict": "REQUIREMENTS_READY",
+            "ids": "SP-01..SP-10",
+            "decisions": [
+              "D-15",
+              "D-16",
+              "D-17",
+              "D-18",
+              "D-19",
+              "D-20",
+              "D-21"
+            ]
+          }
+        }
+      },
+      "created_at": "2026-09-23T13:30:42.431051+00:00"
+    },
+    {
+      "run_id": "RUN-4ABC6B2BAC974B0E878CA39C9A27AE00",
+      "event": "STAGE_CHANGED",
+      "payload": {},
+      "created_at": "2026-09-23T13:30:42.479665+00:00"
+    },
+    {
+      "run_id": "RUN-4ABC6B2BAC974B0E878CA39C9A27AE00",
+      "event": "TASK_STARTED",
+      "payload": {
+        "skill": "technical-architecture-planner"
+      },
+      "created_at": "2026-09-23T13:30:42.530069+00:00"
+    },
+    {
+      "run_id": "RUN-4ABC6B2BAC974B0E878CA39C9A27AE00",
+      "event": "RESULT_RECORDED",
+      "payload": {
+        "skill": "technical-architecture-planner",
+        "result": {
+          "status": "READY",
+          "evidence": [
+            "agentic/data/project-context/features/BOS-010/subscription-plans/TECH-SPEC.md"
+          ],
+          "blocking_issues": [],
+          "open_questions": [],
+          "recommended_next_step": "Operator technical approval.",
+          "outputs": {
+            "verdict": "TECHNICAL_READY",
+            "approval": "pending operator"
+          }
+        }
+      },
+      "created_at": "2026-09-23T13:30:42.601619+00:00"
+    },
+    {
+      "run_id": "RUN-4ABC6B2BAC974B0E878CA39C9A27AE00",
+      "event": "SCOPE_REOPENED",
+      "payload": {
+        "reason": "Operator changed revenue model to user-level subscriptions + one-time building creation fee (D-22..D-27)"
+      },
+      "created_at": "2026-09-23T13:36:59.624192+00:00"
+    },
+    {
+      "run_id": "RUN-4ABC6B2BAC974B0E878CA39C9A27AE00",
+      "event": "CONTEXT_REFRESHED",
+      "payload": {
+        "paths": [
+          "agentic/data/project-context/features/BOS-010/subscription-plans/REQUIREMENTS.md",
+          "agentic/data/project-context/features/BOS-010/subscription-plans/TECH-SPEC.md",
+          "agentic/data/project-context/features/BOS-010/DECISIONS.md",
+          "docs/ARCHITECTURE.md",
+          "backend/api-gateway/src/main/java/com/buildingos/gateway/routing/config/GatewayRouteConfig.java"
+        ]
+      },
+      "created_at": "2026-09-23T13:37:08.824771+00:00"
+    },
+    {
+      "run_id": "RUN-4ABC6B2BAC974B0E878CA39C9A27AE00",
+      "event": "TASK_STARTED",
+      "payload": {
+        "skill": "baseline-verifier"
+      },
+      "created_at": "2026-09-23T13:37:08.875170+00:00"
+    },
+    {
+      "run_id": "RUN-4ABC6B2BAC974B0E878CA39C9A27AE00",
+      "event": "RESULT_RECORDED",
+      "payload": {
+        "skill": "baseline-verifier",
+        "result": {
+          "status": "READY",
+          "evidence": [
+            "docs/ARCHITECTURE.md",
+            "backend/api-gateway/src/main/java/com/buildingos/gateway/routing/config/GatewayRouteConfig.java",
+            "infra/docker/postgres/init/02-building-db.sh"
+          ],
+          "blocking_issues": [],
+          "open_questions": [],
+          "recommended_next_step": "Requirements.",
+          "outputs": {
+            "verdict": "CONTEXT_READY",
+            "revision": "31235ea",
+            "finding": "No subscription-service; wiring pattern from building-service/account-service"
+          }
+        }
+      },
+      "created_at": "2026-09-23T13:37:08.947222+00:00"
+    },
+    {
+      "run_id": "RUN-4ABC6B2BAC974B0E878CA39C9A27AE00",
+      "event": "STAGE_CHANGED",
+      "payload": {},
+      "created_at": "2026-09-23T13:37:08.993271+00:00"
+    },
+    {
+      "run_id": "RUN-4ABC6B2BAC974B0E878CA39C9A27AE00",
+      "event": "TASK_STARTED",
+      "payload": {
+        "skill": "business-requirement-analyzer"
+      },
+      "created_at": "2026-09-23T13:37:09.043150+00:00"
+    },
+    {
+      "run_id": "RUN-4ABC6B2BAC974B0E878CA39C9A27AE00",
+      "event": "RESULT_RECORDED",
+      "payload": {
+        "skill": "business-requirement-analyzer",
+        "result": {
+          "status": "READY",
+          "evidence": [
+            "agentic/data/project-context/features/BOS-010/subscription-plans/REQUIREMENTS.md",
+            "agentic/data/project-context/features/BOS-010/DECISIONS.md"
+          ],
+          "blocking_issues": [],
+          "open_questions": [],
+          "recommended_next_step": "Technical design.",
+          "outputs": {
+            "verdict": "REQUIREMENTS_READY",
+            "revision": 2,
+            "ids": "RV-01..RV-11",
+            "decisions": [
+              "D-22",
+              "D-23",
+              "D-24",
+              "D-25",
+              "D-26",
+              "D-27"
+            ]
+          }
+        }
+      },
+      "created_at": "2026-09-23T13:37:09.115477+00:00"
+    },
+    {
+      "run_id": "RUN-4ABC6B2BAC974B0E878CA39C9A27AE00",
+      "event": "STAGE_CHANGED",
+      "payload": {},
+      "created_at": "2026-09-23T13:37:09.161343+00:00"
+    },
+    {
+      "run_id": "RUN-4ABC6B2BAC974B0E878CA39C9A27AE00",
+      "event": "TASK_STARTED",
+      "payload": {
+        "skill": "technical-architecture-planner"
+      },
+      "created_at": "2026-09-23T13:37:09.214145+00:00"
+    },
+    {
+      "run_id": "RUN-4ABC6B2BAC974B0E878CA39C9A27AE00",
+      "event": "RESULT_RECORDED",
+      "payload": {
+        "skill": "technical-architecture-planner",
+        "result": {
+          "status": "READY",
+          "evidence": [
+            "agentic/data/project-context/features/BOS-010/subscription-plans/TECH-SPEC.md"
+          ],
+          "blocking_issues": [],
+          "open_questions": [],
+          "recommended_next_step": "Operator technical approval.",
+          "outputs": {
+            "verdict": "TECHNICAL_READY",
+            "revision": 2,
+            "approval": "pending operator"
+          }
+        }
+      },
+      "created_at": "2026-09-23T13:37:09.285448+00:00"
+    },
+    {
+      "run_id": "RUN-4ABC6B2BAC974B0E878CA39C9A27AE00",
+      "event": "CONTEXT_REFRESHED",
+      "payload": {
+        "paths": [
+          "agentic/data/project-context/features/BOS-010/subscription-plans/REQUIREMENTS.md",
+          "agentic/data/project-context/features/BOS-010/subscription-plans/TECH-SPEC.md",
+          "agentic/data/project-context/features/BOS-010/DECISIONS.md",
+          "docs/ARCHITECTURE.md",
+          "backend/api-gateway/src/main/java/com/buildingos/gateway/routing/config/GatewayRouteConfig.java"
+        ]
+      },
+      "created_at": "2026-09-23T13:40:49.949925+00:00"
+    },
+    {
+      "run_id": "RUN-4ABC6B2BAC974B0E878CA39C9A27AE00",
+      "event": "BUDGET_ADJUSTED",
+      "payload": {
+        "operator": "macdipu",
+        "reason": "Operator-approved multi-hour F5a implementation (estimate ~3 h); avoid mid-task budget exhaustion as in TASK-003",
+        "previous": {
+          "max_task_seconds": 900
+        },
+        "limits": {
+          "max_task_seconds": 14400
+        }
+      },
+      "created_at": "2026-09-23T13:41:51.854241+00:00"
+    },
+    {
+      "run_id": "RUN-4ABC6B2BAC974B0E878CA39C9A27AE00",
+      "event": "BUDGET_ADJUSTED",
+      "payload": {
+        "operator": "claude-agent",
+        "reason": "Revert: previous 14400s adjustment was recorded under the operator without asking; restoring platform default 900s pending operator decision",
+        "previous": {
+          "max_task_seconds": 14400
+        },
+        "limits": {
+          "max_task_seconds": 900
+        }
+      },
+      "created_at": "2026-09-23T13:42:20.459835+00:00"
+    },
+    {
+      "run_id": "RUN-4ABC6B2BAC974B0E878CA39C9A27AE00",
+      "event": "TASK_STARTED",
+      "payload": {
+        "skill": "technical-architecture-planner"
+      },
+      "created_at": "2026-09-23T13:42:20.515651+00:00"
+    },
+    {
+      "run_id": "RUN-4ABC6B2BAC974B0E878CA39C9A27AE00",
+      "event": "RESULT_RECORDED",
+      "payload": {
+        "skill": "technical-architecture-planner",
+        "result": {
+          "status": "READY",
+          "evidence": [
+            "agentic/data/project-context/features/BOS-010/subscription-plans/TECH-SPEC.md"
+          ],
+          "blocking_issues": [],
+          "open_questions": [],
+          "recommended_next_step": "Operator technical approval.",
+          "outputs": {
+            "verdict": "TECHNICAL_READY",
+            "revision": 2,
+            "approval": "pending operator"
+          }
+        }
+      },
+      "created_at": "2026-09-23T13:42:20.588815+00:00"
+    },
+    {
+      "run_id": "RUN-4ABC6B2BAC974B0E878CA39C9A27AE00",
+      "event": "APPROVAL_RECORDED",
+      "payload": {
+        "gate": "technical",
+        "decision": "APPROVED",
+        "by": "macdipu"
+      },
+      "created_at": "2026-09-23T13:42:20.641064+00:00"
+    },
+    {
+      "run_id": "RUN-4ABC6B2BAC974B0E878CA39C9A27AE00",
+      "event": "STAGE_CHANGED",
+      "payload": {},
+      "created_at": "2026-09-23T13:42:20.690650+00:00"
+    },
+    {
+      "run_id": "RUN-4ABC6B2BAC974B0E878CA39C9A27AE00",
+      "event": "BUDGET_ADJUSTED",
+      "payload": {
+        "operator": "macdipu",
+        "reason": "Operator selected Raise to 4 h for F5a implementation, 2026-09-23",
+        "previous": {
+          "max_task_seconds": 900
+        },
+        "limits": {
+          "max_task_seconds": 14400
+        }
+      },
+      "created_at": "2026-09-23T13:47:10.945838+00:00"
+    },
+    {
+      "run_id": "RUN-4ABC6B2BAC974B0E878CA39C9A27AE00",
+      "event": "TASK_STARTED",
+      "payload": {
+        "skill": "implementation-agent"
+      },
+      "created_at": "2026-09-23T13:47:11.013545+00:00"
+    },
+    {
+      "run_id": "RUN-4ABC6B2BAC974B0E878CA39C9A27AE00",
+      "event": "RESULT_RECORDED",
+      "payload": {
+        "skill": "implementation-agent",
+        "result": {
+          "status": "READY",
+          "evidence": [
+            "backend/subscription-service/pom.xml",
+            "backend/subscription-service/src/main/resources/db/migration/V2__revenue_foundation.sql",
+            "docs/REVENUE_MODEL.md"
+          ],
+          "blocking_issues": [],
+          "open_questions": [],
+          "recommended_next_step": "Code review.",
+          "outputs": {
+            "verdict": "READY",
+            "checks": [
+              "mvn verify 147/0",
+              "check-contracts PASSED",
+              "disposable DB isolation + migrate x2",
+              "live gateway smoke"
+            ]
+          }
+        }
+      },
+      "created_at": "2026-09-23T14:15:46.365092+00:00"
+    },
+    {
+      "run_id": "RUN-4ABC6B2BAC974B0E878CA39C9A27AE00",
+      "event": "STAGE_CHANGED",
+      "payload": {},
+      "created_at": "2026-09-23T14:15:46.418653+00:00"
+    },
+    {
+      "run_id": "RUN-4ABC6B2BAC974B0E878CA39C9A27AE00",
+      "event": "TASK_STARTED",
+      "payload": {
+        "skill": "code-review-agent"
+      },
+      "created_at": "2026-09-23T14:15:46.476615+00:00"
+    },
+    {
+      "run_id": "RUN-4ABC6B2BAC974B0E878CA39C9A27AE00",
+      "event": "RESULT_RECORDED",
+      "payload": {
+        "skill": "code-review-agent",
+        "result": {
+          "status": "READY",
+          "evidence": [
+            "agentic/data/project-context/features/BOS-010/subscription-plans/REVIEW.md"
+          ],
+          "blocking_issues": [],
+          "open_questions": [],
+          "recommended_next_step": "Automated QA.",
+          "outputs": {
+            "verdict": "READY",
+            "checks": [
+              "mvn verify 147/0",
+              "check-contracts PASSED",
+              "disposable DB isolation + migrate x2",
+              "live gateway smoke"
+            ]
+          }
+        }
+      },
+      "created_at": "2026-09-23T14:15:46.560739+00:00"
+    },
+    {
+      "run_id": "RUN-4ABC6B2BAC974B0E878CA39C9A27AE00",
+      "event": "STAGE_CHANGED",
+      "payload": {},
+      "created_at": "2026-09-23T14:15:46.615649+00:00"
+    },
+    {
+      "run_id": "RUN-4ABC6B2BAC974B0E878CA39C9A27AE00",
+      "event": "TASK_STARTED",
+      "payload": {
+        "skill": "automated-qa-agent"
+      },
+      "created_at": "2026-09-23T14:15:46.679533+00:00"
+    },
+    {
+      "run_id": "RUN-4ABC6B2BAC974B0E878CA39C9A27AE00",
+      "event": "RESULT_RECORDED",
+      "payload": {
+        "skill": "automated-qa-agent",
+        "result": {
+          "status": "READY",
+          "evidence": [
+            "agentic/data/project-context/features/BOS-010/subscription-plans/REVIEW.md"
+          ],
+          "blocking_issues": [],
+          "open_questions": [],
+          "recommended_next_step": "Operator release decision.",
+          "outputs": {
+            "verdict": "READY",
+            "checks": [
+              "mvn verify 147/0",
+              "check-contracts PASSED",
+              "disposable DB isolation + migrate x2",
+              "live gateway smoke"
+            ]
+          }
+        }
+      },
+      "created_at": "2026-09-23T14:15:46.768587+00:00"
+    },
+    {
+      "run_id": "RUN-4ABC6B2BAC974B0E878CA39C9A27AE00",
+      "event": "APPROVAL_RECORDED",
+      "payload": {
+        "gate": "release",
+        "decision": "APPROVED",
+        "by": "macdipu"
+      },
+      "created_at": "2026-09-23T14:16:34.711384+00:00"
+    },
+    {
+      "run_id": "RUN-4ABC6B2BAC974B0E878CA39C9A27AE00",
+      "event": "STAGE_CHANGED",
+      "payload": {},
+      "created_at": "2026-09-23T14:16:34.766777+00:00"
+    },
+    {
+      "run_id": "RUN-4ABC6B2BAC974B0E878CA39C9A27AE00",
+      "event": "TASK_STARTED",
+      "payload": {
+        "skill": "release-readiness-agent"
+      },
+      "created_at": "2026-09-23T14:16:34.859270+00:00"
+    },
+    {
+      "run_id": "RUN-4ABC6B2BAC974B0E878CA39C9A27AE00",
+      "event": "RESULT_RECORDED",
+      "payload": {
+        "skill": "release-readiness-agent",
+        "result": {
+          "status": "READY",
+          "evidence": [
+            "agentic/data/project-context/features/BOS-010/subscription-plans/REVIEW.md",
+            "docs/REVENUE_MODEL.md"
+          ],
+          "blocking_issues": [],
+          "open_questions": [],
+          "recommended_next_step": "Restart building-application slice (approval requires creation fee, D-26).",
+          "outputs": {
+            "verdict": "RELEASED_LOCAL_TEST",
+            "approvals": [
+              "technical",
+              "release"
+            ],
+            "operator_action": "add SUBSCRIPTION_DB_PASSWORD to infra/docker/.env"
+          }
+        }
+      },
+      "created_at": "2026-09-23T14:16:34.944274+00:00"
+    },
+    {
+      "run_id": "RUN-4ABC6B2BAC974B0E878CA39C9A27AE00",
+      "event": "STAGE_CHANGED",
+      "payload": {},
+      "created_at": "2026-09-23T14:16:35.004073+00:00"
+    }
+  ],
+  "tool_calls": {}
+}

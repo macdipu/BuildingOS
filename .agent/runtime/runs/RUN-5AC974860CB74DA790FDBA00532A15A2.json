@@ -1,0 +1,3125 @@
+{
+  "run": {
+    "run_id": "RUN-5AC974860CB74DA790FDBA00532A15A2",
+    "project": "BuildingOS",
+    "work_type": "new_feature",
+    "title": "BOS-010 F2: building application & lifecycle",
+    "stage": "COMPLETED",
+    "status": "COMPLETED",
+    "dry_run": false,
+    "created_at": "2026-09-24T05:29:40.870250+00:00",
+    "updated_at": "2026-09-24T09:18:06.575640+00:00",
+    "metadata": {
+      "runtime_version": 2,
+      "repo": "../../..",
+      "route": [
+        "INTAKE",
+        "CONTEXT",
+        "REQUIREMENTS",
+        "TECHNICAL",
+        "IMPLEMENTATION",
+        "REVIEW",
+        "QA",
+        "RELEASE",
+        "COMPLETED"
+      ],
+      "planning": "NO_REPLAN",
+      "scope_revision": 0,
+      "config_hash": "70b1f3f256a7d5cabb8fb3f1b16caebda54573166f642abe33620c51d76783b1",
+      "skill_pins": {
+        "adr-generator": "37b87ceae41931e7df58f2ef5c9fcf3445388213582bd819351c17e095b4809e",
+        "agentic-sdlc-orchestrator": "241d5fb550dd198ced2ea5886df1f80d61b6e4df52056d766bad96d955fecc6b",
+        "api-contract-discovery-agent": "d69fc7cfc2f675bc19c809e5344dea8bf4e1e2d93f7aaaa612938434bb98c5b2",
+        "architecture-reverse-engineer": "107d6d10555d8a72d081e927b73adf875416bf9a4dd0df3bfd49ac69f82174c0",
+        "automated-qa-agent": "3cec92ed01d2911b9db9a54e6985f2e4c17e036ac839f5d7155ce27276b8102f",
+        "baseline-verifier": "948f2c681d6af99a0702fbb74620763667ef24242e101a55f6261f04f519d92e",
+        "brownfield-risk-analyzer": "d5da84ce6cc2c321d64e155c4efd4adc9826a0d4202056c44b73a4a108bcb599",
+        "business-requirement-analyzer": "c6d4f6cafd51a87d2304dc94c9c804e1585f639579638bfd46f7fcc59ec95a41",
+        "change-impact-analyzer": "ed5d3a96e9d0f3cbd878bd869aede9d4981c5bd2d56a2d65b74a75e50e712ab1",
+        "code-review-agent": "f95ee9b1ea892cd4aa4ecadc60246be9ad083669696889c96e788d9e3f0462b7",
+        "database-discovery-agent": "a9bf3867174c95eddbd83511e35079310ac79f511867591d64893c5007e1a791",
+        "device-preview-agent": "2dcccd3e894bcec5e81cfa4b40616f5d073b709320a9e155dc0c93de2a52e904",
+        "document-intake-adapter": "b773708a14af67828446bf84da63f1fb7bab07bf531f7c7a48a0a6b6f6cfd37e",
+        "effort-estimation-agent": "6ba73a7f3f15bbd622e95f1f14f709e7112ebd90433a44781be453f6e2977b1a",
+        "epic-verifier": "bf72ce9f4f91d3b0cd1f3669f2fe13dcd581b485b594fb8fdf7de5f64b5a03e7",
+        "history-analysis-agent": "6b2de7ce22f04464beb115a847b2831e7e42cd3cf6132ffba134ce2b42d1a8d0",
+        "implementation-agent": "369621d9f2bed8a62ab3b14e6108ad218202b4fb4171267933b122b470badf8b",
+        "intake-change-classifier": "b1102a78f041cb71b7456c2739225ba1ceca6b9b227bd7a6511d38db891c30c7",
+        "project-discovery-agent": "5ed25348cec052c3b95f58555ab62ec6ecb5cd4d23a9cfe052e6cb4f62387fe5",
+        "prompt-intake-adapter": "c3ab8c873b2c76e8aea61f808c9714f6e667d475772468a6e5a13f772f3a124e",
+        "release-readiness-agent": "8db12e3d8be626e8524e83c6ea4523293e24404765dade480c3c9a2600c6443c",
+        "requirement-reconstruction-agent": "5b65ac066f3ad5768ef3b949190a67af94bcd96196616f354b890796d97100a8",
+        "requirement-ui-verifier": "855d48036a9aa44e1283235e66899ed06151fb042e70bdebe73f5a0ce2144dfd",
+        "runtime-discovery-agent": "0c0b51066a093bfd52c08425554b8e3415930f82099fcbe0589180ca541d09e2",
+        "sprint-planner": "8193d9f44eea32eef72586a7dbee096f8014676434f719fe047d0a58360ec728",
+        "sprint-readiness-verifier": "b44dcdf8f2032ebddc7ba43c78219ff5fbd15c4f7e1f8b3959782bda33c97374",
+        "srs-generator": "f84a0c95661e2e2a29bc71b6ad6a6ffaf8163440965205f1956b6b3e7c000305",
+        "task-breakdown-agent": "0872087d99f7695ed8a4aa6b585323d29f7df905b56fcb5ca2c06d6f9a680f30",
+        "technical-architecture-planner": "7a37e8b1f49d8e4ce21721b7050475f178413c94a92e4065b3405c58ca482d23",
+        "technical-readiness-verifier": "aa888a9ae421d6fd6f5238435b76c191712bcfa3920df26f67ba7b304ec827f1",
+        "technical-spec-generator": "2d58206e630d0024c78371d3747ea6d86cf17ec2038367e9389dc2961dcc4fd0",
+        "test-baseline-agent": "58a93639efbf78373edf8cb64020e16721f65b5ba30eb271b886d79d49e0fbbf",
+        "user-flow-discovery-agent": "50f20be315ac1d62af72b88d9372a4d29684aa26094ac235c89c77e08c67ef91",
+        "web-preview-agent": "dfab7cd287b98b18637db38fcee208b28bc95a3447bb0ea7cfb12cddb3732eb4",
+        "work-item-level-classifier": "78d23d76d06e905cbe22854091e2a595110d12a31526444a0ebe6aedab77e9d5"
+      },
+      "results": {
+        "INTAKE": {
+          "status": "READY",
+          "evidence": [
+            "agentic/data/project-context/features/BOS-010/DECISIONS.md",
+            "agentic/data/project-context/features/BOS-010/REQUIREMENTS.md"
+          ],
+          "blocking_issues": [],
+          "open_questions": [],
+          "recommended_next_step": "Context.",
+          "outputs": {
+            "work_item": "BOS-010 F2 building application & lifecycle",
+            "work_type": "new_feature",
+            "project_type": "brownfield (building-service skeleton)",
+            "hierarchy": "FEATURE",
+            "planning": "NO_REPLAN",
+            "decisions": [
+              "D-12",
+              "D-13",
+              "D-14",
+              "D-26",
+              "D-28",
+              "D-29",
+              "D-30",
+              "D-31",
+              "D-32"
+            ]
+          }
+        },
+        "CONTEXT": {
+          "status": "READY",
+          "evidence": [
+            "docs/ARCHITECTURE.md",
+            "backend/building-service/src/main/resources/application.yaml",
+            "backend/api-gateway/src/main/java/com/buildingos/gateway/routing/config/GatewayRouteConfig.java",
+            "backend/subscription-service/src/main/java/com/buildingos/subscription/shared/presentation/rest/CurrentActor.java",
+            "backend/auth-service/src/main/java/com/buildingos/auth/auth/domain/repository/UserRepository.java",
+            "infra/docker/compose.yaml"
+          ],
+          "blocking_issues": [],
+          "open_questions": [],
+          "recommended_next_step": "Requirements.",
+          "outputs": {
+            "verdict": "CONTEXT_READY",
+            "revision": "8e66061",
+            "finding": "building-service is a metadata-only skeleton; no object storage in infra; auth-service has findOrCreateByPhone but no provisioning API; JWT carries sub, phone, platform_roles"
+          }
+        },
+        "REQUIREMENTS": {
+          "status": "READY",
+          "evidence": [
+            "agentic/data/project-context/features/BOS-010/building-application/REQUIREMENTS.md",
+            "agentic/data/project-context/features/BOS-010/DECISIONS.md"
+          ],
+          "blocking_issues": [],
+          "open_questions": [],
+          "recommended_next_step": "Technical design.",
+          "outputs": {
+            "verdict": "REQUIREMENTS_READY",
+            "revision": 1,
+            "ids": "AP-01..AP-10",
+            "decisions": [
+              "D-12",
+              "D-13",
+              "D-14",
+              "D-26",
+              "D-28",
+              "D-29",
+              "D-30",
+              "D-31",
+              "D-32"
+            ]
+          }
+        },
+        "TECHNICAL": {
+          "status": "READY",
+          "evidence": [
+            "agentic/data/project-context/features/BOS-010/building-application/TECH-SPEC.md"
+          ],
+          "blocking_issues": [],
+          "open_questions": [],
+          "recommended_next_step": "Operator technical approval.",
+          "outputs": {
+            "verdict": "TECHNICAL_READY",
+            "revision": 1,
+            "approval": "pending operator"
+          }
+        },
+        "IMPLEMENTATION": {
+          "status": "READY",
+          "evidence": [
+            "backend/building-service/src/main/resources/db/migration/V2__building_application.sql",
+            "backend/building-service/src/main/resources/db/migration/V3__application_document.sql",
+            "backend/building-service/src/main/resources/db/migration/V4__building.sql",
+            "backend/auth-service/src/main/java/com/buildingos/auth/auth/application/provisionuser/ProvisionUserService.java",
+            "backend/api-gateway/src/main/java/com/buildingos/gateway/routing/config/GatewayRouteConfig.java",
+            "contracts/openapi/platform.yaml",
+            "infra/docker/compose.yaml",
+            "scripts/smoke-building-application.sh",
+            "user_app/lib/features/building_application",
+            "agentic/data/project-context/features/BOS-010/building-application/TECH-SPEC.md"
+          ],
+          "blocking_issues": [],
+          "open_questions": [
+            "Bangla strings need native-speaker review",
+            "No virus scanning of uploads before production"
+          ],
+          "recommended_next_step": "Code review.",
+          "outputs": {
+            "verdict": "READY",
+            "checks": [
+              "backend mvn verify 197/0",
+              "check-contracts PASSED + Redocly valid",
+              "live smoke on isolated full stack PASSED",
+              "flutter analyze no issues",
+              "flutter test 50/0"
+            ]
+          }
+        },
+        "REVIEW": {
+          "status": "READY",
+          "evidence": [
+            "agentic/data/project-context/features/BOS-010/building-application/REVIEW.md"
+          ],
+          "blocking_issues": [],
+          "open_questions": [
+            "Operator device check of Flutter flow",
+            "Bangla native review",
+            "Upload virus scanning before production"
+          ],
+          "recommended_next_step": "Automated QA.",
+          "outputs": {
+            "verdict": "READY",
+            "findings_fixed": 1,
+            "checks": [
+              "backend mvn verify 197/0",
+              "check-contracts PASSED + Redocly valid",
+              "live smoke on isolated full stack PASSED",
+              "flutter analyze clean, flutter test 50/0"
+            ]
+          }
+        },
+        "QA": {
+          "status": "READY",
+          "evidence": [
+            "agentic/data/project-context/features/BOS-010/building-application/REVIEW.md"
+          ],
+          "blocking_issues": [],
+          "open_questions": [
+            "Operator device check of Flutter flow",
+            "Bangla native review",
+            "Upload virus scanning before production"
+          ],
+          "recommended_next_step": "Operator release decision (local/test).",
+          "outputs": {
+            "verdict": "READY",
+            "checks": [
+              "backend mvn verify 197/0",
+              "check-contracts PASSED + Redocly valid",
+              "live smoke on isolated full stack PASSED",
+              "flutter analyze clean, flutter test 50/0"
+            ]
+          }
+        },
+        "RELEASE": {
+          "status": "READY",
+          "evidence": [
+            "agentic/data/project-context/features/BOS-010/building-application/RELEASE.md",
+            "agentic/data/project-context/features/BOS-010/building-application/REVIEW.md",
+            "agentic/data/project-context/features/BOS-010/building-application/TECH-SPEC.md",
+            "docs/LOCAL_DEVELOPMENT.md"
+          ],
+          "blocking_issues": [],
+          "open_questions": [
+            "Native-speaker Bangla review",
+            "Upload virus scanning and production prerequisites before production"
+          ],
+          "recommended_next_step": "Complete this local/test run; next planned slice is units and ownership, subject to its own scoped intake.",
+          "outputs": {
+            "verdict": "RELEASE_READY",
+            "scope": "local/test only",
+            "implementation_commit": "f1c6dcd06deb7f31a6d1d671bc6a771ba19e0192",
+            "approval": {
+              "by": "macdipu",
+              "date": "2026-09-24",
+              "quote": "yes",
+              "context": "Device check passed and local/test release approved"
+            },
+            "deployment_performed": false,
+            "qa": "Reused unchanged application evidence: backend 197/0, Flutter 50/0, contracts and isolated live smoke passed",
+            "residual_risks": "Production prerequisites and linguistic review are outside this local/test readiness decision.",
+            "rollback": "Coordinated pre-change database/object backups and matching prior artifacts; prefer forward fix. No persistent-environment restore drill claimed."
+          }
+        }
+      },
+      "attempts": {
+        "0:INTAKE:prompt-intake-adapter": 1,
+        "0:CONTEXT:baseline-verifier": 1,
+        "0:REQUIREMENTS:business-requirement-analyzer": 1,
+        "0:TECHNICAL:technical-architecture-planner": 1,
+        "0:IMPLEMENTATION:implementation-agent": 2,
+        "0:REVIEW:code-review-agent": 1,
+        "0:QA:automated-qa-agent": 2,
+        "0:RELEASE:release-readiness-agent": 1
+      },
+      "active_task": null,
+      "context": {
+        "files": {
+          "docs/ARCHITECTURE.md": "eb5f30485c7e9f90f37771ecd4e9bc3fceb5f3e7bc07c7269734bbe0c90ada65",
+          "agentic/data/project-context/features/BOS-010/DECISIONS.md": "15bcdbd505d9375db4841efa1da24f8bcf4490552b54b8b4ca40fd8dbb0fb43b",
+          "agentic/data/project-context/features/BOS-010/building-application/REQUIREMENTS.md": "c50475bdc1a85e77f263ddfccaab1781fade2c381b7234aafc7bc794c9691447",
+          "agentic/data/project-context/features/BOS-010/building-application/TECH-SPEC.md": "b07a5e8c3011e93cb09ba24d2f9c9831bda2ba8ca1a24c04d36ab0560839c6f8",
+          "backend/building-service/src/main/resources/application.yaml": "4b616bbb4a654c5f7eb7df9a38c018665040748fc1bcb936d44dcd00690b3508",
+          "backend/api-gateway/src/main/java/com/buildingos/gateway/routing/config/GatewayRouteConfig.java": "7d54251409b31c285b28729688447b5e22c0e6178b01cd7443a3914837c2ad8f",
+          "infra/docker/compose.yaml": "84ed52f91aa472bbe87bf39006c16268fc3a9854185a8a09224ce93bbb1b684d"
+        }
+      },
+      "budget_overrides": {
+        "max_task_seconds": 3600
+      }
+    }
+  },
+  "checkpoints": [
+    {
+      "run_id": "RUN-5AC974860CB74DA790FDBA00532A15A2",
+      "stage": "INTAKE",
+      "status": "RUNNING",
+      "payload": {
+        "runtime_version": 2,
+        "repo": "../../..",
+        "route": [
+          "INTAKE",
+          "CONTEXT",
+          "REQUIREMENTS",
+          "TECHNICAL",
+          "IMPLEMENTATION",
+          "REVIEW",
+          "QA",
+          "RELEASE",
+          "COMPLETED"
+        ],
+        "planning": "NO_REPLAN",
+        "scope_revision": 0,
+        "config_hash": "70b1f3f256a7d5cabb8fb3f1b16caebda54573166f642abe33620c51d76783b1",
+        "skill_pins": {
+          "adr-generator": "37b87ceae41931e7df58f2ef5c9fcf3445388213582bd819351c17e095b4809e",
+          "agentic-sdlc-orchestrator": "241d5fb550dd198ced2ea5886df1f80d61b6e4df52056d766bad96d955fecc6b",
+          "api-contract-discovery-agent": "d69fc7cfc2f675bc19c809e5344dea8bf4e1e2d93f7aaaa612938434bb98c5b2",
+          "architecture-reverse-engineer": "107d6d10555d8a72d081e927b73adf875416bf9a4dd0df3bfd49ac69f82174c0",
+          "automated-qa-agent": "3cec92ed01d2911b9db9a54e6985f2e4c17e036ac839f5d7155ce27276b8102f",
+          "baseline-verifier": "948f2c681d6af99a0702fbb74620763667ef24242e101a55f6261f04f519d92e",
+          "brownfield-risk-analyzer": "d5da84ce6cc2c321d64e155c4efd4adc9826a0d4202056c44b73a4a108bcb599",
+          "business-requirement-analyzer": "c6d4f6cafd51a87d2304dc94c9c804e1585f639579638bfd46f7fcc59ec95a41",
+          "change-impact-analyzer": "ed5d3a96e9d0f3cbd878bd869aede9d4981c5bd2d56a2d65b74a75e50e712ab1",
+          "code-review-agent": "f95ee9b1ea892cd4aa4ecadc60246be9ad083669696889c96e788d9e3f0462b7",
+          "database-discovery-agent": "a9bf3867174c95eddbd83511e35079310ac79f511867591d64893c5007e1a791",
+          "device-preview-agent": "2dcccd3e894bcec5e81cfa4b40616f5d073b709320a9e155dc0c93de2a52e904",
+          "document-intake-adapter": "b773708a14af67828446bf84da63f1fb7bab07bf531f7c7a48a0a6b6f6cfd37e",
+          "effort-estimation-agent": "6ba73a7f3f15bbd622e95f1f14f709e7112ebd90433a44781be453f6e2977b1a",
+          "epic-verifier": "bf72ce9f4f91d3b0cd1f3669f2fe13dcd581b485b594fb8fdf7de5f64b5a03e7",
+          "history-analysis-agent": "6b2de7ce22f04464beb115a847b2831e7e42cd3cf6132ffba134ce2b42d1a8d0",
+          "implementation-agent": "369621d9f2bed8a62ab3b14e6108ad218202b4fb4171267933b122b470badf8b",
+          "intake-change-classifier": "b1102a78f041cb71b7456c2739225ba1ceca6b9b227bd7a6511d38db891c30c7",
+          "project-discovery-agent": "5ed25348cec052c3b95f58555ab62ec6ecb5cd4d23a9cfe052e6cb4f62387fe5",
+          "prompt-intake-adapter": "c3ab8c873b2c76e8aea61f808c9714f6e667d475772468a6e5a13f772f3a124e",
+          "release-readiness-agent": "8db12e3d8be626e8524e83c6ea4523293e24404765dade480c3c9a2600c6443c",
+          "requirement-reconstruction-agent": "5b65ac066f3ad5768ef3b949190a67af94bcd96196616f354b890796d97100a8",
+          "requirement-ui-verifier": "855d48036a9aa44e1283235e66899ed06151fb042e70bdebe73f5a0ce2144dfd",
+          "runtime-discovery-agent": "0c0b51066a093bfd52c08425554b8e3415930f82099fcbe0589180ca541d09e2",
+          "sprint-planner": "8193d9f44eea32eef72586a7dbee096f8014676434f719fe047d0a58360ec728",
+          "sprint-readiness-verifier": "b44dcdf8f2032ebddc7ba43c78219ff5fbd15c4f7e1f8b3959782bda33c97374",
+          "srs-generator": "f84a0c95661e2e2a29bc71b6ad6a6ffaf8163440965205f1956b6b3e7c000305",
+          "task-breakdown-agent": "0872087d99f7695ed8a4aa6b585323d29f7df905b56fcb5ca2c06d6f9a680f30",
+          "technical-architecture-planner": "7a37e8b1f49d8e4ce21721b7050475f178413c94a92e4065b3405c58ca482d23",
+          "technical-readiness-verifier": "aa888a9ae421d6fd6f5238435b76c191712bcfa3920df26f67ba7b304ec827f1",
+          "technical-spec-generator": "2d58206e630d0024c78371d3747ea6d86cf17ec2038367e9389dc2961dcc4fd0",
+          "test-baseline-agent": "58a93639efbf78373edf8cb64020e16721f65b5ba30eb271b886d79d49e0fbbf",
+          "user-flow-discovery-agent": "50f20be315ac1d62af72b88d9372a4d29684aa26094ac235c89c77e08c67ef91",
+          "web-preview-agent": "dfab7cd287b98b18637db38fcee208b28bc95a3447bb0ea7cfb12cddb3732eb4",
+          "work-item-level-classifier": "78d23d76d06e905cbe22854091e2a595110d12a31526444a0ebe6aedab77e9d5"
+        },
+        "results": {},
+        "attempts": {},
+        "active_task": null
+      },
+      "created_at": "2026-09-24T05:29:40.874257+00:00"
+    },
+    {
+      "run_id": "RUN-5AC974860CB74DA790FDBA00532A15A2",
+      "stage": "INTAKE",
+      "status": "RUNNING",
+      "payload": {
+        "attempts": {
+          "0:INTAKE:prompt-intake-adapter": 1
+        },
+        "active_task": {
+          "id": "55b488df87d041a3a54547fc0c5c80cd",
+          "skill": "prompt-intake-adapter",
+          "started_at": "2026-09-24T05:31:04.173344+00:00",
+          "tool_calls": 0
+        }
+      },
+      "created_at": "2026-09-24T05:31:04.173643+00:00"
+    },
+    {
+      "run_id": "RUN-5AC974860CB74DA790FDBA00532A15A2",
+      "stage": "INTAKE",
+      "status": "RUNNING",
+      "payload": {
+        "results": {
+          "INTAKE": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/DECISIONS.md",
+              "agentic/data/project-context/features/BOS-010/REQUIREMENTS.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Context.",
+            "outputs": {
+              "work_item": "BOS-010 F2 building application & lifecycle",
+              "work_type": "new_feature",
+              "project_type": "brownfield (building-service skeleton)",
+              "hierarchy": "FEATURE",
+              "planning": "NO_REPLAN",
+              "decisions": [
+                "D-12",
+                "D-13",
+                "D-14",
+                "D-26",
+                "D-28",
+                "D-29",
+                "D-30",
+                "D-31",
+                "D-32"
+              ]
+            }
+          }
+        },
+        "active_task": null
+      },
+      "created_at": "2026-09-24T05:31:22.197563+00:00"
+    },
+    {
+      "run_id": "RUN-5AC974860CB74DA790FDBA00532A15A2",
+      "stage": "CONTEXT",
+      "status": "RUNNING",
+      "payload": {},
+      "created_at": "2026-09-24T05:31:22.241477+00:00"
+    },
+    {
+      "run_id": "RUN-5AC974860CB74DA790FDBA00532A15A2",
+      "stage": "CONTEXT",
+      "status": "RUNNING",
+      "payload": {
+        "context": {
+          "files": {
+            "docs/ARCHITECTURE.md": "eb5f30485c7e9f90f37771ecd4e9bc3fceb5f3e7bc07c7269734bbe0c90ada65",
+            "agentic/data/project-context/features/BOS-010/DECISIONS.md": "15bcdbd505d9375db4841efa1da24f8bcf4490552b54b8b4ca40fd8dbb0fb43b",
+            "agentic/data/project-context/features/BOS-010/building-application/REQUIREMENTS.md": "c50475bdc1a85e77f263ddfccaab1781fade2c381b7234aafc7bc794c9691447",
+            "agentic/data/project-context/features/BOS-010/building-application/TECH-SPEC.md": "eca63837ce8ba905e14624ea6cfb61cc00abd0887fa47298bef870d99d22ad27",
+            "backend/building-service/src/main/resources/application.yaml": "19ecb3b193169401b26726a4caec4549950f2c96c6ae041b324565d6b2df27c0",
+            "backend/api-gateway/src/main/java/com/buildingos/gateway/routing/config/GatewayRouteConfig.java": "a681cf88a61e3d75d3837488d6245e1332b9c20e478893b2ec09544308c56866",
+            "infra/docker/compose.yaml": "845dc239f703eae127d67156a9c990a8114c666b7a71205553464804312f0ac2"
+          }
+        }
+      },
+      "created_at": "2026-09-24T05:31:22.290692+00:00"
+    },
+    {
+      "run_id": "RUN-5AC974860CB74DA790FDBA00532A15A2",
+      "stage": "CONTEXT",
+      "status": "RUNNING",
+      "payload": {
+        "attempts": {
+          "0:INTAKE:prompt-intake-adapter": 1,
+          "0:CONTEXT:baseline-verifier": 1
+        },
+        "active_task": {
+          "id": "d95bbdcda5e045c9aca6ca43e1342f00",
+          "skill": "baseline-verifier",
+          "started_at": "2026-09-24T05:31:22.338922+00:00",
+          "tool_calls": 0
+        }
+      },
+      "created_at": "2026-09-24T05:31:22.339753+00:00"
+    },
+    {
+      "run_id": "RUN-5AC974860CB74DA790FDBA00532A15A2",
+      "stage": "CONTEXT",
+      "status": "RUNNING",
+      "payload": {
+        "results": {
+          "INTAKE": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/DECISIONS.md",
+              "agentic/data/project-context/features/BOS-010/REQUIREMENTS.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Context.",
+            "outputs": {
+              "work_item": "BOS-010 F2 building application & lifecycle",
+              "work_type": "new_feature",
+              "project_type": "brownfield (building-service skeleton)",
+              "hierarchy": "FEATURE",
+              "planning": "NO_REPLAN",
+              "decisions": [
+                "D-12",
+                "D-13",
+                "D-14",
+                "D-26",
+                "D-28",
+                "D-29",
+                "D-30",
+                "D-31",
+                "D-32"
+              ]
+            }
+          },
+          "CONTEXT": {
+            "status": "READY",
+            "evidence": [
+              "docs/ARCHITECTURE.md",
+              "backend/building-service/src/main/resources/application.yaml",
+              "backend/api-gateway/src/main/java/com/buildingos/gateway/routing/config/GatewayRouteConfig.java",
+              "backend/subscription-service/src/main/java/com/buildingos/subscription/shared/presentation/rest/CurrentActor.java",
+              "backend/auth-service/src/main/java/com/buildingos/auth/auth/domain/repository/UserRepository.java",
+              "infra/docker/compose.yaml"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Requirements.",
+            "outputs": {
+              "verdict": "CONTEXT_READY",
+              "revision": "8e66061",
+              "finding": "building-service is a metadata-only skeleton; no object storage in infra; auth-service has findOrCreateByPhone but no provisioning API; JWT carries sub, phone, platform_roles"
+            }
+          }
+        },
+        "active_task": null
+      },
+      "created_at": "2026-09-24T05:31:22.396039+00:00"
+    },
+    {
+      "run_id": "RUN-5AC974860CB74DA790FDBA00532A15A2",
+      "stage": "REQUIREMENTS",
+      "status": "RUNNING",
+      "payload": {},
+      "created_at": "2026-09-24T05:31:22.442814+00:00"
+    },
+    {
+      "run_id": "RUN-5AC974860CB74DA790FDBA00532A15A2",
+      "stage": "REQUIREMENTS",
+      "status": "RUNNING",
+      "payload": {
+        "attempts": {
+          "0:INTAKE:prompt-intake-adapter": 1,
+          "0:CONTEXT:baseline-verifier": 1,
+          "0:REQUIREMENTS:business-requirement-analyzer": 1
+        },
+        "active_task": {
+          "id": "82ee7b34f22f41a1afd57c6c6d5f5048",
+          "skill": "business-requirement-analyzer",
+          "started_at": "2026-09-24T05:31:22.493850+00:00",
+          "tool_calls": 0
+        }
+      },
+      "created_at": "2026-09-24T05:31:22.494255+00:00"
+    },
+    {
+      "run_id": "RUN-5AC974860CB74DA790FDBA00532A15A2",
+      "stage": "REQUIREMENTS",
+      "status": "RUNNING",
+      "payload": {
+        "results": {
+          "INTAKE": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/DECISIONS.md",
+              "agentic/data/project-context/features/BOS-010/REQUIREMENTS.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Context.",
+            "outputs": {
+              "work_item": "BOS-010 F2 building application & lifecycle",
+              "work_type": "new_feature",
+              "project_type": "brownfield (building-service skeleton)",
+              "hierarchy": "FEATURE",
+              "planning": "NO_REPLAN",
+              "decisions": [
+                "D-12",
+                "D-13",
+                "D-14",
+                "D-26",
+                "D-28",
+                "D-29",
+                "D-30",
+                "D-31",
+                "D-32"
+              ]
+            }
+          },
+          "CONTEXT": {
+            "status": "READY",
+            "evidence": [
+              "docs/ARCHITECTURE.md",
+              "backend/building-service/src/main/resources/application.yaml",
+              "backend/api-gateway/src/main/java/com/buildingos/gateway/routing/config/GatewayRouteConfig.java",
+              "backend/subscription-service/src/main/java/com/buildingos/subscription/shared/presentation/rest/CurrentActor.java",
+              "backend/auth-service/src/main/java/com/buildingos/auth/auth/domain/repository/UserRepository.java",
+              "infra/docker/compose.yaml"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Requirements.",
+            "outputs": {
+              "verdict": "CONTEXT_READY",
+              "revision": "8e66061",
+              "finding": "building-service is a metadata-only skeleton; no object storage in infra; auth-service has findOrCreateByPhone but no provisioning API; JWT carries sub, phone, platform_roles"
+            }
+          },
+          "REQUIREMENTS": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/building-application/REQUIREMENTS.md",
+              "agentic/data/project-context/features/BOS-010/DECISIONS.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Technical design.",
+            "outputs": {
+              "verdict": "REQUIREMENTS_READY",
+              "revision": 1,
+              "ids": "AP-01..AP-10",
+              "decisions": [
+                "D-12",
+                "D-13",
+                "D-14",
+                "D-26",
+                "D-28",
+                "D-29",
+                "D-30",
+                "D-31",
+                "D-32"
+              ]
+            }
+          }
+        },
+        "active_task": null
+      },
+      "created_at": "2026-09-24T05:31:22.549085+00:00"
+    },
+    {
+      "run_id": "RUN-5AC974860CB74DA790FDBA00532A15A2",
+      "stage": "TECHNICAL",
+      "status": "RUNNING",
+      "payload": {},
+      "created_at": "2026-09-24T05:31:22.593664+00:00"
+    },
+    {
+      "run_id": "RUN-5AC974860CB74DA790FDBA00532A15A2",
+      "stage": "TECHNICAL",
+      "status": "RUNNING",
+      "payload": {
+        "attempts": {
+          "0:INTAKE:prompt-intake-adapter": 1,
+          "0:CONTEXT:baseline-verifier": 1,
+          "0:REQUIREMENTS:business-requirement-analyzer": 1,
+          "0:TECHNICAL:technical-architecture-planner": 1
+        },
+        "active_task": {
+          "id": "ec803cde8fcc473ba5445518bc19b228",
+          "skill": "technical-architecture-planner",
+          "started_at": "2026-09-24T05:31:22.647439+00:00",
+          "tool_calls": 0
+        }
+      },
+      "created_at": "2026-09-24T05:31:22.648805+00:00"
+    },
+    {
+      "run_id": "RUN-5AC974860CB74DA790FDBA00532A15A2",
+      "stage": "TECHNICAL",
+      "status": "RUNNING",
+      "payload": {
+        "results": {
+          "INTAKE": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/DECISIONS.md",
+              "agentic/data/project-context/features/BOS-010/REQUIREMENTS.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Context.",
+            "outputs": {
+              "work_item": "BOS-010 F2 building application & lifecycle",
+              "work_type": "new_feature",
+              "project_type": "brownfield (building-service skeleton)",
+              "hierarchy": "FEATURE",
+              "planning": "NO_REPLAN",
+              "decisions": [
+                "D-12",
+                "D-13",
+                "D-14",
+                "D-26",
+                "D-28",
+                "D-29",
+                "D-30",
+                "D-31",
+                "D-32"
+              ]
+            }
+          },
+          "CONTEXT": {
+            "status": "READY",
+            "evidence": [
+              "docs/ARCHITECTURE.md",
+              "backend/building-service/src/main/resources/application.yaml",
+              "backend/api-gateway/src/main/java/com/buildingos/gateway/routing/config/GatewayRouteConfig.java",
+              "backend/subscription-service/src/main/java/com/buildingos/subscription/shared/presentation/rest/CurrentActor.java",
+              "backend/auth-service/src/main/java/com/buildingos/auth/auth/domain/repository/UserRepository.java",
+              "infra/docker/compose.yaml"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Requirements.",
+            "outputs": {
+              "verdict": "CONTEXT_READY",
+              "revision": "8e66061",
+              "finding": "building-service is a metadata-only skeleton; no object storage in infra; auth-service has findOrCreateByPhone but no provisioning API; JWT carries sub, phone, platform_roles"
+            }
+          },
+          "REQUIREMENTS": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/building-application/REQUIREMENTS.md",
+              "agentic/data/project-context/features/BOS-010/DECISIONS.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Technical design.",
+            "outputs": {
+              "verdict": "REQUIREMENTS_READY",
+              "revision": 1,
+              "ids": "AP-01..AP-10",
+              "decisions": [
+                "D-12",
+                "D-13",
+                "D-14",
+                "D-26",
+                "D-28",
+                "D-29",
+                "D-30",
+                "D-31",
+                "D-32"
+              ]
+            }
+          },
+          "TECHNICAL": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/building-application/TECH-SPEC.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Operator technical approval.",
+            "outputs": {
+              "verdict": "TECHNICAL_READY",
+              "revision": 1,
+              "approval": "pending operator"
+            }
+          }
+        },
+        "active_task": null
+      },
+      "created_at": "2026-09-24T05:31:22.705039+00:00"
+    },
+    {
+      "run_id": "RUN-5AC974860CB74DA790FDBA00532A15A2",
+      "stage": "TECHNICAL",
+      "status": "RUNNING",
+      "payload": {},
+      "created_at": "2026-09-24T05:42:49.983593+00:00"
+    },
+    {
+      "run_id": "RUN-5AC974860CB74DA790FDBA00532A15A2",
+      "stage": "IMPLEMENTATION",
+      "status": "RUNNING",
+      "payload": {},
+      "created_at": "2026-09-24T05:43:07.761770+00:00"
+    },
+    {
+      "run_id": "RUN-5AC974860CB74DA790FDBA00532A15A2",
+      "stage": "IMPLEMENTATION",
+      "status": "RUNNING",
+      "payload": {
+        "attempts": {
+          "0:INTAKE:prompt-intake-adapter": 1,
+          "0:CONTEXT:baseline-verifier": 1,
+          "0:REQUIREMENTS:business-requirement-analyzer": 1,
+          "0:TECHNICAL:technical-architecture-planner": 1,
+          "0:IMPLEMENTATION:implementation-agent": 1
+        },
+        "active_task": {
+          "id": "b6a59dcb18f345e99a87a6131161b6be",
+          "skill": "implementation-agent",
+          "started_at": "2026-09-24T05:43:13.168495+00:00",
+          "tool_calls": 0
+        }
+      },
+      "created_at": "2026-09-24T05:43:13.169958+00:00"
+    },
+    {
+      "run_id": "RUN-5AC974860CB74DA790FDBA00532A15A2",
+      "stage": "IMPLEMENTATION",
+      "status": "BLOCKED",
+      "payload": {
+        "active_task": null
+      },
+      "created_at": "2026-09-24T07:28:08.662556+00:00"
+    },
+    {
+      "run_id": "RUN-5AC974860CB74DA790FDBA00532A15A2",
+      "stage": "IMPLEMENTATION",
+      "status": "BLOCKED",
+      "payload": {
+        "budget_overrides": {
+          "max_task_seconds": 3600
+        }
+      },
+      "created_at": "2026-09-24T08:02:49.000166+00:00"
+    },
+    {
+      "run_id": "RUN-5AC974860CB74DA790FDBA00532A15A2",
+      "stage": "IMPLEMENTATION",
+      "status": "BLOCKED",
+      "payload": {
+        "context": {
+          "files": {
+            "docs/ARCHITECTURE.md": "eb5f30485c7e9f90f37771ecd4e9bc3fceb5f3e7bc07c7269734bbe0c90ada65",
+            "agentic/data/project-context/features/BOS-010/DECISIONS.md": "15bcdbd505d9375db4841efa1da24f8bcf4490552b54b8b4ca40fd8dbb0fb43b",
+            "agentic/data/project-context/features/BOS-010/building-application/REQUIREMENTS.md": "c50475bdc1a85e77f263ddfccaab1781fade2c381b7234aafc7bc794c9691447",
+            "agentic/data/project-context/features/BOS-010/building-application/TECH-SPEC.md": "b07a5e8c3011e93cb09ba24d2f9c9831bda2ba8ca1a24c04d36ab0560839c6f8",
+            "backend/building-service/src/main/resources/application.yaml": "4b616bbb4a654c5f7eb7df9a38c018665040748fc1bcb936d44dcd00690b3508",
+            "backend/api-gateway/src/main/java/com/buildingos/gateway/routing/config/GatewayRouteConfig.java": "7d54251409b31c285b28729688447b5e22c0e6178b01cd7443a3914837c2ad8f",
+            "infra/docker/compose.yaml": "84ed52f91aa472bbe87bf39006c16268fc3a9854185a8a09224ce93bbb1b684d"
+          }
+        }
+      },
+      "created_at": "2026-09-24T08:03:33.032540+00:00"
+    },
+    {
+      "run_id": "RUN-5AC974860CB74DA790FDBA00532A15A2",
+      "stage": "IMPLEMENTATION",
+      "status": "RUNNING",
+      "payload": {
+        "attempts": {
+          "0:INTAKE:prompt-intake-adapter": 1,
+          "0:CONTEXT:baseline-verifier": 1,
+          "0:REQUIREMENTS:business-requirement-analyzer": 1,
+          "0:TECHNICAL:technical-architecture-planner": 1,
+          "0:IMPLEMENTATION:implementation-agent": 2
+        },
+        "active_task": {
+          "id": "28e2a1ccdaa54ceca11ab45042e3a70f",
+          "skill": "implementation-agent",
+          "started_at": "2026-09-24T08:03:33.081886+00:00",
+          "tool_calls": 0
+        }
+      },
+      "created_at": "2026-09-24T08:03:33.083488+00:00"
+    },
+    {
+      "run_id": "RUN-5AC974860CB74DA790FDBA00532A15A2",
+      "stage": "IMPLEMENTATION",
+      "status": "RUNNING",
+      "payload": {
+        "results": {
+          "INTAKE": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/DECISIONS.md",
+              "agentic/data/project-context/features/BOS-010/REQUIREMENTS.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Context.",
+            "outputs": {
+              "work_item": "BOS-010 F2 building application & lifecycle",
+              "work_type": "new_feature",
+              "project_type": "brownfield (building-service skeleton)",
+              "hierarchy": "FEATURE",
+              "planning": "NO_REPLAN",
+              "decisions": [
+                "D-12",
+                "D-13",
+                "D-14",
+                "D-26",
+                "D-28",
+                "D-29",
+                "D-30",
+                "D-31",
+                "D-32"
+              ]
+            }
+          },
+          "CONTEXT": {
+            "status": "READY",
+            "evidence": [
+              "docs/ARCHITECTURE.md",
+              "backend/building-service/src/main/resources/application.yaml",
+              "backend/api-gateway/src/main/java/com/buildingos/gateway/routing/config/GatewayRouteConfig.java",
+              "backend/subscription-service/src/main/java/com/buildingos/subscription/shared/presentation/rest/CurrentActor.java",
+              "backend/auth-service/src/main/java/com/buildingos/auth/auth/domain/repository/UserRepository.java",
+              "infra/docker/compose.yaml"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Requirements.",
+            "outputs": {
+              "verdict": "CONTEXT_READY",
+              "revision": "8e66061",
+              "finding": "building-service is a metadata-only skeleton; no object storage in infra; auth-service has findOrCreateByPhone but no provisioning API; JWT carries sub, phone, platform_roles"
+            }
+          },
+          "REQUIREMENTS": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/building-application/REQUIREMENTS.md",
+              "agentic/data/project-context/features/BOS-010/DECISIONS.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Technical design.",
+            "outputs": {
+              "verdict": "REQUIREMENTS_READY",
+              "revision": 1,
+              "ids": "AP-01..AP-10",
+              "decisions": [
+                "D-12",
+                "D-13",
+                "D-14",
+                "D-26",
+                "D-28",
+                "D-29",
+                "D-30",
+                "D-31",
+                "D-32"
+              ]
+            }
+          },
+          "TECHNICAL": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/building-application/TECH-SPEC.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Operator technical approval.",
+            "outputs": {
+              "verdict": "TECHNICAL_READY",
+              "revision": 1,
+              "approval": "pending operator"
+            }
+          },
+          "IMPLEMENTATION": {
+            "status": "READY",
+            "evidence": [
+              "backend/building-service/src/main/resources/db/migration/V2__building_application.sql",
+              "backend/building-service/src/main/resources/db/migration/V3__application_document.sql",
+              "backend/building-service/src/main/resources/db/migration/V4__building.sql",
+              "backend/auth-service/src/main/java/com/buildingos/auth/auth/application/provisionuser/ProvisionUserService.java",
+              "backend/api-gateway/src/main/java/com/buildingos/gateway/routing/config/GatewayRouteConfig.java",
+              "contracts/openapi/platform.yaml",
+              "infra/docker/compose.yaml",
+              "scripts/smoke-building-application.sh",
+              "user_app/lib/features/building_application",
+              "agentic/data/project-context/features/BOS-010/building-application/TECH-SPEC.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [
+              "Bangla strings need native-speaker review",
+              "No virus scanning of uploads before production"
+            ],
+            "recommended_next_step": "Code review.",
+            "outputs": {
+              "verdict": "READY",
+              "checks": [
+                "backend mvn verify 197/0",
+                "check-contracts PASSED + Redocly valid",
+                "live smoke on isolated full stack PASSED",
+                "flutter analyze no issues",
+                "flutter test 50/0"
+              ]
+            }
+          }
+        },
+        "active_task": null
+      },
+      "created_at": "2026-09-24T08:03:40.757204+00:00"
+    },
+    {
+      "run_id": "RUN-5AC974860CB74DA790FDBA00532A15A2",
+      "stage": "REVIEW",
+      "status": "RUNNING",
+      "payload": {},
+      "created_at": "2026-09-24T08:03:40.810960+00:00"
+    },
+    {
+      "run_id": "RUN-5AC974860CB74DA790FDBA00532A15A2",
+      "stage": "REVIEW",
+      "status": "RUNNING",
+      "payload": {
+        "attempts": {
+          "0:INTAKE:prompt-intake-adapter": 1,
+          "0:CONTEXT:baseline-verifier": 1,
+          "0:REQUIREMENTS:business-requirement-analyzer": 1,
+          "0:TECHNICAL:technical-architecture-planner": 1,
+          "0:IMPLEMENTATION:implementation-agent": 2,
+          "0:REVIEW:code-review-agent": 1
+        },
+        "active_task": {
+          "id": "8def88907d3a490b9e7d1d959f7b4bdc",
+          "skill": "code-review-agent",
+          "started_at": "2026-09-24T08:09:43.634317+00:00",
+          "tool_calls": 0
+        }
+      },
+      "created_at": "2026-09-24T08:09:43.634845+00:00"
+    },
+    {
+      "run_id": "RUN-5AC974860CB74DA790FDBA00532A15A2",
+      "stage": "REVIEW",
+      "status": "RUNNING",
+      "payload": {
+        "results": {
+          "INTAKE": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/DECISIONS.md",
+              "agentic/data/project-context/features/BOS-010/REQUIREMENTS.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Context.",
+            "outputs": {
+              "work_item": "BOS-010 F2 building application & lifecycle",
+              "work_type": "new_feature",
+              "project_type": "brownfield (building-service skeleton)",
+              "hierarchy": "FEATURE",
+              "planning": "NO_REPLAN",
+              "decisions": [
+                "D-12",
+                "D-13",
+                "D-14",
+                "D-26",
+                "D-28",
+                "D-29",
+                "D-30",
+                "D-31",
+                "D-32"
+              ]
+            }
+          },
+          "CONTEXT": {
+            "status": "READY",
+            "evidence": [
+              "docs/ARCHITECTURE.md",
+              "backend/building-service/src/main/resources/application.yaml",
+              "backend/api-gateway/src/main/java/com/buildingos/gateway/routing/config/GatewayRouteConfig.java",
+              "backend/subscription-service/src/main/java/com/buildingos/subscription/shared/presentation/rest/CurrentActor.java",
+              "backend/auth-service/src/main/java/com/buildingos/auth/auth/domain/repository/UserRepository.java",
+              "infra/docker/compose.yaml"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Requirements.",
+            "outputs": {
+              "verdict": "CONTEXT_READY",
+              "revision": "8e66061",
+              "finding": "building-service is a metadata-only skeleton; no object storage in infra; auth-service has findOrCreateByPhone but no provisioning API; JWT carries sub, phone, platform_roles"
+            }
+          },
+          "REQUIREMENTS": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/building-application/REQUIREMENTS.md",
+              "agentic/data/project-context/features/BOS-010/DECISIONS.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Technical design.",
+            "outputs": {
+              "verdict": "REQUIREMENTS_READY",
+              "revision": 1,
+              "ids": "AP-01..AP-10",
+              "decisions": [
+                "D-12",
+                "D-13",
+                "D-14",
+                "D-26",
+                "D-28",
+                "D-29",
+                "D-30",
+                "D-31",
+                "D-32"
+              ]
+            }
+          },
+          "TECHNICAL": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/building-application/TECH-SPEC.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Operator technical approval.",
+            "outputs": {
+              "verdict": "TECHNICAL_READY",
+              "revision": 1,
+              "approval": "pending operator"
+            }
+          },
+          "IMPLEMENTATION": {
+            "status": "READY",
+            "evidence": [
+              "backend/building-service/src/main/resources/db/migration/V2__building_application.sql",
+              "backend/building-service/src/main/resources/db/migration/V3__application_document.sql",
+              "backend/building-service/src/main/resources/db/migration/V4__building.sql",
+              "backend/auth-service/src/main/java/com/buildingos/auth/auth/application/provisionuser/ProvisionUserService.java",
+              "backend/api-gateway/src/main/java/com/buildingos/gateway/routing/config/GatewayRouteConfig.java",
+              "contracts/openapi/platform.yaml",
+              "infra/docker/compose.yaml",
+              "scripts/smoke-building-application.sh",
+              "user_app/lib/features/building_application",
+              "agentic/data/project-context/features/BOS-010/building-application/TECH-SPEC.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [
+              "Bangla strings need native-speaker review",
+              "No virus scanning of uploads before production"
+            ],
+            "recommended_next_step": "Code review.",
+            "outputs": {
+              "verdict": "READY",
+              "checks": [
+                "backend mvn verify 197/0",
+                "check-contracts PASSED + Redocly valid",
+                "live smoke on isolated full stack PASSED",
+                "flutter analyze no issues",
+                "flutter test 50/0"
+              ]
+            }
+          },
+          "REVIEW": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/building-application/REVIEW.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [
+              "Operator device check of Flutter flow",
+              "Bangla native review",
+              "Upload virus scanning before production"
+            ],
+            "recommended_next_step": "Automated QA.",
+            "outputs": {
+              "verdict": "READY",
+              "findings_fixed": 1,
+              "checks": [
+                "backend mvn verify 197/0",
+                "check-contracts PASSED + Redocly valid",
+                "live smoke on isolated full stack PASSED",
+                "flutter analyze clean, flutter test 50/0"
+              ]
+            }
+          }
+        },
+        "active_task": null
+      },
+      "created_at": "2026-09-24T08:09:43.693152+00:00"
+    },
+    {
+      "run_id": "RUN-5AC974860CB74DA790FDBA00532A15A2",
+      "stage": "QA",
+      "status": "RUNNING",
+      "payload": {},
+      "created_at": "2026-09-24T08:09:43.742487+00:00"
+    },
+    {
+      "run_id": "RUN-5AC974860CB74DA790FDBA00532A15A2",
+      "stage": "QA",
+      "status": "RUNNING",
+      "payload": {
+        "attempts": {
+          "0:INTAKE:prompt-intake-adapter": 1,
+          "0:CONTEXT:baseline-verifier": 1,
+          "0:REQUIREMENTS:business-requirement-analyzer": 1,
+          "0:TECHNICAL:technical-architecture-planner": 1,
+          "0:IMPLEMENTATION:implementation-agent": 2,
+          "0:REVIEW:code-review-agent": 1,
+          "0:QA:automated-qa-agent": 1
+        },
+        "active_task": {
+          "id": "843248999b304cc5b749daad062726a1",
+          "skill": "automated-qa-agent",
+          "started_at": "2026-09-24T08:09:43.841972+00:00",
+          "tool_calls": 0
+        }
+      },
+      "created_at": "2026-09-24T08:09:43.844399+00:00"
+    },
+    {
+      "run_id": "RUN-5AC974860CB74DA790FDBA00532A15A2",
+      "stage": "QA",
+      "status": "RUNNING",
+      "payload": {
+        "results": {
+          "INTAKE": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/DECISIONS.md",
+              "agentic/data/project-context/features/BOS-010/REQUIREMENTS.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Context.",
+            "outputs": {
+              "work_item": "BOS-010 F2 building application & lifecycle",
+              "work_type": "new_feature",
+              "project_type": "brownfield (building-service skeleton)",
+              "hierarchy": "FEATURE",
+              "planning": "NO_REPLAN",
+              "decisions": [
+                "D-12",
+                "D-13",
+                "D-14",
+                "D-26",
+                "D-28",
+                "D-29",
+                "D-30",
+                "D-31",
+                "D-32"
+              ]
+            }
+          },
+          "CONTEXT": {
+            "status": "READY",
+            "evidence": [
+              "docs/ARCHITECTURE.md",
+              "backend/building-service/src/main/resources/application.yaml",
+              "backend/api-gateway/src/main/java/com/buildingos/gateway/routing/config/GatewayRouteConfig.java",
+              "backend/subscription-service/src/main/java/com/buildingos/subscription/shared/presentation/rest/CurrentActor.java",
+              "backend/auth-service/src/main/java/com/buildingos/auth/auth/domain/repository/UserRepository.java",
+              "infra/docker/compose.yaml"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Requirements.",
+            "outputs": {
+              "verdict": "CONTEXT_READY",
+              "revision": "8e66061",
+              "finding": "building-service is a metadata-only skeleton; no object storage in infra; auth-service has findOrCreateByPhone but no provisioning API; JWT carries sub, phone, platform_roles"
+            }
+          },
+          "REQUIREMENTS": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/building-application/REQUIREMENTS.md",
+              "agentic/data/project-context/features/BOS-010/DECISIONS.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Technical design.",
+            "outputs": {
+              "verdict": "REQUIREMENTS_READY",
+              "revision": 1,
+              "ids": "AP-01..AP-10",
+              "decisions": [
+                "D-12",
+                "D-13",
+                "D-14",
+                "D-26",
+                "D-28",
+                "D-29",
+                "D-30",
+                "D-31",
+                "D-32"
+              ]
+            }
+          },
+          "TECHNICAL": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/building-application/TECH-SPEC.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Operator technical approval.",
+            "outputs": {
+              "verdict": "TECHNICAL_READY",
+              "revision": 1,
+              "approval": "pending operator"
+            }
+          },
+          "IMPLEMENTATION": {
+            "status": "READY",
+            "evidence": [
+              "backend/building-service/src/main/resources/db/migration/V2__building_application.sql",
+              "backend/building-service/src/main/resources/db/migration/V3__application_document.sql",
+              "backend/building-service/src/main/resources/db/migration/V4__building.sql",
+              "backend/auth-service/src/main/java/com/buildingos/auth/auth/application/provisionuser/ProvisionUserService.java",
+              "backend/api-gateway/src/main/java/com/buildingos/gateway/routing/config/GatewayRouteConfig.java",
+              "contracts/openapi/platform.yaml",
+              "infra/docker/compose.yaml",
+              "scripts/smoke-building-application.sh",
+              "user_app/lib/features/building_application",
+              "agentic/data/project-context/features/BOS-010/building-application/TECH-SPEC.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [
+              "Bangla strings need native-speaker review",
+              "No virus scanning of uploads before production"
+            ],
+            "recommended_next_step": "Code review.",
+            "outputs": {
+              "verdict": "READY",
+              "checks": [
+                "backend mvn verify 197/0",
+                "check-contracts PASSED + Redocly valid",
+                "live smoke on isolated full stack PASSED",
+                "flutter analyze no issues",
+                "flutter test 50/0"
+              ]
+            }
+          },
+          "REVIEW": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/building-application/REVIEW.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [
+              "Operator device check of Flutter flow",
+              "Bangla native review",
+              "Upload virus scanning before production"
+            ],
+            "recommended_next_step": "Automated QA.",
+            "outputs": {
+              "verdict": "READY",
+              "findings_fixed": 1,
+              "checks": [
+                "backend mvn verify 197/0",
+                "check-contracts PASSED + Redocly valid",
+                "live smoke on isolated full stack PASSED",
+                "flutter analyze clean, flutter test 50/0"
+              ]
+            }
+          },
+          "QA": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/building-application/REVIEW.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [
+              "Operator device check of Flutter flow",
+              "Bangla native review",
+              "Upload virus scanning before production"
+            ],
+            "recommended_next_step": "Operator release decision (local/test).",
+            "outputs": {
+              "verdict": "READY",
+              "checks": [
+                "backend mvn verify 197/0",
+                "check-contracts PASSED + Redocly valid",
+                "live smoke on isolated full stack PASSED",
+                "flutter analyze clean, flutter test 50/0"
+              ]
+            }
+          }
+        },
+        "active_task": null
+      },
+      "created_at": "2026-09-24T08:09:43.903056+00:00"
+    },
+    {
+      "run_id": "RUN-5AC974860CB74DA790FDBA00532A15A2",
+      "stage": "QA",
+      "status": "RUNNING",
+      "payload": {
+        "results": {
+          "INTAKE": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/DECISIONS.md",
+              "agentic/data/project-context/features/BOS-010/REQUIREMENTS.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Context.",
+            "outputs": {
+              "work_item": "BOS-010 F2 building application & lifecycle",
+              "work_type": "new_feature",
+              "project_type": "brownfield (building-service skeleton)",
+              "hierarchy": "FEATURE",
+              "planning": "NO_REPLAN",
+              "decisions": [
+                "D-12",
+                "D-13",
+                "D-14",
+                "D-26",
+                "D-28",
+                "D-29",
+                "D-30",
+                "D-31",
+                "D-32"
+              ]
+            }
+          },
+          "CONTEXT": {
+            "status": "READY",
+            "evidence": [
+              "docs/ARCHITECTURE.md",
+              "backend/building-service/src/main/resources/application.yaml",
+              "backend/api-gateway/src/main/java/com/buildingos/gateway/routing/config/GatewayRouteConfig.java",
+              "backend/subscription-service/src/main/java/com/buildingos/subscription/shared/presentation/rest/CurrentActor.java",
+              "backend/auth-service/src/main/java/com/buildingos/auth/auth/domain/repository/UserRepository.java",
+              "infra/docker/compose.yaml"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Requirements.",
+            "outputs": {
+              "verdict": "CONTEXT_READY",
+              "revision": "8e66061",
+              "finding": "building-service is a metadata-only skeleton; no object storage in infra; auth-service has findOrCreateByPhone but no provisioning API; JWT carries sub, phone, platform_roles"
+            }
+          },
+          "REQUIREMENTS": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/building-application/REQUIREMENTS.md",
+              "agentic/data/project-context/features/BOS-010/DECISIONS.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Technical design.",
+            "outputs": {
+              "verdict": "REQUIREMENTS_READY",
+              "revision": 1,
+              "ids": "AP-01..AP-10",
+              "decisions": [
+                "D-12",
+                "D-13",
+                "D-14",
+                "D-26",
+                "D-28",
+                "D-29",
+                "D-30",
+                "D-31",
+                "D-32"
+              ]
+            }
+          },
+          "TECHNICAL": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/building-application/TECH-SPEC.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Operator technical approval.",
+            "outputs": {
+              "verdict": "TECHNICAL_READY",
+              "revision": 1,
+              "approval": "pending operator"
+            }
+          },
+          "IMPLEMENTATION": {
+            "status": "READY",
+            "evidence": [
+              "backend/building-service/src/main/resources/db/migration/V2__building_application.sql",
+              "backend/building-service/src/main/resources/db/migration/V3__application_document.sql",
+              "backend/building-service/src/main/resources/db/migration/V4__building.sql",
+              "backend/auth-service/src/main/java/com/buildingos/auth/auth/application/provisionuser/ProvisionUserService.java",
+              "backend/api-gateway/src/main/java/com/buildingos/gateway/routing/config/GatewayRouteConfig.java",
+              "contracts/openapi/platform.yaml",
+              "infra/docker/compose.yaml",
+              "scripts/smoke-building-application.sh",
+              "user_app/lib/features/building_application",
+              "agentic/data/project-context/features/BOS-010/building-application/TECH-SPEC.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [
+              "Bangla strings need native-speaker review",
+              "No virus scanning of uploads before production"
+            ],
+            "recommended_next_step": "Code review.",
+            "outputs": {
+              "verdict": "READY",
+              "checks": [
+                "backend mvn verify 197/0",
+                "check-contracts PASSED + Redocly valid",
+                "live smoke on isolated full stack PASSED",
+                "flutter analyze no issues",
+                "flutter test 50/0"
+              ]
+            }
+          },
+          "REVIEW": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/building-application/REVIEW.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [
+              "Operator device check of Flutter flow",
+              "Bangla native review",
+              "Upload virus scanning before production"
+            ],
+            "recommended_next_step": "Automated QA.",
+            "outputs": {
+              "verdict": "READY",
+              "findings_fixed": 1,
+              "checks": [
+                "backend mvn verify 197/0",
+                "check-contracts PASSED + Redocly valid",
+                "live smoke on isolated full stack PASSED",
+                "flutter analyze clean, flutter test 50/0"
+              ]
+            }
+          }
+        },
+        "attempts": {
+          "0:INTAKE:prompt-intake-adapter": 1,
+          "0:CONTEXT:baseline-verifier": 1,
+          "0:REQUIREMENTS:business-requirement-analyzer": 1,
+          "0:TECHNICAL:technical-architecture-planner": 1,
+          "0:IMPLEMENTATION:implementation-agent": 2,
+          "0:REVIEW:code-review-agent": 1,
+          "0:QA:automated-qa-agent": 2
+        },
+        "active_task": {
+          "id": "1be2d419f7ac4ff5b889ca999fe5bfb5",
+          "skill": "automated-qa-agent",
+          "started_at": "2026-09-24T08:09:50.153574+00:00",
+          "tool_calls": 0
+        }
+      },
+      "created_at": "2026-09-24T08:09:50.156108+00:00"
+    },
+    {
+      "run_id": "RUN-5AC974860CB74DA790FDBA00532A15A2",
+      "stage": "QA",
+      "status": "RUNNING",
+      "payload": {
+        "results": {
+          "INTAKE": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/DECISIONS.md",
+              "agentic/data/project-context/features/BOS-010/REQUIREMENTS.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Context.",
+            "outputs": {
+              "work_item": "BOS-010 F2 building application & lifecycle",
+              "work_type": "new_feature",
+              "project_type": "brownfield (building-service skeleton)",
+              "hierarchy": "FEATURE",
+              "planning": "NO_REPLAN",
+              "decisions": [
+                "D-12",
+                "D-13",
+                "D-14",
+                "D-26",
+                "D-28",
+                "D-29",
+                "D-30",
+                "D-31",
+                "D-32"
+              ]
+            }
+          },
+          "CONTEXT": {
+            "status": "READY",
+            "evidence": [
+              "docs/ARCHITECTURE.md",
+              "backend/building-service/src/main/resources/application.yaml",
+              "backend/api-gateway/src/main/java/com/buildingos/gateway/routing/config/GatewayRouteConfig.java",
+              "backend/subscription-service/src/main/java/com/buildingos/subscription/shared/presentation/rest/CurrentActor.java",
+              "backend/auth-service/src/main/java/com/buildingos/auth/auth/domain/repository/UserRepository.java",
+              "infra/docker/compose.yaml"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Requirements.",
+            "outputs": {
+              "verdict": "CONTEXT_READY",
+              "revision": "8e66061",
+              "finding": "building-service is a metadata-only skeleton; no object storage in infra; auth-service has findOrCreateByPhone but no provisioning API; JWT carries sub, phone, platform_roles"
+            }
+          },
+          "REQUIREMENTS": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/building-application/REQUIREMENTS.md",
+              "agentic/data/project-context/features/BOS-010/DECISIONS.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Technical design.",
+            "outputs": {
+              "verdict": "REQUIREMENTS_READY",
+              "revision": 1,
+              "ids": "AP-01..AP-10",
+              "decisions": [
+                "D-12",
+                "D-13",
+                "D-14",
+                "D-26",
+                "D-28",
+                "D-29",
+                "D-30",
+                "D-31",
+                "D-32"
+              ]
+            }
+          },
+          "TECHNICAL": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/building-application/TECH-SPEC.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Operator technical approval.",
+            "outputs": {
+              "verdict": "TECHNICAL_READY",
+              "revision": 1,
+              "approval": "pending operator"
+            }
+          },
+          "IMPLEMENTATION": {
+            "status": "READY",
+            "evidence": [
+              "backend/building-service/src/main/resources/db/migration/V2__building_application.sql",
+              "backend/building-service/src/main/resources/db/migration/V3__application_document.sql",
+              "backend/building-service/src/main/resources/db/migration/V4__building.sql",
+              "backend/auth-service/src/main/java/com/buildingos/auth/auth/application/provisionuser/ProvisionUserService.java",
+              "backend/api-gateway/src/main/java/com/buildingos/gateway/routing/config/GatewayRouteConfig.java",
+              "contracts/openapi/platform.yaml",
+              "infra/docker/compose.yaml",
+              "scripts/smoke-building-application.sh",
+              "user_app/lib/features/building_application",
+              "agentic/data/project-context/features/BOS-010/building-application/TECH-SPEC.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [
+              "Bangla strings need native-speaker review",
+              "No virus scanning of uploads before production"
+            ],
+            "recommended_next_step": "Code review.",
+            "outputs": {
+              "verdict": "READY",
+              "checks": [
+                "backend mvn verify 197/0",
+                "check-contracts PASSED + Redocly valid",
+                "live smoke on isolated full stack PASSED",
+                "flutter analyze no issues",
+                "flutter test 50/0"
+              ]
+            }
+          },
+          "REVIEW": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/building-application/REVIEW.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [
+              "Operator device check of Flutter flow",
+              "Bangla native review",
+              "Upload virus scanning before production"
+            ],
+            "recommended_next_step": "Automated QA.",
+            "outputs": {
+              "verdict": "READY",
+              "findings_fixed": 1,
+              "checks": [
+                "backend mvn verify 197/0",
+                "check-contracts PASSED + Redocly valid",
+                "live smoke on isolated full stack PASSED",
+                "flutter analyze clean, flutter test 50/0"
+              ]
+            }
+          },
+          "QA": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/building-application/REVIEW.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [
+              "Operator device check of Flutter flow",
+              "Bangla native review",
+              "Upload virus scanning before production"
+            ],
+            "recommended_next_step": "Operator release decision (local/test).",
+            "outputs": {
+              "verdict": "READY",
+              "checks": [
+                "backend mvn verify 197/0",
+                "check-contracts PASSED + Redocly valid",
+                "live smoke on isolated full stack PASSED",
+                "flutter analyze clean, flutter test 50/0"
+              ]
+            }
+          }
+        },
+        "active_task": null
+      },
+      "created_at": "2026-09-24T08:09:58.812712+00:00"
+    },
+    {
+      "run_id": "RUN-5AC974860CB74DA790FDBA00532A15A2",
+      "stage": "QA",
+      "status": "RUNNING",
+      "payload": {},
+      "created_at": "2026-09-24T09:16:30.199066+00:00"
+    },
+    {
+      "run_id": "RUN-5AC974860CB74DA790FDBA00532A15A2",
+      "stage": "RELEASE",
+      "status": "RUNNING",
+      "payload": {},
+      "created_at": "2026-09-24T09:16:30.312596+00:00"
+    },
+    {
+      "run_id": "RUN-5AC974860CB74DA790FDBA00532A15A2",
+      "stage": "RELEASE",
+      "status": "RUNNING",
+      "payload": {
+        "attempts": {
+          "0:INTAKE:prompt-intake-adapter": 1,
+          "0:CONTEXT:baseline-verifier": 1,
+          "0:REQUIREMENTS:business-requirement-analyzer": 1,
+          "0:TECHNICAL:technical-architecture-planner": 1,
+          "0:IMPLEMENTATION:implementation-agent": 2,
+          "0:REVIEW:code-review-agent": 1,
+          "0:QA:automated-qa-agent": 2,
+          "0:RELEASE:release-readiness-agent": 1
+        },
+        "active_task": {
+          "id": "eb531a5ec70e4da194783516a9f3f453",
+          "skill": "release-readiness-agent",
+          "started_at": "2026-09-24T09:16:30.429186+00:00",
+          "tool_calls": 0
+        }
+      },
+      "created_at": "2026-09-24T09:16:30.429802+00:00"
+    },
+    {
+      "run_id": "RUN-5AC974860CB74DA790FDBA00532A15A2",
+      "stage": "RELEASE",
+      "status": "RUNNING",
+      "payload": {
+        "active_task": {
+          "id": "eb531a5ec70e4da194783516a9f3f453",
+          "skill": "release-readiness-agent",
+          "started_at": "2026-09-24T09:16:30.429186+00:00",
+          "tool_calls": 1
+        }
+      },
+      "created_at": "2026-09-24T09:16:48.472740+00:00"
+    },
+    {
+      "run_id": "RUN-5AC974860CB74DA790FDBA00532A15A2",
+      "stage": "RELEASE",
+      "status": "RUNNING",
+      "payload": {
+        "active_task": {
+          "id": "eb531a5ec70e4da194783516a9f3f453",
+          "skill": "release-readiness-agent",
+          "started_at": "2026-09-24T09:16:30.429186+00:00",
+          "tool_calls": 2
+        }
+      },
+      "created_at": "2026-09-24T09:16:48.708262+00:00"
+    },
+    {
+      "run_id": "RUN-5AC974860CB74DA790FDBA00532A15A2",
+      "stage": "RELEASE",
+      "status": "RUNNING",
+      "payload": {
+        "active_task": {
+          "id": "eb531a5ec70e4da194783516a9f3f453",
+          "skill": "release-readiness-agent",
+          "started_at": "2026-09-24T09:16:30.429186+00:00",
+          "tool_calls": 3
+        }
+      },
+      "created_at": "2026-09-24T09:17:46.672421+00:00"
+    },
+    {
+      "run_id": "RUN-5AC974860CB74DA790FDBA00532A15A2",
+      "stage": "RELEASE",
+      "status": "RUNNING",
+      "payload": {
+        "active_task": {
+          "id": "eb531a5ec70e4da194783516a9f3f453",
+          "skill": "release-readiness-agent",
+          "started_at": "2026-09-24T09:16:30.429186+00:00",
+          "tool_calls": 4
+        }
+      },
+      "created_at": "2026-09-24T09:17:46.918253+00:00"
+    },
+    {
+      "run_id": "RUN-5AC974860CB74DA790FDBA00532A15A2",
+      "stage": "RELEASE",
+      "status": "RUNNING",
+      "payload": {
+        "active_task": {
+          "id": "eb531a5ec70e4da194783516a9f3f453",
+          "skill": "release-readiness-agent",
+          "started_at": "2026-09-24T09:16:30.429186+00:00",
+          "tool_calls": 5
+        }
+      },
+      "created_at": "2026-09-24T09:17:47.049631+00:00"
+    },
+    {
+      "run_id": "RUN-5AC974860CB74DA790FDBA00532A15A2",
+      "stage": "RELEASE",
+      "status": "RUNNING",
+      "payload": {
+        "active_task": {
+          "id": "eb531a5ec70e4da194783516a9f3f453",
+          "skill": "release-readiness-agent",
+          "started_at": "2026-09-24T09:16:30.429186+00:00",
+          "tool_calls": 6
+        }
+      },
+      "created_at": "2026-09-24T09:17:47.182679+00:00"
+    },
+    {
+      "run_id": "RUN-5AC974860CB74DA790FDBA00532A15A2",
+      "stage": "RELEASE",
+      "status": "RUNNING",
+      "payload": {
+        "active_task": {
+          "id": "eb531a5ec70e4da194783516a9f3f453",
+          "skill": "release-readiness-agent",
+          "started_at": "2026-09-24T09:16:30.429186+00:00",
+          "tool_calls": 7
+        }
+      },
+      "created_at": "2026-09-24T09:17:47.318171+00:00"
+    },
+    {
+      "run_id": "RUN-5AC974860CB74DA790FDBA00532A15A2",
+      "stage": "RELEASE",
+      "status": "RUNNING",
+      "payload": {
+        "active_task": {
+          "id": "eb531a5ec70e4da194783516a9f3f453",
+          "skill": "release-readiness-agent",
+          "started_at": "2026-09-24T09:16:30.429186+00:00",
+          "tool_calls": 8
+        }
+      },
+      "created_at": "2026-09-24T09:18:05.900737+00:00"
+    },
+    {
+      "run_id": "RUN-5AC974860CB74DA790FDBA00532A15A2",
+      "stage": "RELEASE",
+      "status": "RUNNING",
+      "payload": {
+        "active_task": {
+          "id": "eb531a5ec70e4da194783516a9f3f453",
+          "skill": "release-readiness-agent",
+          "started_at": "2026-09-24T09:16:30.429186+00:00",
+          "tool_calls": 9
+        }
+      },
+      "created_at": "2026-09-24T09:18:06.041756+00:00"
+    },
+    {
+      "run_id": "RUN-5AC974860CB74DA790FDBA00532A15A2",
+      "stage": "RELEASE",
+      "status": "RUNNING",
+      "payload": {
+        "active_task": {
+          "id": "eb531a5ec70e4da194783516a9f3f453",
+          "skill": "release-readiness-agent",
+          "started_at": "2026-09-24T09:16:30.429186+00:00",
+          "tool_calls": 10
+        }
+      },
+      "created_at": "2026-09-24T09:18:06.178745+00:00"
+    },
+    {
+      "run_id": "RUN-5AC974860CB74DA790FDBA00532A15A2",
+      "stage": "RELEASE",
+      "status": "RUNNING",
+      "payload": {
+        "active_task": {
+          "id": "eb531a5ec70e4da194783516a9f3f453",
+          "skill": "release-readiness-agent",
+          "started_at": "2026-09-24T09:16:30.429186+00:00",
+          "tool_calls": 11
+        }
+      },
+      "created_at": "2026-09-24T09:18:06.315240+00:00"
+    },
+    {
+      "run_id": "RUN-5AC974860CB74DA790FDBA00532A15A2",
+      "stage": "RELEASE",
+      "status": "RUNNING",
+      "payload": {
+        "results": {
+          "INTAKE": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/DECISIONS.md",
+              "agentic/data/project-context/features/BOS-010/REQUIREMENTS.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Context.",
+            "outputs": {
+              "work_item": "BOS-010 F2 building application & lifecycle",
+              "work_type": "new_feature",
+              "project_type": "brownfield (building-service skeleton)",
+              "hierarchy": "FEATURE",
+              "planning": "NO_REPLAN",
+              "decisions": [
+                "D-12",
+                "D-13",
+                "D-14",
+                "D-26",
+                "D-28",
+                "D-29",
+                "D-30",
+                "D-31",
+                "D-32"
+              ]
+            }
+          },
+          "CONTEXT": {
+            "status": "READY",
+            "evidence": [
+              "docs/ARCHITECTURE.md",
+              "backend/building-service/src/main/resources/application.yaml",
+              "backend/api-gateway/src/main/java/com/buildingos/gateway/routing/config/GatewayRouteConfig.java",
+              "backend/subscription-service/src/main/java/com/buildingos/subscription/shared/presentation/rest/CurrentActor.java",
+              "backend/auth-service/src/main/java/com/buildingos/auth/auth/domain/repository/UserRepository.java",
+              "infra/docker/compose.yaml"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Requirements.",
+            "outputs": {
+              "verdict": "CONTEXT_READY",
+              "revision": "8e66061",
+              "finding": "building-service is a metadata-only skeleton; no object storage in infra; auth-service has findOrCreateByPhone but no provisioning API; JWT carries sub, phone, platform_roles"
+            }
+          },
+          "REQUIREMENTS": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/building-application/REQUIREMENTS.md",
+              "agentic/data/project-context/features/BOS-010/DECISIONS.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Technical design.",
+            "outputs": {
+              "verdict": "REQUIREMENTS_READY",
+              "revision": 1,
+              "ids": "AP-01..AP-10",
+              "decisions": [
+                "D-12",
+                "D-13",
+                "D-14",
+                "D-26",
+                "D-28",
+                "D-29",
+                "D-30",
+                "D-31",
+                "D-32"
+              ]
+            }
+          },
+          "TECHNICAL": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/building-application/TECH-SPEC.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Operator technical approval.",
+            "outputs": {
+              "verdict": "TECHNICAL_READY",
+              "revision": 1,
+              "approval": "pending operator"
+            }
+          },
+          "IMPLEMENTATION": {
+            "status": "READY",
+            "evidence": [
+              "backend/building-service/src/main/resources/db/migration/V2__building_application.sql",
+              "backend/building-service/src/main/resources/db/migration/V3__application_document.sql",
+              "backend/building-service/src/main/resources/db/migration/V4__building.sql",
+              "backend/auth-service/src/main/java/com/buildingos/auth/auth/application/provisionuser/ProvisionUserService.java",
+              "backend/api-gateway/src/main/java/com/buildingos/gateway/routing/config/GatewayRouteConfig.java",
+              "contracts/openapi/platform.yaml",
+              "infra/docker/compose.yaml",
+              "scripts/smoke-building-application.sh",
+              "user_app/lib/features/building_application",
+              "agentic/data/project-context/features/BOS-010/building-application/TECH-SPEC.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [
+              "Bangla strings need native-speaker review",
+              "No virus scanning of uploads before production"
+            ],
+            "recommended_next_step": "Code review.",
+            "outputs": {
+              "verdict": "READY",
+              "checks": [
+                "backend mvn verify 197/0",
+                "check-contracts PASSED + Redocly valid",
+                "live smoke on isolated full stack PASSED",
+                "flutter analyze no issues",
+                "flutter test 50/0"
+              ]
+            }
+          },
+          "REVIEW": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/building-application/REVIEW.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [
+              "Operator device check of Flutter flow",
+              "Bangla native review",
+              "Upload virus scanning before production"
+            ],
+            "recommended_next_step": "Automated QA.",
+            "outputs": {
+              "verdict": "READY",
+              "findings_fixed": 1,
+              "checks": [
+                "backend mvn verify 197/0",
+                "check-contracts PASSED + Redocly valid",
+                "live smoke on isolated full stack PASSED",
+                "flutter analyze clean, flutter test 50/0"
+              ]
+            }
+          },
+          "QA": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/building-application/REVIEW.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [
+              "Operator device check of Flutter flow",
+              "Bangla native review",
+              "Upload virus scanning before production"
+            ],
+            "recommended_next_step": "Operator release decision (local/test).",
+            "outputs": {
+              "verdict": "READY",
+              "checks": [
+                "backend mvn verify 197/0",
+                "check-contracts PASSED + Redocly valid",
+                "live smoke on isolated full stack PASSED",
+                "flutter analyze clean, flutter test 50/0"
+              ]
+            }
+          },
+          "RELEASE": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/building-application/RELEASE.md",
+              "agentic/data/project-context/features/BOS-010/building-application/REVIEW.md",
+              "agentic/data/project-context/features/BOS-010/building-application/TECH-SPEC.md",
+              "docs/LOCAL_DEVELOPMENT.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [
+              "Native-speaker Bangla review",
+              "Upload virus scanning and production prerequisites before production"
+            ],
+            "recommended_next_step": "Complete this local/test run; next planned slice is units and ownership, subject to its own scoped intake.",
+            "outputs": {
+              "verdict": "RELEASE_READY",
+              "scope": "local/test only",
+              "implementation_commit": "f1c6dcd06deb7f31a6d1d671bc6a771ba19e0192",
+              "approval": {
+                "by": "macdipu",
+                "date": "2026-09-24",
+                "quote": "yes",
+                "context": "Device check passed and local/test release approved"
+              },
+              "deployment_performed": false,
+              "qa": "Reused unchanged application evidence: backend 197/0, Flutter 50/0, contracts and isolated live smoke passed",
+              "residual_risks": "Production prerequisites and linguistic review are outside this local/test readiness decision.",
+              "rollback": "Coordinated pre-change database/object backups and matching prior artifacts; prefer forward fix. No persistent-environment restore drill claimed."
+            }
+          }
+        },
+        "active_task": null
+      },
+      "created_at": "2026-09-24T09:18:06.453705+00:00"
+    },
+    {
+      "run_id": "RUN-5AC974860CB74DA790FDBA00532A15A2",
+      "stage": "COMPLETED",
+      "status": "COMPLETED",
+      "payload": {},
+      "created_at": "2026-09-24T09:18:06.575640+00:00"
+    }
+  ],
+  "approvals": [
+    {
+      "run_id": "RUN-5AC974860CB74DA790FDBA00532A15A2",
+      "gate": "technical",
+      "approver": "macdipu <c.dipu0@gmail.com>",
+      "decision": "APPROVED",
+      "comment": "TECH-SPEC rev 1 approved",
+      "created_at": "2026-09-24T05:42:49.982900+00:00",
+      "scope_revision": 0
+    },
+    {
+      "run_id": "RUN-5AC974860CB74DA790FDBA00532A15A2",
+      "gate": "release",
+      "approver": "macdipu",
+      "decision": "APPROVED",
+      "comment": "2026-09-24 chat: user replied \"yes\" to \"Did the device check pass, and do you approve the local/test release?\" Confirms device QA and approves local/test release only.",
+      "created_at": "2026-09-24T09:16:30.197808+00:00",
+      "scope_revision": 0
+    }
+  ],
+  "timing_events": [
+    {
+      "run_id": "RUN-5AC974860CB74DA790FDBA00532A15A2",
+      "task": "55b488df87d041a3a54547fc0c5c80cd",
+      "event": "STARTED",
+      "ts": "2026-09-24T05:31:04.173344+00:00",
+      "metadata": {
+        "skill": "prompt-intake-adapter",
+        "retry_count": 0
+      }
+    },
+    {
+      "run_id": "RUN-5AC974860CB74DA790FDBA00532A15A2",
+      "task": "55b488df87d041a3a54547fc0c5c80cd",
+      "event": "COMPLETED",
+      "ts": "2026-09-24T05:31:22.197396+00:00",
+      "metadata": {
+        "duration_ms": 18024,
+        "result_status": "READY"
+      }
+    },
+    {
+      "run_id": "RUN-5AC974860CB74DA790FDBA00532A15A2",
+      "task": "d95bbdcda5e045c9aca6ca43e1342f00",
+      "event": "STARTED",
+      "ts": "2026-09-24T05:31:22.338922+00:00",
+      "metadata": {
+        "skill": "baseline-verifier",
+        "retry_count": 0
+      }
+    },
+    {
+      "run_id": "RUN-5AC974860CB74DA790FDBA00532A15A2",
+      "task": "d95bbdcda5e045c9aca6ca43e1342f00",
+      "event": "COMPLETED",
+      "ts": "2026-09-24T05:31:22.395855+00:00",
+      "metadata": {
+        "duration_ms": 56,
+        "result_status": "READY"
+      }
+    },
+    {
+      "run_id": "RUN-5AC974860CB74DA790FDBA00532A15A2",
+      "task": "82ee7b34f22f41a1afd57c6c6d5f5048",
+      "event": "STARTED",
+      "ts": "2026-09-24T05:31:22.493850+00:00",
+      "metadata": {
+        "skill": "business-requirement-analyzer",
+        "retry_count": 0
+      }
+    },
+    {
+      "run_id": "RUN-5AC974860CB74DA790FDBA00532A15A2",
+      "task": "82ee7b34f22f41a1afd57c6c6d5f5048",
+      "event": "COMPLETED",
+      "ts": "2026-09-24T05:31:22.548856+00:00",
+      "metadata": {
+        "duration_ms": 55,
+        "result_status": "READY"
+      }
+    },
+    {
+      "run_id": "RUN-5AC974860CB74DA790FDBA00532A15A2",
+      "task": "ec803cde8fcc473ba5445518bc19b228",
+      "event": "STARTED",
+      "ts": "2026-09-24T05:31:22.647439+00:00",
+      "metadata": {
+        "skill": "technical-architecture-planner",
+        "retry_count": 0
+      }
+    },
+    {
+      "run_id": "RUN-5AC974860CB74DA790FDBA00532A15A2",
+      "task": "ec803cde8fcc473ba5445518bc19b228",
+      "event": "COMPLETED",
+      "ts": "2026-09-24T05:31:22.704787+00:00",
+      "metadata": {
+        "duration_ms": 57,
+        "result_status": "READY"
+      }
+    },
+    {
+      "run_id": "RUN-5AC974860CB74DA790FDBA00532A15A2",
+      "task": "b6a59dcb18f345e99a87a6131161b6be",
+      "event": "STARTED",
+      "ts": "2026-09-24T05:43:13.168495+00:00",
+      "metadata": {
+        "skill": "implementation-agent",
+        "retry_count": 0
+      }
+    },
+    {
+      "run_id": "RUN-5AC974860CB74DA790FDBA00532A15A2",
+      "task": "b6a59dcb18f345e99a87a6131161b6be",
+      "event": "FAILED",
+      "ts": "2026-09-24T07:28:08.662152+00:00",
+      "metadata": {
+        "error": "Implementation of F2-T1..T5 ran as one task (~5h) and exceeded max_task_seconds=900; work is complete and verified (backend 197/0, live smoke, Flutter 50/0) but the result could not be submitted within budget",
+        "duration_ms": 6295493
+      }
+    },
+    {
+      "run_id": "RUN-5AC974860CB74DA790FDBA00532A15A2",
+      "task": "28e2a1ccdaa54ceca11ab45042e3a70f",
+      "event": "STARTED",
+      "ts": "2026-09-24T08:03:33.081886+00:00",
+      "metadata": {
+        "skill": "implementation-agent",
+        "retry_count": 1
+      }
+    },
+    {
+      "run_id": "RUN-5AC974860CB74DA790FDBA00532A15A2",
+      "task": "28e2a1ccdaa54ceca11ab45042e3a70f",
+      "event": "COMPLETED",
+      "ts": "2026-09-24T08:03:40.756754+00:00",
+      "metadata": {
+        "duration_ms": 7674,
+        "result_status": "READY"
+      }
+    },
+    {
+      "run_id": "RUN-5AC974860CB74DA790FDBA00532A15A2",
+      "task": "8def88907d3a490b9e7d1d959f7b4bdc",
+      "event": "STARTED",
+      "ts": "2026-09-24T08:09:43.634317+00:00",
+      "metadata": {
+        "skill": "code-review-agent",
+        "retry_count": 0
+      }
+    },
+    {
+      "run_id": "RUN-5AC974860CB74DA790FDBA00532A15A2",
+      "task": "8def88907d3a490b9e7d1d959f7b4bdc",
+      "event": "COMPLETED",
+      "ts": "2026-09-24T08:09:43.692709+00:00",
+      "metadata": {
+        "duration_ms": 58,
+        "result_status": "READY"
+      }
+    },
+    {
+      "run_id": "RUN-5AC974860CB74DA790FDBA00532A15A2",
+      "task": "843248999b304cc5b749daad062726a1",
+      "event": "STARTED",
+      "ts": "2026-09-24T08:09:43.841972+00:00",
+      "metadata": {
+        "skill": "automated-qa-agent",
+        "retry_count": 0
+      }
+    },
+    {
+      "run_id": "RUN-5AC974860CB74DA790FDBA00532A15A2",
+      "task": "843248999b304cc5b749daad062726a1",
+      "event": "COMPLETED",
+      "ts": "2026-09-24T08:09:43.902567+00:00",
+      "metadata": {
+        "duration_ms": 60,
+        "result_status": "READY"
+      }
+    },
+    {
+      "run_id": "RUN-5AC974860CB74DA790FDBA00532A15A2",
+      "task": "1be2d419f7ac4ff5b889ca999fe5bfb5",
+      "event": "STARTED",
+      "ts": "2026-09-24T08:09:50.153574+00:00",
+      "metadata": {
+        "skill": "automated-qa-agent",
+        "retry_count": 1
+      }
+    },
+    {
+      "run_id": "RUN-5AC974860CB74DA790FDBA00532A15A2",
+      "task": "1be2d419f7ac4ff5b889ca999fe5bfb5",
+      "event": "COMPLETED",
+      "ts": "2026-09-24T08:09:58.812154+00:00",
+      "metadata": {
+        "duration_ms": 8658,
+        "result_status": "READY"
+      }
+    },
+    {
+      "run_id": "RUN-5AC974860CB74DA790FDBA00532A15A2",
+      "task": "eb531a5ec70e4da194783516a9f3f453",
+      "event": "STARTED",
+      "ts": "2026-09-24T09:16:30.429186+00:00",
+      "metadata": {
+        "skill": "release-readiness-agent",
+        "retry_count": 0
+      }
+    },
+    {
+      "run_id": "RUN-5AC974860CB74DA790FDBA00532A15A2",
+      "task": "eb531a5ec70e4da194783516a9f3f453",
+      "event": "COMPLETED",
+      "ts": "2026-09-24T09:18:06.452875+00:00",
+      "metadata": {
+        "duration_ms": 96023,
+        "result_status": "READY"
+      }
+    }
+  ],
+  "audit_events": [
+    {
+      "run_id": "RUN-5AC974860CB74DA790FDBA00532A15A2",
+      "event": "RUN_STARTED",
+      "payload": {},
+      "created_at": "2026-09-24T05:29:40.874257+00:00"
+    },
+    {
+      "run_id": "RUN-5AC974860CB74DA790FDBA00532A15A2",
+      "event": "TASK_STARTED",
+      "payload": {
+        "skill": "prompt-intake-adapter"
+      },
+      "created_at": "2026-09-24T05:31:04.173643+00:00"
+    },
+    {
+      "run_id": "RUN-5AC974860CB74DA790FDBA00532A15A2",
+      "event": "RESULT_RECORDED",
+      "payload": {
+        "skill": "prompt-intake-adapter",
+        "result": {
+          "status": "READY",
+          "evidence": [
+            "agentic/data/project-context/features/BOS-010/DECISIONS.md",
+            "agentic/data/project-context/features/BOS-010/REQUIREMENTS.md"
+          ],
+          "blocking_issues": [],
+          "open_questions": [],
+          "recommended_next_step": "Context.",
+          "outputs": {
+            "work_item": "BOS-010 F2 building application & lifecycle",
+            "work_type": "new_feature",
+            "project_type": "brownfield (building-service skeleton)",
+            "hierarchy": "FEATURE",
+            "planning": "NO_REPLAN",
+            "decisions": [
+              "D-12",
+              "D-13",
+              "D-14",
+              "D-26",
+              "D-28",
+              "D-29",
+              "D-30",
+              "D-31",
+              "D-32"
+            ]
+          }
+        }
+      },
+      "created_at": "2026-09-24T05:31:22.197563+00:00"
+    },
+    {
+      "run_id": "RUN-5AC974860CB74DA790FDBA00532A15A2",
+      "event": "STAGE_CHANGED",
+      "payload": {},
+      "created_at": "2026-09-24T05:31:22.241477+00:00"
+    },
+    {
+      "run_id": "RUN-5AC974860CB74DA790FDBA00532A15A2",
+      "event": "CONTEXT_REFRESHED",
+      "payload": {
+        "paths": [
+          "docs/ARCHITECTURE.md",
+          "agentic/data/project-context/features/BOS-010/DECISIONS.md",
+          "agentic/data/project-context/features/BOS-010/building-application/REQUIREMENTS.md",
+          "agentic/data/project-context/features/BOS-010/building-application/TECH-SPEC.md",
+          "backend/building-service/src/main/resources/application.yaml",
+          "backend/api-gateway/src/main/java/com/buildingos/gateway/routing/config/GatewayRouteConfig.java",
+          "infra/docker/compose.yaml"
+        ]
+      },
+      "created_at": "2026-09-24T05:31:22.290692+00:00"
+    },
+    {
+      "run_id": "RUN-5AC974860CB74DA790FDBA00532A15A2",
+      "event": "TASK_STARTED",
+      "payload": {
+        "skill": "baseline-verifier"
+      },
+      "created_at": "2026-09-24T05:31:22.339753+00:00"
+    },
+    {
+      "run_id": "RUN-5AC974860CB74DA790FDBA00532A15A2",
+      "event": "RESULT_RECORDED",
+      "payload": {
+        "skill": "baseline-verifier",
+        "result": {
+          "status": "READY",
+          "evidence": [
+            "docs/ARCHITECTURE.md",
+            "backend/building-service/src/main/resources/application.yaml",
+            "backend/api-gateway/src/main/java/com/buildingos/gateway/routing/config/GatewayRouteConfig.java",
+            "backend/subscription-service/src/main/java/com/buildingos/subscription/shared/presentation/rest/CurrentActor.java",
+            "backend/auth-service/src/main/java/com/buildingos/auth/auth/domain/repository/UserRepository.java",
+            "infra/docker/compose.yaml"
+          ],
+          "blocking_issues": [],
+          "open_questions": [],
+          "recommended_next_step": "Requirements.",
+          "outputs": {
+            "verdict": "CONTEXT_READY",
+            "revision": "8e66061",
+            "finding": "building-service is a metadata-only skeleton; no object storage in infra; auth-service has findOrCreateByPhone but no provisioning API; JWT carries sub, phone, platform_roles"
+          }
+        }
+      },
+      "created_at": "2026-09-24T05:31:22.396039+00:00"
+    },
+    {
+      "run_id": "RUN-5AC974860CB74DA790FDBA00532A15A2",
+      "event": "STAGE_CHANGED",
+      "payload": {},
+      "created_at": "2026-09-24T05:31:22.442814+00:00"
+    },
+    {
+      "run_id": "RUN-5AC974860CB74DA790FDBA00532A15A2",
+      "event": "TASK_STARTED",
+      "payload": {
+        "skill": "business-requirement-analyzer"
+      },
+      "created_at": "2026-09-24T05:31:22.494255+00:00"
+    },
+    {
+      "run_id": "RUN-5AC974860CB74DA790FDBA00532A15A2",
+      "event": "RESULT_RECORDED",
+      "payload": {
+        "skill": "business-requirement-analyzer",
+        "result": {
+          "status": "READY",
+          "evidence": [
+            "agentic/data/project-context/features/BOS-010/building-application/REQUIREMENTS.md",
+            "agentic/data/project-context/features/BOS-010/DECISIONS.md"
+          ],
+          "blocking_issues": [],
+          "open_questions": [],
+          "recommended_next_step": "Technical design.",
+          "outputs": {
+            "verdict": "REQUIREMENTS_READY",
+            "revision": 1,
+            "ids": "AP-01..AP-10",
+            "decisions": [
+              "D-12",
+              "D-13",
+              "D-14",
+              "D-26",
+              "D-28",
+              "D-29",
+              "D-30",
+              "D-31",
+              "D-32"
+            ]
+          }
+        }
+      },
+      "created_at": "2026-09-24T05:31:22.549085+00:00"
+    },
+    {
+      "run_id": "RUN-5AC974860CB74DA790FDBA00532A15A2",
+      "event": "STAGE_CHANGED",
+      "payload": {},
+      "created_at": "2026-09-24T05:31:22.593664+00:00"
+    },
+    {
+      "run_id": "RUN-5AC974860CB74DA790FDBA00532A15A2",
+      "event": "TASK_STARTED",
+      "payload": {
+        "skill": "technical-architecture-planner"
+      },
+      "created_at": "2026-09-24T05:31:22.648805+00:00"
+    },
+    {
+      "run_id": "RUN-5AC974860CB74DA790FDBA00532A15A2",
+      "event": "RESULT_RECORDED",
+      "payload": {
+        "skill": "technical-architecture-planner",
+        "result": {
+          "status": "READY",
+          "evidence": [
+            "agentic/data/project-context/features/BOS-010/building-application/TECH-SPEC.md"
+          ],
+          "blocking_issues": [],
+          "open_questions": [],
+          "recommended_next_step": "Operator technical approval.",
+          "outputs": {
+            "verdict": "TECHNICAL_READY",
+            "revision": 1,
+            "approval": "pending operator"
+          }
+        }
+      },
+      "created_at": "2026-09-24T05:31:22.705039+00:00"
+    },
+    {
+      "run_id": "RUN-5AC974860CB74DA790FDBA00532A15A2",
+      "event": "APPROVAL_RECORDED",
+      "payload": {
+        "gate": "technical",
+        "decision": "APPROVED",
+        "by": "macdipu <c.dipu0@gmail.com>"
+      },
+      "created_at": "2026-09-24T05:42:49.983593+00:00"
+    },
+    {
+      "run_id": "RUN-5AC974860CB74DA790FDBA00532A15A2",
+      "event": "STAGE_CHANGED",
+      "payload": {},
+      "created_at": "2026-09-24T05:43:07.761770+00:00"
+    },
+    {
+      "run_id": "RUN-5AC974860CB74DA790FDBA00532A15A2",
+      "event": "TASK_STARTED",
+      "payload": {
+        "skill": "implementation-agent"
+      },
+      "created_at": "2026-09-24T05:43:13.169958+00:00"
+    },
+    {
+      "run_id": "RUN-5AC974860CB74DA790FDBA00532A15A2",
+      "event": "TASK_FAILED",
+      "payload": {
+        "error": "Implementation of F2-T1..T5 ran as one task (~5h) and exceeded max_task_seconds=900; work is complete and verified (backend 197/0, live smoke, Flutter 50/0) but the result could not be submitted within budget"
+      },
+      "created_at": "2026-09-24T07:28:08.662556+00:00"
+    },
+    {
+      "run_id": "RUN-5AC974860CB74DA790FDBA00532A15A2",
+      "event": "BUDGET_ADJUSTED",
+      "payload": {
+        "operator": "macdipu <c.dipu0@gmail.com>",
+        "reason": "F2 implementation ran as one long task; work verified",
+        "previous": {
+          "max_task_seconds": 900
+        },
+        "limits": {
+          "max_task_seconds": 3600
+        }
+      },
+      "created_at": "2026-09-24T08:02:49.000166+00:00"
+    },
+    {
+      "run_id": "RUN-5AC974860CB74DA790FDBA00532A15A2",
+      "event": "CONTEXT_REFRESHED",
+      "payload": {
+        "paths": [
+          "docs/ARCHITECTURE.md",
+          "agentic/data/project-context/features/BOS-010/DECISIONS.md",
+          "agentic/data/project-context/features/BOS-010/building-application/REQUIREMENTS.md",
+          "agentic/data/project-context/features/BOS-010/building-application/TECH-SPEC.md",
+          "backend/building-service/src/main/resources/application.yaml",
+          "backend/api-gateway/src/main/java/com/buildingos/gateway/routing/config/GatewayRouteConfig.java",
+          "infra/docker/compose.yaml"
+        ]
+      },
+      "created_at": "2026-09-24T08:03:33.032540+00:00"
+    },
+    {
+      "run_id": "RUN-5AC974860CB74DA790FDBA00532A15A2",
+      "event": "TASK_STARTED",
+      "payload": {
+        "skill": "implementation-agent"
+      },
+      "created_at": "2026-09-24T08:03:33.083488+00:00"
+    },
+    {
+      "run_id": "RUN-5AC974860CB74DA790FDBA00532A15A2",
+      "event": "RESULT_RECORDED",
+      "payload": {
+        "skill": "implementation-agent",
+        "result": {
+          "status": "READY",
+          "evidence": [
+            "backend/building-service/src/main/resources/db/migration/V2__building_application.sql",
+            "backend/building-service/src/main/resources/db/migration/V3__application_document.sql",
+            "backend/building-service/src/main/resources/db/migration/V4__building.sql",
+            "backend/auth-service/src/main/java/com/buildingos/auth/auth/application/provisionuser/ProvisionUserService.java",
+            "backend/api-gateway/src/main/java/com/buildingos/gateway/routing/config/GatewayRouteConfig.java",
+            "contracts/openapi/platform.yaml",
+            "infra/docker/compose.yaml",
+            "scripts/smoke-building-application.sh",
+            "user_app/lib/features/building_application",
+            "agentic/data/project-context/features/BOS-010/building-application/TECH-SPEC.md"
+          ],
+          "blocking_issues": [],
+          "open_questions": [
+            "Bangla strings need native-speaker review",
+            "No virus scanning of uploads before production"
+          ],
+          "recommended_next_step": "Code review.",
+          "outputs": {
+            "verdict": "READY",
+            "checks": [
+              "backend mvn verify 197/0",
+              "check-contracts PASSED + Redocly valid",
+              "live smoke on isolated full stack PASSED",
+              "flutter analyze no issues",
+              "flutter test 50/0"
+            ]
+          }
+        }
+      },
+      "created_at": "2026-09-24T08:03:40.757204+00:00"
+    },
+    {
+      "run_id": "RUN-5AC974860CB74DA790FDBA00532A15A2",
+      "event": "STAGE_CHANGED",
+      "payload": {},
+      "created_at": "2026-09-24T08:03:40.810960+00:00"
+    },
+    {
+      "run_id": "RUN-5AC974860CB74DA790FDBA00532A15A2",
+      "event": "TASK_STARTED",
+      "payload": {
+        "skill": "code-review-agent"
+      },
+      "created_at": "2026-09-24T08:09:43.634845+00:00"
+    },
+    {
+      "run_id": "RUN-5AC974860CB74DA790FDBA00532A15A2",
+      "event": "RESULT_RECORDED",
+      "payload": {
+        "skill": "code-review-agent",
+        "result": {
+          "status": "READY",
+          "evidence": [
+            "agentic/data/project-context/features/BOS-010/building-application/REVIEW.md"
+          ],
+          "blocking_issues": [],
+          "open_questions": [
+            "Operator device check of Flutter flow",
+            "Bangla native review",
+            "Upload virus scanning before production"
+          ],
+          "recommended_next_step": "Automated QA.",
+          "outputs": {
+            "verdict": "READY",
+            "findings_fixed": 1,
+            "checks": [
+              "backend mvn verify 197/0",
+              "check-contracts PASSED + Redocly valid",
+              "live smoke on isolated full stack PASSED",
+              "flutter analyze clean, flutter test 50/0"
+            ]
+          }
+        }
+      },
+      "created_at": "2026-09-24T08:09:43.693152+00:00"
+    },
+    {
+      "run_id": "RUN-5AC974860CB74DA790FDBA00532A15A2",
+      "event": "STAGE_CHANGED",
+      "payload": {},
+      "created_at": "2026-09-24T08:09:43.742487+00:00"
+    },
+    {
+      "run_id": "RUN-5AC974860CB74DA790FDBA00532A15A2",
+      "event": "TASK_STARTED",
+      "payload": {
+        "skill": "automated-qa-agent"
+      },
+      "created_at": "2026-09-24T08:09:43.844399+00:00"
+    },
+    {
+      "run_id": "RUN-5AC974860CB74DA790FDBA00532A15A2",
+      "event": "RESULT_RECORDED",
+      "payload": {
+        "skill": "automated-qa-agent",
+        "result": {
+          "status": "READY",
+          "evidence": [
+            "agentic/data/project-context/features/BOS-010/building-application/REVIEW.md"
+          ],
+          "blocking_issues": [],
+          "open_questions": [
+            "Operator device check of Flutter flow",
+            "Bangla native review",
+            "Upload virus scanning before production"
+          ],
+          "recommended_next_step": "Operator release decision (local/test).",
+          "outputs": {
+            "verdict": "READY",
+            "checks": [
+              "backend mvn verify 197/0",
+              "check-contracts PASSED + Redocly valid",
+              "live smoke on isolated full stack PASSED",
+              "flutter analyze clean, flutter test 50/0"
+            ]
+          }
+        }
+      },
+      "created_at": "2026-09-24T08:09:43.903056+00:00"
+    },
+    {
+      "run_id": "RUN-5AC974860CB74DA790FDBA00532A15A2",
+      "event": "TASK_STARTED",
+      "payload": {
+        "skill": "automated-qa-agent"
+      },
+      "created_at": "2026-09-24T08:09:50.156108+00:00"
+    },
+    {
+      "run_id": "RUN-5AC974860CB74DA790FDBA00532A15A2",
+      "event": "RESULT_RECORDED",
+      "payload": {
+        "skill": "automated-qa-agent",
+        "result": {
+          "status": "READY",
+          "evidence": [
+            "agentic/data/project-context/features/BOS-010/building-application/REVIEW.md"
+          ],
+          "blocking_issues": [],
+          "open_questions": [
+            "Operator device check of Flutter flow",
+            "Bangla native review",
+            "Upload virus scanning before production"
+          ],
+          "recommended_next_step": "Operator release decision (local/test).",
+          "outputs": {
+            "verdict": "READY",
+            "checks": [
+              "backend mvn verify 197/0",
+              "check-contracts PASSED + Redocly valid",
+              "live smoke on isolated full stack PASSED",
+              "flutter analyze clean, flutter test 50/0"
+            ]
+          }
+        }
+      },
+      "created_at": "2026-09-24T08:09:58.812712+00:00"
+    },
+    {
+      "run_id": "RUN-5AC974860CB74DA790FDBA00532A15A2",
+      "event": "APPROVAL_RECORDED",
+      "payload": {
+        "gate": "release",
+        "decision": "APPROVED",
+        "by": "macdipu"
+      },
+      "created_at": "2026-09-24T09:16:30.199066+00:00"
+    },
+    {
+      "run_id": "RUN-5AC974860CB74DA790FDBA00532A15A2",
+      "event": "STAGE_CHANGED",
+      "payload": {},
+      "created_at": "2026-09-24T09:16:30.312596+00:00"
+    },
+    {
+      "run_id": "RUN-5AC974860CB74DA790FDBA00532A15A2",
+      "event": "TASK_STARTED",
+      "payload": {
+        "skill": "release-readiness-agent"
+      },
+      "created_at": "2026-09-24T09:16:30.429802+00:00"
+    },
+    {
+      "run_id": "RUN-5AC974860CB74DA790FDBA00532A15A2",
+      "event": "TOOL_STARTED",
+      "payload": {
+        "name": "write_artifact",
+        "call_key": "0:f2-release-route"
+      },
+      "created_at": "2026-09-24T09:16:48.472740+00:00"
+    },
+    {
+      "run_id": "RUN-5AC974860CB74DA790FDBA00532A15A2",
+      "event": "TOOL_FAILED",
+      "payload": {
+        "name": "write_artifact",
+        "error": "Artifact writes require a document under a project artifact directory"
+      },
+      "created_at": "2026-09-24T09:16:48.477694+00:00"
+    },
+    {
+      "run_id": "RUN-5AC974860CB74DA790FDBA00532A15A2",
+      "event": "TOOL_ERROR",
+      "payload": {
+        "name": "write_artifact",
+        "error": "Artifact writes require a document under a project artifact directory"
+      },
+      "created_at": "2026-09-24T09:16:48.481736+00:00"
+    },
+    {
+      "run_id": "RUN-5AC974860CB74DA790FDBA00532A15A2",
+      "event": "TOOL_STARTED",
+      "payload": {
+        "name": "read_file",
+        "call_key": "32312e7163da478b9fd17267813508a8"
+      },
+      "created_at": "2026-09-24T09:16:48.708262+00:00"
+    },
+    {
+      "run_id": "RUN-5AC974860CB74DA790FDBA00532A15A2",
+      "event": "TOOL_COMPLETED",
+      "payload": {
+        "name": "read_file"
+      },
+      "created_at": "2026-09-24T09:16:48.714013+00:00"
+    },
+    {
+      "run_id": "RUN-5AC974860CB74DA790FDBA00532A15A2",
+      "event": "TOOL_STARTED",
+      "payload": {
+        "name": "write_artifact",
+        "call_key": "0:f2-release-route-artifact"
+      },
+      "created_at": "2026-09-24T09:17:46.672421+00:00"
+    },
+    {
+      "run_id": "RUN-5AC974860CB74DA790FDBA00532A15A2",
+      "event": "TOOL_COMPLETED",
+      "payload": {
+        "name": "write_artifact"
+      },
+      "created_at": "2026-09-24T09:17:46.677581+00:00"
+    },
+    {
+      "run_id": "RUN-5AC974860CB74DA790FDBA00532A15A2",
+      "event": "TOOL_STARTED",
+      "payload": {
+        "name": "write_artifact",
+        "call_key": "0:f2-release-record"
+      },
+      "created_at": "2026-09-24T09:17:46.918253+00:00"
+    },
+    {
+      "run_id": "RUN-5AC974860CB74DA790FDBA00532A15A2",
+      "event": "TOOL_COMPLETED",
+      "payload": {
+        "name": "write_artifact"
+      },
+      "created_at": "2026-09-24T09:17:46.923396+00:00"
+    },
+    {
+      "run_id": "RUN-5AC974860CB74DA790FDBA00532A15A2",
+      "event": "TOOL_STARTED",
+      "payload": {
+        "name": "read_file",
+        "call_key": "ecacff93d46f465e8d3c961abd2125a1"
+      },
+      "created_at": "2026-09-24T09:17:47.049631+00:00"
+    },
+    {
+      "run_id": "RUN-5AC974860CB74DA790FDBA00532A15A2",
+      "event": "TOOL_COMPLETED",
+      "payload": {
+        "name": "read_file"
+      },
+      "created_at": "2026-09-24T09:17:47.055323+00:00"
+    },
+    {
+      "run_id": "RUN-5AC974860CB74DA790FDBA00532A15A2",
+      "event": "TOOL_STARTED",
+      "payload": {
+        "name": "write_artifact",
+        "call_key": "0:f2-task-status"
+      },
+      "created_at": "2026-09-24T09:17:47.182679+00:00"
+    },
+    {
+      "run_id": "RUN-5AC974860CB74DA790FDBA00532A15A2",
+      "event": "TOOL_COMPLETED",
+      "payload": {
+        "name": "write_artifact"
+      },
+      "created_at": "2026-09-24T09:17:47.189190+00:00"
+    },
+    {
+      "run_id": "RUN-5AC974860CB74DA790FDBA00532A15A2",
+      "event": "TOOL_STARTED",
+      "payload": {
+        "name": "write_artifact",
+        "call_key": "0:f2-release-result"
+      },
+      "created_at": "2026-09-24T09:17:47.318171+00:00"
+    },
+    {
+      "run_id": "RUN-5AC974860CB74DA790FDBA00532A15A2",
+      "event": "TOOL_COMPLETED",
+      "payload": {
+        "name": "write_artifact"
+      },
+      "created_at": "2026-09-24T09:17:47.324633+00:00"
+    },
+    {
+      "run_id": "RUN-5AC974860CB74DA790FDBA00532A15A2",
+      "event": "TOOL_ERROR",
+      "payload": {
+        "name": "run_command",
+        "error": "Tool capability denied: run_command"
+      },
+      "created_at": "2026-09-24T09:17:47.454320+00:00"
+    },
+    {
+      "run_id": "RUN-5AC974860CB74DA790FDBA00532A15A2",
+      "event": "TOOL_STARTED",
+      "payload": {
+        "name": "read_file",
+        "call_key": "50f495e970f1468ba91f2b8ae70fdce6"
+      },
+      "created_at": "2026-09-24T09:18:05.900737+00:00"
+    },
+    {
+      "run_id": "RUN-5AC974860CB74DA790FDBA00532A15A2",
+      "event": "TOOL_COMPLETED",
+      "payload": {
+        "name": "read_file"
+      },
+      "created_at": "2026-09-24T09:18:05.907183+00:00"
+    },
+    {
+      "run_id": "RUN-5AC974860CB74DA790FDBA00532A15A2",
+      "event": "TOOL_STARTED",
+      "payload": {
+        "name": "read_file",
+        "call_key": "599c04a740794db2b6cac19fa634aabf"
+      },
+      "created_at": "2026-09-24T09:18:06.041756+00:00"
+    },
+    {
+      "run_id": "RUN-5AC974860CB74DA790FDBA00532A15A2",
+      "event": "TOOL_COMPLETED",
+      "payload": {
+        "name": "read_file"
+      },
+      "created_at": "2026-09-24T09:18:06.048263+00:00"
+    },
+    {
+      "run_id": "RUN-5AC974860CB74DA790FDBA00532A15A2",
+      "event": "TOOL_STARTED",
+      "payload": {
+        "name": "read_file",
+        "call_key": "05a2b4463048482a868ac1d43ca8d04f"
+      },
+      "created_at": "2026-09-24T09:18:06.178745+00:00"
+    },
+    {
+      "run_id": "RUN-5AC974860CB74DA790FDBA00532A15A2",
+      "event": "TOOL_COMPLETED",
+      "payload": {
+        "name": "read_file"
+      },
+      "created_at": "2026-09-24T09:18:06.185517+00:00"
+    },
+    {
+      "run_id": "RUN-5AC974860CB74DA790FDBA00532A15A2",
+      "event": "TOOL_STARTED",
+      "payload": {
+        "name": "read_file",
+        "call_key": "f7a7fe1d574746b3968f0f56f5a269d2"
+      },
+      "created_at": "2026-09-24T09:18:06.315240+00:00"
+    },
+    {
+      "run_id": "RUN-5AC974860CB74DA790FDBA00532A15A2",
+      "event": "TOOL_COMPLETED",
+      "payload": {
+        "name": "read_file"
+      },
+      "created_at": "2026-09-24T09:18:06.321555+00:00"
+    },
+    {
+      "run_id": "RUN-5AC974860CB74DA790FDBA00532A15A2",
+      "event": "RESULT_RECORDED",
+      "payload": {
+        "skill": "release-readiness-agent",
+        "result": {
+          "status": "READY",
+          "evidence": [
+            "agentic/data/project-context/features/BOS-010/building-application/RELEASE.md",
+            "agentic/data/project-context/features/BOS-010/building-application/REVIEW.md",
+            "agentic/data/project-context/features/BOS-010/building-application/TECH-SPEC.md",
+            "docs/LOCAL_DEVELOPMENT.md"
+          ],
+          "blocking_issues": [],
+          "open_questions": [
+            "Native-speaker Bangla review",
+            "Upload virus scanning and production prerequisites before production"
+          ],
+          "recommended_next_step": "Complete this local/test run; next planned slice is units and ownership, subject to its own scoped intake.",
+          "outputs": {
+            "verdict": "RELEASE_READY",
+            "scope": "local/test only",
+            "implementation_commit": "f1c6dcd06deb7f31a6d1d671bc6a771ba19e0192",
+            "approval": {
+              "by": "macdipu",
+              "date": "2026-09-24",
+              "quote": "yes",
+              "context": "Device check passed and local/test release approved"
+            },
+            "deployment_performed": false,
+            "qa": "Reused unchanged application evidence: backend 197/0, Flutter 50/0, contracts and isolated live smoke passed",
+            "residual_risks": "Production prerequisites and linguistic review are outside this local/test readiness decision.",
+            "rollback": "Coordinated pre-change database/object backups and matching prior artifacts; prefer forward fix. No persistent-environment restore drill claimed."
+          }
+        }
+      },
+      "created_at": "2026-09-24T09:18:06.453705+00:00"
+    },
+    {
+      "run_id": "RUN-5AC974860CB74DA790FDBA00532A15A2",
+      "event": "STAGE_CHANGED",
+      "payload": {},
+      "created_at": "2026-09-24T09:18:06.575640+00:00"
+    },
+    {
+      "run_id": "RUN-5AC974860CB74DA790FDBA00532A15A2",
+      "event": "COMMIT_RECORDED",
+      "payload": {
+        "sha": "976da91",
+        "subject": "docs(building-application): record approved local test release",
+        "work_item": "BOS-010-F2",
+        "task": "eb531a5ec70e4da194783516a9f3f453",
+        "run": "RUN-5AC974860CB74DA790FDBA00532A15A2",
+        "commit_trigger": "task-finish"
+      },
+      "created_at": "2026-09-24T09:20:59.515163+00:00"
+    }
+  ],
+  "tool_calls": {
+    "0:f2-release-route": {
+      "request_hash": "22c97ccac1093cb48b7525470f192c25cc08933d39f23fc8e09d90f44a21b287",
+      "status": "FAILED",
+      "result": null
+    },
+    "32312e7163da478b9fd17267813508a8": {
+      "request_hash": "04de7400f1c816eaecf6a43eeed296bf3e3cc86967ee60fe0c5eea02f56a1238",
+      "status": "COMPLETED",
+      "result": {
+        "path": "agentic/data/project-context/features/BOS-010/TASKS.md",
+        "content": "# BOS-010 implementation sequence (identity & platform roles feature only)\n\nBOS-010 remains a provisional EPIC (see FEATURE.md). This sequence covers the\nidentity, platform roles, and phone OTP slice. Execute existing tasks without\nrecreating planning artifacts; TASK-003 uses TASK_ONLY / NO_REPLAN.\n\n| Task | Outcome | Status |\n|---|---|---|\n| [TASK-001](tasks/TASK-001.md) | Backend global identity, roles, seed SUPER_ADMIN, development login | COMPLETED; local/test release in [RELEASE.md](RELEASE.md) |\n| [TASK-002](tasks/TASK-002.md) | Flutter phone OTP integration | COMPLETED; automated and live QA in [REVIEW-QA.md](REVIEW-QA.md) |\n| [TASK-004](tasks/TASK-004.md) | Architecture conformance and account-service rename | COMPLETED; [review/QA](REVIEW-TASK-004.md) |\n| [TASK-005](tasks/TASK-005.md) | Locale toggle and login/OTP polish | COMPLETED; [review/QA](REVIEW-TASK-005.md) |\n| [TASK-003](tasks/TASK-003.md) | Account-service signing keys and provider-neutral OTP/SMS boundary; vendor deferred | COMPLETED; [review/QA](REVIEW-TASK-003.md), [release](RELEASE-TASK-003.md) local/test, production fail-closed |\n| [TASK-006](tasks/TASK-006.md) | App-owned message for OTP start rate limit (429) | COMPLETED; [review/QA](REVIEW-TASK-006.md) |\n| [TASK-007](tasks/TASK-007.md) | Canonical BD mobile phone format `01XXXXXXXXX` in account-service | COMPLETED; [review/QA](REVIEW-TASK-007.md) |\n| [TASK-008](tasks/TASK-008.md) | Rename `account-service` to `auth-service` (dir, artifact, package, DB, env, gateway route) | COMPLETED 2026-09-24; `mvn verify` 147/0 |\n\nContinuation run: `RUN-0CF5A7A84513476697D476E1334896C1`.\nThe old TASK-003 run was cancelled before code changes. TASK-004 is now complete.\n[Post-cleanup readiness](TASK-003-READINESS.md) records the concrete design and\nvalidation plan. Implementation evidence:\n[task-003-implementation-result.json](task-003-implementation-result.json).\n\nDo not commit without an explicit operator request.\n\n## Feature slices (after the identity slice)\n\n| Slice | Outcome | Status |\n|---|---|---|\n| [F5a revenue foundation](subscription-plans/REQUIREMENTS.md) | `subscription-service`: plans, per-user subscriptions, free tier, one-time building-creation fee ([design](subscription-plans/TECH-SPEC.md)) | COMPLETED 2026-09-23 (local/test); [review/QA](subscription-plans/REVIEW.md); run `RUN-4ABC6B2BAC974B0E878CA39C9A27AE00` |\n| [F2 building application & lifecycle](building-application/REQUIREMENTS.md) | Apply \u2192 review \u2192 approve (creation fee, D-26; admin provisioned in auth-service, D-29) \u2192 onboarding \u2192 activate/suspend (D-30); documents in MinIO/S3 (D-28); Flutter submit flow ([design](building-application/TECH-SPEC.md)) | Technical approved 2026-09-24; T1\u2013T5 done; [review/QA](building-application/REVIEW.md) READY (backend 197/0, live smoke, Flutter 50/0); awaiting operator device check + release approval; run `RUN-5AC974860CB74DA790FDBA00532A15A2` |\n| Units & ownership | Carried BOS-002 domain | Not started |\n| Back-office console | UI for the above | Not started; needs D-09/D-10 |\n\nRevenue model is per-user (D-22..D-27), superseding the BRD's building-level subscription.\n"
+      }
+    },
+    "0:f2-release-route-artifact": {
+      "request_hash": "8f899c58d339c9121d15371c11488aa63d144475f01d33baf8e9628619e515ef",
+      "status": "COMPLETED",
+      "result": {
+        "path": "agentic/data/project-context/features/BOS-010/building-application/release-route.json",
+        "bytes_written": 329
+      }
+    },
+    "0:f2-release-record": {
+      "request_hash": "aabf636bc974836ba2a0620b7fa824fb973f873ce163f72091d45ad6eee979ad",
+      "status": "COMPLETED",
+      "result": {
+        "path": "agentic/data/project-context/features/BOS-010/building-application/RELEASE.md",
+        "bytes_written": 4165
+      }
+    },
+    "ecacff93d46f465e8d3c961abd2125a1": {
+      "request_hash": "04de7400f1c816eaecf6a43eeed296bf3e3cc86967ee60fe0c5eea02f56a1238",
+      "status": "COMPLETED",
+      "result": {
+        "path": "agentic/data/project-context/features/BOS-010/TASKS.md",
+        "content": "# BOS-010 implementation sequence (identity & platform roles feature only)\n\nBOS-010 remains a provisional EPIC (see FEATURE.md). This sequence covers the\nidentity, platform roles, and phone OTP slice. Execute existing tasks without\nrecreating planning artifacts; TASK-003 uses TASK_ONLY / NO_REPLAN.\n\n| Task | Outcome | Status |\n|---|---|---|\n| [TASK-001](tasks/TASK-001.md) | Backend global identity, roles, seed SUPER_ADMIN, development login | COMPLETED; local/test release in [RELEASE.md](RELEASE.md) |\n| [TASK-002](tasks/TASK-002.md) | Flutter phone OTP integration | COMPLETED; automated and live QA in [REVIEW-QA.md](REVIEW-QA.md) |\n| [TASK-004](tasks/TASK-004.md) | Architecture conformance and account-service rename | COMPLETED; [review/QA](REVIEW-TASK-004.md) |\n| [TASK-005](tasks/TASK-005.md) | Locale toggle and login/OTP polish | COMPLETED; [review/QA](REVIEW-TASK-005.md) |\n| [TASK-003](tasks/TASK-003.md) | Account-service signing keys and provider-neutral OTP/SMS boundary; vendor deferred | COMPLETED; [review/QA](REVIEW-TASK-003.md), [release](RELEASE-TASK-003.md) local/test, production fail-closed |\n| [TASK-006](tasks/TASK-006.md) | App-owned message for OTP start rate limit (429) | COMPLETED; [review/QA](REVIEW-TASK-006.md) |\n| [TASK-007](tasks/TASK-007.md) | Canonical BD mobile phone format `01XXXXXXXXX` in account-service | COMPLETED; [review/QA](REVIEW-TASK-007.md) |\n| [TASK-008](tasks/TASK-008.md) | Rename `account-service` to `auth-service` (dir, artifact, package, DB, env, gateway route) | COMPLETED 2026-09-24; `mvn verify` 147/0 |\n\nContinuation run: `RUN-0CF5A7A84513476697D476E1334896C1`.\nThe old TASK-003 run was cancelled before code changes. TASK-004 is now complete.\n[Post-cleanup readiness](TASK-003-READINESS.md) records the concrete design and\nvalidation plan. Implementation evidence:\n[task-003-implementation-result.json](task-003-implementation-result.json).\n\nDo not commit without an explicit operator request.\n\n## Feature slices (after the identity slice)\n\n| Slice | Outcome | Status |\n|---|---|---|\n| [F5a revenue foundation](subscription-plans/REQUIREMENTS.md) | `subscription-service`: plans, per-user subscriptions, free tier, one-time building-creation fee ([design](subscription-plans/TECH-SPEC.md)) | COMPLETED 2026-09-23 (local/test); [review/QA](subscription-plans/REVIEW.md); run `RUN-4ABC6B2BAC974B0E878CA39C9A27AE00` |\n| [F2 building application & lifecycle](building-application/REQUIREMENTS.md) | Apply \u2192 review \u2192 approve (creation fee, D-26; admin provisioned in auth-service, D-29) \u2192 onboarding \u2192 activate/suspend (D-30); documents in MinIO/S3 (D-28); Flutter submit flow ([design](building-application/TECH-SPEC.md)) | Technical approved 2026-09-24; T1\u2013T5 done; [review/QA](building-application/REVIEW.md) READY (backend 197/0, live smoke, Flutter 50/0); awaiting operator device check + release approval; run `RUN-5AC974860CB74DA790FDBA00532A15A2` |\n| Units & ownership | Carried BOS-002 domain | Not started |\n| Back-office console | UI for the above | Not started; needs D-09/D-10 |\n\nRevenue model is per-user (D-22..D-27), superseding the BRD's building-level subscription.\n"
+      }
+    },
+    "0:f2-task-status": {
+      "request_hash": "07520ea1d45fe546a35060da280575a173610ab415d936d900682beeebfdbf09",
+      "status": "COMPLETED",
+      "result": {
+        "path": "agentic/data/project-context/features/BOS-010/TASKS.md",
+        "bytes_written": 3276
+      }
+    },
+    "0:f2-release-result": {
+      "request_hash": "51a83466bcc1ac51907fc4b6a29f671aede72e9c2ce6625486625ffd8f325724",
+      "status": "COMPLETED",
+      "result": {
+        "path": "agentic/data/project-context/features/BOS-010/building-application/release-result.json",
+        "bytes_written": 1400
+      }
+    },
+    "50f495e970f1468ba91f2b8ae70fdce6": {
+      "request_hash": "bc65b4f30e69077b97f6d75c0b5d08a39bb30009a0812da760572f59f0efe7be",
+      "status": "COMPLETED",
+      "result": {
+        "path": "agentic/data/project-context/features/BOS-010/building-application/RELEASE.md",
+        "content": "# BOS-010 F2 \u2014 Local/test release\n\nStatus: READY for local/test, approved 2026-09-24.\nRun: `RUN-5AC974860CB74DA790FDBA00532A15A2`. Release task: `eb531a5ec70e4da194783516a9f3f453`.\nImplementation: `f1c6dcd06deb7f31a6d1d671bc6a771ba19e0192`; reviewed checkout:\n`9054995aa23008ef21402316e2552ec849ffbcac` (subsequent kit changes only).\n\n## Approval and verification\n\nThe operator (macdipu) replied **\"yes\"** on 2026-09-24 to:\n\"Did the device check pass, and do you approve the local/test release?\"\nThis records the operator's device-check confirmation and explicit local/test release approval.\nIt is human-reported evidence; no new agent device inspection was performed in this session.\nThe harness recorded the release gate against scope revision 0.\n\n[Review and automated QA](REVIEW.md) cover AP-01 through AP-10:\nbackend 197 tests / 0 failures, Flutter 50 tests / 0 failures and clean analysis,\ncontract checks/Redocly valid, and isolated live full-stack smoke passed.\nThe device-check scope was the application flow, upload pickers, and Bangla rendering.\nNative-speaker linguistic review remains separate.\n\nThe application, contracts, infrastructure, scripts, and development docs are unchanged\nbetween the feature commit and the reviewed checkout. This session changes release records\nonly; it reuses the recorded test evidence. No deployment was performed.\n\n## Configuration and migration checklist\n\n- Follow [local development](../../../../../../docs/LOCAL_DEVELOPMENT.md) for service startup.\n  Start Postgres, Kafka and MinIO; ensure the private document bucket exists before uploads.\n- Configure building-service's auth/subscription URLs, JWT issuer/JWKS/audience, database\n  credentials, and S3 endpoint/bucket/credentials. Keep credentials outside version control.\n- Run Flyway in order: existing V1, V2 applications/review history, V3 documents, V4 buildings\n  and memberships. These are forward migrations; do not edit applied migration files.\n- Run compatible auth-service, subscription-service, building-service, gateway and Flutter\n  artifacts together. The internal user-provisioning endpoint stays behind service access.\n- Configure the creation fee through the established workflow. Unconfigured or unpaid fees\n  fail closed. The smoke script's fee override is only for a throwaway local database.\n\n## Rollback and monitoring plan\n\nThe local operator owns startup, rollback and monitoring. Stop application writes before\nrecovery. Keep a coordinated backup of the local databases and MinIO objects before applying\nthis slice to data that must be preserved. Application approvals can provision users in auth\nand refer to fees in subscription, so database and object recovery must remain consistent.\n\nPrefer a forward fix. To return to a pre-F2 environment, stop the F2 applications and restore\nthe pre-change databases and object-store snapshot, then run matching prior service/client\nartifacts. Do not run a down migration or delete named volumes as an automatic rollback.\nA restore drill on the operator's persistent environment has not been evidenced; this is\na local/test recovery plan, not a production recovery certification.\n\nCheck /actuator/health/readiness on ports 8080\u20138083 and Postgres/MinIO health. Inspect service\nlogs for Flyway/startup errors, document-store failures, and DEPENDENCY_UNAVAILABLE.\nUse scripts/smoke-building-application.sh against the chosen local gateway for lifecycle\nverification; it creates test data. The prior smoke evidence used an isolated stack;\nthe operator's own environment/volumes were not revalidated in this release session.\n\n## Carried risks and next work\n\nNo blockers remain for the approved local/test scope. Before production, upload virus\nscanning and the existing production authentication/configuration prerequisites remain\nrequired. Native-speaker Bangla review is still outstanding. Token-lifetime coupling,\nheuristic duplicate matching, the pre-existing unknown-route 500, and activation checking\nonly the building admin until the units slice remain as recorded in REVIEW.md and TECH-SPEC.md.\n\nThe next planned slice is units and ownership; it needs its own scoped intake and decisions.\n"
+      }
+    },
+    "599c04a740794db2b6cac19fa634aabf": {
+      "request_hash": "f0a98a4bc1a033127492b78546b674ebf0c9fb152dc592cc52db4c3671dd6ab0",
+      "status": "COMPLETED",
+      "result": {
+        "path": "agentic/data/project-context/features/BOS-010/building-application/release-result.json",
+        "content": "{\n  \"status\": \"READY\",\n  \"evidence\": [\n    \"agentic/data/project-context/features/BOS-010/building-application/RELEASE.md\",\n    \"agentic/data/project-context/features/BOS-010/building-application/REVIEW.md\",\n    \"agentic/data/project-context/features/BOS-010/building-application/TECH-SPEC.md\",\n    \"docs/LOCAL_DEVELOPMENT.md\"\n  ],\n  \"blocking_issues\": [],\n  \"open_questions\": [\n    \"Native-speaker Bangla review\",\n    \"Upload virus scanning and production prerequisites before production\"\n  ],\n  \"recommended_next_step\": \"Complete this local/test run; next planned slice is units and ownership, subject to its own scoped intake.\",\n  \"outputs\": {\n    \"verdict\": \"RELEASE_READY\",\n    \"scope\": \"local/test only\",\n    \"implementation_commit\": \"f1c6dcd06deb7f31a6d1d671bc6a771ba19e0192\",\n    \"approval\": {\n      \"by\": \"macdipu\",\n      \"date\": \"2026-09-24\",\n      \"quote\": \"yes\",\n      \"context\": \"Device check passed and local/test release approved\"\n    },\n    \"deployment_performed\": false,\n    \"qa\": \"Reused unchanged application evidence: backend 197/0, Flutter 50/0, contracts and isolated live smoke passed\",\n    \"residual_risks\": \"Production prerequisites and linguistic review are outside this local/test readiness decision.\",\n    \"rollback\": \"Coordinated pre-change database/object backups and matching prior artifacts; prefer forward fix. No persistent-environment restore drill claimed.\"\n  }\n}\n"
+      }
+    },
+    "05a2b4463048482a868ac1d43ca8d04f": {
+      "request_hash": "106ec018b2734d0a636ba8afbc36bd5f484654c972215e2b33f3f200d5b8d416",
+      "status": "COMPLETED",
+      "result": {
+        "path": "agentic/data/project-context/features/BOS-010/building-application/release-route.json",
+        "content": "{\n  \"route\": [\n    \"INTAKE\",\n    \"CONTEXT\",\n    \"REQUIREMENTS\",\n    \"TECHNICAL\",\n    \"IMPLEMENTATION\",\n    \"REVIEW\",\n    \"QA\",\n    \"RELEASE\",\n    \"COMPLETED\"\n  ],\n  \"workflow_doc\": \"agentic/kit/workflows/brownfield.md\",\n  \"skill_docs\": [\n    \"agentic/kit/skills/release-readiness-agent/SKILL.md\"\n  ],\n  \"planning\": \"NO_REPLAN\"\n}\n"
+      }
+    },
+    "f7a7fe1d574746b3968f0f56f5a269d2": {
+      "request_hash": "04de7400f1c816eaecf6a43eeed296bf3e3cc86967ee60fe0c5eea02f56a1238",
+      "status": "COMPLETED",
+      "result": {
+        "path": "agentic/data/project-context/features/BOS-010/TASKS.md",
+        "content": "# BOS-010 implementation sequence (identity & platform roles feature only)\n\nBOS-010 remains a provisional EPIC (see FEATURE.md). This sequence covers the\nidentity, platform roles, and phone OTP slice. Execute existing tasks without\nrecreating planning artifacts; TASK-003 uses TASK_ONLY / NO_REPLAN.\n\n| Task | Outcome | Status |\n|---|---|---|\n| [TASK-001](tasks/TASK-001.md) | Backend global identity, roles, seed SUPER_ADMIN, development login | COMPLETED; local/test release in [RELEASE.md](RELEASE.md) |\n| [TASK-002](tasks/TASK-002.md) | Flutter phone OTP integration | COMPLETED; automated and live QA in [REVIEW-QA.md](REVIEW-QA.md) |\n| [TASK-004](tasks/TASK-004.md) | Architecture conformance and account-service rename | COMPLETED; [review/QA](REVIEW-TASK-004.md) |\n| [TASK-005](tasks/TASK-005.md) | Locale toggle and login/OTP polish | COMPLETED; [review/QA](REVIEW-TASK-005.md) |\n| [TASK-003](tasks/TASK-003.md) | Account-service signing keys and provider-neutral OTP/SMS boundary; vendor deferred | COMPLETED; [review/QA](REVIEW-TASK-003.md), [release](RELEASE-TASK-003.md) local/test, production fail-closed |\n| [TASK-006](tasks/TASK-006.md) | App-owned message for OTP start rate limit (429) | COMPLETED; [review/QA](REVIEW-TASK-006.md) |\n| [TASK-007](tasks/TASK-007.md) | Canonical BD mobile phone format `01XXXXXXXXX` in account-service | COMPLETED; [review/QA](REVIEW-TASK-007.md) |\n| [TASK-008](tasks/TASK-008.md) | Rename `account-service` to `auth-service` (dir, artifact, package, DB, env, gateway route) | COMPLETED 2026-09-24; `mvn verify` 147/0 |\n\nContinuation run: `RUN-0CF5A7A84513476697D476E1334896C1`.\nThe old TASK-003 run was cancelled before code changes. TASK-004 is now complete.\n[Post-cleanup readiness](TASK-003-READINESS.md) records the concrete design and\nvalidation plan. Implementation evidence:\n[task-003-implementation-result.json](task-003-implementation-result.json).\n\nFollow the repository commit policy: commit after a governed task finishes with green checks, or on an explicit operator request.\n\n## Feature slices (after the identity slice)\n\n| Slice | Outcome | Status |\n|---|---|---|\n| [F5a revenue foundation](subscription-plans/REQUIREMENTS.md) | `subscription-service`: plans, per-user subscriptions, free tier, one-time building-creation fee ([design](subscription-plans/TECH-SPEC.md)) | COMPLETED 2026-09-23 (local/test); [review/QA](subscription-plans/REVIEW.md); run `RUN-4ABC6B2BAC974B0E878CA39C9A27AE00` |\n| [F2 building application & lifecycle](building-application/REQUIREMENTS.md) | Apply \u2192 review \u2192 approve (creation fee, D-26; admin provisioned in auth-service, D-29) \u2192 onboarding \u2192 activate/suspend (D-30); documents in MinIO/S3 (D-28); Flutter submit flow ([design](building-application/TECH-SPEC.md)) | COMPLETED 2026-09-24 (local/test); T1\u2013T5 done; [review/QA](building-application/REVIEW.md) READY (backend 197/0, live smoke, Flutter 50/0); operator confirmed device check and approved [release](building-application/RELEASE.md); run `RUN-5AC974860CB74DA790FDBA00532A15A2` |\n| Units & ownership | Carried BOS-002 domain | Not started |\n| Back-office console | UI for the above | Not started; needs D-09/D-10 |\n\nRevenue model is per-user (D-22..D-27), superseding the BRD's building-level subscription.\n"
+      }
+    }
+  }
+}

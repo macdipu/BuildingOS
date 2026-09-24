@@ -1,0 +1,304 @@
+{
+  "run": {
+    "run_id": "RUN-28CD3436B6534AE087FF73B03B8F5E4D",
+    "project": "BuildingOS",
+    "work_type": "new_feature",
+    "title": "BOS-010 F2: building application & review lifecycle (backend API)",
+    "stage": "INTAKE",
+    "status": "CANCELLED",
+    "dry_run": false,
+    "created_at": "2026-09-23T13:13:49.378781+00:00",
+    "updated_at": "2026-09-23T13:18:41.589909+00:00",
+    "metadata": {
+      "runtime_version": 2,
+      "repo": "../../..",
+      "route": [
+        "INTAKE",
+        "CONTEXT",
+        "REQUIREMENTS",
+        "TECHNICAL",
+        "IMPLEMENTATION",
+        "REVIEW",
+        "QA",
+        "RELEASE",
+        "COMPLETED"
+      ],
+      "planning": "NO_REPLAN",
+      "scope_revision": 0,
+      "config_hash": "70b1f3f256a7d5cabb8fb3f1b16caebda54573166f642abe33620c51d76783b1",
+      "skill_pins": {
+        "adr-generator": "37b87ceae41931e7df58f2ef5c9fcf3445388213582bd819351c17e095b4809e",
+        "agentic-sdlc-orchestrator": "241d5fb550dd198ced2ea5886df1f80d61b6e4df52056d766bad96d955fecc6b",
+        "api-contract-discovery-agent": "d69fc7cfc2f675bc19c809e5344dea8bf4e1e2d93f7aaaa612938434bb98c5b2",
+        "architecture-reverse-engineer": "107d6d10555d8a72d081e927b73adf875416bf9a4dd0df3bfd49ac69f82174c0",
+        "automated-qa-agent": "3cec92ed01d2911b9db9a54e6985f2e4c17e036ac839f5d7155ce27276b8102f",
+        "baseline-verifier": "948f2c681d6af99a0702fbb74620763667ef24242e101a55f6261f04f519d92e",
+        "brownfield-risk-analyzer": "d5da84ce6cc2c321d64e155c4efd4adc9826a0d4202056c44b73a4a108bcb599",
+        "business-requirement-analyzer": "c6d4f6cafd51a87d2304dc94c9c804e1585f639579638bfd46f7fcc59ec95a41",
+        "change-impact-analyzer": "ed5d3a96e9d0f3cbd878bd869aede9d4981c5bd2d56a2d65b74a75e50e712ab1",
+        "code-review-agent": "f95ee9b1ea892cd4aa4ecadc60246be9ad083669696889c96e788d9e3f0462b7",
+        "database-discovery-agent": "a9bf3867174c95eddbd83511e35079310ac79f511867591d64893c5007e1a791",
+        "device-preview-agent": "2dcccd3e894bcec5e81cfa4b40616f5d073b709320a9e155dc0c93de2a52e904",
+        "document-intake-adapter": "b773708a14af67828446bf84da63f1fb7bab07bf531f7c7a48a0a6b6f6cfd37e",
+        "effort-estimation-agent": "6ba73a7f3f15bbd622e95f1f14f709e7112ebd90433a44781be453f6e2977b1a",
+        "epic-verifier": "bf72ce9f4f91d3b0cd1f3669f2fe13dcd581b485b594fb8fdf7de5f64b5a03e7",
+        "history-analysis-agent": "6b2de7ce22f04464beb115a847b2831e7e42cd3cf6132ffba134ce2b42d1a8d0",
+        "implementation-agent": "369621d9f2bed8a62ab3b14e6108ad218202b4fb4171267933b122b470badf8b",
+        "intake-change-classifier": "b1102a78f041cb71b7456c2739225ba1ceca6b9b227bd7a6511d38db891c30c7",
+        "project-discovery-agent": "5ed25348cec052c3b95f58555ab62ec6ecb5cd4d23a9cfe052e6cb4f62387fe5",
+        "prompt-intake-adapter": "c3ab8c873b2c76e8aea61f808c9714f6e667d475772468a6e5a13f772f3a124e",
+        "release-readiness-agent": "8db12e3d8be626e8524e83c6ea4523293e24404765dade480c3c9a2600c6443c",
+        "requirement-reconstruction-agent": "5b65ac066f3ad5768ef3b949190a67af94bcd96196616f354b890796d97100a8",
+        "requirement-ui-verifier": "855d48036a9aa44e1283235e66899ed06151fb042e70bdebe73f5a0ce2144dfd",
+        "runtime-discovery-agent": "0c0b51066a093bfd52c08425554b8e3415930f82099fcbe0589180ca541d09e2",
+        "sprint-planner": "8193d9f44eea32eef72586a7dbee096f8014676434f719fe047d0a58360ec728",
+        "sprint-readiness-verifier": "b44dcdf8f2032ebddc7ba43c78219ff5fbd15c4f7e1f8b3959782bda33c97374",
+        "srs-generator": "f84a0c95661e2e2a29bc71b6ad6a6ffaf8163440965205f1956b6b3e7c000305",
+        "task-breakdown-agent": "0872087d99f7695ed8a4aa6b585323d29f7df905b56fcb5ca2c06d6f9a680f30",
+        "technical-architecture-planner": "7a37e8b1f49d8e4ce21721b7050475f178413c94a92e4065b3405c58ca482d23",
+        "technical-readiness-verifier": "aa888a9ae421d6fd6f5238435b76c191712bcfa3920df26f67ba7b304ec827f1",
+        "technical-spec-generator": "2d58206e630d0024c78371d3747ea6d86cf17ec2038367e9389dc2961dcc4fd0",
+        "test-baseline-agent": "58a93639efbf78373edf8cb64020e16721f65b5ba30eb271b886d79d49e0fbbf",
+        "user-flow-discovery-agent": "50f20be315ac1d62af72b88d9372a4d29684aa26094ac235c89c77e08c67ef91",
+        "web-preview-agent": "dfab7cd287b98b18637db38fcee208b28bc95a3447bb0ea7cfb12cddb3732eb4",
+        "work-item-level-classifier": "78d23d76d06e905cbe22854091e2a595110d12a31526444a0ebe6aedab77e9d5"
+      },
+      "results": {
+        "INTAKE": {
+          "status": "READY",
+          "evidence": [
+            "agentic/data/project-context/features/BOS-010/DECISIONS.md",
+            "agentic/data/project-context/features/BOS-010/REQUIREMENTS.md"
+          ],
+          "blocking_issues": [],
+          "open_questions": [
+            "Document storage technology (TECHNICAL)"
+          ],
+          "recommended_next_step": "Sequenced after subscription plans per D-11; cancel and restart later.",
+          "outputs": {
+            "work_item": "BOS-010 F2 building application",
+            "work_type": "new_feature",
+            "project_type": "brownfield (building-service skeleton)",
+            "hierarchy": "FEATURE",
+            "planning": "NO_REPLAN",
+            "decisions": [
+              "D-11",
+              "D-12",
+              "D-13",
+              "D-14"
+            ]
+          }
+        }
+      },
+      "attempts": {
+        "0:INTAKE:prompt-intake-adapter": 1
+      },
+      "active_task": null
+    }
+  },
+  "checkpoints": [
+    {
+      "run_id": "RUN-28CD3436B6534AE087FF73B03B8F5E4D",
+      "stage": "INTAKE",
+      "status": "RUNNING",
+      "payload": {
+        "runtime_version": 2,
+        "repo": "../../..",
+        "route": [
+          "INTAKE",
+          "CONTEXT",
+          "REQUIREMENTS",
+          "TECHNICAL",
+          "IMPLEMENTATION",
+          "REVIEW",
+          "QA",
+          "RELEASE",
+          "COMPLETED"
+        ],
+        "planning": "NO_REPLAN",
+        "scope_revision": 0,
+        "config_hash": "70b1f3f256a7d5cabb8fb3f1b16caebda54573166f642abe33620c51d76783b1",
+        "skill_pins": {
+          "adr-generator": "37b87ceae41931e7df58f2ef5c9fcf3445388213582bd819351c17e095b4809e",
+          "agentic-sdlc-orchestrator": "241d5fb550dd198ced2ea5886df1f80d61b6e4df52056d766bad96d955fecc6b",
+          "api-contract-discovery-agent": "d69fc7cfc2f675bc19c809e5344dea8bf4e1e2d93f7aaaa612938434bb98c5b2",
+          "architecture-reverse-engineer": "107d6d10555d8a72d081e927b73adf875416bf9a4dd0df3bfd49ac69f82174c0",
+          "automated-qa-agent": "3cec92ed01d2911b9db9a54e6985f2e4c17e036ac839f5d7155ce27276b8102f",
+          "baseline-verifier": "948f2c681d6af99a0702fbb74620763667ef24242e101a55f6261f04f519d92e",
+          "brownfield-risk-analyzer": "d5da84ce6cc2c321d64e155c4efd4adc9826a0d4202056c44b73a4a108bcb599",
+          "business-requirement-analyzer": "c6d4f6cafd51a87d2304dc94c9c804e1585f639579638bfd46f7fcc59ec95a41",
+          "change-impact-analyzer": "ed5d3a96e9d0f3cbd878bd869aede9d4981c5bd2d56a2d65b74a75e50e712ab1",
+          "code-review-agent": "f95ee9b1ea892cd4aa4ecadc60246be9ad083669696889c96e788d9e3f0462b7",
+          "database-discovery-agent": "a9bf3867174c95eddbd83511e35079310ac79f511867591d64893c5007e1a791",
+          "device-preview-agent": "2dcccd3e894bcec5e81cfa4b40616f5d073b709320a9e155dc0c93de2a52e904",
+          "document-intake-adapter": "b773708a14af67828446bf84da63f1fb7bab07bf531f7c7a48a0a6b6f6cfd37e",
+          "effort-estimation-agent": "6ba73a7f3f15bbd622e95f1f14f709e7112ebd90433a44781be453f6e2977b1a",
+          "epic-verifier": "bf72ce9f4f91d3b0cd1f3669f2fe13dcd581b485b594fb8fdf7de5f64b5a03e7",
+          "history-analysis-agent": "6b2de7ce22f04464beb115a847b2831e7e42cd3cf6132ffba134ce2b42d1a8d0",
+          "implementation-agent": "369621d9f2bed8a62ab3b14e6108ad218202b4fb4171267933b122b470badf8b",
+          "intake-change-classifier": "b1102a78f041cb71b7456c2739225ba1ceca6b9b227bd7a6511d38db891c30c7",
+          "project-discovery-agent": "5ed25348cec052c3b95f58555ab62ec6ecb5cd4d23a9cfe052e6cb4f62387fe5",
+          "prompt-intake-adapter": "c3ab8c873b2c76e8aea61f808c9714f6e667d475772468a6e5a13f772f3a124e",
+          "release-readiness-agent": "8db12e3d8be626e8524e83c6ea4523293e24404765dade480c3c9a2600c6443c",
+          "requirement-reconstruction-agent": "5b65ac066f3ad5768ef3b949190a67af94bcd96196616f354b890796d97100a8",
+          "requirement-ui-verifier": "855d48036a9aa44e1283235e66899ed06151fb042e70bdebe73f5a0ce2144dfd",
+          "runtime-discovery-agent": "0c0b51066a093bfd52c08425554b8e3415930f82099fcbe0589180ca541d09e2",
+          "sprint-planner": "8193d9f44eea32eef72586a7dbee096f8014676434f719fe047d0a58360ec728",
+          "sprint-readiness-verifier": "b44dcdf8f2032ebddc7ba43c78219ff5fbd15c4f7e1f8b3959782bda33c97374",
+          "srs-generator": "f84a0c95661e2e2a29bc71b6ad6a6ffaf8163440965205f1956b6b3e7c000305",
+          "task-breakdown-agent": "0872087d99f7695ed8a4aa6b585323d29f7df905b56fcb5ca2c06d6f9a680f30",
+          "technical-architecture-planner": "7a37e8b1f49d8e4ce21721b7050475f178413c94a92e4065b3405c58ca482d23",
+          "technical-readiness-verifier": "aa888a9ae421d6fd6f5238435b76c191712bcfa3920df26f67ba7b304ec827f1",
+          "technical-spec-generator": "2d58206e630d0024c78371d3747ea6d86cf17ec2038367e9389dc2961dcc4fd0",
+          "test-baseline-agent": "58a93639efbf78373edf8cb64020e16721f65b5ba30eb271b886d79d49e0fbbf",
+          "user-flow-discovery-agent": "50f20be315ac1d62af72b88d9372a4d29684aa26094ac235c89c77e08c67ef91",
+          "web-preview-agent": "dfab7cd287b98b18637db38fcee208b28bc95a3447bb0ea7cfb12cddb3732eb4",
+          "work-item-level-classifier": "78d23d76d06e905cbe22854091e2a595110d12a31526444a0ebe6aedab77e9d5"
+        },
+        "results": {},
+        "attempts": {},
+        "active_task": null
+      },
+      "created_at": "2026-09-23T13:13:49.383714+00:00"
+    },
+    {
+      "run_id": "RUN-28CD3436B6534AE087FF73B03B8F5E4D",
+      "stage": "INTAKE",
+      "status": "RUNNING",
+      "payload": {
+        "attempts": {
+          "0:INTAKE:prompt-intake-adapter": 1
+        },
+        "active_task": {
+          "id": "b83c19187a95407ea68cd92e57d68e5c",
+          "skill": "prompt-intake-adapter",
+          "started_at": "2026-09-23T13:18:34.657716+00:00",
+          "tool_calls": 0
+        }
+      },
+      "created_at": "2026-09-23T13:18:34.658015+00:00"
+    },
+    {
+      "run_id": "RUN-28CD3436B6534AE087FF73B03B8F5E4D",
+      "stage": "INTAKE",
+      "status": "RUNNING",
+      "payload": {
+        "results": {
+          "INTAKE": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/DECISIONS.md",
+              "agentic/data/project-context/features/BOS-010/REQUIREMENTS.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [
+              "Document storage technology (TECHNICAL)"
+            ],
+            "recommended_next_step": "Sequenced after subscription plans per D-11; cancel and restart later.",
+            "outputs": {
+              "work_item": "BOS-010 F2 building application",
+              "work_type": "new_feature",
+              "project_type": "brownfield (building-service skeleton)",
+              "hierarchy": "FEATURE",
+              "planning": "NO_REPLAN",
+              "decisions": [
+                "D-11",
+                "D-12",
+                "D-13",
+                "D-14"
+              ]
+            }
+          }
+        },
+        "active_task": null
+      },
+      "created_at": "2026-09-23T13:18:34.733013+00:00"
+    },
+    {
+      "run_id": "RUN-28CD3436B6534AE087FF73B03B8F5E4D",
+      "stage": "INTAKE",
+      "status": "CANCELLED",
+      "payload": {},
+      "created_at": "2026-09-23T13:18:41.589909+00:00"
+    }
+  ],
+  "approvals": [],
+  "timing_events": [
+    {
+      "run_id": "RUN-28CD3436B6534AE087FF73B03B8F5E4D",
+      "task": "b83c19187a95407ea68cd92e57d68e5c",
+      "event": "STARTED",
+      "ts": "2026-09-23T13:18:34.657716+00:00",
+      "metadata": {
+        "skill": "prompt-intake-adapter",
+        "retry_count": 0
+      }
+    },
+    {
+      "run_id": "RUN-28CD3436B6534AE087FF73B03B8F5E4D",
+      "task": "b83c19187a95407ea68cd92e57d68e5c",
+      "event": "COMPLETED",
+      "ts": "2026-09-23T13:18:34.732880+00:00",
+      "metadata": {
+        "duration_ms": 75,
+        "result_status": "READY"
+      }
+    }
+  ],
+  "audit_events": [
+    {
+      "run_id": "RUN-28CD3436B6534AE087FF73B03B8F5E4D",
+      "event": "RUN_STARTED",
+      "payload": {},
+      "created_at": "2026-09-23T13:13:49.383714+00:00"
+    },
+    {
+      "run_id": "RUN-28CD3436B6534AE087FF73B03B8F5E4D",
+      "event": "TASK_STARTED",
+      "payload": {
+        "skill": "prompt-intake-adapter"
+      },
+      "created_at": "2026-09-23T13:18:34.658015+00:00"
+    },
+    {
+      "run_id": "RUN-28CD3436B6534AE087FF73B03B8F5E4D",
+      "event": "RESULT_RECORDED",
+      "payload": {
+        "skill": "prompt-intake-adapter",
+        "result": {
+          "status": "READY",
+          "evidence": [
+            "agentic/data/project-context/features/BOS-010/DECISIONS.md",
+            "agentic/data/project-context/features/BOS-010/REQUIREMENTS.md"
+          ],
+          "blocking_issues": [],
+          "open_questions": [
+            "Document storage technology (TECHNICAL)"
+          ],
+          "recommended_next_step": "Sequenced after subscription plans per D-11; cancel and restart later.",
+          "outputs": {
+            "work_item": "BOS-010 F2 building application",
+            "work_type": "new_feature",
+            "project_type": "brownfield (building-service skeleton)",
+            "hierarchy": "FEATURE",
+            "planning": "NO_REPLAN",
+            "decisions": [
+              "D-11",
+              "D-12",
+              "D-13",
+              "D-14"
+            ]
+          }
+        }
+      },
+      "created_at": "2026-09-23T13:18:34.733013+00:00"
+    },
+    {
+      "run_id": "RUN-28CD3436B6534AE087FF73B03B8F5E4D",
+      "event": "RUN_CANCELLED",
+      "payload": {},
+      "created_at": "2026-09-23T13:18:41.589909+00:00"
+    }
+  ],
+  "tool_calls": {}
+}

@@ -1,0 +1,1730 @@
+{
+  "run": {
+    "run_id": "RUN-F334D51A33AE4944B2F04BE708F7BBE1",
+    "project": "BuildingOS",
+    "work_type": "change_request",
+    "title": "BOS-010 TASK-007: account-service canonical phone format (01XXXXXXXXX)",
+    "stage": "COMPLETED",
+    "status": "COMPLETED",
+    "dry_run": false,
+    "created_at": "2026-09-23T12:57:23.777059+00:00",
+    "updated_at": "2026-09-23T13:07:16.238347+00:00",
+    "metadata": {
+      "runtime_version": 2,
+      "repo": "../../..",
+      "route": [
+        "INTAKE",
+        "CONTEXT",
+        "IMPACT",
+        "TECHNICAL",
+        "IMPLEMENTATION",
+        "REVIEW",
+        "QA",
+        "RELEASE",
+        "COMPLETED"
+      ],
+      "planning": "NO_REPLAN",
+      "scope_revision": 0,
+      "config_hash": "70b1f3f256a7d5cabb8fb3f1b16caebda54573166f642abe33620c51d76783b1",
+      "skill_pins": {
+        "adr-generator": "37b87ceae41931e7df58f2ef5c9fcf3445388213582bd819351c17e095b4809e",
+        "agentic-sdlc-orchestrator": "241d5fb550dd198ced2ea5886df1f80d61b6e4df52056d766bad96d955fecc6b",
+        "api-contract-discovery-agent": "d69fc7cfc2f675bc19c809e5344dea8bf4e1e2d93f7aaaa612938434bb98c5b2",
+        "architecture-reverse-engineer": "107d6d10555d8a72d081e927b73adf875416bf9a4dd0df3bfd49ac69f82174c0",
+        "automated-qa-agent": "3cec92ed01d2911b9db9a54e6985f2e4c17e036ac839f5d7155ce27276b8102f",
+        "baseline-verifier": "948f2c681d6af99a0702fbb74620763667ef24242e101a55f6261f04f519d92e",
+        "brownfield-risk-analyzer": "d5da84ce6cc2c321d64e155c4efd4adc9826a0d4202056c44b73a4a108bcb599",
+        "business-requirement-analyzer": "c6d4f6cafd51a87d2304dc94c9c804e1585f639579638bfd46f7fcc59ec95a41",
+        "change-impact-analyzer": "ed5d3a96e9d0f3cbd878bd869aede9d4981c5bd2d56a2d65b74a75e50e712ab1",
+        "code-review-agent": "f95ee9b1ea892cd4aa4ecadc60246be9ad083669696889c96e788d9e3f0462b7",
+        "database-discovery-agent": "a9bf3867174c95eddbd83511e35079310ac79f511867591d64893c5007e1a791",
+        "device-preview-agent": "2dcccd3e894bcec5e81cfa4b40616f5d073b709320a9e155dc0c93de2a52e904",
+        "document-intake-adapter": "b773708a14af67828446bf84da63f1fb7bab07bf531f7c7a48a0a6b6f6cfd37e",
+        "effort-estimation-agent": "6ba73a7f3f15bbd622e95f1f14f709e7112ebd90433a44781be453f6e2977b1a",
+        "epic-verifier": "bf72ce9f4f91d3b0cd1f3669f2fe13dcd581b485b594fb8fdf7de5f64b5a03e7",
+        "history-analysis-agent": "6b2de7ce22f04464beb115a847b2831e7e42cd3cf6132ffba134ce2b42d1a8d0",
+        "implementation-agent": "369621d9f2bed8a62ab3b14e6108ad218202b4fb4171267933b122b470badf8b",
+        "intake-change-classifier": "b1102a78f041cb71b7456c2739225ba1ceca6b9b227bd7a6511d38db891c30c7",
+        "project-discovery-agent": "5ed25348cec052c3b95f58555ab62ec6ecb5cd4d23a9cfe052e6cb4f62387fe5",
+        "prompt-intake-adapter": "c3ab8c873b2c76e8aea61f808c9714f6e667d475772468a6e5a13f772f3a124e",
+        "release-readiness-agent": "8db12e3d8be626e8524e83c6ea4523293e24404765dade480c3c9a2600c6443c",
+        "requirement-reconstruction-agent": "5b65ac066f3ad5768ef3b949190a67af94bcd96196616f354b890796d97100a8",
+        "requirement-ui-verifier": "855d48036a9aa44e1283235e66899ed06151fb042e70bdebe73f5a0ce2144dfd",
+        "runtime-discovery-agent": "0c0b51066a093bfd52c08425554b8e3415930f82099fcbe0589180ca541d09e2",
+        "sprint-planner": "8193d9f44eea32eef72586a7dbee096f8014676434f719fe047d0a58360ec728",
+        "sprint-readiness-verifier": "b44dcdf8f2032ebddc7ba43c78219ff5fbd15c4f7e1f8b3959782bda33c97374",
+        "srs-generator": "f84a0c95661e2e2a29bc71b6ad6a6ffaf8163440965205f1956b6b3e7c000305",
+        "task-breakdown-agent": "0872087d99f7695ed8a4aa6b585323d29f7df905b56fcb5ca2c06d6f9a680f30",
+        "technical-architecture-planner": "7a37e8b1f49d8e4ce21721b7050475f178413c94a92e4065b3405c58ca482d23",
+        "technical-readiness-verifier": "aa888a9ae421d6fd6f5238435b76c191712bcfa3920df26f67ba7b304ec827f1",
+        "technical-spec-generator": "2d58206e630d0024c78371d3747ea6d86cf17ec2038367e9389dc2961dcc4fd0",
+        "test-baseline-agent": "58a93639efbf78373edf8cb64020e16721f65b5ba30eb271b886d79d49e0fbbf",
+        "user-flow-discovery-agent": "50f20be315ac1d62af72b88d9372a4d29684aa26094ac235c89c77e08c67ef91",
+        "web-preview-agent": "dfab7cd287b98b18637db38fcee208b28bc95a3447bb0ea7cfb12cddb3732eb4",
+        "work-item-level-classifier": "78d23d76d06e905cbe22854091e2a595110d12a31526444a0ebe6aedab77e9d5"
+      },
+      "results": {
+        "INTAKE": {
+          "status": "READY",
+          "evidence": [
+            "agentic/data/project-context/features/BOS-010/tasks/TASK-007.md"
+          ],
+          "blocking_issues": [],
+          "open_questions": [],
+          "recommended_next_step": "Scoped context.",
+          "outputs": {
+            "work_item": "BOS-010 TASK-007",
+            "work_type": "change_request",
+            "project_type": "brownfield",
+            "hierarchy": "TASK_ONLY",
+            "planning": "NO_REPLAN",
+            "source": "TASK-003 review finding 2; operator chose local 01XXXXXXXXX, no migration"
+          }
+        },
+        "CONTEXT": {
+          "status": "READY",
+          "evidence": [
+            "agentic/data/project-context/features/BOS-010/tasks/TASK-007.md"
+          ],
+          "blocking_issues": [],
+          "open_questions": [],
+          "recommended_next_step": "Impact.",
+          "outputs": {
+            "verdict": "CONTEXT_READY",
+            "revision": "6033884",
+            "finding": "App and seed already send/store 01XXXXXXXXX; backend treats formats as distinct"
+          }
+        },
+        "IMPACT": {
+          "status": "READY",
+          "evidence": [
+            "agentic/data/project-context/features/BOS-010/tasks/TASK-007.md"
+          ],
+          "blocking_issues": [],
+          "open_questions": [],
+          "recommended_next_step": "Technical readiness.",
+          "outputs": {
+            "impact": "LOW",
+            "modules": [
+              "account-service auth"
+            ],
+            "api_change": "stricter validation on phone input; response phone canonical",
+            "db_change": false,
+            "flutter_change": false
+          }
+        },
+        "TECHNICAL": {
+          "status": "READY",
+          "evidence": [
+            "agentic/data/project-context/features/BOS-010/tasks/TASK-007.md"
+          ],
+          "blocking_issues": [],
+          "open_questions": [],
+          "recommended_next_step": "Operator technical approval.",
+          "outputs": {
+            "verdict": "TECHNICAL_READY",
+            "approval": "pending operator"
+          }
+        },
+        "IMPLEMENTATION": {
+          "status": "READY",
+          "evidence": [
+            "backend/account-service/src/main/java/com/buildingos/account/auth/domain/model/PhoneNumber.java",
+            "backend/account-service/src/test/java/com/buildingos/account/auth/PhoneNumberTest.java"
+          ],
+          "blocking_issues": [],
+          "open_questions": [],
+          "recommended_next_step": "Code review.",
+          "outputs": {
+            "verdict": "READY",
+            "checks": [
+              "mvn verify 106/0",
+              "verify-flutter PASSED 35"
+            ]
+          }
+        },
+        "REVIEW": {
+          "status": "READY",
+          "evidence": [
+            "agentic/data/project-context/features/BOS-010/REVIEW-TASK-007.md"
+          ],
+          "blocking_issues": [],
+          "open_questions": [],
+          "recommended_next_step": "Automated QA.",
+          "outputs": {
+            "verdict": "READY",
+            "checks": [
+              "mvn verify 106/0",
+              "verify-flutter PASSED 35"
+            ]
+          }
+        },
+        "QA": {
+          "status": "READY",
+          "evidence": [
+            "agentic/data/project-context/features/BOS-010/REVIEW-TASK-007.md"
+          ],
+          "blocking_issues": [],
+          "open_questions": [],
+          "recommended_next_step": "Operator release decision.",
+          "outputs": {
+            "verdict": "READY",
+            "checks": [
+              "mvn verify 106/0",
+              "verify-flutter PASSED 35"
+            ]
+          }
+        },
+        "RELEASE": {
+          "status": "READY",
+          "evidence": [
+            "agentic/data/project-context/features/BOS-010/REVIEW-TASK-007.md"
+          ],
+          "blocking_issues": [],
+          "open_questions": [],
+          "recommended_next_step": "Mark completed; commit.",
+          "outputs": {
+            "verdict": "RELEASED_LOCAL_TEST",
+            "approvals": [
+              "technical",
+              "release"
+            ]
+          }
+        }
+      },
+      "attempts": {
+        "0:INTAKE:prompt-intake-adapter": 1,
+        "0:CONTEXT:baseline-verifier": 1,
+        "0:IMPACT:change-impact-analyzer": 1,
+        "0:TECHNICAL:technical-readiness-verifier": 1,
+        "0:IMPLEMENTATION:implementation-agent": 1,
+        "0:REVIEW:code-review-agent": 1,
+        "0:QA:automated-qa-agent": 1,
+        "0:RELEASE:release-readiness-agent": 1
+      },
+      "active_task": null,
+      "context": {
+        "files": {
+          "agentic/data/project-context/features/BOS-010/tasks/TASK-007.md": "b8b0029ef66113a5ceb9a40631e55d812b0726bf6cd63259a51969d989c563cd",
+          "backend/account-service/src/main/java/com/buildingos/account/auth/application/startotp/StartOtpService.java": "c531466e2ffe4f7515b4af2dfe90c67f8439536ca93526c6aae69b61e6f9907a",
+          "backend/account-service/src/main/java/com/buildingos/account/auth/application/verifyotp/VerifyOtpService.java": "1cf821320999a107b8edc9b998ba1baea93e306274f93c5e42080431e5c71c7a",
+          "backend/account-service/src/main/java/com/buildingos/account/auth/infrastructure/persistence/repository/JdbcOtpChallengeRepositoryAdapter.java": "8d82daa436cf74fd7267f69f011a9af324e30fa8f315dd9c99b937c3969e4d52",
+          "backend/account-service/src/main/java/com/buildingos/account/auth/application/seedsuperadmin/SeedSuperAdminService.java": "06d2d41812b8645a6ff7ab1a75da00b7eb1ba450953ab81f4e5c43bd2c8962ce"
+        }
+      }
+    }
+  },
+  "checkpoints": [
+    {
+      "run_id": "RUN-F334D51A33AE4944B2F04BE708F7BBE1",
+      "stage": "INTAKE",
+      "status": "RUNNING",
+      "payload": {
+        "runtime_version": 2,
+        "repo": "../../..",
+        "route": [
+          "INTAKE",
+          "CONTEXT",
+          "IMPACT",
+          "TECHNICAL",
+          "IMPLEMENTATION",
+          "REVIEW",
+          "QA",
+          "RELEASE",
+          "COMPLETED"
+        ],
+        "planning": "NO_REPLAN",
+        "scope_revision": 0,
+        "config_hash": "70b1f3f256a7d5cabb8fb3f1b16caebda54573166f642abe33620c51d76783b1",
+        "skill_pins": {
+          "adr-generator": "37b87ceae41931e7df58f2ef5c9fcf3445388213582bd819351c17e095b4809e",
+          "agentic-sdlc-orchestrator": "241d5fb550dd198ced2ea5886df1f80d61b6e4df52056d766bad96d955fecc6b",
+          "api-contract-discovery-agent": "d69fc7cfc2f675bc19c809e5344dea8bf4e1e2d93f7aaaa612938434bb98c5b2",
+          "architecture-reverse-engineer": "107d6d10555d8a72d081e927b73adf875416bf9a4dd0df3bfd49ac69f82174c0",
+          "automated-qa-agent": "3cec92ed01d2911b9db9a54e6985f2e4c17e036ac839f5d7155ce27276b8102f",
+          "baseline-verifier": "948f2c681d6af99a0702fbb74620763667ef24242e101a55f6261f04f519d92e",
+          "brownfield-risk-analyzer": "d5da84ce6cc2c321d64e155c4efd4adc9826a0d4202056c44b73a4a108bcb599",
+          "business-requirement-analyzer": "c6d4f6cafd51a87d2304dc94c9c804e1585f639579638bfd46f7fcc59ec95a41",
+          "change-impact-analyzer": "ed5d3a96e9d0f3cbd878bd869aede9d4981c5bd2d56a2d65b74a75e50e712ab1",
+          "code-review-agent": "f95ee9b1ea892cd4aa4ecadc60246be9ad083669696889c96e788d9e3f0462b7",
+          "database-discovery-agent": "a9bf3867174c95eddbd83511e35079310ac79f511867591d64893c5007e1a791",
+          "device-preview-agent": "2dcccd3e894bcec5e81cfa4b40616f5d073b709320a9e155dc0c93de2a52e904",
+          "document-intake-adapter": "b773708a14af67828446bf84da63f1fb7bab07bf531f7c7a48a0a6b6f6cfd37e",
+          "effort-estimation-agent": "6ba73a7f3f15bbd622e95f1f14f709e7112ebd90433a44781be453f6e2977b1a",
+          "epic-verifier": "bf72ce9f4f91d3b0cd1f3669f2fe13dcd581b485b594fb8fdf7de5f64b5a03e7",
+          "history-analysis-agent": "6b2de7ce22f04464beb115a847b2831e7e42cd3cf6132ffba134ce2b42d1a8d0",
+          "implementation-agent": "369621d9f2bed8a62ab3b14e6108ad218202b4fb4171267933b122b470badf8b",
+          "intake-change-classifier": "b1102a78f041cb71b7456c2739225ba1ceca6b9b227bd7a6511d38db891c30c7",
+          "project-discovery-agent": "5ed25348cec052c3b95f58555ab62ec6ecb5cd4d23a9cfe052e6cb4f62387fe5",
+          "prompt-intake-adapter": "c3ab8c873b2c76e8aea61f808c9714f6e667d475772468a6e5a13f772f3a124e",
+          "release-readiness-agent": "8db12e3d8be626e8524e83c6ea4523293e24404765dade480c3c9a2600c6443c",
+          "requirement-reconstruction-agent": "5b65ac066f3ad5768ef3b949190a67af94bcd96196616f354b890796d97100a8",
+          "requirement-ui-verifier": "855d48036a9aa44e1283235e66899ed06151fb042e70bdebe73f5a0ce2144dfd",
+          "runtime-discovery-agent": "0c0b51066a093bfd52c08425554b8e3415930f82099fcbe0589180ca541d09e2",
+          "sprint-planner": "8193d9f44eea32eef72586a7dbee096f8014676434f719fe047d0a58360ec728",
+          "sprint-readiness-verifier": "b44dcdf8f2032ebddc7ba43c78219ff5fbd15c4f7e1f8b3959782bda33c97374",
+          "srs-generator": "f84a0c95661e2e2a29bc71b6ad6a6ffaf8163440965205f1956b6b3e7c000305",
+          "task-breakdown-agent": "0872087d99f7695ed8a4aa6b585323d29f7df905b56fcb5ca2c06d6f9a680f30",
+          "technical-architecture-planner": "7a37e8b1f49d8e4ce21721b7050475f178413c94a92e4065b3405c58ca482d23",
+          "technical-readiness-verifier": "aa888a9ae421d6fd6f5238435b76c191712bcfa3920df26f67ba7b304ec827f1",
+          "technical-spec-generator": "2d58206e630d0024c78371d3747ea6d86cf17ec2038367e9389dc2961dcc4fd0",
+          "test-baseline-agent": "58a93639efbf78373edf8cb64020e16721f65b5ba30eb271b886d79d49e0fbbf",
+          "user-flow-discovery-agent": "50f20be315ac1d62af72b88d9372a4d29684aa26094ac235c89c77e08c67ef91",
+          "web-preview-agent": "dfab7cd287b98b18637db38fcee208b28bc95a3447bb0ea7cfb12cddb3732eb4",
+          "work-item-level-classifier": "78d23d76d06e905cbe22854091e2a595110d12a31526444a0ebe6aedab77e9d5"
+        },
+        "results": {},
+        "attempts": {},
+        "active_task": null
+      },
+      "created_at": "2026-09-23T12:57:23.791425+00:00"
+    },
+    {
+      "run_id": "RUN-F334D51A33AE4944B2F04BE708F7BBE1",
+      "stage": "INTAKE",
+      "status": "RUNNING",
+      "payload": {
+        "context": {
+          "files": {
+            "agentic/data/project-context/features/BOS-010/tasks/TASK-007.md": "b8b0029ef66113a5ceb9a40631e55d812b0726bf6cd63259a51969d989c563cd",
+            "backend/account-service/src/main/java/com/buildingos/account/auth/application/startotp/StartOtpService.java": "a71f13d1aa4702c6d37d211bb8e1d8e5a1bca6ef047d4802db8167793c847f34",
+            "backend/account-service/src/main/java/com/buildingos/account/auth/application/verifyotp/VerifyOtpService.java": "00ab5f856a304daaaf0489e0d30510b320c9fcd74bc9aad7099aa5f922c34286",
+            "backend/account-service/src/main/java/com/buildingos/account/auth/infrastructure/persistence/repository/JdbcOtpChallengeRepositoryAdapter.java": "43a0eb8bee2971494a0c052a265c53c547c0aeaa2bde930093709e7cca60d6f8",
+            "backend/account-service/src/main/java/com/buildingos/account/auth/application/seedsuperadmin/SeedSuperAdminService.java": "1ef1beda8bade2a4b60129ca4ba0e289dcff951e7ca6099c03a33dcb4a03f768"
+          }
+        }
+      },
+      "created_at": "2026-09-23T12:57:38.242919+00:00"
+    },
+    {
+      "run_id": "RUN-F334D51A33AE4944B2F04BE708F7BBE1",
+      "stage": "INTAKE",
+      "status": "RUNNING",
+      "payload": {
+        "attempts": {
+          "0:INTAKE:prompt-intake-adapter": 1
+        },
+        "active_task": {
+          "id": "b9753f3d6f8f469cba60113c25700eed",
+          "skill": "prompt-intake-adapter",
+          "started_at": "2026-09-23T12:57:38.315500+00:00",
+          "tool_calls": 0
+        }
+      },
+      "created_at": "2026-09-23T12:57:38.315908+00:00"
+    },
+    {
+      "run_id": "RUN-F334D51A33AE4944B2F04BE708F7BBE1",
+      "stage": "INTAKE",
+      "status": "RUNNING",
+      "payload": {
+        "results": {
+          "INTAKE": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/tasks/TASK-007.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Scoped context.",
+            "outputs": {
+              "work_item": "BOS-010 TASK-007",
+              "work_type": "change_request",
+              "project_type": "brownfield",
+              "hierarchy": "TASK_ONLY",
+              "planning": "NO_REPLAN",
+              "source": "TASK-003 review finding 2; operator chose local 01XXXXXXXXX, no migration"
+            }
+          }
+        },
+        "active_task": null
+      },
+      "created_at": "2026-09-23T12:57:38.410697+00:00"
+    },
+    {
+      "run_id": "RUN-F334D51A33AE4944B2F04BE708F7BBE1",
+      "stage": "CONTEXT",
+      "status": "RUNNING",
+      "payload": {},
+      "created_at": "2026-09-23T12:57:38.471753+00:00"
+    },
+    {
+      "run_id": "RUN-F334D51A33AE4944B2F04BE708F7BBE1",
+      "stage": "CONTEXT",
+      "status": "RUNNING",
+      "payload": {
+        "attempts": {
+          "0:INTAKE:prompt-intake-adapter": 1,
+          "0:CONTEXT:baseline-verifier": 1
+        },
+        "active_task": {
+          "id": "9ee4b0d2d620499b989893a81d3e4ab3",
+          "skill": "baseline-verifier",
+          "started_at": "2026-09-23T12:57:38.537403+00:00",
+          "tool_calls": 0
+        }
+      },
+      "created_at": "2026-09-23T12:57:38.538480+00:00"
+    },
+    {
+      "run_id": "RUN-F334D51A33AE4944B2F04BE708F7BBE1",
+      "stage": "CONTEXT",
+      "status": "RUNNING",
+      "payload": {
+        "results": {
+          "INTAKE": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/tasks/TASK-007.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Scoped context.",
+            "outputs": {
+              "work_item": "BOS-010 TASK-007",
+              "work_type": "change_request",
+              "project_type": "brownfield",
+              "hierarchy": "TASK_ONLY",
+              "planning": "NO_REPLAN",
+              "source": "TASK-003 review finding 2; operator chose local 01XXXXXXXXX, no migration"
+            }
+          },
+          "CONTEXT": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/tasks/TASK-007.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Impact.",
+            "outputs": {
+              "verdict": "CONTEXT_READY",
+              "revision": "6033884",
+              "finding": "App and seed already send/store 01XXXXXXXXX; backend treats formats as distinct"
+            }
+          }
+        },
+        "active_task": null
+      },
+      "created_at": "2026-09-23T12:57:38.635964+00:00"
+    },
+    {
+      "run_id": "RUN-F334D51A33AE4944B2F04BE708F7BBE1",
+      "stage": "IMPACT",
+      "status": "RUNNING",
+      "payload": {},
+      "created_at": "2026-09-23T12:57:38.697844+00:00"
+    },
+    {
+      "run_id": "RUN-F334D51A33AE4944B2F04BE708F7BBE1",
+      "stage": "IMPACT",
+      "status": "RUNNING",
+      "payload": {
+        "attempts": {
+          "0:INTAKE:prompt-intake-adapter": 1,
+          "0:CONTEXT:baseline-verifier": 1,
+          "0:IMPACT:change-impact-analyzer": 1
+        },
+        "active_task": {
+          "id": "d2c13b0e35a546c19a04143bd5bd76f0",
+          "skill": "change-impact-analyzer",
+          "started_at": "2026-09-23T12:57:38.772843+00:00",
+          "tool_calls": 0
+        }
+      },
+      "created_at": "2026-09-23T12:57:38.773397+00:00"
+    },
+    {
+      "run_id": "RUN-F334D51A33AE4944B2F04BE708F7BBE1",
+      "stage": "IMPACT",
+      "status": "RUNNING",
+      "payload": {
+        "results": {
+          "INTAKE": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/tasks/TASK-007.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Scoped context.",
+            "outputs": {
+              "work_item": "BOS-010 TASK-007",
+              "work_type": "change_request",
+              "project_type": "brownfield",
+              "hierarchy": "TASK_ONLY",
+              "planning": "NO_REPLAN",
+              "source": "TASK-003 review finding 2; operator chose local 01XXXXXXXXX, no migration"
+            }
+          },
+          "CONTEXT": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/tasks/TASK-007.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Impact.",
+            "outputs": {
+              "verdict": "CONTEXT_READY",
+              "revision": "6033884",
+              "finding": "App and seed already send/store 01XXXXXXXXX; backend treats formats as distinct"
+            }
+          },
+          "IMPACT": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/tasks/TASK-007.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Technical readiness.",
+            "outputs": {
+              "impact": "LOW",
+              "modules": [
+                "account-service auth"
+              ],
+              "api_change": "stricter validation on phone input; response phone canonical",
+              "db_change": false,
+              "flutter_change": false
+            }
+          }
+        },
+        "active_task": null
+      },
+      "created_at": "2026-09-23T12:57:38.892684+00:00"
+    },
+    {
+      "run_id": "RUN-F334D51A33AE4944B2F04BE708F7BBE1",
+      "stage": "TECHNICAL",
+      "status": "RUNNING",
+      "payload": {},
+      "created_at": "2026-09-23T12:57:38.970603+00:00"
+    },
+    {
+      "run_id": "RUN-F334D51A33AE4944B2F04BE708F7BBE1",
+      "stage": "TECHNICAL",
+      "status": "RUNNING",
+      "payload": {
+        "attempts": {
+          "0:INTAKE:prompt-intake-adapter": 1,
+          "0:CONTEXT:baseline-verifier": 1,
+          "0:IMPACT:change-impact-analyzer": 1,
+          "0:TECHNICAL:technical-readiness-verifier": 1
+        },
+        "active_task": {
+          "id": "24aee6c7788a454b862475997aea0115",
+          "skill": "technical-readiness-verifier",
+          "started_at": "2026-09-23T12:57:39.060418+00:00",
+          "tool_calls": 0
+        }
+      },
+      "created_at": "2026-09-23T12:57:39.063358+00:00"
+    },
+    {
+      "run_id": "RUN-F334D51A33AE4944B2F04BE708F7BBE1",
+      "stage": "TECHNICAL",
+      "status": "RUNNING",
+      "payload": {
+        "results": {
+          "INTAKE": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/tasks/TASK-007.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Scoped context.",
+            "outputs": {
+              "work_item": "BOS-010 TASK-007",
+              "work_type": "change_request",
+              "project_type": "brownfield",
+              "hierarchy": "TASK_ONLY",
+              "planning": "NO_REPLAN",
+              "source": "TASK-003 review finding 2; operator chose local 01XXXXXXXXX, no migration"
+            }
+          },
+          "CONTEXT": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/tasks/TASK-007.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Impact.",
+            "outputs": {
+              "verdict": "CONTEXT_READY",
+              "revision": "6033884",
+              "finding": "App and seed already send/store 01XXXXXXXXX; backend treats formats as distinct"
+            }
+          },
+          "IMPACT": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/tasks/TASK-007.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Technical readiness.",
+            "outputs": {
+              "impact": "LOW",
+              "modules": [
+                "account-service auth"
+              ],
+              "api_change": "stricter validation on phone input; response phone canonical",
+              "db_change": false,
+              "flutter_change": false
+            }
+          },
+          "TECHNICAL": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/tasks/TASK-007.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Operator technical approval.",
+            "outputs": {
+              "verdict": "TECHNICAL_READY",
+              "approval": "pending operator"
+            }
+          }
+        },
+        "active_task": null
+      },
+      "created_at": "2026-09-23T12:57:39.197838+00:00"
+    },
+    {
+      "run_id": "RUN-F334D51A33AE4944B2F04BE708F7BBE1",
+      "stage": "TECHNICAL",
+      "status": "RUNNING",
+      "payload": {},
+      "created_at": "2026-09-23T12:58:09.829279+00:00"
+    },
+    {
+      "run_id": "RUN-F334D51A33AE4944B2F04BE708F7BBE1",
+      "stage": "IMPLEMENTATION",
+      "status": "RUNNING",
+      "payload": {},
+      "created_at": "2026-09-23T12:58:09.908083+00:00"
+    },
+    {
+      "run_id": "RUN-F334D51A33AE4944B2F04BE708F7BBE1",
+      "stage": "IMPLEMENTATION",
+      "status": "RUNNING",
+      "payload": {
+        "attempts": {
+          "0:INTAKE:prompt-intake-adapter": 1,
+          "0:CONTEXT:baseline-verifier": 1,
+          "0:IMPACT:change-impact-analyzer": 1,
+          "0:TECHNICAL:technical-readiness-verifier": 1,
+          "0:IMPLEMENTATION:implementation-agent": 1
+        },
+        "active_task": {
+          "id": "77d9b931721a4367a89413c49039f55c",
+          "skill": "implementation-agent",
+          "started_at": "2026-09-23T12:58:10.016437+00:00",
+          "tool_calls": 0
+        }
+      },
+      "created_at": "2026-09-23T12:58:10.018714+00:00"
+    },
+    {
+      "run_id": "RUN-F334D51A33AE4944B2F04BE708F7BBE1",
+      "stage": "IMPLEMENTATION",
+      "status": "RUNNING",
+      "payload": {
+        "results": {
+          "INTAKE": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/tasks/TASK-007.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Scoped context.",
+            "outputs": {
+              "work_item": "BOS-010 TASK-007",
+              "work_type": "change_request",
+              "project_type": "brownfield",
+              "hierarchy": "TASK_ONLY",
+              "planning": "NO_REPLAN",
+              "source": "TASK-003 review finding 2; operator chose local 01XXXXXXXXX, no migration"
+            }
+          },
+          "CONTEXT": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/tasks/TASK-007.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Impact.",
+            "outputs": {
+              "verdict": "CONTEXT_READY",
+              "revision": "6033884",
+              "finding": "App and seed already send/store 01XXXXXXXXX; backend treats formats as distinct"
+            }
+          },
+          "IMPACT": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/tasks/TASK-007.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Technical readiness.",
+            "outputs": {
+              "impact": "LOW",
+              "modules": [
+                "account-service auth"
+              ],
+              "api_change": "stricter validation on phone input; response phone canonical",
+              "db_change": false,
+              "flutter_change": false
+            }
+          },
+          "TECHNICAL": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/tasks/TASK-007.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Operator technical approval.",
+            "outputs": {
+              "verdict": "TECHNICAL_READY",
+              "approval": "pending operator"
+            }
+          },
+          "IMPLEMENTATION": {
+            "status": "READY",
+            "evidence": [
+              "backend/account-service/src/main/java/com/buildingos/account/auth/domain/model/PhoneNumber.java",
+              "backend/account-service/src/test/java/com/buildingos/account/auth/PhoneNumberTest.java"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Code review.",
+            "outputs": {
+              "verdict": "READY",
+              "checks": [
+                "mvn verify 106/0",
+                "verify-flutter PASSED 35"
+              ]
+            }
+          }
+        },
+        "active_task": null,
+        "context": {
+          "files": {
+            "agentic/data/project-context/features/BOS-010/tasks/TASK-007.md": "b8b0029ef66113a5ceb9a40631e55d812b0726bf6cd63259a51969d989c563cd",
+            "backend/account-service/src/main/java/com/buildingos/account/auth/application/startotp/StartOtpService.java": "c531466e2ffe4f7515b4af2dfe90c67f8439536ca93526c6aae69b61e6f9907a",
+            "backend/account-service/src/main/java/com/buildingos/account/auth/application/verifyotp/VerifyOtpService.java": "1cf821320999a107b8edc9b998ba1baea93e306274f93c5e42080431e5c71c7a",
+            "backend/account-service/src/main/java/com/buildingos/account/auth/infrastructure/persistence/repository/JdbcOtpChallengeRepositoryAdapter.java": "8d82daa436cf74fd7267f69f011a9af324e30fa8f315dd9c99b937c3969e4d52",
+            "backend/account-service/src/main/java/com/buildingos/account/auth/application/seedsuperadmin/SeedSuperAdminService.java": "06d2d41812b8645a6ff7ab1a75da00b7eb1ba450953ab81f4e5c43bd2c8962ce"
+          }
+        }
+      },
+      "created_at": "2026-09-23T13:06:24.252164+00:00"
+    },
+    {
+      "run_id": "RUN-F334D51A33AE4944B2F04BE708F7BBE1",
+      "stage": "REVIEW",
+      "status": "RUNNING",
+      "payload": {},
+      "created_at": "2026-09-23T13:06:24.298053+00:00"
+    },
+    {
+      "run_id": "RUN-F334D51A33AE4944B2F04BE708F7BBE1",
+      "stage": "REVIEW",
+      "status": "RUNNING",
+      "payload": {
+        "attempts": {
+          "0:INTAKE:prompt-intake-adapter": 1,
+          "0:CONTEXT:baseline-verifier": 1,
+          "0:IMPACT:change-impact-analyzer": 1,
+          "0:TECHNICAL:technical-readiness-verifier": 1,
+          "0:IMPLEMENTATION:implementation-agent": 1,
+          "0:REVIEW:code-review-agent": 1
+        },
+        "active_task": {
+          "id": "58ced44a270145e4b16146e507786065",
+          "skill": "code-review-agent",
+          "started_at": "2026-09-23T13:06:24.346506+00:00",
+          "tool_calls": 0
+        }
+      },
+      "created_at": "2026-09-23T13:06:24.347028+00:00"
+    },
+    {
+      "run_id": "RUN-F334D51A33AE4944B2F04BE708F7BBE1",
+      "stage": "REVIEW",
+      "status": "RUNNING",
+      "payload": {
+        "results": {
+          "INTAKE": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/tasks/TASK-007.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Scoped context.",
+            "outputs": {
+              "work_item": "BOS-010 TASK-007",
+              "work_type": "change_request",
+              "project_type": "brownfield",
+              "hierarchy": "TASK_ONLY",
+              "planning": "NO_REPLAN",
+              "source": "TASK-003 review finding 2; operator chose local 01XXXXXXXXX, no migration"
+            }
+          },
+          "CONTEXT": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/tasks/TASK-007.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Impact.",
+            "outputs": {
+              "verdict": "CONTEXT_READY",
+              "revision": "6033884",
+              "finding": "App and seed already send/store 01XXXXXXXXX; backend treats formats as distinct"
+            }
+          },
+          "IMPACT": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/tasks/TASK-007.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Technical readiness.",
+            "outputs": {
+              "impact": "LOW",
+              "modules": [
+                "account-service auth"
+              ],
+              "api_change": "stricter validation on phone input; response phone canonical",
+              "db_change": false,
+              "flutter_change": false
+            }
+          },
+          "TECHNICAL": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/tasks/TASK-007.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Operator technical approval.",
+            "outputs": {
+              "verdict": "TECHNICAL_READY",
+              "approval": "pending operator"
+            }
+          },
+          "IMPLEMENTATION": {
+            "status": "READY",
+            "evidence": [
+              "backend/account-service/src/main/java/com/buildingos/account/auth/domain/model/PhoneNumber.java",
+              "backend/account-service/src/test/java/com/buildingos/account/auth/PhoneNumberTest.java"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Code review.",
+            "outputs": {
+              "verdict": "READY",
+              "checks": [
+                "mvn verify 106/0",
+                "verify-flutter PASSED 35"
+              ]
+            }
+          },
+          "REVIEW": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/REVIEW-TASK-007.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Automated QA.",
+            "outputs": {
+              "verdict": "READY",
+              "checks": [
+                "mvn verify 106/0",
+                "verify-flutter PASSED 35"
+              ]
+            }
+          }
+        },
+        "active_task": null
+      },
+      "created_at": "2026-09-23T13:06:24.418839+00:00"
+    },
+    {
+      "run_id": "RUN-F334D51A33AE4944B2F04BE708F7BBE1",
+      "stage": "QA",
+      "status": "RUNNING",
+      "payload": {},
+      "created_at": "2026-09-23T13:06:24.467121+00:00"
+    },
+    {
+      "run_id": "RUN-F334D51A33AE4944B2F04BE708F7BBE1",
+      "stage": "QA",
+      "status": "RUNNING",
+      "payload": {
+        "attempts": {
+          "0:INTAKE:prompt-intake-adapter": 1,
+          "0:CONTEXT:baseline-verifier": 1,
+          "0:IMPACT:change-impact-analyzer": 1,
+          "0:TECHNICAL:technical-readiness-verifier": 1,
+          "0:IMPLEMENTATION:implementation-agent": 1,
+          "0:REVIEW:code-review-agent": 1,
+          "0:QA:automated-qa-agent": 1
+        },
+        "active_task": {
+          "id": "b746655d4d4b4f959ff626cd17c5d6ae",
+          "skill": "automated-qa-agent",
+          "started_at": "2026-09-23T13:06:24.519298+00:00",
+          "tool_calls": 0
+        }
+      },
+      "created_at": "2026-09-23T13:06:24.521027+00:00"
+    },
+    {
+      "run_id": "RUN-F334D51A33AE4944B2F04BE708F7BBE1",
+      "stage": "QA",
+      "status": "RUNNING",
+      "payload": {
+        "results": {
+          "INTAKE": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/tasks/TASK-007.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Scoped context.",
+            "outputs": {
+              "work_item": "BOS-010 TASK-007",
+              "work_type": "change_request",
+              "project_type": "brownfield",
+              "hierarchy": "TASK_ONLY",
+              "planning": "NO_REPLAN",
+              "source": "TASK-003 review finding 2; operator chose local 01XXXXXXXXX, no migration"
+            }
+          },
+          "CONTEXT": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/tasks/TASK-007.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Impact.",
+            "outputs": {
+              "verdict": "CONTEXT_READY",
+              "revision": "6033884",
+              "finding": "App and seed already send/store 01XXXXXXXXX; backend treats formats as distinct"
+            }
+          },
+          "IMPACT": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/tasks/TASK-007.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Technical readiness.",
+            "outputs": {
+              "impact": "LOW",
+              "modules": [
+                "account-service auth"
+              ],
+              "api_change": "stricter validation on phone input; response phone canonical",
+              "db_change": false,
+              "flutter_change": false
+            }
+          },
+          "TECHNICAL": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/tasks/TASK-007.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Operator technical approval.",
+            "outputs": {
+              "verdict": "TECHNICAL_READY",
+              "approval": "pending operator"
+            }
+          },
+          "IMPLEMENTATION": {
+            "status": "READY",
+            "evidence": [
+              "backend/account-service/src/main/java/com/buildingos/account/auth/domain/model/PhoneNumber.java",
+              "backend/account-service/src/test/java/com/buildingos/account/auth/PhoneNumberTest.java"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Code review.",
+            "outputs": {
+              "verdict": "READY",
+              "checks": [
+                "mvn verify 106/0",
+                "verify-flutter PASSED 35"
+              ]
+            }
+          },
+          "REVIEW": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/REVIEW-TASK-007.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Automated QA.",
+            "outputs": {
+              "verdict": "READY",
+              "checks": [
+                "mvn verify 106/0",
+                "verify-flutter PASSED 35"
+              ]
+            }
+          },
+          "QA": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/REVIEW-TASK-007.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Operator release decision.",
+            "outputs": {
+              "verdict": "READY",
+              "checks": [
+                "mvn verify 106/0",
+                "verify-flutter PASSED 35"
+              ]
+            }
+          }
+        },
+        "active_task": null
+      },
+      "created_at": "2026-09-23T13:06:24.594439+00:00"
+    },
+    {
+      "run_id": "RUN-F334D51A33AE4944B2F04BE708F7BBE1",
+      "stage": "QA",
+      "status": "RUNNING",
+      "payload": {},
+      "created_at": "2026-09-23T13:07:15.996611+00:00"
+    },
+    {
+      "run_id": "RUN-F334D51A33AE4944B2F04BE708F7BBE1",
+      "stage": "RELEASE",
+      "status": "RUNNING",
+      "payload": {},
+      "created_at": "2026-09-23T13:07:16.044468+00:00"
+    },
+    {
+      "run_id": "RUN-F334D51A33AE4944B2F04BE708F7BBE1",
+      "stage": "RELEASE",
+      "status": "RUNNING",
+      "payload": {
+        "attempts": {
+          "0:INTAKE:prompt-intake-adapter": 1,
+          "0:CONTEXT:baseline-verifier": 1,
+          "0:IMPACT:change-impact-analyzer": 1,
+          "0:TECHNICAL:technical-readiness-verifier": 1,
+          "0:IMPLEMENTATION:implementation-agent": 1,
+          "0:REVIEW:code-review-agent": 1,
+          "0:QA:automated-qa-agent": 1,
+          "0:RELEASE:release-readiness-agent": 1
+        },
+        "active_task": {
+          "id": "72545e92b0d445fdbbffae4510813e2b",
+          "skill": "release-readiness-agent",
+          "started_at": "2026-09-23T13:07:16.114067+00:00",
+          "tool_calls": 0
+        }
+      },
+      "created_at": "2026-09-23T13:07:16.114753+00:00"
+    },
+    {
+      "run_id": "RUN-F334D51A33AE4944B2F04BE708F7BBE1",
+      "stage": "RELEASE",
+      "status": "RUNNING",
+      "payload": {
+        "results": {
+          "INTAKE": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/tasks/TASK-007.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Scoped context.",
+            "outputs": {
+              "work_item": "BOS-010 TASK-007",
+              "work_type": "change_request",
+              "project_type": "brownfield",
+              "hierarchy": "TASK_ONLY",
+              "planning": "NO_REPLAN",
+              "source": "TASK-003 review finding 2; operator chose local 01XXXXXXXXX, no migration"
+            }
+          },
+          "CONTEXT": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/tasks/TASK-007.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Impact.",
+            "outputs": {
+              "verdict": "CONTEXT_READY",
+              "revision": "6033884",
+              "finding": "App and seed already send/store 01XXXXXXXXX; backend treats formats as distinct"
+            }
+          },
+          "IMPACT": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/tasks/TASK-007.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Technical readiness.",
+            "outputs": {
+              "impact": "LOW",
+              "modules": [
+                "account-service auth"
+              ],
+              "api_change": "stricter validation on phone input; response phone canonical",
+              "db_change": false,
+              "flutter_change": false
+            }
+          },
+          "TECHNICAL": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/tasks/TASK-007.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Operator technical approval.",
+            "outputs": {
+              "verdict": "TECHNICAL_READY",
+              "approval": "pending operator"
+            }
+          },
+          "IMPLEMENTATION": {
+            "status": "READY",
+            "evidence": [
+              "backend/account-service/src/main/java/com/buildingos/account/auth/domain/model/PhoneNumber.java",
+              "backend/account-service/src/test/java/com/buildingos/account/auth/PhoneNumberTest.java"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Code review.",
+            "outputs": {
+              "verdict": "READY",
+              "checks": [
+                "mvn verify 106/0",
+                "verify-flutter PASSED 35"
+              ]
+            }
+          },
+          "REVIEW": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/REVIEW-TASK-007.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Automated QA.",
+            "outputs": {
+              "verdict": "READY",
+              "checks": [
+                "mvn verify 106/0",
+                "verify-flutter PASSED 35"
+              ]
+            }
+          },
+          "QA": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/REVIEW-TASK-007.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Operator release decision.",
+            "outputs": {
+              "verdict": "READY",
+              "checks": [
+                "mvn verify 106/0",
+                "verify-flutter PASSED 35"
+              ]
+            }
+          },
+          "RELEASE": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/REVIEW-TASK-007.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Mark completed; commit.",
+            "outputs": {
+              "verdict": "RELEASED_LOCAL_TEST",
+              "approvals": [
+                "technical",
+                "release"
+              ]
+            }
+          }
+        },
+        "active_task": null
+      },
+      "created_at": "2026-09-23T13:07:16.188615+00:00"
+    },
+    {
+      "run_id": "RUN-F334D51A33AE4944B2F04BE708F7BBE1",
+      "stage": "COMPLETED",
+      "status": "COMPLETED",
+      "payload": {},
+      "created_at": "2026-09-23T13:07:16.238347+00:00"
+    }
+  ],
+  "approvals": [
+    {
+      "run_id": "RUN-F334D51A33AE4944B2F04BE708F7BBE1",
+      "gate": "technical",
+      "approver": "macdipu",
+      "decision": "APPROVED",
+      "comment": "Operator selected Approve for TASK-007 design (tasks/TASK-007.md), 2026-09-23",
+      "created_at": "2026-09-23T12:58:09.827895+00:00",
+      "scope_revision": 0
+    },
+    {
+      "run_id": "RUN-F334D51A33AE4944B2F04BE708F7BBE1",
+      "gate": "release",
+      "approver": "macdipu",
+      "decision": "APPROVED",
+      "comment": "Operator selected Approve + commit for TASK-007, 2026-09-23",
+      "created_at": "2026-09-23T13:07:15.995727+00:00",
+      "scope_revision": 0
+    }
+  ],
+  "timing_events": [
+    {
+      "run_id": "RUN-F334D51A33AE4944B2F04BE708F7BBE1",
+      "task": "b9753f3d6f8f469cba60113c25700eed",
+      "event": "STARTED",
+      "ts": "2026-09-23T12:57:38.315500+00:00",
+      "metadata": {
+        "skill": "prompt-intake-adapter",
+        "retry_count": 0
+      }
+    },
+    {
+      "run_id": "RUN-F334D51A33AE4944B2F04BE708F7BBE1",
+      "task": "b9753f3d6f8f469cba60113c25700eed",
+      "event": "COMPLETED",
+      "ts": "2026-09-23T12:57:38.410510+00:00",
+      "metadata": {
+        "duration_ms": 95,
+        "result_status": "READY"
+      }
+    },
+    {
+      "run_id": "RUN-F334D51A33AE4944B2F04BE708F7BBE1",
+      "task": "9ee4b0d2d620499b989893a81d3e4ab3",
+      "event": "STARTED",
+      "ts": "2026-09-23T12:57:38.537403+00:00",
+      "metadata": {
+        "skill": "baseline-verifier",
+        "retry_count": 0
+      }
+    },
+    {
+      "run_id": "RUN-F334D51A33AE4944B2F04BE708F7BBE1",
+      "task": "9ee4b0d2d620499b989893a81d3e4ab3",
+      "event": "COMPLETED",
+      "ts": "2026-09-23T12:57:38.635717+00:00",
+      "metadata": {
+        "duration_ms": 98,
+        "result_status": "READY"
+      }
+    },
+    {
+      "run_id": "RUN-F334D51A33AE4944B2F04BE708F7BBE1",
+      "task": "d2c13b0e35a546c19a04143bd5bd76f0",
+      "event": "STARTED",
+      "ts": "2026-09-23T12:57:38.772843+00:00",
+      "metadata": {
+        "skill": "change-impact-analyzer",
+        "retry_count": 0
+      }
+    },
+    {
+      "run_id": "RUN-F334D51A33AE4944B2F04BE708F7BBE1",
+      "task": "d2c13b0e35a546c19a04143bd5bd76f0",
+      "event": "COMPLETED",
+      "ts": "2026-09-23T12:57:38.892374+00:00",
+      "metadata": {
+        "duration_ms": 119,
+        "result_status": "READY"
+      }
+    },
+    {
+      "run_id": "RUN-F334D51A33AE4944B2F04BE708F7BBE1",
+      "task": "24aee6c7788a454b862475997aea0115",
+      "event": "STARTED",
+      "ts": "2026-09-23T12:57:39.060418+00:00",
+      "metadata": {
+        "skill": "technical-readiness-verifier",
+        "retry_count": 0
+      }
+    },
+    {
+      "run_id": "RUN-F334D51A33AE4944B2F04BE708F7BBE1",
+      "task": "24aee6c7788a454b862475997aea0115",
+      "event": "COMPLETED",
+      "ts": "2026-09-23T12:57:39.197414+00:00",
+      "metadata": {
+        "duration_ms": 136,
+        "result_status": "READY"
+      }
+    },
+    {
+      "run_id": "RUN-F334D51A33AE4944B2F04BE708F7BBE1",
+      "task": "77d9b931721a4367a89413c49039f55c",
+      "event": "STARTED",
+      "ts": "2026-09-23T12:58:10.016437+00:00",
+      "metadata": {
+        "skill": "implementation-agent",
+        "retry_count": 0
+      }
+    },
+    {
+      "run_id": "RUN-F334D51A33AE4944B2F04BE708F7BBE1",
+      "task": "77d9b931721a4367a89413c49039f55c",
+      "event": "COMPLETED",
+      "ts": "2026-09-23T13:06:24.251855+00:00",
+      "metadata": {
+        "duration_ms": 494235,
+        "result_status": "READY"
+      }
+    },
+    {
+      "run_id": "RUN-F334D51A33AE4944B2F04BE708F7BBE1",
+      "task": "58ced44a270145e4b16146e507786065",
+      "event": "STARTED",
+      "ts": "2026-09-23T13:06:24.346506+00:00",
+      "metadata": {
+        "skill": "code-review-agent",
+        "retry_count": 0
+      }
+    },
+    {
+      "run_id": "RUN-F334D51A33AE4944B2F04BE708F7BBE1",
+      "task": "58ced44a270145e4b16146e507786065",
+      "event": "COMPLETED",
+      "ts": "2026-09-23T13:06:24.418472+00:00",
+      "metadata": {
+        "duration_ms": 71,
+        "result_status": "READY"
+      }
+    },
+    {
+      "run_id": "RUN-F334D51A33AE4944B2F04BE708F7BBE1",
+      "task": "b746655d4d4b4f959ff626cd17c5d6ae",
+      "event": "STARTED",
+      "ts": "2026-09-23T13:06:24.519298+00:00",
+      "metadata": {
+        "skill": "automated-qa-agent",
+        "retry_count": 0
+      }
+    },
+    {
+      "run_id": "RUN-F334D51A33AE4944B2F04BE708F7BBE1",
+      "task": "b746655d4d4b4f959ff626cd17c5d6ae",
+      "event": "COMPLETED",
+      "ts": "2026-09-23T13:06:24.594057+00:00",
+      "metadata": {
+        "duration_ms": 74,
+        "result_status": "READY"
+      }
+    },
+    {
+      "run_id": "RUN-F334D51A33AE4944B2F04BE708F7BBE1",
+      "task": "72545e92b0d445fdbbffae4510813e2b",
+      "event": "STARTED",
+      "ts": "2026-09-23T13:07:16.114067+00:00",
+      "metadata": {
+        "skill": "release-readiness-agent",
+        "retry_count": 0
+      }
+    },
+    {
+      "run_id": "RUN-F334D51A33AE4944B2F04BE708F7BBE1",
+      "task": "72545e92b0d445fdbbffae4510813e2b",
+      "event": "COMPLETED",
+      "ts": "2026-09-23T13:07:16.188153+00:00",
+      "metadata": {
+        "duration_ms": 74,
+        "result_status": "READY"
+      }
+    }
+  ],
+  "audit_events": [
+    {
+      "run_id": "RUN-F334D51A33AE4944B2F04BE708F7BBE1",
+      "event": "RUN_STARTED",
+      "payload": {},
+      "created_at": "2026-09-23T12:57:23.791425+00:00"
+    },
+    {
+      "run_id": "RUN-F334D51A33AE4944B2F04BE708F7BBE1",
+      "event": "CONTEXT_REFRESHED",
+      "payload": {
+        "paths": [
+          "agentic/data/project-context/features/BOS-010/tasks/TASK-007.md",
+          "backend/account-service/src/main/java/com/buildingos/account/auth/application/startotp/StartOtpService.java",
+          "backend/account-service/src/main/java/com/buildingos/account/auth/application/verifyotp/VerifyOtpService.java",
+          "backend/account-service/src/main/java/com/buildingos/account/auth/infrastructure/persistence/repository/JdbcOtpChallengeRepositoryAdapter.java",
+          "backend/account-service/src/main/java/com/buildingos/account/auth/application/seedsuperadmin/SeedSuperAdminService.java"
+        ]
+      },
+      "created_at": "2026-09-23T12:57:38.242919+00:00"
+    },
+    {
+      "run_id": "RUN-F334D51A33AE4944B2F04BE708F7BBE1",
+      "event": "TASK_STARTED",
+      "payload": {
+        "skill": "prompt-intake-adapter"
+      },
+      "created_at": "2026-09-23T12:57:38.315908+00:00"
+    },
+    {
+      "run_id": "RUN-F334D51A33AE4944B2F04BE708F7BBE1",
+      "event": "RESULT_RECORDED",
+      "payload": {
+        "skill": "prompt-intake-adapter",
+        "result": {
+          "status": "READY",
+          "evidence": [
+            "agentic/data/project-context/features/BOS-010/tasks/TASK-007.md"
+          ],
+          "blocking_issues": [],
+          "open_questions": [],
+          "recommended_next_step": "Scoped context.",
+          "outputs": {
+            "work_item": "BOS-010 TASK-007",
+            "work_type": "change_request",
+            "project_type": "brownfield",
+            "hierarchy": "TASK_ONLY",
+            "planning": "NO_REPLAN",
+            "source": "TASK-003 review finding 2; operator chose local 01XXXXXXXXX, no migration"
+          }
+        }
+      },
+      "created_at": "2026-09-23T12:57:38.410697+00:00"
+    },
+    {
+      "run_id": "RUN-F334D51A33AE4944B2F04BE708F7BBE1",
+      "event": "STAGE_CHANGED",
+      "payload": {},
+      "created_at": "2026-09-23T12:57:38.471753+00:00"
+    },
+    {
+      "run_id": "RUN-F334D51A33AE4944B2F04BE708F7BBE1",
+      "event": "TASK_STARTED",
+      "payload": {
+        "skill": "baseline-verifier"
+      },
+      "created_at": "2026-09-23T12:57:38.538480+00:00"
+    },
+    {
+      "run_id": "RUN-F334D51A33AE4944B2F04BE708F7BBE1",
+      "event": "RESULT_RECORDED",
+      "payload": {
+        "skill": "baseline-verifier",
+        "result": {
+          "status": "READY",
+          "evidence": [
+            "agentic/data/project-context/features/BOS-010/tasks/TASK-007.md"
+          ],
+          "blocking_issues": [],
+          "open_questions": [],
+          "recommended_next_step": "Impact.",
+          "outputs": {
+            "verdict": "CONTEXT_READY",
+            "revision": "6033884",
+            "finding": "App and seed already send/store 01XXXXXXXXX; backend treats formats as distinct"
+          }
+        }
+      },
+      "created_at": "2026-09-23T12:57:38.635964+00:00"
+    },
+    {
+      "run_id": "RUN-F334D51A33AE4944B2F04BE708F7BBE1",
+      "event": "STAGE_CHANGED",
+      "payload": {},
+      "created_at": "2026-09-23T12:57:38.697844+00:00"
+    },
+    {
+      "run_id": "RUN-F334D51A33AE4944B2F04BE708F7BBE1",
+      "event": "TASK_STARTED",
+      "payload": {
+        "skill": "change-impact-analyzer"
+      },
+      "created_at": "2026-09-23T12:57:38.773397+00:00"
+    },
+    {
+      "run_id": "RUN-F334D51A33AE4944B2F04BE708F7BBE1",
+      "event": "RESULT_RECORDED",
+      "payload": {
+        "skill": "change-impact-analyzer",
+        "result": {
+          "status": "READY",
+          "evidence": [
+            "agentic/data/project-context/features/BOS-010/tasks/TASK-007.md"
+          ],
+          "blocking_issues": [],
+          "open_questions": [],
+          "recommended_next_step": "Technical readiness.",
+          "outputs": {
+            "impact": "LOW",
+            "modules": [
+              "account-service auth"
+            ],
+            "api_change": "stricter validation on phone input; response phone canonical",
+            "db_change": false,
+            "flutter_change": false
+          }
+        }
+      },
+      "created_at": "2026-09-23T12:57:38.892684+00:00"
+    },
+    {
+      "run_id": "RUN-F334D51A33AE4944B2F04BE708F7BBE1",
+      "event": "STAGE_CHANGED",
+      "payload": {},
+      "created_at": "2026-09-23T12:57:38.970603+00:00"
+    },
+    {
+      "run_id": "RUN-F334D51A33AE4944B2F04BE708F7BBE1",
+      "event": "TASK_STARTED",
+      "payload": {
+        "skill": "technical-readiness-verifier"
+      },
+      "created_at": "2026-09-23T12:57:39.063358+00:00"
+    },
+    {
+      "run_id": "RUN-F334D51A33AE4944B2F04BE708F7BBE1",
+      "event": "RESULT_RECORDED",
+      "payload": {
+        "skill": "technical-readiness-verifier",
+        "result": {
+          "status": "READY",
+          "evidence": [
+            "agentic/data/project-context/features/BOS-010/tasks/TASK-007.md"
+          ],
+          "blocking_issues": [],
+          "open_questions": [],
+          "recommended_next_step": "Operator technical approval.",
+          "outputs": {
+            "verdict": "TECHNICAL_READY",
+            "approval": "pending operator"
+          }
+        }
+      },
+      "created_at": "2026-09-23T12:57:39.197838+00:00"
+    },
+    {
+      "run_id": "RUN-F334D51A33AE4944B2F04BE708F7BBE1",
+      "event": "APPROVAL_RECORDED",
+      "payload": {
+        "gate": "technical",
+        "decision": "APPROVED",
+        "by": "macdipu"
+      },
+      "created_at": "2026-09-23T12:58:09.829279+00:00"
+    },
+    {
+      "run_id": "RUN-F334D51A33AE4944B2F04BE708F7BBE1",
+      "event": "STAGE_CHANGED",
+      "payload": {},
+      "created_at": "2026-09-23T12:58:09.908083+00:00"
+    },
+    {
+      "run_id": "RUN-F334D51A33AE4944B2F04BE708F7BBE1",
+      "event": "TASK_STARTED",
+      "payload": {
+        "skill": "implementation-agent"
+      },
+      "created_at": "2026-09-23T12:58:10.018714+00:00"
+    },
+    {
+      "run_id": "RUN-F334D51A33AE4944B2F04BE708F7BBE1",
+      "event": "RESULT_RECORDED",
+      "payload": {
+        "skill": "implementation-agent",
+        "result": {
+          "status": "READY",
+          "evidence": [
+            "backend/account-service/src/main/java/com/buildingos/account/auth/domain/model/PhoneNumber.java",
+            "backend/account-service/src/test/java/com/buildingos/account/auth/PhoneNumberTest.java"
+          ],
+          "blocking_issues": [],
+          "open_questions": [],
+          "recommended_next_step": "Code review.",
+          "outputs": {
+            "verdict": "READY",
+            "checks": [
+              "mvn verify 106/0",
+              "verify-flutter PASSED 35"
+            ]
+          }
+        }
+      },
+      "created_at": "2026-09-23T13:06:24.252164+00:00"
+    },
+    {
+      "run_id": "RUN-F334D51A33AE4944B2F04BE708F7BBE1",
+      "event": "STAGE_CHANGED",
+      "payload": {},
+      "created_at": "2026-09-23T13:06:24.298053+00:00"
+    },
+    {
+      "run_id": "RUN-F334D51A33AE4944B2F04BE708F7BBE1",
+      "event": "TASK_STARTED",
+      "payload": {
+        "skill": "code-review-agent"
+      },
+      "created_at": "2026-09-23T13:06:24.347028+00:00"
+    },
+    {
+      "run_id": "RUN-F334D51A33AE4944B2F04BE708F7BBE1",
+      "event": "RESULT_RECORDED",
+      "payload": {
+        "skill": "code-review-agent",
+        "result": {
+          "status": "READY",
+          "evidence": [
+            "agentic/data/project-context/features/BOS-010/REVIEW-TASK-007.md"
+          ],
+          "blocking_issues": [],
+          "open_questions": [],
+          "recommended_next_step": "Automated QA.",
+          "outputs": {
+            "verdict": "READY",
+            "checks": [
+              "mvn verify 106/0",
+              "verify-flutter PASSED 35"
+            ]
+          }
+        }
+      },
+      "created_at": "2026-09-23T13:06:24.418839+00:00"
+    },
+    {
+      "run_id": "RUN-F334D51A33AE4944B2F04BE708F7BBE1",
+      "event": "STAGE_CHANGED",
+      "payload": {},
+      "created_at": "2026-09-23T13:06:24.467121+00:00"
+    },
+    {
+      "run_id": "RUN-F334D51A33AE4944B2F04BE708F7BBE1",
+      "event": "TASK_STARTED",
+      "payload": {
+        "skill": "automated-qa-agent"
+      },
+      "created_at": "2026-09-23T13:06:24.521027+00:00"
+    },
+    {
+      "run_id": "RUN-F334D51A33AE4944B2F04BE708F7BBE1",
+      "event": "RESULT_RECORDED",
+      "payload": {
+        "skill": "automated-qa-agent",
+        "result": {
+          "status": "READY",
+          "evidence": [
+            "agentic/data/project-context/features/BOS-010/REVIEW-TASK-007.md"
+          ],
+          "blocking_issues": [],
+          "open_questions": [],
+          "recommended_next_step": "Operator release decision.",
+          "outputs": {
+            "verdict": "READY",
+            "checks": [
+              "mvn verify 106/0",
+              "verify-flutter PASSED 35"
+            ]
+          }
+        }
+      },
+      "created_at": "2026-09-23T13:06:24.594439+00:00"
+    },
+    {
+      "run_id": "RUN-F334D51A33AE4944B2F04BE708F7BBE1",
+      "event": "APPROVAL_RECORDED",
+      "payload": {
+        "gate": "release",
+        "decision": "APPROVED",
+        "by": "macdipu"
+      },
+      "created_at": "2026-09-23T13:07:15.996611+00:00"
+    },
+    {
+      "run_id": "RUN-F334D51A33AE4944B2F04BE708F7BBE1",
+      "event": "STAGE_CHANGED",
+      "payload": {},
+      "created_at": "2026-09-23T13:07:16.044468+00:00"
+    },
+    {
+      "run_id": "RUN-F334D51A33AE4944B2F04BE708F7BBE1",
+      "event": "TASK_STARTED",
+      "payload": {
+        "skill": "release-readiness-agent"
+      },
+      "created_at": "2026-09-23T13:07:16.114753+00:00"
+    },
+    {
+      "run_id": "RUN-F334D51A33AE4944B2F04BE708F7BBE1",
+      "event": "RESULT_RECORDED",
+      "payload": {
+        "skill": "release-readiness-agent",
+        "result": {
+          "status": "READY",
+          "evidence": [
+            "agentic/data/project-context/features/BOS-010/REVIEW-TASK-007.md"
+          ],
+          "blocking_issues": [],
+          "open_questions": [],
+          "recommended_next_step": "Mark completed; commit.",
+          "outputs": {
+            "verdict": "RELEASED_LOCAL_TEST",
+            "approvals": [
+              "technical",
+              "release"
+            ]
+          }
+        }
+      },
+      "created_at": "2026-09-23T13:07:16.188615+00:00"
+    },
+    {
+      "run_id": "RUN-F334D51A33AE4944B2F04BE708F7BBE1",
+      "event": "STAGE_CHANGED",
+      "payload": {},
+      "created_at": "2026-09-23T13:07:16.238347+00:00"
+    }
+  ],
+  "tool_calls": {}
+}

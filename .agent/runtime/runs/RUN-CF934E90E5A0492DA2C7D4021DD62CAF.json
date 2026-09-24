@@ -1,0 +1,1836 @@
+{
+  "run": {
+    "run_id": "RUN-CF934E90E5A0492DA2C7D4021DD62CAF",
+    "project": "BuildingOS",
+    "work_type": "change_request",
+    "title": "BOS-010 TASK-006: user_app app-owned OTP start rate-limit message",
+    "stage": "COMPLETED",
+    "status": "COMPLETED",
+    "dry_run": false,
+    "created_at": "2026-09-23T12:39:26.770171+00:00",
+    "updated_at": "2026-09-23T12:42:13.858336+00:00",
+    "metadata": {
+      "runtime_version": 2,
+      "repo": "../../..",
+      "route": [
+        "INTAKE",
+        "CONTEXT",
+        "IMPACT",
+        "TECHNICAL",
+        "IMPLEMENTATION",
+        "REVIEW",
+        "QA",
+        "RELEASE",
+        "COMPLETED"
+      ],
+      "planning": "NO_REPLAN",
+      "scope_revision": 0,
+      "config_hash": "70b1f3f256a7d5cabb8fb3f1b16caebda54573166f642abe33620c51d76783b1",
+      "skill_pins": {
+        "adr-generator": "37b87ceae41931e7df58f2ef5c9fcf3445388213582bd819351c17e095b4809e",
+        "agentic-sdlc-orchestrator": "241d5fb550dd198ced2ea5886df1f80d61b6e4df52056d766bad96d955fecc6b",
+        "api-contract-discovery-agent": "d69fc7cfc2f675bc19c809e5344dea8bf4e1e2d93f7aaaa612938434bb98c5b2",
+        "architecture-reverse-engineer": "107d6d10555d8a72d081e927b73adf875416bf9a4dd0df3bfd49ac69f82174c0",
+        "automated-qa-agent": "3cec92ed01d2911b9db9a54e6985f2e4c17e036ac839f5d7155ce27276b8102f",
+        "baseline-verifier": "948f2c681d6af99a0702fbb74620763667ef24242e101a55f6261f04f519d92e",
+        "brownfield-risk-analyzer": "d5da84ce6cc2c321d64e155c4efd4adc9826a0d4202056c44b73a4a108bcb599",
+        "business-requirement-analyzer": "c6d4f6cafd51a87d2304dc94c9c804e1585f639579638bfd46f7fcc59ec95a41",
+        "change-impact-analyzer": "ed5d3a96e9d0f3cbd878bd869aede9d4981c5bd2d56a2d65b74a75e50e712ab1",
+        "code-review-agent": "f95ee9b1ea892cd4aa4ecadc60246be9ad083669696889c96e788d9e3f0462b7",
+        "database-discovery-agent": "a9bf3867174c95eddbd83511e35079310ac79f511867591d64893c5007e1a791",
+        "device-preview-agent": "2dcccd3e894bcec5e81cfa4b40616f5d073b709320a9e155dc0c93de2a52e904",
+        "document-intake-adapter": "b773708a14af67828446bf84da63f1fb7bab07bf531f7c7a48a0a6b6f6cfd37e",
+        "effort-estimation-agent": "6ba73a7f3f15bbd622e95f1f14f709e7112ebd90433a44781be453f6e2977b1a",
+        "epic-verifier": "bf72ce9f4f91d3b0cd1f3669f2fe13dcd581b485b594fb8fdf7de5f64b5a03e7",
+        "history-analysis-agent": "6b2de7ce22f04464beb115a847b2831e7e42cd3cf6132ffba134ce2b42d1a8d0",
+        "implementation-agent": "369621d9f2bed8a62ab3b14e6108ad218202b4fb4171267933b122b470badf8b",
+        "intake-change-classifier": "b1102a78f041cb71b7456c2739225ba1ceca6b9b227bd7a6511d38db891c30c7",
+        "project-discovery-agent": "5ed25348cec052c3b95f58555ab62ec6ecb5cd4d23a9cfe052e6cb4f62387fe5",
+        "prompt-intake-adapter": "c3ab8c873b2c76e8aea61f808c9714f6e667d475772468a6e5a13f772f3a124e",
+        "release-readiness-agent": "8db12e3d8be626e8524e83c6ea4523293e24404765dade480c3c9a2600c6443c",
+        "requirement-reconstruction-agent": "5b65ac066f3ad5768ef3b949190a67af94bcd96196616f354b890796d97100a8",
+        "requirement-ui-verifier": "855d48036a9aa44e1283235e66899ed06151fb042e70bdebe73f5a0ce2144dfd",
+        "runtime-discovery-agent": "0c0b51066a093bfd52c08425554b8e3415930f82099fcbe0589180ca541d09e2",
+        "sprint-planner": "8193d9f44eea32eef72586a7dbee096f8014676434f719fe047d0a58360ec728",
+        "sprint-readiness-verifier": "b44dcdf8f2032ebddc7ba43c78219ff5fbd15c4f7e1f8b3959782bda33c97374",
+        "srs-generator": "f84a0c95661e2e2a29bc71b6ad6a6ffaf8163440965205f1956b6b3e7c000305",
+        "task-breakdown-agent": "0872087d99f7695ed8a4aa6b585323d29f7df905b56fcb5ca2c06d6f9a680f30",
+        "technical-architecture-planner": "7a37e8b1f49d8e4ce21721b7050475f178413c94a92e4065b3405c58ca482d23",
+        "technical-readiness-verifier": "aa888a9ae421d6fd6f5238435b76c191712bcfa3920df26f67ba7b304ec827f1",
+        "technical-spec-generator": "2d58206e630d0024c78371d3747ea6d86cf17ec2038367e9389dc2961dcc4fd0",
+        "test-baseline-agent": "58a93639efbf78373edf8cb64020e16721f65b5ba30eb271b886d79d49e0fbbf",
+        "user-flow-discovery-agent": "50f20be315ac1d62af72b88d9372a4d29684aa26094ac235c89c77e08c67ef91",
+        "web-preview-agent": "dfab7cd287b98b18637db38fcee208b28bc95a3447bb0ea7cfb12cddb3732eb4",
+        "work-item-level-classifier": "78d23d76d06e905cbe22854091e2a595110d12a31526444a0ebe6aedab77e9d5"
+      },
+      "results": {
+        "INTAKE": {
+          "status": "READY",
+          "evidence": [
+            "agentic/data/project-context/features/BOS-010/tasks/TASK-006.md"
+          ],
+          "blocking_issues": [],
+          "open_questions": [],
+          "recommended_next_step": "Scoped context for user_app auth start path.",
+          "outputs": {
+            "work_item": "BOS-010 TASK-006",
+            "work_type": "change_request",
+            "project_type": "brownfield",
+            "hierarchy": "TASK_ONLY",
+            "planning": "NO_REPLAN",
+            "source": "TASK-003 recorded follow-up",
+            "exclusions": [
+              "Localization",
+              "Backend",
+              "ApiClient"
+            ]
+          }
+        },
+        "CONTEXT": {
+          "status": "READY",
+          "evidence": [
+            "agentic/data/project-context/features/BOS-010/tasks/TASK-006.md"
+          ],
+          "blocking_issues": [],
+          "open_questions": [],
+          "recommended_next_step": "Impact analysis.",
+          "outputs": {
+            "verdict": "CONTEXT_READY",
+            "revision": "d1425d1",
+            "finding": "429 currently surfaces server message text verbatim via Resource.message"
+          }
+        },
+        "IMPACT": {
+          "status": "READY",
+          "evidence": [
+            "agentic/data/project-context/features/BOS-010/tasks/TASK-006.md"
+          ],
+          "blocking_issues": [],
+          "open_questions": [],
+          "recommended_next_step": "Technical readiness.",
+          "outputs": {
+            "impact": "LOW",
+            "modules": [
+              "user_app/features/authentication"
+            ],
+            "api_change": false,
+            "db_change": false,
+            "flows": [
+              "login Next",
+              "OTP resend"
+            ]
+          }
+        },
+        "TECHNICAL": {
+          "status": "READY",
+          "evidence": [
+            "agentic/data/project-context/features/BOS-010/tasks/TASK-006.md"
+          ],
+          "blocking_issues": [],
+          "open_questions": [],
+          "recommended_next_step": "Obtain operator technical approval for TASK-006 design.",
+          "outputs": {
+            "verdict": "TECHNICAL_READY",
+            "files": [
+              "auth_remote_datasource.dart",
+              "login_screen_controller.dart",
+              "otp_repository_http_test.dart",
+              "otp_use_cases_test.dart"
+            ],
+            "approval": "pending operator"
+          }
+        },
+        "IMPLEMENTATION": {
+          "status": "READY",
+          "evidence": [
+            "user_app/lib/features/authentication/data/datasources/auth_remote_datasource.dart",
+            "user_app/lib/features/authentication/presentation/controllers/login_screen_controller.dart",
+            "user_app/test/features/authentication/data/repositories/otp_repository_http_test.dart",
+            "user_app/test/features/authentication/domain/usecases/otp_use_cases_test.dart"
+          ],
+          "blocking_issues": [],
+          "open_questions": [],
+          "recommended_next_step": "Code review.",
+          "outputs": {
+            "changes": [
+              "startOtp 429 -> ServerException('OTP_RATE_LIMITED')",
+              "otpStartErrorMessage maps OTP_RATE_LIMITED; other failures unchanged",
+              "3 tests added"
+            ],
+            "checks": [
+              "verify-flutter.sh VERIFY PASSED: analyze clean, 35 tests"
+            ]
+          }
+        },
+        "REVIEW": {
+          "status": "READY",
+          "evidence": [
+            "agentic/data/project-context/features/BOS-010/REVIEW-TASK-006.md"
+          ],
+          "blocking_issues": [],
+          "open_questions": [],
+          "recommended_next_step": "Automated QA.",
+          "outputs": {
+            "verdict": "READY"
+          }
+        },
+        "QA": {
+          "status": "READY",
+          "evidence": [
+            "agentic/data/project-context/features/BOS-010/REVIEW-TASK-006.md"
+          ],
+          "blocking_issues": [],
+          "open_questions": [],
+          "recommended_next_step": "Operator release decision.",
+          "outputs": {
+            "verdict": "READY"
+          }
+        },
+        "RELEASE": {
+          "status": "READY",
+          "evidence": [
+            "agentic/data/project-context/features/BOS-010/REVIEW-TASK-006.md"
+          ],
+          "blocking_issues": [],
+          "open_questions": [],
+          "recommended_next_step": "Mark completed; commit.",
+          "outputs": {
+            "verdict": "RELEASED",
+            "approvals": [
+              "technical",
+              "release"
+            ]
+          }
+        }
+      },
+      "attempts": {
+        "0:INTAKE:prompt-intake-adapter": 1,
+        "0:CONTEXT:user-flow-discovery-agent": 1,
+        "0:IMPACT:change-impact-analyzer": 1,
+        "0:TECHNICAL:technical-readiness-verifier": 1,
+        "0:IMPLEMENTATION:implementation-agent": 1,
+        "0:REVIEW:code-review-agent": 1,
+        "0:QA:automated-qa-agent": 1,
+        "0:RELEASE:release-readiness-agent": 1
+      },
+      "active_task": null,
+      "context": {
+        "files": {
+          "agentic/data/project-context/features/BOS-010/tasks/TASK-006.md": "7e235e2345c6f6fa5d40aed1e8a89a57fa9a6d35827f918cc670929a5f2e0b2c",
+          "user_app/lib/features/authentication/data/datasources/auth_remote_datasource.dart": "cf5cb25accc76fa8708e3555b25c68480480c7d8d27f9507d29ec051df53164b",
+          "user_app/lib/features/authentication/presentation/controllers/login_screen_controller.dart": "d72e5797711556b9d517f15a6d57bb3c848193a4d6ef54e6b8262a7e59b35353",
+          "user_app/lib/core/network/client/api_client.dart": "57ed1ebd08f2c99090cc92967b54b85341a6ead9b5ecfe09ff5aedca68af089e"
+        }
+      }
+    }
+  },
+  "checkpoints": [
+    {
+      "run_id": "RUN-CF934E90E5A0492DA2C7D4021DD62CAF",
+      "stage": "INTAKE",
+      "status": "RUNNING",
+      "payload": {
+        "runtime_version": 2,
+        "repo": "../../..",
+        "route": [
+          "INTAKE",
+          "CONTEXT",
+          "IMPACT",
+          "TECHNICAL",
+          "IMPLEMENTATION",
+          "REVIEW",
+          "QA",
+          "RELEASE",
+          "COMPLETED"
+        ],
+        "planning": "NO_REPLAN",
+        "scope_revision": 0,
+        "config_hash": "70b1f3f256a7d5cabb8fb3f1b16caebda54573166f642abe33620c51d76783b1",
+        "skill_pins": {
+          "adr-generator": "37b87ceae41931e7df58f2ef5c9fcf3445388213582bd819351c17e095b4809e",
+          "agentic-sdlc-orchestrator": "241d5fb550dd198ced2ea5886df1f80d61b6e4df52056d766bad96d955fecc6b",
+          "api-contract-discovery-agent": "d69fc7cfc2f675bc19c809e5344dea8bf4e1e2d93f7aaaa612938434bb98c5b2",
+          "architecture-reverse-engineer": "107d6d10555d8a72d081e927b73adf875416bf9a4dd0df3bfd49ac69f82174c0",
+          "automated-qa-agent": "3cec92ed01d2911b9db9a54e6985f2e4c17e036ac839f5d7155ce27276b8102f",
+          "baseline-verifier": "948f2c681d6af99a0702fbb74620763667ef24242e101a55f6261f04f519d92e",
+          "brownfield-risk-analyzer": "d5da84ce6cc2c321d64e155c4efd4adc9826a0d4202056c44b73a4a108bcb599",
+          "business-requirement-analyzer": "c6d4f6cafd51a87d2304dc94c9c804e1585f639579638bfd46f7fcc59ec95a41",
+          "change-impact-analyzer": "ed5d3a96e9d0f3cbd878bd869aede9d4981c5bd2d56a2d65b74a75e50e712ab1",
+          "code-review-agent": "f95ee9b1ea892cd4aa4ecadc60246be9ad083669696889c96e788d9e3f0462b7",
+          "database-discovery-agent": "a9bf3867174c95eddbd83511e35079310ac79f511867591d64893c5007e1a791",
+          "device-preview-agent": "2dcccd3e894bcec5e81cfa4b40616f5d073b709320a9e155dc0c93de2a52e904",
+          "document-intake-adapter": "b773708a14af67828446bf84da63f1fb7bab07bf531f7c7a48a0a6b6f6cfd37e",
+          "effort-estimation-agent": "6ba73a7f3f15bbd622e95f1f14f709e7112ebd90433a44781be453f6e2977b1a",
+          "epic-verifier": "bf72ce9f4f91d3b0cd1f3669f2fe13dcd581b485b594fb8fdf7de5f64b5a03e7",
+          "history-analysis-agent": "6b2de7ce22f04464beb115a847b2831e7e42cd3cf6132ffba134ce2b42d1a8d0",
+          "implementation-agent": "369621d9f2bed8a62ab3b14e6108ad218202b4fb4171267933b122b470badf8b",
+          "intake-change-classifier": "b1102a78f041cb71b7456c2739225ba1ceca6b9b227bd7a6511d38db891c30c7",
+          "project-discovery-agent": "5ed25348cec052c3b95f58555ab62ec6ecb5cd4d23a9cfe052e6cb4f62387fe5",
+          "prompt-intake-adapter": "c3ab8c873b2c76e8aea61f808c9714f6e667d475772468a6e5a13f772f3a124e",
+          "release-readiness-agent": "8db12e3d8be626e8524e83c6ea4523293e24404765dade480c3c9a2600c6443c",
+          "requirement-reconstruction-agent": "5b65ac066f3ad5768ef3b949190a67af94bcd96196616f354b890796d97100a8",
+          "requirement-ui-verifier": "855d48036a9aa44e1283235e66899ed06151fb042e70bdebe73f5a0ce2144dfd",
+          "runtime-discovery-agent": "0c0b51066a093bfd52c08425554b8e3415930f82099fcbe0589180ca541d09e2",
+          "sprint-planner": "8193d9f44eea32eef72586a7dbee096f8014676434f719fe047d0a58360ec728",
+          "sprint-readiness-verifier": "b44dcdf8f2032ebddc7ba43c78219ff5fbd15c4f7e1f8b3959782bda33c97374",
+          "srs-generator": "f84a0c95661e2e2a29bc71b6ad6a6ffaf8163440965205f1956b6b3e7c000305",
+          "task-breakdown-agent": "0872087d99f7695ed8a4aa6b585323d29f7df905b56fcb5ca2c06d6f9a680f30",
+          "technical-architecture-planner": "7a37e8b1f49d8e4ce21721b7050475f178413c94a92e4065b3405c58ca482d23",
+          "technical-readiness-verifier": "aa888a9ae421d6fd6f5238435b76c191712bcfa3920df26f67ba7b304ec827f1",
+          "technical-spec-generator": "2d58206e630d0024c78371d3747ea6d86cf17ec2038367e9389dc2961dcc4fd0",
+          "test-baseline-agent": "58a93639efbf78373edf8cb64020e16721f65b5ba30eb271b886d79d49e0fbbf",
+          "user-flow-discovery-agent": "50f20be315ac1d62af72b88d9372a4d29684aa26094ac235c89c77e08c67ef91",
+          "web-preview-agent": "dfab7cd287b98b18637db38fcee208b28bc95a3447bb0ea7cfb12cddb3732eb4",
+          "work-item-level-classifier": "78d23d76d06e905cbe22854091e2a595110d12a31526444a0ebe6aedab77e9d5"
+        },
+        "results": {},
+        "attempts": {},
+        "active_task": null
+      },
+      "created_at": "2026-09-23T12:39:26.785153+00:00"
+    },
+    {
+      "run_id": "RUN-CF934E90E5A0492DA2C7D4021DD62CAF",
+      "stage": "INTAKE",
+      "status": "RUNNING",
+      "payload": {
+        "attempts": {
+          "0:INTAKE:prompt-intake-adapter": 1
+        },
+        "active_task": {
+          "id": "ab86ec752e534732a618de3bfb8fca39",
+          "skill": "prompt-intake-adapter",
+          "started_at": "2026-09-23T12:39:41.509676+00:00",
+          "tool_calls": 0
+        }
+      },
+      "created_at": "2026-09-23T12:39:41.510026+00:00"
+    },
+    {
+      "run_id": "RUN-CF934E90E5A0492DA2C7D4021DD62CAF",
+      "stage": "INTAKE",
+      "status": "RUNNING",
+      "payload": {
+        "results": {
+          "INTAKE": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/tasks/TASK-006.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Scoped context for user_app auth start path.",
+            "outputs": {
+              "work_item": "BOS-010 TASK-006",
+              "work_type": "change_request",
+              "project_type": "brownfield",
+              "hierarchy": "TASK_ONLY",
+              "planning": "NO_REPLAN",
+              "source": "TASK-003 recorded follow-up",
+              "exclusions": [
+                "Localization",
+                "Backend",
+                "ApiClient"
+              ]
+            }
+          }
+        },
+        "active_task": null
+      },
+      "created_at": "2026-09-23T12:39:41.586390+00:00"
+    },
+    {
+      "run_id": "RUN-CF934E90E5A0492DA2C7D4021DD62CAF",
+      "stage": "INTAKE",
+      "status": "RUNNING",
+      "payload": {
+        "context": {
+          "files": {
+            "agentic/data/project-context/features/BOS-010/tasks/TASK-006.md": "7e235e2345c6f6fa5d40aed1e8a89a57fa9a6d35827f918cc670929a5f2e0b2c",
+            "user_app/lib/features/authentication/data/datasources/auth_remote_datasource.dart": "6e3e9bb3a1876ce16ba37640d048c32b8c15d5227bed898045c16f3b05a59e7c",
+            "user_app/lib/features/authentication/presentation/controllers/login_screen_controller.dart": "88b9c30d25100b54cdd3664329a06a3745a00a6014182f8600dcf5caa53eef06",
+            "user_app/lib/core/network/client/api_client.dart": "57ed1ebd08f2c99090cc92967b54b85341a6ead9b5ecfe09ff5aedca68af089e"
+          }
+        }
+      },
+      "created_at": "2026-09-23T12:39:41.652551+00:00"
+    },
+    {
+      "run_id": "RUN-CF934E90E5A0492DA2C7D4021DD62CAF",
+      "stage": "CONTEXT",
+      "status": "RUNNING",
+      "payload": {},
+      "created_at": "2026-09-23T12:39:49.944274+00:00"
+    },
+    {
+      "run_id": "RUN-CF934E90E5A0492DA2C7D4021DD62CAF",
+      "stage": "CONTEXT",
+      "status": "RUNNING",
+      "payload": {
+        "attempts": {
+          "0:INTAKE:prompt-intake-adapter": 1,
+          "0:CONTEXT:user-flow-discovery-agent": 1
+        },
+        "active_task": {
+          "id": "8501fb91ac6b44cf8340d69048e1cad2",
+          "skill": "user-flow-discovery-agent",
+          "started_at": "2026-09-23T12:39:49.996955+00:00",
+          "tool_calls": 0
+        }
+      },
+      "created_at": "2026-09-23T12:39:49.997858+00:00"
+    },
+    {
+      "run_id": "RUN-CF934E90E5A0492DA2C7D4021DD62CAF",
+      "stage": "CONTEXT",
+      "status": "RUNNING",
+      "payload": {
+        "results": {
+          "INTAKE": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/tasks/TASK-006.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Scoped context for user_app auth start path.",
+            "outputs": {
+              "work_item": "BOS-010 TASK-006",
+              "work_type": "change_request",
+              "project_type": "brownfield",
+              "hierarchy": "TASK_ONLY",
+              "planning": "NO_REPLAN",
+              "source": "TASK-003 recorded follow-up",
+              "exclusions": [
+                "Localization",
+                "Backend",
+                "ApiClient"
+              ]
+            }
+          },
+          "CONTEXT": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/tasks/TASK-006.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Impact analysis.",
+            "outputs": {
+              "verdict": "CONTEXT_READY",
+              "revision": "d1425d1",
+              "finding": "429 currently surfaces server message text verbatim via Resource.message"
+            }
+          }
+        },
+        "active_task": null
+      },
+      "created_at": "2026-09-23T12:39:50.075973+00:00"
+    },
+    {
+      "run_id": "RUN-CF934E90E5A0492DA2C7D4021DD62CAF",
+      "stage": "IMPACT",
+      "status": "RUNNING",
+      "payload": {},
+      "created_at": "2026-09-23T12:39:50.125881+00:00"
+    },
+    {
+      "run_id": "RUN-CF934E90E5A0492DA2C7D4021DD62CAF",
+      "stage": "IMPACT",
+      "status": "RUNNING",
+      "payload": {
+        "attempts": {
+          "0:INTAKE:prompt-intake-adapter": 1,
+          "0:CONTEXT:user-flow-discovery-agent": 1,
+          "0:IMPACT:change-impact-analyzer": 1
+        },
+        "active_task": {
+          "id": "560d84931e0d476fbc0e5959df4260f7",
+          "skill": "change-impact-analyzer",
+          "started_at": "2026-09-23T12:39:50.182242+00:00",
+          "tool_calls": 0
+        }
+      },
+      "created_at": "2026-09-23T12:39:50.182730+00:00"
+    },
+    {
+      "run_id": "RUN-CF934E90E5A0492DA2C7D4021DD62CAF",
+      "stage": "IMPACT",
+      "status": "RUNNING",
+      "payload": {
+        "results": {
+          "INTAKE": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/tasks/TASK-006.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Scoped context for user_app auth start path.",
+            "outputs": {
+              "work_item": "BOS-010 TASK-006",
+              "work_type": "change_request",
+              "project_type": "brownfield",
+              "hierarchy": "TASK_ONLY",
+              "planning": "NO_REPLAN",
+              "source": "TASK-003 recorded follow-up",
+              "exclusions": [
+                "Localization",
+                "Backend",
+                "ApiClient"
+              ]
+            }
+          },
+          "CONTEXT": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/tasks/TASK-006.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Impact analysis.",
+            "outputs": {
+              "verdict": "CONTEXT_READY",
+              "revision": "d1425d1",
+              "finding": "429 currently surfaces server message text verbatim via Resource.message"
+            }
+          },
+          "IMPACT": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/tasks/TASK-006.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Technical readiness.",
+            "outputs": {
+              "impact": "LOW",
+              "modules": [
+                "user_app/features/authentication"
+              ],
+              "api_change": false,
+              "db_change": false,
+              "flows": [
+                "login Next",
+                "OTP resend"
+              ]
+            }
+          }
+        },
+        "active_task": null
+      },
+      "created_at": "2026-09-23T12:39:50.265310+00:00"
+    },
+    {
+      "run_id": "RUN-CF934E90E5A0492DA2C7D4021DD62CAF",
+      "stage": "TECHNICAL",
+      "status": "RUNNING",
+      "payload": {},
+      "created_at": "2026-09-23T12:39:50.318446+00:00"
+    },
+    {
+      "run_id": "RUN-CF934E90E5A0492DA2C7D4021DD62CAF",
+      "stage": "TECHNICAL",
+      "status": "RUNNING",
+      "payload": {
+        "attempts": {
+          "0:INTAKE:prompt-intake-adapter": 1,
+          "0:CONTEXT:user-flow-discovery-agent": 1,
+          "0:IMPACT:change-impact-analyzer": 1,
+          "0:TECHNICAL:technical-readiness-verifier": 1
+        },
+        "active_task": {
+          "id": "cf745b4148ac4054a8729a2fb9a9275f",
+          "skill": "technical-readiness-verifier",
+          "started_at": "2026-09-23T12:39:50.378473+00:00",
+          "tool_calls": 0
+        }
+      },
+      "created_at": "2026-09-23T12:39:50.380157+00:00"
+    },
+    {
+      "run_id": "RUN-CF934E90E5A0492DA2C7D4021DD62CAF",
+      "stage": "TECHNICAL",
+      "status": "RUNNING",
+      "payload": {
+        "results": {
+          "INTAKE": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/tasks/TASK-006.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Scoped context for user_app auth start path.",
+            "outputs": {
+              "work_item": "BOS-010 TASK-006",
+              "work_type": "change_request",
+              "project_type": "brownfield",
+              "hierarchy": "TASK_ONLY",
+              "planning": "NO_REPLAN",
+              "source": "TASK-003 recorded follow-up",
+              "exclusions": [
+                "Localization",
+                "Backend",
+                "ApiClient"
+              ]
+            }
+          },
+          "CONTEXT": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/tasks/TASK-006.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Impact analysis.",
+            "outputs": {
+              "verdict": "CONTEXT_READY",
+              "revision": "d1425d1",
+              "finding": "429 currently surfaces server message text verbatim via Resource.message"
+            }
+          },
+          "IMPACT": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/tasks/TASK-006.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Technical readiness.",
+            "outputs": {
+              "impact": "LOW",
+              "modules": [
+                "user_app/features/authentication"
+              ],
+              "api_change": false,
+              "db_change": false,
+              "flows": [
+                "login Next",
+                "OTP resend"
+              ]
+            }
+          },
+          "TECHNICAL": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/tasks/TASK-006.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Obtain operator technical approval for TASK-006 design.",
+            "outputs": {
+              "verdict": "TECHNICAL_READY",
+              "files": [
+                "auth_remote_datasource.dart",
+                "login_screen_controller.dart",
+                "otp_repository_http_test.dart",
+                "otp_use_cases_test.dart"
+              ],
+              "approval": "pending operator"
+            }
+          }
+        },
+        "active_task": null
+      },
+      "created_at": "2026-09-23T12:39:50.470293+00:00"
+    },
+    {
+      "run_id": "RUN-CF934E90E5A0492DA2C7D4021DD62CAF",
+      "stage": "TECHNICAL",
+      "status": "RUNNING",
+      "payload": {},
+      "created_at": "2026-09-23T12:40:07.444534+00:00"
+    },
+    {
+      "run_id": "RUN-CF934E90E5A0492DA2C7D4021DD62CAF",
+      "stage": "IMPLEMENTATION",
+      "status": "RUNNING",
+      "payload": {},
+      "created_at": "2026-09-23T12:40:07.493897+00:00"
+    },
+    {
+      "run_id": "RUN-CF934E90E5A0492DA2C7D4021DD62CAF",
+      "stage": "IMPLEMENTATION",
+      "status": "RUNNING",
+      "payload": {
+        "attempts": {
+          "0:INTAKE:prompt-intake-adapter": 1,
+          "0:CONTEXT:user-flow-discovery-agent": 1,
+          "0:IMPACT:change-impact-analyzer": 1,
+          "0:TECHNICAL:technical-readiness-verifier": 1,
+          "0:IMPLEMENTATION:implementation-agent": 1
+        },
+        "active_task": {
+          "id": "0ea52f62d4b34599bd440fb2e0f74df0",
+          "skill": "implementation-agent",
+          "started_at": "2026-09-23T12:40:07.561830+00:00",
+          "tool_calls": 0
+        }
+      },
+      "created_at": "2026-09-23T12:40:07.563241+00:00"
+    },
+    {
+      "run_id": "RUN-CF934E90E5A0492DA2C7D4021DD62CAF",
+      "stage": "IMPLEMENTATION",
+      "status": "RUNNING",
+      "payload": {
+        "results": {
+          "INTAKE": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/tasks/TASK-006.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Scoped context for user_app auth start path.",
+            "outputs": {
+              "work_item": "BOS-010 TASK-006",
+              "work_type": "change_request",
+              "project_type": "brownfield",
+              "hierarchy": "TASK_ONLY",
+              "planning": "NO_REPLAN",
+              "source": "TASK-003 recorded follow-up",
+              "exclusions": [
+                "Localization",
+                "Backend",
+                "ApiClient"
+              ]
+            }
+          },
+          "CONTEXT": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/tasks/TASK-006.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Impact analysis.",
+            "outputs": {
+              "verdict": "CONTEXT_READY",
+              "revision": "d1425d1",
+              "finding": "429 currently surfaces server message text verbatim via Resource.message"
+            }
+          },
+          "IMPACT": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/tasks/TASK-006.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Technical readiness.",
+            "outputs": {
+              "impact": "LOW",
+              "modules": [
+                "user_app/features/authentication"
+              ],
+              "api_change": false,
+              "db_change": false,
+              "flows": [
+                "login Next",
+                "OTP resend"
+              ]
+            }
+          },
+          "TECHNICAL": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/tasks/TASK-006.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Obtain operator technical approval for TASK-006 design.",
+            "outputs": {
+              "verdict": "TECHNICAL_READY",
+              "files": [
+                "auth_remote_datasource.dart",
+                "login_screen_controller.dart",
+                "otp_repository_http_test.dart",
+                "otp_use_cases_test.dart"
+              ],
+              "approval": "pending operator"
+            }
+          },
+          "IMPLEMENTATION": {
+            "status": "READY",
+            "evidence": [
+              "user_app/lib/features/authentication/data/datasources/auth_remote_datasource.dart",
+              "user_app/lib/features/authentication/presentation/controllers/login_screen_controller.dart",
+              "user_app/test/features/authentication/data/repositories/otp_repository_http_test.dart",
+              "user_app/test/features/authentication/domain/usecases/otp_use_cases_test.dart"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Code review.",
+            "outputs": {
+              "changes": [
+                "startOtp 429 -> ServerException('OTP_RATE_LIMITED')",
+                "otpStartErrorMessage maps OTP_RATE_LIMITED; other failures unchanged",
+                "3 tests added"
+              ],
+              "checks": [
+                "verify-flutter.sh VERIFY PASSED: analyze clean, 35 tests"
+              ]
+            }
+          }
+        },
+        "active_task": null,
+        "context": {
+          "files": {
+            "agentic/data/project-context/features/BOS-010/tasks/TASK-006.md": "7e235e2345c6f6fa5d40aed1e8a89a57fa9a6d35827f918cc670929a5f2e0b2c",
+            "user_app/lib/features/authentication/data/datasources/auth_remote_datasource.dart": "cf5cb25accc76fa8708e3555b25c68480480c7d8d27f9507d29ec051df53164b",
+            "user_app/lib/features/authentication/presentation/controllers/login_screen_controller.dart": "d72e5797711556b9d517f15a6d57bb3c848193a4d6ef54e6b8262a7e59b35353",
+            "user_app/lib/core/network/client/api_client.dart": "57ed1ebd08f2c99090cc92967b54b85341a6ead9b5ecfe09ff5aedca68af089e"
+          }
+        }
+      },
+      "created_at": "2026-09-23T12:41:30.595352+00:00"
+    },
+    {
+      "run_id": "RUN-CF934E90E5A0492DA2C7D4021DD62CAF",
+      "stage": "REVIEW",
+      "status": "RUNNING",
+      "payload": {},
+      "created_at": "2026-09-23T12:41:47.203469+00:00"
+    },
+    {
+      "run_id": "RUN-CF934E90E5A0492DA2C7D4021DD62CAF",
+      "stage": "REVIEW",
+      "status": "RUNNING",
+      "payload": {
+        "attempts": {
+          "0:INTAKE:prompt-intake-adapter": 1,
+          "0:CONTEXT:user-flow-discovery-agent": 1,
+          "0:IMPACT:change-impact-analyzer": 1,
+          "0:TECHNICAL:technical-readiness-verifier": 1,
+          "0:IMPLEMENTATION:implementation-agent": 1,
+          "0:REVIEW:code-review-agent": 1
+        },
+        "active_task": {
+          "id": "5971b15fd3ef4488b62907d1e35109e0",
+          "skill": "code-review-agent",
+          "started_at": "2026-09-23T12:41:47.327618+00:00",
+          "tool_calls": 0
+        }
+      },
+      "created_at": "2026-09-23T12:41:47.328262+00:00"
+    },
+    {
+      "run_id": "RUN-CF934E90E5A0492DA2C7D4021DD62CAF",
+      "stage": "REVIEW",
+      "status": "RUNNING",
+      "payload": {
+        "results": {
+          "INTAKE": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/tasks/TASK-006.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Scoped context for user_app auth start path.",
+            "outputs": {
+              "work_item": "BOS-010 TASK-006",
+              "work_type": "change_request",
+              "project_type": "brownfield",
+              "hierarchy": "TASK_ONLY",
+              "planning": "NO_REPLAN",
+              "source": "TASK-003 recorded follow-up",
+              "exclusions": [
+                "Localization",
+                "Backend",
+                "ApiClient"
+              ]
+            }
+          },
+          "CONTEXT": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/tasks/TASK-006.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Impact analysis.",
+            "outputs": {
+              "verdict": "CONTEXT_READY",
+              "revision": "d1425d1",
+              "finding": "429 currently surfaces server message text verbatim via Resource.message"
+            }
+          },
+          "IMPACT": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/tasks/TASK-006.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Technical readiness.",
+            "outputs": {
+              "impact": "LOW",
+              "modules": [
+                "user_app/features/authentication"
+              ],
+              "api_change": false,
+              "db_change": false,
+              "flows": [
+                "login Next",
+                "OTP resend"
+              ]
+            }
+          },
+          "TECHNICAL": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/tasks/TASK-006.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Obtain operator technical approval for TASK-006 design.",
+            "outputs": {
+              "verdict": "TECHNICAL_READY",
+              "files": [
+                "auth_remote_datasource.dart",
+                "login_screen_controller.dart",
+                "otp_repository_http_test.dart",
+                "otp_use_cases_test.dart"
+              ],
+              "approval": "pending operator"
+            }
+          },
+          "IMPLEMENTATION": {
+            "status": "READY",
+            "evidence": [
+              "user_app/lib/features/authentication/data/datasources/auth_remote_datasource.dart",
+              "user_app/lib/features/authentication/presentation/controllers/login_screen_controller.dart",
+              "user_app/test/features/authentication/data/repositories/otp_repository_http_test.dart",
+              "user_app/test/features/authentication/domain/usecases/otp_use_cases_test.dart"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Code review.",
+            "outputs": {
+              "changes": [
+                "startOtp 429 -> ServerException('OTP_RATE_LIMITED')",
+                "otpStartErrorMessage maps OTP_RATE_LIMITED; other failures unchanged",
+                "3 tests added"
+              ],
+              "checks": [
+                "verify-flutter.sh VERIFY PASSED: analyze clean, 35 tests"
+              ]
+            }
+          },
+          "REVIEW": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/REVIEW-TASK-006.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Automated QA.",
+            "outputs": {
+              "verdict": "READY"
+            }
+          }
+        },
+        "active_task": null
+      },
+      "created_at": "2026-09-23T12:41:47.429771+00:00"
+    },
+    {
+      "run_id": "RUN-CF934E90E5A0492DA2C7D4021DD62CAF",
+      "stage": "QA",
+      "status": "RUNNING",
+      "payload": {},
+      "created_at": "2026-09-23T12:41:47.488905+00:00"
+    },
+    {
+      "run_id": "RUN-CF934E90E5A0492DA2C7D4021DD62CAF",
+      "stage": "QA",
+      "status": "RUNNING",
+      "payload": {
+        "attempts": {
+          "0:INTAKE:prompt-intake-adapter": 1,
+          "0:CONTEXT:user-flow-discovery-agent": 1,
+          "0:IMPACT:change-impact-analyzer": 1,
+          "0:TECHNICAL:technical-readiness-verifier": 1,
+          "0:IMPLEMENTATION:implementation-agent": 1,
+          "0:REVIEW:code-review-agent": 1,
+          "0:QA:automated-qa-agent": 1
+        },
+        "active_task": {
+          "id": "c8df72e3847445afb1cc99f9ffde2c3c",
+          "skill": "automated-qa-agent",
+          "started_at": "2026-09-23T12:41:47.612613+00:00",
+          "tool_calls": 0
+        }
+      },
+      "created_at": "2026-09-23T12:41:47.615029+00:00"
+    },
+    {
+      "run_id": "RUN-CF934E90E5A0492DA2C7D4021DD62CAF",
+      "stage": "QA",
+      "status": "RUNNING",
+      "payload": {
+        "results": {
+          "INTAKE": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/tasks/TASK-006.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Scoped context for user_app auth start path.",
+            "outputs": {
+              "work_item": "BOS-010 TASK-006",
+              "work_type": "change_request",
+              "project_type": "brownfield",
+              "hierarchy": "TASK_ONLY",
+              "planning": "NO_REPLAN",
+              "source": "TASK-003 recorded follow-up",
+              "exclusions": [
+                "Localization",
+                "Backend",
+                "ApiClient"
+              ]
+            }
+          },
+          "CONTEXT": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/tasks/TASK-006.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Impact analysis.",
+            "outputs": {
+              "verdict": "CONTEXT_READY",
+              "revision": "d1425d1",
+              "finding": "429 currently surfaces server message text verbatim via Resource.message"
+            }
+          },
+          "IMPACT": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/tasks/TASK-006.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Technical readiness.",
+            "outputs": {
+              "impact": "LOW",
+              "modules": [
+                "user_app/features/authentication"
+              ],
+              "api_change": false,
+              "db_change": false,
+              "flows": [
+                "login Next",
+                "OTP resend"
+              ]
+            }
+          },
+          "TECHNICAL": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/tasks/TASK-006.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Obtain operator technical approval for TASK-006 design.",
+            "outputs": {
+              "verdict": "TECHNICAL_READY",
+              "files": [
+                "auth_remote_datasource.dart",
+                "login_screen_controller.dart",
+                "otp_repository_http_test.dart",
+                "otp_use_cases_test.dart"
+              ],
+              "approval": "pending operator"
+            }
+          },
+          "IMPLEMENTATION": {
+            "status": "READY",
+            "evidence": [
+              "user_app/lib/features/authentication/data/datasources/auth_remote_datasource.dart",
+              "user_app/lib/features/authentication/presentation/controllers/login_screen_controller.dart",
+              "user_app/test/features/authentication/data/repositories/otp_repository_http_test.dart",
+              "user_app/test/features/authentication/domain/usecases/otp_use_cases_test.dart"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Code review.",
+            "outputs": {
+              "changes": [
+                "startOtp 429 -> ServerException('OTP_RATE_LIMITED')",
+                "otpStartErrorMessage maps OTP_RATE_LIMITED; other failures unchanged",
+                "3 tests added"
+              ],
+              "checks": [
+                "verify-flutter.sh VERIFY PASSED: analyze clean, 35 tests"
+              ]
+            }
+          },
+          "REVIEW": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/REVIEW-TASK-006.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Automated QA.",
+            "outputs": {
+              "verdict": "READY"
+            }
+          },
+          "QA": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/REVIEW-TASK-006.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Operator release decision.",
+            "outputs": {
+              "verdict": "READY"
+            }
+          }
+        },
+        "active_task": null
+      },
+      "created_at": "2026-09-23T12:41:47.712181+00:00"
+    },
+    {
+      "run_id": "RUN-CF934E90E5A0492DA2C7D4021DD62CAF",
+      "stage": "QA",
+      "status": "RUNNING",
+      "payload": {},
+      "created_at": "2026-09-23T12:42:13.514363+00:00"
+    },
+    {
+      "run_id": "RUN-CF934E90E5A0492DA2C7D4021DD62CAF",
+      "stage": "RELEASE",
+      "status": "RUNNING",
+      "payload": {},
+      "created_at": "2026-09-23T12:42:13.577085+00:00"
+    },
+    {
+      "run_id": "RUN-CF934E90E5A0492DA2C7D4021DD62CAF",
+      "stage": "RELEASE",
+      "status": "RUNNING",
+      "payload": {
+        "attempts": {
+          "0:INTAKE:prompt-intake-adapter": 1,
+          "0:CONTEXT:user-flow-discovery-agent": 1,
+          "0:IMPACT:change-impact-analyzer": 1,
+          "0:TECHNICAL:technical-readiness-verifier": 1,
+          "0:IMPLEMENTATION:implementation-agent": 1,
+          "0:REVIEW:code-review-agent": 1,
+          "0:QA:automated-qa-agent": 1,
+          "0:RELEASE:release-readiness-agent": 1
+        },
+        "active_task": {
+          "id": "8f6f6161270b41909a4d52345e9b0730",
+          "skill": "release-readiness-agent",
+          "started_at": "2026-09-23T12:42:13.683471+00:00",
+          "tool_calls": 0
+        }
+      },
+      "created_at": "2026-09-23T12:42:13.684314+00:00"
+    },
+    {
+      "run_id": "RUN-CF934E90E5A0492DA2C7D4021DD62CAF",
+      "stage": "RELEASE",
+      "status": "RUNNING",
+      "payload": {
+        "results": {
+          "INTAKE": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/tasks/TASK-006.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Scoped context for user_app auth start path.",
+            "outputs": {
+              "work_item": "BOS-010 TASK-006",
+              "work_type": "change_request",
+              "project_type": "brownfield",
+              "hierarchy": "TASK_ONLY",
+              "planning": "NO_REPLAN",
+              "source": "TASK-003 recorded follow-up",
+              "exclusions": [
+                "Localization",
+                "Backend",
+                "ApiClient"
+              ]
+            }
+          },
+          "CONTEXT": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/tasks/TASK-006.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Impact analysis.",
+            "outputs": {
+              "verdict": "CONTEXT_READY",
+              "revision": "d1425d1",
+              "finding": "429 currently surfaces server message text verbatim via Resource.message"
+            }
+          },
+          "IMPACT": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/tasks/TASK-006.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Technical readiness.",
+            "outputs": {
+              "impact": "LOW",
+              "modules": [
+                "user_app/features/authentication"
+              ],
+              "api_change": false,
+              "db_change": false,
+              "flows": [
+                "login Next",
+                "OTP resend"
+              ]
+            }
+          },
+          "TECHNICAL": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/tasks/TASK-006.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Obtain operator technical approval for TASK-006 design.",
+            "outputs": {
+              "verdict": "TECHNICAL_READY",
+              "files": [
+                "auth_remote_datasource.dart",
+                "login_screen_controller.dart",
+                "otp_repository_http_test.dart",
+                "otp_use_cases_test.dart"
+              ],
+              "approval": "pending operator"
+            }
+          },
+          "IMPLEMENTATION": {
+            "status": "READY",
+            "evidence": [
+              "user_app/lib/features/authentication/data/datasources/auth_remote_datasource.dart",
+              "user_app/lib/features/authentication/presentation/controllers/login_screen_controller.dart",
+              "user_app/test/features/authentication/data/repositories/otp_repository_http_test.dart",
+              "user_app/test/features/authentication/domain/usecases/otp_use_cases_test.dart"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Code review.",
+            "outputs": {
+              "changes": [
+                "startOtp 429 -> ServerException('OTP_RATE_LIMITED')",
+                "otpStartErrorMessage maps OTP_RATE_LIMITED; other failures unchanged",
+                "3 tests added"
+              ],
+              "checks": [
+                "verify-flutter.sh VERIFY PASSED: analyze clean, 35 tests"
+              ]
+            }
+          },
+          "REVIEW": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/REVIEW-TASK-006.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Automated QA.",
+            "outputs": {
+              "verdict": "READY"
+            }
+          },
+          "QA": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/REVIEW-TASK-006.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Operator release decision.",
+            "outputs": {
+              "verdict": "READY"
+            }
+          },
+          "RELEASE": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/REVIEW-TASK-006.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Mark completed; commit.",
+            "outputs": {
+              "verdict": "RELEASED",
+              "approvals": [
+                "technical",
+                "release"
+              ]
+            }
+          }
+        },
+        "active_task": null
+      },
+      "created_at": "2026-09-23T12:42:13.791565+00:00"
+    },
+    {
+      "run_id": "RUN-CF934E90E5A0492DA2C7D4021DD62CAF",
+      "stage": "COMPLETED",
+      "status": "COMPLETED",
+      "payload": {},
+      "created_at": "2026-09-23T12:42:13.858336+00:00"
+    }
+  ],
+  "approvals": [
+    {
+      "run_id": "RUN-CF934E90E5A0492DA2C7D4021DD62CAF",
+      "gate": "technical",
+      "approver": "macdipu",
+      "decision": "APPROVED",
+      "comment": "Operator selected Approve for TASK-006 design (tasks/TASK-006.md), 2026-09-23",
+      "created_at": "2026-09-23T12:40:07.443956+00:00",
+      "scope_revision": 0
+    },
+    {
+      "run_id": "RUN-CF934E90E5A0492DA2C7D4021DD62CAF",
+      "gate": "release",
+      "approver": "macdipu",
+      "decision": "APPROVED",
+      "comment": "Operator selected Approve + commit for TASK-006, 2026-09-23",
+      "created_at": "2026-09-23T12:42:13.513272+00:00",
+      "scope_revision": 0
+    }
+  ],
+  "timing_events": [
+    {
+      "run_id": "RUN-CF934E90E5A0492DA2C7D4021DD62CAF",
+      "task": "ab86ec752e534732a618de3bfb8fca39",
+      "event": "STARTED",
+      "ts": "2026-09-23T12:39:41.509676+00:00",
+      "metadata": {
+        "skill": "prompt-intake-adapter",
+        "retry_count": 0
+      }
+    },
+    {
+      "run_id": "RUN-CF934E90E5A0492DA2C7D4021DD62CAF",
+      "task": "ab86ec752e534732a618de3bfb8fca39",
+      "event": "COMPLETED",
+      "ts": "2026-09-23T12:39:41.586249+00:00",
+      "metadata": {
+        "duration_ms": 76,
+        "result_status": "READY"
+      }
+    },
+    {
+      "run_id": "RUN-CF934E90E5A0492DA2C7D4021DD62CAF",
+      "task": "8501fb91ac6b44cf8340d69048e1cad2",
+      "event": "STARTED",
+      "ts": "2026-09-23T12:39:49.996955+00:00",
+      "metadata": {
+        "skill": "user-flow-discovery-agent",
+        "retry_count": 0
+      }
+    },
+    {
+      "run_id": "RUN-CF934E90E5A0492DA2C7D4021DD62CAF",
+      "task": "8501fb91ac6b44cf8340d69048e1cad2",
+      "event": "COMPLETED",
+      "ts": "2026-09-23T12:39:50.075782+00:00",
+      "metadata": {
+        "duration_ms": 78,
+        "result_status": "READY"
+      }
+    },
+    {
+      "run_id": "RUN-CF934E90E5A0492DA2C7D4021DD62CAF",
+      "task": "560d84931e0d476fbc0e5959df4260f7",
+      "event": "STARTED",
+      "ts": "2026-09-23T12:39:50.182242+00:00",
+      "metadata": {
+        "skill": "change-impact-analyzer",
+        "retry_count": 0
+      }
+    },
+    {
+      "run_id": "RUN-CF934E90E5A0492DA2C7D4021DD62CAF",
+      "task": "560d84931e0d476fbc0e5959df4260f7",
+      "event": "COMPLETED",
+      "ts": "2026-09-23T12:39:50.265065+00:00",
+      "metadata": {
+        "duration_ms": 82,
+        "result_status": "READY"
+      }
+    },
+    {
+      "run_id": "RUN-CF934E90E5A0492DA2C7D4021DD62CAF",
+      "task": "cf745b4148ac4054a8729a2fb9a9275f",
+      "event": "STARTED",
+      "ts": "2026-09-23T12:39:50.378473+00:00",
+      "metadata": {
+        "skill": "technical-readiness-verifier",
+        "retry_count": 0
+      }
+    },
+    {
+      "run_id": "RUN-CF934E90E5A0492DA2C7D4021DD62CAF",
+      "task": "cf745b4148ac4054a8729a2fb9a9275f",
+      "event": "COMPLETED",
+      "ts": "2026-09-23T12:39:50.469972+00:00",
+      "metadata": {
+        "duration_ms": 91,
+        "result_status": "READY"
+      }
+    },
+    {
+      "run_id": "RUN-CF934E90E5A0492DA2C7D4021DD62CAF",
+      "task": "0ea52f62d4b34599bd440fb2e0f74df0",
+      "event": "STARTED",
+      "ts": "2026-09-23T12:40:07.561830+00:00",
+      "metadata": {
+        "skill": "implementation-agent",
+        "retry_count": 0
+      }
+    },
+    {
+      "run_id": "RUN-CF934E90E5A0492DA2C7D4021DD62CAF",
+      "task": "0ea52f62d4b34599bd440fb2e0f74df0",
+      "event": "COMPLETED",
+      "ts": "2026-09-23T12:41:30.595005+00:00",
+      "metadata": {
+        "duration_ms": 83033,
+        "result_status": "READY"
+      }
+    },
+    {
+      "run_id": "RUN-CF934E90E5A0492DA2C7D4021DD62CAF",
+      "task": "5971b15fd3ef4488b62907d1e35109e0",
+      "event": "STARTED",
+      "ts": "2026-09-23T12:41:47.327618+00:00",
+      "metadata": {
+        "skill": "code-review-agent",
+        "retry_count": 0
+      }
+    },
+    {
+      "run_id": "RUN-CF934E90E5A0492DA2C7D4021DD62CAF",
+      "task": "5971b15fd3ef4488b62907d1e35109e0",
+      "event": "COMPLETED",
+      "ts": "2026-09-23T12:41:47.429314+00:00",
+      "metadata": {
+        "duration_ms": 101,
+        "result_status": "READY"
+      }
+    },
+    {
+      "run_id": "RUN-CF934E90E5A0492DA2C7D4021DD62CAF",
+      "task": "c8df72e3847445afb1cc99f9ffde2c3c",
+      "event": "STARTED",
+      "ts": "2026-09-23T12:41:47.612613+00:00",
+      "metadata": {
+        "skill": "automated-qa-agent",
+        "retry_count": 0
+      }
+    },
+    {
+      "run_id": "RUN-CF934E90E5A0492DA2C7D4021DD62CAF",
+      "task": "c8df72e3847445afb1cc99f9ffde2c3c",
+      "event": "COMPLETED",
+      "ts": "2026-09-23T12:41:47.711643+00:00",
+      "metadata": {
+        "duration_ms": 99,
+        "result_status": "READY"
+      }
+    },
+    {
+      "run_id": "RUN-CF934E90E5A0492DA2C7D4021DD62CAF",
+      "task": "8f6f6161270b41909a4d52345e9b0730",
+      "event": "STARTED",
+      "ts": "2026-09-23T12:42:13.683471+00:00",
+      "metadata": {
+        "skill": "release-readiness-agent",
+        "retry_count": 0
+      }
+    },
+    {
+      "run_id": "RUN-CF934E90E5A0492DA2C7D4021DD62CAF",
+      "task": "8f6f6161270b41909a4d52345e9b0730",
+      "event": "COMPLETED",
+      "ts": "2026-09-23T12:42:13.790902+00:00",
+      "metadata": {
+        "duration_ms": 107,
+        "result_status": "READY"
+      }
+    }
+  ],
+  "audit_events": [
+    {
+      "run_id": "RUN-CF934E90E5A0492DA2C7D4021DD62CAF",
+      "event": "RUN_STARTED",
+      "payload": {},
+      "created_at": "2026-09-23T12:39:26.785153+00:00"
+    },
+    {
+      "run_id": "RUN-CF934E90E5A0492DA2C7D4021DD62CAF",
+      "event": "TASK_STARTED",
+      "payload": {
+        "skill": "prompt-intake-adapter"
+      },
+      "created_at": "2026-09-23T12:39:41.510026+00:00"
+    },
+    {
+      "run_id": "RUN-CF934E90E5A0492DA2C7D4021DD62CAF",
+      "event": "RESULT_RECORDED",
+      "payload": {
+        "skill": "prompt-intake-adapter",
+        "result": {
+          "status": "READY",
+          "evidence": [
+            "agentic/data/project-context/features/BOS-010/tasks/TASK-006.md"
+          ],
+          "blocking_issues": [],
+          "open_questions": [],
+          "recommended_next_step": "Scoped context for user_app auth start path.",
+          "outputs": {
+            "work_item": "BOS-010 TASK-006",
+            "work_type": "change_request",
+            "project_type": "brownfield",
+            "hierarchy": "TASK_ONLY",
+            "planning": "NO_REPLAN",
+            "source": "TASK-003 recorded follow-up",
+            "exclusions": [
+              "Localization",
+              "Backend",
+              "ApiClient"
+            ]
+          }
+        }
+      },
+      "created_at": "2026-09-23T12:39:41.586390+00:00"
+    },
+    {
+      "run_id": "RUN-CF934E90E5A0492DA2C7D4021DD62CAF",
+      "event": "CONTEXT_REFRESHED",
+      "payload": {
+        "paths": [
+          "agentic/data/project-context/features/BOS-010/tasks/TASK-006.md",
+          "user_app/lib/features/authentication/data/datasources/auth_remote_datasource.dart",
+          "user_app/lib/features/authentication/presentation/controllers/login_screen_controller.dart",
+          "user_app/lib/core/network/client/api_client.dart"
+        ]
+      },
+      "created_at": "2026-09-23T12:39:41.652551+00:00"
+    },
+    {
+      "run_id": "RUN-CF934E90E5A0492DA2C7D4021DD62CAF",
+      "event": "STAGE_CHANGED",
+      "payload": {},
+      "created_at": "2026-09-23T12:39:49.944274+00:00"
+    },
+    {
+      "run_id": "RUN-CF934E90E5A0492DA2C7D4021DD62CAF",
+      "event": "TASK_STARTED",
+      "payload": {
+        "skill": "user-flow-discovery-agent"
+      },
+      "created_at": "2026-09-23T12:39:49.997858+00:00"
+    },
+    {
+      "run_id": "RUN-CF934E90E5A0492DA2C7D4021DD62CAF",
+      "event": "RESULT_RECORDED",
+      "payload": {
+        "skill": "user-flow-discovery-agent",
+        "result": {
+          "status": "READY",
+          "evidence": [
+            "agentic/data/project-context/features/BOS-010/tasks/TASK-006.md"
+          ],
+          "blocking_issues": [],
+          "open_questions": [],
+          "recommended_next_step": "Impact analysis.",
+          "outputs": {
+            "verdict": "CONTEXT_READY",
+            "revision": "d1425d1",
+            "finding": "429 currently surfaces server message text verbatim via Resource.message"
+          }
+        }
+      },
+      "created_at": "2026-09-23T12:39:50.075973+00:00"
+    },
+    {
+      "run_id": "RUN-CF934E90E5A0492DA2C7D4021DD62CAF",
+      "event": "STAGE_CHANGED",
+      "payload": {},
+      "created_at": "2026-09-23T12:39:50.125881+00:00"
+    },
+    {
+      "run_id": "RUN-CF934E90E5A0492DA2C7D4021DD62CAF",
+      "event": "TASK_STARTED",
+      "payload": {
+        "skill": "change-impact-analyzer"
+      },
+      "created_at": "2026-09-23T12:39:50.182730+00:00"
+    },
+    {
+      "run_id": "RUN-CF934E90E5A0492DA2C7D4021DD62CAF",
+      "event": "RESULT_RECORDED",
+      "payload": {
+        "skill": "change-impact-analyzer",
+        "result": {
+          "status": "READY",
+          "evidence": [
+            "agentic/data/project-context/features/BOS-010/tasks/TASK-006.md"
+          ],
+          "blocking_issues": [],
+          "open_questions": [],
+          "recommended_next_step": "Technical readiness.",
+          "outputs": {
+            "impact": "LOW",
+            "modules": [
+              "user_app/features/authentication"
+            ],
+            "api_change": false,
+            "db_change": false,
+            "flows": [
+              "login Next",
+              "OTP resend"
+            ]
+          }
+        }
+      },
+      "created_at": "2026-09-23T12:39:50.265310+00:00"
+    },
+    {
+      "run_id": "RUN-CF934E90E5A0492DA2C7D4021DD62CAF",
+      "event": "STAGE_CHANGED",
+      "payload": {},
+      "created_at": "2026-09-23T12:39:50.318446+00:00"
+    },
+    {
+      "run_id": "RUN-CF934E90E5A0492DA2C7D4021DD62CAF",
+      "event": "TASK_STARTED",
+      "payload": {
+        "skill": "technical-readiness-verifier"
+      },
+      "created_at": "2026-09-23T12:39:50.380157+00:00"
+    },
+    {
+      "run_id": "RUN-CF934E90E5A0492DA2C7D4021DD62CAF",
+      "event": "RESULT_RECORDED",
+      "payload": {
+        "skill": "technical-readiness-verifier",
+        "result": {
+          "status": "READY",
+          "evidence": [
+            "agentic/data/project-context/features/BOS-010/tasks/TASK-006.md"
+          ],
+          "blocking_issues": [],
+          "open_questions": [],
+          "recommended_next_step": "Obtain operator technical approval for TASK-006 design.",
+          "outputs": {
+            "verdict": "TECHNICAL_READY",
+            "files": [
+              "auth_remote_datasource.dart",
+              "login_screen_controller.dart",
+              "otp_repository_http_test.dart",
+              "otp_use_cases_test.dart"
+            ],
+            "approval": "pending operator"
+          }
+        }
+      },
+      "created_at": "2026-09-23T12:39:50.470293+00:00"
+    },
+    {
+      "run_id": "RUN-CF934E90E5A0492DA2C7D4021DD62CAF",
+      "event": "APPROVAL_RECORDED",
+      "payload": {
+        "gate": "technical",
+        "decision": "APPROVED",
+        "by": "macdipu"
+      },
+      "created_at": "2026-09-23T12:40:07.444534+00:00"
+    },
+    {
+      "run_id": "RUN-CF934E90E5A0492DA2C7D4021DD62CAF",
+      "event": "STAGE_CHANGED",
+      "payload": {},
+      "created_at": "2026-09-23T12:40:07.493897+00:00"
+    },
+    {
+      "run_id": "RUN-CF934E90E5A0492DA2C7D4021DD62CAF",
+      "event": "TASK_STARTED",
+      "payload": {
+        "skill": "implementation-agent"
+      },
+      "created_at": "2026-09-23T12:40:07.563241+00:00"
+    },
+    {
+      "run_id": "RUN-CF934E90E5A0492DA2C7D4021DD62CAF",
+      "event": "RESULT_RECORDED",
+      "payload": {
+        "skill": "implementation-agent",
+        "result": {
+          "status": "READY",
+          "evidence": [
+            "user_app/lib/features/authentication/data/datasources/auth_remote_datasource.dart",
+            "user_app/lib/features/authentication/presentation/controllers/login_screen_controller.dart",
+            "user_app/test/features/authentication/data/repositories/otp_repository_http_test.dart",
+            "user_app/test/features/authentication/domain/usecases/otp_use_cases_test.dart"
+          ],
+          "blocking_issues": [],
+          "open_questions": [],
+          "recommended_next_step": "Code review.",
+          "outputs": {
+            "changes": [
+              "startOtp 429 -> ServerException('OTP_RATE_LIMITED')",
+              "otpStartErrorMessage maps OTP_RATE_LIMITED; other failures unchanged",
+              "3 tests added"
+            ],
+            "checks": [
+              "verify-flutter.sh VERIFY PASSED: analyze clean, 35 tests"
+            ]
+          }
+        }
+      },
+      "created_at": "2026-09-23T12:41:30.595352+00:00"
+    },
+    {
+      "run_id": "RUN-CF934E90E5A0492DA2C7D4021DD62CAF",
+      "event": "STAGE_CHANGED",
+      "payload": {},
+      "created_at": "2026-09-23T12:41:47.203469+00:00"
+    },
+    {
+      "run_id": "RUN-CF934E90E5A0492DA2C7D4021DD62CAF",
+      "event": "TASK_STARTED",
+      "payload": {
+        "skill": "code-review-agent"
+      },
+      "created_at": "2026-09-23T12:41:47.328262+00:00"
+    },
+    {
+      "run_id": "RUN-CF934E90E5A0492DA2C7D4021DD62CAF",
+      "event": "RESULT_RECORDED",
+      "payload": {
+        "skill": "code-review-agent",
+        "result": {
+          "status": "READY",
+          "evidence": [
+            "agentic/data/project-context/features/BOS-010/REVIEW-TASK-006.md"
+          ],
+          "blocking_issues": [],
+          "open_questions": [],
+          "recommended_next_step": "Automated QA.",
+          "outputs": {
+            "verdict": "READY"
+          }
+        }
+      },
+      "created_at": "2026-09-23T12:41:47.429771+00:00"
+    },
+    {
+      "run_id": "RUN-CF934E90E5A0492DA2C7D4021DD62CAF",
+      "event": "STAGE_CHANGED",
+      "payload": {},
+      "created_at": "2026-09-23T12:41:47.488905+00:00"
+    },
+    {
+      "run_id": "RUN-CF934E90E5A0492DA2C7D4021DD62CAF",
+      "event": "TASK_STARTED",
+      "payload": {
+        "skill": "automated-qa-agent"
+      },
+      "created_at": "2026-09-23T12:41:47.615029+00:00"
+    },
+    {
+      "run_id": "RUN-CF934E90E5A0492DA2C7D4021DD62CAF",
+      "event": "RESULT_RECORDED",
+      "payload": {
+        "skill": "automated-qa-agent",
+        "result": {
+          "status": "READY",
+          "evidence": [
+            "agentic/data/project-context/features/BOS-010/REVIEW-TASK-006.md"
+          ],
+          "blocking_issues": [],
+          "open_questions": [],
+          "recommended_next_step": "Operator release decision.",
+          "outputs": {
+            "verdict": "READY"
+          }
+        }
+      },
+      "created_at": "2026-09-23T12:41:47.712181+00:00"
+    },
+    {
+      "run_id": "RUN-CF934E90E5A0492DA2C7D4021DD62CAF",
+      "event": "APPROVAL_RECORDED",
+      "payload": {
+        "gate": "release",
+        "decision": "APPROVED",
+        "by": "macdipu"
+      },
+      "created_at": "2026-09-23T12:42:13.514363+00:00"
+    },
+    {
+      "run_id": "RUN-CF934E90E5A0492DA2C7D4021DD62CAF",
+      "event": "STAGE_CHANGED",
+      "payload": {},
+      "created_at": "2026-09-23T12:42:13.577085+00:00"
+    },
+    {
+      "run_id": "RUN-CF934E90E5A0492DA2C7D4021DD62CAF",
+      "event": "TASK_STARTED",
+      "payload": {
+        "skill": "release-readiness-agent"
+      },
+      "created_at": "2026-09-23T12:42:13.684314+00:00"
+    },
+    {
+      "run_id": "RUN-CF934E90E5A0492DA2C7D4021DD62CAF",
+      "event": "RESULT_RECORDED",
+      "payload": {
+        "skill": "release-readiness-agent",
+        "result": {
+          "status": "READY",
+          "evidence": [
+            "agentic/data/project-context/features/BOS-010/REVIEW-TASK-006.md"
+          ],
+          "blocking_issues": [],
+          "open_questions": [],
+          "recommended_next_step": "Mark completed; commit.",
+          "outputs": {
+            "verdict": "RELEASED",
+            "approvals": [
+              "technical",
+              "release"
+            ]
+          }
+        }
+      },
+      "created_at": "2026-09-23T12:42:13.791565+00:00"
+    },
+    {
+      "run_id": "RUN-CF934E90E5A0492DA2C7D4021DD62CAF",
+      "event": "STAGE_CHANGED",
+      "payload": {},
+      "created_at": "2026-09-23T12:42:13.858336+00:00"
+    }
+  ],
+  "tool_calls": {}
+}

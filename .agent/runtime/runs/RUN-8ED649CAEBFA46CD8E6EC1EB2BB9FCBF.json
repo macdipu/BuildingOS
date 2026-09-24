@@ -1,0 +1,3130 @@
+{
+  "run": {
+    "run_id": "RUN-8ED649CAEBFA46CD8E6EC1EB2BB9FCBF",
+    "project": "BuildingOS",
+    "work_type": "change_request",
+    "title": "BOS-010 TASK-005: user_app async locale toggle, login SVG precache, login/OTP layout polish",
+    "stage": "COMPLETED",
+    "status": "COMPLETED",
+    "dry_run": false,
+    "created_at": "2026-09-23T10:45:37.938189+00:00",
+    "updated_at": "2026-09-23T11:31:13.847972+00:00",
+    "metadata": {
+      "runtime_version": 2,
+      "repo": "../../..",
+      "route": [
+        "INTAKE",
+        "CONTEXT",
+        "IMPACT",
+        "TECHNICAL",
+        "IMPLEMENTATION",
+        "REVIEW",
+        "QA",
+        "RELEASE",
+        "COMPLETED"
+      ],
+      "planning": "NO_REPLAN",
+      "scope_revision": 1,
+      "config_hash": "70b1f3f256a7d5cabb8fb3f1b16caebda54573166f642abe33620c51d76783b1",
+      "skill_pins": {
+        "adr-generator": "37b87ceae41931e7df58f2ef5c9fcf3445388213582bd819351c17e095b4809e",
+        "agentic-sdlc-orchestrator": "241d5fb550dd198ced2ea5886df1f80d61b6e4df52056d766bad96d955fecc6b",
+        "api-contract-discovery-agent": "d69fc7cfc2f675bc19c809e5344dea8bf4e1e2d93f7aaaa612938434bb98c5b2",
+        "architecture-reverse-engineer": "107d6d10555d8a72d081e927b73adf875416bf9a4dd0df3bfd49ac69f82174c0",
+        "automated-qa-agent": "3cec92ed01d2911b9db9a54e6985f2e4c17e036ac839f5d7155ce27276b8102f",
+        "baseline-verifier": "948f2c681d6af99a0702fbb74620763667ef24242e101a55f6261f04f519d92e",
+        "brownfield-risk-analyzer": "d5da84ce6cc2c321d64e155c4efd4adc9826a0d4202056c44b73a4a108bcb599",
+        "business-requirement-analyzer": "c6d4f6cafd51a87d2304dc94c9c804e1585f639579638bfd46f7fcc59ec95a41",
+        "change-impact-analyzer": "ed5d3a96e9d0f3cbd878bd869aede9d4981c5bd2d56a2d65b74a75e50e712ab1",
+        "code-review-agent": "f95ee9b1ea892cd4aa4ecadc60246be9ad083669696889c96e788d9e3f0462b7",
+        "database-discovery-agent": "a9bf3867174c95eddbd83511e35079310ac79f511867591d64893c5007e1a791",
+        "device-preview-agent": "2dcccd3e894bcec5e81cfa4b40616f5d073b709320a9e155dc0c93de2a52e904",
+        "document-intake-adapter": "b773708a14af67828446bf84da63f1fb7bab07bf531f7c7a48a0a6b6f6cfd37e",
+        "effort-estimation-agent": "6ba73a7f3f15bbd622e95f1f14f709e7112ebd90433a44781be453f6e2977b1a",
+        "epic-verifier": "bf72ce9f4f91d3b0cd1f3669f2fe13dcd581b485b594fb8fdf7de5f64b5a03e7",
+        "history-analysis-agent": "6b2de7ce22f04464beb115a847b2831e7e42cd3cf6132ffba134ce2b42d1a8d0",
+        "implementation-agent": "369621d9f2bed8a62ab3b14e6108ad218202b4fb4171267933b122b470badf8b",
+        "intake-change-classifier": "b1102a78f041cb71b7456c2739225ba1ceca6b9b227bd7a6511d38db891c30c7",
+        "project-discovery-agent": "5ed25348cec052c3b95f58555ab62ec6ecb5cd4d23a9cfe052e6cb4f62387fe5",
+        "prompt-intake-adapter": "c3ab8c873b2c76e8aea61f808c9714f6e667d475772468a6e5a13f772f3a124e",
+        "release-readiness-agent": "8db12e3d8be626e8524e83c6ea4523293e24404765dade480c3c9a2600c6443c",
+        "requirement-reconstruction-agent": "5b65ac066f3ad5768ef3b949190a67af94bcd96196616f354b890796d97100a8",
+        "requirement-ui-verifier": "855d48036a9aa44e1283235e66899ed06151fb042e70bdebe73f5a0ce2144dfd",
+        "runtime-discovery-agent": "0c0b51066a093bfd52c08425554b8e3415930f82099fcbe0589180ca541d09e2",
+        "sprint-planner": "8193d9f44eea32eef72586a7dbee096f8014676434f719fe047d0a58360ec728",
+        "sprint-readiness-verifier": "b44dcdf8f2032ebddc7ba43c78219ff5fbd15c4f7e1f8b3959782bda33c97374",
+        "srs-generator": "f84a0c95661e2e2a29bc71b6ad6a6ffaf8163440965205f1956b6b3e7c000305",
+        "task-breakdown-agent": "0872087d99f7695ed8a4aa6b585323d29f7df905b56fcb5ca2c06d6f9a680f30",
+        "technical-architecture-planner": "7a37e8b1f49d8e4ce21721b7050475f178413c94a92e4065b3405c58ca482d23",
+        "technical-readiness-verifier": "aa888a9ae421d6fd6f5238435b76c191712bcfa3920df26f67ba7b304ec827f1",
+        "technical-spec-generator": "2d58206e630d0024c78371d3747ea6d86cf17ec2038367e9389dc2961dcc4fd0",
+        "test-baseline-agent": "58a93639efbf78373edf8cb64020e16721f65b5ba30eb271b886d79d49e0fbbf",
+        "user-flow-discovery-agent": "50f20be315ac1d62af72b88d9372a4d29684aa26094ac235c89c77e08c67ef91",
+        "web-preview-agent": "dfab7cd287b98b18637db38fcee208b28bc95a3447bb0ea7cfb12cddb3732eb4",
+        "work-item-level-classifier": "78d23d76d06e905cbe22854091e2a595110d12a31526444a0ebe6aedab77e9d5"
+      },
+      "results": {
+        "INTAKE": {
+          "status": "READY",
+          "evidence": [
+            "agentic/data/project-context/features/BOS-010/tasks/TASK-005.md"
+          ],
+          "blocking_issues": [],
+          "open_questions": [],
+          "recommended_next_step": "Load user_app auth presentation + locale context",
+          "outputs": {
+            "work_item": "BOS-010 TASK-005",
+            "input_mode": "prompt-first",
+            "work_type": "change_request",
+            "project_type": "brownfield",
+            "category": "Mobile",
+            "hierarchy": "TASK_ONLY",
+            "planning": "NO_REPLAN",
+            "modules": [
+              "user_app"
+            ]
+          }
+        },
+        "CONTEXT": {
+          "status": "READY",
+          "evidence": [
+            "user_app/lib/features/authentication/presentation/pages/login_screen.dart",
+            "user_app/lib/features/authentication/presentation/pages/login_otp_verify_screen.dart",
+            "user_app/lib/core/controllers/locale_controller.dart",
+            "~/.pub-cache any_image_view-2.1.0 lib/any_image_view.dart:386-449 (rootBundle.loadString + FutureBuilder + SvgPicture.string)",
+            "~/.pub-cache flutter_svg-2.3.0 lib/src/loaders.dart:143-193,384-395 (cache key)"
+          ],
+          "blocking_issues": [],
+          "open_questions": [],
+          "recommended_next_step": "Impact analysis",
+          "outputs": {
+            "flows": [
+              "login: locale toggle, phone, Next -> OTP",
+              "OTP: code, Verify -> app shell, Change Number -> back, resend"
+            ],
+            "finding": "AnyImageView svg path bypasses flutter_svg asset cache"
+          }
+        },
+        "IMPACT": {
+          "status": "READY",
+          "evidence": [
+            "agentic/data/project-context/features/BOS-010/tasks/TASK-005.md",
+            "grep IntroHeader/LocaleController/toggleLocale callers in user_app/lib + test"
+          ],
+          "blocking_issues": [],
+          "open_questions": [],
+          "recommended_next_step": "Operator technical approval of TASK-005",
+          "outputs": {
+            "impact": "LOW",
+            "modules": [
+              "user_app"
+            ],
+            "backend_impact": "none",
+            "api_contract": "unchanged",
+            "callers": "LocaleController used by MyApp and LoginScreenController only; IntroHeader used by OTP screen only",
+            "risk": "locale persistence failure now silent to UI (logged); new app_svg widget in core/widgets"
+          }
+        },
+        "TECHNICAL": {
+          "status": "READY",
+          "evidence": [
+            "agentic/data/project-context/features/BOS-010/tasks/TASK-005.md"
+          ],
+          "blocking_issues": [],
+          "open_questions": [
+            "Proposed Bangla strings (otpVerification, otpSentTo, changeNumber) need operator confirmation"
+          ],
+          "recommended_next_step": "Operator technical approval, then IMPLEMENTATION (mobile-agent)",
+          "outputs": {
+            "verdict": "TECHNICAL_READY",
+            "design_sections": [
+              "async locale toggle",
+              "SvgPicture.asset + svg.cache precache (AnyImageView bypass)",
+              "login layout polish",
+              "OTP layout polish + i18n"
+            ]
+          }
+        },
+        "IMPLEMENTATION": {
+          "status": "READY",
+          "evidence": [
+            "agentic/data/project-context/features/BOS-010/REVIEW-TASK-005.md#implementation-agent-2026-09-23",
+            "fvm flutter analyze: No issues found",
+            "fvm flutter test: 32 passed (incl. double-toggle ordering test)",
+            "agentic/data/project-context/features/BOS-010/qa/task-005/"
+          ],
+          "blocking_issues": [],
+          "open_questions": [
+            "Follow-up: OtpResendButton, OTP error snackbar and shell tab labels remain English in Bangla mode (outside approved scope)"
+          ],
+          "recommended_next_step": "Code review",
+          "outputs": {
+            "verdict": "IMPLEMENTATION_READY",
+            "persona": "mobile-agent",
+            "no_git_commit_made": true
+          }
+        },
+        "REVIEW": {
+          "status": "READY",
+          "evidence": [
+            "agentic/data/project-context/features/BOS-010/REVIEW-TASK-005.md#code-review-round-1-agent-2026-09-23--changes_required--fixed",
+            "user_app/lib/core/controllers/locale_controller.dart:34-48",
+            "user_app/test/core/controllers/locale_controller_test.dart (rapid toggles test; mutation-checked)"
+          ],
+          "blocking_issues": [],
+          "open_questions": [
+            "Follow-up: OtpResendButton, OTP error snackbar, shell tab labels still English in Bangla mode"
+          ],
+          "recommended_next_step": "QA",
+          "outputs": {
+            "verdict": "REVIEW_READY",
+            "round": 2,
+            "resolved": [
+              "locale save ordering race"
+            ]
+          }
+        },
+        "QA": {
+          "status": "READY",
+          "evidence": [
+            "agentic/data/project-context/features/BOS-010/REVIEW-TASK-005.md#qa-agent-2026-09-23-after-review-fix",
+            "fvm flutter analyze: no issues",
+            "fvm flutter test: 32 passed",
+            "agentic/data/project-context/features/BOS-010/qa/task-005/"
+          ],
+          "blocking_issues": [],
+          "open_questions": [
+            "Follow-up: OtpResendButton, OTP error snackbar, shell tab labels English in Bangla mode"
+          ],
+          "recommended_next_step": "Release and commit",
+          "outputs": {
+            "verdict": "QA_READY"
+          }
+        },
+        "RELEASE": {
+          "status": "READY",
+          "evidence": [
+            "git 61e40e9 (TASK-005 user_app changes + evidence)",
+            "agentic/data/project-context/features/BOS-010/REVIEW-TASK-005.md",
+            "release approval recorded by operator 2026-09-23"
+          ],
+          "blocking_issues": [],
+          "open_questions": [
+            "Follow-up: translate OtpResendButton, OTP error snackbar, shell tab labels"
+          ],
+          "recommended_next_step": "Close run; operator to name next task",
+          "outputs": {
+            "verdict": "RELEASE_READY",
+            "scope": "user_app only; no API/backend change",
+            "deploy": "none"
+          }
+        }
+      },
+      "attempts": {
+        "0:INTAKE:prompt-intake-adapter": 1,
+        "0:CONTEXT:user-flow-discovery-agent": 1,
+        "0:IMPACT:change-impact-analyzer": 1,
+        "0:TECHNICAL:technical-readiness-verifier": 1,
+        "0:IMPLEMENTATION:implementation-agent": 2,
+        "0:REVIEW:code-review-agent": 1,
+        "1:CONTEXT:user-flow-discovery-agent": 1,
+        "1:IMPACT:change-impact-analyzer": 1,
+        "1:TECHNICAL:technical-readiness-verifier": 1,
+        "1:IMPLEMENTATION:implementation-agent": 1,
+        "1:REVIEW:code-review-agent": 1,
+        "1:QA:automated-qa-agent": 1,
+        "1:RELEASE:release-readiness-agent": 1
+      },
+      "active_task": null,
+      "context": {
+        "files": {
+          "agentic/data/project-context/features/BOS-010/tasks/TASK-005.md": "2b06243a059547771fc1cf96d2c7d74d023b674b3a36866fe07bb3d41c8e8cb1",
+          "user_app/lib/core/controllers/locale_controller.dart": "cef7ce9acc554d0a9b2fa0453ad06b508be2fdf6325cc033e78fd71146ec733a",
+          "user_app/lib/core/services/app_settings/app_settings_repository.dart": "6e228678ea7bd7964d7bcca18396cf51ca2f17a88e26e31dfa5e8e4a0d07c72f",
+          "user_app/lib/core/services/app_settings/app_settings_repository_impl.dart": "297c356584bfb7e7e82fc7110a155cf81b82f25f8ba5b215640a283363c9999c",
+          "user_app/lib/app/app.dart": "0b65ed319b64c9d4ba01863041cd8e97ed5a105541c3d057cbfd442edc94680c",
+          "user_app/lib/features/authentication/presentation/pages/login_screen.dart": "28dc4a2aba763ca4140acd780d8d5543135c423ebe7f80b17f239adf23550cb7",
+          "user_app/lib/features/authentication/presentation/pages/login_otp_verify_screen.dart": "30ec1940888bd4b3111389c09fa176f0da7662deabce687666e1ba5e8201f4e3",
+          "user_app/lib/features/authentication/presentation/widgets/intro_header.dart": "2fb19e16f26355810129fbcaa67ccb270b6b2993c773b5f4253b3a538229de80",
+          "user_app/lib/features/authentication/presentation/controllers/login_screen_controller.dart": "88b9c30d25100b54cdd3664329a06a3745a00a6014182f8600dcf5caa53eef06",
+          "user_app/lib/res/strings/string_enum.dart": "c19b623c5fc23a95830c5f5c3faf419ea7f2f821c92ba6a15c1997bb07fc8ff8",
+          "user_app/lib/res/drawable/app_drawable.dart": "231974b7e31ee1919bce68accf4029160e2d93304597c783743d8278e4e527a6",
+          "user_app/lib/core/widgets/images/round_image.dart": "73cd7ff71c0af2d0fcbfd2f68a05cbb633fcc9bda5e3205899f8c6ffb0ac8a17",
+          "user_app/lib/core/widgets/images/app_svg.dart": "7de1738070981fc7e9e93c1f46fab179ab4a82dd9c9ea0d5506553257f1e8d71",
+          "user_app/test/core/controllers/locale_controller_test.dart": "c4cdedeebb26a66e80f4aadc8014cc19fb93827714f44f7e8cd860c65c8f5f5e",
+          "user_app/test/core/widgets/app_svg_test.dart": "96771dbd2b58ed13d7fd7154bc96b922243ce1066f39e88f74e1ec0cc33c779e",
+          "user_app/pubspec.yaml": "c8f8e945836ea400f8329ad471aaf03ae7b3cde785ebf211250a9abc6d40a16e",
+          "user_app/pubspec.lock": "15bb22943c8704ca4037c40d33de5baff979443adce1bcf8928adc69264e5e9d"
+        }
+      }
+    }
+  },
+  "checkpoints": [
+    {
+      "run_id": "RUN-8ED649CAEBFA46CD8E6EC1EB2BB9FCBF",
+      "stage": "INTAKE",
+      "status": "RUNNING",
+      "payload": {
+        "runtime_version": 2,
+        "repo": "../../..",
+        "route": [
+          "INTAKE",
+          "CONTEXT",
+          "IMPACT",
+          "TECHNICAL",
+          "IMPLEMENTATION",
+          "REVIEW",
+          "QA",
+          "RELEASE",
+          "COMPLETED"
+        ],
+        "planning": "NO_REPLAN",
+        "scope_revision": 0,
+        "config_hash": "70b1f3f256a7d5cabb8fb3f1b16caebda54573166f642abe33620c51d76783b1",
+        "skill_pins": {
+          "adr-generator": "37b87ceae41931e7df58f2ef5c9fcf3445388213582bd819351c17e095b4809e",
+          "agentic-sdlc-orchestrator": "241d5fb550dd198ced2ea5886df1f80d61b6e4df52056d766bad96d955fecc6b",
+          "api-contract-discovery-agent": "d69fc7cfc2f675bc19c809e5344dea8bf4e1e2d93f7aaaa612938434bb98c5b2",
+          "architecture-reverse-engineer": "107d6d10555d8a72d081e927b73adf875416bf9a4dd0df3bfd49ac69f82174c0",
+          "automated-qa-agent": "3cec92ed01d2911b9db9a54e6985f2e4c17e036ac839f5d7155ce27276b8102f",
+          "baseline-verifier": "948f2c681d6af99a0702fbb74620763667ef24242e101a55f6261f04f519d92e",
+          "brownfield-risk-analyzer": "d5da84ce6cc2c321d64e155c4efd4adc9826a0d4202056c44b73a4a108bcb599",
+          "business-requirement-analyzer": "c6d4f6cafd51a87d2304dc94c9c804e1585f639579638bfd46f7fcc59ec95a41",
+          "change-impact-analyzer": "ed5d3a96e9d0f3cbd878bd869aede9d4981c5bd2d56a2d65b74a75e50e712ab1",
+          "code-review-agent": "f95ee9b1ea892cd4aa4ecadc60246be9ad083669696889c96e788d9e3f0462b7",
+          "database-discovery-agent": "a9bf3867174c95eddbd83511e35079310ac79f511867591d64893c5007e1a791",
+          "device-preview-agent": "2dcccd3e894bcec5e81cfa4b40616f5d073b709320a9e155dc0c93de2a52e904",
+          "document-intake-adapter": "b773708a14af67828446bf84da63f1fb7bab07bf531f7c7a48a0a6b6f6cfd37e",
+          "effort-estimation-agent": "6ba73a7f3f15bbd622e95f1f14f709e7112ebd90433a44781be453f6e2977b1a",
+          "epic-verifier": "bf72ce9f4f91d3b0cd1f3669f2fe13dcd581b485b594fb8fdf7de5f64b5a03e7",
+          "history-analysis-agent": "6b2de7ce22f04464beb115a847b2831e7e42cd3cf6132ffba134ce2b42d1a8d0",
+          "implementation-agent": "369621d9f2bed8a62ab3b14e6108ad218202b4fb4171267933b122b470badf8b",
+          "intake-change-classifier": "b1102a78f041cb71b7456c2739225ba1ceca6b9b227bd7a6511d38db891c30c7",
+          "project-discovery-agent": "5ed25348cec052c3b95f58555ab62ec6ecb5cd4d23a9cfe052e6cb4f62387fe5",
+          "prompt-intake-adapter": "c3ab8c873b2c76e8aea61f808c9714f6e667d475772468a6e5a13f772f3a124e",
+          "release-readiness-agent": "8db12e3d8be626e8524e83c6ea4523293e24404765dade480c3c9a2600c6443c",
+          "requirement-reconstruction-agent": "5b65ac066f3ad5768ef3b949190a67af94bcd96196616f354b890796d97100a8",
+          "requirement-ui-verifier": "855d48036a9aa44e1283235e66899ed06151fb042e70bdebe73f5a0ce2144dfd",
+          "runtime-discovery-agent": "0c0b51066a093bfd52c08425554b8e3415930f82099fcbe0589180ca541d09e2",
+          "sprint-planner": "8193d9f44eea32eef72586a7dbee096f8014676434f719fe047d0a58360ec728",
+          "sprint-readiness-verifier": "b44dcdf8f2032ebddc7ba43c78219ff5fbd15c4f7e1f8b3959782bda33c97374",
+          "srs-generator": "f84a0c95661e2e2a29bc71b6ad6a6ffaf8163440965205f1956b6b3e7c000305",
+          "task-breakdown-agent": "0872087d99f7695ed8a4aa6b585323d29f7df905b56fcb5ca2c06d6f9a680f30",
+          "technical-architecture-planner": "7a37e8b1f49d8e4ce21721b7050475f178413c94a92e4065b3405c58ca482d23",
+          "technical-readiness-verifier": "aa888a9ae421d6fd6f5238435b76c191712bcfa3920df26f67ba7b304ec827f1",
+          "technical-spec-generator": "2d58206e630d0024c78371d3747ea6d86cf17ec2038367e9389dc2961dcc4fd0",
+          "test-baseline-agent": "58a93639efbf78373edf8cb64020e16721f65b5ba30eb271b886d79d49e0fbbf",
+          "user-flow-discovery-agent": "50f20be315ac1d62af72b88d9372a4d29684aa26094ac235c89c77e08c67ef91",
+          "web-preview-agent": "dfab7cd287b98b18637db38fcee208b28bc95a3447bb0ea7cfb12cddb3732eb4",
+          "work-item-level-classifier": "78d23d76d06e905cbe22854091e2a595110d12a31526444a0ebe6aedab77e9d5"
+        },
+        "results": {},
+        "attempts": {},
+        "active_task": null
+      },
+      "created_at": "2026-09-23T10:45:37.950753+00:00"
+    },
+    {
+      "run_id": "RUN-8ED649CAEBFA46CD8E6EC1EB2BB9FCBF",
+      "stage": "INTAKE",
+      "status": "RUNNING",
+      "payload": {
+        "attempts": {
+          "0:INTAKE:prompt-intake-adapter": 1
+        },
+        "active_task": {
+          "id": "51d2df73919a45aaab8517c21318be99",
+          "skill": "prompt-intake-adapter",
+          "started_at": "2026-09-23T10:47:32.008288+00:00",
+          "tool_calls": 0
+        }
+      },
+      "created_at": "2026-09-23T10:47:32.008635+00:00"
+    },
+    {
+      "run_id": "RUN-8ED649CAEBFA46CD8E6EC1EB2BB9FCBF",
+      "stage": "INTAKE",
+      "status": "RUNNING",
+      "payload": {
+        "results": {
+          "INTAKE": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/tasks/TASK-005.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Load user_app auth presentation + locale context",
+            "outputs": {
+              "work_item": "BOS-010 TASK-005",
+              "input_mode": "prompt-first",
+              "work_type": "change_request",
+              "project_type": "brownfield",
+              "category": "Mobile",
+              "hierarchy": "TASK_ONLY",
+              "planning": "NO_REPLAN",
+              "modules": [
+                "user_app"
+              ]
+            }
+          }
+        },
+        "active_task": null
+      },
+      "created_at": "2026-09-23T10:47:32.060607+00:00"
+    },
+    {
+      "run_id": "RUN-8ED649CAEBFA46CD8E6EC1EB2BB9FCBF",
+      "stage": "CONTEXT",
+      "status": "RUNNING",
+      "payload": {},
+      "created_at": "2026-09-23T10:47:32.105156+00:00"
+    },
+    {
+      "run_id": "RUN-8ED649CAEBFA46CD8E6EC1EB2BB9FCBF",
+      "stage": "CONTEXT",
+      "status": "RUNNING",
+      "payload": {
+        "attempts": {
+          "0:INTAKE:prompt-intake-adapter": 1,
+          "0:CONTEXT:user-flow-discovery-agent": 1
+        },
+        "active_task": {
+          "id": "127ecb7643764666a9207fbd597fe7d5",
+          "skill": "user-flow-discovery-agent",
+          "started_at": "2026-09-23T10:47:44.543554+00:00",
+          "tool_calls": 0
+        }
+      },
+      "created_at": "2026-09-23T10:47:44.544284+00:00"
+    },
+    {
+      "run_id": "RUN-8ED649CAEBFA46CD8E6EC1EB2BB9FCBF",
+      "stage": "CONTEXT",
+      "status": "RUNNING",
+      "payload": {
+        "results": {
+          "INTAKE": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/tasks/TASK-005.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Load user_app auth presentation + locale context",
+            "outputs": {
+              "work_item": "BOS-010 TASK-005",
+              "input_mode": "prompt-first",
+              "work_type": "change_request",
+              "project_type": "brownfield",
+              "category": "Mobile",
+              "hierarchy": "TASK_ONLY",
+              "planning": "NO_REPLAN",
+              "modules": [
+                "user_app"
+              ]
+            }
+          },
+          "CONTEXT": {
+            "status": "READY",
+            "evidence": [
+              "user_app/lib/features/authentication/presentation/pages/login_screen.dart",
+              "user_app/lib/features/authentication/presentation/pages/login_otp_verify_screen.dart",
+              "user_app/lib/core/controllers/locale_controller.dart",
+              "~/.pub-cache any_image_view-2.1.0 lib/any_image_view.dart:386-449 (rootBundle.loadString + FutureBuilder + SvgPicture.string)",
+              "~/.pub-cache flutter_svg-2.3.0 lib/src/loaders.dart:143-193,384-395 (cache key)"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Impact analysis",
+            "outputs": {
+              "flows": [
+                "login: locale toggle, phone, Next -> OTP",
+                "OTP: code, Verify -> app shell, Change Number -> back, resend"
+              ],
+              "finding": "AnyImageView svg path bypasses flutter_svg asset cache"
+            }
+          }
+        },
+        "active_task": null
+      },
+      "created_at": "2026-09-23T10:47:44.597638+00:00"
+    },
+    {
+      "run_id": "RUN-8ED649CAEBFA46CD8E6EC1EB2BB9FCBF",
+      "stage": "CONTEXT",
+      "status": "RUNNING",
+      "payload": {
+        "context": {
+          "files": {
+            "agentic/data/project-context/features/BOS-010/tasks/TASK-005.md": "2b06243a059547771fc1cf96d2c7d74d023b674b3a36866fe07bb3d41c8e8cb1",
+            "user_app/lib/core/controllers/locale_controller.dart": "ad973080605366a1a54273fd16580d3ec0e6ab537fd45bd98133fbdfd5661ce4",
+            "user_app/lib/core/services/app_settings/app_settings_repository.dart": "6e228678ea7bd7964d7bcca18396cf51ca2f17a88e26e31dfa5e8e4a0d07c72f",
+            "user_app/lib/core/services/app_settings/app_settings_repository_impl.dart": "297c356584bfb7e7e82fc7110a155cf81b82f25f8ba5b215640a283363c9999c",
+            "user_app/lib/app/app.dart": "4cfbe82681f557fa3586b82cfc41a7a7960f5e3e2aa4a1e7a4cd5d99d419fcac",
+            "user_app/lib/features/authentication/presentation/pages/login_screen.dart": "3f3eed452e6b85d7c932d43b9eb80f31e9a692ada9a80956c7454137a47c8577",
+            "user_app/lib/features/authentication/presentation/pages/login_otp_verify_screen.dart": "6f6c366cc6edaeb92635f13282272be644cfbfb6ed73f2f745cfc5a00b319b5a",
+            "user_app/lib/features/authentication/presentation/widgets/intro_header.dart": "d21af137cb62fd245a94d994e3c8edee4c9b9a5bf13b59c1742c6b31c26fce27",
+            "user_app/lib/features/authentication/presentation/controllers/login_screen_controller.dart": "88b9c30d25100b54cdd3664329a06a3745a00a6014182f8600dcf5caa53eef06",
+            "user_app/lib/res/strings/string_enum.dart": "33f7e55c50b5e36470bcd5dc1174102d47e02c8efcf48a8bb120ba7281b4b52d",
+            "user_app/lib/res/drawable/app_drawable.dart": "231974b7e31ee1919bce68accf4029160e2d93304597c783743d8278e4e527a6",
+            "user_app/lib/core/widgets/images/round_image.dart": "73cd7ff71c0af2d0fcbfd2f68a05cbb633fcc9bda5e3205899f8c6ffb0ac8a17",
+            "user_app/pubspec.yaml": "c8f8e945836ea400f8329ad471aaf03ae7b3cde785ebf211250a9abc6d40a16e",
+            "user_app/pubspec.lock": "a79f7cd7a64bccf38cc919fce164c85eb74d2e41aead7a09f221b31651d7f862"
+          }
+        }
+      },
+      "created_at": "2026-09-23T10:47:55.967208+00:00"
+    },
+    {
+      "run_id": "RUN-8ED649CAEBFA46CD8E6EC1EB2BB9FCBF",
+      "stage": "IMPACT",
+      "status": "RUNNING",
+      "payload": {},
+      "created_at": "2026-09-23T10:48:02.193237+00:00"
+    },
+    {
+      "run_id": "RUN-8ED649CAEBFA46CD8E6EC1EB2BB9FCBF",
+      "stage": "IMPACT",
+      "status": "RUNNING",
+      "payload": {
+        "attempts": {
+          "0:INTAKE:prompt-intake-adapter": 1,
+          "0:CONTEXT:user-flow-discovery-agent": 1,
+          "0:IMPACT:change-impact-analyzer": 1
+        },
+        "active_task": {
+          "id": "eacb900e33884cd5b408d5bbe23d0c16",
+          "skill": "change-impact-analyzer",
+          "started_at": "2026-09-23T10:48:12.073815+00:00",
+          "tool_calls": 0
+        }
+      },
+      "created_at": "2026-09-23T10:48:12.074218+00:00"
+    },
+    {
+      "run_id": "RUN-8ED649CAEBFA46CD8E6EC1EB2BB9FCBF",
+      "stage": "IMPACT",
+      "status": "RUNNING",
+      "payload": {
+        "results": {
+          "INTAKE": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/tasks/TASK-005.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Load user_app auth presentation + locale context",
+            "outputs": {
+              "work_item": "BOS-010 TASK-005",
+              "input_mode": "prompt-first",
+              "work_type": "change_request",
+              "project_type": "brownfield",
+              "category": "Mobile",
+              "hierarchy": "TASK_ONLY",
+              "planning": "NO_REPLAN",
+              "modules": [
+                "user_app"
+              ]
+            }
+          },
+          "CONTEXT": {
+            "status": "READY",
+            "evidence": [
+              "user_app/lib/features/authentication/presentation/pages/login_screen.dart",
+              "user_app/lib/features/authentication/presentation/pages/login_otp_verify_screen.dart",
+              "user_app/lib/core/controllers/locale_controller.dart",
+              "~/.pub-cache any_image_view-2.1.0 lib/any_image_view.dart:386-449 (rootBundle.loadString + FutureBuilder + SvgPicture.string)",
+              "~/.pub-cache flutter_svg-2.3.0 lib/src/loaders.dart:143-193,384-395 (cache key)"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Impact analysis",
+            "outputs": {
+              "flows": [
+                "login: locale toggle, phone, Next -> OTP",
+                "OTP: code, Verify -> app shell, Change Number -> back, resend"
+              ],
+              "finding": "AnyImageView svg path bypasses flutter_svg asset cache"
+            }
+          },
+          "IMPACT": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/tasks/TASK-005.md",
+              "grep IntroHeader/LocaleController/toggleLocale callers in user_app/lib + test"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Operator technical approval of TASK-005",
+            "outputs": {
+              "impact": "LOW",
+              "modules": [
+                "user_app"
+              ],
+              "backend_impact": "none",
+              "api_contract": "unchanged",
+              "callers": "LocaleController used by MyApp and LoginScreenController only; IntroHeader used by OTP screen only",
+              "risk": "locale persistence failure now silent to UI (logged); new app_svg widget in core/widgets"
+            }
+          }
+        },
+        "active_task": null
+      },
+      "created_at": "2026-09-23T10:48:12.131135+00:00"
+    },
+    {
+      "run_id": "RUN-8ED649CAEBFA46CD8E6EC1EB2BB9FCBF",
+      "stage": "TECHNICAL",
+      "status": "RUNNING",
+      "payload": {},
+      "created_at": "2026-09-23T10:48:12.177740+00:00"
+    },
+    {
+      "run_id": "RUN-8ED649CAEBFA46CD8E6EC1EB2BB9FCBF",
+      "stage": "TECHNICAL",
+      "status": "RUNNING",
+      "payload": {
+        "attempts": {
+          "0:INTAKE:prompt-intake-adapter": 1,
+          "0:CONTEXT:user-flow-discovery-agent": 1,
+          "0:IMPACT:change-impact-analyzer": 1,
+          "0:TECHNICAL:technical-readiness-verifier": 1
+        },
+        "active_task": {
+          "id": "903b6841461c45469037b7c31cabbc05",
+          "skill": "technical-readiness-verifier",
+          "started_at": "2026-09-23T10:48:20.706912+00:00",
+          "tool_calls": 0
+        }
+      },
+      "created_at": "2026-09-23T10:48:20.708240+00:00"
+    },
+    {
+      "run_id": "RUN-8ED649CAEBFA46CD8E6EC1EB2BB9FCBF",
+      "stage": "TECHNICAL",
+      "status": "RUNNING",
+      "payload": {
+        "results": {
+          "INTAKE": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/tasks/TASK-005.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Load user_app auth presentation + locale context",
+            "outputs": {
+              "work_item": "BOS-010 TASK-005",
+              "input_mode": "prompt-first",
+              "work_type": "change_request",
+              "project_type": "brownfield",
+              "category": "Mobile",
+              "hierarchy": "TASK_ONLY",
+              "planning": "NO_REPLAN",
+              "modules": [
+                "user_app"
+              ]
+            }
+          },
+          "CONTEXT": {
+            "status": "READY",
+            "evidence": [
+              "user_app/lib/features/authentication/presentation/pages/login_screen.dart",
+              "user_app/lib/features/authentication/presentation/pages/login_otp_verify_screen.dart",
+              "user_app/lib/core/controllers/locale_controller.dart",
+              "~/.pub-cache any_image_view-2.1.0 lib/any_image_view.dart:386-449 (rootBundle.loadString + FutureBuilder + SvgPicture.string)",
+              "~/.pub-cache flutter_svg-2.3.0 lib/src/loaders.dart:143-193,384-395 (cache key)"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Impact analysis",
+            "outputs": {
+              "flows": [
+                "login: locale toggle, phone, Next -> OTP",
+                "OTP: code, Verify -> app shell, Change Number -> back, resend"
+              ],
+              "finding": "AnyImageView svg path bypasses flutter_svg asset cache"
+            }
+          },
+          "IMPACT": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/tasks/TASK-005.md",
+              "grep IntroHeader/LocaleController/toggleLocale callers in user_app/lib + test"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Operator technical approval of TASK-005",
+            "outputs": {
+              "impact": "LOW",
+              "modules": [
+                "user_app"
+              ],
+              "backend_impact": "none",
+              "api_contract": "unchanged",
+              "callers": "LocaleController used by MyApp and LoginScreenController only; IntroHeader used by OTP screen only",
+              "risk": "locale persistence failure now silent to UI (logged); new app_svg widget in core/widgets"
+            }
+          },
+          "TECHNICAL": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/tasks/TASK-005.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [
+              "Proposed Bangla strings (otpVerification, otpSentTo, changeNumber) need operator confirmation"
+            ],
+            "recommended_next_step": "Operator technical approval, then IMPLEMENTATION (mobile-agent)",
+            "outputs": {
+              "verdict": "TECHNICAL_READY",
+              "design_sections": [
+                "async locale toggle",
+                "SvgPicture.asset + svg.cache precache (AnyImageView bypass)",
+                "login layout polish",
+                "OTP layout polish + i18n"
+              ]
+            }
+          }
+        },
+        "active_task": null
+      },
+      "created_at": "2026-09-23T10:48:20.770126+00:00"
+    },
+    {
+      "run_id": "RUN-8ED649CAEBFA46CD8E6EC1EB2BB9FCBF",
+      "stage": "TECHNICAL",
+      "status": "RUNNING",
+      "payload": {},
+      "created_at": "2026-09-23T11:15:43.240557+00:00"
+    },
+    {
+      "run_id": "RUN-8ED649CAEBFA46CD8E6EC1EB2BB9FCBF",
+      "stage": "IMPLEMENTATION",
+      "status": "RUNNING",
+      "payload": {},
+      "created_at": "2026-09-23T11:15:43.289577+00:00"
+    },
+    {
+      "run_id": "RUN-8ED649CAEBFA46CD8E6EC1EB2BB9FCBF",
+      "stage": "IMPLEMENTATION",
+      "status": "RUNNING",
+      "payload": {
+        "attempts": {
+          "0:INTAKE:prompt-intake-adapter": 1,
+          "0:CONTEXT:user-flow-discovery-agent": 1,
+          "0:IMPACT:change-impact-analyzer": 1,
+          "0:TECHNICAL:technical-readiness-verifier": 1,
+          "0:IMPLEMENTATION:implementation-agent": 1
+        },
+        "active_task": {
+          "id": "8395f2006cfd4532bbc6ab9250826a27",
+          "skill": "implementation-agent",
+          "started_at": "2026-09-23T11:15:43.354653+00:00",
+          "tool_calls": 0
+        }
+      },
+      "created_at": "2026-09-23T11:15:43.356047+00:00"
+    },
+    {
+      "run_id": "RUN-8ED649CAEBFA46CD8E6EC1EB2BB9FCBF",
+      "stage": "IMPLEMENTATION",
+      "status": "BLOCKED",
+      "payload": {
+        "active_task": null
+      },
+      "created_at": "2026-09-23T11:22:00.084991+00:00"
+    },
+    {
+      "run_id": "RUN-8ED649CAEBFA46CD8E6EC1EB2BB9FCBF",
+      "stage": "IMPLEMENTATION",
+      "status": "BLOCKED",
+      "payload": {
+        "context": {
+          "files": {
+            "agentic/data/project-context/features/BOS-010/tasks/TASK-005.md": "2b06243a059547771fc1cf96d2c7d74d023b674b3a36866fe07bb3d41c8e8cb1",
+            "user_app/lib/core/controllers/locale_controller.dart": "481848fc90eb30c3c0ba5e6f2be816dd8596186d91be59b6f1b776dbd85cd119",
+            "user_app/lib/core/services/app_settings/app_settings_repository.dart": "6e228678ea7bd7964d7bcca18396cf51ca2f17a88e26e31dfa5e8e4a0d07c72f",
+            "user_app/lib/core/services/app_settings/app_settings_repository_impl.dart": "297c356584bfb7e7e82fc7110a155cf81b82f25f8ba5b215640a283363c9999c",
+            "user_app/lib/app/app.dart": "0b65ed319b64c9d4ba01863041cd8e97ed5a105541c3d057cbfd442edc94680c",
+            "user_app/lib/features/authentication/presentation/pages/login_screen.dart": "28dc4a2aba763ca4140acd780d8d5543135c423ebe7f80b17f239adf23550cb7",
+            "user_app/lib/features/authentication/presentation/pages/login_otp_verify_screen.dart": "30ec1940888bd4b3111389c09fa176f0da7662deabce687666e1ba5e8201f4e3",
+            "user_app/lib/features/authentication/presentation/widgets/intro_header.dart": "2fb19e16f26355810129fbcaa67ccb270b6b2993c773b5f4253b3a538229de80",
+            "user_app/lib/features/authentication/presentation/controllers/login_screen_controller.dart": "88b9c30d25100b54cdd3664329a06a3745a00a6014182f8600dcf5caa53eef06",
+            "user_app/lib/res/strings/string_enum.dart": "c19b623c5fc23a95830c5f5c3faf419ea7f2f821c92ba6a15c1997bb07fc8ff8",
+            "user_app/lib/res/drawable/app_drawable.dart": "231974b7e31ee1919bce68accf4029160e2d93304597c783743d8278e4e527a6",
+            "user_app/lib/core/widgets/images/round_image.dart": "73cd7ff71c0af2d0fcbfd2f68a05cbb633fcc9bda5e3205899f8c6ffb0ac8a17",
+            "user_app/lib/core/widgets/images/app_svg.dart": "7de1738070981fc7e9e93c1f46fab179ab4a82dd9c9ea0d5506553257f1e8d71",
+            "user_app/test/core/controllers/locale_controller_test.dart": "07e283ef7d51b5f8b16bf11488523bd90623b67338e89754abf26a27643ae6b8",
+            "user_app/test/core/widgets/app_svg_test.dart": "96771dbd2b58ed13d7fd7154bc96b922243ce1066f39e88f74e1ec0cc33c779e",
+            "user_app/pubspec.yaml": "c8f8e945836ea400f8329ad471aaf03ae7b3cde785ebf211250a9abc6d40a16e",
+            "user_app/pubspec.lock": "a79f7cd7a64bccf38cc919fce164c85eb74d2e41aead7a09f221b31651d7f862"
+          }
+        }
+      },
+      "created_at": "2026-09-23T11:22:00.291560+00:00"
+    },
+    {
+      "run_id": "RUN-8ED649CAEBFA46CD8E6EC1EB2BB9FCBF",
+      "stage": "IMPLEMENTATION",
+      "status": "RUNNING",
+      "payload": {
+        "attempts": {
+          "0:INTAKE:prompt-intake-adapter": 1,
+          "0:CONTEXT:user-flow-discovery-agent": 1,
+          "0:IMPACT:change-impact-analyzer": 1,
+          "0:TECHNICAL:technical-readiness-verifier": 1,
+          "0:IMPLEMENTATION:implementation-agent": 2
+        },
+        "active_task": {
+          "id": "f81d596e96d145e99fe92de11e26df52",
+          "skill": "implementation-agent",
+          "started_at": "2026-09-23T11:22:00.553768+00:00",
+          "tool_calls": 0
+        }
+      },
+      "created_at": "2026-09-23T11:22:00.564718+00:00"
+    },
+    {
+      "run_id": "RUN-8ED649CAEBFA46CD8E6EC1EB2BB9FCBF",
+      "stage": "IMPLEMENTATION",
+      "status": "RUNNING",
+      "payload": {
+        "results": {
+          "INTAKE": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/tasks/TASK-005.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Load user_app auth presentation + locale context",
+            "outputs": {
+              "work_item": "BOS-010 TASK-005",
+              "input_mode": "prompt-first",
+              "work_type": "change_request",
+              "project_type": "brownfield",
+              "category": "Mobile",
+              "hierarchy": "TASK_ONLY",
+              "planning": "NO_REPLAN",
+              "modules": [
+                "user_app"
+              ]
+            }
+          },
+          "CONTEXT": {
+            "status": "READY",
+            "evidence": [
+              "user_app/lib/features/authentication/presentation/pages/login_screen.dart",
+              "user_app/lib/features/authentication/presentation/pages/login_otp_verify_screen.dart",
+              "user_app/lib/core/controllers/locale_controller.dart",
+              "~/.pub-cache any_image_view-2.1.0 lib/any_image_view.dart:386-449 (rootBundle.loadString + FutureBuilder + SvgPicture.string)",
+              "~/.pub-cache flutter_svg-2.3.0 lib/src/loaders.dart:143-193,384-395 (cache key)"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Impact analysis",
+            "outputs": {
+              "flows": [
+                "login: locale toggle, phone, Next -> OTP",
+                "OTP: code, Verify -> app shell, Change Number -> back, resend"
+              ],
+              "finding": "AnyImageView svg path bypasses flutter_svg asset cache"
+            }
+          },
+          "IMPACT": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/tasks/TASK-005.md",
+              "grep IntroHeader/LocaleController/toggleLocale callers in user_app/lib + test"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Operator technical approval of TASK-005",
+            "outputs": {
+              "impact": "LOW",
+              "modules": [
+                "user_app"
+              ],
+              "backend_impact": "none",
+              "api_contract": "unchanged",
+              "callers": "LocaleController used by MyApp and LoginScreenController only; IntroHeader used by OTP screen only",
+              "risk": "locale persistence failure now silent to UI (logged); new app_svg widget in core/widgets"
+            }
+          },
+          "TECHNICAL": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/tasks/TASK-005.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [
+              "Proposed Bangla strings (otpVerification, otpSentTo, changeNumber) need operator confirmation"
+            ],
+            "recommended_next_step": "Operator technical approval, then IMPLEMENTATION (mobile-agent)",
+            "outputs": {
+              "verdict": "TECHNICAL_READY",
+              "design_sections": [
+                "async locale toggle",
+                "SvgPicture.asset + svg.cache precache (AnyImageView bypass)",
+                "login layout polish",
+                "OTP layout polish + i18n"
+              ]
+            }
+          },
+          "IMPLEMENTATION": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/REVIEW-TASK-005.md#implementation-agent-2026-09-23",
+              "fvm flutter analyze: No issues found",
+              "fvm flutter test: 31 passed",
+              "agentic/data/project-context/features/BOS-010/qa/task-005/"
+            ],
+            "blocking_issues": [],
+            "open_questions": [
+              "Follow-up: OtpResendButton, OTP error snackbar and shell tab labels remain English in Bangla mode (outside approved scope)"
+            ],
+            "recommended_next_step": "Code review",
+            "outputs": {
+              "verdict": "IMPLEMENTATION_READY",
+              "persona": "mobile-agent",
+              "no_git_commit_made": true
+            }
+          }
+        },
+        "active_task": null
+      },
+      "created_at": "2026-09-23T11:22:00.812188+00:00"
+    },
+    {
+      "run_id": "RUN-8ED649CAEBFA46CD8E6EC1EB2BB9FCBF",
+      "stage": "REVIEW",
+      "status": "RUNNING",
+      "payload": {},
+      "created_at": "2026-09-23T11:22:00.986768+00:00"
+    },
+    {
+      "run_id": "RUN-8ED649CAEBFA46CD8E6EC1EB2BB9FCBF",
+      "stage": "REVIEW",
+      "status": "RUNNING",
+      "payload": {
+        "attempts": {
+          "0:INTAKE:prompt-intake-adapter": 1,
+          "0:CONTEXT:user-flow-discovery-agent": 1,
+          "0:IMPACT:change-impact-analyzer": 1,
+          "0:TECHNICAL:technical-readiness-verifier": 1,
+          "0:IMPLEMENTATION:implementation-agent": 2,
+          "0:REVIEW:code-review-agent": 1
+        },
+        "active_task": {
+          "id": "f4adb96d2dac44acb6bbf1af4760f0ba",
+          "skill": "code-review-agent",
+          "started_at": "2026-09-23T11:25:27.090294+00:00",
+          "tool_calls": 0
+        }
+      },
+      "created_at": "2026-09-23T11:25:27.090932+00:00"
+    },
+    {
+      "run_id": "RUN-8ED649CAEBFA46CD8E6EC1EB2BB9FCBF",
+      "stage": "REVIEW",
+      "status": "BLOCKED",
+      "payload": {
+        "results": {
+          "INTAKE": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/tasks/TASK-005.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Load user_app auth presentation + locale context",
+            "outputs": {
+              "work_item": "BOS-010 TASK-005",
+              "input_mode": "prompt-first",
+              "work_type": "change_request",
+              "project_type": "brownfield",
+              "category": "Mobile",
+              "hierarchy": "TASK_ONLY",
+              "planning": "NO_REPLAN",
+              "modules": [
+                "user_app"
+              ]
+            }
+          },
+          "CONTEXT": {
+            "status": "READY",
+            "evidence": [
+              "user_app/lib/features/authentication/presentation/pages/login_screen.dart",
+              "user_app/lib/features/authentication/presentation/pages/login_otp_verify_screen.dart",
+              "user_app/lib/core/controllers/locale_controller.dart",
+              "~/.pub-cache any_image_view-2.1.0 lib/any_image_view.dart:386-449 (rootBundle.loadString + FutureBuilder + SvgPicture.string)",
+              "~/.pub-cache flutter_svg-2.3.0 lib/src/loaders.dart:143-193,384-395 (cache key)"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Impact analysis",
+            "outputs": {
+              "flows": [
+                "login: locale toggle, phone, Next -> OTP",
+                "OTP: code, Verify -> app shell, Change Number -> back, resend"
+              ],
+              "finding": "AnyImageView svg path bypasses flutter_svg asset cache"
+            }
+          },
+          "IMPACT": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/tasks/TASK-005.md",
+              "grep IntroHeader/LocaleController/toggleLocale callers in user_app/lib + test"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Operator technical approval of TASK-005",
+            "outputs": {
+              "impact": "LOW",
+              "modules": [
+                "user_app"
+              ],
+              "backend_impact": "none",
+              "api_contract": "unchanged",
+              "callers": "LocaleController used by MyApp and LoginScreenController only; IntroHeader used by OTP screen only",
+              "risk": "locale persistence failure now silent to UI (logged); new app_svg widget in core/widgets"
+            }
+          },
+          "TECHNICAL": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/tasks/TASK-005.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [
+              "Proposed Bangla strings (otpVerification, otpSentTo, changeNumber) need operator confirmation"
+            ],
+            "recommended_next_step": "Operator technical approval, then IMPLEMENTATION (mobile-agent)",
+            "outputs": {
+              "verdict": "TECHNICAL_READY",
+              "design_sections": [
+                "async locale toggle",
+                "SvgPicture.asset + svg.cache precache (AnyImageView bypass)",
+                "login layout polish",
+                "OTP layout polish + i18n"
+              ]
+            }
+          },
+          "IMPLEMENTATION": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/REVIEW-TASK-005.md#implementation-agent-2026-09-23",
+              "fvm flutter analyze: No issues found",
+              "fvm flutter test: 31 passed",
+              "agentic/data/project-context/features/BOS-010/qa/task-005/"
+            ],
+            "blocking_issues": [],
+            "open_questions": [
+              "Follow-up: OtpResendButton, OTP error snackbar and shell tab labels remain English in Bangla mode (outside approved scope)"
+            ],
+            "recommended_next_step": "Code review",
+            "outputs": {
+              "verdict": "IMPLEMENTATION_READY",
+              "persona": "mobile-agent",
+              "no_git_commit_made": true
+            }
+          },
+          "REVIEW": {
+            "status": "BLOCKED",
+            "evidence": [
+              "user_app/lib/core/controllers/locale_controller.dart:33"
+            ],
+            "blocking_issues": [
+              "Rapid double toggle runs two concurrent setLocale calls; out-of-order completion can persist the older locale, so restart shows the wrong language"
+            ],
+            "open_questions": [],
+            "recommended_next_step": "Serialize locale saves in LocaleController and add a double-toggle test",
+            "outputs": {
+              "verdict": "CHANGES_REQUIRED",
+              "passed": [
+                "AppSvg cache key",
+                "layout/SafeArea/keyboard",
+                "IntroHeader",
+                "trParams @phone",
+                "style rules",
+                "tests non-vacuous"
+              ]
+            }
+          }
+        },
+        "active_task": null
+      },
+      "created_at": "2026-09-23T11:25:27.160136+00:00"
+    },
+    {
+      "run_id": "RUN-8ED649CAEBFA46CD8E6EC1EB2BB9FCBF",
+      "stage": "CONTEXT",
+      "status": "RUNNING",
+      "payload": {
+        "scope_revision": 1,
+        "results": {
+          "INTAKE": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/tasks/TASK-005.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Load user_app auth presentation + locale context",
+            "outputs": {
+              "work_item": "BOS-010 TASK-005",
+              "input_mode": "prompt-first",
+              "work_type": "change_request",
+              "project_type": "brownfield",
+              "category": "Mobile",
+              "hierarchy": "TASK_ONLY",
+              "planning": "NO_REPLAN",
+              "modules": [
+                "user_app"
+              ]
+            }
+          }
+        },
+        "_removed": [
+          "context"
+        ]
+      },
+      "created_at": "2026-09-23T11:28:10.873521+00:00"
+    },
+    {
+      "run_id": "RUN-8ED649CAEBFA46CD8E6EC1EB2BB9FCBF",
+      "stage": "CONTEXT",
+      "status": "RUNNING",
+      "payload": {
+        "context": {
+          "files": {
+            "agentic/data/project-context/features/BOS-010/tasks/TASK-005.md": "2b06243a059547771fc1cf96d2c7d74d023b674b3a36866fe07bb3d41c8e8cb1",
+            "user_app/lib/core/controllers/locale_controller.dart": "cef7ce9acc554d0a9b2fa0453ad06b508be2fdf6325cc033e78fd71146ec733a",
+            "user_app/lib/core/services/app_settings/app_settings_repository.dart": "6e228678ea7bd7964d7bcca18396cf51ca2f17a88e26e31dfa5e8e4a0d07c72f",
+            "user_app/lib/core/services/app_settings/app_settings_repository_impl.dart": "297c356584bfb7e7e82fc7110a155cf81b82f25f8ba5b215640a283363c9999c",
+            "user_app/lib/app/app.dart": "0b65ed319b64c9d4ba01863041cd8e97ed5a105541c3d057cbfd442edc94680c",
+            "user_app/lib/features/authentication/presentation/pages/login_screen.dart": "28dc4a2aba763ca4140acd780d8d5543135c423ebe7f80b17f239adf23550cb7",
+            "user_app/lib/features/authentication/presentation/pages/login_otp_verify_screen.dart": "30ec1940888bd4b3111389c09fa176f0da7662deabce687666e1ba5e8201f4e3",
+            "user_app/lib/features/authentication/presentation/widgets/intro_header.dart": "2fb19e16f26355810129fbcaa67ccb270b6b2993c773b5f4253b3a538229de80",
+            "user_app/lib/features/authentication/presentation/controllers/login_screen_controller.dart": "88b9c30d25100b54cdd3664329a06a3745a00a6014182f8600dcf5caa53eef06",
+            "user_app/lib/res/strings/string_enum.dart": "c19b623c5fc23a95830c5f5c3faf419ea7f2f821c92ba6a15c1997bb07fc8ff8",
+            "user_app/lib/res/drawable/app_drawable.dart": "231974b7e31ee1919bce68accf4029160e2d93304597c783743d8278e4e527a6",
+            "user_app/lib/core/widgets/images/round_image.dart": "73cd7ff71c0af2d0fcbfd2f68a05cbb633fcc9bda5e3205899f8c6ffb0ac8a17",
+            "user_app/lib/core/widgets/images/app_svg.dart": "7de1738070981fc7e9e93c1f46fab179ab4a82dd9c9ea0d5506553257f1e8d71",
+            "user_app/test/core/controllers/locale_controller_test.dart": "c4cdedeebb26a66e80f4aadc8014cc19fb93827714f44f7e8cd860c65c8f5f5e",
+            "user_app/test/core/widgets/app_svg_test.dart": "96771dbd2b58ed13d7fd7154bc96b922243ce1066f39e88f74e1ec0cc33c779e",
+            "user_app/pubspec.yaml": "c8f8e945836ea400f8329ad471aaf03ae7b3cde785ebf211250a9abc6d40a16e",
+            "user_app/pubspec.lock": "15bb22943c8704ca4037c40d33de5baff979443adce1bcf8928adc69264e5e9d"
+          }
+        }
+      },
+      "created_at": "2026-09-23T11:28:10.981012+00:00"
+    },
+    {
+      "run_id": "RUN-8ED649CAEBFA46CD8E6EC1EB2BB9FCBF",
+      "stage": "CONTEXT",
+      "status": "RUNNING",
+      "payload": {
+        "attempts": {
+          "0:INTAKE:prompt-intake-adapter": 1,
+          "0:CONTEXT:user-flow-discovery-agent": 1,
+          "0:IMPACT:change-impact-analyzer": 1,
+          "0:TECHNICAL:technical-readiness-verifier": 1,
+          "0:IMPLEMENTATION:implementation-agent": 2,
+          "0:REVIEW:code-review-agent": 1,
+          "1:CONTEXT:user-flow-discovery-agent": 1
+        },
+        "active_task": {
+          "id": "3af27651daf4406db111b076d57f4f7a",
+          "skill": "user-flow-discovery-agent",
+          "started_at": "2026-09-23T11:28:11.073569+00:00",
+          "tool_calls": 0
+        }
+      },
+      "created_at": "2026-09-23T11:28:11.077277+00:00"
+    },
+    {
+      "run_id": "RUN-8ED649CAEBFA46CD8E6EC1EB2BB9FCBF",
+      "stage": "CONTEXT",
+      "status": "RUNNING",
+      "payload": {
+        "results": {
+          "INTAKE": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/tasks/TASK-005.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Load user_app auth presentation + locale context",
+            "outputs": {
+              "work_item": "BOS-010 TASK-005",
+              "input_mode": "prompt-first",
+              "work_type": "change_request",
+              "project_type": "brownfield",
+              "category": "Mobile",
+              "hierarchy": "TASK_ONLY",
+              "planning": "NO_REPLAN",
+              "modules": [
+                "user_app"
+              ]
+            }
+          },
+          "CONTEXT": {
+            "status": "READY",
+            "evidence": [
+              "user_app/lib/features/authentication/presentation/pages/login_screen.dart",
+              "user_app/lib/features/authentication/presentation/pages/login_otp_verify_screen.dart",
+              "user_app/lib/core/controllers/locale_controller.dart",
+              "~/.pub-cache any_image_view-2.1.0 lib/any_image_view.dart:386-449 (rootBundle.loadString + FutureBuilder + SvgPicture.string)",
+              "~/.pub-cache flutter_svg-2.3.0 lib/src/loaders.dart:143-193,384-395 (cache key)"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Impact analysis",
+            "outputs": {
+              "flows": [
+                "login: locale toggle, phone, Next -> OTP",
+                "OTP: code, Verify -> app shell, Change Number -> back, resend"
+              ],
+              "finding": "AnyImageView svg path bypasses flutter_svg asset cache"
+            }
+          }
+        },
+        "active_task": null
+      },
+      "created_at": "2026-09-23T11:28:11.153665+00:00"
+    },
+    {
+      "run_id": "RUN-8ED649CAEBFA46CD8E6EC1EB2BB9FCBF",
+      "stage": "IMPACT",
+      "status": "RUNNING",
+      "payload": {},
+      "created_at": "2026-09-23T11:28:11.243516+00:00"
+    },
+    {
+      "run_id": "RUN-8ED649CAEBFA46CD8E6EC1EB2BB9FCBF",
+      "stage": "IMPACT",
+      "status": "RUNNING",
+      "payload": {
+        "attempts": {
+          "0:INTAKE:prompt-intake-adapter": 1,
+          "0:CONTEXT:user-flow-discovery-agent": 1,
+          "0:IMPACT:change-impact-analyzer": 1,
+          "0:TECHNICAL:technical-readiness-verifier": 1,
+          "0:IMPLEMENTATION:implementation-agent": 2,
+          "0:REVIEW:code-review-agent": 1,
+          "1:CONTEXT:user-flow-discovery-agent": 1,
+          "1:IMPACT:change-impact-analyzer": 1
+        },
+        "active_task": {
+          "id": "9407ac85c56c44bb975ddc36945d38b9",
+          "skill": "change-impact-analyzer",
+          "started_at": "2026-09-23T11:28:11.388955+00:00",
+          "tool_calls": 0
+        }
+      },
+      "created_at": "2026-09-23T11:28:11.390397+00:00"
+    },
+    {
+      "run_id": "RUN-8ED649CAEBFA46CD8E6EC1EB2BB9FCBF",
+      "stage": "IMPACT",
+      "status": "RUNNING",
+      "payload": {
+        "results": {
+          "INTAKE": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/tasks/TASK-005.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Load user_app auth presentation + locale context",
+            "outputs": {
+              "work_item": "BOS-010 TASK-005",
+              "input_mode": "prompt-first",
+              "work_type": "change_request",
+              "project_type": "brownfield",
+              "category": "Mobile",
+              "hierarchy": "TASK_ONLY",
+              "planning": "NO_REPLAN",
+              "modules": [
+                "user_app"
+              ]
+            }
+          },
+          "CONTEXT": {
+            "status": "READY",
+            "evidence": [
+              "user_app/lib/features/authentication/presentation/pages/login_screen.dart",
+              "user_app/lib/features/authentication/presentation/pages/login_otp_verify_screen.dart",
+              "user_app/lib/core/controllers/locale_controller.dart",
+              "~/.pub-cache any_image_view-2.1.0 lib/any_image_view.dart:386-449 (rootBundle.loadString + FutureBuilder + SvgPicture.string)",
+              "~/.pub-cache flutter_svg-2.3.0 lib/src/loaders.dart:143-193,384-395 (cache key)"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Impact analysis",
+            "outputs": {
+              "flows": [
+                "login: locale toggle, phone, Next -> OTP",
+                "OTP: code, Verify -> app shell, Change Number -> back, resend"
+              ],
+              "finding": "AnyImageView svg path bypasses flutter_svg asset cache"
+            }
+          },
+          "IMPACT": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/tasks/TASK-005.md",
+              "grep IntroHeader/LocaleController/toggleLocale callers in user_app/lib + test"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Operator technical approval of TASK-005",
+            "outputs": {
+              "impact": "LOW",
+              "modules": [
+                "user_app"
+              ],
+              "backend_impact": "none",
+              "api_contract": "unchanged",
+              "callers": "LocaleController used by MyApp and LoginScreenController only; IntroHeader used by OTP screen only",
+              "risk": "locale persistence failure now silent to UI (logged); new app_svg widget in core/widgets"
+            }
+          }
+        },
+        "active_task": null
+      },
+      "created_at": "2026-09-23T11:28:11.541476+00:00"
+    },
+    {
+      "run_id": "RUN-8ED649CAEBFA46CD8E6EC1EB2BB9FCBF",
+      "stage": "TECHNICAL",
+      "status": "RUNNING",
+      "payload": {},
+      "created_at": "2026-09-23T11:28:11.682380+00:00"
+    },
+    {
+      "run_id": "RUN-8ED649CAEBFA46CD8E6EC1EB2BB9FCBF",
+      "stage": "TECHNICAL",
+      "status": "RUNNING",
+      "payload": {
+        "attempts": {
+          "0:INTAKE:prompt-intake-adapter": 1,
+          "0:CONTEXT:user-flow-discovery-agent": 1,
+          "0:IMPACT:change-impact-analyzer": 1,
+          "0:TECHNICAL:technical-readiness-verifier": 1,
+          "0:IMPLEMENTATION:implementation-agent": 2,
+          "0:REVIEW:code-review-agent": 1,
+          "1:CONTEXT:user-flow-discovery-agent": 1,
+          "1:IMPACT:change-impact-analyzer": 1,
+          "1:TECHNICAL:technical-readiness-verifier": 1
+        },
+        "active_task": {
+          "id": "87fd78ab783e4e3cacdbf1eb426bf45f",
+          "skill": "technical-readiness-verifier",
+          "started_at": "2026-09-23T11:28:11.834926+00:00",
+          "tool_calls": 0
+        }
+      },
+      "created_at": "2026-09-23T11:28:11.840047+00:00"
+    },
+    {
+      "run_id": "RUN-8ED649CAEBFA46CD8E6EC1EB2BB9FCBF",
+      "stage": "TECHNICAL",
+      "status": "RUNNING",
+      "payload": {
+        "results": {
+          "INTAKE": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/tasks/TASK-005.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Load user_app auth presentation + locale context",
+            "outputs": {
+              "work_item": "BOS-010 TASK-005",
+              "input_mode": "prompt-first",
+              "work_type": "change_request",
+              "project_type": "brownfield",
+              "category": "Mobile",
+              "hierarchy": "TASK_ONLY",
+              "planning": "NO_REPLAN",
+              "modules": [
+                "user_app"
+              ]
+            }
+          },
+          "CONTEXT": {
+            "status": "READY",
+            "evidence": [
+              "user_app/lib/features/authentication/presentation/pages/login_screen.dart",
+              "user_app/lib/features/authentication/presentation/pages/login_otp_verify_screen.dart",
+              "user_app/lib/core/controllers/locale_controller.dart",
+              "~/.pub-cache any_image_view-2.1.0 lib/any_image_view.dart:386-449 (rootBundle.loadString + FutureBuilder + SvgPicture.string)",
+              "~/.pub-cache flutter_svg-2.3.0 lib/src/loaders.dart:143-193,384-395 (cache key)"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Impact analysis",
+            "outputs": {
+              "flows": [
+                "login: locale toggle, phone, Next -> OTP",
+                "OTP: code, Verify -> app shell, Change Number -> back, resend"
+              ],
+              "finding": "AnyImageView svg path bypasses flutter_svg asset cache"
+            }
+          },
+          "IMPACT": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/tasks/TASK-005.md",
+              "grep IntroHeader/LocaleController/toggleLocale callers in user_app/lib + test"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Operator technical approval of TASK-005",
+            "outputs": {
+              "impact": "LOW",
+              "modules": [
+                "user_app"
+              ],
+              "backend_impact": "none",
+              "api_contract": "unchanged",
+              "callers": "LocaleController used by MyApp and LoginScreenController only; IntroHeader used by OTP screen only",
+              "risk": "locale persistence failure now silent to UI (logged); new app_svg widget in core/widgets"
+            }
+          },
+          "TECHNICAL": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/tasks/TASK-005.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [
+              "Proposed Bangla strings (otpVerification, otpSentTo, changeNumber) need operator confirmation"
+            ],
+            "recommended_next_step": "Operator technical approval, then IMPLEMENTATION (mobile-agent)",
+            "outputs": {
+              "verdict": "TECHNICAL_READY",
+              "design_sections": [
+                "async locale toggle",
+                "SvgPicture.asset + svg.cache precache (AnyImageView bypass)",
+                "login layout polish",
+                "OTP layout polish + i18n"
+              ]
+            }
+          }
+        },
+        "active_task": null
+      },
+      "created_at": "2026-09-23T11:28:11.927324+00:00"
+    },
+    {
+      "run_id": "RUN-8ED649CAEBFA46CD8E6EC1EB2BB9FCBF",
+      "stage": "TECHNICAL",
+      "status": "RUNNING",
+      "payload": {},
+      "created_at": "2026-09-23T11:28:49.650321+00:00"
+    },
+    {
+      "run_id": "RUN-8ED649CAEBFA46CD8E6EC1EB2BB9FCBF",
+      "stage": "IMPLEMENTATION",
+      "status": "RUNNING",
+      "payload": {},
+      "created_at": "2026-09-23T11:28:49.701670+00:00"
+    },
+    {
+      "run_id": "RUN-8ED649CAEBFA46CD8E6EC1EB2BB9FCBF",
+      "stage": "IMPLEMENTATION",
+      "status": "RUNNING",
+      "payload": {
+        "attempts": {
+          "0:INTAKE:prompt-intake-adapter": 1,
+          "0:CONTEXT:user-flow-discovery-agent": 1,
+          "0:IMPACT:change-impact-analyzer": 1,
+          "0:TECHNICAL:technical-readiness-verifier": 1,
+          "0:IMPLEMENTATION:implementation-agent": 2,
+          "0:REVIEW:code-review-agent": 1,
+          "1:CONTEXT:user-flow-discovery-agent": 1,
+          "1:IMPACT:change-impact-analyzer": 1,
+          "1:TECHNICAL:technical-readiness-verifier": 1,
+          "1:IMPLEMENTATION:implementation-agent": 1
+        },
+        "active_task": {
+          "id": "e83754f86c91432490bd45e93e17f6d2",
+          "skill": "implementation-agent",
+          "started_at": "2026-09-23T11:28:49.874469+00:00",
+          "tool_calls": 0
+        }
+      },
+      "created_at": "2026-09-23T11:28:49.877653+00:00"
+    },
+    {
+      "run_id": "RUN-8ED649CAEBFA46CD8E6EC1EB2BB9FCBF",
+      "stage": "IMPLEMENTATION",
+      "status": "RUNNING",
+      "payload": {
+        "results": {
+          "INTAKE": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/tasks/TASK-005.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Load user_app auth presentation + locale context",
+            "outputs": {
+              "work_item": "BOS-010 TASK-005",
+              "input_mode": "prompt-first",
+              "work_type": "change_request",
+              "project_type": "brownfield",
+              "category": "Mobile",
+              "hierarchy": "TASK_ONLY",
+              "planning": "NO_REPLAN",
+              "modules": [
+                "user_app"
+              ]
+            }
+          },
+          "CONTEXT": {
+            "status": "READY",
+            "evidence": [
+              "user_app/lib/features/authentication/presentation/pages/login_screen.dart",
+              "user_app/lib/features/authentication/presentation/pages/login_otp_verify_screen.dart",
+              "user_app/lib/core/controllers/locale_controller.dart",
+              "~/.pub-cache any_image_view-2.1.0 lib/any_image_view.dart:386-449 (rootBundle.loadString + FutureBuilder + SvgPicture.string)",
+              "~/.pub-cache flutter_svg-2.3.0 lib/src/loaders.dart:143-193,384-395 (cache key)"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Impact analysis",
+            "outputs": {
+              "flows": [
+                "login: locale toggle, phone, Next -> OTP",
+                "OTP: code, Verify -> app shell, Change Number -> back, resend"
+              ],
+              "finding": "AnyImageView svg path bypasses flutter_svg asset cache"
+            }
+          },
+          "IMPACT": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/tasks/TASK-005.md",
+              "grep IntroHeader/LocaleController/toggleLocale callers in user_app/lib + test"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Operator technical approval of TASK-005",
+            "outputs": {
+              "impact": "LOW",
+              "modules": [
+                "user_app"
+              ],
+              "backend_impact": "none",
+              "api_contract": "unchanged",
+              "callers": "LocaleController used by MyApp and LoginScreenController only; IntroHeader used by OTP screen only",
+              "risk": "locale persistence failure now silent to UI (logged); new app_svg widget in core/widgets"
+            }
+          },
+          "TECHNICAL": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/tasks/TASK-005.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [
+              "Proposed Bangla strings (otpVerification, otpSentTo, changeNumber) need operator confirmation"
+            ],
+            "recommended_next_step": "Operator technical approval, then IMPLEMENTATION (mobile-agent)",
+            "outputs": {
+              "verdict": "TECHNICAL_READY",
+              "design_sections": [
+                "async locale toggle",
+                "SvgPicture.asset + svg.cache precache (AnyImageView bypass)",
+                "login layout polish",
+                "OTP layout polish + i18n"
+              ]
+            }
+          },
+          "IMPLEMENTATION": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/REVIEW-TASK-005.md#implementation-agent-2026-09-23",
+              "fvm flutter analyze: No issues found",
+              "fvm flutter test: 32 passed (incl. double-toggle ordering test)",
+              "agentic/data/project-context/features/BOS-010/qa/task-005/"
+            ],
+            "blocking_issues": [],
+            "open_questions": [
+              "Follow-up: OtpResendButton, OTP error snackbar and shell tab labels remain English in Bangla mode (outside approved scope)"
+            ],
+            "recommended_next_step": "Code review",
+            "outputs": {
+              "verdict": "IMPLEMENTATION_READY",
+              "persona": "mobile-agent",
+              "no_git_commit_made": true
+            }
+          }
+        },
+        "active_task": null
+      },
+      "created_at": "2026-09-23T11:28:49.941639+00:00"
+    },
+    {
+      "run_id": "RUN-8ED649CAEBFA46CD8E6EC1EB2BB9FCBF",
+      "stage": "REVIEW",
+      "status": "RUNNING",
+      "payload": {},
+      "created_at": "2026-09-23T11:28:49.993131+00:00"
+    },
+    {
+      "run_id": "RUN-8ED649CAEBFA46CD8E6EC1EB2BB9FCBF",
+      "stage": "REVIEW",
+      "status": "RUNNING",
+      "payload": {
+        "attempts": {
+          "0:INTAKE:prompt-intake-adapter": 1,
+          "0:CONTEXT:user-flow-discovery-agent": 1,
+          "0:IMPACT:change-impact-analyzer": 1,
+          "0:TECHNICAL:technical-readiness-verifier": 1,
+          "0:IMPLEMENTATION:implementation-agent": 2,
+          "0:REVIEW:code-review-agent": 1,
+          "1:CONTEXT:user-flow-discovery-agent": 1,
+          "1:IMPACT:change-impact-analyzer": 1,
+          "1:TECHNICAL:technical-readiness-verifier": 1,
+          "1:IMPLEMENTATION:implementation-agent": 1,
+          "1:REVIEW:code-review-agent": 1
+        },
+        "active_task": {
+          "id": "afe2361350d444ebaa12c984c29ef885",
+          "skill": "code-review-agent",
+          "started_at": "2026-09-23T11:28:50.051958+00:00",
+          "tool_calls": 0
+        }
+      },
+      "created_at": "2026-09-23T11:28:50.053030+00:00"
+    },
+    {
+      "run_id": "RUN-8ED649CAEBFA46CD8E6EC1EB2BB9FCBF",
+      "stage": "REVIEW",
+      "status": "RUNNING",
+      "payload": {
+        "results": {
+          "INTAKE": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/tasks/TASK-005.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Load user_app auth presentation + locale context",
+            "outputs": {
+              "work_item": "BOS-010 TASK-005",
+              "input_mode": "prompt-first",
+              "work_type": "change_request",
+              "project_type": "brownfield",
+              "category": "Mobile",
+              "hierarchy": "TASK_ONLY",
+              "planning": "NO_REPLAN",
+              "modules": [
+                "user_app"
+              ]
+            }
+          },
+          "CONTEXT": {
+            "status": "READY",
+            "evidence": [
+              "user_app/lib/features/authentication/presentation/pages/login_screen.dart",
+              "user_app/lib/features/authentication/presentation/pages/login_otp_verify_screen.dart",
+              "user_app/lib/core/controllers/locale_controller.dart",
+              "~/.pub-cache any_image_view-2.1.0 lib/any_image_view.dart:386-449 (rootBundle.loadString + FutureBuilder + SvgPicture.string)",
+              "~/.pub-cache flutter_svg-2.3.0 lib/src/loaders.dart:143-193,384-395 (cache key)"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Impact analysis",
+            "outputs": {
+              "flows": [
+                "login: locale toggle, phone, Next -> OTP",
+                "OTP: code, Verify -> app shell, Change Number -> back, resend"
+              ],
+              "finding": "AnyImageView svg path bypasses flutter_svg asset cache"
+            }
+          },
+          "IMPACT": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/tasks/TASK-005.md",
+              "grep IntroHeader/LocaleController/toggleLocale callers in user_app/lib + test"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Operator technical approval of TASK-005",
+            "outputs": {
+              "impact": "LOW",
+              "modules": [
+                "user_app"
+              ],
+              "backend_impact": "none",
+              "api_contract": "unchanged",
+              "callers": "LocaleController used by MyApp and LoginScreenController only; IntroHeader used by OTP screen only",
+              "risk": "locale persistence failure now silent to UI (logged); new app_svg widget in core/widgets"
+            }
+          },
+          "TECHNICAL": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/tasks/TASK-005.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [
+              "Proposed Bangla strings (otpVerification, otpSentTo, changeNumber) need operator confirmation"
+            ],
+            "recommended_next_step": "Operator technical approval, then IMPLEMENTATION (mobile-agent)",
+            "outputs": {
+              "verdict": "TECHNICAL_READY",
+              "design_sections": [
+                "async locale toggle",
+                "SvgPicture.asset + svg.cache precache (AnyImageView bypass)",
+                "login layout polish",
+                "OTP layout polish + i18n"
+              ]
+            }
+          },
+          "IMPLEMENTATION": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/REVIEW-TASK-005.md#implementation-agent-2026-09-23",
+              "fvm flutter analyze: No issues found",
+              "fvm flutter test: 32 passed (incl. double-toggle ordering test)",
+              "agentic/data/project-context/features/BOS-010/qa/task-005/"
+            ],
+            "blocking_issues": [],
+            "open_questions": [
+              "Follow-up: OtpResendButton, OTP error snackbar and shell tab labels remain English in Bangla mode (outside approved scope)"
+            ],
+            "recommended_next_step": "Code review",
+            "outputs": {
+              "verdict": "IMPLEMENTATION_READY",
+              "persona": "mobile-agent",
+              "no_git_commit_made": true
+            }
+          },
+          "REVIEW": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/REVIEW-TASK-005.md#code-review-round-1-agent-2026-09-23--changes_required--fixed",
+              "user_app/lib/core/controllers/locale_controller.dart:34-48",
+              "user_app/test/core/controllers/locale_controller_test.dart (rapid toggles test; mutation-checked)"
+            ],
+            "blocking_issues": [],
+            "open_questions": [
+              "Follow-up: OtpResendButton, OTP error snackbar, shell tab labels still English in Bangla mode"
+            ],
+            "recommended_next_step": "QA",
+            "outputs": {
+              "verdict": "REVIEW_READY",
+              "round": 2,
+              "resolved": [
+                "locale save ordering race"
+              ]
+            }
+          }
+        },
+        "active_task": null
+      },
+      "created_at": "2026-09-23T11:28:50.171595+00:00"
+    },
+    {
+      "run_id": "RUN-8ED649CAEBFA46CD8E6EC1EB2BB9FCBF",
+      "stage": "QA",
+      "status": "RUNNING",
+      "payload": {},
+      "created_at": "2026-09-23T11:28:50.274166+00:00"
+    },
+    {
+      "run_id": "RUN-8ED649CAEBFA46CD8E6EC1EB2BB9FCBF",
+      "stage": "QA",
+      "status": "RUNNING",
+      "payload": {
+        "attempts": {
+          "0:INTAKE:prompt-intake-adapter": 1,
+          "0:CONTEXT:user-flow-discovery-agent": 1,
+          "0:IMPACT:change-impact-analyzer": 1,
+          "0:TECHNICAL:technical-readiness-verifier": 1,
+          "0:IMPLEMENTATION:implementation-agent": 2,
+          "0:REVIEW:code-review-agent": 1,
+          "1:CONTEXT:user-flow-discovery-agent": 1,
+          "1:IMPACT:change-impact-analyzer": 1,
+          "1:TECHNICAL:technical-readiness-verifier": 1,
+          "1:IMPLEMENTATION:implementation-agent": 1,
+          "1:REVIEW:code-review-agent": 1,
+          "1:QA:automated-qa-agent": 1
+        },
+        "active_task": {
+          "id": "260f75115d8c43cd8081d73585b1a1cb",
+          "skill": "automated-qa-agent",
+          "started_at": "2026-09-23T11:30:40.040693+00:00",
+          "tool_calls": 0
+        }
+      },
+      "created_at": "2026-09-23T11:30:40.044328+00:00"
+    },
+    {
+      "run_id": "RUN-8ED649CAEBFA46CD8E6EC1EB2BB9FCBF",
+      "stage": "QA",
+      "status": "RUNNING",
+      "payload": {
+        "results": {
+          "INTAKE": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/tasks/TASK-005.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Load user_app auth presentation + locale context",
+            "outputs": {
+              "work_item": "BOS-010 TASK-005",
+              "input_mode": "prompt-first",
+              "work_type": "change_request",
+              "project_type": "brownfield",
+              "category": "Mobile",
+              "hierarchy": "TASK_ONLY",
+              "planning": "NO_REPLAN",
+              "modules": [
+                "user_app"
+              ]
+            }
+          },
+          "CONTEXT": {
+            "status": "READY",
+            "evidence": [
+              "user_app/lib/features/authentication/presentation/pages/login_screen.dart",
+              "user_app/lib/features/authentication/presentation/pages/login_otp_verify_screen.dart",
+              "user_app/lib/core/controllers/locale_controller.dart",
+              "~/.pub-cache any_image_view-2.1.0 lib/any_image_view.dart:386-449 (rootBundle.loadString + FutureBuilder + SvgPicture.string)",
+              "~/.pub-cache flutter_svg-2.3.0 lib/src/loaders.dart:143-193,384-395 (cache key)"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Impact analysis",
+            "outputs": {
+              "flows": [
+                "login: locale toggle, phone, Next -> OTP",
+                "OTP: code, Verify -> app shell, Change Number -> back, resend"
+              ],
+              "finding": "AnyImageView svg path bypasses flutter_svg asset cache"
+            }
+          },
+          "IMPACT": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/tasks/TASK-005.md",
+              "grep IntroHeader/LocaleController/toggleLocale callers in user_app/lib + test"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Operator technical approval of TASK-005",
+            "outputs": {
+              "impact": "LOW",
+              "modules": [
+                "user_app"
+              ],
+              "backend_impact": "none",
+              "api_contract": "unchanged",
+              "callers": "LocaleController used by MyApp and LoginScreenController only; IntroHeader used by OTP screen only",
+              "risk": "locale persistence failure now silent to UI (logged); new app_svg widget in core/widgets"
+            }
+          },
+          "TECHNICAL": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/tasks/TASK-005.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [
+              "Proposed Bangla strings (otpVerification, otpSentTo, changeNumber) need operator confirmation"
+            ],
+            "recommended_next_step": "Operator technical approval, then IMPLEMENTATION (mobile-agent)",
+            "outputs": {
+              "verdict": "TECHNICAL_READY",
+              "design_sections": [
+                "async locale toggle",
+                "SvgPicture.asset + svg.cache precache (AnyImageView bypass)",
+                "login layout polish",
+                "OTP layout polish + i18n"
+              ]
+            }
+          },
+          "IMPLEMENTATION": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/REVIEW-TASK-005.md#implementation-agent-2026-09-23",
+              "fvm flutter analyze: No issues found",
+              "fvm flutter test: 32 passed (incl. double-toggle ordering test)",
+              "agentic/data/project-context/features/BOS-010/qa/task-005/"
+            ],
+            "blocking_issues": [],
+            "open_questions": [
+              "Follow-up: OtpResendButton, OTP error snackbar and shell tab labels remain English in Bangla mode (outside approved scope)"
+            ],
+            "recommended_next_step": "Code review",
+            "outputs": {
+              "verdict": "IMPLEMENTATION_READY",
+              "persona": "mobile-agent",
+              "no_git_commit_made": true
+            }
+          },
+          "REVIEW": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/REVIEW-TASK-005.md#code-review-round-1-agent-2026-09-23--changes_required--fixed",
+              "user_app/lib/core/controllers/locale_controller.dart:34-48",
+              "user_app/test/core/controllers/locale_controller_test.dart (rapid toggles test; mutation-checked)"
+            ],
+            "blocking_issues": [],
+            "open_questions": [
+              "Follow-up: OtpResendButton, OTP error snackbar, shell tab labels still English in Bangla mode"
+            ],
+            "recommended_next_step": "QA",
+            "outputs": {
+              "verdict": "REVIEW_READY",
+              "round": 2,
+              "resolved": [
+                "locale save ordering race"
+              ]
+            }
+          },
+          "QA": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/REVIEW-TASK-005.md#qa-agent-2026-09-23-after-review-fix",
+              "fvm flutter analyze: no issues",
+              "fvm flutter test: 32 passed",
+              "agentic/data/project-context/features/BOS-010/qa/task-005/"
+            ],
+            "blocking_issues": [],
+            "open_questions": [
+              "Follow-up: OtpResendButton, OTP error snackbar, shell tab labels English in Bangla mode"
+            ],
+            "recommended_next_step": "Release and commit",
+            "outputs": {
+              "verdict": "QA_READY"
+            }
+          }
+        },
+        "active_task": null
+      },
+      "created_at": "2026-09-23T11:30:40.165015+00:00"
+    },
+    {
+      "run_id": "RUN-8ED649CAEBFA46CD8E6EC1EB2BB9FCBF",
+      "stage": "QA",
+      "status": "RUNNING",
+      "payload": {},
+      "created_at": "2026-09-23T11:30:40.218554+00:00"
+    },
+    {
+      "run_id": "RUN-8ED649CAEBFA46CD8E6EC1EB2BB9FCBF",
+      "stage": "RELEASE",
+      "status": "RUNNING",
+      "payload": {},
+      "created_at": "2026-09-23T11:30:40.282861+00:00"
+    },
+    {
+      "run_id": "RUN-8ED649CAEBFA46CD8E6EC1EB2BB9FCBF",
+      "stage": "RELEASE",
+      "status": "RUNNING",
+      "payload": {
+        "attempts": {
+          "0:INTAKE:prompt-intake-adapter": 1,
+          "0:CONTEXT:user-flow-discovery-agent": 1,
+          "0:IMPACT:change-impact-analyzer": 1,
+          "0:TECHNICAL:technical-readiness-verifier": 1,
+          "0:IMPLEMENTATION:implementation-agent": 2,
+          "0:REVIEW:code-review-agent": 1,
+          "1:CONTEXT:user-flow-discovery-agent": 1,
+          "1:IMPACT:change-impact-analyzer": 1,
+          "1:TECHNICAL:technical-readiness-verifier": 1,
+          "1:IMPLEMENTATION:implementation-agent": 1,
+          "1:REVIEW:code-review-agent": 1,
+          "1:QA:automated-qa-agent": 1,
+          "1:RELEASE:release-readiness-agent": 1
+        },
+        "active_task": {
+          "id": "7a13eb572a82455e96e479928b5d3a17",
+          "skill": "release-readiness-agent",
+          "started_at": "2026-09-23T11:31:13.674091+00:00",
+          "tool_calls": 0
+        }
+      },
+      "created_at": "2026-09-23T11:31:13.675157+00:00"
+    },
+    {
+      "run_id": "RUN-8ED649CAEBFA46CD8E6EC1EB2BB9FCBF",
+      "stage": "RELEASE",
+      "status": "RUNNING",
+      "payload": {
+        "results": {
+          "INTAKE": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/tasks/TASK-005.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Load user_app auth presentation + locale context",
+            "outputs": {
+              "work_item": "BOS-010 TASK-005",
+              "input_mode": "prompt-first",
+              "work_type": "change_request",
+              "project_type": "brownfield",
+              "category": "Mobile",
+              "hierarchy": "TASK_ONLY",
+              "planning": "NO_REPLAN",
+              "modules": [
+                "user_app"
+              ]
+            }
+          },
+          "CONTEXT": {
+            "status": "READY",
+            "evidence": [
+              "user_app/lib/features/authentication/presentation/pages/login_screen.dart",
+              "user_app/lib/features/authentication/presentation/pages/login_otp_verify_screen.dart",
+              "user_app/lib/core/controllers/locale_controller.dart",
+              "~/.pub-cache any_image_view-2.1.0 lib/any_image_view.dart:386-449 (rootBundle.loadString + FutureBuilder + SvgPicture.string)",
+              "~/.pub-cache flutter_svg-2.3.0 lib/src/loaders.dart:143-193,384-395 (cache key)"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Impact analysis",
+            "outputs": {
+              "flows": [
+                "login: locale toggle, phone, Next -> OTP",
+                "OTP: code, Verify -> app shell, Change Number -> back, resend"
+              ],
+              "finding": "AnyImageView svg path bypasses flutter_svg asset cache"
+            }
+          },
+          "IMPACT": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/tasks/TASK-005.md",
+              "grep IntroHeader/LocaleController/toggleLocale callers in user_app/lib + test"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Operator technical approval of TASK-005",
+            "outputs": {
+              "impact": "LOW",
+              "modules": [
+                "user_app"
+              ],
+              "backend_impact": "none",
+              "api_contract": "unchanged",
+              "callers": "LocaleController used by MyApp and LoginScreenController only; IntroHeader used by OTP screen only",
+              "risk": "locale persistence failure now silent to UI (logged); new app_svg widget in core/widgets"
+            }
+          },
+          "TECHNICAL": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/tasks/TASK-005.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [
+              "Proposed Bangla strings (otpVerification, otpSentTo, changeNumber) need operator confirmation"
+            ],
+            "recommended_next_step": "Operator technical approval, then IMPLEMENTATION (mobile-agent)",
+            "outputs": {
+              "verdict": "TECHNICAL_READY",
+              "design_sections": [
+                "async locale toggle",
+                "SvgPicture.asset + svg.cache precache (AnyImageView bypass)",
+                "login layout polish",
+                "OTP layout polish + i18n"
+              ]
+            }
+          },
+          "IMPLEMENTATION": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/REVIEW-TASK-005.md#implementation-agent-2026-09-23",
+              "fvm flutter analyze: No issues found",
+              "fvm flutter test: 32 passed (incl. double-toggle ordering test)",
+              "agentic/data/project-context/features/BOS-010/qa/task-005/"
+            ],
+            "blocking_issues": [],
+            "open_questions": [
+              "Follow-up: OtpResendButton, OTP error snackbar and shell tab labels remain English in Bangla mode (outside approved scope)"
+            ],
+            "recommended_next_step": "Code review",
+            "outputs": {
+              "verdict": "IMPLEMENTATION_READY",
+              "persona": "mobile-agent",
+              "no_git_commit_made": true
+            }
+          },
+          "REVIEW": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/REVIEW-TASK-005.md#code-review-round-1-agent-2026-09-23--changes_required--fixed",
+              "user_app/lib/core/controllers/locale_controller.dart:34-48",
+              "user_app/test/core/controllers/locale_controller_test.dart (rapid toggles test; mutation-checked)"
+            ],
+            "blocking_issues": [],
+            "open_questions": [
+              "Follow-up: OtpResendButton, OTP error snackbar, shell tab labels still English in Bangla mode"
+            ],
+            "recommended_next_step": "QA",
+            "outputs": {
+              "verdict": "REVIEW_READY",
+              "round": 2,
+              "resolved": [
+                "locale save ordering race"
+              ]
+            }
+          },
+          "QA": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/REVIEW-TASK-005.md#qa-agent-2026-09-23-after-review-fix",
+              "fvm flutter analyze: no issues",
+              "fvm flutter test: 32 passed",
+              "agentic/data/project-context/features/BOS-010/qa/task-005/"
+            ],
+            "blocking_issues": [],
+            "open_questions": [
+              "Follow-up: OtpResendButton, OTP error snackbar, shell tab labels English in Bangla mode"
+            ],
+            "recommended_next_step": "Release and commit",
+            "outputs": {
+              "verdict": "QA_READY"
+            }
+          },
+          "RELEASE": {
+            "status": "READY",
+            "evidence": [
+              "git 61e40e9 (TASK-005 user_app changes + evidence)",
+              "agentic/data/project-context/features/BOS-010/REVIEW-TASK-005.md",
+              "release approval recorded by operator 2026-09-23"
+            ],
+            "blocking_issues": [],
+            "open_questions": [
+              "Follow-up: translate OtpResendButton, OTP error snackbar, shell tab labels"
+            ],
+            "recommended_next_step": "Close run; operator to name next task",
+            "outputs": {
+              "verdict": "RELEASE_READY",
+              "scope": "user_app only; no API/backend change",
+              "deploy": "none"
+            }
+          }
+        },
+        "active_task": null
+      },
+      "created_at": "2026-09-23T11:31:13.741264+00:00"
+    },
+    {
+      "run_id": "RUN-8ED649CAEBFA46CD8E6EC1EB2BB9FCBF",
+      "stage": "COMPLETED",
+      "status": "COMPLETED",
+      "payload": {},
+      "created_at": "2026-09-23T11:31:13.847972+00:00"
+    }
+  ],
+  "approvals": [
+    {
+      "run_id": "RUN-8ED649CAEBFA46CD8E6EC1EB2BB9FCBF",
+      "gate": "technical",
+      "approver": "macdipu <c.dipu0@gmail.com>",
+      "decision": "APPROVED",
+      "comment": "Operator chose 'Approve as written' for TASK-005 design (incl. proposed Bangla strings) in Claude session 2026-09-23.",
+      "created_at": "2026-09-23T11:15:43.239937+00:00",
+      "scope_revision": 0
+    },
+    {
+      "run_id": "RUN-8ED649CAEBFA46CD8E6EC1EB2BB9FCBF",
+      "gate": "technical",
+      "approver": "macdipu <c.dipu0@gmail.com>",
+      "decision": "APPROVED",
+      "comment": "Operator chose 'Re-approve, finish it' for TASK-005 (scope revision 1, design unchanged; locale-save ordering fix) in Claude session 2026-09-23; also authorizes commit and release close.",
+      "created_at": "2026-09-23T11:28:49.648585+00:00",
+      "scope_revision": 1
+    },
+    {
+      "run_id": "RUN-8ED649CAEBFA46CD8E6EC1EB2BB9FCBF",
+      "gate": "release",
+      "approver": "macdipu <c.dipu0@gmail.com>",
+      "decision": "APPROVED",
+      "comment": "Operator chose 'Re-approve, finish it' for TASK-005 in Claude session 2026-09-23 (option: re-run review/QA, commit, close run).",
+      "created_at": "2026-09-23T11:30:40.216578+00:00",
+      "scope_revision": 1
+    }
+  ],
+  "timing_events": [
+    {
+      "run_id": "RUN-8ED649CAEBFA46CD8E6EC1EB2BB9FCBF",
+      "task": "51d2df73919a45aaab8517c21318be99",
+      "event": "STARTED",
+      "ts": "2026-09-23T10:47:32.008288+00:00",
+      "metadata": {
+        "skill": "prompt-intake-adapter",
+        "retry_count": 0
+      }
+    },
+    {
+      "run_id": "RUN-8ED649CAEBFA46CD8E6EC1EB2BB9FCBF",
+      "task": "51d2df73919a45aaab8517c21318be99",
+      "event": "COMPLETED",
+      "ts": "2026-09-23T10:47:32.060464+00:00",
+      "metadata": {
+        "duration_ms": 52,
+        "result_status": "READY"
+      }
+    },
+    {
+      "run_id": "RUN-8ED649CAEBFA46CD8E6EC1EB2BB9FCBF",
+      "task": "127ecb7643764666a9207fbd597fe7d5",
+      "event": "STARTED",
+      "ts": "2026-09-23T10:47:44.543554+00:00",
+      "metadata": {
+        "skill": "user-flow-discovery-agent",
+        "retry_count": 0
+      }
+    },
+    {
+      "run_id": "RUN-8ED649CAEBFA46CD8E6EC1EB2BB9FCBF",
+      "task": "127ecb7643764666a9207fbd597fe7d5",
+      "event": "COMPLETED",
+      "ts": "2026-09-23T10:47:44.597438+00:00",
+      "metadata": {
+        "duration_ms": 53,
+        "result_status": "READY"
+      }
+    },
+    {
+      "run_id": "RUN-8ED649CAEBFA46CD8E6EC1EB2BB9FCBF",
+      "task": "eacb900e33884cd5b408d5bbe23d0c16",
+      "event": "STARTED",
+      "ts": "2026-09-23T10:48:12.073815+00:00",
+      "metadata": {
+        "skill": "change-impact-analyzer",
+        "retry_count": 0
+      }
+    },
+    {
+      "run_id": "RUN-8ED649CAEBFA46CD8E6EC1EB2BB9FCBF",
+      "task": "eacb900e33884cd5b408d5bbe23d0c16",
+      "event": "COMPLETED",
+      "ts": "2026-09-23T10:48:12.130870+00:00",
+      "metadata": {
+        "duration_ms": 57,
+        "result_status": "READY"
+      }
+    },
+    {
+      "run_id": "RUN-8ED649CAEBFA46CD8E6EC1EB2BB9FCBF",
+      "task": "903b6841461c45469037b7c31cabbc05",
+      "event": "STARTED",
+      "ts": "2026-09-23T10:48:20.706912+00:00",
+      "metadata": {
+        "skill": "technical-readiness-verifier",
+        "retry_count": 0
+      }
+    },
+    {
+      "run_id": "RUN-8ED649CAEBFA46CD8E6EC1EB2BB9FCBF",
+      "task": "903b6841461c45469037b7c31cabbc05",
+      "event": "COMPLETED",
+      "ts": "2026-09-23T10:48:20.769850+00:00",
+      "metadata": {
+        "duration_ms": 62,
+        "result_status": "READY"
+      }
+    },
+    {
+      "run_id": "RUN-8ED649CAEBFA46CD8E6EC1EB2BB9FCBF",
+      "task": "8395f2006cfd4532bbc6ab9250826a27",
+      "event": "STARTED",
+      "ts": "2026-09-23T11:15:43.354653+00:00",
+      "metadata": {
+        "skill": "implementation-agent",
+        "retry_count": 0
+      }
+    },
+    {
+      "run_id": "RUN-8ED649CAEBFA46CD8E6EC1EB2BB9FCBF",
+      "task": "8395f2006cfd4532bbc6ab9250826a27",
+      "event": "FAILED",
+      "ts": "2026-09-23T11:22:00.081816+00:00",
+      "metadata": {
+        "error": "Implementation changed registered scope files and added new ones; closing to refresh scope (work complete, evidence in REVIEW-TASK-005.md)",
+        "duration_ms": 376725
+      }
+    },
+    {
+      "run_id": "RUN-8ED649CAEBFA46CD8E6EC1EB2BB9FCBF",
+      "task": "f81d596e96d145e99fe92de11e26df52",
+      "event": "STARTED",
+      "ts": "2026-09-23T11:22:00.553768+00:00",
+      "metadata": {
+        "skill": "implementation-agent",
+        "retry_count": 1
+      }
+    },
+    {
+      "run_id": "RUN-8ED649CAEBFA46CD8E6EC1EB2BB9FCBF",
+      "task": "f81d596e96d145e99fe92de11e26df52",
+      "event": "COMPLETED",
+      "ts": "2026-09-23T11:22:00.811209+00:00",
+      "metadata": {
+        "duration_ms": 257,
+        "result_status": "READY"
+      }
+    },
+    {
+      "run_id": "RUN-8ED649CAEBFA46CD8E6EC1EB2BB9FCBF",
+      "task": "f4adb96d2dac44acb6bbf1af4760f0ba",
+      "event": "STARTED",
+      "ts": "2026-09-23T11:25:27.090294+00:00",
+      "metadata": {
+        "skill": "code-review-agent",
+        "retry_count": 0
+      }
+    },
+    {
+      "run_id": "RUN-8ED649CAEBFA46CD8E6EC1EB2BB9FCBF",
+      "task": "f4adb96d2dac44acb6bbf1af4760f0ba",
+      "event": "COMPLETED",
+      "ts": "2026-09-23T11:25:27.159645+00:00",
+      "metadata": {
+        "duration_ms": 69,
+        "result_status": "BLOCKED"
+      }
+    },
+    {
+      "run_id": "RUN-8ED649CAEBFA46CD8E6EC1EB2BB9FCBF",
+      "task": "3af27651daf4406db111b076d57f4f7a",
+      "event": "STARTED",
+      "ts": "2026-09-23T11:28:11.073569+00:00",
+      "metadata": {
+        "skill": "user-flow-discovery-agent",
+        "retry_count": 0
+      }
+    },
+    {
+      "run_id": "RUN-8ED649CAEBFA46CD8E6EC1EB2BB9FCBF",
+      "task": "3af27651daf4406db111b076d57f4f7a",
+      "event": "COMPLETED",
+      "ts": "2026-09-23T11:28:11.153054+00:00",
+      "metadata": {
+        "duration_ms": 79,
+        "result_status": "READY"
+      }
+    },
+    {
+      "run_id": "RUN-8ED649CAEBFA46CD8E6EC1EB2BB9FCBF",
+      "task": "9407ac85c56c44bb975ddc36945d38b9",
+      "event": "STARTED",
+      "ts": "2026-09-23T11:28:11.388955+00:00",
+      "metadata": {
+        "skill": "change-impact-analyzer",
+        "retry_count": 0
+      }
+    },
+    {
+      "run_id": "RUN-8ED649CAEBFA46CD8E6EC1EB2BB9FCBF",
+      "task": "9407ac85c56c44bb975ddc36945d38b9",
+      "event": "COMPLETED",
+      "ts": "2026-09-23T11:28:11.540727+00:00",
+      "metadata": {
+        "duration_ms": 151,
+        "result_status": "READY"
+      }
+    },
+    {
+      "run_id": "RUN-8ED649CAEBFA46CD8E6EC1EB2BB9FCBF",
+      "task": "87fd78ab783e4e3cacdbf1eb426bf45f",
+      "event": "STARTED",
+      "ts": "2026-09-23T11:28:11.834926+00:00",
+      "metadata": {
+        "skill": "technical-readiness-verifier",
+        "retry_count": 0
+      }
+    },
+    {
+      "run_id": "RUN-8ED649CAEBFA46CD8E6EC1EB2BB9FCBF",
+      "task": "87fd78ab783e4e3cacdbf1eb426bf45f",
+      "event": "COMPLETED",
+      "ts": "2026-09-23T11:28:11.926482+00:00",
+      "metadata": {
+        "duration_ms": 91,
+        "result_status": "READY"
+      }
+    },
+    {
+      "run_id": "RUN-8ED649CAEBFA46CD8E6EC1EB2BB9FCBF",
+      "task": "e83754f86c91432490bd45e93e17f6d2",
+      "event": "STARTED",
+      "ts": "2026-09-23T11:28:49.874469+00:00",
+      "metadata": {
+        "skill": "implementation-agent",
+        "retry_count": 0
+      }
+    },
+    {
+      "run_id": "RUN-8ED649CAEBFA46CD8E6EC1EB2BB9FCBF",
+      "task": "e83754f86c91432490bd45e93e17f6d2",
+      "event": "COMPLETED",
+      "ts": "2026-09-23T11:28:49.940968+00:00",
+      "metadata": {
+        "duration_ms": 66,
+        "result_status": "READY"
+      }
+    },
+    {
+      "run_id": "RUN-8ED649CAEBFA46CD8E6EC1EB2BB9FCBF",
+      "task": "afe2361350d444ebaa12c984c29ef885",
+      "event": "STARTED",
+      "ts": "2026-09-23T11:28:50.051958+00:00",
+      "metadata": {
+        "skill": "code-review-agent",
+        "retry_count": 0
+      }
+    },
+    {
+      "run_id": "RUN-8ED649CAEBFA46CD8E6EC1EB2BB9FCBF",
+      "task": "afe2361350d444ebaa12c984c29ef885",
+      "event": "COMPLETED",
+      "ts": "2026-09-23T11:28:50.170844+00:00",
+      "metadata": {
+        "duration_ms": 118,
+        "result_status": "READY"
+      }
+    },
+    {
+      "run_id": "RUN-8ED649CAEBFA46CD8E6EC1EB2BB9FCBF",
+      "task": "260f75115d8c43cd8081d73585b1a1cb",
+      "event": "STARTED",
+      "ts": "2026-09-23T11:30:40.040693+00:00",
+      "metadata": {
+        "skill": "automated-qa-agent",
+        "retry_count": 0
+      }
+    },
+    {
+      "run_id": "RUN-8ED649CAEBFA46CD8E6EC1EB2BB9FCBF",
+      "task": "260f75115d8c43cd8081d73585b1a1cb",
+      "event": "COMPLETED",
+      "ts": "2026-09-23T11:30:40.164199+00:00",
+      "metadata": {
+        "duration_ms": 123,
+        "result_status": "READY"
+      }
+    },
+    {
+      "run_id": "RUN-8ED649CAEBFA46CD8E6EC1EB2BB9FCBF",
+      "task": "7a13eb572a82455e96e479928b5d3a17",
+      "event": "STARTED",
+      "ts": "2026-09-23T11:31:13.674091+00:00",
+      "metadata": {
+        "skill": "release-readiness-agent",
+        "retry_count": 0
+      }
+    },
+    {
+      "run_id": "RUN-8ED649CAEBFA46CD8E6EC1EB2BB9FCBF",
+      "task": "7a13eb572a82455e96e479928b5d3a17",
+      "event": "COMPLETED",
+      "ts": "2026-09-23T11:31:13.740391+00:00",
+      "metadata": {
+        "duration_ms": 66,
+        "result_status": "READY"
+      }
+    }
+  ],
+  "audit_events": [
+    {
+      "run_id": "RUN-8ED649CAEBFA46CD8E6EC1EB2BB9FCBF",
+      "event": "RUN_STARTED",
+      "payload": {},
+      "created_at": "2026-09-23T10:45:37.950753+00:00"
+    },
+    {
+      "run_id": "RUN-8ED649CAEBFA46CD8E6EC1EB2BB9FCBF",
+      "event": "TASK_STARTED",
+      "payload": {
+        "skill": "prompt-intake-adapter"
+      },
+      "created_at": "2026-09-23T10:47:32.008635+00:00"
+    },
+    {
+      "run_id": "RUN-8ED649CAEBFA46CD8E6EC1EB2BB9FCBF",
+      "event": "RESULT_RECORDED",
+      "payload": {
+        "skill": "prompt-intake-adapter",
+        "result": {
+          "status": "READY",
+          "evidence": [
+            "agentic/data/project-context/features/BOS-010/tasks/TASK-005.md"
+          ],
+          "blocking_issues": [],
+          "open_questions": [],
+          "recommended_next_step": "Load user_app auth presentation + locale context",
+          "outputs": {
+            "work_item": "BOS-010 TASK-005",
+            "input_mode": "prompt-first",
+            "work_type": "change_request",
+            "project_type": "brownfield",
+            "category": "Mobile",
+            "hierarchy": "TASK_ONLY",
+            "planning": "NO_REPLAN",
+            "modules": [
+              "user_app"
+            ]
+          }
+        }
+      },
+      "created_at": "2026-09-23T10:47:32.060607+00:00"
+    },
+    {
+      "run_id": "RUN-8ED649CAEBFA46CD8E6EC1EB2BB9FCBF",
+      "event": "STAGE_CHANGED",
+      "payload": {},
+      "created_at": "2026-09-23T10:47:32.105156+00:00"
+    },
+    {
+      "run_id": "RUN-8ED649CAEBFA46CD8E6EC1EB2BB9FCBF",
+      "event": "TASK_STARTED",
+      "payload": {
+        "skill": "user-flow-discovery-agent"
+      },
+      "created_at": "2026-09-23T10:47:44.544284+00:00"
+    },
+    {
+      "run_id": "RUN-8ED649CAEBFA46CD8E6EC1EB2BB9FCBF",
+      "event": "RESULT_RECORDED",
+      "payload": {
+        "skill": "user-flow-discovery-agent",
+        "result": {
+          "status": "READY",
+          "evidence": [
+            "user_app/lib/features/authentication/presentation/pages/login_screen.dart",
+            "user_app/lib/features/authentication/presentation/pages/login_otp_verify_screen.dart",
+            "user_app/lib/core/controllers/locale_controller.dart",
+            "~/.pub-cache any_image_view-2.1.0 lib/any_image_view.dart:386-449 (rootBundle.loadString + FutureBuilder + SvgPicture.string)",
+            "~/.pub-cache flutter_svg-2.3.0 lib/src/loaders.dart:143-193,384-395 (cache key)"
+          ],
+          "blocking_issues": [],
+          "open_questions": [],
+          "recommended_next_step": "Impact analysis",
+          "outputs": {
+            "flows": [
+              "login: locale toggle, phone, Next -> OTP",
+              "OTP: code, Verify -> app shell, Change Number -> back, resend"
+            ],
+            "finding": "AnyImageView svg path bypasses flutter_svg asset cache"
+          }
+        }
+      },
+      "created_at": "2026-09-23T10:47:44.597638+00:00"
+    },
+    {
+      "run_id": "RUN-8ED649CAEBFA46CD8E6EC1EB2BB9FCBF",
+      "event": "CONTEXT_REFRESHED",
+      "payload": {
+        "paths": [
+          "agentic/data/project-context/features/BOS-010/tasks/TASK-005.md",
+          "user_app/lib/core/controllers/locale_controller.dart",
+          "user_app/lib/core/services/app_settings/app_settings_repository.dart",
+          "user_app/lib/core/services/app_settings/app_settings_repository_impl.dart",
+          "user_app/lib/app/app.dart",
+          "user_app/lib/features/authentication/presentation/pages/login_screen.dart",
+          "user_app/lib/features/authentication/presentation/pages/login_otp_verify_screen.dart",
+          "user_app/lib/features/authentication/presentation/widgets/intro_header.dart",
+          "user_app/lib/features/authentication/presentation/controllers/login_screen_controller.dart",
+          "user_app/lib/res/strings/string_enum.dart",
+          "user_app/lib/res/drawable/app_drawable.dart",
+          "user_app/lib/core/widgets/images/round_image.dart",
+          "user_app/pubspec.yaml",
+          "user_app/pubspec.lock"
+        ]
+      },
+      "created_at": "2026-09-23T10:47:55.967208+00:00"
+    },
+    {
+      "run_id": "RUN-8ED649CAEBFA46CD8E6EC1EB2BB9FCBF",
+      "event": "STAGE_CHANGED",
+      "payload": {},
+      "created_at": "2026-09-23T10:48:02.193237+00:00"
+    },
+    {
+      "run_id": "RUN-8ED649CAEBFA46CD8E6EC1EB2BB9FCBF",
+      "event": "TASK_STARTED",
+      "payload": {
+        "skill": "change-impact-analyzer"
+      },
+      "created_at": "2026-09-23T10:48:12.074218+00:00"
+    },
+    {
+      "run_id": "RUN-8ED649CAEBFA46CD8E6EC1EB2BB9FCBF",
+      "event": "RESULT_RECORDED",
+      "payload": {
+        "skill": "change-impact-analyzer",
+        "result": {
+          "status": "READY",
+          "evidence": [
+            "agentic/data/project-context/features/BOS-010/tasks/TASK-005.md",
+            "grep IntroHeader/LocaleController/toggleLocale callers in user_app/lib + test"
+          ],
+          "blocking_issues": [],
+          "open_questions": [],
+          "recommended_next_step": "Operator technical approval of TASK-005",
+          "outputs": {
+            "impact": "LOW",
+            "modules": [
+              "user_app"
+            ],
+            "backend_impact": "none",
+            "api_contract": "unchanged",
+            "callers": "LocaleController used by MyApp and LoginScreenController only; IntroHeader used by OTP screen only",
+            "risk": "locale persistence failure now silent to UI (logged); new app_svg widget in core/widgets"
+          }
+        }
+      },
+      "created_at": "2026-09-23T10:48:12.131135+00:00"
+    },
+    {
+      "run_id": "RUN-8ED649CAEBFA46CD8E6EC1EB2BB9FCBF",
+      "event": "STAGE_CHANGED",
+      "payload": {},
+      "created_at": "2026-09-23T10:48:12.177740+00:00"
+    },
+    {
+      "run_id": "RUN-8ED649CAEBFA46CD8E6EC1EB2BB9FCBF",
+      "event": "TASK_STARTED",
+      "payload": {
+        "skill": "technical-readiness-verifier"
+      },
+      "created_at": "2026-09-23T10:48:20.708240+00:00"
+    },
+    {
+      "run_id": "RUN-8ED649CAEBFA46CD8E6EC1EB2BB9FCBF",
+      "event": "RESULT_RECORDED",
+      "payload": {
+        "skill": "technical-readiness-verifier",
+        "result": {
+          "status": "READY",
+          "evidence": [
+            "agentic/data/project-context/features/BOS-010/tasks/TASK-005.md"
+          ],
+          "blocking_issues": [],
+          "open_questions": [
+            "Proposed Bangla strings (otpVerification, otpSentTo, changeNumber) need operator confirmation"
+          ],
+          "recommended_next_step": "Operator technical approval, then IMPLEMENTATION (mobile-agent)",
+          "outputs": {
+            "verdict": "TECHNICAL_READY",
+            "design_sections": [
+              "async locale toggle",
+              "SvgPicture.asset + svg.cache precache (AnyImageView bypass)",
+              "login layout polish",
+              "OTP layout polish + i18n"
+            ]
+          }
+        }
+      },
+      "created_at": "2026-09-23T10:48:20.770126+00:00"
+    },
+    {
+      "run_id": "RUN-8ED649CAEBFA46CD8E6EC1EB2BB9FCBF",
+      "event": "APPROVAL_RECORDED",
+      "payload": {
+        "gate": "technical",
+        "decision": "APPROVED",
+        "by": "macdipu <c.dipu0@gmail.com>"
+      },
+      "created_at": "2026-09-23T11:15:43.240557+00:00"
+    },
+    {
+      "run_id": "RUN-8ED649CAEBFA46CD8E6EC1EB2BB9FCBF",
+      "event": "STAGE_CHANGED",
+      "payload": {},
+      "created_at": "2026-09-23T11:15:43.289577+00:00"
+    },
+    {
+      "run_id": "RUN-8ED649CAEBFA46CD8E6EC1EB2BB9FCBF",
+      "event": "TASK_STARTED",
+      "payload": {
+        "skill": "implementation-agent"
+      },
+      "created_at": "2026-09-23T11:15:43.356047+00:00"
+    },
+    {
+      "run_id": "RUN-8ED649CAEBFA46CD8E6EC1EB2BB9FCBF",
+      "event": "TASK_FAILED",
+      "payload": {
+        "error": "Implementation changed registered scope files and added new ones; closing to refresh scope (work complete, evidence in REVIEW-TASK-005.md)"
+      },
+      "created_at": "2026-09-23T11:22:00.084991+00:00"
+    },
+    {
+      "run_id": "RUN-8ED649CAEBFA46CD8E6EC1EB2BB9FCBF",
+      "event": "CONTEXT_REFRESHED",
+      "payload": {
+        "paths": [
+          "agentic/data/project-context/features/BOS-010/tasks/TASK-005.md",
+          "user_app/lib/core/controllers/locale_controller.dart",
+          "user_app/lib/core/services/app_settings/app_settings_repository.dart",
+          "user_app/lib/core/services/app_settings/app_settings_repository_impl.dart",
+          "user_app/lib/app/app.dart",
+          "user_app/lib/features/authentication/presentation/pages/login_screen.dart",
+          "user_app/lib/features/authentication/presentation/pages/login_otp_verify_screen.dart",
+          "user_app/lib/features/authentication/presentation/widgets/intro_header.dart",
+          "user_app/lib/features/authentication/presentation/controllers/login_screen_controller.dart",
+          "user_app/lib/res/strings/string_enum.dart",
+          "user_app/lib/res/drawable/app_drawable.dart",
+          "user_app/lib/core/widgets/images/round_image.dart",
+          "user_app/lib/core/widgets/images/app_svg.dart",
+          "user_app/test/core/controllers/locale_controller_test.dart",
+          "user_app/test/core/widgets/app_svg_test.dart",
+          "user_app/pubspec.yaml",
+          "user_app/pubspec.lock"
+        ]
+      },
+      "created_at": "2026-09-23T11:22:00.291560+00:00"
+    },
+    {
+      "run_id": "RUN-8ED649CAEBFA46CD8E6EC1EB2BB9FCBF",
+      "event": "TASK_STARTED",
+      "payload": {
+        "skill": "implementation-agent"
+      },
+      "created_at": "2026-09-23T11:22:00.564718+00:00"
+    },
+    {
+      "run_id": "RUN-8ED649CAEBFA46CD8E6EC1EB2BB9FCBF",
+      "event": "RESULT_RECORDED",
+      "payload": {
+        "skill": "implementation-agent",
+        "result": {
+          "status": "READY",
+          "evidence": [
+            "agentic/data/project-context/features/BOS-010/REVIEW-TASK-005.md#implementation-agent-2026-09-23",
+            "fvm flutter analyze: No issues found",
+            "fvm flutter test: 31 passed",
+            "agentic/data/project-context/features/BOS-010/qa/task-005/"
+          ],
+          "blocking_issues": [],
+          "open_questions": [
+            "Follow-up: OtpResendButton, OTP error snackbar and shell tab labels remain English in Bangla mode (outside approved scope)"
+          ],
+          "recommended_next_step": "Code review",
+          "outputs": {
+            "verdict": "IMPLEMENTATION_READY",
+            "persona": "mobile-agent",
+            "no_git_commit_made": true
+          }
+        }
+      },
+      "created_at": "2026-09-23T11:22:00.812188+00:00"
+    },
+    {
+      "run_id": "RUN-8ED649CAEBFA46CD8E6EC1EB2BB9FCBF",
+      "event": "STAGE_CHANGED",
+      "payload": {},
+      "created_at": "2026-09-23T11:22:00.986768+00:00"
+    },
+    {
+      "run_id": "RUN-8ED649CAEBFA46CD8E6EC1EB2BB9FCBF",
+      "event": "TASK_STARTED",
+      "payload": {
+        "skill": "code-review-agent"
+      },
+      "created_at": "2026-09-23T11:25:27.090932+00:00"
+    },
+    {
+      "run_id": "RUN-8ED649CAEBFA46CD8E6EC1EB2BB9FCBF",
+      "event": "RESULT_RECORDED",
+      "payload": {
+        "skill": "code-review-agent",
+        "result": {
+          "status": "BLOCKED",
+          "evidence": [
+            "user_app/lib/core/controllers/locale_controller.dart:33"
+          ],
+          "blocking_issues": [
+            "Rapid double toggle runs two concurrent setLocale calls; out-of-order completion can persist the older locale, so restart shows the wrong language"
+          ],
+          "open_questions": [],
+          "recommended_next_step": "Serialize locale saves in LocaleController and add a double-toggle test",
+          "outputs": {
+            "verdict": "CHANGES_REQUIRED",
+            "passed": [
+              "AppSvg cache key",
+              "layout/SafeArea/keyboard",
+              "IntroHeader",
+              "trParams @phone",
+              "style rules",
+              "tests non-vacuous"
+            ]
+          }
+        }
+      },
+      "created_at": "2026-09-23T11:25:27.160136+00:00"
+    },
+    {
+      "run_id": "RUN-8ED649CAEBFA46CD8E6EC1EB2BB9FCBF",
+      "event": "SCOPE_REOPENED",
+      "payload": {
+        "reason": "Code review found locale-save ordering race; fix changes locale_controller.dart + test after REVIEW. Design unchanged."
+      },
+      "created_at": "2026-09-23T11:28:10.873521+00:00"
+    },
+    {
+      "run_id": "RUN-8ED649CAEBFA46CD8E6EC1EB2BB9FCBF",
+      "event": "CONTEXT_REFRESHED",
+      "payload": {
+        "paths": [
+          "agentic/data/project-context/features/BOS-010/tasks/TASK-005.md",
+          "user_app/lib/core/controllers/locale_controller.dart",
+          "user_app/lib/core/services/app_settings/app_settings_repository.dart",
+          "user_app/lib/core/services/app_settings/app_settings_repository_impl.dart",
+          "user_app/lib/app/app.dart",
+          "user_app/lib/features/authentication/presentation/pages/login_screen.dart",
+          "user_app/lib/features/authentication/presentation/pages/login_otp_verify_screen.dart",
+          "user_app/lib/features/authentication/presentation/widgets/intro_header.dart",
+          "user_app/lib/features/authentication/presentation/controllers/login_screen_controller.dart",
+          "user_app/lib/res/strings/string_enum.dart",
+          "user_app/lib/res/drawable/app_drawable.dart",
+          "user_app/lib/core/widgets/images/round_image.dart",
+          "user_app/lib/core/widgets/images/app_svg.dart",
+          "user_app/test/core/controllers/locale_controller_test.dart",
+          "user_app/test/core/widgets/app_svg_test.dart",
+          "user_app/pubspec.yaml",
+          "user_app/pubspec.lock"
+        ]
+      },
+      "created_at": "2026-09-23T11:28:10.981012+00:00"
+    },
+    {
+      "run_id": "RUN-8ED649CAEBFA46CD8E6EC1EB2BB9FCBF",
+      "event": "TASK_STARTED",
+      "payload": {
+        "skill": "user-flow-discovery-agent"
+      },
+      "created_at": "2026-09-23T11:28:11.077277+00:00"
+    },
+    {
+      "run_id": "RUN-8ED649CAEBFA46CD8E6EC1EB2BB9FCBF",
+      "event": "RESULT_RECORDED",
+      "payload": {
+        "skill": "user-flow-discovery-agent",
+        "result": {
+          "status": "READY",
+          "evidence": [
+            "user_app/lib/features/authentication/presentation/pages/login_screen.dart",
+            "user_app/lib/features/authentication/presentation/pages/login_otp_verify_screen.dart",
+            "user_app/lib/core/controllers/locale_controller.dart",
+            "~/.pub-cache any_image_view-2.1.0 lib/any_image_view.dart:386-449 (rootBundle.loadString + FutureBuilder + SvgPicture.string)",
+            "~/.pub-cache flutter_svg-2.3.0 lib/src/loaders.dart:143-193,384-395 (cache key)"
+          ],
+          "blocking_issues": [],
+          "open_questions": [],
+          "recommended_next_step": "Impact analysis",
+          "outputs": {
+            "flows": [
+              "login: locale toggle, phone, Next -> OTP",
+              "OTP: code, Verify -> app shell, Change Number -> back, resend"
+            ],
+            "finding": "AnyImageView svg path bypasses flutter_svg asset cache"
+          }
+        }
+      },
+      "created_at": "2026-09-23T11:28:11.153665+00:00"
+    },
+    {
+      "run_id": "RUN-8ED649CAEBFA46CD8E6EC1EB2BB9FCBF",
+      "event": "STAGE_CHANGED",
+      "payload": {},
+      "created_at": "2026-09-23T11:28:11.243516+00:00"
+    },
+    {
+      "run_id": "RUN-8ED649CAEBFA46CD8E6EC1EB2BB9FCBF",
+      "event": "TASK_STARTED",
+      "payload": {
+        "skill": "change-impact-analyzer"
+      },
+      "created_at": "2026-09-23T11:28:11.390397+00:00"
+    },
+    {
+      "run_id": "RUN-8ED649CAEBFA46CD8E6EC1EB2BB9FCBF",
+      "event": "RESULT_RECORDED",
+      "payload": {
+        "skill": "change-impact-analyzer",
+        "result": {
+          "status": "READY",
+          "evidence": [
+            "agentic/data/project-context/features/BOS-010/tasks/TASK-005.md",
+            "grep IntroHeader/LocaleController/toggleLocale callers in user_app/lib + test"
+          ],
+          "blocking_issues": [],
+          "open_questions": [],
+          "recommended_next_step": "Operator technical approval of TASK-005",
+          "outputs": {
+            "impact": "LOW",
+            "modules": [
+              "user_app"
+            ],
+            "backend_impact": "none",
+            "api_contract": "unchanged",
+            "callers": "LocaleController used by MyApp and LoginScreenController only; IntroHeader used by OTP screen only",
+            "risk": "locale persistence failure now silent to UI (logged); new app_svg widget in core/widgets"
+          }
+        }
+      },
+      "created_at": "2026-09-23T11:28:11.541476+00:00"
+    },
+    {
+      "run_id": "RUN-8ED649CAEBFA46CD8E6EC1EB2BB9FCBF",
+      "event": "STAGE_CHANGED",
+      "payload": {},
+      "created_at": "2026-09-23T11:28:11.682380+00:00"
+    },
+    {
+      "run_id": "RUN-8ED649CAEBFA46CD8E6EC1EB2BB9FCBF",
+      "event": "TASK_STARTED",
+      "payload": {
+        "skill": "technical-readiness-verifier"
+      },
+      "created_at": "2026-09-23T11:28:11.840047+00:00"
+    },
+    {
+      "run_id": "RUN-8ED649CAEBFA46CD8E6EC1EB2BB9FCBF",
+      "event": "RESULT_RECORDED",
+      "payload": {
+        "skill": "technical-readiness-verifier",
+        "result": {
+          "status": "READY",
+          "evidence": [
+            "agentic/data/project-context/features/BOS-010/tasks/TASK-005.md"
+          ],
+          "blocking_issues": [],
+          "open_questions": [
+            "Proposed Bangla strings (otpVerification, otpSentTo, changeNumber) need operator confirmation"
+          ],
+          "recommended_next_step": "Operator technical approval, then IMPLEMENTATION (mobile-agent)",
+          "outputs": {
+            "verdict": "TECHNICAL_READY",
+            "design_sections": [
+              "async locale toggle",
+              "SvgPicture.asset + svg.cache precache (AnyImageView bypass)",
+              "login layout polish",
+              "OTP layout polish + i18n"
+            ]
+          }
+        }
+      },
+      "created_at": "2026-09-23T11:28:11.927324+00:00"
+    },
+    {
+      "run_id": "RUN-8ED649CAEBFA46CD8E6EC1EB2BB9FCBF",
+      "event": "APPROVAL_RECORDED",
+      "payload": {
+        "gate": "technical",
+        "decision": "APPROVED",
+        "by": "macdipu <c.dipu0@gmail.com>"
+      },
+      "created_at": "2026-09-23T11:28:49.650321+00:00"
+    },
+    {
+      "run_id": "RUN-8ED649CAEBFA46CD8E6EC1EB2BB9FCBF",
+      "event": "STAGE_CHANGED",
+      "payload": {},
+      "created_at": "2026-09-23T11:28:49.701670+00:00"
+    },
+    {
+      "run_id": "RUN-8ED649CAEBFA46CD8E6EC1EB2BB9FCBF",
+      "event": "TASK_STARTED",
+      "payload": {
+        "skill": "implementation-agent"
+      },
+      "created_at": "2026-09-23T11:28:49.877653+00:00"
+    },
+    {
+      "run_id": "RUN-8ED649CAEBFA46CD8E6EC1EB2BB9FCBF",
+      "event": "RESULT_RECORDED",
+      "payload": {
+        "skill": "implementation-agent",
+        "result": {
+          "status": "READY",
+          "evidence": [
+            "agentic/data/project-context/features/BOS-010/REVIEW-TASK-005.md#implementation-agent-2026-09-23",
+            "fvm flutter analyze: No issues found",
+            "fvm flutter test: 32 passed (incl. double-toggle ordering test)",
+            "agentic/data/project-context/features/BOS-010/qa/task-005/"
+          ],
+          "blocking_issues": [],
+          "open_questions": [
+            "Follow-up: OtpResendButton, OTP error snackbar and shell tab labels remain English in Bangla mode (outside approved scope)"
+          ],
+          "recommended_next_step": "Code review",
+          "outputs": {
+            "verdict": "IMPLEMENTATION_READY",
+            "persona": "mobile-agent",
+            "no_git_commit_made": true
+          }
+        }
+      },
+      "created_at": "2026-09-23T11:28:49.941639+00:00"
+    },
+    {
+      "run_id": "RUN-8ED649CAEBFA46CD8E6EC1EB2BB9FCBF",
+      "event": "STAGE_CHANGED",
+      "payload": {},
+      "created_at": "2026-09-23T11:28:49.993131+00:00"
+    },
+    {
+      "run_id": "RUN-8ED649CAEBFA46CD8E6EC1EB2BB9FCBF",
+      "event": "TASK_STARTED",
+      "payload": {
+        "skill": "code-review-agent"
+      },
+      "created_at": "2026-09-23T11:28:50.053030+00:00"
+    },
+    {
+      "run_id": "RUN-8ED649CAEBFA46CD8E6EC1EB2BB9FCBF",
+      "event": "RESULT_RECORDED",
+      "payload": {
+        "skill": "code-review-agent",
+        "result": {
+          "status": "READY",
+          "evidence": [
+            "agentic/data/project-context/features/BOS-010/REVIEW-TASK-005.md#code-review-round-1-agent-2026-09-23--changes_required--fixed",
+            "user_app/lib/core/controllers/locale_controller.dart:34-48",
+            "user_app/test/core/controllers/locale_controller_test.dart (rapid toggles test; mutation-checked)"
+          ],
+          "blocking_issues": [],
+          "open_questions": [
+            "Follow-up: OtpResendButton, OTP error snackbar, shell tab labels still English in Bangla mode"
+          ],
+          "recommended_next_step": "QA",
+          "outputs": {
+            "verdict": "REVIEW_READY",
+            "round": 2,
+            "resolved": [
+              "locale save ordering race"
+            ]
+          }
+        }
+      },
+      "created_at": "2026-09-23T11:28:50.171595+00:00"
+    },
+    {
+      "run_id": "RUN-8ED649CAEBFA46CD8E6EC1EB2BB9FCBF",
+      "event": "STAGE_CHANGED",
+      "payload": {},
+      "created_at": "2026-09-23T11:28:50.274166+00:00"
+    },
+    {
+      "run_id": "RUN-8ED649CAEBFA46CD8E6EC1EB2BB9FCBF",
+      "event": "TASK_STARTED",
+      "payload": {
+        "skill": "automated-qa-agent"
+      },
+      "created_at": "2026-09-23T11:30:40.044328+00:00"
+    },
+    {
+      "run_id": "RUN-8ED649CAEBFA46CD8E6EC1EB2BB9FCBF",
+      "event": "RESULT_RECORDED",
+      "payload": {
+        "skill": "automated-qa-agent",
+        "result": {
+          "status": "READY",
+          "evidence": [
+            "agentic/data/project-context/features/BOS-010/REVIEW-TASK-005.md#qa-agent-2026-09-23-after-review-fix",
+            "fvm flutter analyze: no issues",
+            "fvm flutter test: 32 passed",
+            "agentic/data/project-context/features/BOS-010/qa/task-005/"
+          ],
+          "blocking_issues": [],
+          "open_questions": [
+            "Follow-up: OtpResendButton, OTP error snackbar, shell tab labels English in Bangla mode"
+          ],
+          "recommended_next_step": "Release and commit",
+          "outputs": {
+            "verdict": "QA_READY"
+          }
+        }
+      },
+      "created_at": "2026-09-23T11:30:40.165015+00:00"
+    },
+    {
+      "run_id": "RUN-8ED649CAEBFA46CD8E6EC1EB2BB9FCBF",
+      "event": "APPROVAL_RECORDED",
+      "payload": {
+        "gate": "release",
+        "decision": "APPROVED",
+        "by": "macdipu <c.dipu0@gmail.com>"
+      },
+      "created_at": "2026-09-23T11:30:40.218554+00:00"
+    },
+    {
+      "run_id": "RUN-8ED649CAEBFA46CD8E6EC1EB2BB9FCBF",
+      "event": "STAGE_CHANGED",
+      "payload": {},
+      "created_at": "2026-09-23T11:30:40.282861+00:00"
+    },
+    {
+      "run_id": "RUN-8ED649CAEBFA46CD8E6EC1EB2BB9FCBF",
+      "event": "TASK_STARTED",
+      "payload": {
+        "skill": "release-readiness-agent"
+      },
+      "created_at": "2026-09-23T11:31:13.675157+00:00"
+    },
+    {
+      "run_id": "RUN-8ED649CAEBFA46CD8E6EC1EB2BB9FCBF",
+      "event": "RESULT_RECORDED",
+      "payload": {
+        "skill": "release-readiness-agent",
+        "result": {
+          "status": "READY",
+          "evidence": [
+            "git 61e40e9 (TASK-005 user_app changes + evidence)",
+            "agentic/data/project-context/features/BOS-010/REVIEW-TASK-005.md",
+            "release approval recorded by operator 2026-09-23"
+          ],
+          "blocking_issues": [],
+          "open_questions": [
+            "Follow-up: translate OtpResendButton, OTP error snackbar, shell tab labels"
+          ],
+          "recommended_next_step": "Close run; operator to name next task",
+          "outputs": {
+            "verdict": "RELEASE_READY",
+            "scope": "user_app only; no API/backend change",
+            "deploy": "none"
+          }
+        }
+      },
+      "created_at": "2026-09-23T11:31:13.741264+00:00"
+    },
+    {
+      "run_id": "RUN-8ED649CAEBFA46CD8E6EC1EB2BB9FCBF",
+      "event": "STAGE_CHANGED",
+      "payload": {},
+      "created_at": "2026-09-23T11:31:13.847972+00:00"
+    }
+  ],
+  "tool_calls": {}
+}

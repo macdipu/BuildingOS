@@ -15,9 +15,12 @@ sys.path.insert(0, str(ROOT / 'agentic/kit/runtime/python'))
 from agentic_runtime.doctor import detect_project, diagnose
 from agentic_runtime.installation import managed_text, merge_hooks, unfinished_runs
 from agentic_runtime import handoff
+from agentic_runtime.paths import ACTIVE_TASK_POINTER_REL, STATE_DIR_REL
 
 DOCS = ['README.md', 'ADOPTION.md', 'SKILL-CATALOG.md']
-IGNORE = ['/agentic/data/runtime/state/', '/agentic/data/runtime/logs/',
+LEGACY_STATE_REL = Path('agentic/data/runtime/state')
+IGNORE = ['/.agent/runtime/**/*.lock', '/.agent/runtime/**/*.tmp', '/.agent/runtime/**/.active-task-*',
+          '/.agent/runtime/logs/', '/.agent/runtime/active-task.recovered-*.json',
           '/agentic/data/artifacts/', '/agentic-backups/', '__pycache__/', '*.py[cod]']
 
 HANDOFF_SKILL = """---
@@ -50,8 +53,8 @@ with its `Commit-Trigger` (`task-finish`/`user-request`) and `Work-Item`/`Task`
 trailers -- see `agentic/kit/policies/commit-policy.md`.
 
 This writes `.agent/HANDOFF.md` and a new `.agent/sessions/<timestamp>-{agent}.md`
-record, both git-tracked (unlike this kit's own local run store under
-`agentic/data/runtime/state/`, which stays out of git). Never overwrite another
+record, git-tracked alongside the run ledger under `.agent/runtime/`, so another
+machine resumes after `git pull`. Never overwrite another
 agent's uncommitted changes without explicit user approval.
 """
 
@@ -75,7 +78,7 @@ def _stage_kit(put, changed, stage, target, source, upgrade):
     kit_relative = 'agentic/kit'
     current_kit = target / kit_relative
     kit_source = current_kit if current_kit.exists() and not upgrade else source / 'kit'
-    shutil.copytree(kit_source, stage / kit_relative, ignore=shutil.ignore_patterns('__pycache__', '*.pyc'))
+    shutil.copytree(kit_source, stage / kit_relative, ignore=shutil.ignore_patterns('__pycache__', '*.pyc', '.pytest_cache'))
     if upgrade and current_kit.exists():
         # Preserve project configuration. New configuration files are supplied
         # by the new kit; existing policy choices are never silently replaced.
@@ -86,11 +89,12 @@ def _stage_kit(put, changed, stage, target, source, upgrade):
     return current_kit
 
 
-def _stage_docs_and_instructions(put, stage, target, source):
+def _stage_docs_and_instructions(put, stage, target, source, upgrade=False):
+    # Kit docs describe the kit, so an upgrade refreshes them; a plain reinstall keeps host copies.
     for name in DOCS:
         relative = 'agentic/' + name
         current = target / relative
-        put(relative, current.read_text() if current.exists() else (source / name).read_text())
+        put(relative, current.read_text() if current.exists() and not upgrade else (source / name).read_text())
     fragment = (stage / 'agentic/kit/config/AGENTS.fragment.md').read_text()
     for name, addition in [('AGENTS.md', fragment), ('CLAUDE.md', '@AGENTS.md\n')]:
         current = (target / name).read_text() if (target / name).exists() else ''
@@ -115,9 +119,9 @@ def _scaffold_project_context(put, target, source, project, project_type):
 
 
 def _scaffold_handoff(put, target):
-    """Cross-agent-platform handoff notes (agent-handoff compatible, git-tracked
-    unlike agentic/data/runtime/state/): scaffold once, never clobber live notes."""
-    if not (target / '.agent').exists():
+    """Cross-agent-platform handoff notes (agent-handoff compatible, git-tracked):
+    scaffold once, never clobber live notes."""
+    if not (target / '.agent/HANDOFF.md').exists():
         put('.agent/sessions/.gitkeep', '')
         put('.agent/HANDOFF.md', handoff.render_handoff(
             last_agent='claude', operator=handoff.git_user(target), status='NOT_STARTED',
@@ -189,6 +193,19 @@ def _rollback(target, backup, installed):
                 shutil.copy2(saved, destination)
 
 
+def _migrate_legacy_state(target):
+    """One-time move of pre-.agent run history and route cache into .agent/runtime/."""
+    legacy = target / LEGACY_STATE_REL
+    if not legacy.is_dir():
+        return
+    for path in sorted(legacy.rglob('*.json')):
+        destination = target / STATE_DIR_REL / path.relative_to(legacy)
+        if not destination.exists():
+            destination.parent.mkdir(parents=True, exist_ok=True)
+            shutil.move(str(path), destination)
+    shutil.rmtree(legacy.parent)
+
+
 def install(target, project, project_type, mode, agent, upgrade=False):
     target = Path(target).resolve()
     if target == ROOT:
@@ -196,7 +213,8 @@ def install(target, project, project_type, mode, agent, upgrade=False):
     if target == Path(target.anchor) or target == Path.home():
         raise ValueError('Choose a project directory, not a filesystem or home root')
     if (target / 'agentic/kit').exists() and upgrade:
-        if unfinished_runs(target) or (target / 'agentic/data/runtime/state/active-task.json').exists():
+        if (unfinished_runs(target) or unfinished_runs(target, LEGACY_STATE_REL / 'runs')
+                or (target / ACTIVE_TASK_POINTER_REL).exists() or (target / LEGACY_STATE_REL / 'active-task.json').exists()):
             raise ValueError('Finish or cancel governed work before upgrading pinned kit files')
     target.mkdir(parents=True, exist_ok=True)
     source = ROOT / 'agentic'
@@ -214,7 +232,7 @@ def install(target, project, project_type, mode, agent, upgrade=False):
             changed.append(relative)
 
         current_kit = _stage_kit(put, changed, stage, target, source, upgrade)
-        _stage_docs_and_instructions(put, stage, target, source)
+        _stage_docs_and_instructions(put, stage, target, source, upgrade)
         _scaffold_project_context(put, target, source, project, project_type)
         _scaffold_handoff(put, target)
 
@@ -229,11 +247,12 @@ def install(target, project, project_type, mode, agent, upgrade=False):
         if (target / 'README.md').exists():
             shutil.copy2(target / 'README.md', stage / 'README.md')
         env = dict(os.environ, PYTHONDONTWRITEBYTECODE='1')
+        validate_env = dict(env, AGENTIC_HOST_ROOT=str(target))
         for command in [
             [sys.executable, 'agentic/kit/scripts/validate_structure.py', '--write-manifests'],
             [sys.executable, 'agentic/kit/examples/runtime-demo.py'],
         ]:
-            result = subprocess.run(command, cwd=stage, env=env, capture_output=True, text=True, timeout=60)
+            result = subprocess.run(command, cwd=stage, env=validate_env, capture_output=True, text=True, timeout=60)
             if result.returncode:
                 raise ValueError('Staged validation failed: ' + result.stderr + result.stdout)
         changed.append('agentic/MANIFEST.md')
@@ -248,6 +267,7 @@ def install(target, project, project_type, mode, agent, upgrade=False):
                                         cwd=target, env=env, capture_output=True, text=True, timeout=30)
                 if result.returncode:
                     raise ValueError(result.stderr)
+            _migrate_legacy_state(target)
             report = diagnose(target)
             if not report['ok']:
                 raise ValueError('Installed doctor failed: ' + json.dumps(report))

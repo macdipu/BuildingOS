@@ -129,11 +129,42 @@ class AdoptionTests(unittest.TestCase):
         self.install(mode='local-harness')
         path = self.host / 'agentic/kit/config/platform.json'
         original = path.read_bytes()
-        store = RuntimeStore(str(self.host / 'agentic/data/runtime/state/runs'))
+        store = RuntimeStore(str(self.host / '.agent/runtime/runs'))
         Orchestrator(store, self.host / 'agentic/kit').start('fixture', 'discovery', 'Unfinished work', repo=self.host)
         with self.assertRaisesRegex(ValueError, 'Finish or cancel'):
             self.install(upgrade=True)
         self.assertEqual(path.read_bytes(), original)
+
+    def test_upgrade_moves_legacy_runtime_state_into_agent_dir(self):
+        self.install(mode='local-harness')
+        legacy = self.host / 'agentic/data/runtime/state'
+        (legacy / 'runs').mkdir(parents=True)
+        (legacy / 'runs/RUN-OLD.json').write_text(json.dumps({'run': {'status': 'COMPLETED'}}))
+        (legacy / 'route-cache.json').write_text('{}')
+        self.assertTrue(self.install(mode='local-harness', upgrade=True)['ok'])
+        self.assertTrue((self.host / '.agent/runtime/runs/RUN-OLD.json').is_file())
+        self.assertTrue((self.host / '.agent/runtime/route-cache.json').is_file())
+        self.assertFalse((self.host / 'agentic/data/runtime').exists())
+
+    def test_upgrade_refreshes_kit_docs(self):
+        self.install()
+        readme = self.host / 'agentic/README.md'
+        readme.write_text('stale kit readme\n')
+        self.install()
+        self.assertEqual(readme.read_text(), 'stale kit readme\n')
+        self.install(upgrade=True)
+        self.assertEqual(readme.read_text(), (KIT.parent / 'README.md').read_text())
+
+    def test_host_doc_links_resolve_against_host_during_staged_validation(self):
+        self.install()
+        (self.host / 'docs').mkdir()
+        (self.host / 'docs/ARCH.md').write_text('arch\n')
+        agents = self.host / 'AGENTS.md'
+        agents.write_text(agents.read_text() + '\nSee [arch](docs/ARCH.md).\n')
+        self.assertTrue(self.install()['ok'])
+        agents.write_text(agents.read_text() + '\nSee [gone](docs/MISSING.md).\n')
+        with self.assertRaisesRegex(ValueError, 'Broken local link'):
+            self.install()
 
     def test_literal_source_path_is_validated_before_install_commit(self):
         self.install()

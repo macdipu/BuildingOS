@@ -8,3 +8,8 @@ __pycache__/
 /infra/docker/.env
 target/
 .DS_Store
+/.agent/runtime/**/*.lock
+/.agent/runtime/**/*.tmp
+/.agent/runtime/**/.active-task-*
+/.agent/runtime/logs/
+/.agent/runtime/active-task.recovered-*.json

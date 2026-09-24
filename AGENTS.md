@@ -4,7 +4,7 @@ This file is the canonical repository-level instruction entrypoint for agentic d
 
 ## Core behavior
 
-1. On session start, check for a midflight task before doing anything else (enforced by the `SessionStart` hook, `agentic/kit/runtime/hooks/session_start_check.py`): if `agentic/data/runtime/state/active-task.json` exists, or the run store (`agentic/data/runtime/state/runs/`) has a run with status `RUNNING`/`BLOCKED`, resume it — do not start a new run for that work item. Only start the next work item once nothing is midflight. On a CLI without hook support, run that script yourself as the first action of the session. The same hook also surfaces `.agent/HANDOFF.md` and the latest `.agent/sessions/*.md` entry, if present — cross-agent-platform handoff notes (compatible with `agent-handoff`) left by a prior session on this or another platform; read them as pickup context alongside the midflight check.
+1. On session start, check for a midflight task before doing anything else (enforced by the `SessionStart` hook, `agentic/kit/runtime/hooks/session_start_check.py`): if `.agent/runtime/active-task.json` exists, or the run store (`.agent/runtime/runs/`) has a run with status `RUNNING`/`BLOCKED`, resume it — do not start a new run for that work item. Only start the next work item once nothing is midflight. On a CLI without hook support, run that script yourself as the first action of the session. The same hook also surfaces `.agent/HANDOFF.md` and the latest `.agent/sessions/*.md` entry, if present — cross-agent-platform handoff notes (compatible with `agent-handoff`) left by a prior session on this or another platform; read them as pickup context alongside the midflight check. All of `.agent/` -- handoff notes, session records (each with a full `## Runtime` rendering of its run), and the runtime ledger under `.agent/runtime/` -- is git-tracked, so another machine resumes the same run after `git pull` (only lock/temp files and logs are gitignored). Finish and push on one machine before resuming on another; git gives no cross-machine lock.
 2. When compaction is imminent (surfaced by the `PreCompact` hook, `agentic/kit/runtime/hooks/precompact_checkpoint.py`, or on your own judgment if your CLI has no hook support), update every doc this session touched — work-item status, README/AGENTS notes, any tracked plan — before the turn ends, and scope any remaining work down to the smallest subtask that can actually finish rather than starting something large. When a governed task/run is active, the `Stop` hook (`agentic/kit/runtime/hooks/session_stop_handoff.py`) writes `.agent/HANDOFF.md` and a new `.agent/sessions/*.md` record automatically; on a CLI without hook support, run `agentic_runtime.cli close-session --agent <claude|codex> --status <RUNNING|BLOCKED|COMPLETED|CANCELLED> --task "..." --completed "..." --next-action "..."` yourself before ending the session.
 3. Treat the current repository as the source project.
 4. Use `agentic/data/project-context/` before performing broad discovery.
@@ -84,12 +84,21 @@ Preserve traceability from the request through requirements, implementation, QA,
 and release evidence. Generated artifacts and host work items belong under
 `agentic/data/`; reusable skills, templates, and runtime belong under `agentic/kit/`.
 Never infer missing business rules or human approval.
+Once the user gives explicit approval (for example, in chat), the agent may
+record it with the runtime `approve --by <user>` or `adjust-budget --by <user>`
+commands, citing where approval was given; never run them without it.
 
 Instruction mode guides agent behavior. In local-harness mode, use the runtime
 task protocol and verify installation with its `doctor` command. Before starting
 new work, run `python3 agentic/kit/runtime/hooks/session_start_check.py` when the
 agent platform has no SessionStart hook. Resume midflight work before starting
 another run. Unknown or damaged state requires explicit recovery.
+
+Commit only per `agentic/kit/policies/commit-policy.md`: after a governed task
+finishes with checks green, or when the user explicitly asks. Build messages
+with `agentic_runtime.cli commit-message` (Conventional Commits + Work-Item/Task/
+Run/Commit-Trigger trailers) and log them with `record-commit RUN_ID`; never
+push, amend, or skip hooks without an explicit ask.
 
 Record execution timing through the harness. Before compaction, checkpoint
 active work and update affected task/context documents with remaining work.
