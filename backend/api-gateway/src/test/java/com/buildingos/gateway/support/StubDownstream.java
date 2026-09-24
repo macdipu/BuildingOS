@@ -52,6 +52,10 @@ public final class StubDownstream implements AutoCloseable {
         baseUrl = "http://127.0.0.1:" + server.getAddress().getPort();
     }
 
+    public void reset() {
+        lastAuthorization.set(null);
+    }
+
     public String lastAuthorization() {
         return lastAuthorization.get();
     }

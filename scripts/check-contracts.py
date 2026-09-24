@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate the platform contracts (OpenAPI + Kafka envelope schema). Nonzero exit on any problem."""
+"""Validate the platform contracts (OpenAPI + Kafka envelope and event schemas). Nonzero exit on any problem."""
 import json
 import sys
 from pathlib import Path
@@ -67,9 +67,28 @@ def check_kafka_envelope_schema():
             errors.append(f"{ENVELOPE_SCHEMA_PATH}: properties missing '{field}'")
 
 
+def check_kafka_event_schemas():
+    """Each <event-type>.v<N>.schema.json describes the envelope `data` of one published event version."""
+    schemas = sorted(ENVELOPE_SCHEMA_PATH.parent.glob("*.v*.schema.json"))
+    if not schemas:
+        errors.append(f"{ENVELOPE_SCHEMA_PATH.parent}: no event data schemas")
+    for path in schemas:
+        try:
+            schema = json.loads(path.read_text())
+        except json.JSONDecodeError as exc:
+            errors.append(f"{path}: invalid JSON: {exc}")
+            continue
+        if schema.get("type") != "object" or schema.get("additionalProperties") is not False:
+            errors.append(f"{path}: data schema must be a closed object (additionalProperties: false)")
+        missing = set(schema.get("required", [])) - set(schema.get("properties", {}))
+        if not schema.get("required") or missing:
+            errors.append(f"{path}: required fields must be declared properties (missing: {sorted(missing)})")
+
+
 def main():
     check_openapi()
     check_kafka_envelope_schema()
+    check_kafka_event_schemas()
     if errors:
         for error in errors:
             print(f"CONTRACT CHECK FAILED: {error}", file=sys.stderr)

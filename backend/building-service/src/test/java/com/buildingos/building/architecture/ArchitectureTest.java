@@ -3,6 +3,7 @@ package com.buildingos.building.architecture;
 import static com.tngtech.archunit.base.DescribedPredicate.not;
 import static com.tngtech.archunit.core.domain.JavaClass.Predicates.resideInAPackage;
 import static com.tngtech.archunit.core.domain.JavaClass.Predicates.resideInAnyPackage;
+import static com.tngtech.archunit.core.domain.JavaClass.Predicates.simpleNameContaining;
 import static com.tngtech.archunit.core.domain.JavaClass.Predicates.simpleNameEndingWith;
 import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.classes;
 import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.noClasses;
@@ -54,4 +55,12 @@ class ArchitectureTest {
     static final ArchRule sharesOnlyPlatformWebKernel = noClasses()
             .should().dependOnClassesThat(resideInAPackage("com.buildingos..")
                     .and(not(resideInAnyPackage(ROOT + "..", "com.buildingos.platform.web.."))));
+
+    /** UO-D04: units, membership and ownership are free foundations; they never consult billing or entitlements. */
+    @ArchTest
+    static final ArchRule unitsAndOwnershipCarryNoEntitlementGate = noClasses()
+            .that().resideInAnyPackage(ROOT + ".unit..", ROOT + ".membership..", ROOT + ".ownership..")
+            .should().dependOnClassesThat(resideInAPackage(ROOT + ".buildingapplication.application.port.out..")
+                    .or(simpleNameContaining("Subscription")).or(simpleNameContaining("Entitlement"))
+                    .or(simpleNameContaining("CreationFee")));
 }

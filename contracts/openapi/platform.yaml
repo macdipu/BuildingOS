@@ -5,7 +5,8 @@ info:
   description: >
     Exact operational routes for the BOS-001 platform foundation milestone.
     Service metadata plus BOS-010 F5a revenue APIs (subscription-service) and F2 building
-    application & lifecycle APIs (building-service).
+    application & lifecycle APIs (building-service), and F4 units, membership and ownership
+    APIs (building-service, free under UO-D04: no entitlement check).
 servers:
   - url: http://localhost:8080
     description: Local gateway
@@ -1410,6 +1411,1164 @@ paths:
           content:
             application/json:
               schema: { $ref: "#/components/schemas/ApiError" }
+  /api/v1/me/buildings:
+    get:
+      summary: "Buildings where the caller holds a current membership (selector/portfolio)"
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: page
+          in: query
+          required: false
+          schema: { type: integer, default: 0 }
+        - name: size
+          in: query
+          required: false
+          schema: { type: integer, default: 20 }
+      responses:
+        "200":
+          description: "Paged envelope: building, roles, ownedUnitCount"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiEnvelope" }
+        "400":
+          description: "INVALID_REQUEST (page/size)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "401":
+          description: "Missing or invalid token"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+  /api/v1/me/properties:
+    get:
+      summary: "Caller's current unit allocations (My Properties)"
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: page
+          in: query
+          required: false
+          schema: { type: integer, default: 0 }
+        - name: size
+          in: query
+          required: false
+          schema: { type: integer, default: 20 }
+      responses:
+        "200":
+          description: "Paged envelope: unit, floor, type, area, building, share, since; only buildings with a current membership"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiEnvelope" }
+        "400":
+          description: "INVALID_REQUEST (page/size)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "401":
+          description: "Missing or invalid token"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+  /api/v1/me/building-invitations:
+    get:
+      summary: "Pending invitations for the caller's verified phone"
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: "Success envelope"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiEnvelope" }
+        "401":
+          description: "Missing or invalid token"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+  /api/v1/me/building-invitations/{invitationId}/claim:
+    post:
+      summary: "Claim an owner invitation (creates OWNER membership)"
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: invitationId
+          in: path
+          required: true
+          schema: { type: string, format: uuid }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/ClaimInvitationRequest" }
+      responses:
+        "200":
+          description: "Success envelope (replayed operationId returns the prior result)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiEnvelope" }
+        "400":
+          description: "INVALID_REQUEST (operationId required)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "401":
+          description: "Missing or invalid token"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "404":
+          description: "INVITATION_NOT_FOUND (also for invitations addressed to another phone)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "409":
+          description: "INVITATION_ALREADY_CLAIMED, INVITATION_REVOKED, INVITATION_EXPIRED or IDEMPOTENCY_CONFLICT"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "503":
+          description: "DEPENDENCY_UNAVAILABLE (auth-service identity lookup)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+  /api/v1/buildings/{buildingId}:
+    get:
+      summary: "Building context for a current member: building, caller roles"
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: buildingId
+          in: path
+          required: true
+          schema: { type: string, format: uuid }
+      responses:
+        "200":
+          description: "Success envelope"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiEnvelope" }
+        "401":
+          description: "Missing or invalid token"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "404":
+          description: "BUILDING_NOT_FOUND (also when the caller holds no current membership)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+  /api/v1/buildings/{buildingId}/invitations:
+    get:
+      summary: "Invitations of the building (admins)"
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: buildingId
+          in: path
+          required: true
+          schema: { type: string, format: uuid }
+        - name: page
+          in: query
+          required: false
+          schema: { type: integer, default: 0 }
+        - name: size
+          in: query
+          required: false
+          schema: { type: integer, default: 20 }
+      responses:
+        "200":
+          description: "Paged envelope"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiEnvelope" }
+        "400":
+          description: "INVALID_REQUEST (page/size)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "401":
+          description: "Missing or invalid token"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "403":
+          description: "ACCESS_DENIED (requires BUILDING_ADMIN membership or platform admin)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "404":
+          description: "BUILDING_NOT_FOUND (also when the caller holds no current membership)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+    post:
+      summary: "Invite an owner by phone (one live invitation per building/phone/role)"
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: buildingId
+          in: path
+          required: true
+          schema: { type: string, format: uuid }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/InviteOwnerRequest" }
+      responses:
+        "201":
+          description: "Created envelope"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiEnvelope" }
+        "400":
+          description: "INVALID_REQUEST (phone, role OWNER)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "401":
+          description: "Missing or invalid token"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "403":
+          description: "ACCESS_DENIED (requires BUILDING_ADMIN membership or platform admin)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "404":
+          description: "BUILDING_NOT_FOUND (also when the caller holds no current membership)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "409":
+          description: "BUILDING_READ_ONLY or ALREADY_OWNER (already an active member)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "503":
+          description: "DEPENDENCY_UNAVAILABLE (auth-service identity lookup)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+  /api/v1/buildings/{buildingId}/invitations/{invitationId}/revoke:
+    post:
+      summary: "Revoke a pending invitation"
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: buildingId
+          in: path
+          required: true
+          schema: { type: string, format: uuid }
+        - name: invitationId
+          in: path
+          required: true
+          schema: { type: string, format: uuid }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/ReasonRequest" }
+      responses:
+        "200":
+          description: "Success envelope"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiEnvelope" }
+        "400":
+          description: "INVALID_REQUEST"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "401":
+          description: "Missing or invalid token"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "403":
+          description: "ACCESS_DENIED (requires BUILDING_ADMIN membership or platform admin)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "404":
+          description: "BUILDING_NOT_FOUND or INVITATION_NOT_FOUND"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "409":
+          description: "BUILDING_READ_ONLY, INVITATION_ALREADY_CLAIMED, INVITATION_REVOKED or INVITATION_EXPIRED"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+  /api/v1/buildings/{buildingId}/members:
+    get:
+      summary: "Members of the building (admins)"
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: buildingId
+          in: path
+          required: true
+          schema: { type: string, format: uuid }
+        - name: page
+          in: query
+          required: false
+          schema: { type: integer, default: 0 }
+        - name: size
+          in: query
+          required: false
+          schema: { type: integer, default: 20 }
+      responses:
+        "200":
+          description: "Paged envelope"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiEnvelope" }
+        "400":
+          description: "INVALID_REQUEST (page/size)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "401":
+          description: "Missing or invalid token"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "403":
+          description: "ACCESS_DENIED (requires BUILDING_ADMIN membership or platform admin)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "404":
+          description: "BUILDING_NOT_FOUND (also when the caller holds no current membership)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+  /api/v1/buildings/{buildingId}/members/{membershipId}/revoke:
+    post:
+      summary: "Revoke an OWNER membership (ownership history is kept)"
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: buildingId
+          in: path
+          required: true
+          schema: { type: string, format: uuid }
+        - name: membershipId
+          in: path
+          required: true
+          schema: { type: string, format: uuid }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/RevokeMembershipRequest" }
+      responses:
+        "200":
+          description: "Success envelope"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiEnvelope" }
+        "400":
+          description: "INVALID_REQUEST (reason, expectedVersion)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "401":
+          description: "Missing or invalid token"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "403":
+          description: "ACCESS_DENIED (requires BUILDING_ADMIN membership or platform admin)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "404":
+          description: "BUILDING_NOT_FOUND or MEMBERSHIP_NOT_FOUND"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "409":
+          description: "BUILDING_READ_ONLY, MEMBERSHIP_NOT_ACTIVE, MEMBERSHIP_NOT_REVOCABLE or STALE_VERSION"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+  /api/v1/buildings/{buildingId}/floors:
+    get:
+      summary: "Floors in display order"
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: buildingId
+          in: path
+          required: true
+          schema: { type: string, format: uuid }
+        - name: page
+          in: query
+          required: false
+          schema: { type: integer, default: 0 }
+        - name: size
+          in: query
+          required: false
+          schema: { type: integer, default: 20 }
+      responses:
+        "200":
+          description: "Paged envelope"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiEnvelope" }
+        "400":
+          description: "INVALID_REQUEST (page/size)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "401":
+          description: "Missing or invalid token"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "404":
+          description: "BUILDING_NOT_FOUND (also when the caller holds no current membership)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+    post:
+      summary: "Create a floor"
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: buildingId
+          in: path
+          required: true
+          schema: { type: string, format: uuid }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/FloorRequest" }
+      responses:
+        "201":
+          description: "Created envelope"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiEnvelope" }
+        "400":
+          description: "INVALID_REQUEST (FLOOR_LABEL, FLOOR_KIND_REQUIRED, FLOOR_ORDER_REQUIRED)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "401":
+          description: "Missing or invalid token"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "403":
+          description: "ACCESS_DENIED (requires BUILDING_ADMIN membership or platform admin)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "404":
+          description: "BUILDING_NOT_FOUND (also when the caller holds no current membership)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "409":
+          description: "BUILDING_READ_ONLY (SUSPENDED), FLOOR_LABEL_TAKEN"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+  /api/v1/buildings/{buildingId}/floors/{floorId}:
+    put:
+      summary: "Update a floor (optimistic expectedVersion)"
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: buildingId
+          in: path
+          required: true
+          schema: { type: string, format: uuid }
+        - name: floorId
+          in: path
+          required: true
+          schema: { type: string, format: uuid }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/FloorRequest" }
+      responses:
+        "200":
+          description: "Success envelope"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiEnvelope" }
+        "400":
+          description: "INVALID_REQUEST"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "401":
+          description: "Missing or invalid token"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "403":
+          description: "ACCESS_DENIED (requires BUILDING_ADMIN membership or platform admin)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "404":
+          description: "BUILDING_NOT_FOUND or FLOOR_NOT_FOUND"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "409":
+          description: "BUILDING_READ_ONLY (SUSPENDED), FLOOR_LABEL_TAKEN or STALE_VERSION"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+  /api/v1/buildings/{buildingId}/units:
+    get:
+      summary: "Units; admins see all, an OWNER member only units they currently own"
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: buildingId
+          in: path
+          required: true
+          schema: { type: string, format: uuid }
+        - name: floorId
+          in: query
+          required: false
+          schema: { type: string }
+        - name: type
+          in: query
+          required: false
+          schema: { type: string }
+        - name: page
+          in: query
+          required: false
+          schema: { type: integer, default: 0 }
+        - name: size
+          in: query
+          required: false
+          schema: { type: integer, default: 20 }
+      responses:
+        "200":
+          description: "Paged envelope"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiEnvelope" }
+        "400":
+          description: "INVALID_REQUEST"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "401":
+          description: "Missing or invalid token"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "404":
+          description: "BUILDING_NOT_FOUND (also when the caller holds no current membership)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+    post:
+      summary: "Create a unit (number unique per building, case-insensitive)"
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: buildingId
+          in: path
+          required: true
+          schema: { type: string, format: uuid }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/UnitRequest" }
+      responses:
+        "201":
+          description: "Created envelope"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiEnvelope" }
+        "400":
+          description: "INVALID_REQUEST (UNIT_NUMBER, UNIT_TYPE_*, AREA_*, BEDROOMS_INVALID, MAINTENANCE_RATE_*)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "401":
+          description: "Missing or invalid token"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "403":
+          description: "ACCESS_DENIED (requires BUILDING_ADMIN membership or platform admin)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "404":
+          description: "BUILDING_NOT_FOUND or FLOOR_NOT_FOUND"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "409":
+          description: "BUILDING_READ_ONLY (SUSPENDED), UNIT_NUMBER_TAKEN"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+  /api/v1/buildings/{buildingId}/units/{unitId}:
+    get:
+      summary: "Unit detail (owners: only units they currently own)"
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: buildingId
+          in: path
+          required: true
+          schema: { type: string, format: uuid }
+        - name: unitId
+          in: path
+          required: true
+          schema: { type: string, format: uuid }
+      responses:
+        "200":
+          description: "Success envelope"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiEnvelope" }
+        "401":
+          description: "Missing or invalid token"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "404":
+          description: "BUILDING_NOT_FOUND or UNIT_NOT_FOUND (also for units an owner does not own)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+    put:
+      summary: "Update a unit (optimistic expectedVersion)"
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: buildingId
+          in: path
+          required: true
+          schema: { type: string, format: uuid }
+        - name: unitId
+          in: path
+          required: true
+          schema: { type: string, format: uuid }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/UnitRequest" }
+      responses:
+        "200":
+          description: "Success envelope"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiEnvelope" }
+        "400":
+          description: "INVALID_REQUEST (same field codes as create)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "401":
+          description: "Missing or invalid token"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "403":
+          description: "ACCESS_DENIED (requires BUILDING_ADMIN membership or platform admin)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "404":
+          description: "BUILDING_NOT_FOUND, UNIT_NOT_FOUND or FLOOR_NOT_FOUND"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "409":
+          description: "BUILDING_READ_ONLY (SUSPENDED), UNIT_NUMBER_TAKEN or STALE_VERSION"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+  /api/v1/buildings/{buildingId}/unit-batches/preview:
+    post:
+      summary: "Preview a unit batch from rows, a floor pattern, or an uploaded CSV/XLSX sheet"
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: buildingId
+          in: path
+          required: true
+          schema: { type: string, format: uuid }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/BatchPreviewRequest" }
+          multipart/form-data:
+            schema: { $ref: "#/components/schemas/SheetUpload" }
+      responses:
+        "200":
+          description: "Preview envelope: canonical rows with per-row field codes; nothing is written"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiEnvelope" }
+        "400":
+          description: "INVALID_REQUEST, BATCH_EMPTY, BATCH_TOO_LARGE, FLOORS_REQUIRED, UNITS_PER_FLOOR_INVALID, TEMPLATE_FLOOR_EMPTY, PATTERN_*, SHEET_* (SHEET_INVALID, SHEET_HEADER_MISSING, SHEET_COLUMN_MISSING, SHEET_ENCODING_INVALID, SHEET_QUOTE_UNCLOSED, SHEET_FORMULA_NOT_ALLOWED, SHEET_MACROS_NOT_ALLOWED)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "401":
+          description: "Missing or invalid token"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "403":
+          description: "ACCESS_DENIED (requires BUILDING_ADMIN membership or platform admin)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "404":
+          description: "BUILDING_NOT_FOUND (also when the caller holds no current membership)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "409":
+          description: "BUILDING_READ_ONLY"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "413":
+          description: "SHEET_TOO_LARGE"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "415":
+          description: "SHEET_TYPE_UNSUPPORTED"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+  /api/v1/buildings/{buildingId}/unit-batches/commit:
+    post:
+      summary: "Commit previewed rows all-or-nothing (rows are revalidated)"
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: buildingId
+          in: path
+          required: true
+          schema: { type: string, format: uuid }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/BatchCommitRequest" }
+      responses:
+        "201":
+          description: "Created envelope (replayed operationId returns the prior result)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiEnvelope" }
+        "400":
+          description: "INVALID_REQUEST, BATCH_EMPTY, BATCH_TOO_LARGE or per-row field codes (e.g. DUPLICATE_IN_BATCH)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "401":
+          description: "Missing or invalid token"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "403":
+          description: "ACCESS_DENIED (requires BUILDING_ADMIN membership or platform admin)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "404":
+          description: "BUILDING_NOT_FOUND (also when the caller holds no current membership)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "409":
+          description: "BUILDING_READ_ONLY, UNIT_NUMBER_TAKEN or IDEMPOTENCY_CONFLICT"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+  /api/v1/buildings/{buildingId}/units/{unitId}/ownerships:
+    get:
+      summary: "Current allocations and ownership revision (expectedVersion for writes)"
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: buildingId
+          in: path
+          required: true
+          schema: { type: string, format: uuid }
+        - name: unitId
+          in: path
+          required: true
+          schema: { type: string, format: uuid }
+      responses:
+        "200":
+          description: "Success envelope; owners see only their own allocation"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiEnvelope" }
+        "401":
+          description: "Missing or invalid token"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "404":
+          description: "BUILDING_NOT_FOUND or UNIT_NOT_FOUND (also for units an owner does not own)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+    post:
+      summary: "Assign a share to a claimed OWNER member (effective today, Asia/Dhaka)"
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: buildingId
+          in: path
+          required: true
+          schema: { type: string, format: uuid }
+        - name: unitId
+          in: path
+          required: true
+          schema: { type: string, format: uuid }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/AssignOwnershipRequest" }
+      responses:
+        "201":
+          description: "Created envelope (200 when an operationId is replayed)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiEnvelope" }
+        "400":
+          description: "INVALID_REQUEST, SHARE_REQUIRED, SHARE_NOT_POSITIVE, SHARE_TOO_LARGE, SHARE_PRECISION, EFFECTIVE_DATE_REQUIRED, EFFECTIVE_DATE_NOT_TODAY, NOTES_TOO_LONG"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "401":
+          description: "Missing or invalid token"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "403":
+          description: "ACCESS_DENIED (requires BUILDING_ADMIN membership or platform admin)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "404":
+          description: "BUILDING_NOT_FOUND or UNIT_NOT_FOUND"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "409":
+          description: "BUILDING_READ_ONLY, STALE_VERSION, IDEMPOTENCY_CONFLICT, OWNER_NOT_MEMBER, SHARE_EXCEEDED or ALREADY_OWNER"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+  /api/v1/buildings/{buildingId}/units/{unitId}/ownership-transfers:
+    post:
+      summary: "Move a share between owners; emits ownership.transferred v1 via the outbox"
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: buildingId
+          in: path
+          required: true
+          schema: { type: string, format: uuid }
+        - name: unitId
+          in: path
+          required: true
+          schema: { type: string, format: uuid }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/TransferOwnershipRequest" }
+      responses:
+        "201":
+          description: "Created envelope (200 when an operationId is replayed)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiEnvelope" }
+        "400":
+          description: "INVALID_REQUEST, SHARE_*, EFFECTIVE_DATE_*, SAME_OWNER"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "401":
+          description: "Missing or invalid token"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "403":
+          description: "ACCESS_DENIED (requires BUILDING_ADMIN membership or platform admin)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "404":
+          description: "BUILDING_NOT_FOUND or UNIT_NOT_FOUND"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "409":
+          description: "BUILDING_READ_ONLY, STALE_VERSION, IDEMPOTENCY_CONFLICT, OWNER_NOT_MEMBER, SOURCE_NOT_OWNER or INSUFFICIENT_SOURCE_SHARE"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+  /api/v1/buildings/{buildingId}/units/{unitId}/ownership-history:
+    get:
+      summary: "Ownership periods and transfers; owners see only their own records"
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: buildingId
+          in: path
+          required: true
+          schema: { type: string, format: uuid }
+        - name: unitId
+          in: path
+          required: true
+          schema: { type: string, format: uuid }
+      responses:
+        "200":
+          description: "Success envelope"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiEnvelope" }
+        "401":
+          description: "Missing or invalid token"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "403":
+          description: "ACCESS_DENIED (member without OWNER or admin role)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "404":
+          description: "BUILDING_NOT_FOUND or UNIT_NOT_FOUND (also for units an owner never owned)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+  /api/v1/buildings/{buildingId}/units/{unitId}/ownership-transfers/{transferId}/documents:
+    get:
+      summary: "Transfer document metadata (admins, or the transfer's source/recipient with a current OWNER membership)"
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: buildingId
+          in: path
+          required: true
+          schema: { type: string, format: uuid }
+        - name: unitId
+          in: path
+          required: true
+          schema: { type: string, format: uuid }
+        - name: transferId
+          in: path
+          required: true
+          schema: { type: string, format: uuid }
+      responses:
+        "200":
+          description: "Success envelope"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiEnvelope" }
+        "401":
+          description: "Missing or invalid token"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "404":
+          description: "BUILDING_NOT_FOUND or TRANSFER_NOT_FOUND (also for non-parties, revoked parties and a wrong unit)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+    post:
+      summary: "Attach a transfer document (admins); PDF, JPEG or PNG detected from content"
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: buildingId
+          in: path
+          required: true
+          schema: { type: string, format: uuid }
+        - name: unitId
+          in: path
+          required: true
+          schema: { type: string, format: uuid }
+        - name: transferId
+          in: path
+          required: true
+          schema: { type: string, format: uuid }
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema: { $ref: "#/components/schemas/TransferDocumentUpload" }
+      responses:
+        "201":
+          description: "Created envelope"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiEnvelope" }
+        "400":
+          description: "INVALID_REQUEST (reason required for platform admins without a building-admin membership)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "401":
+          description: "Missing or invalid token"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "403":
+          description: "ACCESS_DENIED (requires BUILDING_ADMIN membership or platform admin)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "404":
+          description: "BUILDING_NOT_FOUND or TRANSFER_NOT_FOUND"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "409":
+          description: "BUILDING_READ_ONLY or DOCUMENT_LIMIT_REACHED"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "413":
+          description: "DOCUMENT_TOO_LARGE"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "415":
+          description: "UNSUPPORTED_DOCUMENT_TYPE"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "503":
+          description: "DEPENDENCY_UNAVAILABLE (object storage; no metadata is kept)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+  /api/v1/buildings/{buildingId}/units/{unitId}/ownership-transfers/{transferId}/documents/{documentId}:
+    get:
+      summary: "Download a transfer document (attachment, nosniff)"
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: buildingId
+          in: path
+          required: true
+          schema: { type: string, format: uuid }
+        - name: unitId
+          in: path
+          required: true
+          schema: { type: string, format: uuid }
+        - name: transferId
+          in: path
+          required: true
+          schema: { type: string, format: uuid }
+        - name: documentId
+          in: path
+          required: true
+          schema: { type: string, format: uuid }
+      responses:
+        "200":
+          description: "Document bytes, Content-Disposition attachment"
+          content:
+            application/octet-stream:
+              schema: { $ref: "#/components/schemas/DocumentBytes" }
+        "401":
+          description: "Missing or invalid token"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "404":
+          description: "BUILDING_NOT_FOUND or TRANSFER_NOT_FOUND (also for non-parties, revoked parties and a wrong unit), or DOCUMENT_NOT_FOUND"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "503":
+          description: "DEPENDENCY_UNAVAILABLE"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+    delete:
+      summary: "Audited removal (admins); the transfer itself is kept"
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: buildingId
+          in: path
+          required: true
+          schema: { type: string, format: uuid }
+        - name: unitId
+          in: path
+          required: true
+          schema: { type: string, format: uuid }
+        - name: transferId
+          in: path
+          required: true
+          schema: { type: string, format: uuid }
+        - name: documentId
+          in: path
+          required: true
+          schema: { type: string, format: uuid }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/ReasonRequest" }
+      responses:
+        "204":
+          description: "Removed"
+        "400":
+          description: "INVALID_REQUEST (reason required)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "401":
+          description: "Missing or invalid token"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "403":
+          description: "ACCESS_DENIED (requires BUILDING_ADMIN membership or platform admin)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "404":
+          description: "BUILDING_NOT_FOUND, TRANSFER_NOT_FOUND or DOCUMENT_NOT_FOUND"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "409":
+          description: "BUILDING_READ_ONLY"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
   /internal/users/provision:
     post:
       summary: "auth-service: find or create a user by phone (service-to-service, D-29)"
@@ -1542,6 +2701,119 @@ components:
       required: [phone]
       properties:
         phone: { type: string }
+    ClaimInvitationRequest:
+      type: object
+      required: [operationId]
+      properties:
+        operationId: { type: string, format: uuid, description: Idempotency key; a replay returns the prior result }
+    InviteOwnerRequest:
+      type: object
+      required: [phone, role]
+      properties:
+        phone: { type: string, description: "01XXXXXXXXX, 8801XXXXXXXXX or +8801XXXXXXXXX" }
+        role: { type: string, enum: [OWNER] }
+        reason: { type: string, maxLength: 1000, description: Required for platform admins without a building-admin membership }
+    RevokeMembershipRequest:
+      type: object
+      required: [reason, expectedVersion]
+      properties:
+        reason: { type: string, maxLength: 1000 }
+        expectedVersion: { type: integer, format: int64 }
+    FloorRequest:
+      type: object
+      required: [label, kind, displayOrder]
+      properties:
+        label: { type: string, maxLength: 40 }
+        kind: { type: string, enum: [BASEMENT, GROUND, REGULAR, ROOF, COMMON] }
+        displayOrder: { type: integer }
+        expectedVersion: { type: integer, format: int64, description: Required on update }
+        reason: { type: string, maxLength: 1000 }
+    UnitRequest:
+      type: object
+      required: [number, floorId, type, areaSqft]
+      properties:
+        number: { type: string, maxLength: 32, description: Trimmed; unique per building ignoring case, display spelling kept }
+        floorId: { type: string, format: uuid }
+        type: { type: string, enum: [FLAT, PARKING, STORAGE, COMMERCIAL, COMMON, OTHER] }
+        areaSqft: { type: number, exclusiveMinimum: true, minimum: 0, description: Square feet, at most 2 decimals }
+        bedrooms: { type: integer, minimum: 0 }
+        defaultMaintenanceRate: { type: number, minimum: 0, description: At most 2 decimals }
+        notes: { type: string, maxLength: 1000 }
+        expectedVersion: { type: integer, format: int64, description: Required on update }
+        reason: { type: string, maxLength: 1000 }
+    BatchRow:
+      type: object
+      properties:
+        number: { type: string }
+        floorId: { type: string, format: uuid }
+        floorLabel: { type: string }
+        type: { type: string, enum: [FLAT, PARKING, STORAGE, COMMERCIAL, COMMON, OTHER] }
+        areaSqft: { type: number }
+        bedrooms: { type: integer }
+        defaultMaintenanceRate: { type: number }
+        notes: { type: string }
+    BatchPreviewRequest:
+      type: object
+      description: Either explicit rows or a floor pattern
+      properties:
+        rows:
+          type: array
+          items: { $ref: "#/components/schemas/BatchRow" }
+        generate:
+          type: object
+          properties:
+            floorIds: { type: array, items: { type: string, format: uuid } }
+            unitsPerFloor: { type: integer, minimum: 1 }
+            numberPattern: { type: string, example: "{floor}{letter}" }
+            start: { type: integer }
+            type: { type: string, enum: [FLAT, PARKING, STORAGE, COMMERCIAL, COMMON, OTHER] }
+            areaSqft: { type: number }
+            bedrooms: { type: integer }
+            defaultMaintenanceRate: { type: number }
+            templateFloorId: { type: string, format: uuid, description: Copy this floor's units instead of a pattern }
+    SheetUpload:
+      type: object
+      required: [file]
+      properties:
+        file: { type: string, format: binary, description: CSV or XLSX (no macros/formulas), bounded rows and bytes }
+    BatchCommitRequest:
+      type: object
+      required: [rows, operationId]
+      properties:
+        rows:
+          type: array
+          items: { $ref: "#/components/schemas/BatchRow" }
+        operationId: { type: string, format: uuid }
+        reason: { type: string, maxLength: 1000 }
+    AssignOwnershipRequest:
+      type: object
+      required: [ownerUserId, share, effectiveDate, expectedVersion, operationId]
+      properties:
+        ownerUserId: { type: string, format: uuid, description: Must hold an active OWNER membership }
+        share: { type: number, exclusiveMinimum: true, minimum: 0, maximum: 100, description: Percentage, at most 4 decimals }
+        effectiveDate: { type: string, format: date, description: Must be today in Asia/Dhaka }
+        notes: { type: string, maxLength: 1000 }
+        reason: { type: string, maxLength: 1000 }
+        expectedVersion: { type: integer, format: int64, description: Unit ownership revision }
+        operationId: { type: string, format: uuid }
+    TransferOwnershipRequest:
+      type: object
+      required: [sourceOwnerUserId, recipientUserId, share, effectiveDate, reason, expectedVersion, operationId]
+      properties:
+        sourceOwnerUserId: { type: string, format: uuid }
+        recipientUserId: { type: string, format: uuid, description: Must hold an active OWNER membership }
+        share: { type: number, exclusiveMinimum: true, minimum: 0, maximum: 100, description: Percentage points moved, at most 4 decimals }
+        effectiveDate: { type: string, format: date, description: Must be today in Asia/Dhaka }
+        reference: { type: string, maxLength: 200 }
+        reason: { type: string, maxLength: 1000 }
+        expectedVersion: { type: integer, format: int64 }
+        operationId: { type: string, format: uuid }
+    TransferDocumentUpload:
+      type: object
+      required: [file]
+      properties:
+        file: { type: string, format: binary }
+        reason: { type: string, maxLength: 1000 }
     ApiError:
       type: object
       required: [success, code, message, traceId]

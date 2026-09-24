@@ -31,7 +31,9 @@ public class GatewayRouteConfig {
                 .and(passThroughRoute("building-api", buildingUrl,
                         "/api/v1/building-applications", "/api/v1/building-applications/**",
                         "/api/v1/me/building-applications", "/api/v1/platform/building-applications",
-                        "/api/v1/platform/building-applications/**", "/api/v1/platform/buildings/**"))
+                        "/api/v1/platform/building-applications/**", "/api/v1/platform/buildings/**",
+                        "/api/v1/buildings/**", "/api/v1/me/buildings", "/api/v1/me/properties",
+                        "/api/v1/me/building-invitations", "/api/v1/me/building-invitations/**"))
                 .and(otpRoute("start", authUrl))
                 .and(otpRoute("verify", authUrl));
     }

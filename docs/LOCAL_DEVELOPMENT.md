@@ -150,7 +150,7 @@ also require `platform.observe` scope. Stop each application with Ctrl-C.
 ```sh
 mvn -B -f backend/pom.xml verify              # compile + unit + integration tests
 sh scripts/verify-platform.sh                 # Postgres/Kafka isolation + smoke + restart
-python3 scripts/check-contracts.py            # OpenAPI + Kafka envelope schema sanity
+python3 scripts/check-contracts.py            # OpenAPI + Kafka envelope/event schema sanity
 docker compose -f infra/docker/compose.yaml config --quiet   # Compose file validity
 sh scripts/verify-flutter.sh                  # user_app analyze + test (separate app, may
                                                # report pre-existing failures — see

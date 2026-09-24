@@ -136,6 +136,43 @@ class GatewayRoutingTest {
         assertThat(buildingStub.lastAuthorization()).isEqualTo("Bearer " + token);
     }
 
+    @ParameterizedTest
+    @ValueSource(strings = {"/api/v1/me/buildings", "/api/v1/me/properties", "/api/v1/me/building-invitations",
+            "/api/v1/me/building-invitations/abc/claim", "/api/v1/buildings/abc", "/api/v1/buildings/abc/floors",
+            "/api/v1/buildings/abc/units/def", "/api/v1/buildings/abc/unit-batches/preview",
+            "/api/v1/buildings/abc/invitations/def/revoke", "/api/v1/buildings/abc/members",
+            "/api/v1/buildings/abc/units/def/ownership-history",
+            "/api/v1/buildings/abc/units/def/ownership-transfers/ghi/documents/jkl"})
+    void unitsAndOwnershipPathsForwardUnchangedWithBearerToken(String path) throws Exception {
+        String token = validToken();
+        var response = call(path, token, null, null);
+        assertThat(response.statusCode()).isEqualTo(200);
+        assertThat(response.body()).contains("\"service\":\"building-service\"", "\"path\":\"" + path + "\"");
+        assertThat(buildingStub.lastAuthorization()).isEqualTo("Bearer " + token);
+    }
+
+    @Test
+    void unitsAndOwnershipWritesForwardEveryMethod() throws Exception {
+        for (String method : new String[] {"POST", "PUT", "DELETE"}) {
+            var request = HttpRequest.newBuilder(URI.create("http://127.0.0.1:" + port
+                            + "/api/v1/buildings/abc/units/def/ownership-transfers/ghi/documents/jkl"))
+                    .method(method, HttpRequest.BodyPublishers.ofString("{\"reason\":\"x\"}"))
+                    .header("Authorization", "Bearer " + validToken())
+                    .header("Content-Type", "application/json").build();
+            var response = HTTP.send(request, HttpResponse.BodyHandlers.ofString());
+            assertThat(response.statusCode()).isEqualTo(200);
+            assertThat(response.body()).contains("\"method\":\"" + method + "\"");
+        }
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"/api/v1/me/properties", "/api/v1/buildings/abc/units"})
+    void unitsAndOwnershipRequireTokenAtGateway(String path) throws Exception {
+        buildingStub.reset();
+        assertThat(call(path, null, null, null).statusCode()).isEqualTo(401);
+        assertThat(buildingStub.lastAuthorization()).isNull();
+    }
+
     @Test
     void documentUploadStreamsMultipartBodyIntact() throws Exception {
         byte[] file = new byte[2 * 1024 * 1024];

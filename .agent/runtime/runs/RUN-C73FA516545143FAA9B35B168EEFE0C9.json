@@ -8,7 +8,7 @@
     "status": "BLOCKED",
     "dry_run": false,
     "created_at": "2026-09-24T11:15:32.383326+00:00",
-    "updated_at": "2026-09-24T12:51:57.181101+00:00",
+    "updated_at": "2026-09-24T13:05:50.250749+00:00",
     "metadata": {
       "runtime_version": 2,
       "repo": "../../..",
@@ -107,25 +107,25 @@
         "IMPLEMENTATION": {
           "status": "PARTIAL",
           "evidence": [
-            "backend/building-service/src/main/resources/db/migration/V9__ownership_document.sql",
-            "backend/building-service/src/main/java/com/buildingos/building/ownership/application/TransferDocuments.java",
-            "backend/building-service/src/main/java/com/buildingos/building/ownership/application/uploadtransferdocument/UploadTransferDocumentService.java",
-            "backend/building-service/src/main/java/com/buildingos/building/ownership/application/removetransferdocument/RemoveTransferDocumentService.java",
-            "backend/building-service/src/main/java/com/buildingos/building/ownership/presentation/rest/TransferDocumentController.java",
-            "backend/building-service/src/test/java/com/buildingos/building/ownership/TransferDocumentApiIntegrationTest.java",
-            "backend/building-service/src/test/java/com/buildingos/building/ownership/UploadTransferDocumentServiceTest.java",
-            "agentic/data/project-context/features/BOS-010/units-ownership/tasks/F4-T5b.md",
-            "mvn -pl building-service -am verify: BUILD SUCCESS (building-service 112/0 incl. ArchUnit 7/0; platform-web 5/0); scripts/check-contracts.py passed"
+            "backend/api-gateway/src/main/java/com/buildingos/gateway/routing/config/GatewayRouteConfig.java",
+            "backend/api-gateway/src/test/java/com/buildingos/gateway/GatewayRoutingTest.java",
+            "contracts/openapi/platform.yaml",
+            "backend/building-service/src/test/java/com/buildingos/building/contract/OpenApiCoverageTest.java",
+            "backend/building-service/src/test/java/com/buildingos/building/architecture/ArchitectureTest.java",
+            "scripts/check-contracts.py",
+            "agentic/data/project-context/features/BOS-010/units-ownership/tasks/F4-T6.md",
+            "mvn -pl api-gateway -am verify: BUILD SUCCESS (46/0)",
+            "mvn -pl building-service -am verify: BUILD SUCCESS (114/0 incl. ArchUnit 8/0, OpenApiCoverageTest)",
+            "python3 scripts/check-contracts.py: CONTRACT CHECKS PASSED"
           ],
           "blocking_issues": [],
           "open_questions": [],
-          "recommended_next_step": "F4-T6: gateway/OpenAPI/event contracts for F4 endpoints (incl. transfer documents) and approved revenue-policy enforcement.",
+          "recommended_next_step": "F4-T7: Flutter selector/portfolio, invitations, units and batch flows against the published contract.",
           "outputs": {
-            "subtask": "F4-T5b",
+            "subtask": "F4-T6",
             "subtask_status": "COMPLETED",
-            "residual_risk": "Object delete after a committed removal is best-effort; no orphan sweeper yet.",
+            "policy": "UO-D04 enforced as no entitlement gate for F4; max_units/max_users deferred",
             "remaining": [
-              "F4-T6",
               "F4-T7",
               "F4-T8",
               "F4-T9"
@@ -136,7 +136,7 @@
       "attempts": {
         "0:INTAKE:document-intake-adapter": 1,
         "0:CONTEXT:baseline-verifier": 1,
-        "0:IMPLEMENTATION:implementation-agent": 8
+        "0:IMPLEMENTATION:implementation-agent": 9
       },
       "active_task": null,
       "context": {
@@ -1512,6 +1512,150 @@
         "active_task": null
       },
       "created_at": "2026-09-24T12:51:57.181101+00:00"
+    },
+    {
+      "run_id": "RUN-C73FA516545143FAA9B35B168EEFE0C9",
+      "stage": "IMPLEMENTATION",
+      "status": "RUNNING",
+      "payload": {
+        "results": {
+          "INTAKE": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/units-ownership/APPROVAL.md",
+              "agentic/data/project-context/features/BOS-010/units-ownership/DELIVERY-PLAN.md",
+              "agentic/data/project-context/features/BOS-010/units-ownership/tasks/F4-T1a.md",
+              "agentic/data/project-context/features/BOS-010/units-ownership/tasks/F4-T1b.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Verify context and record the operator's technical approval, then resume F4-T1b from the working tree.",
+            "outputs": {
+              "work_item": "BOS-010 F4 units and ownership",
+              "work_type": "existing_task",
+              "hierarchy": "FEATURE_WITH_TASKS",
+              "planning": "NO_REPLAN",
+              "project_type": "brownfield",
+              "supersedes_run": "RUN-0BF1AD2443404B03BE7350F0C91BD0C0 (CANCELLED for kit upgrade 1482131)",
+              "completed_subtasks": [
+                "F4-T1a (b820ead)"
+              ],
+              "next_subtask": "F4-T1b"
+            }
+          },
+          "CONTEXT": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/units-ownership/BASELINE.md",
+              "docs/ARCHITECTURE.md",
+              "backend/building-service/src/main/resources/db/migration/V5__building_membership_invitations.sql",
+              "agentic/data/project-context/features/BOS-010/units-ownership/TECH-SPEC.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Record the operator's technical approval for the approved F4 design, then implement F4-T1b.",
+            "outputs": {
+              "context": "AVAILABLE",
+              "project_type": "brownfield",
+              "verdict": "CONTEXT_READY",
+              "baseline": "F4-T1a committed b820ead; building-service verify 60/0 at that commit"
+            }
+          }
+        },
+        "attempts": {
+          "0:INTAKE:document-intake-adapter": 1,
+          "0:CONTEXT:baseline-verifier": 1,
+          "0:IMPLEMENTATION:implementation-agent": 9
+        },
+        "active_task": {
+          "id": "9a25f8b08e2a4e2380e07c433bdb2eec",
+          "skill": "implementation-agent",
+          "started_at": "2026-09-24T12:56:34.449717+00:00",
+          "tool_calls": 0
+        }
+      },
+      "created_at": "2026-09-24T12:56:34.450929+00:00"
+    },
+    {
+      "run_id": "RUN-C73FA516545143FAA9B35B168EEFE0C9",
+      "stage": "IMPLEMENTATION",
+      "status": "BLOCKED",
+      "payload": {
+        "results": {
+          "INTAKE": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/units-ownership/APPROVAL.md",
+              "agentic/data/project-context/features/BOS-010/units-ownership/DELIVERY-PLAN.md",
+              "agentic/data/project-context/features/BOS-010/units-ownership/tasks/F4-T1a.md",
+              "agentic/data/project-context/features/BOS-010/units-ownership/tasks/F4-T1b.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Verify context and record the operator's technical approval, then resume F4-T1b from the working tree.",
+            "outputs": {
+              "work_item": "BOS-010 F4 units and ownership",
+              "work_type": "existing_task",
+              "hierarchy": "FEATURE_WITH_TASKS",
+              "planning": "NO_REPLAN",
+              "project_type": "brownfield",
+              "supersedes_run": "RUN-0BF1AD2443404B03BE7350F0C91BD0C0 (CANCELLED for kit upgrade 1482131)",
+              "completed_subtasks": [
+                "F4-T1a (b820ead)"
+              ],
+              "next_subtask": "F4-T1b"
+            }
+          },
+          "CONTEXT": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/features/BOS-010/units-ownership/BASELINE.md",
+              "docs/ARCHITECTURE.md",
+              "backend/building-service/src/main/resources/db/migration/V5__building_membership_invitations.sql",
+              "agentic/data/project-context/features/BOS-010/units-ownership/TECH-SPEC.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Record the operator's technical approval for the approved F4 design, then implement F4-T1b.",
+            "outputs": {
+              "context": "AVAILABLE",
+              "project_type": "brownfield",
+              "verdict": "CONTEXT_READY",
+              "baseline": "F4-T1a committed b820ead; building-service verify 60/0 at that commit"
+            }
+          },
+          "IMPLEMENTATION": {
+            "status": "PARTIAL",
+            "evidence": [
+              "backend/api-gateway/src/main/java/com/buildingos/gateway/routing/config/GatewayRouteConfig.java",
+              "backend/api-gateway/src/test/java/com/buildingos/gateway/GatewayRoutingTest.java",
+              "contracts/openapi/platform.yaml",
+              "backend/building-service/src/test/java/com/buildingos/building/contract/OpenApiCoverageTest.java",
+              "backend/building-service/src/test/java/com/buildingos/building/architecture/ArchitectureTest.java",
+              "scripts/check-contracts.py",
+              "agentic/data/project-context/features/BOS-010/units-ownership/tasks/F4-T6.md",
+              "mvn -pl api-gateway -am verify: BUILD SUCCESS (46/0)",
+              "mvn -pl building-service -am verify: BUILD SUCCESS (114/0 incl. ArchUnit 8/0, OpenApiCoverageTest)",
+              "python3 scripts/check-contracts.py: CONTRACT CHECKS PASSED"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "F4-T7: Flutter selector/portfolio, invitations, units and batch flows against the published contract.",
+            "outputs": {
+              "subtask": "F4-T6",
+              "subtask_status": "COMPLETED",
+              "policy": "UO-D04 enforced as no entitlement gate for F4; max_units/max_users deferred",
+              "remaining": [
+                "F4-T7",
+                "F4-T8",
+                "F4-T9"
+              ]
+            }
+          }
+        },
+        "active_task": null
+      },
+      "created_at": "2026-09-24T13:05:50.250749+00:00"
     }
   ],
   "approvals": [
@@ -1723,6 +1867,26 @@
       "ts": "2026-09-24T12:51:57.180861+00:00",
       "metadata": {
         "duration_ms": 536030,
+        "result_status": "PARTIAL"
+      }
+    },
+    {
+      "run_id": "RUN-C73FA516545143FAA9B35B168EEFE0C9",
+      "task": "9a25f8b08e2a4e2380e07c433bdb2eec",
+      "event": "STARTED",
+      "ts": "2026-09-24T12:56:34.449717+00:00",
+      "metadata": {
+        "skill": "implementation-agent",
+        "retry_count": 8
+      }
+    },
+    {
+      "run_id": "RUN-C73FA516545143FAA9B35B168EEFE0C9",
+      "task": "9a25f8b08e2a4e2380e07c433bdb2eec",
+      "event": "COMPLETED",
+      "ts": "2026-09-24T13:05:50.250488+00:00",
+      "metadata": {
+        "duration_ms": 555800,
         "result_status": "PARTIAL"
       }
     }
@@ -2315,6 +2479,63 @@
         }
       },
       "created_at": "2026-09-24T12:51:57.181101+00:00"
+    },
+    {
+      "run_id": "RUN-C73FA516545143FAA9B35B168EEFE0C9",
+      "event": "COMMIT_RECORDED",
+      "payload": {
+        "sha": "3e6f7c8",
+        "subject": "feat(units-ownership): add ownership transfer documents",
+        "work_item": "BOS-010-F4",
+        "task": "48557709b9db44eca43322885645d5c1",
+        "run": "RUN-C73FA516545143FAA9B35B168EEFE0C9",
+        "commit_trigger": "task-finish"
+      },
+      "created_at": "2026-09-24T12:51:57.356686+00:00"
+    },
+    {
+      "run_id": "RUN-C73FA516545143FAA9B35B168EEFE0C9",
+      "event": "TASK_STARTED",
+      "payload": {
+        "skill": "implementation-agent"
+      },
+      "created_at": "2026-09-24T12:56:34.450929+00:00"
+    },
+    {
+      "run_id": "RUN-C73FA516545143FAA9B35B168EEFE0C9",
+      "event": "RESULT_RECORDED",
+      "payload": {
+        "skill": "implementation-agent",
+        "result": {
+          "status": "PARTIAL",
+          "evidence": [
+            "backend/api-gateway/src/main/java/com/buildingos/gateway/routing/config/GatewayRouteConfig.java",
+            "backend/api-gateway/src/test/java/com/buildingos/gateway/GatewayRoutingTest.java",
+            "contracts/openapi/platform.yaml",
+            "backend/building-service/src/test/java/com/buildingos/building/contract/OpenApiCoverageTest.java",
+            "backend/building-service/src/test/java/com/buildingos/building/architecture/ArchitectureTest.java",
+            "scripts/check-contracts.py",
+            "agentic/data/project-context/features/BOS-010/units-ownership/tasks/F4-T6.md",
+            "mvn -pl api-gateway -am verify: BUILD SUCCESS (46/0)",
+            "mvn -pl building-service -am verify: BUILD SUCCESS (114/0 incl. ArchUnit 8/0, OpenApiCoverageTest)",
+            "python3 scripts/check-contracts.py: CONTRACT CHECKS PASSED"
+          ],
+          "blocking_issues": [],
+          "open_questions": [],
+          "recommended_next_step": "F4-T7: Flutter selector/portfolio, invitations, units and batch flows against the published contract.",
+          "outputs": {
+            "subtask": "F4-T6",
+            "subtask_status": "COMPLETED",
+            "policy": "UO-D04 enforced as no entitlement gate for F4; max_units/max_users deferred",
+            "remaining": [
+              "F4-T7",
+              "F4-T8",
+              "F4-T9"
+            ]
+          }
+        }
+      },
+      "created_at": "2026-09-24T13:05:50.250749+00:00"
     }
   ],
   "tool_calls": {}
