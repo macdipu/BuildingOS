@@ -33,12 +33,10 @@ public record Building(UUID id, UUID applicationId, String name, BuildingType ty
                 0, at, at);
     }
 
-    /** Interim rule (D-30): an active building admin is the only prerequisite until the units slice lands. */
-    public Building activated(long activeAdmins, Instant at) {
+    /** D-30 / UO-09: an active building admin and at least one unit. */
+    public Building activated(ActivationReadiness readiness, Instant at) {
         require(BuildingStatus.ONBOARDING, "activate");
-        if (activeAdmins < 1) {
-            throw new NoBuildingAdminException();
-        }
+        requireReady(readiness);
         return with(BuildingStatus.ACTIVE, at);
     }
 
@@ -47,9 +45,20 @@ public record Building(UUID id, UUID applicationId, String name, BuildingType ty
         return with(BuildingStatus.SUSPENDED, at);
     }
 
-    public Building reactivated(Instant at) {
+    /** Reactivation rechecks activation prerequisites; ACTIVE buildings without units are not demoted. */
+    public Building reactivated(ActivationReadiness readiness, Instant at) {
         require(BuildingStatus.SUSPENDED, "reactivate");
+        requireReady(readiness);
         return with(BuildingStatus.ACTIVE, at);
+    }
+
+    private static void requireReady(ActivationReadiness readiness) {
+        if (readiness.activeAdmins() < 1) {
+            throw new NoBuildingAdminException();
+        }
+        if (readiness.units() < 1) {
+            throw new NoBuildingUnitException();
+        }
     }
 
     private void require(BuildingStatus expected, String action) {

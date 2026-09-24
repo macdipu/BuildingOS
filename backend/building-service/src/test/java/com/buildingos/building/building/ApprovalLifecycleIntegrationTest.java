@@ -257,6 +257,16 @@ class ApprovalLifecycleIntegrationTest {
         assertThat(buildingsFor(id)).isEqualTo(1);
     }
 
+    private void addUnit(String buildingId) {
+        UUID floor = UUID.randomUUID();
+        jdbc.update("INSERT INTO building_floor (id, building_id, label, normalized_label, kind, display_order, "
+                + "created_at, updated_at) VALUES (?, ?::uuid, 'Ground', 'GROUND', 'GROUND', 0, now(), now())",
+                floor, buildingId);
+        jdbc.update("INSERT INTO building_unit (id, building_id, floor_id, number, normalized_number, unit_type, "
+                + "area_sqft, created_at, updated_at) VALUES (?, ?::uuid, ?, 'G1', 'G1', 'FLAT', 900, now(), now())",
+                UUID.randomUUID(), buildingId, floor);
+    }
+
     @Test
     void buildingLifecycleNeedsReasonsAndFollowsTheStateMachine() throws Exception {
         String buildingId = approve(underReview(), APPROVE).data().path("buildingId").asString();
@@ -266,6 +276,9 @@ class ApprovalLifecycleIntegrationTest {
         assertThat(send("POST", base + "/activate", reviewerToken(), "{}").status()).isEqualTo(400);
         assertThat(send("POST", base + "/activate", token(applicant), "{\"reason\":\"go\"}").status()).isEqualTo(403);
 
+        assertThat(send("POST", base + "/activate", reviewerToken(), "{\"reason\":\"No units yet\"}").code())
+                .isEqualTo("NO_BUILDING_UNIT");
+        addUnit(buildingId);
         assertThat(send("POST", base + "/activate", reviewerToken(), "{\"reason\":\"Admin confirmed\"}")
                 .data().path("status").asString()).isEqualTo("ACTIVE");
         assertThat(send("POST", base + "/suspend", reviewerToken(), "{\"reason\":\"Payment dispute\"}")

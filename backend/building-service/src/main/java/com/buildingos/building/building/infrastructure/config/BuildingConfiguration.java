@@ -13,6 +13,7 @@ import com.buildingos.building.building.domain.repository.BuildingMembershipRepo
 import com.buildingos.building.building.domain.repository.BuildingRepository;
 import com.buildingos.building.shared.application.port.out.UnitOfWork;
 import com.buildingos.building.shared.domain.repository.LifecycleTransitionRepository;
+import com.buildingos.building.unit.domain.repository.UnitRepository;
 import java.time.Clock;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -26,16 +27,18 @@ public class BuildingConfiguration {
     }
 
     @Bean
-    ActivateBuildingUseCase activateBuilding(BuildingChanges changes, BuildingMembershipRepository memberships) {
-        return new ActivateBuildingService(changes, memberships);
+    ActivateBuildingUseCase activateBuilding(BuildingChanges changes, BuildingMembershipRepository memberships,
+            UnitRepository units) {
+        return new ActivateBuildingService(changes, memberships, units);
     }
 
     @Bean
     SuspendBuildingUseCase suspendBuilding(BuildingChanges changes) { return new SuspendBuildingService(changes); }
 
     @Bean
-    ReactivateBuildingUseCase reactivateBuilding(BuildingChanges changes) {
-        return new ReactivateBuildingService(changes);
+    ReactivateBuildingUseCase reactivateBuilding(BuildingChanges changes, BuildingMembershipRepository memberships,
+            UnitRepository units) {
+        return new ReactivateBuildingService(changes, memberships, units);
     }
 
     @Bean

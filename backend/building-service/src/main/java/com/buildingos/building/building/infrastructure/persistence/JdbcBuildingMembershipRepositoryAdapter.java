@@ -83,6 +83,19 @@ public class JdbcBuildingMembershipRepositoryAdapter implements BuildingMembersh
                 + "AND role = 'BUILDING_ADMIN' AND status = 'ACTIVE'", Long.class, buildingId);
     }
 
+    @Override
+    public List<UUID> findActiveBuildingIds(UUID userId, int page, int size) {
+        return jdbc.queryForList("SELECT b.id FROM building b WHERE EXISTS (SELECT 1 FROM building_membership m "
+                + "WHERE m.building_id = b.id AND m.user_id = ? AND m.status = 'ACTIVE') ORDER BY b.name, b.id "
+                + "LIMIT ? OFFSET ?", UUID.class, userId, size, (long) page * size);
+    }
+
+    @Override
+    public long countActiveBuildings(UUID userId) {
+        return jdbc.queryForObject("SELECT count(DISTINCT building_id) FROM building_membership WHERE user_id = ? "
+                + "AND status = 'ACTIVE'", Long.class, userId);
+    }
+
     private static Timestamp timestamp(Instant at) {
         return at == null ? null : Timestamp.from(at);
     }

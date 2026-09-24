@@ -17,4 +17,7 @@ public interface BuildingMembershipRepository {
     Optional<BuildingMembership> find(UUID buildingId, UUID userId, BuildingRole role);
     List<BuildingMembership> findActive(UUID buildingId, UUID userId);
     long countActiveAdmins(UUID buildingId);
+    /** Buildings where the user holds any active membership, ordered by building name then id. */
+    List<UUID> findActiveBuildingIds(UUID userId, int page, int size);
+    long countActiveBuildings(UUID userId);
 }

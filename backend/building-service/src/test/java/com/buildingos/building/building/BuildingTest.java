@@ -3,9 +3,11 @@ package com.buildingos.building.building;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import com.buildingos.building.building.domain.model.ActivationReadiness;
 import com.buildingos.building.building.domain.model.Building;
 import com.buildingos.building.building.domain.model.BuildingStatus;
 import com.buildingos.building.building.domain.model.NoBuildingAdminException;
+import com.buildingos.building.building.domain.model.NoBuildingUnitException;
 import com.buildingos.building.buildingapplication.domain.model.ApplicantRelationship;
 import com.buildingos.building.buildingapplication.domain.model.ApplicationDetails;
 import com.buildingos.building.buildingapplication.domain.model.ApplicationNumber;
@@ -39,17 +41,23 @@ class BuildingTest {
     }
 
     @Test
-    void activationNeedsAnAdminThenSuspendAndReactivate() {
+    void activationNeedsAnAdminAndAUnitThenSuspendAndReactivate() {
         var building = onboarding();
-        assertThatThrownBy(() -> building.activated(0, NOW)).isInstanceOf(NoBuildingAdminException.class);
-        var active = building.activated(1, NOW);
+        var ready = new ActivationReadiness(1, 1);
+        assertThatThrownBy(() -> building.activated(new ActivationReadiness(0, 1), NOW))
+                .isInstanceOf(NoBuildingAdminException.class);
+        assertThatThrownBy(() -> building.activated(new ActivationReadiness(1, 0), NOW))
+                .isInstanceOf(NoBuildingUnitException.class);
+        var active = building.activated(ready, NOW);
         assertThat(active.status()).isEqualTo(BuildingStatus.ACTIVE);
-        assertThatThrownBy(() -> active.activated(1, NOW)).isInstanceOf(InvalidTransitionException.class);
-        assertThatThrownBy(() -> active.reactivated(NOW)).isInstanceOf(InvalidTransitionException.class);
+        assertThatThrownBy(() -> active.activated(ready, NOW)).isInstanceOf(InvalidTransitionException.class);
+        assertThatThrownBy(() -> active.reactivated(ready, NOW)).isInstanceOf(InvalidTransitionException.class);
         var suspended = active.suspended(NOW);
         assertThat(suspended.status()).isEqualTo(BuildingStatus.SUSPENDED);
         assertThatThrownBy(() -> building.suspended(NOW)).isInstanceOf(InvalidTransitionException.class);
-        assertThat(suspended.reactivated(NOW).status()).isEqualTo(BuildingStatus.ACTIVE);
-        assertThat(suspended.reactivated(NOW).version()).isEqualTo(3);
+        assertThatThrownBy(() -> suspended.reactivated(new ActivationReadiness(1, 0), NOW))
+                .isInstanceOf(NoBuildingUnitException.class);
+        assertThat(suspended.reactivated(ready, NOW).status()).isEqualTo(BuildingStatus.ACTIVE);
+        assertThat(suspended.reactivated(ready, NOW).version()).isEqualTo(3);
     }
 }

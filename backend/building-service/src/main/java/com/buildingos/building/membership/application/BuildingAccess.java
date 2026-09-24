@@ -9,6 +9,7 @@ import com.buildingos.building.building.domain.repository.BuildingRepository;
 import com.buildingos.building.shared.application.Actor;
 import com.buildingos.building.shared.application.NotPermittedException;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
  * Authoritative building authorization (TECH-SPEC-F4 "Mutation transaction and authorization"). Must run inside the
@@ -24,19 +25,22 @@ public final class BuildingAccess {
         this.memberships = memberships;
     }
 
+    /** Protected read for any current member or platform admin (FOR SHARE). */
+    public BuildingGrant requireMemberToRead(Actor actor, UUID buildingId) {
+        return grant(actor, buildings.findByIdForShare(buildingId).orElseThrow(() -> BuildingErrors.notFound(buildingId)));
+    }
+
     /** Protected read: FOR SHARE lock, platform admin or active building admin. */
-    public Building requireAdminToRead(Actor actor, UUID buildingId) {
-        var building = buildings.findByIdForShare(buildingId).orElseThrow(() -> BuildingErrors.notFound(buildingId));
-        requireAdmin(actor, building);
-        return building;
+    public BuildingGrant requireAdminToRead(Actor actor, UUID buildingId) {
+        return requireAdmin(requireMemberToRead(actor, buildingId));
     }
 
     /** Building-scoped write: FOR UPDATE lock, admin role, and SUSPENDED buildings are read-only. */
-    public Building requireAdminToWrite(Actor actor, UUID buildingId) {
+    public BuildingGrant requireAdminToWrite(Actor actor, UUID buildingId) {
         var building = buildings.findByIdForUpdate(buildingId).orElseThrow(() -> BuildingErrors.notFound(buildingId));
-        requireAdmin(actor, building);
+        var grant = requireAdmin(grant(actor, building));
         requireWritable(building);
-        return building;
+        return grant;
     }
 
     public static void requireWritable(Building building) {
@@ -45,16 +49,19 @@ public final class BuildingAccess {
         }
     }
 
-    private void requireAdmin(Actor actor, Building building) {
-        if (actor.isPlatformAdmin()) {
-            return;
-        }
-        var current = memberships.findActive(building.id(), actor.userId());
-        if (current.isEmpty()) {
+    private BuildingGrant grant(Actor actor, Building building) {
+        var roles = memberships.findActive(building.id(), actor.userId()).stream().map(BuildingMembership::role)
+                .collect(Collectors.toSet());
+        if (roles.isEmpty() && !actor.isPlatformAdmin()) {
             throw BuildingErrors.notFound(building.id());
         }
-        if (current.stream().noneMatch(BuildingMembership::isActiveAdmin)) {
+        return new BuildingGrant(building, roles, actor.isPlatformAdmin());
+    }
+
+    private static BuildingGrant requireAdmin(BuildingGrant grant) {
+        if (!grant.isAdmin()) {
             throw new NotPermittedException();
         }
+        return grant;
     }
 }

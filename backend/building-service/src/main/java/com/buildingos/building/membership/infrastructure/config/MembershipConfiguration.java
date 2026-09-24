@@ -4,6 +4,8 @@ import com.buildingos.building.building.domain.repository.BuildingMembershipRepo
 import com.buildingos.building.building.domain.repository.BuildingRepository;
 import com.buildingos.building.membership.application.BuildingAccess;
 import com.buildingos.building.membership.application.claiminvitation.ClaimInvitationService;
+import com.buildingos.building.membership.application.getbuildingcontext.GetBuildingContextService;
+import com.buildingos.building.membership.application.getbuildingcontext.GetBuildingContextUseCase;
 import com.buildingos.building.membership.application.claiminvitation.ClaimInvitationUseCase;
 import com.buildingos.building.membership.application.inviteowner.InviteOwnerService;
 import com.buildingos.building.membership.application.inviteowner.InviteOwnerUseCase;
@@ -11,6 +13,8 @@ import com.buildingos.building.membership.application.listinvitations.ListInvita
 import com.buildingos.building.membership.application.listinvitations.ListInvitationsUseCase;
 import com.buildingos.building.membership.application.listmembers.ListMembersService;
 import com.buildingos.building.membership.application.listmembers.ListMembersUseCase;
+import com.buildingos.building.membership.application.listmybuildings.ListMyBuildingsService;
+import com.buildingos.building.membership.application.listmybuildings.ListMyBuildingsUseCase;
 import com.buildingos.building.membership.application.listmyinvitations.ListMyInvitationsService;
 import com.buildingos.building.membership.application.listmyinvitations.ListMyInvitationsUseCase;
 import com.buildingos.building.membership.application.revokeinvitation.RevokeInvitationService;
@@ -74,5 +78,16 @@ public class MembershipConfiguration {
     RevokeMembershipUseCase revokeMembership(BuildingAccess access, BuildingMembershipRepository memberships,
             AuditRepository audit, UnitOfWork uow, Clock clock) {
         return new RevokeMembershipService(access, memberships, audit, uow, clock);
+    }
+
+    @Bean
+    ListMyBuildingsUseCase listMyBuildings(BuildingRepository buildings, BuildingMembershipRepository memberships,
+            UnitOfWork uow) {
+        return new ListMyBuildingsService(buildings, memberships, uow);
+    }
+
+    @Bean
+    GetBuildingContextUseCase getBuildingContext(BuildingAccess access, UnitOfWork uow) {
+        return new GetBuildingContextService(access, uow);
     }
 }
