@@ -90,9 +90,9 @@
     "kit_version": "997f6a5d5a93da63efaaea3a35db1bb30e1aef8bf9b6544a5a187bc1267da094"
   },
   "existing_task:brownfield:units-ownership": {
-    "cached_at": "2026-09-24T14:31:21.050876+00:00",
+    "cached_at": "2026-09-24T16:24:20.024910+00:00",
     "decision": {
-      "planning": "NO_REPLAN",
+      "notes": "existing_task/brownfield continuation of BOS-010 F4 units-ownership at F4-T9 (QA). INTAKE via prompt-intake-adapter, CONTEXT via baseline-verifier reusing prior confirmed baseline, technical approval re-recorded per-run (approvals are run-scoped, not carried across superseding runs).",
       "route": [
         "INTAKE",
         "CONTEXT",
@@ -103,15 +103,14 @@
         "COMPLETED"
       ],
       "skill_docs": [
-        "agentic/kit/agents/mobile-agent/AGENT.md",
-        "agentic/kit/skills/implementation-agent/SKILL.md",
-        "agentic/kit/skills/code-review-agent/SKILL.md",
+        "agentic/kit/skills/prompt-intake-adapter/SKILL.md",
+        "agentic/kit/skills/baseline-verifier/SKILL.md",
         "agentic/kit/skills/automated-qa-agent/SKILL.md",
         "agentic/kit/skills/device-preview-agent/SKILL.md"
       ],
       "workflow_doc": "agentic/kit/workflows/brownfield.md"
     },
-    "kit_version": "6f4e7496f94ca47ff1ac51bc62211d4bab46df2f9faff923e8d06324dad88827"
+    "kit_version": "17d7c4cb4a7c638574c2dedd32f7b944519ffde1e0aedd57683ef3e56166170f"
   },
   "new_feature:brownfield:building-application": {
     "cached_at": "2026-09-24T09:17:46.799586+00:00",

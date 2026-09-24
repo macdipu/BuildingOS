@@ -29,14 +29,17 @@ void _initialize() {
   Get.put<SessionExpiryNotifier>(SessionExpiryNotifier(), permanent: true);
   Get.lazyPut<ApiUrl>(() => ApiUrl(Get.find<AppConfig>().getApiClientConfig()),
       fenix: true);
-  Get.lazyPut<ApiClient>(
-    () => ApiClient(
+  // permanent: true — this holds the in-memory session token; GetX's fenix
+  // recreation (used elsewhere) silently drops that state when the route
+  // stack that first resolved it is cleared (e.g. after login).
+  Get.put<ApiClient>(
+    ApiClient(
       Get.find<AppConfig>().getApiClientConfig(),
       Get.find<PreferenceCache>(),
       Get.find<ApiUrl>(),
       Get.find<SessionExpiryNotifier>(),
     ),
-    fenix: true,
+    permanent: true,
   );
   Get.lazyPut<NotificationService>(() => NotificationService(), fenix: true);
 }
