@@ -1,0 +1,24 @@
+{
+  "status": "READY",
+  "evidence": [
+    "agentic/data/project-context/features/BOS-010/units-ownership/BASELINE.md",
+    "docs/ARCHITECTURE.md",
+    "backend/building-service/src/main/resources/db/migration/V4__building.sql",
+    "backend/building-service/src/main/java/com/buildingos/building/building/application/activatebuilding/ActivateBuildingService.java",
+    "backend/auth-service/src/main/java/com/buildingos/auth/auth/presentation/rest/UserProvisioningController.java",
+    "agentic/data/project-context/features/BOS-010/subscription-plans/REQUIREMENTS.md"
+  ],
+  "blocking_issues": [],
+  "open_questions": [
+    "Single authority for membership/invitation must be resolved in technical design",
+    "New business permission, temporal and revenue rules pending"
+  ],
+  "recommended_next_step": "Analyze requirements and obtain missing product decisions; context is usable, implementation is not approved.",
+  "outputs": {
+    "verdict": "CONTEXT_READY",
+    "context": "AVAILABLE",
+    "project_type": "brownfield",
+    "confidence": "High for sampled code; scoped absence findings",
+    "implementation_approval": false
+  }
+}
