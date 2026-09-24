@@ -8,20 +8,20 @@ agentic/data/project-context/features/<WORK-ITEM-ID>/
 ├── context.yaml          # optional, module-context.yaml-shaped snapshot for this feature
 ├── BRD.md                # copy or reference of the originating BRD/FEATURE/CR doc (optional)
 ├── SRS.md                # from srs-generator
-├── ARCHITECTURE.md       # from technical-architecture-planner
-├── TECH-SPEC.md          # from technical-spec-generator
+├── ARCHITECTURE.md       # feature HLD, from technical-architecture-planner
+├── TECH-SPEC.md          # feature LLD, from technical-spec-generator
 ├── adr/
 │   └── ADR-XXX-title.md  # from adr-generator, only for significant decisions
 └── tasks/
     └── TASK-XXX.md       # from task-breakdown-agent
 ```
 
-Templates for each file type live in `agentic/kit/templates/` (`brd.md`, `srs.md`, `architecture.md`,
-`tech-spec.md`, `adr.md`, `task.md`).
+Templates for each file type live in `agentic/kit/templates/` (`brd.md`, `srs.md`, `feature-hld.md`,
+`feature-lld.md`, `adr.md`, `task.md`).
 
-Whole-app/whole-project BRD, PRD, SRD live one level up, at
-`agentic/data/project-context/{BRD,PRD,SRD}.md` (see `../README.md`), not in a feature
-folder. A feature's own `BRD.md`/`SRS.md` here should reference that project-wide doc
+Whole-app/whole-project BRD, PRD, SRD, and the project-level HLD (`ARCHITECTURE.md`)
+live one level up, at `agentic/data/project-context/{BRD,PRD,SRD,ARCHITECTURE}.md`
+(see `../README.md`), not in a feature folder. A feature's own `BRD.md`/`SRS.md` here should reference that project-wide doc
 rather than restate it.
 
 Rules:

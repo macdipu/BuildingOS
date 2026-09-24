@@ -89,6 +89,28 @@
     },
     "kit_version": "997f6a5d5a93da63efaaea3a35db1bb30e1aef8bf9b6544a5a187bc1267da094"
   },
+  "new_feature:brownfield:building-application": {
+    "cached_at": "2026-09-24T09:17:46.799586+00:00",
+    "decision": {
+      "planning": "NO_REPLAN",
+      "route": [
+        "INTAKE",
+        "CONTEXT",
+        "REQUIREMENTS",
+        "TECHNICAL",
+        "IMPLEMENTATION",
+        "REVIEW",
+        "QA",
+        "RELEASE",
+        "COMPLETED"
+      ],
+      "skill_docs": [
+        "agentic/kit/skills/release-readiness-agent/SKILL.md"
+      ],
+      "workflow_doc": "agentic/kit/workflows/brownfield.md"
+    },
+    "kit_version": "517987e3caf7fdbed4de9a7093f67031875e62edd6b49f7b2213a712048d99ef"
+  },
   "new_feature:brownfield:buildingos": {
     "cached_at": "2026-09-22T08:45:22.379020+00:00",
     "decision": {
