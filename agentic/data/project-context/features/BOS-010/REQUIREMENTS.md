@@ -48,7 +48,7 @@ Flutter submit screen, suspend/reactivate in the first G2 slice (D-14).
 |---|---|---|---|
 | ON-01 | Onboarding modes `SELF_SERVICE / ASSISTED / BACK_OFFICE_SETUP` all produce the same canonical Building/Unit/Ownership records via the same validation. Resumable 11-step flow (building info → structure/floors → units → owners → committee/staff → maintenance config → rent-management config → payment methods → invitations → review → activate). | §149.8-149.9 | none |
 | ON-02 | Activation minimum prerequisites: approved building, ≥1 active Building Admin, required identity/address data, ≥1 valid unit (unless migration policy permits otherwise), accepted platform terms where applicable. Optional setup may continue after activation. | §149.9 step 11 | none |
-| ON-03 | Assisted onboarding: `AssistedOnboardingSession` grants a temporary, building/scope-limited `ONBOARDING_AGENT` assignment that expires automatically; no implicit unrelated-building access; every assisted mutation is audited and visible to the customer. | §149.11 | D-10 (exact scope enumeration) |
+| ON-03 | Assisted onboarding: `AssistedOnboardingSession` grants a temporary, building/scope-limited `ONBOARDING_AGENT` assignment that expires automatically; no implicit unrelated-building access; every assisted mutation is audited and visible to the customer. | §149.11 | D-10 (resolved: scope enumeration in DECISIONS.md) |
 
 ### G4 — Units & ownership (carried from BOS-002, unchanged domain rules)
 
@@ -71,8 +71,8 @@ Flutter submit screen, suspend/reactivate in the first G2 slice (D-14).
 
 | ID | Requirement and acceptance | BRD source | Pending |
 |---|---|---|---|
-| BO-01 | A distinct back-office application surface (own navigation, own platform-permission checks, no authoritative business logic in the UI) covering Dashboard / Buildings / Users / Subscriptions / Support / System navigation. | §149.1-149.2, §149.17-149.18 | D-09 (tech choice, technical stage) |
-| BO-02 | Support assistance never implements unrestricted silent impersonation; a `SupportSession`/`SupportAccessGrant` records platform user, target user/building, reason, scope, approver, start/expiry/end; high-risk actions (payment reversal, ownership transfer, Building-Admin removal, unrestricted financial export) are blocked or require elevated, separately audited approval during ordinary support sessions. | §149.12 | D-10 |
+| BO-01 | A distinct back-office application surface (own navigation, own platform-permission checks, no authoritative business logic in the UI) covering Dashboard / Buildings / Users / Subscriptions / Support / System navigation. | §149.1-149.2, §149.17-149.18 | D-09 (resolved: separate web stack, not Flutter Web) |
+| BO-02 | Support assistance never implements unrestricted silent impersonation; a `SupportSession`/`SupportAccessGrant` records platform user, target user/building, reason, scope, approver, start/expiry/end; high-risk actions (payment reversal, ownership transfer, Building-Admin removal, unrestricted financial export) are blocked or require elevated, separately audited approval during ordinary support sessions. | §149.12 | D-10 (resolved: scope enumeration + SUPER_ADMIN-only elevated approval in DECISIONS.md) |
 | AU-01 | Audit at minimum: application state transitions, approval/rejection actor+reason, building activation/suspension/reactivation, Building-Admin assignment/removal, onboarding-agent assignment and assisted mutations, support-session lifecycle+actions, subscription/entitlement changes, bulk unit/owner imports. Back-office internal notes are access-controlled and never leak into ordinary building-member views. | §149.21 | none |
 
 ## Anti-patterns this work item must avoid (BRD §144, extended by §149's additions)
@@ -96,4 +96,5 @@ D-07: `PLATFORM_ADMIN` has full building-application approval authority, identic
 `SUPER_ADMIN`, no threshold. D-08: subscription plans are back-office admin-configured
 data (plan CRUD in the console), not a hardcoded MVP catalog; at least one plan must
 exist before a building application can be approved into an active subscription. See
-DECISIONS.md. D-09/D-10 remain open as technical-design inputs for TECHNICAL.
+DECISIONS.md. D-09 (back-office tech stack) and D-10 (assisted-onboarding/support
+scope enumeration and elevated-approval routing) are now resolved.
