@@ -5145,6 +5145,19 @@
         }
       },
       "created_at": "2026-09-24T14:46:56.561228+00:00"
+    },
+    {
+      "run_id": "RUN-C73FA516545143FAA9B35B168EEFE0C9",
+      "event": "COMMIT_RECORDED",
+      "payload": {
+        "sha": "7e83bb8",
+        "subject": "feat(units-ownership): add ownership actions, history and transfer files",
+        "work_item": "BOS-010-F4",
+        "task": "F4-T8",
+        "run": "RUN-C73FA516545143FAA9B35B168EEFE0C9",
+        "commit_trigger": "task-finish"
+      },
+      "created_at": "2026-09-24T14:47:12.946495+00:00"
     }
   ],
   "tool_calls": {
