@@ -1,6 +1,6 @@
 # BOS-010 F4 — Units and ownership
 
-Status: INTAKE READY; requirements and technical decisions pending.
+Status: REQUIREMENTS_READY; F4 proposal and technical design approved 2026-09-24.
 Run: `RUN-0BF1AD2443404B03BE7350F0C91BD0C0`. Parent: [BOS-010](../FEATURE.md).
 
 ## Request and objective
@@ -62,7 +62,7 @@ Each implementation step needs a separate governed task; avoid the multi-hour F2
 - Ownership-transfer event/outbox scope and transfer-document policy.
 - Bulk import atomicity and review/validation UX.
 
-The first three questions were presented to the operator on 2026-09-24. Suggestions
+Four product questions (permissions, dates, units/precision, and revenue treatment) were presented to the operator on 2026-09-24; see DECISIONS.md. Suggestions
 are proposals, not accepted business rules; no prior F2 approval covers this slice.
 
 ## Sources
@@ -74,3 +74,19 @@ are proposals, not accepted business rules; no prior F2 approval covers this sli
 - [Carried ownership decisions](../../BOS-002/DECISIONS.md), D-04..D-06,
   rechecked against the revised BRD rather than silently reused.
 - [F2 release](../building-application/RELEASE.md).
+
+## Current review package
+
+Intake/context are complete. Requirements remain blocked on product decisions.
+[APPROVAL.md](APPROVAL.md) consolidates the proposed defaults and conditional
+[HLD](ARCHITECTURE.md), [LLD](TECH-SPEC.md) and membership ADR. Preparing these artifacts
+does not advance the run past REQUIREMENTS or authorize implementation.
+
+
+## Operator decision — 2026-09-24
+
+The operator replied **"approve"** to the explicit request to approve the F4 proposal
+and technical design. This accepts APPROVAL.md as presented, including UO-D01..04,
+supplementary behavior, the HLD/LLD and ADR-F4-001. It authorizes implementation after
+the harness records ready requirements/technical evidence and the technical gate.
+Release/device-QA approval is separate. No scope expansion is implied.
