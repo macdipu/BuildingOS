@@ -1,0 +1,23 @@
+{
+  "status": "READY",
+  "evidence": [
+    "agentic/data/project-context/features/BOS-010/units-ownership/FEATURE.md",
+    "agentic/data/project-context/features/BOS-010/REQUIREMENTS.md",
+    "agentic/data/project-context/features/BOS-010/DECISIONS.md"
+  ],
+  "blocking_issues": [],
+  "open_questions": [
+    "Permission/ownership temporal/unit-field decisions",
+    "Membership identity boundary and entitlement mapping",
+    "Transfer outbox/documents and bulk import policy"
+  ],
+  "recommended_next_step": "Verify scoped brownfield baseline, then resolve requirements before technical approval or code.",
+  "outputs": {
+    "work_item": "BOS-010 F4 units and ownership",
+    "work_type": "new_feature",
+    "project_type": "brownfield",
+    "hierarchy": "FEATURE_WITH_TASKS",
+    "planning": "NO_REPLAN",
+    "implementation_authorized": false
+  }
+}

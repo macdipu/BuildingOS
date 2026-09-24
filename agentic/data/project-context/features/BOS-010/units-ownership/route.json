@@ -1,0 +1,26 @@
+{
+  "route": [
+    "INTAKE",
+    "CONTEXT",
+    "REQUIREMENTS",
+    "TECHNICAL",
+    "IMPLEMENTATION",
+    "REVIEW",
+    "QA",
+    "RELEASE",
+    "COMPLETED"
+  ],
+  "workflow_doc": "agentic/kit/workflows/brownfield.md",
+  "workflow_docs": [
+    "agentic/kit/workflows/routing.md",
+    "agentic/kit/workflows/new-feature.md"
+  ],
+  "skill_docs": [
+    "agentic/kit/skills/prompt-intake-adapter/SKILL.md",
+    "agentic/kit/skills/baseline-verifier/SKILL.md",
+    "agentic/kit/skills/business-requirement-analyzer/SKILL.md",
+    "agentic/kit/skills/technical-architecture-planner/SKILL.md"
+  ],
+  "planning": "NO_REPLAN",
+  "hierarchy": "FEATURE_WITH_TASKS"
+}
