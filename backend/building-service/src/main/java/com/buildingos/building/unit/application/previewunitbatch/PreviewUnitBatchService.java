@@ -58,7 +58,7 @@ public final class PreviewUnitBatchService implements PreviewUnitBatchUseCase {
         }
         return parsers.stream().filter(p -> p.supports(sheet.filename(), sheet.contentType())).findFirst()
                 .orElseThrow(() -> new BatchRejectedException("SHEET_TYPE_UNSUPPORTED",
-                        DomainRuleException.Kind.UNSUPPORTED_TYPE, "Upload a CSV file"))
+                        DomainRuleException.Kind.UNSUPPORTED_TYPE, "Upload a CSV or .xlsx file"))
                 .parse(sheet.content(), limits.maxRows());
     }
 }

@@ -248,8 +248,10 @@ class UnitBatchApiIntegrationTest {
         assertThat(codes(preview.data().path("rows"))).containsExactly("OK", "FLOOR_NOT_FOUND");
         assertThat(upload("units.csv", "text/csv", "number,floor,type,areaSqft\n=1+1,1st Floor,FLAT,9\n").code())
                 .isEqualTo("SHEET_FORMULA_NOT_ALLOWED");
+        assertThat(upload("units.ods", "application/vnd.oasis.opendocument.spreadsheet", "PK").status())
+                .isEqualTo(415);
         assertThat(upload("units.xlsx", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "PK")
-                .status()).isEqualTo(415);
+                .code()).isEqualTo("SHEET_INVALID");
         assertThat(upload("units.csv", "text/csv", "number,floor,type,areaSqft\n" + "x,1st Floor,FLAT,1\n".repeat(501))
                 .code()).isEqualTo("BATCH_TOO_LARGE");
         assertThat(upload("units.csv", "text/csv", "a".repeat(1_048_577)).status()).isEqualTo(413);

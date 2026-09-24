@@ -71,14 +71,14 @@ features:
     planning: EPIC_PROVISIONAL
     updated: "2026-09-24"
     completed_tasks: [TASK-001, TASK-002, TASK-003, TASK-004, TASK-005, TASK-006, TASK-007, TASK-008]
-    last_commit: c06ef3a
+    last_commit: 1e85686
     completed_slices: [F5a-revenue-foundation (RUN-4ABC6B2BAC974B0E878CA39C9A27AE00), F2-building-application (RUN-5AC974860CB74DA790FDBA00532A15A2)]
     current_slice: F4-units-ownership
     current_run: RUN-C73FA516545143FAA9B35B168EEFE0C9
     current_stage: IMPLEMENTATION
     current_review_packet: agentic/data/project-context/features/BOS-010/units-ownership/APPROVAL.md
-    completed_subtasks: [F4-T1a, F4-T1b, F4-T2, F4-T3a]
-    next_action: F4-T3b XLSX import (parser dependency needs operator confirmation) or F4-T4 ownership
+    completed_subtasks: [F4-T1a, F4-T1b, F4-T2, F4-T3a, F4-T3b]
+    next_action: F4-T4 assignment/co-ownership, transfer and history (with F4-T5 audit/outbox)
     resolved: [D-01, D-02, D-07, D-08, D-11, D-12, D-13, D-14, D-16, D-17, D-18, D-20, D-22, D-23, D-24, D-25, D-26, D-27, D-28, D-29, D-30, D-31, D-32, F4-UO-D01, F4-UO-D02, F4-UO-D03, F4-UO-D04, ADR-F4-001]
     superseded: [D-15, D-19, D-21]
     open: [D-09-backoffice-technology, D-10-support-session-scopes]

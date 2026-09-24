@@ -40,4 +40,4 @@ XLSX (F4-T3b, needs a reviewed parser dependency), ownership, gateway, mobile.
 ## Status
 COMPLETED 2026-09-24 (run RUN-C73FA516545143FAA9B35B168EEFE0C9). UnitBatchParsingTest 3 +
 UnitBatchApiIntegrationTest 6; building-service verify 86/0, ArchUnit 7/0, platform-web 5/0.
-XLSX upload currently answers 415 SHEET_TYPE_UNSUPPORTED until F4-T3b.
+XLSX support added by F4-T3b.
