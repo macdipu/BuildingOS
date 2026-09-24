@@ -103,6 +103,17 @@ role) is used. Limits: `DOCUMENTS_MAX_SIZE_BYTES` (default 10 MB), `DOCUMENTS_MA
 (default 10); PDF/JPEG/PNG only, detected from file content. No virus scanning yet — required before
 production.
 
+Ownership events (BOS-010 F4, UO-10) are written to `building_outbox` in the same transaction as the
+change and published to Kafka by an in-service worker: topic `ownership.transferred` (created on
+startup, since broker auto-creation is off), key = unit id, value = the
+`contracts/kafka/event-envelope.schema.json` envelope with the same `eventId` on every retry.
+`KAFKA_BOOTSTRAP_SERVERS` defaults to `localhost:9092`. While Kafka is down, events stay pending and
+retry with exponential backoff (`OUTBOX_RETRY_BASE` PT1S up to `OUTBOX_RETRY_MAX` PT5M); tune the
+worker with `OUTBOX_POLL_INTERVAL`, `OUTBOX_BATCH_SIZE`, `OUTBOX_SEND_TIMEOUT`,
+`OUTBOX_TOPIC_PARTITIONS`/`OUTBOX_TOPIC_REPLICAS`, or stop it with `OUTBOX_PUBLISHER_ENABLED=false`.
+Backlog metrics: `buildingos_outbox_pending`, `buildingos_outbox_oldest_age_seconds`,
+`buildingos_outbox_published_total`, `buildingos_outbox_publish_failures_total`.
+
 building-service calls auth-service (`POST /internal/users/provision`, initial building admin, D-29) and
 subscription-service (creation-fee status, D-26) directly — not through the gateway — relaying the approving
 admin's access token. Both URLs are required; the gateway never routes `/internal/**`.

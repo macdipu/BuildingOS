@@ -45,6 +45,15 @@ spring:
     multipart:
       max-file-size: ${DOCUMENTS_MAX_SIZE_BYTES:10485760}B
       max-request-size: ${DOCUMENTS_MAX_REQUEST_BYTES:11534336}B
+  kafka:
+    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
+    producer:
+      acks: all
+      properties:
+        enable.idempotence: true
+        max.block.ms: ${KAFKA_MAX_BLOCK_MS:5000}
+        request.timeout.ms: ${KAFKA_REQUEST_TIMEOUT_MS:5000}
+        delivery.timeout.ms: ${KAFKA_DELIVERY_TIMEOUT_MS:10000}
 buildingos:
   membership:
     invitation-ttl: ${MEMBERSHIP_INVITATION_TTL:P7D}
@@ -54,6 +63,15 @@ buildingos:
       max-sheet-bytes: ${UNIT_BATCH_MAX_SHEET_BYTES:1048576}
   ownership:
     zone: ${OWNERSHIP_ZONE:Asia/Dhaka}
+  outbox:
+    enabled: ${OUTBOX_PUBLISHER_ENABLED:true}
+    poll-interval: ${OUTBOX_POLL_INTERVAL:PT1S}
+    batch-size: ${OUTBOX_BATCH_SIZE:100}
+    send-timeout: ${OUTBOX_SEND_TIMEOUT:PT15S}
+    retry-base: ${OUTBOX_RETRY_BASE:PT1S}
+    retry-max: ${OUTBOX_RETRY_MAX:PT5M}
+    topic-partitions: ${OUTBOX_TOPIC_PARTITIONS:3}
+    topic-replicas: ${OUTBOX_TOPIC_REPLICAS:1}
   documents:
     max-size-bytes: ${DOCUMENTS_MAX_SIZE_BYTES:10485760}
     max-per-application: ${DOCUMENTS_MAX_PER_APPLICATION:10}
