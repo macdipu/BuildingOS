@@ -1,3 +1,4 @@
+import 'package:customer/features/units_ownership/presentation/property_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:customer/features/building_application/presentation/building_application_pages.dart';
 import 'package:customer/res/strings/string_enum.dart';
@@ -82,11 +83,13 @@ class _HomeTab extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Center(
-        child: FilledButton.icon(
-          onPressed: () => Get.toNamed(BuildingApplicationPages.list),
-          icon: const Icon(Icons.apartment_outlined),
-          label: Text(TextEnum.buildingApplications.tr),
-        ),
+        child: Column(mainAxisSize: MainAxisSize.min, children: [
+          FilledButton.icon(onPressed: () => Get.toNamed(PropertyPages.home),
+            icon: const Icon(Icons.domain_outlined), label: Text(TextEnum.uoBuildings.tr)),
+          const SizedBox(height: 16),
+          OutlinedButton.icon(onPressed: () => Get.toNamed(BuildingApplicationPages.list),
+            icon: const Icon(Icons.apartment_outlined), label: Text(TextEnum.buildingApplications.tr)),
+        ]),
       ),
     );
   }

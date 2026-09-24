@@ -1,3 +1,4 @@
+import 'package:customer/features/units_ownership/presentation/property_pages.dart';
 
 import 'package:get/get_navigation/src/routes/get_route.dart';
 
@@ -13,6 +14,7 @@ class AppPages {
   static final List<GetPage> routes = [
     ...AuthPages.routes,
     ...BuildingApplicationPages.routes,
+    ...PropertyPages.routes,
     GetPage(
       name: AppRoutes.appShell,
       page: () => const AppShell(),

@@ -89,6 +89,30 @@
     },
     "kit_version": "997f6a5d5a93da63efaaea3a35db1bb30e1aef8bf9b6544a5a187bc1267da094"
   },
+  "existing_task:brownfield:units-ownership": {
+    "cached_at": "2026-09-24T14:31:21.050876+00:00",
+    "decision": {
+      "planning": "NO_REPLAN",
+      "route": [
+        "INTAKE",
+        "CONTEXT",
+        "IMPLEMENTATION",
+        "REVIEW",
+        "QA",
+        "RELEASE",
+        "COMPLETED"
+      ],
+      "skill_docs": [
+        "agentic/kit/agents/mobile-agent/AGENT.md",
+        "agentic/kit/skills/implementation-agent/SKILL.md",
+        "agentic/kit/skills/code-review-agent/SKILL.md",
+        "agentic/kit/skills/automated-qa-agent/SKILL.md",
+        "agentic/kit/skills/device-preview-agent/SKILL.md"
+      ],
+      "workflow_doc": "agentic/kit/workflows/brownfield.md"
+    },
+    "kit_version": "6f4e7496f94ca47ff1ac51bc62211d4bab46df2f9faff923e8d06324dad88827"
+  },
   "new_feature:brownfield:building-application": {
     "cached_at": "2026-09-24T09:17:46.799586+00:00",
     "decision": {

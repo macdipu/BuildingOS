@@ -1,0 +1,22 @@
+{
+  "status": "PARTIAL",
+  "evidence": [
+    "agentic/data/project-context/features/BOS-010/units-ownership/tasks/F4-T7.md",
+    "user_app/lib/features/units_ownership",
+    "user_app/test/features/units_ownership",
+    "sh scripts/verify-flutter.sh: PASS, analyze=0, 60 tests passed",
+    "git diff --check: PASS"
+  ],
+  "blocking_issues": [],
+  "open_questions": [],
+  "recommended_next_step": "Implement F4-T8 ownership assignment, transfers, documents and history; then F4-T9 QA.",
+  "outputs": {
+    "subtask": "F4-T7",
+    "subtask_status": "COMPLETED",
+    "remaining": [
+      "F4-T8",
+      "F4-T9"
+    ],
+    "sdk_configuration": "Generated package configuration and SDK-pinned lock entries synchronized with FVM Flutter 3.44.4."
+  }
+}
