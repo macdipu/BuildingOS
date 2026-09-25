@@ -17,6 +17,7 @@ import com.buildingos.auth.auth.infrastructure.security.DevelopmentOtpProvider;
 import java.time.Instant;
 import java.time.ZoneOffset;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
@@ -67,6 +68,14 @@ class OtpChallengeFlowTest {
             return users.computeIfAbsent(phone, p -> new User(UUID.randomUUID(), p, now.get(), Set.of()));
         }
         @Override public void grantPlatformRole(UUID userId, PlatformRole role) {
+            throw new UnsupportedOperationException();
+        }
+        @Override public Optional<User> findById(UUID id) { throw new UnsupportedOperationException(); }
+        @Override public List<User> list(String query, PlatformRole role, int page, int size) {
+            throw new UnsupportedOperationException();
+        }
+        @Override public long count(String query, PlatformRole role) { throw new UnsupportedOperationException(); }
+        @Override public void revokePlatformRole(UUID userId, PlatformRole role) {
             throw new UnsupportedOperationException();
         }
     };

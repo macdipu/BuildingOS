@@ -1,7 +1,13 @@
 package com.buildingos.auth.auth.infrastructure.config;
 
+import com.buildingos.auth.auth.application.assignplatformrole.AssignPlatformRoleService;
+import com.buildingos.auth.auth.application.assignplatformrole.AssignPlatformRoleUseCase;
 import com.buildingos.auth.auth.application.getpublickeys.GetPublicSigningKeysService;
 import com.buildingos.auth.auth.application.getpublickeys.GetPublicSigningKeysUseCase;
+import com.buildingos.auth.auth.application.getuser.GetUserService;
+import com.buildingos.auth.auth.application.getuser.GetUserUseCase;
+import com.buildingos.auth.auth.application.listusers.ListUsersService;
+import com.buildingos.auth.auth.application.listusers.ListUsersUseCase;
 import com.buildingos.auth.auth.application.port.out.OtpProvider;
 import com.buildingos.auth.auth.application.port.out.SigningKeyProvider;
 import com.buildingos.auth.auth.application.port.out.SmsSender;
@@ -10,6 +16,8 @@ import com.buildingos.auth.auth.application.seedsuperadmin.SeedSuperAdminService
 import com.buildingos.auth.auth.application.seedsuperadmin.SeedSuperAdminUseCase;
 import com.buildingos.auth.auth.application.provisionuser.ProvisionUserService;
 import com.buildingos.auth.auth.application.provisionuser.ProvisionUserUseCase;
+import com.buildingos.auth.auth.application.revokeplatformrole.RevokePlatformRoleService;
+import com.buildingos.auth.auth.application.revokeplatformrole.RevokePlatformRoleUseCase;
 import com.buildingos.auth.auth.application.startotp.StartOtpService;
 import com.buildingos.auth.auth.application.startotp.StartOtpUseCase;
 import com.buildingos.auth.auth.application.verifyotp.VerifyOtpService;
@@ -59,6 +67,26 @@ public class AuthConfiguration {
     @Bean
     ProvisionUserUseCase provisionUser(UserRepository users) {
         return new ProvisionUserService(users);
+    }
+
+    @Bean
+    ListUsersUseCase listUsers(UserRepository users) {
+        return new ListUsersService(users);
+    }
+
+    @Bean
+    GetUserUseCase getUser(UserRepository users) {
+        return new GetUserService(users);
+    }
+
+    @Bean
+    AssignPlatformRoleUseCase assignPlatformRole(UserRepository users) {
+        return new AssignPlatformRoleService(users);
+    }
+
+    @Bean
+    RevokePlatformRoleUseCase revokePlatformRole(UserRepository users) {
+        return new RevokePlatformRoleService(users);
     }
 
     @Bean

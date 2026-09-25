@@ -57,9 +57,9 @@ public class JdbcUserRepositoryAdapter implements UserRepository {
         String like = query == null || query.isBlank() ? null : "%" + query.trim() + "%";
         List<UUID> ids = jdbc.query("""
                 SELECT u.id FROM app_user u
-                WHERE (? IS NULL OR u.phone ILIKE ?)
-                  AND (? IS NULL OR EXISTS (
-                        SELECT 1 FROM platform_user_role r WHERE r.user_id = u.id AND r.role = ?))
+                WHERE (CAST(? AS text) IS NULL OR u.phone ILIKE CAST(? AS text))
+                  AND (CAST(? AS text) IS NULL OR EXISTS (
+                        SELECT 1 FROM platform_user_role r WHERE r.user_id = u.id AND r.role = CAST(? AS text)))
                 ORDER BY u.created_at DESC
                 LIMIT ? OFFSET ?
                 """, UserRowMapper.ID, like, like, role == null ? null : role.name(), role == null ? null : role.name(),
@@ -72,9 +72,9 @@ public class JdbcUserRepositoryAdapter implements UserRepository {
         String like = query == null || query.isBlank() ? null : "%" + query.trim() + "%";
         Long total = jdbc.queryForObject("""
                 SELECT count(*) FROM app_user u
-                WHERE (? IS NULL OR u.phone ILIKE ?)
-                  AND (? IS NULL OR EXISTS (
-                        SELECT 1 FROM platform_user_role r WHERE r.user_id = u.id AND r.role = ?))
+                WHERE (CAST(? AS text) IS NULL OR u.phone ILIKE CAST(? AS text))
+                  AND (CAST(? AS text) IS NULL OR EXISTS (
+                        SELECT 1 FROM platform_user_role r WHERE r.user_id = u.id AND r.role = CAST(? AS text)))
                 """, Long.class, like, like, role == null ? null : role.name(), role == null ? null : role.name());
         return total == null ? 0 : total;
     }
