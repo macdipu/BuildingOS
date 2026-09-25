@@ -39,4 +39,4 @@ Backfill of pre-F6-T5b role changes; audit writing changes in other services; UI
 ../TECH-SPEC.md; REQUIREMENTS.md BOC-05, BOC-08; DECISIONS D-37; AU-01.
 
 ## Status
-F6-T5b DONE (auth-service 93 tests green, contract check passed): V4 platform_role_audit, row only on real state change, same transaction as grant/revoke; action PLATFORM_ROLE_GRANTED/REVOKED; bad since/until/limit → 400; since>until → empty. F6-T5c, F6-T5d PLANNED.
+F6-T5b DONE (auth-service 93 tests green, contract check passed): V4 platform_role_audit, row only on real state change, same transaction as grant/revoke; action PLATFORM_ROLE_GRANTED/REVOKED; bad since/until/limit → 400; since>until → empty. F6-T5c DONE (building-service 125, subscription-service 37 tests green): building action FROM→TO (NONE on creation) for lifecycle_transition, stored action for building_audit; buildingId set for BUILDING entities and building_audit; subscription entityId string. F6-T5d PLANNED.

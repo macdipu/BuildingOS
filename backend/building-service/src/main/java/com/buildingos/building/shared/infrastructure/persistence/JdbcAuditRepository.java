@@ -5,6 +5,7 @@ import com.buildingos.building.shared.domain.repository.AuditRepository;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.time.Instant;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -38,6 +39,23 @@ public class JdbcAuditRepository implements AuditRepository {
         return jdbc.query("SELECT id, building_id, actor_user_id, action, entity_type, entity_id, reason, "
                 + "before_data, after_data, occurred_at FROM building_audit WHERE building_id = ? AND entity_type = ? "
                 + "AND entity_id = ? ORDER BY occurred_at, id", this::map, buildingId, entityType, entityId);
+    }
+
+    @Override
+    public List<AuditEntry> list(Instant since, Instant until, String entityType, UUID actorUserId, int limit) {
+        return jdbc.query("SELECT id, building_id, actor_user_id, action, entity_type, entity_id, reason, "
+                + "before_data, after_data, occurred_at FROM building_audit "
+                + "WHERE (CAST(? AS timestamptz) IS NULL OR occurred_at >= CAST(? AS timestamptz)) "
+                + "AND (CAST(? AS timestamptz) IS NULL OR occurred_at < CAST(? AS timestamptz)) "
+                + "AND (CAST(? AS varchar) IS NULL OR entity_type = CAST(? AS varchar)) "
+                + "AND (CAST(? AS uuid) IS NULL OR actor_user_id = CAST(? AS uuid)) "
+                + "ORDER BY occurred_at DESC, id DESC LIMIT ?",
+                this::map, ts(since), ts(since), ts(until), ts(until), entityType, entityType, actorUserId, actorUserId,
+                limit);
+    }
+
+    private static Timestamp ts(Instant instant) {
+        return instant == null ? null : Timestamp.from(instant);
     }
 
     private AuditEntry map(ResultSet rs, int row) throws SQLException {
