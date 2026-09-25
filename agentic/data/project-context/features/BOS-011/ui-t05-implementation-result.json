@@ -1,0 +1,14 @@
+{
+  "status": "READY",
+  "evidence": [
+    "user_app/lib/features/units_ownership/presentation/widgets/building_card.dart: mockup 04 card (status pill, name, address, roles, owned units, Open Building)",
+    "BRD 42 access warning: SUSPENDED building shows read-only warning. Subscription warning not shown: subscriptions are per user (BOS-010 D-22), no per-building subscription data exists",
+    "BRD 42 Building Applications entry added via BuildingOpener.openBuildingApplications (app implements; feature does not import building_application)",
+    "Excluded (data from BOS-003/004 or UI-only): rent dues / maintenance due amounts, greeting, notifications bell, invite code join, Continue Onboarding (no onboarding flow in app)",
+    "test/features/units_ownership/building_card_test.dart (warning visible/hidden, open)",
+    "flutter analyze: No issues found; flutter test: 89 passed"
+  ],
+  "blocking_issues": [], "open_questions": [],
+  "recommended_next_step": "UI-T07",
+  "outputs": {"task": "UI-T05", "verdict": "IMPLEMENTED"}
+}

@@ -5,6 +5,7 @@ import '../../domain/entities/property_models.dart';
 import '../../domain/usecases/property_use_cases.dart';
 import '../building_opener.dart';
 import '../property_text.dart';
+import '../widgets/building_card.dart';
 import '../widgets/property_widgets.dart';
 import 'building_units_page.dart';
 import 'unit_detail_page.dart';
@@ -33,46 +34,53 @@ class _PropertyHomePageState extends State<PropertyHomePage> {
       builder: (data, reload) => ListView(
         padding: const EdgeInsets.all(16),
         children: [
-          Align(
-            alignment: Alignment.centerRight,
-            child: IconButton(
-              tooltip: TextEnum.uoRefresh.tr,
-              onPressed: reload,
-              icon: const Icon(Icons.refresh),
-            ),
+          Row(
+            children: [
+              Expanded(
+                child: Text(
+                  '${TextEnum.uoBuildings.tr} (${data.$1.length})',
+                  style: Theme.of(context).textTheme.headlineSmall,
+                ),
+              ),
+              IconButton(
+                tooltip: TextEnum.uoRefresh.tr,
+                onPressed: reload,
+                icon: const Icon(Icons.refresh),
+              ),
+            ],
           ),
-          Text(
-            TextEnum.uoBuildings.tr,
-            style: Theme.of(context).textTheme.titleLarge,
-          ),
+          const SizedBox(height: 8),
           if (data.$1.isEmpty)
             Padding(
               padding: const EdgeInsets.all(16),
               child: Text(TextEnum.uoEmpty.tr),
             ),
           for (final b in data.$1)
-            Card(
-              child: ListTile(
-                title: Text(b.name),
-                subtitle: Text(
-                  '${b.address}\n${propertyLabel(b.status)} · ${b.roles.map(propertyLabel).join(', ')}\n${TextEnum.uoOwnedCount.tr}: ${b.ownedUnitCount}',
-                ),
-                trailing: const Icon(Icons.chevron_right),
-                onTap: () async {
-                  if (Get.isRegistered<BuildingOpener>()) {
-                    await Get.find<BuildingOpener>().open(b);
-                    return;
-                  }
-                  await Navigator.push(
-                    context,
-                    MaterialPageRoute<void>(
-                      builder: (_) => BuildingUnitsPage(buildingId: b.id),
-                    ),
-                  );
-                  if (mounted) reload();
-                },
-              ),
+            BuildingCard(
+              building: b,
+              onOpen: () async {
+                if (Get.isRegistered<BuildingOpener>()) {
+                  await Get.find<BuildingOpener>().open(b);
+                  return;
+                }
+                await Navigator.push(
+                  context,
+                  MaterialPageRoute<void>(
+                    builder: (_) => BuildingUnitsPage(buildingId: b.id),
+                  ),
+                );
+                if (mounted) reload();
+              },
             ),
+          if (Get.isRegistered<BuildingOpener>()) ...[
+            const SizedBox(height: 8),
+            OutlinedButton.icon(
+              key: const ValueKey('open-building-applications'),
+              onPressed: () => Get.find<BuildingOpener>().openBuildingApplications(),
+              icon: const Icon(Icons.add_business_outlined),
+              label: Text(TextEnum.buildingApplications.tr),
+            ),
+          ],
           const SizedBox(height: 24),
           Text(
             TextEnum.uoProperties.tr,

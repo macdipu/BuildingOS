@@ -5,4 +5,7 @@ import '../domain/entities/property_models.dart';
 /// When none is registered, My Buildings falls back to the unit list.
 abstract class BuildingOpener {
   Future<void> open(BuildingSummary building);
+
+  /// BRD §42 "Building Applications" section lives in another feature.
+  Future<void> openBuildingApplications();
 }

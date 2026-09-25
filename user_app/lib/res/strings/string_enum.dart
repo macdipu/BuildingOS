@@ -380,7 +380,12 @@ enum TextEnum {
   loginContinue(en: "Continue with Phone", bn: "ফোন দিয়ে চালিয়ে যান"),
   otpTitle(en: "Verify Identity", bn: "পরিচয় যাচাই"),
   otpEnterCode(en: "Enter Verification Code", bn: "যাচাইকরণ কোড লিখুন"),
-  verifyContinue(en: "Verify & Continue", bn: "যাচাই করে চালিয়ে যান")
+  verifyContinue(en: "Verify & Continue", bn: "যাচাই করে চালিয়ে যান"),
+  openBuilding(en: "Open Building", bn: "ভবন খুলুন"),
+  buildingSuspendedWarning(
+    en: "This building is suspended. Records are read-only.",
+    bn: "এই ভবনটি স্থগিত। তথ্য শুধু দেখা যাবে।",
+  )
   // Add more entries as required
   ;
 
