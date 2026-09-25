@@ -1,0 +1,8 @@
+{
+  "status": "BLOCKED",
+  "evidence": ["Chrome web build http://127.0.0.1:8088: app stays on /splash; no API requests issued; console clean"],
+  "blocking_issues": ["DEF-01: SplashController registered with Get.lazyPut and SplashScreen never reads controller, so onReady never runs and start routing never happens (unit/widget tests used Get.put and missed it)"],
+  "open_questions": [],
+  "recommended_next_step": "Fix DEF-01 in IMPLEMENTATION, add a test that registers the controller lazily like production, re-run QA",
+  "outputs": {"verdict": "QA_FAIL", "defects": ["DEF-01"]}
+}

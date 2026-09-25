@@ -2,7 +2,8 @@
   "status": "READY",
   "evidence": [
     "agentic/data/project-context/features/BOS-011/CR.md#delta",
-    "agentic/data/project-context/features/BOS-011/TECH-SPEC.md#risks"
+    "agentic/data/project-context/features/BOS-011/TECH-SPEC.md#risks",
+    "DEF-01 impact: user_app/lib/app/startup/splash_binding.dart only; no API/DB change"
   ],
   "blocking_issues": [],
   "open_questions": [],

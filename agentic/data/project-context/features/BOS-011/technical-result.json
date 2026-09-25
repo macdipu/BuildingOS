@@ -5,7 +5,8 @@
     "agentic/data/project-context/features/BOS-011/TASKS.md",
     "agentic/data/project-context/features/BOS-011/DECISIONS.md",
     "agentic/data/project-context/features/BOS-011/tasks/UI-T01.md",
-    "agentic/data/project-context/features/BOS-011/DECISIONS.md#Q-01..Q-03 RESOLVED"
+    "agentic/data/project-context/features/BOS-011/DECISIONS.md#Q-01..Q-03 RESOLVED",
+    "TECH-SPEC.md section 7 (DEF-01) + TASKS.md UI-T11"
   ],
   "blocking_issues": [],
   "open_questions": [],

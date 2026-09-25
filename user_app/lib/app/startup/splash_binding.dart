@@ -13,8 +13,8 @@ class SplashBinding extends Bindings {
     PropertyBinding().dependencies();
     BuildingApplicationDataBinding().dependencies();
     final api = Get.find<ApiClient>();
-    Get.lazyPut(
-      () => SplashController(
+    register(
+      SplashController(
         restoreSession: () async {
           await api.setToken();
           return api.hasToken();
@@ -27,4 +27,8 @@ class SplashBinding extends Bindings {
       ),
     );
   }
+
+  /// Eager on purpose: SplashScreen never reads `controller`, so a lazy
+  /// registration is never built and onReady (start routing) never runs (DEF-01).
+  static void register(SplashController controller) => Get.put(controller);
 }

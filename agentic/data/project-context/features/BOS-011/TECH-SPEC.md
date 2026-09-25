@@ -47,3 +47,9 @@ unit detail / ownership / transfer / members. No behavior or API change beyond l
 ## Verification
 `flutter analyze`, `flutter test` (incl. `test/architecture` layer rules), `mvn -pl
 building-service verify` for UI-T06, device preview per screen against `screen.png` (UI-T10).
+
+## 7. Defect fix DEF-01 (QA, 2026-09-25)
+Chrome QA: app stuck on splash. `SplashBinding` used `Get.lazyPut` and `SplashScreen` never reads
+`controller`, so `SplashController.onReady` never ran. Fix: `Get.put` in the binding (created when the
+route opens). Test: pump the real route with `SplashBinding`-style lazy registration so an unread
+controller fails the test. Task UI-T11.

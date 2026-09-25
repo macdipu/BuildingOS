@@ -1,5 +1,6 @@
 import 'package:customer/app/routes/app_routes.dart';
 import 'package:customer/app/session/active_building_service.dart';
+import 'package:customer/app/startup/splash_binding.dart';
 import 'package:customer/app/startup/splash_controller.dart';
 import 'package:customer/app/startup/splash_screen.dart';
 import 'package:customer/app/theme/app_theme.dart';
@@ -13,14 +14,19 @@ import 'package:get/get.dart';
 Widget _stub(String label) => Scaffold(body: Text(label));
 
 Future<void> _pumpSplash(WidgetTester tester, SplashController controller) async {
-  Get.put(controller);
   await tester.pumpWidget(GetMaterialApp(
     theme: AppTheme.lightTheme,
     translations: AppTranslations(),
     locale: const Locale('en'),
     initialRoute: AppRoutes.splash,
     getPages: [
-      GetPage(name: AppRoutes.splash, page: () => const SplashScreen()),
+      // Registered through the production hook, not a test-only Get.put, so a
+      // registration the screen never builds would leave the app on splash (DEF-01).
+      GetPage(
+        name: AppRoutes.splash,
+        page: () => const SplashScreen(),
+        binding: BindingsBuilder(() => SplashBinding.register(controller)),
+      ),
       GetPage(name: AppRoutes.login, page: () => _stub('login')),
       GetPage(name: AppRoutes.appShell, page: () => _stub('shell')),
       GetPage(name: PropertyPages.home, page: () => _stub('my-buildings')),

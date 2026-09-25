@@ -6,7 +6,8 @@
     "user_app/lib/app/routes/app_pages.dart (initial=/login, no splash)",
     "user_app/lib/app/shell/app_shell.dart (starter Home/Explore/Account)",
     "backend/building-service/.../unit/presentation/rest/UnitController.java (units list: floorId,type,page,size only)",
-    "backend/building-service/.../building/domain/model/BuildingRole.java (BUILDING_ADMIN, OWNER)"
+    "backend/building-service/.../building/domain/model/BuildingRole.java (BUILDING_ADMIN, OWNER)",
+    "Reopened after QA DEF-01; baseline = commits d5e104f..563f385 on main"
   ],
   "blocking_issues": [],
   "open_questions": [],
