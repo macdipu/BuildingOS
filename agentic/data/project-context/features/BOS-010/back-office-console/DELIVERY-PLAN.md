@@ -25,7 +25,15 @@ applications) + `back-office/03` (subscriptions); F6-T8 ← no mockup (Users/Sup
 `back-office/01` (dashboard) + `back-office/04` (audit/system). Conflicts C-2 (automated
 billing) and C-3 (kanban vs §149.4 states) are excluded from scope pending operator decision.
 
-Progress: F6-T1 97d489a, F6-T2 975ea8d, F6-T6 f79e6d9, F6-T3 done; F6-T4 next.
+Progress: F6-T1 97d489a, F6-T2 975ea8d, F6-T6 f79e6d9, F6-T3 a28b792; F6-T4 BLOCKED on
+Q-F6-3; F6-T7 split into F6-T7.1 (application review, done) and F6-T7.2 (subscriptions).
+
+- **Q-F6-3 (OPEN, blocks F6-T4):** `SupportSession` lifecycle rules are not decided by D-10/BRD
+  §149.12: (a) who may start a session and for whom (SUPPORT_AGENT self-start? admins?);
+  (b) maximum duration; (c) who may end it and who sees which sessions; (d) whether a
+  SUPER_ADMIN may approve a high-risk request on their own session; (e) which existing
+  endpoint each high-risk/ordinary scope relays to (TECH-SPEC open question). Needs an operator
+  decision (D-36) before F6-T4 is planned.
 
 Task files: `tasks/F6-T6.md`..`F6-T9.md` (planned 2026-09-25 with UI Reference). UI conflicts
 C-2/C-3 are now decided (BRD wins; UI-INDEX). Planning questions (resolved 2026-09-25; F6-T7a/T7b change the approved TECH-SPEC, so they need
