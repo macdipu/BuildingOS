@@ -1976,6 +1976,19 @@
       "event": "STAGE_CHANGED",
       "payload": {},
       "created_at": "2026-09-25T06:37:25.838093+00:00"
+    },
+    {
+      "run_id": "RUN-3E204CA14C934E4EAA374F6163F7AB96",
+      "event": "COMMIT_RECORDED",
+      "payload": {
+        "sha": "673c450",
+        "subject": "docs(bos-012): record BOS-012 review, QA and release",
+        "work_item": "BOS-012",
+        "task": "UI-F01",
+        "run": "RUN-3E204CA14C934E4EAA374F6163F7AB96",
+        "commit_trigger": "task-finish"
+      },
+      "created_at": "2026-09-25T06:37:26.704153+00:00"
     }
   ],
   "tool_calls": {}
