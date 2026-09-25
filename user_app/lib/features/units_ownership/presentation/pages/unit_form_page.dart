@@ -56,7 +56,9 @@ class _UnitFormPageState extends State<UnitFormPage> {
     super.dispose();
   }
 
-  Future<void> save() async {
+  /// BRD §49 `Save & Add Another`: after a create, keep floor, type and default
+  /// rate (and the audit reason) so the next unit on the floor is quick to add.
+  Future<void> save({bool addAnother = false}) async {
     if (!form.currentState!.validate()) return;
     final d = UnitDraft(
       number: number.text.trim(),
@@ -88,8 +90,20 @@ class _UnitFormPageState extends State<UnitFormPage> {
         reason.text.trim(),
       );
     }
-    if (mounted) Navigator.pop(context);
+    if (!mounted) return;
+    if (addAnother) {
+      for (final c in [number, area, bedrooms, notes]) {
+        c.clear();
+      }
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(TextEnum.uoUnitSaved.trParams({'number': d.number}))),
+      );
+      return;
+    }
+    Navigator.pop(context);
   }
+
+  bool get canAddAnother => widget.unit == null && !widget.previewOnly;
 
   @override
   Widget build(BuildContext context) => Scaffold(
@@ -158,7 +172,20 @@ class _UnitFormPageState extends State<UnitFormPage> {
               validator: requiredText,
               maxLength: 1000,
             ),
+          const SizedBox(height: 8),
           PropertyAction(label: TextEnum.uoSave.tr, action: save),
+          if (canAddAnother) ...[
+            const SizedBox(height: 8),
+            PropertyAction(
+              key: const ValueKey('save-add-another'),
+              label: TextEnum.uoSaveAddAnother.tr,
+              action: () => save(addAnother: true),
+            ),
+          ],
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: Text(TextEnum.cancel.tr),
+          ),
         ],
       ),
     ),

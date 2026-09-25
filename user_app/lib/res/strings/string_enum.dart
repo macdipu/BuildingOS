@@ -394,7 +394,9 @@ enum TextEnum {
   uoClearFilters(en: "Clear", bn: "মুছুন"),
   uoSortNumber(en: "Unit number", bn: "ইউনিট নম্বর"),
   uoAscending(en: "Ascending", bn: "ঊর্ধ্বক্রম"),
-  uoDescending(en: "Descending", bn: "অধঃক্রম")
+  uoDescending(en: "Descending", bn: "অধঃক্রম"),
+  uoSaveAddAnother(en: "Save & Add Another", bn: "সংরক্ষণ করে আরেকটি যোগ করুন"),
+  uoUnitSaved(en: "Unit @number saved", bn: "ইউনিট @number সংরক্ষিত হয়েছে")
   // Add more entries as required
   ;
 

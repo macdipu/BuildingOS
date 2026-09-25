@@ -1,0 +1,12 @@
+{
+  "status": "READY",
+  "evidence": [
+    "user_app/lib/features/units_ownership/presentation/pages/unit_form_page.dart: BRD 49 Save & Add Another (create only) keeps floor/type/default rate/reason, clears number/area/bedrooms/notes, stays on form with confirmation snackbar; Cancel button; single page (C-10 wizard not adopted)",
+    "Validation unchanged (required number, positive area precision, valid type; unique number enforced server-side)",
+    "test/features/units_ownership/unit_form_test.dart (add-another flow twice; edit mode has no add-another)",
+    "flutter analyze: No issues found; flutter test: All tests passed"
+  ],
+  "blocking_issues": [], "open_questions": [],
+  "recommended_next_step": "UI-T09",
+  "outputs": {"task": "UI-T08", "verdict": "IMPLEMENTED"}
+}
