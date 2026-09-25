@@ -12,6 +12,10 @@ class AppTheme {
   static ThemeData _buildTheme({required bool isDark}) {
     Color c(AdaptiveColor ac) => isDark ? ac.dark : ac.light;
     final textTheme = AppTextTheme.lightTextTheme;
+    // Stitch mockups: CTAs fill primary-container (#2563EB); controls 8px, cards 12px,
+    // bottom sheets 24px; mobile touch targets 48px.
+    final ctaColor = c(AppColors.primaryContainer);
+    final onCta = isDark ? c(AppColors.onPrimaryContainer) : Colors.white;
     final shadowAlpha = isDark ? 0.3 : 0.1;
 
     final colorScheme = ColorScheme(
@@ -70,19 +74,23 @@ class AppTheme {
       ),
 
       cardTheme: CardThemeData(
-        color: colorScheme.surfaceContainerLow,
-        elevation: 2,
+        color: colorScheme.surfaceContainerLowest,
+        elevation: 1,
         shadowColor: colorScheme.shadow.withValues(alpha: shadowAlpha),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12),
+          side: BorderSide(color: c(AppColors.outlineVariant)),
+        ),
         margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       ),
 
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
-          backgroundColor: colorScheme.primary,
-          foregroundColor: colorScheme.onPrimary,
-          elevation: 2,
+          backgroundColor: ctaColor,
+          foregroundColor: onCta,
+          elevation: 1,
           shadowColor: colorScheme.shadow.withValues(alpha: shadowAlpha),
+          minimumSize: const Size(64, 48),
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
           textStyle: textTheme.labelLarge,
@@ -92,7 +100,8 @@ class AppTheme {
       outlinedButtonTheme: OutlinedButtonThemeData(
         style: OutlinedButton.styleFrom(
           foregroundColor: colorScheme.primary,
-          side: BorderSide(color: colorScheme.outline),
+          side: BorderSide(color: colorScheme.outlineVariant),
+          minimumSize: const Size(64, 48),
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
           textStyle: textTheme.labelLarge,
@@ -109,14 +118,14 @@ class AppTheme {
 
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
-        fillColor: c(AppColors.surfaceContainerHighest),
+        fillColor: c(AppColors.surfaceContainerLowest),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
-          borderSide: BorderSide(color: colorScheme.outline),
+          borderSide: BorderSide(color: colorScheme.outlineVariant),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
-          borderSide: BorderSide(color: colorScheme.outline),
+          borderSide: BorderSide(color: colorScheme.outlineVariant),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
@@ -130,7 +139,7 @@ class AppTheme {
           borderRadius: BorderRadius.circular(8),
           borderSide: BorderSide(color: colorScheme.error, width: 2),
         ),
-        contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+        contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
         labelStyle: textTheme.bodyMedium?.copyWith(color: colorScheme.onSurfaceVariant),
         hintStyle: textTheme.bodyMedium?.copyWith(
           color: colorScheme.onSurfaceVariant.withValues(alpha: 0.6),
@@ -139,8 +148,8 @@ class AppTheme {
       ),
 
       floatingActionButtonTheme: FloatingActionButtonThemeData(
-        backgroundColor: colorScheme.primary,
-        foregroundColor: colorScheme.onPrimary,
+        backgroundColor: ctaColor,
+        foregroundColor: onCta,
         elevation: 4,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       ),
@@ -149,8 +158,8 @@ class AppTheme {
         backgroundColor: c(AppColors.surfaceContainerHighest),
         deleteIconColor: colorScheme.onSurfaceVariant,
         labelStyle: textTheme.labelMedium?.copyWith(color: colorScheme.onSurfaceVariant),
-        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+        shape: const StadiumBorder(),
       ),
 
       dialogTheme: DialogThemeData(
@@ -165,7 +174,7 @@ class AppTheme {
         backgroundColor: colorScheme.surfaceContainerHigh,
         elevation: 8,
         shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+          borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
         ),
       ),
 
@@ -209,12 +218,24 @@ class AppTheme {
 
       progressIndicatorTheme: ProgressIndicatorThemeData(color: colorScheme.primary),
 
+      navigationBarTheme: NavigationBarThemeData(
+        height: 64,
+        backgroundColor: colorScheme.surfaceContainerLowest,
+        indicatorColor: c(AppColors.primaryContainer).withValues(alpha: 0.12),
+        labelTextStyle: WidgetStateProperty.resolveWith((states) => textTheme.labelSmall?.copyWith(
+              color: states.contains(WidgetState.selected) ? ctaColor : colorScheme.onSurfaceVariant,
+            )),
+        iconTheme: WidgetStateProperty.resolveWith((states) => IconThemeData(
+              color: states.contains(WidgetState.selected) ? ctaColor : colorScheme.onSurfaceVariant,
+            )),
+      ),
+
       bottomNavigationBarTheme: BottomNavigationBarThemeData(
-        backgroundColor: colorScheme.surface,
-        selectedItemColor: colorScheme.primary,
+        backgroundColor: colorScheme.surfaceContainerLowest,
+        selectedItemColor: ctaColor,
         unselectedItemColor: colorScheme.onSurfaceVariant,
         type: BottomNavigationBarType.fixed,
-        elevation: 8,
+        elevation: 0,
         selectedLabelStyle: textTheme.labelMedium,
         unselectedLabelStyle: textTheme.labelSmall,
       ),

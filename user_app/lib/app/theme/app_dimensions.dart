@@ -188,6 +188,17 @@ class _Spacing {
       const EdgeInsets.symmetric(horizontal: 16, vertical: 12);
 
   EdgeInsets get pagePadding => const EdgeInsets.all(16);
+
+  // Stitch DESIGN.md spacing tokens (8pt rhythm, 16px mobile margin).
+  double get space2xs => s4;
+  double get spaceXs => s8;
+  double get spaceSm => s12;
+  double get spaceMd => s16;
+  double get spaceLg => s24;
+  double get spaceXl => s32;
+  double get space2xl => s48;
+  double get gutterMobile => s16;
+  double get marginMobile => s16;
 }
 
 /// ============================================================
@@ -225,6 +236,13 @@ class _Radius {
   BorderRadius get br32 => BorderRadius.circular(32);
 
   BorderRadius get brFull => BorderRadius.circular(9999);
+
+  // Stitch mockup shape roles.
+  BorderRadius get control => br8;
+  BorderRadius get card => br12;
+  BorderRadius get dialog => br16;
+  BorderRadius get sheet => const BorderRadius.vertical(top: Radius.circular(24));
+  BorderRadius get pill => brFull;
 }
 
 /// ============================================================

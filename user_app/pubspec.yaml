@@ -100,6 +100,26 @@ flutter:
   assets:
     - assets/svgs/
 
+  # Bundled (not google_fonts runtime fetch) so the app and tests work offline.
+  # Licenses: assets/fonts/OFL-*.txt
+  fonts:
+    - family: Inter
+      fonts:
+        - asset: assets/fonts/Inter-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/Inter-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/Inter-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/Inter-Bold.ttf
+          weight: 700
+    - family: Plus Jakarta Sans
+      fonts:
+        - asset: assets/fonts/PlusJakartaSans-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/PlusJakartaSans-Bold.ttf
+          weight: 700
+
 flutter_native_splash:
   color: "#ffffff"
   android: true
