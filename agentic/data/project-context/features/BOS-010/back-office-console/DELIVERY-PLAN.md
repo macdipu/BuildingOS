@@ -26,7 +26,7 @@ applications) + `back-office/03` (subscriptions); F6-T8 ← no mockup (Users/Sup
 billing) and C-3 (kanban vs §149.4 states) are excluded from scope pending operator decision.
 
 Progress: F6-T1 97d489a, F6-T2 975ea8d, F6-T6 f79e6d9, F6-T3 a28b792; F6-T4 done (D-36),
-F6-T4b relay planned; F6-T7 split into F6-T7.1 (application review, done) and F6-T7.2 (subscriptions, done).
+F6-T4b relay planned; F6-T7 split into F6-T7.1 (application review, done) and F6-T7.2 (subscriptions, done). F6-T5 split: F6-T5a health (done), F6-T5b/c/d audit planned (D-37).
 
 - **Q-F6-3 (RESOLVED D-36):** `SupportSession` lifecycle rules are not decided by D-10/BRD
   §149.12: (a) who may start a session and for whom (SUPPORT_AGENT self-start? admins?);
@@ -50,3 +50,5 @@ technical re-approval before implementation):
 
 Split further if a task cannot finish within the harness task budget. One task-finish
 commit per bounded task.
+
+- **Q-F6-4 (RESOLVED D-37):** auth-service persists no platform-role grant/revoke audit rows (F6-T2 logs only), but TECH-SPEC/AU-01 expect stored rows and BOC-08's Audit Logs reads them. Options: add an auth-service role-assignment audit table in F6-T5b, or show only building/subscription/back-office audit rows for now.

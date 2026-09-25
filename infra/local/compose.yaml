@@ -180,6 +180,7 @@ services:
       JWT_AUDIENCE: buildingos-local
       AUTH_SERVICE_URL: http://auth-service:8080
       BUILDING_SERVICE_URL: http://building-service:8080
+      SUBSCRIPTION_SERVICE_URL: http://subscription-service:8080
     ports:
       - "127.0.0.1:8084:8080"
     depends_on:

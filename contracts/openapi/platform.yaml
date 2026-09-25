@@ -3309,6 +3309,32 @@ paths:
           content:
             application/json:
               schema: { $ref: "#/components/schemas/ApiError" }
+  /api/v1/platform/backoffice/system-health:
+    get:
+      summary: "SUPER_ADMIN: readiness of every BuildingOS backend service in one call (BOC-08)"
+      description: >
+        Aggregates each configured service's /actuator/health/readiness (buildingos.health.services) plus
+        back-office-service's own. Readiness bodies are never forwarded: only status, HTTP code and latency.
+        An unreachable or timed-out service is UNKNOWN; the endpoint still answers 200. overall is UP when every
+        service is UP, DOWN when none is, otherwise DEGRADED.
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: "Success envelope (data: SystemHealth)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiEnvelope" }
+        "401":
+          description: "Missing or invalid token"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "403":
+          description: "ACCESS_DENIED (caller is not SUPER_ADMIN)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
   /internal/users/provision:
     post:
       summary: "auth-service: find or create a user by phone (service-to-service, D-29)"
@@ -3605,6 +3631,23 @@ components:
           items: { type: string, enum: [SUPPORT_VIEW_MEMBERS, SUPPORT_VIEW_UNITS, SUPPORT_VIEW_OWNERSHIP_HISTORY, SUPPORT_EDIT_UNIT, SUPPORT_MANAGE_MEMBERSHIP_INVITE, SUPPORT_REVOKE_MEMBERSHIP, SUPPORT_VIEW_SUBSCRIPTION, SUPPORT_VIEW_PAYMENTS, SUPPORT_REVERSE_PAYMENT, SUPPORT_TRANSFER_OWNERSHIP, SUPPORT_REMOVE_BUILDING_ADMIN, SUPPORT_EXPORT_FINANCIAL_UNRESTRICTED] }
         reason: { type: string, maxLength: 1000 }
         expiresAt: { type: string, format: date-time, description: "In the future and at most buildingos.support.max-duration (default PT8H) after start" }
+    SystemHealth:
+      type: object
+      required: [checkedAt, overall, services]
+      properties:
+        checkedAt: { type: string, format: date-time }
+        overall: { type: string, enum: [UP, DEGRADED, DOWN] }
+        services:
+          type: array
+          items: { $ref: "#/components/schemas/ServiceReadiness" }
+    ServiceReadiness:
+      type: object
+      required: [name, status, latencyMs]
+      properties:
+        name: { type: string, example: auth-service }
+        status: { type: string, enum: [UP, DOWN, UNKNOWN] }
+        httpStatus: { type: integer, description: "Readiness HTTP status; absent when the service was unreachable or timed out" }
+        latencyMs: { type: integer, format: int64, minimum: 0 }
     SupportReasonRequest:
       type: object
       properties:

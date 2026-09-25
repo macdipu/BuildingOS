@@ -2,3 +2,4 @@ buildingos:
   services:
     auth-url: http://127.0.0.1:9
     building-url: http://127.0.0.1:9
+    subscription-url: http://127.0.0.1:9

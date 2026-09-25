@@ -45,9 +45,21 @@ buildingos:
   services:
     auth-url: ${AUTH_SERVICE_URL}
     building-url: ${BUILDING_SERVICE_URL}
+    subscription-url: ${SUBSCRIPTION_SERVICE_URL}
     connect-timeout: ${SERVICE_CONNECT_TIMEOUT:PT2S}
     read-timeout: ${SERVICE_READ_TIMEOUT:PT5S}
   onboarding:
     max-duration: ${ONBOARDING_MAX_DURATION:P30D}
   support:
     max-duration: ${SUPPORT_MAX_DURATION:PT8H}
+  health:
+    # BOC-08 System Health: services whose /actuator/health/readiness is aggregated. No url = this service.
+    timeout: ${HEALTH_PROBE_TIMEOUT:PT2S}
+    services:
+      - name: auth-service
+        url: ${buildingos.services.auth-url}
+      - name: building-service
+        url: ${buildingos.services.building-url}
+      - name: subscription-service
+        url: ${buildingos.services.subscription-url}
+      - name: back-office-service
