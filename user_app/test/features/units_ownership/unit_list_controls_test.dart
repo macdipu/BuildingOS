@@ -35,7 +35,8 @@ void main() {
 
     await tester.tap(find.byKey(const ValueKey('unit-sort')));
     await tester.pumpAndSettle();
-    await tester.tap(find.text('Floor · Descending'));
+    // CheckedPopupMenuItem's label ignores pointers; the tap lands on its menu item.
+    await tester.tap(find.text('Floor · Descending'), warnIfMissed: false);
     await tester.pumpAndSettle();
     expect(sorted, (UnitSortField.floor, true));
   });

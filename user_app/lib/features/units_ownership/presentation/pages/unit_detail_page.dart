@@ -26,23 +26,84 @@ class UnitDetailPage extends StatelessWidget {
       load: load,
       builder: (data, reload) {
         final u = data.$2;
+        final text = Theme.of(context).textTheme;
+        final muted = Theme.of(context).colorScheme.onSurfaceVariant;
+        // Mockup 12: header card (number + facts), then specifications. Tenant,
+        // lease, rent and maintenance tabs arrive with BOS-003/004.
         return ListView(
           padding: const EdgeInsets.all(16),
           children: [
-            Text(u.number, style: Theme.of(context).textTheme.headlineMedium),
-            Text('${u.floorLabel} · ${propertyLabel(u.type)}'),
-            Text('${TextEnum.uoArea.tr}: ${u.areaSqft}'),
-            if (u.bedrooms != null)
-              Text('${TextEnum.uoBedrooms.tr}: ${u.bedrooms}'),
-            if (u.defaultMaintenanceRate != null)
-              Text('${TextEnum.uoRate.tr}: ${u.defaultMaintenanceRate}'),
-            if (u.notes?.isNotEmpty == true) Text(u.notes!),
-            if (data.$1.readOnly) Text(TextEnum.uoReadOnly.tr),
-            IconButton(
-              tooltip: TextEnum.uoRefresh.tr,
-              onPressed: reload,
-              icon: const Icon(Icons.refresh),
+            Card(
+              child: Padding(
+                padding: const EdgeInsets.all(16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        Expanded(child: Text(u.number, style: text.headlineLarge)),
+                        IconButton(
+                          tooltip: TextEnum.uoRefresh.tr,
+                          onPressed: reload,
+                          icon: const Icon(Icons.refresh),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 4),
+                    Row(
+                      children: [
+                        Icon(Icons.apartment, size: 16, color: muted),
+                        const SizedBox(width: 6),
+                        Expanded(
+                          child: Text(
+                            [
+                              propertyLabel(u.type),
+                              '${u.areaSqft} ${TextEnum.uoSqft.tr}',
+                              u.floorLabel,
+                            ].join(' • '),
+                            style: text.bodyMedium?.copyWith(color: muted),
+                          ),
+                        ),
+                      ],
+                    ),
+                    if (data.$1.readOnly) ...[
+                      const SizedBox(height: 8),
+                      Text(TextEnum.uoReadOnly.tr, style: text.bodySmall),
+                    ],
+                  ],
+                ),
+              ),
             ),
+            Card(
+              child: Column(
+                children: [
+                  ListTile(
+                    leading: const Icon(Icons.tune),
+                    title: Text(TextEnum.uoSpecifications.tr, style: text.titleMedium),
+                  ),
+                  ListTile(
+                    dense: true,
+                    title: Text(TextEnum.uoArea.tr),
+                    trailing: Text('${u.areaSqft}'),
+                  ),
+                  if (u.bedrooms != null)
+                    ListTile(
+                      dense: true,
+                      title: Text(TextEnum.uoBedrooms.tr),
+                      trailing: Text('${u.bedrooms}'),
+                    ),
+                  if (u.defaultMaintenanceRate != null)
+                    ListTile(
+                      dense: true,
+                      title: Text(TextEnum.uoRate.tr),
+                      trailing: Text('${u.defaultMaintenanceRate}'),
+                    ),
+                  if (u.notes?.isNotEmpty == true)
+                    ListTile(dense: true, title: Text(u.notes!)),
+                ],
+              ),
+            ),
+            const SizedBox(height: 8),
             OutlinedButton(
               onPressed: () async {
                 await Navigator.push(

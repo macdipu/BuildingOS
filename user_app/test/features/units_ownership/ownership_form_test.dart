@@ -98,7 +98,11 @@ void main() {
       await tester.pumpAndSettle();
       await tester.enterText(find.byType(TextFormField).at(0), '20');
       await tester.enterText(find.byType(TextFormField).at(1), 'Sale');
-      await tester.ensureVisible(find.text(TextEnum.uoConfirm.en));
+      await tester.scrollUntilVisible(
+        find.text(TextEnum.uoConfirm.en),
+        200,
+        scrollable: find.byType(Scrollable).first,
+      );
       await tester.tap(find.text(TextEnum.uoConfirm.en));
       await tester.pump();
       await tester.pump(const Duration(milliseconds: 350));

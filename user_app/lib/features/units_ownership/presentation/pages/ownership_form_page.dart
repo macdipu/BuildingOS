@@ -108,20 +108,28 @@ class _OwnershipFormPageState extends State<OwnershipFormPage> {
         child: ListView(
           padding: const EdgeInsets.all(16),
           children: [
-            Text(
-              widget.unitNumber,
-              style: Theme.of(context).textTheme.headlineSmall,
-            ),
-            Text(TextEnum.uoImmediate.tr),
-            Text(
-              '${TextEnum.uoEffective.tr}: ${pending?.effectiveDate ?? ownershipDate(DateTime.now())}',
+            // Mockup 14: unit summary card above the steps.
+            Card(
+              child: ListTile(
+                leading: const Icon(Icons.domain),
+                title: Text(
+                  widget.unitNumber,
+                  style: Theme.of(context).textTheme.headlineSmall,
+                ),
+                subtitle: Text(
+                  '${TextEnum.uoImmediate.tr}\n${TextEnum.uoEffective.tr}: ${pending?.effectiveDate ?? ownershipDate(DateTime.now())}',
+                ),
+                isThreeLine: true,
+              ),
             ),
             if (data.$2.isEmpty) Text(TextEnum.uoNoMembers.tr),
             if (pending != null) Text(TextEnum.uoRetryUncertain.tr),
             AbsorbPointer(
               absorbing: pending != null,
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
+                  if (widget.transfer) StepHeader(1, TextEnum.uoSource.tr),
                   if (widget.transfer)
                     DropdownButtonFormField<String>(
                       initialValue: source,
@@ -143,6 +151,7 @@ class _OwnershipFormPageState extends State<OwnershipFormPage> {
                       onChanged: (v) => setState(() => source = v),
                       validator: requiredText,
                     ),
+                  if (widget.transfer) StepHeader(2, TextEnum.uoRecipient.tr),
                   DropdownButtonFormField<String>(
                     initialValue: recipient,
                     decoration: InputDecoration(
@@ -167,6 +176,7 @@ class _OwnershipFormPageState extends State<OwnershipFormPage> {
                         ? TextEnum.errInvalidRequest.tr
                         : null,
                   ),
+                  if (widget.transfer) StepHeader(3, TextEnum.uoShare.tr),
                   propertyField(
                     share,
                     TextEnum.uoShare.tr,

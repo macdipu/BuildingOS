@@ -396,7 +396,9 @@ enum TextEnum {
   uoAscending(en: "Ascending", bn: "ঊর্ধ্বক্রম"),
   uoDescending(en: "Descending", bn: "অধঃক্রম"),
   uoSaveAddAnother(en: "Save & Add Another", bn: "সংরক্ষণ করে আরেকটি যোগ করুন"),
-  uoUnitSaved(en: "Unit @number saved", bn: "ইউনিট @number সংরক্ষিত হয়েছে")
+  uoUnitSaved(en: "Unit @number saved", bn: "ইউনিট @number সংরক্ষিত হয়েছে"),
+  uoSqft(en: "sq ft", bn: "বর্গফুট"),
+  uoSpecifications(en: "Unit specifications", bn: "ইউনিটের বিবরণ")
   // Add more entries as required
   ;
 

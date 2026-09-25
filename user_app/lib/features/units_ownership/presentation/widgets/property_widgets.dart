@@ -204,3 +204,29 @@ Widget propertyDropdown(
     validator: requiredText,
   ),
 );
+
+/// Numbered section header used by multi-step forms (Stitch mockup 14).
+class StepHeader extends StatelessWidget {
+  const StepHeader(this.step, this.title, {super.key});
+  final int step;
+  final String title;
+  @override
+  Widget build(BuildContext context) {
+    final scheme = Theme.of(context).colorScheme;
+    return Padding(
+      padding: const EdgeInsets.only(top: 16, bottom: 8),
+      child: Row(
+        children: [
+          CircleAvatar(
+            radius: 12,
+            backgroundColor: scheme.primaryContainer,
+            foregroundColor: Colors.white,
+            child: Text('$step', style: Theme.of(context).textTheme.labelMedium?.copyWith(color: Colors.white)),
+          ),
+          const SizedBox(width: 8),
+          Expanded(child: Text(title, style: Theme.of(context).textTheme.titleMedium)),
+        ],
+      ),
+    );
+  }
+}
