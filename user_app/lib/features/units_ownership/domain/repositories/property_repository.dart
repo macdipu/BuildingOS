@@ -19,7 +19,10 @@ abstract class PropertyRepository {
     int version,
     String reason,
   );
-  Future<List<PropertyUnit>> listUnits(String buildingId);
+  Future<List<PropertyUnit>> listUnits(
+    String buildingId, {
+    UnitListQuery query = const UnitListQuery(),
+  });
   Future<PropertyUnit> getUnit(String buildingId, String id);
   Future<PropertyUnit> createUnit(
     String buildingId,

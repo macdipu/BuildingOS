@@ -34,6 +34,18 @@ class PropertyMapper {
     status: j['status'] ?? 'PENDING',
     expiresAt: j['expiresAt'],
   );
+  static String unitQuery(UnitListQuery q) {
+    final params = <String, String>{
+      if (q.floorId != null) 'floorId': q.floorId!,
+      if (q.type != null) 'type': q.type!,
+      if (q.ownerUserId != null) 'ownerUserId': q.ownerUserId!,
+      if (q.search != null && q.search!.trim().isNotEmpty) 'q': q.search!.trim(),
+      if (q.sort != UnitSortField.unitNumber || q.descending)
+        'sort': '${q.sort.name},${q.descending ? 'desc' : 'asc'}',
+    };
+    return params.isEmpty ? '' : '?${Uri(queryParameters: params).query}';
+  }
+
   static BuildingMember member(Map<String, dynamic> j) => BuildingMember(
     id: j['id'],
     userId: j['userId'],

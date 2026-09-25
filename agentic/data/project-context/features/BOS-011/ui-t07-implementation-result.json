@@ -1,0 +1,15 @@
+{
+  "status": "READY",
+  "evidence": [
+    "user_app units_ownership: UnitListQuery (domain) -> PropertyMapper.unitQuery (floorId,type,ownerUserId,q,sort) -> repository/use case",
+    "presentation/pages/building_units_page.dart: stateful query; search (submit), filter sheet (Type/Floor/Owner, owner only for admins), sort menu; + Add Unit primary; floor/batch/members actions kept; empty/loading/error via PropertyLoad",
+    "presentation/widgets/unit_list_controls.dart: UnitSearchBar, filter sheet, UnitRow (mockup 10 row)",
+    "Owner options show user ids: members API exposes no owner names (same as delivered ownership form)",
+    "Excluded until BOS-003/004: Tenant/Occupancy/Rent/Maintenance columns and Occupancy/Due filters",
+    "tests: property_repository_test (query params), unit_list_controls_test (search, sort, filter sheet)",
+    "flutter analyze: No issues found; flutter test: 92 passed"
+  ],
+  "blocking_issues": [], "open_questions": [],
+  "recommended_next_step": "UI-T08",
+  "outputs": {"task": "UI-T07", "verdict": "IMPLEMENTED"}
+}

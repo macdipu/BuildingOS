@@ -167,6 +167,30 @@ void main() {
     expect(client.body, {'expectedVersion': 3, 'reason': 'Requested'});
     expect(client.path, 'http://local/api/v1/buildings/b/members/m/revoke');
   });
+  test('unit list sends BRD §48 filter, search and sort params only when set', () async {
+    await repo.listUnits('b');
+    expect(client.path, 'http://local/api/v1/buildings/b/units');
+    await repo.listUnits(
+      'b',
+      query: const UnitListQuery(
+        floorId: 'f1',
+        type: 'FLAT',
+        ownerUserId: 'u1',
+        search: ' 4a ',
+        sort: UnitSortField.floor,
+        descending: true,
+      ),
+    );
+    final uri = Uri.parse(client.path!);
+    expect(uri.path, '/api/v1/buildings/b/units');
+    expect(uri.queryParameters, {
+      'floorId': 'f1',
+      'type': 'FLAT',
+      'ownerUserId': 'u1',
+      'q': '4a',
+      'sort': 'floor,desc',
+    });
+  });
   test('denied response cannot become empty success', () async {
     client.next = Resource(
       messageCode: 403,

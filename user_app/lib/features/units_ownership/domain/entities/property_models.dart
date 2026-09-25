@@ -177,3 +177,51 @@ class PropertyException implements Exception {
   final String code;
   final BatchPreview? preview;
 }
+
+enum UnitSortField { unitNumber, floor, type }
+
+/// BRD §48 unit list filter/search/sort. Null filters = any.
+class UnitListQuery {
+  const UnitListQuery({
+    this.floorId,
+    this.type,
+    this.ownerUserId,
+    this.search,
+    this.sort = UnitSortField.unitNumber,
+    this.descending = false,
+  });
+  final String? floorId, type, ownerUserId, search;
+  final UnitSortField sort;
+  final bool descending;
+
+  bool get hasFilters => floorId != null || type != null || ownerUserId != null;
+
+  UnitListQuery copyWith({
+    String? Function()? floorId,
+    String? Function()? type,
+    String? Function()? ownerUserId,
+    String? Function()? search,
+    UnitSortField? sort,
+    bool? descending,
+  }) => UnitListQuery(
+    floorId: floorId == null ? this.floorId : floorId(),
+    type: type == null ? this.type : type(),
+    ownerUserId: ownerUserId == null ? this.ownerUserId : ownerUserId(),
+    search: search == null ? this.search : search(),
+    sort: sort ?? this.sort,
+    descending: descending ?? this.descending,
+  );
+
+  @override
+  bool operator ==(Object other) =>
+      other is UnitListQuery &&
+      other.floorId == floorId &&
+      other.type == type &&
+      other.ownerUserId == ownerUserId &&
+      other.search == search &&
+      other.sort == sort &&
+      other.descending == descending;
+
+  @override
+  int get hashCode => Object.hash(floorId, type, ownerUserId, search, sort, descending);
+}

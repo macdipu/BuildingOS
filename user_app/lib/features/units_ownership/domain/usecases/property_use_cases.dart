@@ -65,8 +65,10 @@ class UpdateBuildingFloor {
 class ListBuildingUnits {
   const ListBuildingUnits(this._repository);
   final PropertyRepository _repository;
-  Future<List<PropertyUnit>> call(String buildingId) =>
-      _repository.listUnits(buildingId);
+  Future<List<PropertyUnit>> call(
+    String buildingId, [
+    UnitListQuery query = const UnitListQuery(),
+  ]) => _repository.listUnits(buildingId, query: query);
 }
 
 class GetPropertyUnit {

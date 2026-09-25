@@ -385,7 +385,16 @@ enum TextEnum {
   buildingSuspendedWarning(
     en: "This building is suspended. Records are read-only.",
     bn: "এই ভবনটি স্থগিত। তথ্য শুধু দেখা যাবে।",
-  )
+  ),
+  uoSearchUnits(en: "Search unit number", bn: "ইউনিট নম্বর খুঁজুন"),
+  uoFilter(en: "Filter", bn: "ফিল্টার"),
+  uoSort(en: "Sort", bn: "সাজান"),
+  uoAny(en: "Any", bn: "যেকোনো"),
+  uoApply(en: "Apply", bn: "প্রয়োগ করুন"),
+  uoClearFilters(en: "Clear", bn: "মুছুন"),
+  uoSortNumber(en: "Unit number", bn: "ইউনিট নম্বর"),
+  uoAscending(en: "Ascending", bn: "ঊর্ধ্বক্রম"),
+  uoDescending(en: "Descending", bn: "অধঃক্রম")
   // Add more entries as required
   ;
 

@@ -69,8 +69,13 @@ class PropertyRepositoryImpl implements PropertyRepository {
     ),
   );
   @override
-  Future<List<PropertyUnit>> listUnits(String buildingId) =>
-      _list('${_building(buildingId)}/units', PropertyMapper.unit);
+  Future<List<PropertyUnit>> listUnits(
+    String buildingId, {
+    UnitListQuery query = const UnitListQuery(),
+  }) => _list(
+    '${_building(buildingId)}/units${PropertyMapper.unitQuery(query)}',
+    PropertyMapper.unit,
+  );
   @override
   Future<PropertyUnit> getUnit(String buildingId, String id) async =>
       PropertyMapper.unit(
