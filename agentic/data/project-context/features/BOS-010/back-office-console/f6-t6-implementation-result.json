@@ -1,0 +1,18 @@
+{
+  "status": "READY",
+  "evidence": [
+    "buildingos_backoffice_web/: Next.js 16 App Router + TypeScript + Tailwind 4 project (D-09)",
+    "src/app/api/auth/otp/{start,verify}, logout: OTP relay to auth-service; token kept in httpOnly SameSite=Strict cookie (Secure in production), max-age = expiresInSeconds",
+    "src/app/api/gateway/[...path]: server-side proxy, allowlist platform/** and building-applications/**, no browser cookies forwarded",
+    "src/proxy.ts route guard (signed-out -> /login, no platform role -> /denied); (console)/layout.tsx re-checks session",
+    "src/lib/nav.ts: BRD 149.2 tree + BRD 4.1 role visibility (UI only); Subscriptions items per D-22/D-35",
+    "Stitch DESIGN.md tokens in globals.css; bundled Plus Jakarta Sans/Inter via next/font/local",
+    "Dockerfile (standalone), infra/local/compose.yaml backoffice-web service (compose config valid)",
+    "Tests: 14 passed (claims, nav, gateway rules, Rail); npm run typecheck, lint, build green",
+    "Smoke vs local stack: unauth / -> 307 /login; unauth gateway 401; SUPER_ADMIN 01306999005 OTP 000000 -> 200 + HttpOnly cookie; shell renders full 149.2 rail; gateway platform/subscription-plans 200; me/buildings 404; no-role user 403 NO_PLATFORM_ROLE",
+    "Deviation: Playwright smoke replaced by curl smoke above; browser walkthrough moves to F6-T10 QA"
+  ],
+  "blocking_issues": [], "open_questions": [],
+  "recommended_next_step": "F6-T3/F6-T7 (T7a/T7b need technical re-approval for the spec change)",
+  "outputs": {"task": "F6-T6", "verdict": "IMPLEMENTED"}
+}

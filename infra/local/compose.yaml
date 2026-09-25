@@ -225,6 +225,19 @@ services:
       retries: 20
       start_period: 15s
 
+  backoffice-web:
+    container_name: buildingos-local-backoffice-web
+    image: buildingos/backoffice-web:local
+    build:
+      context: ../../buildingos_backoffice_web
+    environment:
+      BACKOFFICE_API_BASE_URL: http://api-gateway:8080/
+    ports:
+      - "127.0.0.1:3000:3000"
+    depends_on:
+      api-gateway:
+        condition: service_healthy
+
 volumes:
   postgres_data:
   kafka_data:

@@ -1,0 +1,54 @@
+@import "tailwindcss";
+
+/*
+ * Stitch "Proptech Enterprise" tokens
+ * (agentic/data/project-context/ui/stitch/design-system/DESIGN.md), same values as user_app.
+ */
+@theme inline {
+  --color-surface: #f8f9ff;
+  --color-surface-lowest: #ffffff;
+  --color-surface-low: #eff4ff;
+  --color-surface-container: #e5eeff;
+  --color-surface-high: #dce9ff;
+  --color-on-surface: #0b1c30;
+  --color-on-surface-variant: #434655;
+  --color-outline: #737686;
+  --color-outline-variant: #c3c6d7;
+  --color-primary: #004ac6;
+  --color-primary-container: #2563eb;
+  --color-primary-hover: #1d4ed8;
+  --color-on-primary: #ffffff;
+  --color-inverse-surface: #213145;
+  --color-anchor: #0f172a;
+  --color-tertiary: #006243;
+  --color-success: #059669;
+  --color-success-container: #ecfdf5;
+  --color-on-success-container: #065f46;
+  --color-warning: #d97706;
+  --color-warning-container: #fffbeb;
+  --color-on-warning-container: #92400e;
+  --color-error: #ba1a1a;
+  --color-error-container: #ffdad6;
+
+  --font-display: var(--nf-display), "Plus Jakarta Sans", system-ui, sans-serif;
+  --font-sans: var(--nf-body), "Inter", system-ui, sans-serif;
+
+  --radius-control: 0.5rem;
+  --radius-card: 0.75rem;
+  --radius-panel: 1rem;
+
+  --shadow-tier1: 0 1px 3px 0 rgba(15, 23, 42, 0.05), 0 1px 2px -1px rgba(15, 23, 42, 0.03);
+  --shadow-tier2: 0 10px 15px -3px rgba(15, 23, 42, 0.08), 0 4px 6px -4px rgba(15, 23, 42, 0.04);
+}
+
+body {
+  background: var(--color-surface);
+  color: var(--color-on-surface);
+  font-family: var(--font-sans);
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+}
