@@ -12,8 +12,8 @@ import com.buildingos.backoffice.onboarding.application.getonboardingsession.Get
 import com.buildingos.backoffice.onboarding.application.getonboardingsession.GetOnboardingSessionUseCase;
 import com.buildingos.backoffice.onboarding.application.listonboardingsessions.ListOnboardingSessionsService;
 import com.buildingos.backoffice.onboarding.application.listonboardingsessions.ListOnboardingSessionsUseCase;
-import com.buildingos.backoffice.onboarding.application.port.out.BuildingDirectory;
-import com.buildingos.backoffice.onboarding.application.port.out.PlatformUserDirectory;
+import com.buildingos.backoffice.shared.application.port.out.BuildingDirectory;
+import com.buildingos.backoffice.shared.application.port.out.PlatformUserDirectory;
 import com.buildingos.backoffice.onboarding.application.startonboardingsession.StartOnboardingSessionService;
 import com.buildingos.backoffice.onboarding.application.startonboardingsession.StartOnboardingSessionUseCase;
 import com.buildingos.backoffice.onboarding.application.startonboardingwork.StartOnboardingWorkService;

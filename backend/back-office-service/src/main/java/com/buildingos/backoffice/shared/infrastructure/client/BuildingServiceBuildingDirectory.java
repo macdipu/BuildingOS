@@ -1,6 +1,6 @@
-package com.buildingos.backoffice.onboarding.infrastructure.client;
+package com.buildingos.backoffice.shared.infrastructure.client;
 
-import com.buildingos.backoffice.onboarding.application.port.out.BuildingDirectory;
+import com.buildingos.backoffice.shared.application.port.out.BuildingDirectory;
 import com.buildingos.backoffice.shared.application.DependencyUnavailableException;
 import java.util.UUID;
 import org.springframework.beans.factory.annotation.Qualifier;

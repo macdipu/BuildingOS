@@ -1,3 +1,3 @@
 package com.buildingos.backoffice.shared.domain.model;
 
-public enum EntityType { ASSISTED_ONBOARDING_SESSION }
+public enum EntityType { ASSISTED_ONBOARDING_SESSION, SUPPORT_SESSION, ELEVATED_APPROVAL_REQUEST }

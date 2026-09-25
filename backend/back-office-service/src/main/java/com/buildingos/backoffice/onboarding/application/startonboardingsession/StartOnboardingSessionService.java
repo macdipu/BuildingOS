@@ -2,8 +2,8 @@ package com.buildingos.backoffice.onboarding.application.startonboardingsession;
 
 import com.buildingos.backoffice.onboarding.application.OnboardingErrors;
 import com.buildingos.backoffice.onboarding.application.OnboardingSessionExpiry;
-import com.buildingos.backoffice.onboarding.application.port.out.BuildingDirectory;
-import com.buildingos.backoffice.onboarding.application.port.out.PlatformUserDirectory;
+import com.buildingos.backoffice.shared.application.port.out.BuildingDirectory;
+import com.buildingos.backoffice.shared.application.port.out.PlatformUserDirectory;
 import com.buildingos.backoffice.onboarding.domain.model.AssistedOnboardingSession;
 import com.buildingos.backoffice.onboarding.domain.repository.AssistedOnboardingSessionRepository;
 import com.buildingos.backoffice.shared.application.Actor;

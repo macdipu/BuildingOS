@@ -1,4 +1,4 @@
-package com.buildingos.backoffice.onboarding.application.port.out;
+package com.buildingos.backoffice.shared.application.port.out;
 
 import java.util.Optional;
 import java.util.Set;

@@ -2904,6 +2904,411 @@ paths:
           content:
             application/json:
               schema: { $ref: "#/components/schemas/ApiError" }
+  /api/v1/platform/backoffice/support-sessions:
+    post:
+      summary: "Open a support session for the caller (BOC-07, D-36): SUPPORT_AGENT, PLATFORM_ADMIN or SUPER_ADMIN"
+      description: >
+        platformUserId is always the caller. back-office-service checks the target user with auth-service
+        GET /internal/users/{id} and the building with building-service GET /api/v1/platform/buildings/{id},
+        relaying the caller's token; nothing is stored unless both answer. Ordinary scopes are granted; each
+        high-risk scope creates a PENDING elevated approval request. The start and each request are recorded as
+        lifecycle_transition rows.
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/StartSupportSessionRequest" }
+      responses:
+        "201":
+          description: "Success envelope (data: SupportSessionDetail)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiEnvelope" }
+        "400":
+          description: "INVALID_REQUEST (no target user and no building, no/unknown/duplicate scope, reason missing, expiresAt not in the future or beyond max duration)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "401":
+          description: "Missing or invalid token"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "403":
+          description: "ACCESS_DENIED (requires SUPPORT_AGENT, PLATFORM_ADMIN or SUPER_ADMIN)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "422":
+          description: "TARGET_USER_NOT_FOUND or BUILDING_NOT_FOUND"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "503":
+          description: "DEPENDENCY_UNAVAILABLE (auth-service or building-service down; nothing stored)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+    get:
+      summary: "List support sessions (Support History; admins: all; SUPPORT_AGENT: own only)"
+      description: >
+        meta carries page, size, total. Newest started first. Due sessions are persisted EXPIRED first.
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: active
+          in: query
+          required: false
+          schema: { type: boolean }
+        - name: platformUserId
+          in: query
+          required: false
+          schema: { type: string, format: uuid }
+        - name: targetUserId
+          in: query
+          required: false
+          schema: { type: string, format: uuid }
+        - name: buildingId
+          in: query
+          required: false
+          schema: { type: string, format: uuid }
+        - name: page
+          in: query
+          required: false
+          schema: { type: integer, minimum: 0, default: 0 }
+        - name: size
+          in: query
+          required: false
+          schema: { type: integer, minimum: 1, maximum: 100, default: 20 }
+      responses:
+        "200":
+          description: "Success envelope (data: SupportSession[])"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiEnvelope" }
+        "400":
+          description: "INVALID_REQUEST (bad filter, page < 0, size outside 1-100)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "401":
+          description: "Missing or invalid token"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "403":
+          description: "ACCESS_DENIED (caller is neither SUPER_ADMIN/PLATFORM_ADMIN nor SUPPORT_AGENT)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+  /api/v1/platform/backoffice/support-sessions/{sessionId}:
+    get:
+      summary: "Support session detail with its elevated approval requests (reports EXPIRED once past expires_at)"
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: sessionId
+          in: path
+          required: true
+          schema: { type: string, format: uuid }
+      responses:
+        "200":
+          description: "Success envelope (data: SupportSessionDetail)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiEnvelope" }
+        "401":
+          description: "Missing or invalid token"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "403":
+          description: "ACCESS_DENIED (caller is neither SUPER_ADMIN/PLATFORM_ADMIN nor SUPPORT_AGENT)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "404":
+          description: "SUPPORT_SESSION_NOT_FOUND (also for another agent's sessions)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+  /api/v1/platform/backoffice/support-sessions/{sessionId}/end:
+    post:
+      summary: "Owner, SUPER_ADMIN or PLATFORM_ADMIN: end an active support session"
+      description: >
+        A session past expires_at is first persisted as EXPIRED (system transition), then rejected with 409.
+        Appends a lifecycle_transition row with the acting user. Its approvals can no longer be used or decided.
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: sessionId
+          in: path
+          required: true
+          schema: { type: string, format: uuid }
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/SupportReasonRequest" }
+      responses:
+        "200":
+          description: "Success envelope (data: SupportSessionDetail)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiEnvelope" }
+        "400":
+          description: "INVALID_REQUEST (reason longer than 1000)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "401":
+          description: "Missing or invalid token"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "403":
+          description: "ACCESS_DENIED (caller is neither SUPER_ADMIN/PLATFORM_ADMIN nor SUPPORT_AGENT)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "404":
+          description: "SUPPORT_SESSION_NOT_FOUND (also for another agent's sessions)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "409":
+          description: "SESSION_ENDED"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+  /api/v1/platform/backoffice/support-sessions/{sessionId}/elevated-approvals:
+    post:
+      summary: "Session owner: request a high-risk scope (creates a PENDING elevated approval request)"
+      description: >
+        One PENDING request per session and scope; a denied scope may be requested again. Appends a
+        lifecycle_transition row with the requester and reason.
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: sessionId
+          in: path
+          required: true
+          schema: { type: string, format: uuid }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/RequestElevatedApprovalRequest" }
+      responses:
+        "201":
+          description: "Success envelope (data: ElevatedApprovalRequest)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiEnvelope" }
+        "400":
+          description: "INVALID_REQUEST (scope missing, unknown or not high-risk; reason missing or longer than 1000)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "401":
+          description: "Missing or invalid token"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "403":
+          description: "ACCESS_DENIED (not a support user, or not the session owner)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "404":
+          description: "SUPPORT_SESSION_NOT_FOUND (also for another agent's sessions)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "409":
+          description: "SESSION_ENDED, APPROVAL_ALREADY_PENDING or APPROVAL_ALREADY_GRANTED"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+  /api/v1/platform/backoffice/support-sessions/{sessionId}/scope-check:
+    get:
+      summary: "Whether the session may use a scope now"
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: sessionId
+          in: path
+          required: true
+          schema: { type: string, format: uuid }
+        - name: scope
+          in: query
+          required: true
+          schema: { type: string, enum: [SUPPORT_VIEW_MEMBERS, SUPPORT_VIEW_UNITS, SUPPORT_VIEW_OWNERSHIP_HISTORY, SUPPORT_EDIT_UNIT, SUPPORT_MANAGE_MEMBERSHIP_INVITE, SUPPORT_REVOKE_MEMBERSHIP, SUPPORT_VIEW_SUBSCRIPTION, SUPPORT_VIEW_PAYMENTS, SUPPORT_REVERSE_PAYMENT, SUPPORT_TRANSFER_OWNERSHIP, SUPPORT_REMOVE_BUILDING_ADMIN, SUPPORT_EXPORT_FINANCIAL_UNRESTRICTED] }
+      responses:
+        "200":
+          description: "Success envelope (data: SupportScopeCheck)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiEnvelope" }
+        "400":
+          description: "INVALID_REQUEST (scope missing or unknown)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "401":
+          description: "Missing or invalid token"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "403":
+          description: "ACCESS_DENIED (caller is neither SUPER_ADMIN/PLATFORM_ADMIN nor SUPPORT_AGENT)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "404":
+          description: "SUPPORT_SESSION_NOT_FOUND (also for another agent's sessions)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+  /api/v1/platform/backoffice/elevated-approvals:
+    get:
+      summary: "List elevated approval requests (admins: all; SUPPORT_AGENT: on own sessions only)"
+      description: >
+        meta carries page, size, total. Newest requested first.
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: status
+          in: query
+          required: false
+          schema: { type: string, enum: [PENDING, APPROVED, DENIED] }
+        - name: page
+          in: query
+          required: false
+          schema: { type: integer, minimum: 0, default: 0 }
+        - name: size
+          in: query
+          required: false
+          schema: { type: integer, minimum: 1, maximum: 100, default: 20 }
+      responses:
+        "200":
+          description: "Success envelope (data: ElevatedApprovalRequest[])"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiEnvelope" }
+        "400":
+          description: "INVALID_REQUEST (unknown status, page < 0, size outside 1-100)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "401":
+          description: "Missing or invalid token"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "403":
+          description: "ACCESS_DENIED (caller is neither SUPER_ADMIN/PLATFORM_ADMIN nor SUPPORT_AGENT)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+  /api/v1/platform/backoffice/elevated-approvals/{approvalId}/approve:
+    post:
+      summary: "SUPER_ADMIN other than the session owner (four-eyes): approve a PENDING request on an active session"
+      description: >
+        Appends a lifecycle_transition row with the approver. The approval ends with its session.
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: approvalId
+          in: path
+          required: true
+          schema: { type: string, format: uuid }
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/SupportReasonRequest" }
+      responses:
+        "200":
+          description: "Success envelope (data: ElevatedApprovalRequest)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiEnvelope" }
+        "400":
+          description: "INVALID_REQUEST (reason longer than 1000)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "401":
+          description: "Missing or invalid token"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "403":
+          description: "ACCESS_DENIED (not SUPER_ADMIN, or the session owner)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "404":
+          description: "ELEVATED_APPROVAL_NOT_FOUND"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "409":
+          description: "SESSION_ENDED or APPROVAL_NOT_PENDING"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+  /api/v1/platform/backoffice/elevated-approvals/{approvalId}/deny:
+    post:
+      summary: "SUPER_ADMIN other than the session owner (four-eyes): deny a PENDING request with a reason"
+      description: >
+        Appends a lifecycle_transition row with the approver and reason.
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: approvalId
+          in: path
+          required: true
+          schema: { type: string, format: uuid }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/SupportReasonRequest" }
+      responses:
+        "200":
+          description: "Success envelope (data: ElevatedApprovalRequest)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiEnvelope" }
+        "400":
+          description: "INVALID_REQUEST (reason missing or longer than 1000)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "401":
+          description: "Missing or invalid token"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "403":
+          description: "ACCESS_DENIED (not SUPER_ADMIN, or the session owner)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "404":
+          description: "ELEVATED_APPROVAL_NOT_FOUND"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "409":
+          description: "SESSION_ENDED or APPROVAL_NOT_PENDING"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
   /internal/users/provision:
     post:
       summary: "auth-service: find or create a user by phone (service-to-service, D-29)"
@@ -3185,6 +3590,76 @@ components:
         expiresAt: { type: string, format: date-time }
         completedAt: { type: string, format: date-time, nullable: true }
         notes: { type: string, nullable: true }
+    StartSupportSessionRequest:
+      type: object
+      required: [permissionScope, reason, expiresAt]
+      description: At least one of targetUserId and buildingId.
+      properties:
+        targetUserId: { type: string, format: uuid, nullable: true, description: Must exist in auth-service }
+        buildingId: { type: string, format: uuid, nullable: true, description: Must exist in building-service }
+        permissionScope:
+          type: array
+          minItems: 1
+          uniqueItems: true
+          description: D-10 support scopes; high-risk ones become PENDING elevated approval requests
+          items: { type: string, enum: [SUPPORT_VIEW_MEMBERS, SUPPORT_VIEW_UNITS, SUPPORT_VIEW_OWNERSHIP_HISTORY, SUPPORT_EDIT_UNIT, SUPPORT_MANAGE_MEMBERSHIP_INVITE, SUPPORT_REVOKE_MEMBERSHIP, SUPPORT_VIEW_SUBSCRIPTION, SUPPORT_VIEW_PAYMENTS, SUPPORT_REVERSE_PAYMENT, SUPPORT_TRANSFER_OWNERSHIP, SUPPORT_REMOVE_BUILDING_ADMIN, SUPPORT_EXPORT_FINANCIAL_UNRESTRICTED] }
+        reason: { type: string, maxLength: 1000 }
+        expiresAt: { type: string, format: date-time, description: "In the future and at most buildingos.support.max-duration (default PT8H) after start" }
+    SupportReasonRequest:
+      type: object
+      properties:
+        reason: { type: string, maxLength: 1000, description: Audit reason; required to deny, optional otherwise }
+    RequestElevatedApprovalRequest:
+      type: object
+      required: [scope, reason]
+      properties:
+        scope: { type: string, enum: [SUPPORT_REVERSE_PAYMENT, SUPPORT_TRANSFER_OWNERSHIP, SUPPORT_REMOVE_BUILDING_ADMIN, SUPPORT_EXPORT_FINANCIAL_UNRESTRICTED] }
+        reason: { type: string, maxLength: 1000 }
+    SupportSession:
+      type: object
+      required: [id, platformUserId, status, reason, permissionScope, startedAt, expiresAt]
+      properties:
+        id: { type: string, format: uuid }
+        platformUserId: { type: string, format: uuid }
+        targetUserId: { type: string, format: uuid, nullable: true }
+        buildingId: { type: string, format: uuid, nullable: true }
+        status: { type: string, enum: [ACTIVE, ENDED, EXPIRED] }
+        reason: { type: string }
+        permissionScope:
+          type: array
+          description: Every scope named on the session; high-risk entries are usable only while an APPROVED request exists
+          items: { type: string, enum: [SUPPORT_VIEW_MEMBERS, SUPPORT_VIEW_UNITS, SUPPORT_VIEW_OWNERSHIP_HISTORY, SUPPORT_EDIT_UNIT, SUPPORT_MANAGE_MEMBERSHIP_INVITE, SUPPORT_REVOKE_MEMBERSHIP, SUPPORT_VIEW_SUBSCRIPTION, SUPPORT_VIEW_PAYMENTS, SUPPORT_REVERSE_PAYMENT, SUPPORT_TRANSFER_OWNERSHIP, SUPPORT_REMOVE_BUILDING_ADMIN, SUPPORT_EXPORT_FINANCIAL_UNRESTRICTED] }
+        startedAt: { type: string, format: date-time }
+        expiresAt: { type: string, format: date-time }
+        endedAt: { type: string, format: date-time, nullable: true, description: "Equals expiresAt when EXPIRED" }
+    SupportSessionDetail:
+      allOf:
+        - $ref: "#/components/schemas/SupportSession"
+        - type: object
+          required: [elevatedApprovals]
+          properties:
+            elevatedApprovals:
+              type: array
+              items: { $ref: "#/components/schemas/ElevatedApprovalRequest" }
+    ElevatedApprovalRequest:
+      type: object
+      required: [id, supportSessionId, requestedScope, status, requestedAt]
+      properties:
+        id: { type: string, format: uuid }
+        supportSessionId: { type: string, format: uuid }
+        requestedScope: { type: string, enum: [SUPPORT_REVERSE_PAYMENT, SUPPORT_TRANSFER_OWNERSHIP, SUPPORT_REMOVE_BUILDING_ADMIN, SUPPORT_EXPORT_FINANCIAL_UNRESTRICTED] }
+        status: { type: string, enum: [PENDING, APPROVED, DENIED] }
+        decidedBy: { type: string, format: uuid, nullable: true }
+        requestedAt: { type: string, format: date-time }
+        decidedAt: { type: string, format: date-time, nullable: true }
+        decisionReason: { type: string, nullable: true }
+    SupportScopeCheck:
+      type: object
+      required: [sessionId, scope, result]
+      properties:
+        sessionId: { type: string, format: uuid }
+        scope: { type: string, enum: [SUPPORT_VIEW_MEMBERS, SUPPORT_VIEW_UNITS, SUPPORT_VIEW_OWNERSHIP_HISTORY, SUPPORT_EDIT_UNIT, SUPPORT_MANAGE_MEMBERSHIP_INVITE, SUPPORT_REVOKE_MEMBERSHIP, SUPPORT_VIEW_SUBSCRIPTION, SUPPORT_VIEW_PAYMENTS, SUPPORT_REVERSE_PAYMENT, SUPPORT_TRANSFER_OWNERSHIP, SUPPORT_REMOVE_BUILDING_ADMIN, SUPPORT_EXPORT_FINANCIAL_UNRESTRICTED] }
+        result: { type: string, enum: [ALLOWED, PENDING_APPROVAL, NOT_GRANTED, SESSION_ENDED] }
     ApiError:
       type: object
       required: [success, code, message, traceId]

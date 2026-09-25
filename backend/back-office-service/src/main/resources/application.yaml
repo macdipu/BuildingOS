@@ -49,3 +49,5 @@ buildingos:
     read-timeout: ${SERVICE_READ_TIMEOUT:PT5S}
   onboarding:
     max-duration: ${ONBOARDING_MAX_DURATION:P30D}
+  support:
+    max-duration: ${SUPPORT_MAX_DURATION:PT8H}
