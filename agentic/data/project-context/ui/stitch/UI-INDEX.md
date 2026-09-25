@@ -85,31 +85,33 @@ Already-delivered screens (01–04, 10–12, 14) are being aligned by CR
 | `mobile/38-work-order-completion-signoff` | §74 (Complete) | BOS-006 | none yet |
 | `mobile/39-notice-board-circulars` | §77, §150.2 | BOS-007 | none yet |
 | `mobile/40-notice-detail-acknowledgment` | §79, §150.2 | BOS-007 | none yet |
-| `mobile/41-society-polls-agm-voting` | **not in BRD** | none — needs CR | — |
+| `mobile/41-society-polls-agm-voting` | §3.2 future scope (C-13) | none | — |
 | `mobile/42-resident-directory-intercom` | §87 Contacts (partial) | none — §87 in no backlog item | — |
-| `mobile/43-visitor-gate-pass-management` | **§3.2 future / §125 MVP exclusion** | none — needs CR | — |
+| `mobile/43-visitor-gate-pass-management` | §3.2 future / §125 MVP exclusion (C-13) | none | — |
 
 No mockup (BRD screens): §51 Ownership Assignment, §75–76 Contractors, §78 Create
 Announcement, §80–82 Meetings, §83–84 Assets, §85 Notifications, §86 Reports, §88 Calendar,
 §89 Settings, §90 Audit Log (mobile), §150.3 Community Chat. Plan these from BRD text + DESIGN.md.
 
-## Conflicts — BRD wins, operator decision needed
+## Conflicts — decisions (operator, 2026-09-25)
 
-| # | Screens | Mockup shows | BRD says |
-|---|---|---|---|
-| C-1 | mobile 04+ (all) | One bottom nav: Home/Units/Finance/Work/Community | §37: per-role nav sets (Owner, Tenant, Committee, admin differ) |
-| C-2 | back-office 01, 03 | Automated SaaS billing: bKash/Nagad auto-pay, direct debit, VAT invoices, MRR/GMV, dunning | §149.23: MVP has no automated billing/collection/invoicing/VAT/dunning |
-| C-3 | back-office 02 | 4-stage kanban, RAJUK deed KYC, per-building DB/subdomain | §149.4 state machine (DRAFT→SUBMITTED→UNDER_REVIEW→…→ACTIVE); §149.5 review fields/actions |
-| C-4 | mobile 24, 25, 26 | Auto 3% platform fee + landlord/fund payout split at collection | §22/§23/§113/§126: no such model |
-| C-5 | mobile 25 | Single lump balance, no invoice pick / allocation toggle / summary | §63: selected invoices, auto-oldest/manual allocation, received/allocated/advance/remaining summary |
-| C-6 | mobile 18, 19 | NID required + shown unmasked; DMP police verification workflow | §56/§94: NID optional, masked by default; no DMP workflow |
-| C-7 | mobile 19, 26 | Receipt `RCP-2025-0302` | §108: server-generated `BLD01-RNT-202609-000123` |
-| C-8 | mobile 31, 33 | Expense statuses "Settled", "Approved & Paid" | §26: DRAFT/SUBMITTED/APPROVED/REJECTED/PAID/VOID |
-| C-9 | mobile 38 | In-app "Pay Now via bKash/Nagad" | §3.2/§125: payment-gateway integration excluded |
-| C-10 | mobile 11, 14 | Unit wizard bundles ownership/parking/utility meters; transfer adds OTP gate + legal-instrument type | §49 field list; §52/§127 transfer fields |
-| C-11 | mobile 02 | "Continue with Google" primary | BOS-010: Google sign-in deferred |
-| C-12 | mobile 39 | Concrete notice categories (Emergency, circular, resolution) | §150.2: category OPEN |
-| C-13 | mobile 41, 43 | Polls/AGM voting; visitor gate pass | Absent / explicit future scope |
+"BRD (default)" = BRD wins per AGENTS.md UI rule 2; mockup element is not scope.
+
+| # | Screens | Mockup shows | BRD says | Decision |
+|---|---|---|---|---|
+| C-1 | mobile 04+ (all) | One bottom nav: Home/Units/Finance/Work/Community | §37: per-role nav sets (Owner, Tenant, Committee, admin differ) | BRD — per-role nav (BOS-011 D-02, done) |
+| C-2 | back-office 01, 03 | Automated SaaS billing: bKash/Nagad auto-pay, direct debit, VAT invoices, MRR/GMV, dunning | §149.23: MVP has no automated billing/collection/invoicing/VAT/dunning | BRD (default) — no automated billing in MVP |
+| C-3 | back-office 02 | 4-stage kanban, RAJUK deed KYC, per-building DB/subdomain | §149.4 state machine (DRAFT→SUBMITTED→UNDER_REVIEW→…→ACTIVE); §149.5 review fields/actions | BRD (default) — §149.4 states + §149.5 fields |
+| C-4 | mobile 24, 25, 26 | Auto 3% platform fee + landlord/fund payout split at collection | §22/§23/§113/§126: no such model | Dropped — no platform fee / payout split |
+| C-5 | mobile 25 | Single lump balance, no invoice pick / allocation toggle / summary | §63: selected invoices, auto-oldest/manual allocation, received/allocated/advance/remaining summary | BRD (default) — §63 allocation UI |
+| C-6 | mobile 18, 19 | NID required + shown unmasked; DMP police verification workflow | §56/§94: NID optional, masked by default; no DMP workflow | BRD — NID optional + masked; no DMP workflow |
+| C-7 | mobile 19, 26 | Receipt `RCP-2025-0302` | §108: server-generated `BLD01-RNT-202609-000123` | BRD (default) — server §108 receipt format |
+| C-8 | mobile 31, 33 | Expense statuses "Settled", "Approved & Paid" | §26: DRAFT/SUBMITTED/APPROVED/REJECTED/PAID/VOID | BRD (default) — §26 status enum |
+| C-9 | mobile 38 | In-app "Pay Now via bKash/Nagad" | §3.2/§125: payment-gateway integration excluded | BRD (default) — no in-app gateway payment |
+| C-10 | mobile 11, 14 | Unit wizard bundles ownership/parking/utility meters; transfer adds OTP gate + legal-instrument type | §49 field list; §52/§127 transfer fields | BRD — mockup extras excluded (BOS-011 D-03, done) |
+| C-11 | mobile 02 | "Continue with Google" primary | BOS-010: Google sign-in deferred | BRD — Google sign-in deferred (done) |
+| C-12 | mobile 39 | Concrete notice categories (Emergency, circular, resolution) | §150.2: category OPEN | Adopted: GENERAL, EMERGENCY, CIRCULAR, RESOLUTION, MAINTENANCE (BRD §150.2 updated) |
+| C-13 | mobile 41, 43 | Polls/AGM voting; visitor gate pass | Absent / explicit future scope | Both future scope (BRD §3.2 updated); no work items |
 
 Material BRD-only gaps per screen (e.g. tenant-detail lifecycle actions `Create Lease`,
 `Record Payment`, `Give Notice`, `Move Out`; expense `Edit`/`Mark Paid`/`Void`; work-order link

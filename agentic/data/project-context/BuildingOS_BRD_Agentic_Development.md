@@ -93,8 +93,9 @@ The platform must support buildings where one owner can own multiple units, one 
 - Integrated payment gateway
 - bKash/Nagad merchant APIs
 - Utility billing
-- Visitor management
+- Visitor management (incl. visitor gate pass; still excluded from MVP, §125 — confirmed 2026-09-25)
 - Gate access
+- Society polls / AGM voting (not yet specified; from Stitch UI review 2026-09-25)
 - QR rent payment
 - Accounting integrations
 - OCR receipt extraction
@@ -5401,7 +5402,8 @@ Additional fields:
 
 ```text
 pinned
-category        -- OPEN: category list (e.g. GENERAL, MAINTENANCE, EMERGENCY, MEETING, FINANCE) not yet decided
+category        -- GENERAL | EMERGENCY | CIRCULAR | RESOLUTION | MAINTENANCE (decided 2026-09-25, UI-INDEX C-12);
+                   a label only: push/preference bypass is still driven by priority EMERGENCY above
 allow_comments
 ```
 

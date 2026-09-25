@@ -13,9 +13,9 @@ Source: BRD §123; work starts with BOS-001. No sprint dates, capacity promises,
 | BOS-009 | Security, load/failure recovery, DLQ and release evidence | Prior slices | 93–99,102,135–136,142,146 |
 
 UI mockups per item: `agentic/data/project-context/ui/stitch/UI-INDEX.md` (BOS-003 → mobile 17–24,
-BOS-004 → 25–33, BOS-006 → 34–38, BOS-007 → 39–40, BOS-008 → 05–09). Mobile 41 (polls/AGM),
-42 (resident directory ≈ §87 Contacts, unassigned), 43 (visitor gate pass, §3.2 future scope)
-have no backlog item — CR required before planning.
+BOS-004 → 25–33, BOS-006 → 34–38, BOS-007 → 39–40, BOS-008 → 05–09). Mobile 41 (polls/AGM) and 43 (visitor
+gate pass) are future scope (§3.2, decided 2026-09-25); 42 (resident directory ≈ §87 Contacts) is
+unassigned. UI-INDEX conflict decisions C-1..C-13 apply to all planning.
 
 Audit is implemented alongside privileged/domain writes from BOS-002 onward, not deferred to BOS-009.
 Outbox and consumer idempotency ship with each event-producing feature.

@@ -39,6 +39,9 @@ project_docs:
       moved from future scope (§3.2) to in-scope Phase 6, MVP inclusion OPEN
       (§125); cross-refs in §3,4,8.6,8.7,9,28,31,37,85,91,112,115,123,134-138,
       149.16. Tracked by BOS-007 in BOS-001/BACKLOG.md.
+      Revised 2026-09-25 (Stitch UI review, UI-INDEX C-12/C-13): notice
+      category list decided (§150.2); polls/AGM voting added to future scope
+      and visitor gate pass confirmed excluded (§3.2).
   UI:
     status: DRAFT
     path: agentic/data/project-context/ui/stitch/UI-INDEX.md
