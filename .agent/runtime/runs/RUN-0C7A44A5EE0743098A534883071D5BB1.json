@@ -3028,6 +3028,32 @@
         "commit_trigger": "user-request"
       },
       "created_at": "2026-09-24T22:53:31.287516+00:00"
+    },
+    {
+      "run_id": "RUN-0C7A44A5EE0743098A534883071D5BB1",
+      "event": "COMMIT_RECORDED",
+      "payload": {
+        "sha": "476a3f9",
+        "subject": "fix(building-service): fix minio data dir for non-root bitnami image",
+        "work_item": "BOS-010-F4",
+        "task": "",
+        "run": "",
+        "commit_trigger": "user-request"
+      },
+      "created_at": "2026-09-25T01:06:23.727835+00:00"
+    },
+    {
+      "run_id": "RUN-0C7A44A5EE0743098A534883071D5BB1",
+      "event": "COMMIT_RECORDED",
+      "payload": {
+        "sha": "f81d630",
+        "subject": "docs(bos-010): mark F4's minio exclusion as resolved",
+        "work_item": "BOS-010-F4",
+        "task": "",
+        "run": "",
+        "commit_trigger": "user-request"
+      },
+      "created_at": "2026-09-25T01:07:00.938793+00:00"
     }
   ],
   "tool_calls": {}

@@ -11,6 +11,7 @@ services:
       AUTH_DB_PASSWORD: ${AUTH_DB_PASSWORD:?set in infra/dev/.env}
       BUILDING_DB_PASSWORD: ${BUILDING_DB_PASSWORD:?set in infra/dev/.env}
       SUBSCRIPTION_DB_PASSWORD: ${SUBSCRIPTION_DB_PASSWORD:?set in infra/dev/.env}
+      BACK_OFFICE_DB_PASSWORD: ${BACK_OFFICE_DB_PASSWORD:?set in infra/dev/.env}
     ports:
       - "127.0.0.1:5432:5432"
     volumes:
@@ -163,6 +164,34 @@ services:
       retries: 20
       start_period: 15s
 
+  back-office-service:
+    container_name: buildingos-dev-back-office-service
+    image: buildingos/back-office-service:dev
+    build:
+      context: ../../backend/back-office-service
+    environment:
+      SPRING_PROFILES_ACTIVE: local
+      SERVER_PORT: 8080
+      DB_URL: jdbc:postgresql://postgres:5432/back_office_db
+      DB_USERNAME: back_office_app
+      DB_PASSWORD: ${BACK_OFFICE_DB_PASSWORD:?set in infra/dev/.env}
+      JWT_ISSUER: http://auth-service:8080
+      JWT_JWK_SET_URI: http://auth-service:8080/.well-known/jwks.json
+      JWT_AUDIENCE: buildingos-dev
+    ports:
+      - "127.0.0.1:8084:8080"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      auth-service:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health/readiness"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+      start_period: 15s
+
   api-gateway:
     container_name: buildingos-dev-api-gateway
     image: buildingos/api-gateway:dev
@@ -177,6 +206,7 @@ services:
       AUTH_SERVICE_URL: http://auth-service:8080
       BUILDING_SERVICE_URL: http://building-service:8080
       SUBSCRIPTION_SERVICE_URL: http://subscription-service:8080
+      BACK_OFFICE_SERVICE_URL: http://back-office-service:8080
     ports:
       - "127.0.0.1:8080:8080"
     depends_on:
@@ -185,6 +215,8 @@ services:
       building-service:
         condition: service_healthy
       subscription-service:
+        condition: service_healthy
+      back-office-service:
         condition: service_healthy
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health/readiness"]

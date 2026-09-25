@@ -19,10 +19,12 @@ public class GatewayRouteConfig {
     RouterFunction<ServerResponse> routes(
             @Value("${AUTH_SERVICE_URL}") String authUrl,
             @Value("${BUILDING_SERVICE_URL}") String buildingUrl,
-            @Value("${SUBSCRIPTION_SERVICE_URL}") String subscriptionUrl) {
+            @Value("${SUBSCRIPTION_SERVICE_URL}") String subscriptionUrl,
+            @Value("${BACK_OFFICE_SERVICE_URL}") String backOfficeUrl) {
         return metadataRoute("auth", authUrl)
                 .and(metadataRoute("building", buildingUrl))
                 .and(metadataRoute("subscription", subscriptionUrl))
+                .and(metadataRoute("backoffice", backOfficeUrl))
                 .and(passThroughRoute("subscription-api", subscriptionUrl,
                         "/api/v1/platform/subscription-plans", "/api/v1/platform/subscription-plans/**",
                         "/api/v1/platform/free-tier", "/api/v1/platform/users/*/subscription",
@@ -34,6 +36,8 @@ public class GatewayRouteConfig {
                         "/api/v1/platform/building-applications/**", "/api/v1/platform/buildings/**",
                         "/api/v1/buildings/**", "/api/v1/me/buildings", "/api/v1/me/properties",
                         "/api/v1/me/building-invitations", "/api/v1/me/building-invitations/**"))
+                .and(passThroughRoute("backoffice-api", backOfficeUrl,
+                        "/api/v1/platform/backoffice/**"))
                 .and(otpRoute("start", authUrl))
                 .and(otpRoute("verify", authUrl));
     }

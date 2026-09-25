@@ -47,6 +47,7 @@ class GatewayDownstreamUnavailableTest {
         registry.add("AUTH_SERVICE_URL", () -> UNREACHABLE);
         registry.add("BUILDING_SERVICE_URL", () -> UNREACHABLE);
         registry.add("SUBSCRIPTION_SERVICE_URL", () -> UNREACHABLE);
+        registry.add("BACK_OFFICE_SERVICE_URL", () -> UNREACHABLE);
     }
 
     @Test

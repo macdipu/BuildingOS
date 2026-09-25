@@ -28,6 +28,7 @@ class GatewayRoutingTest {
     private static StubDownstream authStub;
     private static StubDownstream buildingStub;
     private static StubDownstream subscriptionStub;
+    private static StubDownstream backOfficeStub;
     private static final HttpClient HTTP = HttpClient.newHttpClient();
 
     @LocalServerPort
@@ -39,6 +40,7 @@ class GatewayRoutingTest {
         authStub = new StubDownstream("auth-service");
         buildingStub = new StubDownstream("building-service");
         subscriptionStub = new StubDownstream("subscription-service");
+        backOfficeStub = new StubDownstream("back-office-service");
     }
 
     @AfterAll
@@ -47,6 +49,7 @@ class GatewayRoutingTest {
         authStub.close();
         buildingStub.close();
         subscriptionStub.close();
+        backOfficeStub.close();
     }
 
     @DynamicPropertySource
@@ -57,6 +60,7 @@ class GatewayRoutingTest {
         registry.add("AUTH_SERVICE_URL", () -> authStub.baseUrl);
         registry.add("BUILDING_SERVICE_URL", () -> buildingStub.baseUrl);
         registry.add("SUBSCRIPTION_SERVICE_URL", () -> subscriptionStub.baseUrl);
+        registry.add("BACK_OFFICE_SERVICE_URL", () -> backOfficeStub.baseUrl);
     }
 
     private HttpResponse<String> call(String path, String bearerToken, String extraHeaderName, String extraHeaderValue)
@@ -96,6 +100,24 @@ class GatewayRoutingTest {
         var response = call("/api/v1/platform/subscription", validToken(), null, null);
         assertThat(response.statusCode()).isEqualTo(200);
         assertThat(response.body()).contains("\"service\":\"subscription-service\"");
+    }
+
+    @Test
+    void validTokenForwardsToBackOfficeServiceMetadata() throws Exception {
+        var response = call("/api/v1/platform/backoffice", validToken(), null, null);
+        assertThat(response.statusCode()).isEqualTo(200);
+        assertThat(response.body()).contains("\"service\":\"back-office-service\"");
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"/api/v1/platform/backoffice/support-sessions",
+            "/api/v1/platform/backoffice/onboarding-sessions/abc"})
+    void backOfficeApiPathsForwardUnchangedWithBearerToken(String path) throws Exception {
+        String token = validToken();
+        var response = call(path, token, null, null);
+        assertThat(response.statusCode()).isEqualTo(200);
+        assertThat(response.body()).contains("\"service\":\"back-office-service\"", "\"path\":\"" + path + "\"");
+        assertThat(backOfficeStub.lastAuthorization()).isEqualTo("Bearer " + token);
     }
 
     @ParameterizedTest

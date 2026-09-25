@@ -43,15 +43,18 @@ Testcontainers Postgres and a local fixture JWKS server — no external services
 docker compose -f infra/local/compose.yaml up -d --build
 ```
 
-Brings up Postgres, Kafka, MinIO, and all four application services (`auth-service`,
-`subscription-service`, `building-service`, `api-gateway`), built from source and wired
-together on the compose network, in dependency order (each service's own
-`/actuator/health/readiness` gates the next). Images are tagged `buildingos/<service>:local`
-and containers named `buildingos-local-<service>` (see [container images](#container-images)
-for building without compose).
+Or `make local-up` (see the [Makefile](#makefile-shortcuts) below).
+
+Brings up Postgres, Kafka, MinIO, and all five application services (`auth-service`,
+`subscription-service`, `building-service`, `back-office-service`, `api-gateway`), built
+from source and wired together on the compose network, in dependency order (each
+service's own `/actuator/health/readiness` gates the next). Images are tagged
+`buildingos/<service>:local` and containers named `buildingos-local-<service>` (see
+[container images](#container-images) for building without compose).
 
 Ports on the host: gateway `8080`, auth-service `8081`, building-service `8082`,
-subscription-service `8083`, Postgres `5432`, Kafka `9092`, MinIO API/console `9000`/`9001`.
+subscription-service `8083`, back-office-service `8084`, Postgres `5432`, Kafka `9092`,
+MinIO API/console `9000`/`9001`.
 
 Rebuild after a code change:
 
@@ -61,6 +64,22 @@ docker compose -f infra/local/compose.yaml up -d --build <service>
 ```
 
 Stop everything: see [Stop](#stop).
+
+## Makefile shortcuts
+
+`make help` lists every target. Shorthand for the commands above:
+
+```sh
+make local-up          # docker compose -f infra/local/compose.yaml up -d --build
+make local-down        # docker compose -f infra/local/compose.yaml down
+make local-restart     # local-down then local-up
+make local-logs        # follow all local service logs
+make dev-up / dev-down / dev-restart / dev-logs   # same, for infra/dev
+make verify            # mvn -B -f backend/pom.xml verify
+make verify-platform   # sh scripts/verify-platform.sh
+make check-contracts   # python3 scripts/check-contracts.py
+make verify-flutter    # sh scripts/verify-flutter.sh
+```
 
 ## Start just the infrastructure
 
@@ -211,6 +230,7 @@ mvn -B -f backend/pom.xml package -DskipTests
 docker build --tag buildingos/auth-service:local backend/auth-service
 docker build --tag buildingos/building-service:local backend/building-service
 docker build --tag buildingos/subscription-service:local backend/subscription-service
+docker build --tag buildingos/back-office-service:local backend/back-office-service
 docker build --tag buildingos/api-gateway:local backend/api-gateway
 ```
 

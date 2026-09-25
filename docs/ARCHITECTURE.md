@@ -37,6 +37,7 @@ BuildingOS/
 │   ├── auth-service/
 │   ├── building-service/
 │   ├── subscription-service/ plans, per-user subscriptions, free tier, one-time fees (BOS-010 F5a)
+│   ├── back-office-service/ assisted-onboarding/support sessions, elevated approval, audit/health aggregation (BOS-010 F6)
 │   └── platform-web/        shared web kernel (library, not a service)
 ├── user_app/                Flutter mobile app (GetX)
 ├── contracts/
