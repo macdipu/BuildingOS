@@ -367,7 +367,20 @@ enum TextEnum {
     en: "This section is not available yet.",
     bn: "এই অংশটি এখনো চালু হয়নি।",
   ),
-  switchBuilding(en: "Switch building", bn: "ভবন পরিবর্তন করুন")
+  switchBuilding(en: "Switch building", bn: "ভবন পরিবর্তন করুন"),
+  loginWelcome(en: "Welcome back", bn: "আবার স্বাগতম"),
+  loginSubtitle(
+    en: "Manage your properties, rent collections, and community in one place",
+    bn: "আপনার সম্পত্তি, ভাড়া আদায় ও কমিউনিটি এক জায়গায় পরিচালনা করুন",
+  ),
+  loginOtpHint(
+    en: "We will send a 6-digit verification code to this number",
+    bn: "এই নম্বরে ৬ সংখ্যার একটি যাচাইকরণ কোড পাঠানো হবে",
+  ),
+  loginContinue(en: "Continue with Phone", bn: "ফোন দিয়ে চালিয়ে যান"),
+  otpTitle(en: "Verify Identity", bn: "পরিচয় যাচাই"),
+  otpEnterCode(en: "Enter Verification Code", bn: "যাচাইকরণ কোড লিখুন"),
+  verifyContinue(en: "Verify & Continue", bn: "যাচাই করে চালিয়ে যান")
   // Add more entries as required
   ;
 

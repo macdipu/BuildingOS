@@ -1,5 +1,6 @@
 import 'package:customer/app/startup/splash_controller.dart';
 import 'package:customer/app/theme/theme_extensions.dart';
+import 'package:customer/core/widgets/brand/brand_mark.dart';
 import 'package:customer/res/strings/string_enum.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -18,15 +19,7 @@ class SplashScreen extends GetView<SplashController> {
           child: Column(
             children: [
               const Spacer(),
-              Container(
-                width: 72,
-                height: 72,
-                decoration: BoxDecoration(
-                  color: context.primaryContainer,
-                  borderRadius: BorderRadius.circular(16),
-                ),
-                child: Icon(Icons.domain, size: 40, color: context.onPrimary),
-              ),
+              const BrandMark(),
               const SizedBox(height: 24),
               Text(
                 TextEnum.splashBrand.tr,

@@ -2,7 +2,7 @@ import 'dart:async';
 import 'package:flutter/services.dart';
 import 'package:customer/app/theme/theme_extensions.dart';
 import 'package:customer/core/utils/state_status.dart';
-import 'package:customer/core/widgets/images/app_svg.dart';
+import 'package:customer/core/widgets/brand/brand_mark.dart';
 import 'package:customer/core/widgets/text_field/custom_text_field.dart';
 import 'package:customer/core/widgets/buttons/common_button.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +10,6 @@ import 'package:get/get.dart';
 import 'package:customer/app/routes/app_routes.dart';
 import 'package:customer/res/strings/string_enum.dart';
 
-import 'package:customer/res/resources.dart';
 import 'package:customer/features/authentication/presentation/controllers/login_screen_controller.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -32,14 +31,16 @@ class _LoginScreenState extends State<LoginScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              const SizedBox(height: 16),
+              const SizedBox(height: 8),
               _switchLocaleButton(),
-              const SizedBox(height: 48),
+              const SizedBox(height: 32),
               _branding(),
-              const SizedBox(height: 24),
+              const SizedBox(height: 40),
               _heading(),
-              const SizedBox(height: 24),
+              const SizedBox(height: 32),
               _phoneNumber(),
+              const SizedBox(height: 8),
+              _otpHint(),
               const SizedBox(height: 24),
               _submitButton(),
               const SizedBox(height: 24),
@@ -80,20 +81,52 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
+  // Mockup 02: brand row, then "Welcome back" + subtitle.
   Widget _branding() {
-    return Center(
-      child: AppSvg(
-        assetPath: Resources.drawable.splashImage,
-        height: 96,
-      ),
+    return Row(
+      children: [
+        const BrandMark(size: 40),
+        const SizedBox(width: 12),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(TextEnum.splashBrand.tr, style: context.headlineSmall),
+            Text(
+              TextEnum.splashTagline.tr,
+              style: context.labelSmall?.copyWith(color: context.onSurfaceVariant),
+            ),
+          ],
+        ),
+      ],
     );
   }
 
   Widget _heading() {
-    return Text(
-      TextEnum.loginUpperText.tr,
-      textAlign: TextAlign.center,
-      style: Theme.of(context).textTheme.headlineSmall,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(TextEnum.loginWelcome.tr, style: context.headlineLarge),
+        const SizedBox(height: 8),
+        Text(
+          TextEnum.loginSubtitle.tr,
+          style: context.bodyMedium?.copyWith(color: context.onSurfaceVariant),
+        ),
+      ],
+    );
+  }
+
+  Widget _otpHint() {
+    return Row(
+      children: [
+        Icon(Icons.lock_clock_outlined, size: 16, color: context.onSurfaceVariant),
+        const SizedBox(width: 6),
+        Expanded(
+          child: Text(
+            TextEnum.loginOtpHint.tr,
+            style: context.bodySmall?.copyWith(color: context.onSurfaceVariant),
+          ),
+        ),
+      ],
     );
   }
 
@@ -111,7 +144,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget _submitButton() {
     return Obx(
       () => CommonButton.elevated(
-        title: TextEnum.next.tr,
+        title: TextEnum.loginContinue.tr,
         isLoading: _controller.status.value == StateStatus.loading,
         onTap: () async {
           final success = await _controller.requestOtp();
