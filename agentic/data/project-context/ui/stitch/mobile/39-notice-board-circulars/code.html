@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Green Valley Heights - Notice Board &amp; Announcements</title>
+<!-- Material Symbols Outlined font -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Plus Jakarta Sans & Inter Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS with Forms and Container Queries -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "secondary-fixed-dim": "#bec6e0",
+            "surface": "#f8f9ff",
+            "primary-fixed": "#dbe1ff",
+            "primary-container": "#2563eb",
+            "surface-container-highest": "#d3e4fe",
+            "surface-bright": "#f8f9ff",
+            "inverse-surface": "#213145",
+            "surface-variant": "#d3e4fe",
+            "tertiary-fixed": "#85f8c4",
+            "on-tertiary-container": "#bdffdc",
+            "secondary-container": "#dae2fd",
+            "secondary": "#565e74",
+            "on-error-container": "#93000a",
+            "on-surface-variant": "#434655",
+            "inverse-primary": "#b4c5ff",
+            "primary-fixed-dim": "#b4c5ff",
+            "surface-container": "#e5eeff",
+            "on-secondary": "#ffffff",
+            "on-tertiary-fixed": "#002114",
+            "error": "#ba1a1a",
+            "on-primary-fixed-variant": "#003ea8",
+            "on-tertiary-fixed-variant": "#005137",
+            "surface-dim": "#cbdbf5",
+            "error-container": "#ffdad6",
+            "surface-container-low": "#eff4ff",
+            "on-background": "#0b1c30",
+            "on-secondary-fixed": "#131b2e",
+            "background": "#f8f9ff",
+            "on-secondary-container": "#5c647a",
+            "on-primary": "#ffffff",
+            "outline": "#737686",
+            "tertiary": "#006243",
+            "on-secondary-fixed-variant": "#3f465c",
+            "on-surface": "#0b1c30",
+            "on-primary-container": "#eeefff",
+            "tertiary-fixed-dim": "#68dba9",
+            "on-tertiary": "#ffffff",
+            "surface-container-high": "#dce9ff",
+            "on-primary-fixed": "#00174b",
+            "inverse-on-surface": "#eaf1ff",
+            "surface-container-lowest": "#ffffff",
+            "secondary-fixed": "#dae2fd",
+            "surface-tint": "#0053db",
+            "on-error": "#ffffff",
+            "primary": "#004ac6",
+            "outline-variant": "#c3c6d7",
+            "tertiary-container": "#007d57"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-lg": "1.5rem",
+            "space-xl": "2rem",
+            "space-2xl": "3rem",
+            "margin-mobile": "1rem",
+            "space-md": "1rem",
+            "space-sm": "0.75rem",
+            "space-2xs": "0.25rem",
+            "gutter-mobile": "1rem",
+            "gutter": "1.5rem",
+            "space-xs": "0.5rem",
+            "margin": "2rem"
+          },
+          "fontFamily": {
+            "label-sm": ["Inter"],
+            "headline-lg": ["Plus Jakarta Sans"],
+            "label-md": ["Inter"],
+            "body-sm": ["Inter"],
+            "currency-lg": ["Plus Jakarta Sans"],
+            "body-md": ["Inter"],
+            "display-lg": ["Plus Jakarta Sans"],
+            "body-lg": ["Inter"],
+            "display-lg-mobile": ["Plus Jakarta Sans"],
+            "currency-md": ["Inter"],
+            "headline-md": ["Plus Jakarta Sans"],
+            "label-lg": ["Inter"],
+            "headline-xl": ["Plus Jakarta Sans"]
+          },
+          "fontSize": {
+            "label-sm": ["11px", { "lineHeight": "14px", "letterSpacing": "0.02em", "fontWeight": "600" }],
+            "headline-lg": ["22px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "600" }],
+            "body-sm": ["12px", { "lineHeight": "16px", "fontWeight": "400" }],
+            "currency-lg": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+            "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+            "display-lg": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "display-lg-mobile": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+            "currency-md": ["15px", { "lineHeight": "20px", "fontWeight": "600" }],
+            "headline-md": ["18px", { "lineHeight": "24px", "letterSpacing": "-0.005em", "fontWeight": "600" }],
+            "label-lg": ["14px", { "lineHeight": "20px", "fontWeight": "600" }],
+            "headline-xl": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.015em", "fontWeight": "600" }]
+          }
+        },
+      },
+    }
+  </script>
+</head>
+<body class="bg-background text-on-surface antialiased font-body-md selection:bg-primary-fixed selection:text-on-primary-fixed min-h-screen pb-24">
+<!-- ================= TOP APP BAR (Shared Component Anchor) ================= -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-space-md h-16 bg-surface-container-lowest dark:bg-inverse-surface shadow-sm">
+<div class="flex items-center gap-space-xs">
+<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-primary dark:text-inverse-primary">
+<span class="material-symbols-outlined text-[24px]">apartment</span>
+</div>
+<div>
+<h1 class="text-headline-md font-headline-md text-on-surface dark:text-inverse-on-surface leading-tight">Green Valley Heights</h1>
+<p class="text-label-sm font-label-sm text-secondary dark:text-secondary-fixed-dim">Notice Board &amp; Circulars • Banani, Dhaka</p>
+</div>
+</div>
+<div class="flex items-center gap-space-xs">
+<button aria-label="Search Notices" class="w-9 h-9 rounded-lg flex items-center justify-center text-secondary hover:bg-surface-container-high transition-transform duration-150 active:scale-95" type="button">
+<span class="material-symbols-outlined text-[20px]">search</span>
+</button>
+<button aria-label="Notifications" class="w-9 h-9 rounded-lg flex items-center justify-center text-secondary hover:bg-surface-container-high relative transition-transform duration-150 active:scale-95" type="button">
+<span class="material-symbols-outlined text-[20px]">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 rounded-full bg-error ring-2 ring-surface-container-lowest"></span>
+</button>
+</div>
+</header>
+<!-- Main Scrollable Canvas -->
+<main class="pt-20 px-margin-mobile space-y-space-md max-w-md mx-auto">
+<!-- Management Meta Bar & Action Button -->
+<div class="flex items-center justify-between pt-1">
+<div class="flex items-center gap-space-xs">
+<span class="inline-flex items-center px-2 py-0.5 rounded-full text-label-sm font-label-sm bg-surface-container-high text-on-surface-variant font-semibold">
+          Banani Block D
+        </span>
+<span class="text-label-sm font-label-sm text-secondary">36 Multi-tenants</span>
+</div>
+<button class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-primary text-on-primary text-label-md font-label-md shadow-sm active:scale-95 transition-all" type="button">
+<span class="material-symbols-outlined text-[16px]">add</span>
+<span>+ Post Notice</span>
+</button>
+</div>
+<!-- Filter Segmented Horizontal Pills -->
+<section aria-label="Notice Categories" class="overflow-x-auto no-scrollbar -mx-margin-mobile px-margin-mobile py-0.5 flex items-center gap-space-xs">
+<button class="whitespace-nowrap px-3 py-1.5 rounded-full text-label-md font-label-md bg-primary text-on-primary shadow-sm font-semibold active:scale-95 transition-all">
+        All (12)
+      </button>
+<button class="whitespace-nowrap px-3 py-1.5 rounded-full text-label-md font-label-md bg-surface-container-lowest border border-outline-variant text-on-surface-variant active:scale-95 hover:bg-surface-container transition-all flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-error"></span>
+<span>Emergency (1)</span>
+</button>
+<button class="whitespace-nowrap px-3 py-1.5 rounded-full text-label-md font-label-md bg-surface-container-lowest border border-outline-variant text-on-surface-variant active:scale-95 hover:bg-surface-container transition-all">
+        Society AGM (2)
+      </button>
+<button class="whitespace-nowrap px-3 py-1.5 rounded-full text-label-md font-label-md bg-surface-container-lowest border border-outline-variant text-on-surface-variant active:scale-95 hover:bg-surface-container transition-all">
+        Maintenance (5)
+      </button>
+<button class="whitespace-nowrap px-3 py-1.5 rounded-full text-label-md font-label-md bg-surface-container-lowest border border-outline-variant text-on-surface-variant active:scale-95 hover:bg-surface-container transition-all">
+        Rules &amp; By-laws (4)
+      </button>
+</section>
+<!-- ================= PINNED URGENT NOTICE CARD ================= -->
+<section class="relative bg-surface-container-lowest rounded-xl border-2 border-error-container shadow-sm overflow-hidden p-space-md space-y-3">
+<!-- Ambient Top Urgency Line Accent -->
+<div class="absolute top-0 left-0 right-0 h-1.5 bg-error"></div>
+<!-- Badge & Pin Indicator Row -->
+<div class="flex items-center justify-between pt-0.5">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-label-sm font-label-sm bg-error-container text-on-error-container font-semibold tracking-wide">
+<span class="material-symbols-outlined text-[14px]">warning</span>
+<span>URGENT • Mandatory Read</span>
+</span>
+<div class="flex items-center text-error gap-0.5 text-label-sm font-label-sm font-semibold">
+<span class="material-symbols-outlined text-[16px]">push_pin</span>
+<span>Pinned</span>
+</div>
+</div>
+<!-- Notice Title & Datetime -->
+<div class="space-y-1">
+<h2 class="text-headline-md font-headline-md text-on-surface font-bold leading-snug">
+          Water Supply Shutdown for Overhead Tank Deep Cleaning &amp; Chlorination
+        </h2>
+<div class="flex items-center gap-1.5 text-secondary text-label-sm font-label-sm">
+<span class="material-symbols-outlined text-[16px] text-error">schedule</span>
+<span class="font-medium text-on-surface">21 March 2025, 10:00 AM - 04:00 PM</span>
+</div>
+</div>
+<!-- Summary Copy -->
+<p class="text-body-md font-body-md text-on-surface-variant">
+        Dhaka WASA booster pump maintenance &amp; underground tank cleaning. Residents requested to store sufficient potable water.
+      </p>
+<!-- Compliance / Acknowledgment Tracker -->
+<div class="bg-surface-container-low rounded-lg p-2.5 space-y-1.5 border border-outline-variant">
+<div class="flex justify-between items-center text-label-sm font-label-sm">
+<span class="font-semibold text-on-surface">Digital Compliance Tracker</span>
+<span class="font-bold text-primary">28 of 36 Flats Acknowledged (78%)</span>
+</div>
+<!-- Progress track -->
+<div class="w-full bg-surface-container-high h-2 rounded-full overflow-hidden">
+<div class="bg-primary h-full rounded-full transition-all duration-500" style="width: 78%;"></div>
+</div>
+<p class="text-[10px] leading-3 text-secondary font-label-sm">
+          Mandated by Banani Society Directive WASA-2025. Unacknowledged units will receive SMS ping.
+        </p>
+</div>
+<!-- CTA Button -->
+<div class="pt-1">
+<button class="w-full py-2.5 px-space-md rounded-lg bg-error text-on-error text-label-lg font-label-lg font-semibold flex items-center justify-center gap-2 shadow-sm active:scale-95 transition-all" type="button">
+<span class="material-symbols-outlined text-[18px]">verified_user</span>
+<span>View Circular &amp; Acknowledge</span>
+</button>
+</div>
+</section>
+<!-- ================= NOTICE FEED ================= -->
+<div class="pt-1 flex items-center justify-between">
+<h3 class="text-label-lg font-label-lg text-on-surface font-bold tracking-tight">Active Circulars &amp; Ledgers</h3>
+<span class="text-label-sm font-label-sm text-secondary">Updated 10m ago</span>
+</div>
+<!-- Notice Card 1: Society AGM -->
+<article class="bg-surface-container-lowest rounded-xl border border-outline-variant shadow-sm p-space-md space-y-3 transition-all hover:border-primary">
+<div class="flex items-center justify-between">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-label-sm font-label-sm bg-surface-container-high text-primary font-semibold">
+          Society AGM
+        </span>
+<span class="text-label-sm font-label-sm text-secondary">Posted 18 Mar 2025</span>
+</div>
+<div class="space-y-1">
+<h4 class="text-headline-md font-headline-md text-on-surface font-semibold leading-tight">
+          Annual General Meeting (AGM 2025) &amp; Executive Committee Election
+        </h4>
+<p class="text-label-sm font-label-sm text-secondary flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">person</span>
+<span>Barrister Farhana (General Secretary)</span>
+</p>
+</div>
+<p class="text-body-md font-body-md text-on-surface-variant leading-relaxed">
+        Notice is hereby given for the 7th AGM to be held on 28 March at 7:30 PM at the 1st Floor Community Hall. Agenda includes audited FY24 financials and 2025 lift replacement reserve.
+      </p>
+<!-- Attachment Widget -->
+<div class="flex items-center justify-between p-2 rounded-lg bg-surface-container-low border border-outline-variant">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded bg-surface-container-lowest flex items-center justify-center text-primary shadow-xs">
+<span class="material-symbols-outlined text-[20px]">picture_as_pdf</span>
+</div>
+<div>
+<div class="text-label-md font-label-md text-on-surface font-semibold truncate max-w-[180px]">AGM_Agenda_2025.pdf</div>
+<div class="text-[10px] text-secondary font-label-sm">2.4 MB • Official Seal Verified</div>
+</div>
+</div>
+<button aria-label="Download Attachment" class="p-1.5 rounded-lg text-primary hover:bg-surface-container-highest transition-all" type="button">
+<span class="material-symbols-outlined text-[20px]">download</span>
+</button>
+</div>
+<!-- Footer & Quorum indicator -->
+<div class="pt-2 border-t border-outline-variant flex items-center justify-between text-label-sm font-label-sm">
+<div class="flex items-center gap-1.5 text-on-surface font-semibold">
+<span class="material-symbols-outlined text-[16px] text-primary">groups</span>
+<span>Digital Quorum: 22/36 Confirmed</span>
+</div>
+<button class="text-primary font-bold hover:underline flex items-center gap-0.5" type="button">
+<span>RSVP</span>
+<span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</button>
+</div>
+</article>
+<!-- Notice Card 2: Mosquito Fogging -->
+<article class="bg-surface-container-lowest rounded-xl border border-outline-variant shadow-sm p-space-md space-y-3 transition-all hover:border-primary">
+<div class="flex items-center justify-between">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-label-sm font-label-sm bg-tertiary-fixed text-on-tertiary-fixed font-semibold">
+          Health &amp; Safety
+        </span>
+<span class="text-label-sm font-label-sm text-secondary">Posted 16 Mar 2025</span>
+</div>
+<div class="space-y-1">
+<h4 class="text-headline-md font-headline-md text-on-surface font-semibold leading-tight">
+          Mosquito Fogging &amp; Pest Control Drive by DNCC
+        </h4>
+<p class="text-label-sm font-label-sm text-secondary flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">verified</span>
+<span>Dhaka North City Corporation (Zone 3)</span>
+</p>
+</div>
+<p class="text-body-md font-body-md text-on-surface-variant leading-relaxed">
+        Dhaka North City Corporation will conduct indoor and parking area fogging this Saturday at 11:00 AM. Please keep balcony windows shut.
+      </p>
+<div class="pt-1 flex items-center gap-2">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-surface-container text-on-surface-variant text-[11px] font-label-sm font-medium">
+<span class="material-symbols-outlined text-[13px]">location_on</span>
+          Basement, Stairwells, Podium
+        </span>
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-surface-container text-on-surface-variant text-[11px] font-label-sm font-medium">
+<span class="material-symbols-outlined text-[13px]">alarm</span>
+          Duration: 45 Mins
+        </span>
+</div>
+</article>
+<!-- Notice Card 3: Bylaws Revision -->
+<article class="bg-surface-container-lowest rounded-xl border border-outline-variant shadow-sm p-space-md space-y-3 transition-all hover:border-primary">
+<div class="flex items-center justify-between">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-label-sm font-label-sm bg-secondary-fixed text-on-secondary-fixed font-semibold">
+          Rules &amp; By-laws
+        </span>
+<span class="text-label-sm font-label-sm text-secondary">Posted 10 Mar 2025</span>
+</div>
+<div class="space-y-1">
+<h4 class="text-headline-md font-headline-md text-on-surface font-semibold leading-tight">
+          Revised Rooftop Garden &amp; Community Hall Booking Bylaws
+        </h4>
+<p class="text-label-sm font-label-sm text-secondary flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">gavel</span>
+<span>Management Committee Resolution #44</span>
+</p>
+</div>
+<p class="text-body-md font-body-md text-on-surface-variant leading-relaxed">
+        New guidelines regarding late night music after 10 PM and cleaning security deposit. All private gatherings require 48-hour prior clearance via the app portal.
+      </p>
+<div class="pt-1 flex items-center justify-between text-label-sm font-label-sm text-secondary">
+<span class="text-on-surface-variant font-medium">Effective from: 01 April 2025</span>
+<button class="text-primary font-semibold hover:underline" type="button">Read Full Code</button>
+</div>
+</article>
+</main>
+<!-- ================= BOTTOM NAVIGATION BAR (Shared Component Anchor) ================= -->
+<!-- 
+       Target Destination: "Notices" (Notice Board screen).
+       Per Shared Components JSON:
+       label_texts: ["Dashboard", "Units", "Community", "Notices", "Passes"]
+       icons: ["dashboard", "domain", "forum", "campaign", "badge"]
+       Active selection: 'Notices' tab represents the exact semantic destination.
+  -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center h-16 px-space-sm bg-surface-container-lowest dark:bg-inverse-surface shadow-md">
+<!-- Tab 1: Dashboard -->
+<button class="flex flex-col items-center justify-center text-secondary dark:text-secondary-fixed-dim font-medium hover:text-primary dark:hover:text-inverse-primary active:scale-95 transition-transform duration-150" type="button">
+<span class="material-symbols-outlined text-[22px]">dashboard</span>
+<span class="text-label-sm font-label-sm mt-0.5">Dashboard</span>
+</button>
+<!-- Tab 2: Units -->
+<button class="flex flex-col items-center justify-center text-secondary dark:text-secondary-fixed-dim font-medium hover:text-primary dark:hover:text-inverse-primary active:scale-95 transition-transform duration-150" type="button">
+<span class="material-symbols-outlined text-[22px]">domain</span>
+<span class="text-label-sm font-label-sm mt-0.5">Units</span>
+</button>
+<!-- Tab 3: Community -->
+<button class="flex flex-col items-center justify-center text-secondary dark:text-secondary-fixed-dim font-medium hover:text-primary dark:hover:text-inverse-primary active:scale-95 transition-transform duration-150" type="button">
+<span class="material-symbols-outlined text-[22px]">forum</span>
+<span class="text-label-sm font-label-sm mt-0.5">Community</span>
+</button>
+<!-- Tab 4: Notices (ACTIVE TAB) -->
+<button class="flex flex-col items-center justify-center text-primary dark:text-inverse-primary font-bold relative after:content-[''] after:w-1.5 after:h-1.5 after:bg-primary dark:after:bg-inverse-primary after:rounded-full after:mt-1 active:scale-95 transition-transform duration-150" type="button">
+<span class="material-symbols-outlined text-[22px]" style="font-variation-settings: 'FILL' 1;">campaign</span>
+<span class="text-label-sm font-label-sm mt-0.5">Notices</span>
+</button>
+<!-- Tab 5: Passes -->
+<button class="flex flex-col items-center justify-center text-secondary dark:text-secondary-fixed-dim font-medium hover:text-primary dark:hover:text-inverse-primary active:scale-95 transition-transform duration-150" type="button">
+<span class="material-symbols-outlined text-[22px]">badge</span>
+<span class="text-label-sm font-label-sm mt-0.5">Passes</span>
+</button>
+</nav>
+</body></html>

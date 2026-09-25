@@ -1,0 +1,22 @@
+{
+  "status": "READY",
+  "evidence": [
+    "agentic/data/project-context/features/BOS-011/CR.md",
+    "agentic/data/project-context/ui/stitch/UI-INDEX.md",
+    "operator chat 2026-09-25: 'yes use stitch blue, per-role nav, create the CR'"
+  ],
+  "blocking_issues": [],
+  "open_questions": [],
+  "recommended_next_step": "Load user_app + building-service unit baseline",
+  "outputs": {
+    "work_item_id": "BOS-011",
+    "work_type": "change_request",
+    "project_type": "brownfield",
+    "modules": [
+      "user_app",
+      "building-service"
+    ],
+    "level": "TASK",
+    "sprint_handling": "BACKLOG_ONLY"
+  }
+}

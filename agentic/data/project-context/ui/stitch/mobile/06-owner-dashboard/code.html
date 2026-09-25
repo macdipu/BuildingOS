@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Owner Portfolio - Green Valley Heights</title>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "primary-container": "#2563eb",
+            "primary-fixed-dim": "#b4c5ff",
+            "tertiary-fixed": "#85f8c4",
+            "primary-fixed": "#dbe1ff",
+            "on-tertiary-fixed": "#002114",
+            "surface-variant": "#d3e4fe",
+            "error-container": "#ffdad6",
+            "inverse-surface": "#213145",
+            "secondary-container": "#dae2fd",
+            "tertiary": "#006243",
+            "surface": "#f8f9ff",
+            "background": "#f8f9ff",
+            "secondary-fixed": "#dae2fd",
+            "surface-container-low": "#eff4ff",
+            "error": "#ba1a1a",
+            "on-primary-fixed": "#00174b",
+            "on-tertiary": "#ffffff",
+            "on-tertiary-fixed-variant": "#005137",
+            "outline": "#737686",
+            "on-error-container": "#93000a",
+            "on-background": "#0b1c30",
+            "on-error": "#ffffff",
+            "on-primary-container": "#eeefff",
+            "surface-dim": "#cbdbf5",
+            "on-primary": "#ffffff",
+            "surface-bright": "#f8f9ff",
+            "surface-container-highest": "#d3e4fe",
+            "outline-variant": "#c3c6d7",
+            "inverse-primary": "#b4c5ff",
+            "surface-tint": "#0053db",
+            "tertiary-fixed-dim": "#68dba9",
+            "on-primary-fixed-variant": "#003ea8",
+            "surface-container-lowest": "#ffffff",
+            "secondary-fixed-dim": "#bec6e0",
+            "on-surface": "#0b1c30",
+            "on-secondary": "#ffffff",
+            "primary": "#004ac6",
+            "surface-container": "#e5eeff",
+            "inverse-on-surface": "#eaf1ff",
+            "on-surface-variant": "#434655",
+            "on-secondary-fixed": "#131b2e",
+            "surface-container-high": "#dce9ff",
+            "tertiary-container": "#007d57",
+            "on-tertiary-container": "#bdffdc",
+            "secondary": "#565e74",
+            "on-secondary-fixed-variant": "#3f465c",
+            "on-secondary-container": "#5c647a"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "gutter": "1.5rem",
+            "space-lg": "1.5rem",
+            "space-xl": "2rem",
+            "space-md": "1rem",
+            "space-sm": "0.75rem",
+            "gutter-mobile": "1rem",
+            "margin-mobile": "1rem",
+            "margin": "2rem",
+            "space-2xl": "3rem",
+            "space-2xs": "0.25rem",
+            "space-xs": "0.5rem"
+          },
+          "fontFamily": {
+            "body-md": ["Inter"],
+            "display-lg-mobile": ["Plus Jakarta Sans"],
+            "body-lg": ["Inter"],
+            "headline-lg": ["Plus Jakarta Sans"],
+            "headline-xl": ["Plus Jakarta Sans"],
+            "label-md": ["Inter"],
+            "label-lg": ["Inter"],
+            "currency-lg": ["Plus Jakarta Sans"],
+            "currency-md": ["Inter"],
+            "label-sm": ["Inter"],
+            "display-lg": ["Plus Jakarta Sans"],
+            "headline-md": ["Plus Jakarta Sans"],
+            "body-sm": ["Inter"]
+          },
+          "fontSize": {
+            "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+            "display-lg-mobile": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+            "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+            "headline-lg": ["22px", {"lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+            "headline-xl": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.015em", "fontWeight": "600"}],
+            "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+            "label-lg": ["14px", {"lineHeight": "20px", "fontWeight": "600"}],
+            "currency-lg": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+            "currency-md": ["15px", {"lineHeight": "20px", "fontWeight": "600"}],
+            "label-sm": ["11px", {"lineHeight": "14px", "letterSpacing": "0.02em", "fontWeight": "600"}],
+            "display-lg": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+            "headline-md": ["18px", {"lineHeight": "24px", "letterSpacing": "-0.005em", "fontWeight": "600"}],
+            "body-sm": ["12px", {"lineHeight": "16px", "fontWeight": "400"}]
+          }
+        },
+      },
+    }
+  </script>
+</head>
+<body class="bg-background text-on-surface antialiased min-h-screen pb-24 selection:bg-surface-variant">
+<!-- TopAppBar Component (Shared Anchor: Small, Docked Top) -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center h-16 px-space-md bg-surface-container-lowest dark:bg-inverse-surface shadow-sm dark:shadow-none">
+<div class="flex items-center gap-space-xs">
+<button aria-label="Building switch icon" class="w-10 h-10 rounded-lg flex items-center justify-center text-primary dark:text-inverse-primary hover:bg-surface-container dark:hover:bg-surface-dim transition-colors duration-150 active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-primary dark:text-inverse-primary" data-icon="apartment">apartment</span>
+</button>
+<div>
+<span class="text-headline-md font-headline-md font-bold text-primary dark:text-inverse-primary tracking-tight leading-tight block">Green Valley Heights</span>
+<span class="text-label-sm font-label-sm text-secondary flex items-center gap-1">
+          Flats 4A, 4B, 7C
+          <span class="material-symbols-outlined text-[14px] text-secondary" data-icon="expand_more">expand_more</span>
+</span>
+</div>
+</div>
+<div class="flex items-center gap-space-xs">
+<button aria-label="Notifications" class="relative w-10 h-10 rounded-lg flex items-center justify-center text-on-surface-variant dark:text-surface-variant hover:bg-surface-container dark:hover:bg-surface-dim transition-colors duration-150 active:scale-95 transition-transform">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 rounded-full bg-error ring-2 ring-surface-container-lowest"></span>
+</button>
+<div class="w-8 h-8 rounded-full bg-primary-fixed flex items-center justify-center text-primary font-headline-md text-xs font-bold border border-primary-fixed-dim">
+        TA
+      </div>
+</div>
+</header>
+<!-- Main Viewport Canvas (Mobile Form Factor Optimized) -->
+<main class="pt-20 px-margin-mobile space-y-space-md max-w-md mx-auto">
+<!-- Owner Header Profile & Selector Strip -->
+<div class="flex items-center justify-between bg-surface-container-lowest rounded-xl p-space-md border border-outline-variant/30 shadow-[0_1px_3px_0_rgba(15,23,42,0.05)]">
+<div class="flex items-center gap-space-sm">
+<div class="w-11 h-11 rounded-full bg-surface-container-high border border-outline-variant/50 flex items-center justify-center text-primary font-bold">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+</div>
+<div>
+<div class="flex items-center gap-1.5">
+<h1 class="font-headline-md text-headline-md text-on-surface font-bold">Tanvir Ahmed</h1>
+<span class="inline-flex items-center px-1.5 py-0.5 rounded-full text-[11px] font-semibold tracking-wider uppercase bg-[#EFF6FF] border border-[#BFDBFE] text-[#1D4ED8]">
+              Owner
+            </span>
+</div>
+<p class="font-body-sm text-body-sm text-secondary flex items-center gap-1 mt-0.5">
+<span class="material-symbols-outlined text-[13px] text-tertiary" data-icon="verified_user">verified_user</span>
+            Verified Portfolio Holder
+          </p>
+</div>
+</div>
+<button class="text-primary font-label-md text-label-md flex items-center gap-0.5 px-2 py-1 rounded bg-surface-container-low hover:bg-surface-container transition-colors">
+        Switch
+        <span class="material-symbols-outlined text-[16px]" data-icon="swap_horiz">swap_horiz</span>
+</button>
+</div>
+<!-- Overview Financial & Occupancy Bento Grid -->
+<section class="space-y-space-xs">
+<div class="flex items-center justify-between px-1">
+<h2 class="font-label-lg text-label-lg text-secondary tracking-tight">Portfolio Summary</h2>
+<span class="font-label-sm text-label-sm text-outline">March 2025</span>
+</div>
+<!-- Hero Key Card: Rent Collection Progress -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md border border-outline-variant/40 shadow-[0_1px_3px_0_rgba(15,23,42,0.05)]">
+<div class="flex justify-between items-start">
+<div>
+<span class="font-label-sm text-label-sm text-secondary font-medium">Rent Collected This Month</span>
+<div class="font-currency-lg text-currency-lg text-on-surface font-extrabold mt-1">
+              ৳1,10,000
+              <span class="font-body-sm text-body-sm text-secondary font-normal">/ ৳1,65,000</span>
+</div>
+</div>
+<div class="inline-flex items-center px-2 py-0.5 rounded-full text-label-sm font-label-sm bg-tertiary-fixed/30 text-tertiary font-bold">
+            66.7%
+          </div>
+</div>
+<!-- Progress Bar -->
+<div class="w-full bg-surface-container-high rounded-full h-2.5 mt-3 overflow-hidden">
+<div class="bg-primary h-2.5 rounded-full transition-all duration-500" style="width: 66.7%"></div>
+</div>
+<!-- Submetric Row -->
+<div class="grid grid-cols-2 gap-2 mt-3 pt-3 border-t border-outline-variant/30">
+<div>
+<span class="font-label-sm text-label-sm text-secondary block">Outstanding Rent</span>
+<span class="font-currency-md text-currency-md text-error font-bold flex items-center gap-1">
+              ৳55,000
+              <span class="w-1.5 h-1.5 rounded-full bg-error"></span>
+</span>
+<span class="text-[11px] text-error/80 font-medium">Flat 7C (12d overdue)</span>
+</div>
+<div>
+<span class="font-label-sm text-label-sm text-secondary block">Maintenance Due</span>
+<span class="font-currency-md text-currency-md text-on-surface font-bold">৳12,500</span>
+<span class="text-[11px] text-secondary font-medium">Payable by Owner</span>
+</div>
+</div>
+</div>
+<!-- Micro Metrics Bento Pair -->
+<div class="grid grid-cols-2 gap-space-xs">
+<!-- Units Owned Status -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md border border-outline-variant/40 shadow-[0_1px_3px_0_rgba(15,23,42,0.05)]">
+<div class="flex items-center justify-between text-secondary">
+<span class="font-label-sm text-label-sm">Total Units Owned</span>
+<span class="material-symbols-outlined text-[18px] text-primary" data-icon="domain">domain</span>
+</div>
+<div class="font-headline-xl text-headline-xl text-on-surface font-bold mt-1">3 Units</div>
+<div class="flex items-center gap-2 mt-1">
+<span class="text-[11px] font-label-sm text-[#065F46] bg-[#ECFDF5] px-1.5 py-0.5 rounded">2 Occupied</span>
+<span class="text-[11px] font-label-sm text-secondary bg-surface-container px-1.5 py-0.5 rounded">1 Vacant</span>
+</div>
+</div>
+<!-- Occupancy Ratio -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md border border-outline-variant/40 shadow-[0_1px_3px_0_rgba(15,23,42,0.05)]">
+<div class="flex items-center justify-between text-secondary">
+<span class="font-label-sm text-label-sm">Occupancy</span>
+<span class="material-symbols-outlined text-[18px] text-tertiary" data-icon="pie_chart">pie_chart</span>
+</div>
+<div class="font-headline-xl text-headline-xl text-on-surface font-bold mt-1">66.7%</div>
+<div class="flex items-center gap-1 text-[11px] text-secondary mt-1">
+<span class="material-symbols-outlined text-[14px] text-outline" data-icon="trending_flat">trending_flat</span>
+<span>Target: 100%</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Primary Quick Actions Carousel / Row -->
+<section>
+<div class="grid grid-cols-4 gap-2">
+<!-- Action 1: View Properties -->
+<button class="bg-surface-container-lowest p-2.5 rounded-xl border border-outline-variant/30 flex flex-col items-center justify-center text-center shadow-sm active:scale-95 transition-all">
+<div class="w-9 h-9 rounded-lg bg-surface-container-low text-primary flex items-center justify-center mb-1.5">
+<span class="material-symbols-outlined text-[20px]" data-icon="apartment">apartment</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface font-medium leading-tight">View Properties</span>
+</button>
+<!-- Action 2: Rent Ledger -->
+<button class="bg-surface-container-lowest p-2.5 rounded-xl border border-outline-variant/30 flex flex-col items-center justify-center text-center shadow-sm active:scale-95 transition-all">
+<div class="w-9 h-9 rounded-lg bg-surface-container-low text-primary flex items-center justify-center mb-1.5">
+<span class="material-symbols-outlined text-[20px]" data-icon="receipt_long">receipt_long</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface font-medium leading-tight">Rent Ledger</span>
+</button>
+<!-- Action 3: Maintenance -->
+<button class="bg-surface-container-lowest p-2.5 rounded-xl border border-outline-variant/30 flex flex-col items-center justify-center text-center shadow-sm active:scale-95 transition-all">
+<div class="w-9 h-9 rounded-lg bg-surface-container-low text-primary flex items-center justify-center mb-1.5">
+<span class="material-symbols-outlined text-[20px]" data-icon="construction">construction</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface font-medium leading-tight">Maintenance</span>
+</button>
+<!-- Action 4: Statement (PDF) -->
+<button class="bg-surface-container-lowest p-2.5 rounded-xl border border-outline-variant/30 flex flex-col items-center justify-center text-center shadow-sm active:scale-95 transition-all">
+<div class="w-9 h-9 rounded-lg bg-surface-container-low text-primary flex items-center justify-center mb-1.5">
+<span class="material-symbols-outlined text-[20px]" data-icon="download">download</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface font-medium leading-tight">Statement (PDF)</span>
+</button>
+</div>
+</section>
+<!-- Lease Expiry & Tenant Alerts Strip -->
+<section class="bg-[#FFFBEB] rounded-xl p-space-md border border-[#FDE68A] shadow-sm">
+<div class="flex items-start gap-3">
+<div class="w-8 h-8 rounded-full bg-[#FEF3C7] text-[#D97706] flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[20px]" data-icon="event_upcoming">event_upcoming</span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md text-[#92400E] font-bold">Lease Expiry Alert</span>
+<span class="text-[11px] font-label-sm font-semibold bg-[#FEF3C7] text-[#B45309] px-2 py-0.5 rounded-full">42 Days Left</span>
+</div>
+<p class="font-body-sm text-body-sm text-[#78350F] mt-0.5">
+            Flat 4A lease expires on <span class="font-semibold">15 May 2025</span>. Tenant has not signed renewal yet.
+          </p>
+<div class="mt-2.5 flex items-center gap-2">
+<button class="bg-[#D97706] hover:bg-[#B45309] text-white px-3 py-1 rounded-lg text-label-sm font-label-sm shadow-xs transition-colors flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="edit_calendar">edit_calendar</span>
+              Renew Lease
+            </button>
+<button class="text-[#92400E] hover:underline text-label-sm font-label-sm font-medium px-2 py-1">
+              Dismiss
+            </button>
+</div>
+</div>
+</div>
+</section>
+<!-- Section: My Unit Performance -->
+<section class="space-y-space-xs">
+<div class="flex items-center justify-between px-1">
+<h2 class="font-label-lg text-label-lg text-on-surface font-bold">My Unit Performance</h2>
+<span class="font-label-sm text-label-sm text-primary font-semibold cursor-pointer">Manage All</span>
+</div>
+<!-- Unit 1: Flat 4A -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md border border-outline-variant/30 shadow-[0_1px_3px_0_rgba(15,23,42,0.05)] space-y-3">
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-2">
+<span class="font-headline-md text-headline-md font-bold text-on-surface">Flat 4A</span>
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-label-sm font-label-sm bg-[#ECFDF5] text-[#065F46] font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-[#059669]"></span>
+              Paid on 02 Mar
+            </span>
+</div>
+<span class="font-currency-md text-currency-md text-on-surface font-extrabold">৳55,000</span>
+</div>
+<div class="flex items-center justify-between text-body-sm font-body-sm text-secondary bg-surface-container-low p-2 rounded-lg">
+<div class="flex items-center gap-2 truncate">
+<span class="material-symbols-outlined text-[16px] text-outline" data-icon="person">person</span>
+<span class="truncate font-medium text-on-surface">Engr. Rafiqul Islam</span>
+</div>
+<div class="flex items-center gap-1 text-[12px] shrink-0 text-[#065F46] font-medium">
+<span class="material-symbols-outlined text-[14px]" data-icon="check_circle">check_circle</span>
+            Maint: Paid
+          </div>
+</div>
+</div>
+<!-- Unit 2: Flat 4B -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md border border-outline-variant/30 shadow-[0_1px_3px_0_rgba(15,23,42,0.05)] space-y-3">
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-2">
+<span class="font-headline-md text-headline-md font-bold text-on-surface">Flat 4B</span>
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-label-sm font-label-sm bg-[#ECFDF5] text-[#065F46] font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-[#059669]"></span>
+              Paid on 05 Mar
+            </span>
+</div>
+<span class="font-currency-md text-currency-md text-on-surface font-extrabold">৳55,000</span>
+</div>
+<div class="flex items-center justify-between text-body-sm font-body-sm text-secondary bg-surface-container-low p-2 rounded-lg">
+<div class="flex items-center gap-2 truncate">
+<span class="material-symbols-outlined text-[16px] text-outline" data-icon="person">person</span>
+<span class="truncate font-medium text-on-surface">Dr. Nadia Rahman</span>
+</div>
+<div class="flex items-center gap-1 text-[12px] shrink-0 text-[#065F46] font-medium">
+<span class="material-symbols-outlined text-[14px]" data-icon="check_circle">check_circle</span>
+            Maint: Paid
+          </div>
+</div>
+</div>
+<!-- Unit 3: Flat 7C (Overdue / Action Needed) -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md border-2 border-error/30 shadow-[0_1px_3px_0_rgba(15,23,42,0.05)] space-y-3 bg-red-50/10">
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-2">
+<span class="font-headline-md text-headline-md font-bold text-on-surface">Flat 7C</span>
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-label-sm font-label-sm bg-[#FFF1F2] text-[#9F1239] font-bold">
+<span class="w-1.5 h-1.5 rounded-full bg-[#E11D48]"></span>
+              Overdue (৳55,000)
+            </span>
+</div>
+<span class="font-currency-md text-currency-md text-error font-extrabold">৳55,000</span>
+</div>
+<div class="flex items-center justify-between text-body-sm font-body-sm text-secondary bg-surface-container-low p-2 rounded-lg">
+<div class="flex items-center gap-1.5 text-[#9F1239] font-medium">
+<span class="material-symbols-outlined text-[16px]" data-icon="info">info</span>
+<span>Vacant / Notice Period</span>
+</div>
+<div class="text-[12px] text-secondary font-medium">
+            Due 12 Days Ago
+          </div>
+</div>
+<!-- Inline Quick Action Pair -->
+<div class="grid grid-cols-2 gap-2 pt-1">
+<button class="w-full bg-[#E11D48] hover:bg-[#BE123C] text-white py-2 px-2 rounded-lg text-label-sm font-label-sm font-semibold flex items-center justify-center gap-1 transition-colors">
+<span class="material-symbols-outlined text-[16px]" data-icon="notifications_active">notifications_active</span>
+            Send Reminder
+          </button>
+<button class="w-full bg-surface-container-lowest border border-outline-variant/60 hover:bg-surface-container text-on-surface py-2 px-2 rounded-lg text-label-sm font-label-sm font-semibold flex items-center justify-center gap-1 transition-colors">
+<span class="material-symbols-outlined text-[16px]" data-icon="real_estate_agent">real_estate_agent</span>
+            Relist Unit
+          </button>
+</div>
+</div>
+</section>
+<!-- Section: Recent Payments & Transfers -->
+<section class="space-y-space-xs">
+<div class="flex items-center justify-between px-1">
+<h2 class="font-label-lg text-label-lg text-on-surface font-bold">Recent Payouts &amp; Transfers</h2>
+<span class="font-label-sm text-label-sm text-secondary">Bank Account Verified</span>
+</div>
+<div class="bg-surface-container-lowest rounded-xl p-space-md border border-outline-variant/30 shadow-[0_1px_3px_0_rgba(15,23,42,0.05)]">
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-[#ECFDF5] text-[#059669] flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[22px]" data-icon="account_balance">account_balance</span>
+</div>
+<div>
+<span class="font-label-md text-label-md font-bold text-on-surface block">Direct Bank Deposit</span>
+<span class="font-body-sm text-body-sm text-secondary">City Bank A/C •••• 8912</span>
+</div>
+</div>
+<div class="text-right">
+<span class="font-currency-md text-currency-md text-[#065F46] font-bold block">+৳1,06,700</span>
+<span class="text-[11px] font-label-sm text-[#059669]">Credited</span>
+</div>
+</div>
+<!-- Ledger Reconciliation micro text -->
+<div class="mt-3 pt-2.5 border-t border-outline-variant/20 flex items-center justify-between text-secondary">
+<span class="text-[11px] font-body-sm text-secondary">Gross ৳1,10,000 (Net after 3% management fee)</span>
+<span class="text-[11px] font-label-sm text-primary font-semibold cursor-pointer">Receipt</span>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar Component (Shared Anchor: Labels: Home, Units, Finance, Work, Community) -->
+<!-- Contextual Lock: Screen is Owner Dashboard, hence 'Home' is active according to logic -->
+<nav class="fixed bottom-0 left-0 w-full z-50 h-16 flex justify-around items-center px-space-xs bg-surface-container-lowest dark:bg-inverse-surface shadow-sm dark:shadow-none">
+<!-- Item 1: Home (Active Destination) -->
+<a class="flex flex-col items-center justify-center text-primary dark:text-inverse-primary font-semibold relative after:content-[''] after:w-1.5 after:h-1.5 after:bg-primary dark:after:bg-inverse-primary after:rounded-full after:mt-1 active:scale-90 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined text-[22px]" data-icon="dashboard">dashboard</span>
+<span class="text-label-sm font-label-sm">Home</span>
+</a>
+<!-- Item 2: Units -->
+<a class="flex flex-col items-center justify-center text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-inverse-primary transition-colors duration-150 active:scale-90 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined text-[22px]" data-icon="domain">domain</span>
+<span class="text-label-sm font-label-sm">Units</span>
+</a>
+<!-- Item 3: Finance -->
+<a class="flex flex-col items-center justify-center text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-inverse-primary transition-colors duration-150 active:scale-90 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined text-[22px]" data-icon="account_balance_wallet">account_balance_wallet</span>
+<span class="text-label-sm font-label-sm">Finance</span>
+</a>
+<!-- Item 4: Work -->
+<a class="flex flex-col items-center justify-center text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-inverse-primary transition-colors duration-150 active:scale-90 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined text-[22px]" data-icon="construction">construction</span>
+<span class="text-label-sm font-label-sm">Work</span>
+</a>
+<!-- Item 5: Community -->
+<a class="flex flex-col items-center justify-center text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-inverse-primary transition-colors duration-150 active:scale-90 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined text-[22px]" data-icon="groups">groups</span>
+<span class="text-label-sm font-label-sm">Community</span>
+</a>
+</nav>
+</body></html>

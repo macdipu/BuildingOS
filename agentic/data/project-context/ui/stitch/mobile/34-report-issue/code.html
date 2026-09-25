@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>BuildingOS - Report Maintenance Issue</title>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "on-secondary-fixed": "#131b2e",
+            "surface-variant": "#d3e4fe",
+            "surface": "#f8f9ff",
+            "on-surface-variant": "#434655",
+            "primary": "#004ac6",
+            "tertiary": "#006243",
+            "surface-container-high": "#dce9ff",
+            "tertiary-fixed": "#85f8c4",
+            "secondary": "#565e74",
+            "surface-container-lowest": "#ffffff",
+            "on-secondary": "#ffffff",
+            "inverse-on-surface": "#eaf1ff",
+            "on-surface": "#0b1c30",
+            "primary-fixed-dim": "#b4c5ff",
+            "on-error": "#ffffff",
+            "on-tertiary-fixed-variant": "#005137",
+            "primary-container": "#2563eb",
+            "on-primary-container": "#eeefff",
+            "outline": "#737686",
+            "inverse-primary": "#b4c5ff",
+            "secondary-fixed-dim": "#bec6e0",
+            "primary-fixed": "#dbe1ff",
+            "tertiary-fixed-dim": "#68dba9",
+            "on-background": "#0b1c30",
+            "inverse-surface": "#213145",
+            "on-secondary-fixed-variant": "#3f465c",
+            "tertiary-container": "#007d57",
+            "secondary-container": "#dae2fd",
+            "on-tertiary-container": "#bdffdc",
+            "surface-dim": "#cbdbf5",
+            "surface-container": "#e5eeff",
+            "surface-container-low": "#eff4ff",
+            "background": "#f8f9ff",
+            "error-container": "#ffdad6",
+            "on-secondary-container": "#5c647a",
+            "surface-tint": "#0053db",
+            "surface-bright": "#f8f9ff",
+            "on-primary-fixed-variant": "#003ea8",
+            "secondary-fixed": "#dae2fd",
+            "on-primary-fixed": "#00174b",
+            "surface-container-highest": "#d3e4fe",
+            "outline-variant": "#c3c6d7",
+            "on-error-container": "#93000a",
+            "on-tertiary": "#ffffff",
+            "on-tertiary-fixed": "#002114",
+            "error": "#ba1a1a",
+            "on-primary": "#ffffff"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-lg": "1.5rem",
+            "space-2xl": "3rem",
+            "space-sm": "0.75rem",
+            "gutter": "1.5rem",
+            "margin": "2rem",
+            "gutter-mobile": "1rem",
+            "space-2xs": "0.25rem",
+            "space-xl": "2rem",
+            "space-md": "1rem",
+            "space-xs": "0.5rem",
+            "margin-mobile": "1rem"
+          },
+          "fontFamily": {
+            "body-sm": ["Inter"],
+            "headline-xl": ["Plus Jakarta Sans"],
+            "label-sm": ["Inter"],
+            "headline-md": ["Plus Jakarta Sans"],
+            "body-lg": ["Inter"],
+            "label-lg": ["Inter"],
+            "label-md": ["Inter"],
+            "currency-lg": ["Plus Jakarta Sans"],
+            "display-lg": ["Plus Jakarta Sans"],
+            "currency-md": ["Inter"],
+            "headline-lg": ["Plus Jakarta Sans"],
+            "display-lg-mobile": ["Plus Jakarta Sans"],
+            "body-md": ["Inter"]
+          },
+          "fontSize": {
+            "body-sm": ["12px", { "lineHeight": "16px", "fontWeight": "400" }],
+            "headline-xl": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.015em", "fontWeight": "600" }],
+            "label-sm": ["11px", { "lineHeight": "14px", "letterSpacing": "0.02em", "fontWeight": "600" }],
+            "headline-md": ["18px", { "lineHeight": "24px", "letterSpacing": "-0.005em", "fontWeight": "600" }],
+            "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "label-lg": ["14px", { "lineHeight": "20px", "fontWeight": "600" }],
+            "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "600" }],
+            "currency-lg": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+            "display-lg": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "currency-md": ["15px", { "lineHeight": "20px", "fontWeight": "600" }],
+            "headline-lg": ["22px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "display-lg-mobile": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+            "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }]
+          }
+        },
+      },
+    }
+  </script>
+</head>
+<body class="bg-[#F8FAFC] text-on-surface antialiased min-h-screen flex justify-center selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- Mobile Device Shell Frame -->
+<div class="w-full max-w-md bg-surface min-h-screen flex flex-col relative pb-32">
+<!-- Top Header Navigation (Task-Focused: Suppresses standard full tab bar) -->
+<header class="sticky top-0 z-40 bg-surface-container-lowest/95 backdrop-blur-md px-space-md py-3 shadow-sm">
+<div class="flex items-center gap-space-sm">
+<button aria-label="Go back" class="w-10 h-10 rounded-full flex items-center justify-center text-on-surface hover:bg-surface-container transition-colors duration-150 active:scale-95" type="button">
+<span class="material-symbols-outlined text-[24px]">arrow_back</span>
+</button>
+<div class="flex-1 min-w-0">
+<div class="flex items-center gap-space-2xs">
+<h1 class="font-headline-md text-headline-md font-bold text-on-surface truncate">Report Issue</h1>
+<span class="inline-flex items-center px-1.5 py-0.5 rounded-full text-[10px] font-semibold bg-surface-container-high text-primary tracking-wide uppercase">New</span>
+</div>
+<p class="font-body-sm text-body-sm text-secondary truncate">
+            Green Valley Heights • Flat 4A (Engr. Rafiqul Islam)
+          </p>
+</div>
+<button aria-label="Support info" class="w-9 h-9 rounded-full flex items-center justify-center text-secondary hover:bg-surface-container transition-colors" type="button">
+<span class="material-symbols-outlined text-[20px]">help_outline</span>
+</button>
+</div>
+</header>
+<!-- Main Scrollable Form Canvas -->
+<main class="flex-1 px-space-md pt-space-md space-y-space-md">
+<!-- 1. Target Location Card -->
+<section class="bg-surface-container-lowest border border-outline-variant/60 rounded-xl p-space-md shadow-sm">
+<div class="flex items-center justify-between mb-space-sm">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[20px]">location_on</span>
+<label class="font-label-lg text-label-lg text-on-surface">Target Location</label>
+</div>
+<span class="text-[11px] font-semibold px-2 py-0.5 rounded-full bg-primary/10 text-primary uppercase tracking-wider">Unit Assigned</span>
+</div>
+<!-- Scope Switcher Tabs -->
+<div class="grid grid-cols-2 p-1 bg-surface-container rounded-lg mb-space-sm">
+<button class="py-2 text-center text-xs font-semibold rounded-md bg-surface-container-lowest text-primary shadow-xs transition-all" type="button">
+            Private Unit (Flat 4A)
+          </button>
+<button class="py-2 text-center text-xs font-semibold rounded-md text-secondary hover:text-on-surface transition-all" type="button">
+            Common Area Facility
+          </button>
+</div>
+<!-- Room Selector Dropdown Simulation -->
+<div>
+<label class="font-label-sm text-label-sm text-secondary mb-1 block">Specific Room / Segment</label>
+<div class="relative">
+<select class="w-full h-11 bg-surface-container-lowest border border-outline-variant rounded-lg px-3 pr-8 font-body-md text-body-md text-on-surface focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all appearance-none">
+<option selected="">Flat 4A - Master Bathroom</option>
+<option>Flat 4A - Kitchen &amp; Utility Balcony</option>
+<option>Flat 4A - Guest Bedroom 2</option>
+<option>Flat 4A - Living &amp; Dining Lounge</option>
+<option>Flat 4A - Main Entrance Vestibule</option>
+</select>
+<div class="absolute inset-y-0 right-0 flex items-center px-3 pointer-events-none text-secondary">
+<span class="material-symbols-outlined text-[20px]">expand_more</span>
+</div>
+</div>
+</div>
+<div class="mt-2.5 flex items-center gap-1.5 text-secondary">
+<span class="material-symbols-outlined text-[15px] text-tertiary">check_circle</span>
+<span class="font-body-sm text-body-sm text-secondary">Pre-verified unit ledger #GVH-4A-OWNER</span>
+</div>
+</section>
+<!-- 2. Issue Category Picker -->
+<section class="bg-surface-container-lowest border border-outline-variant/60 rounded-xl p-space-md shadow-sm">
+<div class="flex items-center justify-between mb-space-sm">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[20px]">category</span>
+<h2 class="font-label-lg text-label-lg text-on-surface">Issue Category</h2>
+</div>
+<span class="text-body-sm font-label-sm text-secondary">Select 1</span>
+</div>
+<!-- Visual Grid -->
+<div class="grid grid-cols-2 gap-2.5">
+<!-- Plumbing / Water (Selected) -->
+<div class="flex items-center gap-2.5 p-3 rounded-xl border-2 border-primary bg-primary/5 text-primary cursor-pointer transition-all">
+<div class="w-9 h-9 rounded-lg bg-primary text-surface-container-lowest flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">water_drop</span>
+</div>
+<div class="min-w-0">
+<p class="font-label-md text-label-md font-semibold text-primary truncate">Plumbing / Water</p>
+<p class="text-[11px] text-primary/80 truncate">Taps, drainage, pipes</p>
+</div>
+</div>
+<!-- Electrical / Wiring -->
+<div class="flex items-center gap-2.5 p-3 rounded-xl border border-outline-variant/70 bg-surface-container-lowest text-on-surface hover:border-outline cursor-pointer transition-all">
+<div class="w-9 h-9 rounded-lg bg-surface-container text-secondary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[20px]">bolt</span>
+</div>
+<div class="min-w-0">
+<p class="font-label-md text-label-md font-semibold text-on-surface truncate">Electrical &amp; Power</p>
+<p class="text-[11px] text-secondary truncate">Tripping, switches</p>
+</div>
+</div>
+<!-- HVAC / AC Repair -->
+<div class="flex items-center gap-2.5 p-3 rounded-xl border border-outline-variant/70 bg-surface-container-lowest text-on-surface hover:border-outline cursor-pointer transition-all">
+<div class="w-9 h-9 rounded-lg bg-surface-container text-secondary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[20px]">ac_unit</span>
+</div>
+<div class="min-w-0">
+<p class="font-label-md text-label-md font-semibold text-on-surface truncate">HVAC / AC Repair</p>
+<p class="text-[11px] text-secondary truncate">Cooling, compressor</p>
+</div>
+</div>
+<!-- Carpentry & Door -->
+<div class="flex items-center gap-2.5 p-3 rounded-xl border border-outline-variant/70 bg-surface-container-lowest text-on-surface hover:border-outline cursor-pointer transition-all">
+<div class="w-9 h-9 rounded-lg bg-surface-container text-secondary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[20px]">door_front</span>
+</div>
+<div class="min-w-0">
+<p class="font-label-md text-label-md font-semibold text-on-surface truncate">Carpentry &amp; Door</p>
+<p class="text-[11px] text-secondary truncate">Locks, cabinetry</p>
+</div>
+</div>
+<!-- Civil / Masonry / Dampness -->
+<div class="flex items-center gap-2.5 p-3 rounded-xl border border-outline-variant/70 bg-surface-container-lowest text-on-surface hover:border-outline cursor-pointer transition-all">
+<div class="w-9 h-9 rounded-lg bg-surface-container text-secondary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[20px]">format_paint</span>
+</div>
+<div class="min-w-0">
+<p class="font-label-md text-label-md font-semibold text-on-surface truncate">Civil &amp; Dampness</p>
+<p class="text-[11px] text-secondary truncate">Wall cracks, seepage</p>
+</div>
+</div>
+<!-- Lift / Generator (Common) -->
+<div class="flex items-center gap-2.5 p-3 rounded-xl border border-outline-variant/70 bg-surface-container-lowest text-on-surface hover:border-outline cursor-pointer transition-all">
+<div class="w-9 h-9 rounded-lg bg-surface-container text-secondary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[20px]">elevator</span>
+</div>
+<div class="min-w-0">
+<p class="font-label-md text-label-md font-semibold text-on-surface truncate">Lift / Generator</p>
+<p class="text-[11px] text-secondary truncate">Mechanical common</p>
+</div>
+</div>
+</div>
+</section>
+<!-- 3. Urgency / Severity Level Selector -->
+<section class="bg-surface-container-lowest border border-outline-variant/60 rounded-xl p-space-md shadow-sm">
+<div class="flex items-center justify-between mb-space-sm">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[20px]">e911_emergency</span>
+<h2 class="font-label-lg text-label-lg text-on-surface">Urgency &amp; Severity Level</h2>
+</div>
+<span class="text-[11px] font-semibold text-error px-2 py-0.5 rounded-full bg-error-container/60">SLA Priority</span>
+</div>
+<div class="space-y-2">
+<!-- Low -->
+<label class="flex items-start gap-3 p-3 rounded-lg border border-outline-variant/60 hover:bg-surface-container-low cursor-pointer transition-all">
+<input class="mt-0.5 w-4 h-4 text-primary focus:ring-primary" name="severity" type="radio"/>
+<div class="flex-1 text-left">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md font-semibold text-on-surface">Low Priority</span>
+<span class="text-[11px] text-secondary">Within 48h</span>
+</div>
+<p class="font-body-sm text-body-sm text-secondary">Routine maintenance, cosmetic updates, or minor squeaks.</p>
+</div>
+</label>
+<!-- Medium -->
+<label class="flex items-start gap-3 p-3 rounded-lg border border-outline-variant/60 hover:bg-surface-container-low cursor-pointer transition-all">
+<input class="mt-0.5 w-4 h-4 text-primary focus:ring-primary" name="severity" type="radio"/>
+<div class="flex-1 text-left">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md font-semibold text-on-surface">Medium Priority</span>
+<span class="text-[11px] text-secondary">Within 24h</span>
+</div>
+<p class="font-body-sm text-body-sm text-secondary">Functional hindrance without property structural risk.</p>
+</div>
+</label>
+<!-- High / Urgent (Active Selected) -->
+<label class="flex items-start gap-3 p-3 rounded-lg border-2 border-error bg-red-50/50 cursor-pointer transition-all">
+<input checked="" class="mt-0.5 w-4 h-4 text-error focus:ring-error" name="severity" type="radio"/>
+<div class="flex-1 text-left">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-1.5">
+<span class="font-label-md text-label-md font-bold text-error">High / Urgent</span>
+<span class="w-2 h-2 rounded-full bg-error animate-ping"></span>
+</div>
+<span class="text-[11px] font-bold text-error bg-error-container/70 px-2 py-0.5 rounded-full">Immediate Action</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface mt-0.5">
+                Urgent — Water leakage damaging ceiling, immediate attention required.
+              </p>
+</div>
+</label>
+<!-- Emergency -->
+<label class="flex items-start gap-3 p-3 rounded-lg border border-outline-variant/60 hover:bg-surface-container-low cursor-pointer transition-all">
+<input class="mt-0.5 w-4 h-4 text-primary focus:ring-primary" name="severity" type="radio"/>
+<div class="flex-1 text-left">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md font-semibold text-on-surface">Critical Emergency</span>
+<span class="text-[11px] text-secondary">Instant Response</span>
+</div>
+<p class="font-body-sm text-body-sm text-secondary">Active gas smell, short circuit sparking, or major flooding.</p>
+</div>
+</label>
+</div>
+</section>
+<!-- 4. Issue Description -->
+<section class="bg-surface-container-lowest border border-outline-variant/60 rounded-xl p-space-md shadow-sm space-y-space-sm">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[20px]">edit_note</span>
+<h2 class="font-label-lg text-label-lg text-on-surface">Issue Details</h2>
+</div>
+<div>
+<label class="font-label-sm text-label-sm text-secondary mb-1 block">Issue Summary Headline</label>
+<input class="w-full h-10 bg-surface-container-lowest border border-outline-variant rounded-lg px-3 font-body-md text-body-md font-medium text-on-surface focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20" type="text" value="Concealed Pipe Joint Leakage behind Washbasin"/>
+</div>
+<div>
+<label class="font-label-sm text-label-sm text-secondary mb-1 flex justify-between">
+<span>Detailed Description</span>
+<span class="text-secondary/70">142/500 chars</span>
+</label>
+<textarea class="w-full bg-surface-container-lowest border border-outline-variant rounded-lg p-3 font-body-md text-body-md text-on-surface focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 leading-relaxed" rows="4">Continuous water seepage detected behind the vanity cabinet and washbasin faucet. It is dampening the adjacent bedroom wall baseboard and causing severe drop in line pressure. Immediate inspection of CPVC elbow joint requested.</textarea>
+</div>
+<!-- Quick Tags -->
+<div class="flex flex-wrap gap-1.5 pt-1">
+<span class="text-[11px] bg-surface-container px-2 py-0.5 rounded text-secondary font-medium">#CPVCPipe</span>
+<span class="text-[11px] bg-surface-container px-2 py-0.5 rounded text-secondary font-medium">#WallSeepage</span>
+<span class="text-[11px] bg-surface-container px-2 py-0.5 rounded text-secondary font-medium">#WaterPressure</span>
+</div>
+</section>
+<!-- 5. Media / Photo Evidence Upload -->
+<section class="bg-surface-container-lowest border border-outline-variant/60 rounded-xl p-space-md shadow-sm">
+<div class="flex items-center justify-between mb-space-sm">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[20px]">photo_camera</span>
+<h2 class="font-label-lg text-label-lg text-on-surface">Media Evidence</h2>
+</div>
+<span class="font-label-sm text-label-sm text-secondary">2 of 5 attached</span>
+</div>
+<div class="grid grid-cols-3 gap-2.5">
+<!-- Photo 1 -->
+<div class="group relative rounded-lg overflow-hidden border border-outline-variant bg-surface-container-low aspect-square">
+<img class="w-full h-full object-cover" data-alt="A clean, clear close-up photograph of a contemporary master bathroom sink counter showing a concealed pipe joint behind a white ceramic washbasin with distinct damp water droplets and subtle moisture stains on modern grey subway tiles. Bright interior residential lighting highlights the plumbing fixture with authoritative clarity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDiY3nIZSEyIrLcT7eEzwQyqcfv_jwRNI1ay-klgh84qGY7nIxHRdoI51iceS8fsWAQRTylu8_78fg43X_W9v66A2rMUYVjB18sR_-uAQYM0DOm_U-ivE41f3-Dj8Kwc1wawfMJsBBSqYVq38cDiev5kvtWxge702cM06AxoHbD7_sn6GPRNc1G0IdWjUPqNnBe0F5KfRJ5vvuCuWOBFn1jqHtprKCrVk6-11GijZeO-VsfE_P8oBoW"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/20"></div>
+<button aria-label="Delete photo 1" class="absolute top-1 right-1 w-6 h-6 rounded-full bg-black/60 text-white flex items-center justify-center hover:bg-error transition-colors" type="button">
+<span class="material-symbols-outlined text-[14px]">close</span>
+</button>
+<span class="absolute bottom-1 left-1 right-1 font-body-sm text-[10px] text-white truncate px-1">
+              pipe_leak_washbasin.jpg
+            </span>
+</div>
+<!-- Photo 2 -->
+<div class="group relative rounded-lg overflow-hidden border border-outline-variant bg-surface-container-low aspect-square">
+<img class="w-full h-full object-cover" data-alt="A detailed architectural inspection shot showing an apartment bathroom plaster wall displaying visible dampness and paint bubbling along the lower skirting board near the floor. Bright neutral lighting casts sharp details on the textured moisture ring in a clean, modern high-rise residential setting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBuc-ehm9UQAe48TYDWGCI0QyUpRhwJNvbc5Vv710olc1KbNLtyaEdZiubfJV9p-fUEFfyhHhuS-8eiURddQHp4G2JLXWxVrAL1ac1-JTuDWSXxdr2mdNeAHKyjF8T6aHmgvScvzJsK04MRj7ZijCV5gic6mc95dK7anV-JCkmFbaQedK3rzqZa4nw0DaQr83BDX2nyVV4fM3NyP5ENgsUgDj6hIht_T8QYvkwApKJM9y4VI74eBD_D"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/20"></div>
+<button aria-label="Delete photo 2" class="absolute top-1 right-1 w-6 h-6 rounded-full bg-black/60 text-white flex items-center justify-center hover:bg-error transition-colors" type="button">
+<span class="material-symbols-outlined text-[14px]">close</span>
+</button>
+<span class="absolute bottom-1 left-1 right-1 font-body-sm text-[10px] text-white truncate px-1">
+              damp_wall_masterbath.jpg
+            </span>
+</div>
+<!-- Add Photo / Video Button -->
+<button class="border-2 border-dashed border-outline-variant hover:border-primary rounded-lg aspect-square flex flex-col items-center justify-center p-2 text-center text-secondary hover:text-primary transition-colors bg-surface/50" type="button">
+<span class="material-symbols-outlined text-[24px] mb-1">add_a_photo</span>
+<span class="font-label-sm text-[11px] leading-tight font-semibold">+ Add Photo / Video</span>
+</button>
+</div>
+<p class="font-body-sm text-body-sm text-secondary mt-2 flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">info</span>
+          Maximum file size 15 MB (JPG, PNG, MP4)
+        </p>
+</section>
+<!-- 6. Preferred Service Visit Slot -->
+<section class="bg-surface-container-lowest border border-outline-variant/60 rounded-xl p-space-md shadow-sm space-y-space-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[20px]">calendar_clock</span>
+<h2 class="font-label-lg text-label-lg text-on-surface">Preferred Inspection Slot</h2>
+</div>
+<span class="font-label-sm text-label-sm text-tertiary font-semibold flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span>Technician Ready
+          </span>
+</div>
+<!-- Date Picker Display -->
+<div class="flex items-center justify-between p-3 rounded-lg border border-outline-variant bg-surface-container-low">
+<div class="flex items-center gap-2.5">
+<span class="material-symbols-outlined text-primary text-[22px]">calendar_month</span>
+<div>
+<p class="font-label-md text-label-md font-semibold text-on-surface">Tomorrow, 20 March 2025</p>
+<p class="font-body-sm text-[11px] text-secondary">Express slot requested under Urgent triage</p>
+</div>
+</div>
+<button class="text-xs font-semibold text-primary px-2.5 py-1 rounded border border-primary/30 hover:bg-primary/5" type="button">
+            Change
+          </button>
+</div>
+<!-- Time Window Chips -->
+<div>
+<label class="font-label-sm text-label-sm text-secondary mb-2 block">Available Time Windows</label>
+<div class="space-y-2">
+<!-- Selected Morning -->
+<div class="flex items-center justify-between p-2.5 rounded-lg border-2 border-primary bg-primary/5 text-primary cursor-pointer">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">wb_sunny</span>
+<span class="font-label-md text-label-md font-semibold">Morning (09:00 AM - 12:00 PM)</span>
+</div>
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<!-- Afternoon -->
+<div class="flex items-center justify-between p-2.5 rounded-lg border border-outline-variant bg-surface-container-lowest text-on-surface hover:bg-surface-container-low cursor-pointer">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-secondary">light_mode</span>
+<span class="font-label-md text-label-md font-medium">Afternoon (02:00 PM - 05:00 PM)</span>
+</div>
+<span class="text-[11px] text-secondary">2 slots</span>
+</div>
+<!-- Evening -->
+<div class="flex items-center justify-between p-2.5 rounded-lg border border-outline-variant bg-surface-container-lowest text-on-surface hover:bg-surface-container-low cursor-pointer">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-secondary">bedtime</span>
+<span class="font-label-md text-label-md font-medium">Evening (06:00 PM - 08:00 PM)</span>
+</div>
+<span class="text-[11px] text-secondary">1 slot</span>
+</div>
+</div>
+</div>
+</section>
+<!-- 7. Resident Availability & Contact -->
+<section class="bg-surface-container-lowest border border-outline-variant/60 rounded-xl p-space-md shadow-sm space-y-3.5">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[20px]">person_pin</span>
+<h2 class="font-label-lg text-label-lg text-on-surface">Resident Verification</h2>
+</div>
+<span class="text-[11px] font-semibold text-secondary bg-surface-container px-2 py-0.5 rounded-full">Unit Resident</span>
+</div>
+<div class="p-3 bg-surface-container-low rounded-lg border border-outline-variant/60 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-primary/10 text-primary flex items-center justify-center font-bold text-sm">
+              RI
+            </div>
+<div>
+<p class="font-label-md text-label-md font-semibold text-on-surface">Engr. Rafiqul Islam</p>
+<p class="font-body-sm text-body-sm text-secondary font-mono">+880 1711-987654</p>
+</div>
+</div>
+<button class="w-8 h-8 rounded-full flex items-center justify-center text-secondary hover:text-primary hover:bg-surface-container" type="button">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+</button>
+</div>
+<!-- Caretaker Entry Permission Toggle -->
+<div class="pt-1">
+<label class="flex items-start justify-between gap-3 cursor-pointer">
+<div class="flex-1 pr-2">
+<p class="font-label-md text-label-md font-medium text-on-surface">
+                Allow Building Caretaker entry if resident is away
+              </p>
+<p class="font-body-sm text-body-sm text-secondary mt-0.5">
+                Caretaker Master Key will be logged by building security guard with mandatory video recording.
+              </p>
+</div>
+<!-- Styled Switch Checkbox (Default Off) -->
+<div class="relative inline-flex items-center shrink-0 mt-1">
+<input class="sr-only peer" id="caretaker-toggle" type="checkbox"/>
+<div class="w-11 h-6 bg-outline-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</div>
+</label>
+</div>
+</section>
+<!-- Operational Policy Note -->
+<div class="p-3 bg-surface-container-low rounded-lg flex items-start gap-2.5 text-secondary border border-outline-variant/40">
+<span class="material-symbols-outlined text-[18px] text-primary shrink-0 mt-0.5">verified_user</span>
+<p class="font-body-sm text-[12px] leading-relaxed">
+          Standard plumbing diagnosis visit is covered under monthly building service maintenance. Parts replacement requires on-spot approval by owner.
+        </p>
+</div>
+</main>
+<!-- Sticky Bottom Action Footer -->
+<div class="fixed bottom-0 max-w-md w-full z-50 bg-surface-container-lowest/95 backdrop-blur-md px-space-md py-3 shadow-[0_-4px_16px_rgba(15,23,42,0.06)] border-t border-outline-variant/40 space-y-2">
+<button class="w-full h-12 bg-primary-container hover:bg-primary text-white font-label-lg text-label-lg rounded-xl flex items-center justify-center gap-2 shadow-md active:scale-[0.98] transition-all" type="button">
+<span>Submit Service Request</span>
+<span class="material-symbols-outlined text-[20px]">arrow_forward</span>
+</button>
+<button class="w-full py-1 text-center font-label-md text-label-md text-secondary hover:text-on-surface active:scale-95 transition-all" type="button">
+        Save as Draft
+      </button>
+</div>
+</div>
+</body></html>

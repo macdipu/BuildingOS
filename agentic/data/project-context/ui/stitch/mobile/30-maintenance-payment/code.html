@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>30. Record Maintenance Payment - BuildingOS</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "surface-bright": "#f8f9ff",
+            "on-surface": "#0b1c30",
+            "error": "#ba1a1a",
+            "inverse-on-surface": "#eaf1ff",
+            "surface-container-high": "#dce9ff",
+            "surface-container": "#e5eeff",
+            "surface-tint": "#0053db",
+            "tertiary-fixed": "#85f8c4",
+            "on-primary-fixed-variant": "#003ea8",
+            "secondary-fixed": "#dae2fd",
+            "on-tertiary-fixed-variant": "#005137",
+            "primary-fixed": "#dbe1ff",
+            "inverse-primary": "#b4c5ff",
+            "primary-container": "#2563eb",
+            "tertiary": "#006243",
+            "secondary": "#565e74",
+            "on-error": "#ffffff",
+            "secondary-fixed-dim": "#bec6e0",
+            "on-error-container": "#93000a",
+            "surface-dim": "#cbdbf5",
+            "outline": "#737686",
+            "on-primary-fixed": "#00174b",
+            "inverse-surface": "#213145",
+            "on-tertiary": "#ffffff",
+            "surface-container-lowest": "#ffffff",
+            "on-primary-container": "#eeefff",
+            "on-primary": "#ffffff",
+            "on-secondary": "#ffffff",
+            "primary-fixed-dim": "#b4c5ff",
+            "tertiary-fixed-dim": "#68dba9",
+            "tertiary-container": "#007d57",
+            "on-background": "#0b1c30",
+            "surface-container-highest": "#d3e4fe",
+            "on-tertiary-fixed": "#002114",
+            "on-tertiary-container": "#bdffdc",
+            "primary": "#004ac6",
+            "surface": "#f8f9ff",
+            "on-secondary-container": "#5c647a",
+            "on-secondary-fixed": "#131b2e",
+            "error-container": "#ffdad6",
+            "on-secondary-fixed-variant": "#3f465c",
+            "on-surface-variant": "#434655",
+            "surface-container-low": "#eff4ff",
+            "outline-variant": "#c3c6d7",
+            "background": "#f8f9ff",
+            "secondary-container": "#dae2fd",
+            "surface-variant": "#d3e4fe"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-lg": "1.5rem",
+            "margin-mobile": "1rem",
+            "space-md": "1rem",
+            "space-sm": "0.75rem",
+            "space-2xs": "0.25rem",
+            "space-xs": "0.5rem",
+            "space-xl": "2rem",
+            "gutter-mobile": "1rem",
+            "margin": "2rem",
+            "space-2xl": "3rem",
+            "gutter": "1.5rem"
+          },
+          "fontFamily": {
+            "headline-xl": ["Plus Jakarta Sans"],
+            "label-lg": ["Inter"],
+            "headline-lg": ["Plus Jakarta Sans"],
+            "body-sm": ["Inter"],
+            "body-lg": ["Inter"],
+            "label-md": ["Inter"],
+            "label-sm": ["Inter"],
+            "display-lg": ["Plus Jakarta Sans"],
+            "currency-lg": ["Plus Jakarta Sans"],
+            "display-lg-mobile": ["Plus Jakarta Sans"],
+            "currency-md": ["Inter"],
+            "headline-md": ["Plus Jakarta Sans"],
+            "body-md": ["Inter"]
+          },
+          "fontSize": {
+            "headline-xl": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.015em", "fontWeight": "600" }],
+            "label-lg": ["14px", { "lineHeight": "20px", "fontWeight": "600" }],
+            "headline-lg": ["22px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "body-sm": ["12px", { "lineHeight": "16px", "fontWeight": "400" }],
+            "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "600" }],
+            "label-sm": ["11px", { "lineHeight": "14px", "letterSpacing": "0.02em", "fontWeight": "600" }],
+            "display-lg": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "currency-lg": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+            "display-lg-mobile": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+            "currency-md": ["15px", { "lineHeight": "20px", "fontWeight": "600" }],
+            "headline-md": ["18px", { "lineHeight": "24px", "letterSpacing": "-0.005em", "fontWeight": "600" }],
+            "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }]
+          }
+        },
+      },
+    }
+  </script>
+</head>
+<body class="bg-background text-on-surface antialiased font-body-md text-body-md flex justify-center selection:bg-primary-container selection:text-on-primary">
+<!-- Mobile Viewport Container (Locked to realistic mobile frame for fidelity) -->
+<main class="w-full max-w-[430px] min-h-screen bg-surface-bright flex flex-col relative pb-36 border-x border-outline-variant/30 shadow-2xl">
+<!-- Top App Bar (Task-Focused Destination: Close 'X' action suppressing persistent shell) -->
+<header class="sticky top-0 z-40 bg-surface-container-lowest/95 backdrop-blur-md px-space-md py-space-sm flex items-center justify-between border-b border-outline-variant/40 shadow-sm">
+<div class="flex items-center gap-space-sm">
+<button aria-label="Close" class="w-10 h-10 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container-low active:scale-95 transition-all" type="button">
+<span class="material-symbols-outlined text-[22px]">close</span>
+</button>
+<div>
+<div class="flex items-center gap-space-xs">
+<h1 class="font-headline-md text-headline-md font-bold text-on-surface tracking-tight">Record Maintenance Fee</h1>
+</div>
+<p class="font-body-sm text-body-sm text-secondary truncate max-w-[210px]">Flat 7C • Tanvir Ahmed (Owner)</p>
+</div>
+</div>
+<span class="inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-semibold bg-primary-fixed text-on-primary-fixed border border-primary/20 tracking-wider">
+        Unit 7C
+      </span>
+</header>
+<!-- Scrollable Workflow Content Canvas -->
+<div class="px-space-md pt-space-md space-y-space-md">
+<!-- Target Unit & Owner Summary Card (Tier 1 Surface) -->
+<section class="bg-surface-container-lowest rounded-xl p-space-md border border-outline-variant/50 shadow-sm">
+<div class="flex items-start justify-between pb-space-xs border-b border-surface-container-low">
+<div class="flex items-center gap-space-xs">
+<span class="w-8 h-8 rounded-lg bg-surface-container-low flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[20px]">apartment</span>
+</span>
+<div>
+<h2 class="font-headline-md text-headline-md font-bold text-on-surface">Flat 7C</h2>
+<span class="font-body-sm text-body-sm text-secondary">Penthouse, 2,800 sqft</span>
+</div>
+</div>
+<span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[11px] font-semibold bg-error-container text-on-error-container border border-error/20">
+<span class="w-1.5 h-1.5 rounded-full bg-error"></span>
+            Overdue
+          </span>
+</div>
+<div class="mt-space-sm space-y-2">
+<!-- Payer info -->
+<div class="flex items-center justify-between text-body-sm font-body-sm">
+<span class="text-secondary flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-outline">person</span>
+              Payer
+            </span>
+<div class="text-right">
+<span class="font-semibold text-on-surface">Tanvir Ahmed</span>
+<span class="block text-[11px] text-outline">+880 1711-987654 (Owner)</span>
+</div>
+</div>
+<!-- Assessment Month -->
+<div class="flex items-center justify-between text-body-sm font-body-sm">
+<span class="text-secondary flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-outline">calendar_month</span>
+              Assessment Month
+            </span>
+<span class="font-medium text-on-surface">March 2025 Maintenance</span>
+</div>
+<!-- Total Outstanding Ledger Box -->
+<div class="mt-space-xs p-space-sm rounded-lg bg-surface-container-low/70 border border-outline-variant/30 flex items-center justify-between">
+<div>
+<span class="text-[11px] font-medium text-secondary uppercase tracking-wider block">Total Outstanding Balance</span>
+<span class="text-[11px] text-outline">March ৳6,500 + Feb Arrears ৳6,000</span>
+</div>
+<div class="text-right">
+<span class="font-currency-lg text-currency-lg text-error font-bold tracking-tight">৳ 12,500</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Payment Details Form Section -->
+<section class="space-y-space-md">
+<!-- Payment Amount Field -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md border border-outline-variant/50 shadow-sm space-y-space-xs">
+<div class="flex items-center justify-between">
+<label class="font-label-md text-label-md text-on-surface font-semibold" for="paymentAmount">
+              Payment Amount Received
+            </label>
+<span class="inline-flex items-center gap-1 text-[11px] font-semibold text-tertiary">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+              Full clearance
+            </span>
+</div>
+<div class="relative flex items-center rounded-lg border border-primary ring-2 ring-primary/10 overflow-hidden bg-surface-container-lowest focus-within:ring-3 focus-within:ring-primary/20">
+<div class="px-3 py-2 bg-surface-container-low border-r border-outline-variant/40 font-headline-md font-bold text-primary flex items-center">
+              ৳
+            </div>
+<input class="w-full h-10 px-3 font-currency-lg text-currency-lg font-bold text-on-surface border-0 focus:ring-0 bg-transparent placeholder-outline" id="paymentAmount" type="text" value="12,500"/>
+<div class="pr-3 text-secondary font-label-sm text-label-sm">
+              BDT
+            </div>
+</div>
+<p class="font-body-sm text-body-sm text-secondary">Pre-filled to cover full pending ledger balance.</p>
+</div>
+<!-- Payment Date Field -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md border border-outline-variant/50 shadow-sm space-y-space-2xs">
+<label class="font-label-md text-label-md text-on-surface font-semibold block" for="paymentDate">
+            Payment Collection Date
+          </label>
+<div class="relative flex items-center">
+<span class="material-symbols-outlined absolute left-3 text-outline text-[18px]">event</span>
+<input class="w-full h-10 pl-9 pr-3 rounded-lg border border-outline-variant bg-surface-container-lowest font-body-md text-body-md text-on-surface focus:border-primary focus:ring-2 focus:ring-primary/15" id="paymentDate" type="text" value="19 March 2025"/>
+</div>
+</div>
+<!-- Payment Method Selector -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md border border-outline-variant/50 shadow-sm space-y-space-sm">
+<div class="flex items-center justify-between">
+<label class="font-label-md text-label-md text-on-surface font-semibold">
+              Payment Method
+            </label>
+<span class="font-label-sm text-label-sm text-outline">Select one</span>
+</div>
+<!-- Radio Card Grid -->
+<div class="grid grid-cols-1 gap-2">
+<!-- bKash Merchant (Active / Selected) -->
+<label class="relative flex items-center justify-between p-3 rounded-lg border-2 border-primary bg-surface-container-low/50 cursor-pointer shadow-xs">
+<div class="flex items-center gap-3">
+<input checked="" class="w-4 h-4 text-primary border-outline focus:ring-primary" name="payment_method" type="radio"/>
+<div class="w-7 h-7 rounded-md bg-[#D12053] flex items-center justify-center text-white font-bold text-xs tracking-tighter">
+                  bK
+                </div>
+<div>
+<span class="font-label-md text-label-md text-on-surface font-semibold block">bKash Merchant</span>
+<span class="font-body-sm text-body-sm text-secondary">Instant electronic confirmation</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-primary text-[20px]">verified</span>
+</label>
+<!-- Nagad -->
+<label class="relative flex items-center justify-between p-3 rounded-lg border border-outline-variant bg-surface-container-lowest cursor-pointer hover:bg-surface-bright transition-colors">
+<div class="flex items-center gap-3">
+<input class="w-4 h-4 text-primary border-outline focus:ring-primary" name="payment_method" type="radio"/>
+<div class="w-7 h-7 rounded-md bg-[#ED1C24] flex items-center justify-center text-white font-bold text-xs">
+                  N
+                </div>
+<div>
+<span class="font-label-md text-label-md text-on-surface font-medium block">Nagad Wallet</span>
+<span class="font-body-sm text-body-sm text-secondary">MFS direct settlement</span>
+</div>
+</div>
+</label>
+<!-- Bank Transfer / NPSB -->
+<label class="relative flex items-center justify-between p-3 rounded-lg border border-outline-variant bg-surface-container-lowest cursor-pointer hover:bg-surface-bright transition-colors">
+<div class="flex items-center gap-3">
+<input class="w-4 h-4 text-primary border-outline focus:ring-primary" name="payment_method" type="radio"/>
+<div class="w-7 h-7 rounded-md bg-surface-container flex items-center justify-center text-primary font-bold text-xs">
+<span class="material-symbols-outlined text-[18px]">account_balance</span>
+</div>
+<div>
+<span class="font-label-md text-label-md text-on-surface font-medium block">Bank Transfer / BEFTN / NPSB</span>
+<span class="font-body-sm text-body-sm text-secondary">Direct association bank clearance</span>
+</div>
+</div>
+</label>
+<!-- Cash in Hand -->
+<label class="relative flex items-center justify-between p-3 rounded-lg border border-outline-variant bg-surface-container-lowest cursor-pointer hover:bg-surface-bright transition-colors">
+<div class="flex items-center gap-3">
+<input class="w-4 h-4 text-primary border-outline focus:ring-primary" name="payment_method" type="radio"/>
+<div class="w-7 h-7 rounded-md bg-surface-container flex items-center justify-center text-secondary font-bold text-xs">
+<span class="material-symbols-outlined text-[18px]">payments</span>
+</div>
+<div>
+<span class="font-label-md text-label-md text-on-surface font-medium block">Cash in Hand</span>
+<span class="font-body-sm text-body-sm text-secondary">Building Manager receipt counter</span>
+</div>
+</div>
+</label>
+<!-- Cheque / Pay Order -->
+<label class="relative flex items-center justify-between p-3 rounded-lg border border-outline-variant bg-surface-container-lowest cursor-pointer hover:bg-surface-bright transition-colors">
+<div class="flex items-center gap-3">
+<input class="w-4 h-4 text-primary border-outline focus:ring-primary" name="payment_method" type="radio"/>
+<div class="w-7 h-7 rounded-md bg-surface-container flex items-center justify-center text-secondary font-bold text-xs">
+<span class="material-symbols-outlined text-[18px]">description</span>
+</div>
+<div>
+<span class="font-label-md text-label-md text-on-surface font-medium block">Cheque / Pay Order</span>
+<span class="font-body-sm text-body-sm text-secondary">Subject to realization</span>
+</div>
+</div>
+</label>
+</div>
+</div>
+<!-- TrxID & Destination Bank Account -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md border border-outline-variant/50 shadow-sm space-y-space-sm">
+<!-- TrxID -->
+<div class="space-y-space-2xs">
+<div class="flex items-center justify-between">
+<label class="font-label-md text-label-md text-on-surface font-semibold" for="trxId">
+                Transaction Reference / TrxID
+              </label>
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold bg-tertiary-fixed text-on-tertiary-fixed">
+<span class="material-symbols-outlined text-[12px]">verified</span>
+                Verified Gateway
+              </span>
+</div>
+<div class="relative flex items-center">
+<span class="material-symbols-outlined absolute left-3 text-primary text-[18px]">tag</span>
+<input class="w-full h-10 pl-9 pr-3 rounded-lg border border-outline-variant bg-surface-container-lowest font-body-md text-body-md font-semibold text-on-surface tracking-wider uppercase focus:border-primary focus:ring-2 focus:ring-primary/15" id="trxId" type="text" value="BKASH-MT-904128"/>
+</div>
+</div>
+<!-- Deposited Account Destination -->
+<div class="pt-2 border-t border-surface-container-low space-y-space-2xs">
+<label class="font-label-md text-label-md text-on-surface font-semibold block" for="accountSelect">
+              Deposited To Association Account
+            </label>
+<div class="relative">
+<select class="w-full h-10 pl-3 pr-8 rounded-lg border border-outline-variant bg-surface-container-lowest font-body-sm text-body-sm text-on-surface focus:border-primary focus:ring-2 focus:ring-primary/15 appearance-none" id="accountSelect">
+<option selected="">Trust Bank Operational A/C #4402 (Green Valley Heights Society)</option>
+<option>BRAC Bank Maintenance Reserve A/C #8901</option>
+<option>Petty Cash Drawer (Manager Custody)</option>
+</select>
+<span class="material-symbols-outlined absolute right-2.5 top-2.5 text-outline pointer-events-none text-[20px]">expand_more</span>
+</div>
+</div>
+</div>
+<!-- Allocation Breakdown Card -->
+<section class="bg-surface-container-lowest rounded-xl p-space-md border border-outline-variant/50 shadow-sm space-y-space-xs">
+<div class="flex items-center justify-between pb-space-2xs border-b border-surface-container-low">
+<h3 class="font-headline-md text-headline-md font-bold text-on-surface flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[18px] text-primary">pie_chart</span>
+              Allocation Breakdown
+            </h3>
+<span class="font-label-sm text-label-sm text-outline">Audit Schedule</span>
+</div>
+<div class="space-y-2 pt-1 font-body-sm text-body-sm">
+<div class="flex items-center justify-between text-secondary">
+<span>March 2025 Standard Maintenance</span>
+<span class="font-semibold text-on-surface">৳ 6,500</span>
+</div>
+<div class="flex items-center justify-between text-secondary">
+<span class="flex items-center gap-1">
+                Past Arrears (Lift AMC &amp; Generator)
+                <span class="material-symbols-outlined text-[14px] text-outline">info</span>
+</span>
+<span class="font-semibold text-on-surface">৳ 6,000</span>
+</div>
+<div class="flex items-center justify-between text-secondary">
+<span class="flex items-center gap-1">
+                Association Late Penalty
+                <span class="text-[11px] text-tertiary font-medium">(Waived by Committee)</span>
+</span>
+<span class="font-semibold text-outline line-through">৳ 500</span>
+</div>
+<div class="pt-2 border-t border-outline-variant/30 flex items-center justify-between font-bold">
+<span class="text-on-surface">Total Allocated Clearing</span>
+<span class="text-primary font-currency-md text-currency-md">৳ 12,500</span>
+</div>
+</div>
+</section>
+<!-- Supporting Document / Money Receipt Upload -->
+<section class="bg-surface-container-lowest rounded-xl p-space-md border border-outline-variant/50 shadow-sm space-y-space-xs">
+<div class="flex items-center justify-between">
+<label class="font-label-md text-label-md text-on-surface font-semibold">
+              Supporting Voucher / Money Receipt
+            </label>
+<span class="font-label-sm text-label-sm text-tertiary font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">attachment</span> Attached (1)
+            </span>
+</div>
+<!-- Uploaded Box Item -->
+<div class="flex items-center justify-between p-2.5 rounded-lg border border-outline-variant/70 bg-surface-container-low/40">
+<div class="flex items-center gap-2.5 min-w-0">
+<div class="w-9 h-9 rounded bg-surface-container-high flex items-center justify-center text-primary flex-shrink-0">
+<span class="material-symbols-outlined text-[20px]">image</span>
+</div>
+<div class="truncate">
+<p class="font-label-md text-label-md text-on-surface font-medium truncate max-w-[170px]">
+                  bKash_Slip_Tanvir_7C.png
+                </p>
+<span class="font-body-sm text-[11px] text-outline">380 KB • Uploaded today</span>
+</div>
+</div>
+<div class="flex items-center gap-1 flex-shrink-0">
+<button aria-label="View Attachment" class="p-1.5 rounded-md text-secondary hover:text-primary hover:bg-surface-container transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">visibility</span>
+</button>
+<button aria-label="Remove Attachment" class="p-1.5 rounded-md text-outline hover:text-error hover:bg-error-container/30 transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Internal Memo / Operational Notes -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md border border-outline-variant/50 shadow-sm space-y-space-2xs">
+<label class="font-label-md text-label-md text-on-surface font-semibold block" for="memoNotes">
+            Internal Note / Society Memo
+          </label>
+<textarea class="w-full rounded-lg border border-outline-variant bg-surface-container-lowest font-body-sm text-body-sm text-on-surface focus:border-primary focus:ring-2 focus:ring-primary/15 placeholder-outline" id="memoNotes" rows="3">Received via bKash by Tanvir K. (Estate Manager) on behalf of Building Society.</textarea>
+<span class="text-[11px] text-outline block text-right">Visible only to Society Auditing Committee</span>
+</div>
+</section>
+</div>
+<!-- Pinned Bottom Sticky CTAs (Aligned with Mobile Design Protocol) -->
+<footer class="fixed bottom-0 left-0 right-0 max-w-[430px] mx-auto bg-surface-container-lowest/95 backdrop-blur-md px-space-md py-space-sm border-t border-outline-variant/40 shadow-lg space-y-2 z-50">
+<button class="w-full h-12 bg-primary hover:bg-primary-container text-on-primary rounded-lg font-label-lg text-label-lg flex items-center justify-center gap-2 shadow-md active:scale-[0.98] transition-all" type="button">
+<span class="material-symbols-outlined text-[20px]">receipt_long</span>
+        Confirm &amp; Issue Association Receipt (৳12,500)
+      </button>
+<button class="w-full py-1.5 text-center font-label-md text-label-md text-secondary hover:text-on-surface active:scale-95 transition-all" type="button">
+        Cancel and Discard Changes
+      </button>
+</footer>
+</main>
+</body></html>

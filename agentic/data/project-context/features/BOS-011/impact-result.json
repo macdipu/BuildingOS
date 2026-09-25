@@ -1,0 +1,24 @@
+{
+  "status": "READY",
+  "evidence": [
+    "agentic/data/project-context/features/BOS-011/CR.md#delta",
+    "agentic/data/project-context/features/BOS-011/TECH-SPEC.md#risks"
+  ],
+  "blocking_issues": [],
+  "open_questions": [],
+  "recommended_next_step": "Technical readiness review",
+  "outputs": {
+    "impact": "MEDIUM",
+    "db_change": false,
+    "api_change": "additive optional query params on GET /api/v1/buildings/{id}/units",
+    "affected": [
+      "user_app theme (all screens)",
+      "user_app shell/routing",
+      "units_ownership pages",
+      "authentication pages",
+      "building-service listunits"
+    ],
+    "reopens_completed_tasks": false,
+    "regression_risk": "widget tests asserting colors/styles; route tests starting at /login"
+  }
+}

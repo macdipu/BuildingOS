@@ -9,6 +9,7 @@ agentic/data/project-context/
 ├── PRD.md                # whole-app/whole-project PRD, optional
 ├── SRD.md                # whole-app/whole-project SRD/SRS, optional
 ├── ARCHITECTURE.md       # project-level HLD, generated + human-approved (template: project-hld.md)
+├── ui/<set>/             # UI mockups (screen.png + code.html per screen), design tokens, UI-INDEX.md
 └── features/<WORK-ITEM-ID>/   # per-feature/CR/bug artifacts, see features/README.md
 ```
 

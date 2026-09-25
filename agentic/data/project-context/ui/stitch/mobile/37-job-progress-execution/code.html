@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Work Order Progress &amp; Execution - BuildingOS</title>
+<!-- Google Fonts & Material Symbols -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS CDN -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "on-secondary-fixed": "#131b2e",
+            "surface-variant": "#d3e4fe",
+            "surface": "#f8f9ff",
+            "on-surface-variant": "#434655",
+            "primary": "#004ac6",
+            "tertiary": "#006243",
+            "surface-container-high": "#dce9ff",
+            "tertiary-fixed": "#85f8c4",
+            "secondary": "#565e74",
+            "surface-container-lowest": "#ffffff",
+            "on-secondary": "#ffffff",
+            "inverse-on-surface": "#eaf1ff",
+            "on-surface": "#0b1c30",
+            "primary-fixed-dim": "#b4c5ff",
+            "on-error": "#ffffff",
+            "on-tertiary-fixed-variant": "#005137",
+            "primary-container": "#2563eb",
+            "on-primary-container": "#eeefff",
+            "outline": "#737686",
+            "inverse-primary": "#b4c5ff",
+            "secondary-fixed-dim": "#bec6e0",
+            "primary-fixed": "#dbe1ff",
+            "tertiary-fixed-dim": "#68dba9",
+            "on-background": "#0b1c30",
+            "inverse-surface": "#213145",
+            "on-secondary-fixed-variant": "#3f465c",
+            "tertiary-container": "#007d57",
+            "secondary-container": "#dae2fd",
+            "on-tertiary-container": "#bdffdc",
+            "surface-dim": "#cbdbf5",
+            "surface-container": "#e5eeff",
+            "surface-container-low": "#eff4ff",
+            "background": "#f8f9ff",
+            "error-container": "#ffdad6",
+            "on-secondary-container": "#5c647a",
+            "surface-tint": "#0053db",
+            "surface-bright": "#f8f9ff",
+            "on-primary-fixed-variant": "#003ea8",
+            "secondary-fixed": "#dae2fd",
+            "on-primary-fixed": "#00174b",
+            "surface-container-highest": "#d3e4fe",
+            "outline-variant": "#c3c6d7",
+            "on-error-container": "#93000a",
+            "on-tertiary": "#ffffff",
+            "on-tertiary-fixed": "#002114",
+            "error": "#ba1a1a",
+            "on-primary": "#ffffff"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-lg": "1.5rem",
+            "space-2xl": "3rem",
+            "space-sm": "0.75rem",
+            "gutter": "1.5rem",
+            "margin": "2rem",
+            "gutter-mobile": "1rem",
+            "space-2xs": "0.25rem",
+            "space-xl": "2rem",
+            "space-md": "1rem",
+            "space-xs": "0.5rem",
+            "margin-mobile": "1rem"
+          },
+          "fontFamily": {
+            "body-sm": ["Inter"],
+            "headline-xl": ["Plus Jakarta Sans"],
+            "label-sm": ["Inter"],
+            "headline-md": ["Plus Jakarta Sans"],
+            "body-lg": ["Inter"],
+            "label-lg": ["Inter"],
+            "label-md": ["Inter"],
+            "currency-lg": ["Plus Jakarta Sans"],
+            "display-lg": ["Plus Jakarta Sans"],
+            "currency-md": ["Inter"],
+            "headline-lg": ["Plus Jakarta Sans"],
+            "display-lg-mobile": ["Plus Jakarta Sans"],
+            "body-md": ["Inter"]
+          },
+          "fontSize": {
+            "body-sm": ["12px", {"lineHeight": "16px", "fontWeight": "400"}],
+            "headline-xl": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.015em", "fontWeight": "600"}],
+            "label-sm": ["11px", {"lineHeight": "14px", "letterSpacing": "0.02em", "fontWeight": "600"}],
+            "headline-md": ["18px", {"lineHeight": "24px", "letterSpacing": "-0.005em", "fontWeight": "600"}],
+            "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+            "label-lg": ["14px", {"lineHeight": "20px", "fontWeight": "600"}],
+            "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+            "currency-lg": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+            "display-lg": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+            "currency-md": ["15px", {"lineHeight": "20px", "fontWeight": "600"}],
+            "headline-lg": ["22px", {"lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+            "display-lg-mobile": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+            "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}]
+          }
+        }
+      }
+    };
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      line-height: 1;
+      display: inline-block;
+      vertical-align: middle;
+    }
+    .material-symbols-outlined.fill {
+      font-variation-settings: 'FILL' 1;
+    }
+  </style>
+</head>
+<body class="bg-background text-on-surface antialiased font-body-md min-h-screen flex justify-center selection:bg-primary selection:text-on-primary">
+<!-- Mobile Screen Container (375px - 440px context) -->
+<main class="w-full max-w-md bg-background min-h-screen pb-32 flex flex-col relative shadow-xl">
+<!-- Top Sticky Context Header -->
+<header class="sticky top-0 z-40 bg-surface-container-lowest/95 backdrop-blur-md px-space-md h-16 flex items-center justify-between border-b border-outline-variant/30 shadow-sm">
+<div class="flex items-center gap-space-sm">
+<button aria-label="Go Back" class="w-9 h-9 rounded-lg flex items-center justify-center text-on-surface hover:bg-surface-container transition-colors active:scale-95" type="button">
+<span class="material-symbols-outlined text-[22px]">arrow_back</span>
+</button>
+<div class="flex flex-col">
+<h1 class="font-headline-md text-headline-md font-bold tracking-tight text-on-surface leading-tight">
+            Work Order Execution
+          </h1>
+<span class="font-body-sm text-body-sm text-secondary font-medium">
+            #WO-2025-0142 • Flat 4A
+          </span>
+</div>
+</div>
+<a aria-label="Call Flat Resident" class="w-9 h-9 rounded-lg bg-surface-container text-primary flex items-center justify-center hover:bg-primary hover:text-on-primary transition-all active:scale-95 shadow-sm" href="tel:+8801712345678">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">call</span>
+</a>
+</header>
+<div class="px-space-md pt-space-md flex flex-col gap-space-md">
+<!-- Status Banner & Live SLA Monitor -->
+<section class="bg-surface-container-lowest border border-outline-variant/40 rounded-xl p-space-md shadow-sm relative overflow-hidden">
+<div class="flex items-start justify-between gap-2 pb-space-sm border-b border-outline-variant/20">
+<div>
+<div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-surface-container-high border border-primary/20 mb-1.5">
+<span class="relative flex h-2 w-2">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary-container opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+</span>
+<span class="font-label-sm text-label-sm font-semibold text-primary uppercase tracking-wider">In Progress</span>
+</div>
+<h2 class="font-headline-md text-headline-md font-bold text-on-surface">On-Site Work Underway</h2>
+</div>
+<span class="px-2 py-1 rounded bg-secondary-container text-on-secondary-fixed font-label-sm text-label-sm font-semibold">Priority 1</span>
+</div>
+<!-- SLA & Elapsed Timers Grid -->
+<div class="grid grid-cols-2 gap-space-xs mt-space-sm pt-space-xs">
+<div class="bg-surface rounded-lg p-space-xs border border-outline-variant/30 flex items-center gap-2.5">
+<div class="w-8 h-8 rounded-md bg-secondary-container/60 text-secondary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[18px]">schedule</span>
+</div>
+<div>
+<p class="font-label-sm text-label-sm text-secondary">Elapsed Time</p>
+<p class="font-currency-md text-currency-md font-bold text-on-surface">45 mins</p>
+</div>
+</div>
+<div class="bg-surface rounded-lg p-space-xs border border-outline-variant/30 flex items-center gap-2.5">
+<div class="w-8 h-8 rounded-md bg-tertiary-fixed/40 text-tertiary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">timer</span>
+</div>
+<div>
+<p class="font-label-sm text-label-sm text-tertiary">SLA Remaining</p>
+<p class="font-currency-md text-currency-md font-bold text-tertiary">1h 15m</p>
+</div>
+</div>
+</div>
+<!-- Assigned Technician Card -->
+<div class="mt-space-md pt-space-sm border-t border-outline-variant/20 flex flex-col gap-2.5">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<div class="relative">
+<img class="w-11 h-11 rounded-full object-cover border border-outline-variant/40" data-alt="Close up professional portrait of a South Asian senior technician wearing a neat blue uniform and hardhat in a well-lit residential setting. Soft natural daylight illuminates his confident and trustworthy expression with subtle industrial background details." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDsDpMcVaP2cj-UxWjgUNu6Gjmi9Ze0zfO9AvUOL02s7lhsGzZdfsLugt_-ERM0tatHz30cdIVUwvdJLwAXddN2bOk6HL2hJqsejBfrHrMXHabvAeXDCz7QP01T0hAxdUHlIQs6U7Tw0fRTUXiGBnAg9ZAkihMYAGVJbjxcInXM37KaShXGQIizoL12phIeQgj1zlRybqbnGktH4lK_kRYUf0KouRsEap5fLS28xpd5AjtIF5deQzO_"/>
+<span class="absolute bottom-0 right-0 w-3 h-3 bg-tertiary-container rounded-full border-2 border-surface-container-lowest"></span>
+</div>
+<div>
+<div class="flex items-center gap-1.5">
+<span class="font-label-lg text-label-lg font-bold text-on-surface">Ratan Karmakar</span>
+<span class="px-1.5 py-0.5 rounded bg-surface-container text-on-surface-variant font-label-sm text-label-sm">Senior Plumber</span>
+</div>
+<p class="font-body-sm text-body-sm text-secondary">Assigned Specialist • Facilities Team</p>
+</div>
+</div>
+<a aria-label="Call Technician" class="w-8 h-8 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center hover:bg-primary transition-transform active:scale-90" href="tel:+8801812987654">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">call</span>
+</a>
+</div>
+<!-- Verified OTP Security Stamp -->
+<div class="flex items-center justify-between px-2.5 py-1.5 rounded-lg bg-surface-container-low border border-primary/15 text-primary">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-tertiary font-bold" style="font-variation-settings: 'FILL' 1;">verified</span>
+<span class="font-label-sm text-label-sm font-semibold text-on-surface">Entry OTP #7492 Verified</span>
+</div>
+<span class="font-body-sm text-body-sm text-secondary font-medium">03:12 PM</span>
+</div>
+</div>
+</section>
+<!-- Milestone Timeline Tracker -->
+<section class="bg-surface-container-lowest border border-outline-variant/40 rounded-xl p-space-md shadow-sm">
+<div class="flex items-center justify-between pb-space-sm mb-space-sm border-b border-outline-variant/20">
+<h3 class="font-headline-md text-headline-md font-bold text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[20px]">timeline</span>
+            Milestone Progress
+          </h3>
+<span class="font-label-sm text-label-sm text-secondary font-semibold">Step 4 of 5</span>
+</div>
+<div class="relative pl-6 space-y-4 before:absolute before:left-[11px] before:top-2 before:bottom-3 before:w-[2px] before:bg-outline-variant/40">
+<!-- Step 1: Completed -->
+<div class="relative">
+<span class="absolute -left-6 top-0.5 w-5 h-5 rounded-full bg-tertiary text-on-tertiary flex items-center justify-center ring-4 ring-surface-container-lowest">
+<span class="material-symbols-outlined text-[14px] font-bold">check</span>
+</span>
+<div class="flex items-baseline justify-between">
+<h4 class="font-label-md text-label-md font-semibold text-on-surface">Ticket Logged by Resident</h4>
+<span class="font-body-sm text-body-sm text-secondary">20 Mar, 10:15 AM</span>
+</div>
+<p class="font-body-sm text-body-sm text-secondary">Reported severe water seepage in master bathroom.</p>
+</div>
+<!-- Step 2: Completed -->
+<div class="relative">
+<span class="absolute -left-6 top-0.5 w-5 h-5 rounded-full bg-tertiary text-on-tertiary flex items-center justify-center ring-4 ring-surface-container-lowest">
+<span class="material-symbols-outlined text-[14px] font-bold">check</span>
+</span>
+<div class="flex items-baseline justify-between">
+<h4 class="font-label-md text-label-md font-semibold text-on-surface">Assigned &amp; Dispatched by Estate Manager</h4>
+<span class="font-body-sm text-body-sm text-secondary">20 Mar, 01:30 PM</span>
+</div>
+<p class="font-body-sm text-body-sm text-secondary">Work scheduled with Senior Technician Ratan Karmakar.</p>
+</div>
+<!-- Step 3: Completed -->
+<div class="relative">
+<span class="absolute -left-6 top-0.5 w-5 h-5 rounded-full bg-tertiary text-on-tertiary flex items-center justify-center ring-4 ring-surface-container-lowest">
+<span class="material-symbols-outlined text-[14px] font-bold">check</span>
+</span>
+<div class="flex items-baseline justify-between">
+<h4 class="font-label-md text-label-md font-semibold text-on-surface">Technician Arrived at Flat 4A &amp; Checked In</h4>
+<span class="font-body-sm text-body-sm text-secondary">20 Mar, 03:12 PM</span>
+</div>
+<p class="font-body-sm text-body-sm text-secondary">Resident accepted door access via OTP #7492 verification.</p>
+</div>
+<!-- Step 4: Active Pulse Step -->
+<div class="relative">
+<span class="absolute -left-6 top-0.5 w-5 h-5 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center ring-4 ring-surface-container-lowest animate-pulse">
+<span class="material-symbols-outlined text-[14px] font-bold">play_arrow</span>
+</span>
+<div class="flex items-baseline justify-between">
+<h4 class="font-label-md text-label-md font-bold text-primary">Diagnosis &amp; Work in Progress</h4>
+<span class="font-label-sm text-label-sm text-primary font-bold">Active Now</span>
+</div>
+<div class="mt-1 p-2 rounded-lg bg-surface-container-low border border-primary-container/20">
+<p class="font-body-sm text-body-sm text-on-surface font-medium flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[15px] text-primary">build</span>
+                PPR elbow pipe joint replaced, pressure leak test running
+              </p>
+</div>
+</div>
+<!-- Step 5: Upcoming Gray Step -->
+<div class="relative opacity-60">
+<span class="absolute -left-6 top-0.5 w-5 h-5 rounded-full bg-surface-container text-outline flex items-center justify-center ring-4 ring-surface-container-lowest border border-outline-variant/60">
+<span class="material-symbols-outlined text-[12px]">lock</span>
+</span>
+<div class="flex items-baseline justify-between">
+<h4 class="font-label-md text-label-md font-semibold text-secondary">Completion &amp; Resident Signoff</h4>
+<span class="font-body-sm text-body-sm text-outline">Pending</span>
+</div>
+<p class="font-body-sm text-body-sm text-secondary">Digital sign-off on billable spares and handover checklist.</p>
+</div>
+</div>
+</section>
+<!-- Material & Spare Parts Consumed Log -->
+<section class="bg-surface-container-lowest border border-outline-variant/40 rounded-xl p-space-md shadow-sm">
+<div class="flex items-center justify-between pb-space-xs border-b border-outline-variant/20 mb-space-xs">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[20px]">receipt_long</span>
+<h3 class="font-headline-md text-headline-md font-bold text-on-surface">Parts &amp; Billing Log</h3>
+</div>
+<span class="font-label-sm text-label-sm px-2 py-0.5 rounded bg-surface-container text-on-surface-variant font-medium">3 Items Added</span>
+</div>
+<!-- Ledger Items -->
+<div class="divide-y divide-outline-variant/20">
+<div class="py-2.5 flex items-start justify-between gap-2">
+<div class="flex items-start gap-2">
+<span class="w-6 h-6 rounded bg-surface-container-low text-primary flex items-center justify-center text-[12px] font-bold shrink-0 mt-0.5">1x</span>
+<div>
+<p class="font-label-md text-label-md font-semibold text-on-surface">PPR 25mm 90-Degree Elbow Joint (RFL)</p>
+<p class="font-body-sm text-body-sm text-secondary">SKU: PLM-PPR-90E • Unit: ৳180</p>
+</div>
+</div>
+<span class="font-currency-md text-currency-md font-bold text-on-surface whitespace-nowrap">৳180</span>
+</div>
+<div class="py-2.5 flex items-start justify-between gap-2">
+<div class="flex items-start gap-2">
+<span class="w-6 h-6 rounded bg-surface-container-low text-primary flex items-center justify-center text-[12px] font-bold shrink-0 mt-0.5">1x</span>
+<div>
+<p class="font-label-md text-label-md font-semibold text-on-surface">CPVC Solvent Cement 100ml</p>
+<p class="font-body-sm text-body-sm text-secondary">SKU: CHM-CPVC-100 • Unit: ৳220</p>
+</div>
+</div>
+<span class="font-currency-md text-currency-md font-bold text-on-surface whitespace-nowrap">৳220</span>
+</div>
+<div class="py-2.5 flex items-start justify-between gap-2">
+<div class="flex items-start gap-2">
+<span class="w-6 h-6 rounded bg-surface-container-low text-primary flex items-center justify-center text-[12px] font-bold shrink-0 mt-0.5">1x</span>
+<div>
+<p class="font-label-md text-label-md font-semibold text-on-surface">High-pressure Teflon Sealing Tape</p>
+<p class="font-body-sm text-body-sm text-secondary">SKU: TAP-TEF-HP • Unit: ৳60</p>
+</div>
+</div>
+<span class="font-currency-md text-currency-md font-bold text-on-surface whitespace-nowrap">৳60</span>
+</div>
+</div>
+<!-- Breakdown & Total Running Estimate -->
+<div class="mt-space-xs pt-space-xs border-t border-outline-variant/30 space-y-1.5 bg-surface-container-low/40 p-space-sm rounded-lg">
+<div class="flex justify-between text-body-sm font-body-sm text-secondary">
+<span>Subtotal Materials</span>
+<span class="font-semibold text-on-surface">৳460</span>
+</div>
+<div class="flex justify-between text-body-sm font-body-sm text-secondary">
+<span>Technician Labor Surcharge</span>
+<span class="font-semibold text-on-surface">৳800</span>
+</div>
+<div class="flex justify-between items-baseline pt-1.5 border-t border-outline-variant/30 text-on-surface">
+<div>
+<p class="font-label-md text-label-md font-bold">Total Running Estimate</p>
+<p class="font-body-sm text-body-sm text-secondary text-[11px]">Includes 5% Building Maintenance Reserve</p>
+</div>
+<span class="font-currency-lg text-currency-lg font-bold text-primary">৳1,260</span>
+</div>
+</div>
+</section>
+<!-- Live Job Evidence Media -->
+<section class="bg-surface-container-lowest border border-outline-variant/40 rounded-xl p-space-md shadow-sm">
+<div class="flex items-center justify-between pb-space-xs border-b border-outline-variant/20 mb-space-sm">
+<h3 class="font-headline-md text-headline-md font-bold text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[20px]">photo_camera</span>
+            Live Job Evidence
+          </h3>
+<span class="font-label-sm text-label-sm text-tertiary font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-[15px]">cloud_done</span>
+            Synced
+          </span>
+</div>
+<!-- Media Grid -->
+<div class="grid grid-cols-3 gap-2.5">
+<!-- Thumbnail 1: Before -->
+<div class="group relative rounded-lg overflow-hidden border border-outline-variant/50 aspect-square bg-surface-container flex flex-col justify-end">
+<img class="absolute inset-0 w-full h-full object-cover transition-transform group-hover:scale-105" data-alt="High-detail close-up shot of a cracked water pipe leaking inside an exposed wall cavity behind chipped ceramic tiles. Water droplets and lime deposits are visible with clear sharp focus under work light conditions, exhibiting realistic apartment plumbing repair diagnostics." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAbZNoXXlUAoWY4z3eM3MLSFgBO8UxYW0NS_xJoI5I1e79a2gvRoHGXvHv9iCTWntdHzym9ZNihei2NW4qVbzx1c3zviiFO54r4HEHwqbLYcebW1c3cEYOzuIj67orKRymAvKLqaL3yb9IOpZMxv6SXuylyvWJJ17E8t5XIicIPYcaLTREMOVdU8U6-uNkDIquZWURAlbFD7vAaKWM1PVCS5Hx7L627dt5kkpPkEFD8MyFi_-vqykwm"/>
+<div class="relative z-10 bg-inverse-surface/85 backdrop-blur-xs p-1 text-center">
+<p class="text-[10px] font-semibold text-inverse-on-surface truncate">Before: Leaking pipe</p>
+</div>
+</div>
+<!-- Thumbnail 2: In-Progress -->
+<div class="group relative rounded-lg overflow-hidden border border-outline-variant/50 aspect-square bg-surface-container flex flex-col justify-end">
+<img class="absolute inset-0 w-full h-full object-cover transition-transform group-hover:scale-105" data-alt="Close-up professional macro photography of a newly welded green PPR 90 degree elbow pipe joint fitted securely onto copper water piping. Industrial adhesive sealant lines are visible around clean fresh plumbing joint connectors with bright work inspection torch lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCdrm-4mzA-luQHdwKDccVPOJgndxM3flXCWmfy7K9OfoytVFdesTRPMs-GFLmZMRHKEZEx_T-d-43aYCY1daEzpTwgzTq8Rc9megWJCQdtL2MBhLYf2ODzKhjFHVcI_tmZvOL34LpvDxL6J-jGU8WntB7eSHg_vVNvR1o8DyvqFkVp-BBulO8bziE_xHDHaCoxVxLJ54Dl-Yfiogfb73CIafitR10wXQmTD00drqs4xv97mbvybp4j"/>
+<div class="relative z-10 bg-inverse-surface/85 backdrop-blur-xs p-1 text-center">
+<p class="text-[10px] font-semibold text-inverse-on-surface truncate">In-Progress: Weld joint</p>
+</div>
+</div>
+<!-- Add Photo CTA -->
+<button class="aspect-square rounded-lg border-2 border-dashed border-primary/40 bg-surface-container-low hover:bg-surface-container flex flex-col items-center justify-center gap-1 text-primary active:scale-95 transition-all p-1 text-center" type="button">
+<span class="material-symbols-outlined text-[24px]">add_a_photo</span>
+<span class="font-label-sm text-label-sm font-semibold text-[11px] leading-tight">+ Add Photo Evidence</span>
+</button>
+</div>
+</section>
+</div>
+<!-- Fixed Bottom Action Bar -->
+<div class="fixed bottom-0 max-w-md w-full bg-surface-container-lowest/95 backdrop-blur-lg border-t border-outline-variant/30 px-space-md py-space-sm z-50 shadow-[0_-4px_12px_rgba(15,23,42,0.06)]">
+<div class="flex flex-col gap-2">
+<button class="w-full h-12 bg-primary-container hover:bg-primary text-on-primary-container rounded-lg font-label-lg text-label-lg font-bold shadow-md hover:shadow-lg transition-all active:scale-[0.98] flex items-center justify-center gap-2" type="button">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">task_alt</span>
+          Mark Work as Complete
+        </button>
+<button class="w-full h-10 bg-transparent hover:bg-surface-container border border-outline-variant text-on-surface-variant rounded-lg font-label-md text-label-md font-semibold transition-all active:scale-[0.98] flex items-center justify-center gap-1.5" type="button">
+<span class="material-symbols-outlined text-[18px]">more_horiz</span>
+          Request Additional Parts / Pause Job
+        </button>
+</div>
+</div>
+</main>
+</body></html>

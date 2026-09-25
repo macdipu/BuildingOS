@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Tenant Profile - Green Valley Heights</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "inverse-on-surface": "#eaf1ff",
+            "on-tertiary": "#ffffff",
+            "on-primary-fixed": "#00174b",
+            "tertiary": "#006243",
+            "inverse-primary": "#b4c5ff",
+            "tertiary-fixed-dim": "#68dba9",
+            "on-surface": "#0b1c30",
+            "surface-tint": "#0053db",
+            "surface-container-highest": "#d3e4fe",
+            "on-primary-container": "#eeefff",
+            "inverse-surface": "#213145",
+            "secondary-fixed": "#dae2fd",
+            "primary-fixed-dim": "#b4c5ff",
+            "on-error-container": "#93000a",
+            "on-primary-fixed-variant": "#003ea8",
+            "on-tertiary-fixed": "#002114",
+            "outline-variant": "#c3c6d7",
+            "background": "#f8f9ff",
+            "on-primary": "#ffffff",
+            "secondary-container": "#dae2fd",
+            "on-secondary-container": "#5c647a",
+            "surface-container": "#e5eeff",
+            "surface": "#f8f9ff",
+            "surface-container-low": "#eff4ff",
+            "on-background": "#0b1c30",
+            "surface-container-high": "#dce9ff",
+            "surface-variant": "#d3e4fe",
+            "on-secondary-fixed": "#131b2e",
+            "on-secondary": "#ffffff",
+            "primary-container": "#2563eb",
+            "secondary-fixed-dim": "#bec6e0",
+            "on-tertiary-container": "#bdffdc",
+            "tertiary-fixed": "#85f8c4",
+            "on-tertiary-fixed-variant": "#005137",
+            "surface-bright": "#f8f9ff",
+            "error-container": "#ffdad6",
+            "secondary": "#565e74",
+            "error": "#ba1a1a",
+            "outline": "#737686",
+            "surface-dim": "#cbdbf5",
+            "on-surface-variant": "#434655",
+            "surface-container-lowest": "#ffffff",
+            "on-error": "#ffffff",
+            "primary": "#004ac6",
+            "tertiary-container": "#007d57",
+            "primary-fixed": "#dbe1ff",
+            "on-secondary-fixed-variant": "#3f465c"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-2xs": "0.25rem",
+            "space-xs": "0.5rem",
+            "space-sm": "0.75rem",
+            "space-md": "1rem",
+            "space-lg": "1.5rem",
+            "space-xl": "2rem",
+            "space-2xl": "3rem",
+            "margin-mobile": "1rem",
+            "gutter-mobile": "1rem",
+            "margin": "2rem",
+            "gutter": "1.5rem"
+          },
+          "fontFamily": {
+            "body-md": ["Inter"],
+            "display-lg-mobile": ["Plus Jakarta Sans"],
+            "display-lg": ["Plus Jakarta Sans"],
+            "headline-xl": ["Plus Jakarta Sans"],
+            "headline-md": ["Plus Jakarta Sans"],
+            "body-lg": ["Inter"],
+            "label-sm": ["Inter"],
+            "currency-md": ["Inter"],
+            "currency-lg": ["Plus Jakarta Sans"],
+            "body-sm": ["Inter"],
+            "label-lg": ["Inter"],
+            "label-md": ["Inter"],
+            "headline-lg": ["Plus Jakarta Sans"]
+          },
+          "fontSize": {
+            "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+            "display-lg-mobile": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+            "display-lg": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "headline-xl": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.015em", "fontWeight": "600" }],
+            "headline-md": ["18px", { "lineHeight": "24px", "letterSpacing": "-0.005em", "fontWeight": "600" }],
+            "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "label-sm": ["11px", { "lineHeight": "14px", "letterSpacing": "0.02em", "fontWeight": "600" }],
+            "currency-md": ["15px", { "lineHeight": "20px", "fontWeight": "600" }],
+            "currency-lg": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+            "body-sm": ["12px", { "lineHeight": "16px", "fontWeight": "400" }],
+            "label-lg": ["14px", { "lineHeight": "20px", "fontWeight": "600" }],
+            "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "600" }],
+            "headline-lg": ["22px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600" }]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1;
+    }
+    .material-symbols-outlined.fill {
+      font-variation-settings: 'FILL' 1;
+    }
+    /* Hide scrollbars for clean tab overflow */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+</head>
+<body class="bg-background text-on-surface antialiased font-body-md min-h-screen pb-36">
+<!-- Mobile Viewport Frame Container -->
+<div class="max-w-md mx-auto relative bg-background min-h-screen flex flex-col shadow-xl">
+<!-- Top App Header -->
+<header class="sticky top-0 z-40 bg-surface-container-lowest/95 backdrop-blur-md px-space-md h-16 flex items-center justify-between border-b border-outline-variant/30 shadow-sm">
+<div class="flex items-center gap-space-sm">
+<button aria-label="Back" class="w-10 h-10 -ml-2 rounded-full flex items-center justify-center text-on-surface hover:bg-surface-container active:scale-95 transition-all" type="button">
+<span class="material-symbols-outlined text-[24px]">arrow_back</span>
+</button>
+<div>
+<h1 class="font-headline-md text-headline-md font-bold text-on-surface tracking-tight">Tenant Profile</h1>
+<p class="font-body-sm text-body-sm text-secondary">Green Valley Heights</p>
+</div>
+</div>
+<div class="flex items-center gap-space-xs">
+<button aria-label="Edit Profile" class="w-9 h-9 rounded-full flex items-center justify-center text-secondary hover:bg-surface-container hover:text-primary active:scale-90 transition-all" type="button">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+<button aria-label="Share Profile" class="w-9 h-9 rounded-full flex items-center justify-center text-secondary hover:bg-surface-container hover:text-primary active:scale-90 transition-all" type="button">
+<span class="material-symbols-outlined text-[20px]">share</span>
+</button>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-1 px-space-md pt-space-md space-y-space-md">
+<!-- Tenant Header Card -->
+<section class="bg-surface-container-lowest rounded-xl border border-outline-variant/40 p-space-md shadow-sm relative overflow-hidden">
+<!-- Subtle Institutional Accent Gradient Strip -->
+<div class="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-primary to-primary-container"></div>
+<div class="flex items-start gap-space-md pt-space-xs">
+<!-- Avatar with Verified Badge -->
+<div class="relative shrink-0">
+<div class="w-16 h-16 rounded-full overflow-hidden border-2 border-primary-fixed ring-2 ring-primary/10">
+<img alt="Engr. Rafiqul Islam" class="w-full h-full object-cover" data-alt="A distinguished South Asian professional man in his early forties with neatly groomed dark hair and spectacles, wearing a modern formal collared shirt, set against a soft, bright architectural corporate office background with neutral cool blues and crisp natural morning lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAh8c7f_FlTp6Qw-wKoaL2x_WnNHVm_MEIc8NcXuGpufBgbw_pHQKriGV0tSx0Dgm8Gr-sdhLqblz_mH0Hq9iXAaq1NMMg25_AgTNmfWASEr93AtdEhUzjcwtaULF7NCCNy8DO3Jev07I8eKw6yA5hiwsl4hcJobEwoCKW97c8dNoZno2FZN2EojlGD0vOthNU9vUo3qgQ4JoZIm_7QTCwwQQrUJoW7Hzt8TNTaoKmnNcuWC0BY-XRr"/>
+</div>
+<div class="absolute -bottom-1 -right-1 bg-tertiary text-on-tertiary rounded-full w-5 h-5 flex items-center justify-center shadow-sm ring-2 ring-surface-container-lowest" title="Identity Verified">
+<span class="material-symbols-outlined text-[13px] fill" style="font-variation-settings: 'FILL' 1;">verified</span>
+</div>
+</div>
+<!-- Primary Title & Unit Details -->
+<div class="flex-1 min-w-0">
+<div class="flex items-center gap-space-2xs flex-wrap mb-1">
+<span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold bg-tertiary/10 text-tertiary border border-tertiary/20">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary mr-1.5 animate-pulse"></span>
+                Verified Resident Tenant
+              </span>
+</div>
+<h2 class="font-headline-lg text-headline-lg font-bold text-on-surface truncate">Engr. Rafiqul Islam</h2>
+<div class="flex items-center gap-1.5 text-secondary font-body-sm text-body-sm mt-0.5">
+<span class="material-symbols-outlined text-[16px] text-primary">domain</span>
+<span class="font-medium text-on-surface">Flat 4A</span>
+<span class="text-outline-variant">•</span>
+<span>Green Valley Heights</span>
+</div>
+</div>
+</div>
+<!-- Contact & Identification Ledger Section -->
+<div class="mt-space-md pt-space-sm border-t border-outline-variant/30 space-y-space-xs">
+<!-- Phone Row -->
+<div class="flex items-center justify-between py-1">
+<div class="flex items-center gap-space-xs text-on-surface-variant text-body-sm">
+<span class="material-symbols-outlined text-[18px] text-secondary">call</span>
+<span class="font-medium text-on-surface">+880 1711-987654</span>
+</div>
+<a class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-surface-container-low text-primary hover:bg-primary hover:text-on-primary transition-colors" href="tel:+8801711987654">
+<span class="material-symbols-outlined text-[18px]">phone_in_talk</span>
+</a>
+</div>
+<!-- Email Row -->
+<div class="flex items-center justify-between py-1">
+<div class="flex items-center gap-space-xs text-on-surface-variant text-body-sm">
+<span class="material-symbols-outlined text-[18px] text-secondary">mail</span>
+<span class="font-body-sm text-body-sm text-on-surface truncate max-w-[210px]">rafiqul@techfirm.bd</span>
+</div>
+<span class="text-[11px] font-medium text-secondary bg-surface-container px-2 py-0.5 rounded">Work</span>
+</div>
+<!-- NID Identification Row -->
+<div class="flex items-center justify-between py-1 bg-surface-container-low/60 px-space-xs rounded-lg">
+<div class="flex items-center gap-space-xs text-body-sm">
+<span class="material-symbols-outlined text-[18px] text-tertiary">badge</span>
+<div>
+<span class="text-[11px] text-secondary block leading-3">National ID (Smart NID)</span>
+<span class="font-semibold text-on-surface tracking-wider text-body-sm">19822691238479</span>
+</div>
+</div>
+<span class="inline-flex items-center gap-1 text-[11px] font-semibold text-tertiary bg-tertiary/10 px-2 py-0.5 rounded">
+<span class="material-symbols-outlined text-[13px] fill" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+              Verified
+            </span>
+</div>
+<!-- Emergency Contact Accordion Item -->
+<div class="mt-space-sm pt-space-xs border-t border-outline-variant/30 flex items-start gap-space-xs text-body-sm">
+<span class="material-symbols-outlined text-[18px] text-error mt-0.5">contact_emergency</span>
+<div class="flex-1">
+<span class="text-[11px] font-semibold text-secondary uppercase tracking-wider block">Emergency Contact</span>
+<p class="font-medium text-on-surface text-body-sm">
+                Mrs. Sabina Yasmin <span class="text-secondary font-normal">(Spouse)</span>
+</p>
+<div class="flex items-center gap-1.5 text-secondary text-body-sm mt-0.5">
+<span class="font-mono text-on-surface-variant font-medium">+880 1819-112233</span>
+<a class="text-primary text-[12px] font-semibold hover:underline flex items-center" href="tel:+8801819112233">
+                  Call
+                </a>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Scrollable Tab Bar -->
+<nav class="flex items-center gap-2 overflow-x-auto no-scrollbar py-1 -mx-space-md px-space-md border-b border-outline-variant/30 text-body-sm">
+<button class="shrink-0 px-3.5 py-1.5 rounded-full font-label-md text-label-md font-semibold bg-primary text-on-primary shadow-xs">
+          Overview
+        </button>
+<button class="shrink-0 px-3.5 py-1.5 rounded-full font-label-md text-label-md text-secondary hover:text-on-surface hover:bg-surface-container transition-colors">
+          Lease &amp; Agreement
+        </button>
+<button class="shrink-0 px-3.5 py-1.5 rounded-full font-label-md text-label-md text-secondary hover:text-on-surface hover:bg-surface-container transition-colors">
+          Rent Ledger
+        </button>
+<button class="shrink-0 px-3.5 py-1.5 rounded-full font-label-md text-label-md text-secondary hover:text-on-surface hover:bg-surface-container transition-colors">
+          DMP Police Form
+        </button>
+<button class="shrink-0 px-3.5 py-1.5 rounded-full font-label-md text-label-md text-secondary hover:text-on-surface hover:bg-surface-container transition-colors">
+          Documents
+        </button>
+</nav>
+<!-- Active Lease Summary Bento Card -->
+<section class="bg-surface-container-lowest rounded-xl border border-outline-variant/40 p-space-md shadow-sm">
+<div class="flex items-center justify-between pb-space-xs border-b border-outline-variant/30">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[20px]">assignment</span>
+<h3 class="font-headline-md text-headline-md font-bold text-on-surface">Active Lease Summary</h3>
+</div>
+<span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-tertiary/10 text-tertiary">
+            Active
+          </span>
+</div>
+<div class="grid grid-cols-2 gap-space-sm mt-space-md">
+<!-- Agreed Rent -->
+<div class="bg-surface-container-low/70 rounded-lg p-space-sm border border-outline-variant/20">
+<div class="text-[11px] font-semibold text-secondary flex items-center justify-between">
+<span>Agreed Monthly Rent</span>
+<span class="material-symbols-outlined text-[15px] text-primary">payments</span>
+</div>
+<div class="mt-1">
+<span class="font-currency-lg text-currency-lg font-bold text-on-surface">৳55,000</span>
+<span class="font-body-sm text-body-sm text-secondary"> / month</span>
+</div>
+<div class="text-[11px] font-medium text-tertiary mt-1 flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span>
+              Due on 5th of month
+            </div>
+</div>
+<!-- Security Deposit -->
+<div class="bg-surface-container-low/70 rounded-lg p-space-sm border border-outline-variant/20">
+<div class="text-[11px] font-semibold text-secondary flex items-center justify-between">
+<span>Security Deposit</span>
+<span class="material-symbols-outlined text-[15px] text-tertiary">lock</span>
+</div>
+<div class="mt-1">
+<span class="font-currency-lg text-currency-lg font-bold text-on-surface">৳1,10,000</span>
+</div>
+<div class="text-[11px] font-medium text-secondary mt-1">
+              2 Months (Escrow Held)
+            </div>
+</div>
+</div>
+<!-- Lease Timeline & Remaining Duration Progress -->
+<div class="mt-space-md bg-surface-container-lowest border border-outline-variant/30 rounded-lg p-space-sm">
+<div class="flex items-center justify-between text-body-sm mb-1.5">
+<span class="text-secondary text-[12px] font-medium">Lease Validity Period</span>
+<span class="text-primary font-semibold text-[12px] flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">hourglass_top</span>
+              74 days remaining
+            </span>
+</div>
+<div class="w-full bg-surface-container h-2 rounded-full overflow-hidden">
+<div class="bg-primary h-full rounded-full" style="width: 79%;"></div>
+</div>
+<div class="flex justify-between items-center text-[11px] text-secondary mt-1.5">
+<span class="font-medium text-on-surface">01 Jun 2024</span>
+<span class="font-medium text-on-surface">31 May 2025</span>
+</div>
+</div>
+<!-- Landlord/Owner Info Bar -->
+<div class="mt-space-sm pt-space-xs flex items-center justify-between text-body-sm">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-[18px]">person</span>
+<span class="text-secondary text-[12px]">Property Owner:</span>
+<span class="font-semibold text-on-surface text-body-sm">Tanvir Ahmed</span>
+</div>
+<span class="text-[11px] font-medium text-primary bg-primary-fixed/50 px-2 py-0.5 rounded">Flat 4A Owner</span>
+</div>
+</section>
+<!-- Recent Rent Payments Status Card -->
+<section class="bg-surface-container-lowest rounded-xl border border-outline-variant/40 p-space-md shadow-sm">
+<div class="flex items-center justify-between pb-space-xs border-b border-outline-variant/30 mb-space-sm">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-tertiary text-[20px]">receipt_long</span>
+<h3 class="font-headline-md text-headline-md font-bold text-on-surface">Recent Rent Payments</h3>
+</div>
+<a class="font-label-md text-label-md font-semibold text-primary hover:underline flex items-center" href="#">
+            View Ledger
+            <span class="material-symbols-outlined text-[16px]">chevron_right</span>
+</a>
+</div>
+<div class="space-y-space-xs">
+<!-- Transaction 1: March 2025 -->
+<div class="flex items-center justify-between p-space-xs rounded-lg hover:bg-surface-container-low transition-colors border border-outline-variant/20">
+<div class="flex items-center gap-space-xs">
+<div class="w-8 h-8 rounded-full bg-tertiary/10 text-tertiary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[18px]">check</span>
+</div>
+<div>
+<div class="flex items-center gap-1.5">
+<p class="font-label-lg text-label-lg font-semibold text-on-surface">March 2025</p>
+<span class="text-[10px] bg-surface-container text-secondary px-1.5 py-0.2 rounded font-mono">#RCP-2025-0302</span>
+</div>
+<p class="text-[11px] text-secondary">Paid on 02 Mar 2025 • Bank Transfer</p>
+</div>
+</div>
+<div class="text-right">
+<p class="font-currency-md text-currency-md font-bold text-tertiary">৳55,000</p>
+<span class="inline-flex items-center gap-1 text-[10px] font-semibold text-tertiary">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span> Paid
+              </span>
+</div>
+</div>
+<!-- Transaction 2: February 2025 -->
+<div class="flex items-center justify-between p-space-xs rounded-lg hover:bg-surface-container-low transition-colors border border-outline-variant/20">
+<div class="flex items-center gap-space-xs">
+<div class="w-8 h-8 rounded-full bg-tertiary/10 text-tertiary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[18px]">check</span>
+</div>
+<div>
+<p class="font-label-lg text-label-lg font-semibold text-on-surface">February 2025</p>
+<p class="text-[11px] text-secondary">Paid on 04 Feb 2025 • bKash Merchant</p>
+</div>
+</div>
+<div class="text-right">
+<p class="font-currency-md text-currency-md font-bold text-tertiary">৳55,000</p>
+<span class="inline-flex items-center gap-1 text-[10px] font-semibold text-tertiary">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span> Paid
+              </span>
+</div>
+</div>
+</div>
+</section>
+<!-- Document Vault Items -->
+<section class="bg-surface-container-lowest rounded-xl border border-outline-variant/40 p-space-md shadow-sm">
+<div class="flex items-center justify-between pb-space-xs border-b border-outline-variant/30 mb-space-sm">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[20px]">folder_shared</span>
+<h3 class="font-headline-md text-headline-md font-bold text-on-surface">Document Vault</h3>
+</div>
+<span class="text-[11px] font-semibold text-secondary">2 Files Available</span>
+</div>
+<div class="space-y-space-xs">
+<!-- DMP Verification Copy -->
+<div class="flex items-center justify-between p-space-xs bg-surface-container-low/50 rounded-lg border border-outline-variant/30">
+<div class="flex items-center gap-space-xs">
+<div class="w-9 h-9 rounded-lg bg-surface-container flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined text-[22px]">policy</span>
+</div>
+<div>
+<p class="font-label-md text-label-md font-semibold text-on-surface leading-tight">DMP Dhaka Police Verification Copy</p>
+<div class="flex items-center gap-1.5 mt-0.5">
+<span class="inline-flex items-center text-[10px] font-semibold text-tertiary bg-tertiary/10 px-1.5 py-0.5 rounded">
+                    Verified &amp; Stamped
+                  </span>
+<span class="text-[11px] text-secondary font-mono">Thana: Dhanmondi</span>
+</div>
+</div>
+</div>
+<button aria-label="Download DMP Verification" class="w-8 h-8 rounded-full flex items-center justify-center text-secondary hover:text-primary hover:bg-surface-container transition-colors" type="button">
+<span class="material-symbols-outlined text-[20px]">download</span>
+</button>
+</div>
+<!-- Tenancy Agreement Deed -->
+<div class="flex items-center justify-between p-space-xs bg-surface-container-low/50 rounded-lg border border-outline-variant/30">
+<div class="flex items-center gap-space-xs">
+<div class="w-9 h-9 rounded-lg bg-surface-container flex items-center justify-center text-error shrink-0">
+<span class="material-symbols-outlined text-[22px]">description</span>
+</div>
+<div>
+<p class="font-label-md text-label-md font-semibold text-on-surface leading-tight">Tenancy Agreement Deed</p>
+<p class="text-[11px] text-secondary mt-0.5">Signed PDF • 3.8 MB • Non-Judicial Stamp</p>
+</div>
+</div>
+<button aria-label="Download Tenancy Agreement" class="w-8 h-8 rounded-full flex items-center justify-center text-secondary hover:text-primary hover:bg-surface-container transition-colors" type="button">
+<span class="material-symbols-outlined text-[20px]">download</span>
+</button>
+</div>
+</div>
+</section>
+</main>
+<!-- Anchored Dual Action Bottom Bar (Pinned above global navigation) -->
+<div class="fixed bottom-16 left-0 right-0 max-w-md mx-auto z-40 bg-surface-container-lowest/95 backdrop-blur-md px-space-md py- space-xs border-t border-outline-variant/30 shadow-lg flex items-center gap-space-sm py-2">
+<!-- Call Tenant (Outline) -->
+<a class="flex-1 h-11 px-3 border border-outline-variant rounded-lg text-on-surface font-label-md text-label-md font-semibold flex items-center justify-center gap-1.5 hover:bg-surface-container active:scale-95 transition-all text-center" href="tel:+8801711987654">
+<span class="material-symbols-outlined text-[18px] text-primary">call</span>
+        Call Tenant
+      </a>
+<!-- Issue Rent Receipt / Bill (Primary Blue) -->
+<button class="flex-[1.5] h-11 px-4 bg-primary-container hover:bg-primary text-on-primary rounded-lg font-label-md text-label-md font-semibold flex items-center justify-center gap-1.5 shadow-sm active:scale-95 transition-all" type="button">
+<span class="material-symbols-outlined text-[18px]">receipt</span>
+        Issue Rent Receipt / Bill
+      </button>
+</div>
+<!-- Bottom Navigation Bar (Shared Component Execution from JSON) -->
+<!-- JSON: label_texts: ["Home", "Units", "Finance", "Work", "Community"], icons: ["dashboard", "domain", "account_balance_wallet", "construction", "groups"] -->
+<!-- Active State Logic: Tenant belongs under "Units" destination -->
+<nav class="fixed bottom-0 left-0 w-full z-50 h-16 flex justify-around items-center px-space-xs bg-surface-container-lowest shadow-sm max-w-md mx-auto right-0">
+<!-- Home -->
+<button class="flex flex-col items-center justify-center text-secondary hover:text-primary transition-colors duration-150 active:scale-90" type="button">
+<span class="material-symbols-outlined text-[22px]">dashboard</span>
+<span class="font-label-sm text-label-sm mt-0.5">Home</span>
+</button>
+<!-- Units (Active Tab) -->
+<button class="flex flex-col items-center justify-center text-primary font-semibold relative after:content-[''] after:w-1.5 after:h-1.5 after:bg-primary after:rounded-full after:mt-1 active:scale-90 transition-transform duration-150" type="button">
+<span class="material-symbols-outlined text-[22px] fill" style="font-variation-settings: 'FILL' 1;">domain</span>
+<span class="font-label-sm text-label-sm mt-0.5">Units</span>
+</button>
+<!-- Finance -->
+<button class="flex flex-col items-center justify-center text-secondary hover:text-primary transition-colors duration-150 active:scale-90" type="button">
+<span class="material-symbols-outlined text-[22px]">account_balance_wallet</span>
+<span class="font-label-sm text-label-sm mt-0.5">Finance</span>
+</button>
+<!-- Work -->
+<button class="flex flex-col items-center justify-center text-secondary hover:text-primary transition-colors duration-150 active:scale-90" type="button">
+<span class="material-symbols-outlined text-[22px]">construction</span>
+<span class="font-label-sm text-label-sm mt-0.5">Work</span>
+</button>
+<!-- Community -->
+<button class="flex flex-col items-center justify-center text-secondary hover:text-primary transition-colors duration-150 active:scale-90" type="button">
+<span class="material-symbols-outlined text-[22px]">groups</span>
+<span class="font-label-sm text-label-sm mt-0.5">Community</span>
+</button>
+</nav>
+</div>
+</body></html>

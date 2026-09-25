@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Create Tenancy Lease - Green Valley Heights</title>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts: Inter & Plus Jakarta Sans -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS v3 -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "inverse-on-surface": "#eaf1ff",
+            "on-tertiary": "#ffffff",
+            "on-primary-fixed": "#00174b",
+            "tertiary": "#006243",
+            "inverse-primary": "#b4c5ff",
+            "tertiary-fixed-dim": "#68dba9",
+            "on-surface": "#0b1c30",
+            "surface-tint": "#0053db",
+            "surface-container-highest": "#d3e4fe",
+            "on-primary-container": "#eeefff",
+            "inverse-surface": "#213145",
+            "secondary-fixed": "#dae2fd",
+            "primary-fixed-dim": "#b4c5ff",
+            "on-error-container": "#93000a",
+            "on-primary-fixed-variant": "#003ea8",
+            "on-tertiary-fixed": "#002114",
+            "outline-variant": "#c3c6d7",
+            "background": "#f8f9ff",
+            "on-primary": "#ffffff",
+            "secondary-container": "#dae2fd",
+            "on-secondary-container": "#5c647a",
+            "surface-container": "#e5eeff",
+            "surface": "#f8f9ff",
+            "surface-container-low": "#eff4ff",
+            "on-background": "#0b1c30",
+            "surface-container-high": "#dce9ff",
+            "surface-variant": "#d3e4fe",
+            "on-secondary-fixed": "#131b2e",
+            "on-secondary": "#ffffff",
+            "primary-container": "#2563eb",
+            "secondary-fixed-dim": "#bec6e0",
+            "on-tertiary-container": "#bdffdc",
+            "tertiary-fixed": "#85f8c4",
+            "on-tertiary-fixed-variant": "#005137",
+            "surface-bright": "#f8f9ff",
+            "error-container": "#ffdad6",
+            "secondary": "#565e74",
+            "error": "#ba1a1a",
+            "outline": "#737686",
+            "surface-dim": "#cbdbf5",
+            "on-surface-variant": "#434655",
+            "surface-container-lowest": "#ffffff",
+            "on-error": "#ffffff",
+            "primary": "#004ac6",
+            "tertiary-container": "#007d57",
+            "primary-fixed": "#dbe1ff",
+            "on-secondary-fixed-variant": "#3f465c"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-2xs": "0.25rem",
+            "space-xs": "0.5rem",
+            "space-sm": "0.75rem",
+            "space-md": "1rem",
+            "space-lg": "1.5rem",
+            "space-xl": "2rem",
+            "space-2xl": "3rem",
+            "margin-mobile": "1rem",
+            "gutter-mobile": "1rem",
+            "margin": "2rem",
+            "gutter": "1.5rem"
+          },
+          "fontFamily": {
+            "body-md": ["Inter"],
+            "display-lg-mobile": ["Plus Jakarta Sans"],
+            "display-lg": ["Plus Jakarta Sans"],
+            "headline-xl": ["Plus Jakarta Sans"],
+            "headline-md": ["Plus Jakarta Sans"],
+            "body-lg": ["Inter"],
+            "label-sm": ["Inter"],
+            "currency-md": ["Inter"],
+            "currency-lg": ["Plus Jakarta Sans"],
+            "body-sm": ["Inter"],
+            "label-lg": ["Inter"],
+            "label-md": ["Inter"],
+            "headline-lg": ["Plus Jakarta Sans"]
+          },
+          "fontSize": {
+            "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+            "display-lg-mobile": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+            "display-lg": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "headline-xl": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.015em", "fontWeight": "600" }],
+            "headline-md": ["18px", { "lineHeight": "24px", "letterSpacing": "-0.005em", "fontWeight": "600" }],
+            "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "label-sm": ["11px", { "lineHeight": "14px", "letterSpacing": "0.02em", "fontWeight": "600" }],
+            "currency-md": ["15px", { "lineHeight": "20px", "fontWeight": "600" }],
+            "currency-lg": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+            "body-sm": ["12px", { "lineHeight": "16px", "fontWeight": "400" }],
+            "label-lg": ["14px", { "lineHeight": "20px", "fontWeight": "600" }],
+            "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "600" }],
+            "headline-lg": ["22px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600" }]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1;
+    }
+    /* Tabular numeric for financial data integrity */
+    .tabular-nums {
+      font-variant-numeric: tabular-nums;
+    }
+  </style>
+</head>
+<body class="bg-background text-on-surface antialiased min-h-screen flex flex-col font-body-md text-body-md select-none">
+<!-- Mobile Top Application Bar (Task-Focused: features Back arrow, BottomNavBar suppressed per Semantic Shell rules) -->
+<header class="fixed top-0 left-0 w-full z-50 h-16 bg-surface-container-lowest shadow-sm flex items-center justify-between px-space-md">
+<div class="flex items-center space-x-space-sm">
+<button aria-label="Go Back" class="w-10 h-10 -ml-1 rounded-lg flex items-center justify-center text-on-surface hover:bg-surface-container active:scale-95 transition-all" type="button">
+<span class="material-symbols-outlined text-headline-lg">arrow_back</span>
+</button>
+<div class="flex flex-col">
+<h1 class="font-headline-md text-headline-md font-bold tracking-tight text-on-surface">Create Tenancy Lease</h1>
+<div class="flex items-center space-x-space-2xs text-secondary">
+<span class="font-label-sm text-label-sm font-semibold">Green Valley Heights</span>
+<span class="text-outline-variant font-label-sm">•</span>
+<span class="font-label-sm text-label-sm text-primary">Legal Contract</span>
+</div>
+</div>
+</div>
+<div class="flex items-center space-x-space-xs">
+<button class="w-9 h-9 rounded-lg flex items-center justify-center text-secondary hover:bg-surface-container transition-colors" title="Contract Template Guidance" type="button">
+<span class="material-symbols-outlined text-headline-md">gavel</span>
+</button>
+<button class="w-9 h-9 rounded-lg flex items-center justify-center text-secondary hover:bg-surface-container transition-colors" title="Save Draft" type="button">
+<span class="material-symbols-outlined text-headline-md">bookmark</span>
+</button>
+</div>
+</header>
+<!-- Step Progression Indicator -->
+<section class="mt-16 bg-surface-container-lowest border-b border-outline-variant/30 px-space-md py-space-sm sticky top-16 z-40">
+<div class="max-w-md mx-auto">
+<div class="flex items-center justify-between mb-space-2xs">
+<span class="font-label-md text-label-md font-semibold text-primary">Step 1 of 4</span>
+<span class="font-label-sm text-label-sm text-secondary uppercase tracking-wider font-semibold">Parties &amp; Terms</span>
+</div>
+<p class="font-body-sm text-body-sm font-semibold text-on-surface mb-space-xs">Step 1 of 4: Contract Parties &amp; Terms</p>
+<!-- Progress Bar Tracker -->
+<div class="w-full bg-surface-container rounded-full h-1.5 flex overflow-hidden">
+<div class="bg-primary h-full w-1/4 rounded-full transition-all duration-300"></div>
+<div class="bg-transparent h-full w-3/4"></div>
+</div>
+</div>
+</section>
+<!-- Main Scrollable Form Content -->
+<main class="flex-1 max-w-md w-full mx-auto px-space-md pt-space-md pb-28 space-y-space-lg">
+<!-- 1. Target Property & Parties Module -->
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant/40 p-space-md shadow-sm space-y-space-md">
+<div class="flex items-center justify-between pb-space-xs border-b border-outline-variant/20">
+<div class="flex items-center space-x-space-xs">
+<span class="w-7 h-7 rounded-lg bg-surface-container-low text-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-headline-md">apartment</span>
+</span>
+<h2 class="font-headline-md text-headline-md font-semibold text-on-surface">1. Property &amp; Parties</h2>
+</div>
+<span class="inline-flex items-center px-2 py-0.5 rounded-full text-label-sm font-label-sm font-semibold bg-surface-container text-primary">
+          Verified
+        </span>
+</div>
+<!-- Selected Flat -->
+<div class="space-y-space-2xs">
+<label class="block font-label-md text-label-md font-semibold text-on-surface-variant">Selected Premises</label>
+<div class="flex items-center justify-between p-space-sm bg-surface-container-low rounded-lg border border-outline-variant/30">
+<div class="flex items-center space-x-space-sm">
+<span class="material-symbols-outlined text-primary text-headline-lg">domain</span>
+<div>
+<p class="font-label-lg text-label-lg font-semibold text-on-surface">Flat 2B (2nd Floor, 1,980 sqft)</p>
+<p class="font-body-sm text-body-sm text-secondary">Block B • 3 Bed, 3 Bath, 2 Balconies</p>
+</div>
+</div>
+<button class="text-primary hover:text-primary-container p-1 rounded" type="button">
+<span class="material-symbols-outlined text-headline-md">swap_horiz</span>
+</button>
+</div>
+</div>
+<!-- Landlord Identity Card -->
+<div class="space-y-space-2xs">
+<div class="flex items-center justify-between">
+<label class="block font-label-md text-label-md font-semibold text-on-surface-variant">First Party (Lessor / Landlord)</label>
+<span class="font-label-sm text-label-sm px-1.5 py-0.5 rounded bg-surface-container text-on-secondary-container">100% Title</span>
+</div>
+<div class="p-space-sm bg-surface-container-lowest rounded-lg border border-outline-variant/40 flex items-start space-x-space-sm">
+<div class="w-9 h-9 rounded-full bg-secondary-container text-on-secondary-fixed flex items-center justify-center font-bold text-label-lg mt-0.5">
+            SH
+          </div>
+<div class="flex-1 min-w-0">
+<div class="flex items-center space-x-space-xs">
+<span class="font-label-lg text-label-lg font-semibold text-on-surface truncate">Advocate Shamsul Huda</span>
+<span class="material-symbols-outlined text-tertiary text-label-md" style="font-variation-settings: 'FILL' 1;">verified</span>
+</div>
+<p class="font-body-sm text-body-sm text-secondary">Owner Registration #GVH-OWN-042</p>
+<p class="font-body-sm text-body-sm text-secondary">NID: 19682690123000142</p>
+</div>
+<span class="material-symbols-outlined text-outline text-headline-md">lock</span>
+</div>
+</div>
+<!-- Tenant Selection -->
+<div class="space-y-space-2xs">
+<div class="flex items-center justify-between">
+<label class="block font-label-md text-label-md font-semibold text-on-surface-variant">Second Party (Lessee / Tenant)</label>
+<span class="font-label-sm text-label-sm text-tertiary font-semibold flex items-center">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary mr-1"></span> KYC Verified
+          </span>
+</div>
+<div class="p-space-sm bg-surface-container-lowest rounded-lg border border-primary/40 ring-1 ring-primary/20 flex items-center justify-between">
+<div class="flex items-center space-x-space-sm">
+<div class="w-9 h-9 rounded-full bg-primary-fixed text-on-primary-fixed flex items-center justify-center font-bold text-label-lg">
+              TA
+            </div>
+<div>
+<p class="font-label-lg text-label-lg font-semibold text-on-surface">Engr. Tanzeem Ahsan</p>
+<p class="font-body-sm text-body-sm text-secondary tabular-nums">+880 1712-889900</p>
+</div>
+</div>
+<button class="text-primary hover:text-primary-container p-1 rounded" title="Change Tenant" type="button">
+<span class="material-symbols-outlined text-headline-md">edit</span>
+</button>
+</div>
+</div>
+</div>
+<!-- 2. Lease Financial Terms Module -->
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant/40 p-space-md shadow-sm space-y-space-md">
+<div class="flex items-center justify-between pb-space-xs border-b border-outline-variant/20">
+<div class="flex items-center space-x-space-xs">
+<span class="w-7 h-7 rounded-lg bg-surface-container-low text-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-headline-md">payments</span>
+</span>
+<h2 class="font-headline-md text-headline-md font-semibold text-on-surface">2. Financial Consideration</h2>
+</div>
+<span class="font-label-sm text-label-sm text-secondary">BDT (৳) Currency</span>
+</div>
+<!-- Monthly Base Rent -->
+<div class="space-y-space-2xs">
+<label class="block font-label-md text-label-md font-semibold text-on-surface" for="base-rent">Monthly Base Rent</label>
+<div class="relative rounded-lg shadow-sm">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none bg-surface-container-low px-3 rounded-l-lg border-r border-outline-variant/40">
+<span class="font-currency-md text-currency-md text-on-surface font-semibold">৳</span>
+</div>
+<input class="block w-full pl-12 pr-4 py-2 text-headline-md font-headline-md font-bold text-on-surface border border-outline-variant rounded-lg focus:border-primary focus:ring-2 focus:ring-primary/20 tabular-nums" id="base-rent" type="text" value="50,000"/>
+</div>
+<p class="font-body-sm text-body-sm text-secondary">Fifty Thousand Bangladeshi Taka strictly per month.</p>
+</div>
+<!-- Service / Maintenance Charge -->
+<div class="p-space-sm bg-surface-container-low/60 rounded-lg border border-outline-variant/30 space-y-space-xs">
+<div class="flex justify-between items-center">
+<label class="font-label-md text-label-md font-semibold text-on-surface">Building Service &amp; Maintenance</label>
+<span class="font-currency-md text-currency-md font-bold text-on-surface tabular-nums">৳ 6,500</span>
+</div>
+<div class="flex items-start space-x-space-xs text-secondary font-body-sm text-body-sm">
+<span class="material-symbols-outlined text-label-md text-tertiary mt-0.5">info</span>
+<span>Paid directly by tenant to building association by the 10th of every month.</span>
+</div>
+</div>
+<!-- Rent Due Day of Month & Advance Security Deposit -->
+<div class="grid grid-cols-1 gap-space-sm">
+<div class="space-y-space-2xs">
+<label class="block font-label-md text-label-md font-semibold text-on-surface">Rent Due Calendar Schedule</label>
+<div class="flex items-center justify-between p-space-sm bg-surface-container-lowest border border-outline-variant/40 rounded-lg">
+<div class="flex items-center space-x-space-xs">
+<span class="material-symbols-outlined text-secondary text-headline-md">calendar_month</span>
+<span class="font-body-md text-body-md font-semibold text-on-surface">5th of each calendar month</span>
+</div>
+<span class="font-label-sm text-label-sm px-2 py-0.5 rounded bg-surface-container text-secondary font-semibold">Grace: +3 Days</span>
+</div>
+</div>
+<div class="space-y-space-2xs">
+<label class="block font-label-md text-label-md font-semibold text-on-surface">Advance Security Deposit</label>
+<div class="p-space-sm bg-surface-container-lowest border border-outline-variant/40 rounded-lg space-y-space-2xs">
+<div class="flex items-baseline justify-between">
+<span class="font-currency-lg text-currency-lg font-bold text-primary tabular-nums">৳ 1,500,000</span>
+<span class="font-label-sm text-label-sm text-secondary">3 Months Value</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant font-medium">Bank Guarantee / Transfer to Landlord Escrow</p>
+</div>
+</div>
+</div>
+</div>
+<!-- 3. Agreement Duration & Renewal Module -->
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant/40 p-space-md shadow-sm space-y-space-md">
+<div class="flex items-center justify-between pb-space-xs border-b border-outline-variant/20">
+<div class="flex items-center space-x-space-xs">
+<span class="w-7 h-7 rounded-lg bg-surface-container-low text-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-headline-md">date_range</span>
+</span>
+<h2 class="font-headline-md text-headline-md font-semibold text-on-surface">3. Duration &amp; Renewal</h2>
+</div>
+<span class="font-label-sm text-label-sm font-semibold text-primary">12 Months Fixed</span>
+</div>
+<!-- Start Date and End Date -->
+<div class="grid grid-cols-2 gap-space-sm">
+<div class="p-space-sm bg-surface-container-low rounded-lg border border-outline-variant/30 space-y-space-2xs">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-secondary font-semibold">Commencement</span>
+<p class="font-label-lg text-label-lg font-bold text-on-surface">01 April 2025</p>
+<div class="flex items-center text-secondary text-body-sm font-body-sm">
+<span class="material-symbols-outlined text-label-md mr-1">event_available</span>
+            Possession Date
+          </div>
+</div>
+<div class="p-space-sm bg-surface-container-low rounded-lg border border-outline-variant/30 space-y-space-2xs">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-secondary font-semibold">Expiration</span>
+<p class="font-label-lg text-label-lg font-bold text-on-surface">31 March 2026</p>
+<div class="flex items-center text-secondary text-body-sm font-body-sm">
+<span class="material-symbols-outlined text-label-md mr-1">schedule</span>
+            1 Year Tenancy
+          </div>
+</div>
+</div>
+<!-- Legal Clauses Row -->
+<div class="space-y-space-xs pt-space-2xs">
+<div class="flex items-center justify-between py-2 border-b border-outline-variant/20">
+<div class="flex items-center space-x-space-xs">
+<span class="material-symbols-outlined text-outline text-headline-md">lock_clock</span>
+<span class="font-body-md text-body-md text-on-surface">Lock-in Period</span>
+</div>
+<span class="font-label-lg text-label-lg font-semibold text-on-surface">6 Months</span>
+</div>
+<div class="flex items-center justify-between py-2 border-b border-outline-variant/20">
+<div class="flex items-center space-x-space-xs">
+<span class="material-symbols-outlined text-outline text-headline-md">outgoing_mail</span>
+<span class="font-body-md text-body-md text-on-surface">Notice for Vacating</span>
+</div>
+<span class="font-label-lg text-label-lg font-semibold text-on-surface">2 Months Prior</span>
+</div>
+<div class="flex items-center justify-between py-2">
+<div class="flex items-center space-x-space-xs">
+<span class="material-symbols-outlined text-outline text-headline-md">trending_up</span>
+<span class="font-body-md text-body-md text-on-surface">Annual Escalation</span>
+</div>
+<span class="inline-flex items-center px-2 py-0.5 rounded text-label-sm font-label-sm font-semibold bg-tertiary-container/15 text-tertiary">
+            10% on Renewal
+          </span>
+</div>
+</div>
+</div>
+<!-- 4. Special Legal Terms (Dhaka Rental Practice) -->
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant/40 p-space-md shadow-sm space-y-space-md">
+<div class="flex items-center justify-between pb-space-xs border-b border-outline-variant/20">
+<div class="flex items-center space-x-space-xs">
+<span class="w-7 h-7 rounded-lg bg-surface-container-low text-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-headline-md">policy</span>
+</span>
+<h2 class="font-headline-md text-headline-md font-semibold text-on-surface">4. Special Covenants</h2>
+</div>
+<span class="font-label-sm text-label-sm text-secondary">Dhaka Standard</span>
+</div>
+<!-- Dhaka Utility Settlement Covenant -->
+<div class="p-space-sm rounded-lg bg-surface-container-low/50 border border-outline-variant/30 flex items-start space-x-space-sm">
+<div class="w-8 h-8 rounded-lg bg-surface-container-highest text-primary flex items-center justify-center shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-headline-md">bolt</span>
+</div>
+<div class="space-y-space-2xs flex-1">
+<div class="flex items-center justify-between">
+<h3 class="font-label-lg text-label-lg font-semibold text-on-surface">Utility Settlement Protocol</h3>
+<span class="font-label-sm text-label-sm font-semibold text-primary">Prepaid</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+            DPDC Smart Electric Meter &amp; Titas Gas consumption bills are strictly borne and prepaid directly by Tenant prior to end of monthly billing cycle.
+          </p>
+</div>
+</div>
+<!-- Prohibitions -->
+<div class="p-space-sm rounded-lg bg-error-container/20 border border-error-container/60 flex items-start space-x-space-sm">
+<div class="w-8 h-8 rounded-lg bg-error-container text-error flex items-center justify-center shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-headline-md">block</span>
+</div>
+<div class="space-y-space-2xs flex-1">
+<div class="flex items-center justify-between">
+<h3 class="font-label-lg text-label-lg font-semibold text-error">Sub-letting Prohibition</h3>
+<span class="font-label-sm text-label-sm font-semibold uppercase text-error">Strict</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+            Sub-letting or transferring premise possession partially or entirely is strictly prohibited without written consent of First Party.
+          </p>
+</div>
+</div>
+<!-- Non-judicial Stamp Declaration Notice -->
+<div class="flex items-center space-x-space-xs p-space-xs bg-surface-container rounded-lg text-on-surface-variant font-body-sm text-body-sm">
+<span class="material-symbols-outlined text-headline-md text-secondary">description</span>
+<span>Auto-formatted on ৳300 Non-Judicial Government Stamp Paper as per Bangladesh Contract Act.</span>
+</div>
+</div>
+</main>
+<!-- Sticky Bottom Mobile Action Footer (Conforms to Design System Form / Workflow Guidelines) -->
+<footer class="fixed bottom-0 left-0 w-full z-50 bg-surface-container-lowest/95 backdrop-blur-md border-t border-outline-variant/30 py-space-sm px-space-md">
+<div class="max-w-md mx-auto flex items-center space-x-space-sm">
+<!-- Secondary / Cancel Button -->
+<button class="w-1/3 h-12 rounded-lg border border-outline-variant font-label-lg text-label-lg font-semibold text-secondary hover:bg-surface-container active:scale-95 transition-all flex items-center justify-center" type="button">
+        Cancel
+      </button>
+<!-- Primary Blue Action Button -->
+<button class="w-2/3 h-12 rounded-lg bg-primary-container hover:bg-primary font-label-lg text-label-lg font-semibold text-on-primary shadow-sm hover:shadow active:scale-98 transition-all flex items-center justify-center space-x-space-xs" type="button">
+<span>Generate Lease Deed</span>
+<span class="material-symbols-outlined text-headline-md">arrow_forward</span>
+</button>
+</div>
+</footer>
+</body></html>

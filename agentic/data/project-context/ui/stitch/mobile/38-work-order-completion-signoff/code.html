@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Work Order Completion &amp; Signoff - BuildingOS</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts for Design System -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS with Plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Configuration verbatim as mandated -->
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "on-secondary-fixed": "#131b2e",
+            "surface-variant": "#d3e4fe",
+            "surface": "#f8f9ff",
+            "on-surface-variant": "#434655",
+            "primary": "#004ac6",
+            "tertiary": "#006243",
+            "surface-container-high": "#dce9ff",
+            "tertiary-fixed": "#85f8c4",
+            "secondary": "#565e74",
+            "surface-container-lowest": "#ffffff",
+            "on-secondary": "#ffffff",
+            "inverse-on-surface": "#eaf1ff",
+            "on-surface": "#0b1c30",
+            "primary-fixed-dim": "#b4c5ff",
+            "on-error": "#ffffff",
+            "on-tertiary-fixed-variant": "#005137",
+            "primary-container": "#2563eb",
+            "on-primary-container": "#eeefff",
+            "outline": "#737686",
+            "inverse-primary": "#b4c5ff",
+            "secondary-fixed-dim": "#bec6e0",
+            "primary-fixed": "#dbe1ff",
+            "tertiary-fixed-dim": "#68dba9",
+            "on-background": "#0b1c30",
+            "inverse-surface": "#213145",
+            "on-secondary-fixed-variant": "#3f465c",
+            "tertiary-container": "#007d57",
+            "secondary-container": "#dae2fd",
+            "on-tertiary-container": "#bdffdc",
+            "surface-dim": "#cbdbf5",
+            "surface-container": "#e5eeff",
+            "surface-container-low": "#eff4ff",
+            "background": "#f8f9ff",
+            "error-container": "#ffdad6",
+            "on-secondary-container": "#5c647a",
+            "surface-tint": "#0053db",
+            "surface-bright": "#f8f9ff",
+            "on-primary-fixed-variant": "#003ea8",
+            "secondary-fixed": "#dae2fd",
+            "on-primary-fixed": "#00174b",
+            "surface-container-highest": "#d3e4fe",
+            "outline-variant": "#c3c6d7",
+            "on-error-container": "#93000a",
+            "on-tertiary": "#ffffff",
+            "on-tertiary-fixed": "#002114",
+            "error": "#ba1a1a",
+            "on-primary": "#ffffff"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-lg": "1.5rem",
+            "space-2xl": "3rem",
+            "space-sm": "0.75rem",
+            "gutter": "1.5rem",
+            "margin": "2rem",
+            "gutter-mobile": "1rem",
+            "space-2xs": "0.25rem",
+            "space-xl": "2rem",
+            "space-md": "1rem",
+            "space-xs": "0.5rem",
+            "margin-mobile": "1rem"
+          },
+          "fontFamily": {
+            "body-sm": ["Inter"],
+            "headline-xl": ["Plus Jakarta Sans"],
+            "label-sm": ["Inter"],
+            "headline-md": ["Plus Jakarta Sans"],
+            "body-lg": ["Inter"],
+            "label-lg": ["Inter"],
+            "label-md": ["Inter"],
+            "currency-lg": ["Plus Jakarta Sans"],
+            "display-lg": ["Plus Jakarta Sans"],
+            "currency-md": ["Inter"],
+            "headline-lg": ["Plus Jakarta Sans"],
+            "display-lg-mobile": ["Plus Jakarta Sans"],
+            "body-md": ["Inter"]
+          },
+          "fontSize": {
+            "body-sm": ["12px", { "lineHeight": "16px", "fontWeight": "400" }],
+            "headline-xl": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.015em", "fontWeight": "600" }],
+            "label-sm": ["11px", { "lineHeight": "14px", "letterSpacing": "0.02em", "fontWeight": "600" }],
+            "headline-md": ["18px", { "lineHeight": "24px", "letterSpacing": "-0.005em", "fontWeight": "600" }],
+            "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "label-lg": ["14px", { "lineHeight": "20px", "fontWeight": "600" }],
+            "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "600" }],
+            "currency-lg": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+            "display-lg": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "currency-md": ["15px", { "lineHeight": "20px", "fontWeight": "600" }],
+            "headline-lg": ["22px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "display-lg-mobile": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+            "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }]
+          }
+        },
+      },
+    }
+  </script>
+</head>
+<body class="bg-background text-on-surface antialiased min-h-screen flex justify-center selection:bg-surface-container-high selection:text-primary">
+<!-- Mobile Frame Container (Max 440px for mobile focus, responsive layout) -->
+<div class="w-full max-w-[440px] bg-background min-h-screen flex flex-col relative pb-32">
+<!-- Task-Focused Sticky Navigation Header (Semantic Shell Rule: Suppresses BottomNavBar for task signoff completion flow) -->
+<header class="sticky top-0 z-40 bg-surface-container-lowest/95 backdrop-blur-md px-margin-mobile py-space-sm border-b border-outline-variant/40 flex items-center justify-between shadow-sm">
+<div class="flex items-center gap-space-sm">
+<button aria-label="Back" class="w-10 h-10 -ml-1 rounded-full flex items-center justify-center text-on-surface hover:bg-surface-container active:scale-95 transition-all" type="button">
+<span class="material-symbols-outlined" data-icon="arrow_back">arrow_back</span>
+</button>
+<div>
+<h1 class="text-headline-md font-headline-md text-on-surface leading-tight">Job Completion &amp; Signoff</h1>
+<p class="text-body-sm font-body-sm text-secondary truncate max-w-[240px]">Ticket #WO-2025-0142 • Master Bath Leak</p>
+</div>
+</div>
+<div class="flex items-center">
+<span class="text-label-sm font-label-sm px-space-xs py-space-2xs rounded-full bg-surface-container-high text-primary font-semibold border border-primary-fixed-dim">
+          Unit 7-B
+        </span>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-1 px-margin-mobile pt-space-md space-y-space-md">
+<!-- Success Summary Card -->
+<section class="bg-surface-container-lowest rounded-xl border border-outline-variant/50 p-space-md shadow-sm overflow-hidden relative">
+<div class="flex items-start gap-space-sm">
+<div class="w-10 h-10 rounded-full bg-tertiary-fixed text-tertiary flex items-center justify-center shrink-0 mt-0.5">
+<span class="material-symbols-outlined font-bold" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<div class="flex-1">
+<div class="inline-flex items-center gap-space-2xs text-tertiary font-label-md text-label-md mb-0.5">
+<span>Maintenance Work Successfully Completed</span>
+</div>
+<p class="text-headline-md font-headline-md text-on-surface font-semibold mb-space-xs">Plumbing Repair Verified</p>
+<div class="flex flex-wrap items-center gap-y-1 gap-x-3 text-body-sm font-body-sm text-secondary">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-outline" data-icon="schedule">schedule</span>
+                1 hr 18 mins
+              </span>
+<span class="inline-block w-1 h-1 rounded-full bg-outline-variant"></span>
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-outline" data-icon="engineering">engineering</span>
+                Ratan Karmakar <span class="text-label-sm font-label-sm text-secondary bg-surface-container px-1 rounded border border-outline-variant/40">#ET-04</span>
+</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Before & After Visual Inspection Gallery (Bento Style Comparison) -->
+<section class="space-y-space-xs">
+<div class="flex items-center justify-between">
+<h2 class="text-label-lg font-label-lg text-on-surface flex items-center gap-1.5">
+<span class="material-symbols-outlined text-primary text-[18px]" data-icon="compare">compare</span>
+            Worksite Verification Audit
+          </h2>
+<span class="text-label-sm font-label-sm text-secondary">2 Geo-Tagged Captures</span>
+</div>
+<div class="grid grid-cols-2 gap-space-sm">
+<!-- Before Card -->
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant/60 overflow-hidden shadow-sm flex flex-col">
+<div class="relative aspect-[4/3] bg-surface-container overflow-hidden group">
+<img class="w-full h-full object-cover" data-alt="A detailed photo of a cracked concealed PVC pipe joint behind broken ceramic wall tiles with water spraying out, inside a high-end Dhaka residential apartment bathroom. Fluorescent maintenance emergency work light illuminating the plumbing fault. High contrast, sharp detail." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD_nAHLg-E56eXnn12U-rK4bUTSCpAy2UcGQw0y7zdmrF0UXFehuQ0kLjI4yePUXBUNHxV48cHEQmF5ULuXEgKSEFfvAwmY5TZZhKnP5Tp7S45kcBgy94OB1fUNYnzSBdC0tO-pbvzLLBVykGgWcD5V8iMjO_LG3Cgq0myGefOaSv3fsh0KUu-OOFZVkRme8Rgnu4gicivli2eQsj8QUhOiyenZSjDfX9Pmd295Gcgvb1lygHM6w7FH"/>
+<span class="absolute top-2 left-2 bg-error text-on-error text-label-sm font-label-sm px-2 py-0.5 rounded-full shadow-sm">
+                Before Repair
+              </span>
+<span class="absolute bottom-2 right-2 bg-on-surface/75 text-inverse-on-surface text-[10px] font-mono px-1.5 py-0.5 rounded backdrop-blur-sm">
+                14:42 PM
+              </span>
+</div>
+<div class="p-space-xs bg-surface-container-lowest flex-1 flex flex-col justify-between">
+<p class="text-body-sm font-body-sm text-on-surface font-medium line-clamp-1">Cracked Pipe Joint</p>
+<p class="text-[11px] text-secondary leading-tight mt-0.5">High-pressure solvent rupture at elbow junction.</p>
+</div>
+</div>
+<!-- After Card -->
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant/60 overflow-hidden shadow-sm flex flex-col">
+<div class="relative aspect-[4/3] bg-surface-container overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A finished pristine white subway tile bathroom wall with completely sealed joints, brand new industrial chrome brass pressure fitting valve, completely dry floor, and professional silicone caulking. Bright natural daylight with clean commercial finish." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDkfErnmjShnN0rAHKpoFOM7qintGLSrJ5XFz514ukp4F8V3luCmhz-Q7b3l31xPfzX_XLQLug2OtmEbf8QMBYgN-GTLwamTc6wShF88MIN1q7B9HXtx36peDN8yHc9VhqQKI0Bumkuo8o2_eD0nmFtN2z4sb03QOrvIStV-zHfUnsPcl6w1Ass9RFJMabsWG8UnJxHLHsqJXK_UHT8AmO_Pq2P-7vO2KPVaPXXxy6M87e6E4wwAipB"/>
+<span class="absolute top-2 left-2 bg-tertiary-container text-on-tertiary-container text-label-sm font-label-sm px-2 py-0.5 rounded-full shadow-sm flex items-center gap-1 font-semibold">
+<span class="material-symbols-outlined text-[13px]" data-icon="verified" style="font-variation-settings: 'FILL' 1;">verified</span>
+                After Repair
+              </span>
+<span class="absolute bottom-2 right-2 bg-on-surface/75 text-inverse-on-surface text-[10px] font-mono px-1.5 py-0.5 rounded backdrop-blur-sm">
+                16:00 PM
+              </span>
+</div>
+<div class="p-space-xs bg-surface-container-lowest flex-1 flex flex-col justify-between">
+<p class="text-body-sm font-body-sm text-tertiary font-semibold flex items-center gap-1">
+                Pressure Tested
+              </p>
+<p class="text-[11px] text-secondary leading-tight mt-0.5">Passed 6-bar test with UPVC sealant.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Final Audited Bill & Payment Settlement -->
+<section class="bg-surface-container-lowest rounded-xl border border-outline-variant/60 p-space-md shadow-sm space-y-space-md">
+<div class="flex items-center justify-between pb-space-xs border-b border-outline-variant/40">
+<div>
+<h2 class="text-label-lg font-label-lg text-on-surface">Audited Settlement Ledger</h2>
+<p class="text-body-sm font-body-sm text-secondary">Verified by Facilities Desk #OP-02</p>
+</div>
+<span class="text-label-sm font-label-sm bg-surface-container px-2 py-0.5 rounded-full text-secondary font-medium">Billed to Owner</span>
+</div>
+<!-- Itemized Charges Table -->
+<div class="space-y-space-xs">
+<div class="flex items-center justify-between text-body-sm font-body-sm py-1 border-b border-surface-container">
+<span class="text-on-surface-variant">Base Technician Labor Fee (Standard Tier)</span>
+<span class="font-currency-md text-currency-md text-on-surface tabular-nums">৳800.00</span>
+</div>
+<div class="flex items-center justify-between text-body-sm font-body-sm py-1 border-b border-surface-container">
+<div class="flex flex-col">
+<span class="text-on-surface-variant">Replaced Plumbing Parts &amp; Solvent</span>
+<span class="text-[11px] text-secondary font-body-sm">1× CPVC 3/4" Union + Heavy Solvent Glue</span>
+</div>
+<span class="font-currency-md text-currency-md text-on-surface tabular-nums">৳460.00</span>
+</div>
+<div class="flex items-center justify-between text-body-sm font-body-sm py-1 border-b border-surface-container">
+<div class="flex items-center gap-1">
+<span class="text-on-surface-variant">Society Administrative Fee (10%)</span>
+<span class="material-symbols-outlined text-[14px] text-outline cursor-pointer" data-icon="info">info</span>
+</div>
+<span class="font-currency-md text-currency-md text-on-surface tabular-nums">৳126.00</span>
+</div>
+<!-- Total Calculation Highlight -->
+<div class="flex items-baseline justify-between pt-space-xs mt-space-xs bg-surface-container-low p-space-sm rounded-lg border border-surface-container">
+<div>
+<span class="text-label-md font-label-md text-on-surface block">Total Payable Amount</span>
+<span class="text-[11px] text-secondary">Inclusive of all local maintenance VAT</span>
+</div>
+<div class="text-right">
+<span class="font-currency-lg text-currency-lg text-primary tracking-tight font-extrabold">৳1,386</span>
+<span class="text-label-sm font-label-sm text-secondary ml-1">BDT</span>
+</div>
+</div>
+</div>
+<!-- Payment Settlement Rail -->
+<div class="space-y-space-xs pt-space-xs">
+<label class="text-label-md font-label-md text-on-surface block">Select Settlement Option</label>
+<div class="space-y-2">
+<!-- Option 1: Add to Monthly Maintenance (Selected Active) -->
+<label class="flex items-start gap-space-sm p-space-sm rounded-lg border-2 border-primary bg-primary/5 cursor-pointer transition-all">
+<input checked="" class="mt-0.5 text-primary focus:ring-primary w-4 h-4" name="payment_method" type="radio"/>
+<div class="flex-1">
+<div class="flex items-center justify-between">
+<span class="text-body-md font-body-md font-semibold text-on-surface">Add to Monthly Maintenance Bill</span>
+<span class="text-[10px] bg-primary text-on-primary font-bold px-1.5 py-0.5 rounded">RECOMMENDED</span>
+</div>
+<p class="text-body-sm font-body-sm text-secondary mt-0.5">March 2025 Ledger • Invoiced on 1st of next month</p>
+</div>
+</label>
+<!-- Option 2: Pay Now via MFS -->
+<label class="flex items-center gap-space-sm p-space-sm rounded-lg border border-outline-variant bg-surface-container-lowest hover:bg-surface-container-low cursor-pointer transition-all">
+<input class="text-primary focus:ring-primary w-4 h-4" name="payment_method" type="radio"/>
+<div class="flex-1 flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="text-body-md font-body-md text-on-surface">Pay Now via bKash / Nagad Instant MFS</span>
+</div>
+<div class="flex items-center gap-1">
+<span class="text-[11px] font-bold text-pink-700 bg-pink-50 px-1.5 py-0.2 rounded border border-pink-200">bKash</span>
+<span class="text-[11px] font-bold text-orange-700 bg-orange-50 px-1.5 py-0.2 rounded border border-orange-200">Nagad</span>
+</div>
+</div>
+</label>
+<!-- Option 3: Paid in Cash -->
+<label class="flex items-center gap-space-sm p-space-sm rounded-lg border border-outline-variant bg-surface-container-lowest hover:bg-surface-container-low cursor-pointer transition-all">
+<input class="text-primary focus:ring-primary w-4 h-4" name="payment_method" type="radio"/>
+<div class="flex-1">
+<span class="text-body-md font-body-md text-on-surface">Paid in Cash to Building Manager Counter</span>
+<p class="text-body-sm font-body-sm text-secondary">Requires physical receipt counterfoil verification</p>
+</div>
+</label>
+</div>
+</div>
+</section>
+<!-- Service Warranty & Guarantee Callout -->
+<section class="bg-gradient-to-r from-tertiary-container/10 via-surface-container-lowest to-surface-container-low rounded-xl border border-tertiary-container/30 p-space-sm flex items-start gap-space-sm">
+<div class="w-9 h-9 rounded-lg bg-tertiary-fixed text-on-tertiary-fixed flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined" data-icon="verified_user">verified_user</span>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<span class="text-label-md font-label-md font-bold text-tertiary">30-Day Service Guarantee Included</span>
+</div>
+<p class="text-body-sm font-body-sm text-on-surface-variant mt-0.5 leading-snug">
+            If leak reoccurs within 30 days, re-inspection and rework are 100% free of charge under Society Bylaws.
+          </p>
+</div>
+</section>
+<!-- Resident Rating & Digital Signature -->
+<section class="bg-surface-container-lowest rounded-xl border border-outline-variant/60 p-space-md shadow-sm space-y-space-md">
+<div class="flex items-center justify-between">
+<h2 class="text-label-lg font-label-lg text-on-surface">Resident Feedback &amp; Signoff</h2>
+<span class="text-label-sm font-label-sm text-primary font-semibold">Mandatory</span>
+</div>
+<!-- Star Rating -->
+<div class="space-y-space-xs">
+<label class="text-body-sm font-body-sm text-secondary block">Rate Service Quality</label>
+<div class="flex items-center gap-1.5">
+<div class="flex items-center gap-1 text-amber-500">
+<button class="material-symbols-outlined text-[28px] focus:outline-none hover:scale-110 transition-transform" data-icon="star" style="font-variation-settings: 'FILL' 1;" type="button">star</button>
+<button class="material-symbols-outlined text-[28px] focus:outline-none hover:scale-110 transition-transform" data-icon="star" style="font-variation-settings: 'FILL' 1;" type="button">star</button>
+<button class="material-symbols-outlined text-[28px] focus:outline-none hover:scale-110 transition-transform" data-icon="star" style="font-variation-settings: 'FILL' 1;" type="button">star</button>
+<button class="material-symbols-outlined text-[28px] focus:outline-none hover:scale-110 transition-transform" data-icon="star" style="font-variation-settings: 'FILL' 1;" type="button">star</button>
+<button class="material-symbols-outlined text-[28px] focus:outline-none hover:scale-110 transition-transform" data-icon="star" style="font-variation-settings: 'FILL' 1;" type="button">star</button>
+</div>
+<span class="text-body-sm font-body-sm font-bold text-on-surface ml-2">5.0</span>
+<span class="text-label-sm font-label-sm bg-surface-container text-primary font-medium px-2 py-0.5 rounded-full ml-auto">
+              Punctual &amp; Clean Work
+            </span>
+</div>
+</div>
+<!-- Optional Feedback Input -->
+<div class="space-y-1">
+<label class="text-body-sm font-body-sm text-secondary flex items-center justify-between" for="feedback">
+<span>Feedback Memo</span>
+<span class="text-[11px] text-outline">Optional</span>
+</label>
+<textarea class="w-full rounded-lg border-outline-variant text-body-sm font-body-sm focus:border-primary focus:ring focus:ring-primary/20 bg-surface-container-lowest placeholder:text-outline-variant text-on-surface resize-none" id="feedback" placeholder="Technician was very polite, arrived within 20 mins and thoroughly checked the pipe pressure before leaving." rows="2"></textarea>
+</div>
+<!-- Digital Closure Signoff Box -->
+<div class="space-y-space-xs">
+<div class="flex items-center justify-between">
+<span class="text-body-sm font-body-sm text-secondary font-medium">Digital Signature &amp; Timestamp</span>
+<span class="text-label-sm font-label-sm text-tertiary flex items-center gap-1 font-semibold">
+<span class="material-symbols-outlined text-[13px]" data-icon="fingerprint">fingerprint</span>
+              Biometric Authenticated
+            </span>
+</div>
+<div class="bg-surface-container-low rounded-xl border border-outline-variant p-space-sm relative">
+<div class="flex justify-between items-center mb-1">
+<span class="text-label-sm font-label-sm text-secondary">Authorized Tenant Signee:</span>
+<span class="text-label-sm font-label-sm font-mono text-outline">Apt 7-B Verification</span>
+</div>
+<!-- Stylized Signature Glyphs -->
+<div class="py-2 flex items-center justify-between border-b border-dashed border-outline-variant/80">
+<div class="font-serif italic text-2xl tracking-wide text-primary-container pl-2 select-none">
+                Rafiqul Islam
+              </div>
+<div class="text-right">
+<span class="inline-block px-2 py-0.5 rounded bg-tertiary-fixed/40 text-tertiary text-label-sm font-label-sm">
+                  Active Verified
+                </span>
+</div>
+</div>
+<div class="flex items-center justify-between mt-2 pt-1 text-[11px] font-mono text-secondary">
+<span class="font-semibold text-on-surface">Engr. Rafiqul Islam</span>
+<span>20 Mar 2025, 04:30 PM</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Society Audit Note -->
+<p class="text-center text-body-sm font-body-sm text-outline px-space-md">
+        Green Valley Heights Owner Association • Bylaws Part IV Section 12 for Resident Maintenance Audits.
+      </p>
+</main>
+<!-- Anchored Footer CTAs (Docked Task Action Bar) -->
+<div class="fixed bottom-0 left-0 right-0 z-50 flex justify-center bg-surface-container-lowest border-t border-outline-variant/60 shadow-[0_-4px_16px_rgba(15,23,42,0.06)] px-margin-mobile py-space-sm">
+<div class="w-full max-w-[440px] flex flex-col gap-2">
+<button class="w-full h-12 bg-primary-container text-on-primary rounded-xl font-label-lg text-label-lg font-bold flex items-center justify-center gap-2 hover:bg-primary active:scale-[0.98] transition-all shadow-md shadow-primary/20" type="button">
+<span class="material-symbols-outlined text-[20px]" data-icon="task_alt">task_alt</span>
+          Approve &amp; Close Work Order (৳1,386)
+        </button>
+<button class="w-full py-2 bg-transparent text-error hover:bg-error-container/20 rounded-lg text-label-md font-label-md font-semibold transition-colors flex items-center justify-center gap-1 active:scale-[0.99]" type="button">
+<span class="material-symbols-outlined text-[16px]" data-icon="report_problem">report_problem</span>
+          Dispute / Request Rework
+        </button>
+</div>
+</div>
+</div>
+</body></html>

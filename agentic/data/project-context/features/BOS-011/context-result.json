@@ -1,0 +1,21 @@
+{
+  "status": "READY",
+  "evidence": [
+    "agentic/data/project-context/features/BOS-002/BASELINE.md",
+    "user_app/lib/app/theme/color_schemes.dart (brand #0A1A2F/#F4C430/#F2633B)",
+    "user_app/lib/app/routes/app_pages.dart (initial=/login, no splash)",
+    "user_app/lib/app/shell/app_shell.dart (starter Home/Explore/Account)",
+    "backend/building-service/.../unit/presentation/rest/UnitController.java (units list: floorId,type,page,size only)",
+    "backend/building-service/.../building/domain/model/BuildingRole.java (BUILDING_ADMIN, OWNER)"
+  ],
+  "blocking_issues": [],
+  "open_questions": [],
+  "recommended_next_step": "Change impact analysis",
+  "outputs": {
+    "verdict": "BASELINE_AVAILABLE",
+    "reused_context": [
+      "user_app",
+      "backend"
+    ]
+  }
+}

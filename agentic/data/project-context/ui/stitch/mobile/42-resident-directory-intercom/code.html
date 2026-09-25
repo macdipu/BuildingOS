@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Resident Directory &amp; Intercom - Green Valley Heights</title>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts: Plus Jakarta Sans & Inter -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS v3 -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "secondary-fixed-dim": "#bec6e0",
+            "surface": "#f8f9ff",
+            "primary-fixed": "#dbe1ff",
+            "primary-container": "#2563eb",
+            "surface-container-highest": "#d3e4fe",
+            "surface-bright": "#f8f9ff",
+            "inverse-surface": "#213145",
+            "surface-variant": "#d3e4fe",
+            "tertiary-fixed": "#85f8c4",
+            "on-tertiary-container": "#bdffdc",
+            "secondary-container": "#dae2fd",
+            "secondary": "#565e74",
+            "on-error-container": "#93000a",
+            "on-surface-variant": "#434655",
+            "inverse-primary": "#b4c5ff",
+            "primary-fixed-dim": "#b4c5ff",
+            "surface-container": "#e5eeff",
+            "on-secondary": "#ffffff",
+            "on-tertiary-fixed": "#002114",
+            "error": "#ba1a1a",
+            "on-primary-fixed-variant": "#003ea8",
+            "on-tertiary-fixed-variant": "#005137",
+            "surface-dim": "#cbdbf5",
+            "error-container": "#ffdad6",
+            "surface-container-low": "#eff4ff",
+            "on-background": "#0b1c30",
+            "on-secondary-fixed": "#131b2e",
+            "background": "#f8f9ff",
+            "on-secondary-container": "#5c647a",
+            "on-primary": "#ffffff",
+            "outline": "#737686",
+            "tertiary": "#006243",
+            "on-secondary-fixed-variant": "#3f465c",
+            "on-surface": "#0b1c30",
+            "on-primary-container": "#eeefff",
+            "tertiary-fixed-dim": "#68dba9",
+            "on-tertiary": "#ffffff",
+            "surface-container-high": "#dce9ff",
+            "on-primary-fixed": "#00174b",
+            "inverse-on-surface": "#eaf1ff",
+            "surface-container-lowest": "#ffffff",
+            "secondary-fixed": "#dae2fd",
+            "surface-tint": "#0053db",
+            "on-error": "#ffffff",
+            "primary": "#004ac6",
+            "outline-variant": "#c3c6d7",
+            "tertiary-container": "#007d57"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-lg": "1.5rem",
+            "space-xl": "2rem",
+            "space-2xl": "3rem",
+            "margin-mobile": "1rem",
+            "space-md": "1rem",
+            "space-sm": "0.75rem",
+            "space-2xs": "0.25rem",
+            "gutter-mobile": "1rem",
+            "gutter": "1.5rem",
+            "space-xs": "0.5rem",
+            "margin": "2rem"
+          },
+          "fontFamily": {
+            "label-sm": ["Inter"],
+            "headline-lg": ["Plus Jakarta Sans"],
+            "headline-lg-mobile": ["Plus Jakarta Sans"],
+            "label-md": ["Inter"],
+            "body-sm": ["Inter"],
+            "currency-lg": ["Plus Jakarta Sans"],
+            "body-md": ["Inter"],
+            "display-lg": ["Plus Jakarta Sans"],
+            "body-lg": ["Inter"],
+            "display-lg-mobile": ["Plus Jakarta Sans"],
+            "currency-md": ["Inter"],
+            "headline-md": ["Plus Jakarta Sans"],
+            "headline-md-mobile": ["Plus Jakarta Sans"],
+            "label-lg": ["Inter"],
+            "headline-xl": ["Plus Jakarta Sans"]
+          },
+          "fontSize": {
+            "label-sm": ["11px", { "lineHeight": "14px", "letterSpacing": "0.02em", "fontWeight": "600" }],
+            "headline-lg": ["22px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "headline-lg-mobile": ["19px", { "lineHeight": "24px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "600" }],
+            "body-sm": ["12px", { "lineHeight": "16px", "fontWeight": "400" }],
+            "currency-lg": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+            "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+            "display-lg": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "display-lg-mobile": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+            "currency-md": ["15px", { "lineHeight": "20px", "fontWeight": "600" }],
+            "headline-md": ["18px", { "lineHeight": "24px", "letterSpacing": "-0.005em", "fontWeight": "600" }],
+            "headline-md-mobile": ["16px", { "lineHeight": "22px", "letterSpacing": "-0.005em", "fontWeight": "600" }],
+            "label-lg": ["14px", { "lineHeight": "20px", "fontWeight": "600" }],
+            "headline-xl": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.015em", "fontWeight": "600" }]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1;
+    }
+    .material-symbols-outlined.fill-icon {
+      font-variation-settings: 'FILL' 1;
+    }
+  </style>
+</head>
+<body class="bg-background text-on-surface antialiased font-body-md min-h-screen pb-24 selection:bg-primary selection:text-on-primary">
+<!-- TOP APP BAR -->
+<header class="fixed top-0 left-0 w-full z-40 bg-surface-container-lowest/95 backdrop-blur-md shadow-sm">
+<div class="max-w-md mx-auto px-margin-mobile h-16 flex items-center justify-between">
+<!-- Leading: Back Button -->
+<div class="flex items-center gap-space-xs">
+<button aria-label="Go Back" class="w-10 h-10 -ml-2 rounded-full flex items-center justify-center text-on-surface hover:bg-surface-container active:scale-95 transition-transform duration-150" type="button">
+<span class="material-symbols-outlined text-[24px]">arrow_back</span>
+</button>
+<div>
+<h1 class="font-headline-md-mobile text-headline-md-mobile font-bold text-on-surface leading-tight tracking-tight">Resident Directory</h1>
+<p class="font-label-sm text-label-sm text-secondary flex items-center gap-1">
+<span class="inline-block w-1.5 h-1.5 rounded-full bg-tertiary"></span>
+            36 Flats • 8 Floors • Banani
+          </p>
+</div>
+</div>
+<!-- Trailing Action Icons -->
+<div class="flex items-center gap-1">
+<button class="w-9 h-9 rounded-full flex items-center justify-center text-secondary hover:text-primary hover:bg-surface-container-high active:scale-95 transition-transform duration-150" title="Intercom Dialer Pad" type="button">
+<span class="material-symbols-outlined text-[20px]">dialpad</span>
+</button>
+<button class="w-9 h-9 rounded-full flex items-center justify-center text-error bg-error-container/40 hover:bg-error-container active:scale-95 transition-transform duration-150" title="Emergency Contacts" type="button">
+<span class="material-symbols-outlined text-[20px]">emergency</span>
+</button>
+</div>
+</div>
+</header>
+<!-- MAIN SCROLLABLE CONTENT -->
+<main class="max-w-md mx-auto pt-20 px-margin-mobile space-y-space-md">
+<!-- SPEED DIAL STRIP (Emergency & Priority Gate Services) -->
+<section aria-labelledby="speed-dial-title" class="space-y-space-xs">
+<div class="flex items-center justify-between px-0.5">
+<h2 class="font-label-sm text-label-sm uppercase tracking-wider text-secondary flex items-center gap-1.5 font-bold" id="speed-dial-title">
+<span class="material-symbols-outlined text-[15px] text-tertiary">bolt</span>
+          Priority &amp; Security Intercom
+        </h2>
+<span class="font-label-sm text-label-sm text-primary font-semibold">24/7 Gate</span>
+</div>
+<!-- Horizontal Scrollable Strip -->
+<div class="flex gap-space-sm overflow-x-auto no-scrollbar py-1 -mx-margin-mobile px-margin-mobile">
+<!-- Speed Dial 1: Guard Room -->
+<article class="flex-shrink-0 w-44 bg-surface-container-lowest rounded-xl p-space-sm border border-outline-variant/50 shadow-sm flex flex-col justify-between hover:border-primary/40 transition-colors">
+<div class="flex items-start justify-between">
+<div class="w-8 h-8 rounded-lg bg-primary/10 text-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]">security</span>
+</div>
+<span class="inline-flex items-center px-1.5 py-0.5 rounded-full text-[10px] font-semibold bg-tertiary-fixed text-on-tertiary-fixed">
+              Gate #1
+            </span>
+</div>
+<div class="mt-2 mb-2">
+<h3 class="font-label-md text-label-md font-bold text-on-surface line-clamp-1">Security Gate</h3>
+<p class="font-body-sm text-body-sm text-secondary truncate">Main Reception Guard</p>
+</div>
+<button class="w-full h-8 rounded-lg bg-primary hover:bg-primary-container text-on-primary font-label-sm text-label-sm flex items-center justify-center gap-1 active:scale-95 transition-transform shadow-sm" type="button">
+<span class="material-symbols-outlined text-[15px]">call</span>
+            Call Instant
+          </button>
+</article>
+<!-- Speed Dial 2: Estate Manager -->
+<article class="flex-shrink-0 w-44 bg-surface-container-lowest rounded-xl p-space-sm border border-outline-variant/50 shadow-sm flex flex-col justify-between hover:border-primary/40 transition-colors">
+<div class="flex items-start justify-between">
+<div class="w-8 h-8 rounded-lg bg-surface-container-high text-on-surface-variant flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]">badge</span>
+</div>
+<span class="inline-flex items-center px-1.5 py-0.5 rounded-full text-[10px] font-semibold bg-surface-container text-on-surface-variant">
+              Staff
+            </span>
+</div>
+<div class="mt-2 mb-2">
+<h3 class="font-label-md text-label-md font-bold text-on-surface line-clamp-1">Tanvir K. (Manager)</h3>
+<p class="font-body-sm text-body-sm text-secondary truncate">Estate Maintenance</p>
+</div>
+<button class="w-full h-8 rounded-lg bg-primary hover:bg-primary-container text-on-primary font-label-sm text-label-sm flex items-center justify-center gap-1 active:scale-95 transition-transform shadow-sm" type="button">
+<span class="material-symbols-outlined text-[15px]">call</span>
+            Call Instant
+          </button>
+</article>
+<!-- Speed Dial 3: Pump/Generator Operator -->
+<article class="flex-shrink-0 w-48 bg-surface-container-lowest rounded-xl p-space-sm border border-outline-variant/50 shadow-sm flex flex-col justify-between hover:border-primary/40 transition-colors">
+<div class="flex items-start justify-between">
+<div class="w-8 h-8 rounded-lg bg-surface-container-high text-on-surface-variant flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]">propane_tank</span>
+</div>
+<span class="inline-flex items-center px-1.5 py-0.5 rounded-full text-[10px] font-semibold bg-tertiary/10 text-tertiary">
+              Utility
+            </span>
+</div>
+<div class="mt-2 mb-2">
+<h3 class="font-label-md text-label-md font-bold text-on-surface truncate">Gen / Pump Operator</h3>
+<p class="font-body-sm text-body-sm text-secondary truncate">Basement 1 Plant</p>
+</div>
+<button class="w-full h-8 rounded-lg bg-primary hover:bg-primary-container text-on-primary font-label-sm text-label-sm flex items-center justify-center gap-1 active:scale-95 transition-transform shadow-sm" type="button">
+<span class="material-symbols-outlined text-[15px]">call</span>
+            Call Instant
+          </button>
+</article>
+<!-- Speed Dial 4: Banani Fire Station -->
+<article class="flex-shrink-0 w-44 bg-surface-container-lowest rounded-xl p-space-sm border border-outline-variant/50 shadow-sm flex flex-col justify-between hover:border-error/40 transition-colors">
+<div class="flex items-start justify-between">
+<div class="w-8 h-8 rounded-lg bg-error-container text-error flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]">local_fire_department</span>
+</div>
+<span class="inline-flex items-center px-1.5 py-0.5 rounded-full text-[10px] font-bold bg-error-container text-on-error-container">
+              199 SOS
+            </span>
+</div>
+<div class="mt-2 mb-2">
+<h3 class="font-label-md text-label-md font-bold text-error truncate">Banani Fire Station</h3>
+<p class="font-body-sm text-body-sm text-secondary truncate">Civil Defense Unit</p>
+</div>
+<button class="w-full h-8 rounded-lg bg-error hover:bg-error/90 text-on-error font-label-sm text-label-sm flex items-center justify-center gap-1 active:scale-95 transition-transform shadow-sm" type="button">
+<span class="material-symbols-outlined text-[15px]">call</span>
+            Direct 199
+          </button>
+</article>
+</div>
+</section>
+<!-- SEARCH & FILTER BAR -->
+<section class="space-y-space-xs">
+<!-- Search Input -->
+<div class="relative">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-secondary">
+<span class="material-symbols-outlined text-[20px]">search</span>
+</div>
+<input class="w-full h-11 pl-10 pr-9 bg-surface-container-lowest border border-outline-variant rounded-xl font-body-md text-body-md text-on-surface placeholder:text-secondary/60 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all shadow-sm" placeholder="Search resident, flat (e.g. 4A), floor, or car..." type="text"/>
+<button class="absolute inset-y-0 right-0 pr-3 flex items-center text-secondary hover:text-on-surface" type="button">
+<span class="material-symbols-outlined text-[18px]">tune</span>
+</button>
+</div>
+<!-- Filter Pills -->
+<div class="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-0.5">
+<button class="px-3 py-1.5 rounded-full font-label-sm text-label-sm bg-primary text-on-primary whitespace-nowrap shadow-sm" type="button">
+          All Floors
+        </button>
+<button class="px-3 py-1.5 rounded-full font-label-sm text-label-sm bg-surface-container-lowest text-secondary border border-outline-variant hover:border-primary/50 whitespace-nowrap" type="button">
+          Floor 1-3
+        </button>
+<button class="px-3 py-1.5 rounded-full font-label-sm text-label-sm bg-surface-container-lowest text-secondary border border-outline-variant hover:border-primary/50 whitespace-nowrap" type="button">
+          Floor 4-6
+        </button>
+<button class="px-3 py-1.5 rounded-full font-label-sm text-label-sm bg-surface-container-lowest text-secondary border border-outline-variant hover:border-primary/50 whitespace-nowrap" type="button">
+          Floor 7-8 (Penthouse)
+        </button>
+<button class="px-3 py-1.5 rounded-full font-label-sm text-label-sm bg-purple-50 text-purple-700 border border-purple-200 whitespace-nowrap flex items-center gap-1" type="button">
+<span class="w-1.5 h-1.5 rounded-full bg-purple-600"></span>
+          Committee (7)
+        </button>
+</div>
+</section>
+<!-- RESIDENT DIRECTORY CARDS -->
+<section aria-label="Residents Ledger" class="space-y-space-sm">
+<!-- Card 1: Flat 4A -->
+<article class="bg-surface-container-lowest rounded-xl border border-outline-variant/60 p-space-md shadow-sm hover:shadow-md transition-shadow">
+<!-- Header row -->
+<div class="flex items-start justify-between gap-2 border-b border-outline-variant/30 pb-space-xs mb-space-xs">
+<div class="flex items-center gap-2">
+<span class="w-8 h-8 rounded-lg bg-primary-fixed text-primary font-headline-md text-headline-md font-bold flex items-center justify-center text-sm">
+              4A
+            </span>
+<div>
+<p class="font-label-sm text-label-sm font-semibold text-secondary">4th Floor • East Wing</p>
+<h3 class="font-headline-md-mobile text-headline-md-mobile font-bold text-on-surface">Engr. Rafiqul Islam</h3>
+</div>
+</div>
+<!-- Role Badges -->
+<div class="flex flex-col items-end gap-1">
+<span class="inline-flex items-center px-2 py-0.5 rounded-full font-label-sm text-[10px] uppercase tracking-wide bg-blue-50 border border-blue-200 text-blue-800 font-semibold">
+              Owner Resident
+            </span>
+<span class="inline-flex items-center px-2 py-0.5 rounded-full font-label-sm text-[10px] uppercase tracking-wide bg-purple-50 border border-purple-200 text-purple-800 font-semibold">
+              Audit Committee
+            </span>
+</div>
+</div>
+<!-- Household & Asset Details -->
+<div class="grid grid-cols-2 gap-2 text-secondary py-1 font-body-sm text-body-sm">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-on-surface-variant">group</span>
+<span>4 Members</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-on-surface-variant">directions_car</span>
+<span class="truncate">DM-GA 24-8192 <span class="text-xs text-primary font-semibold">(P4)</span></span>
+</div>
+</div>
+<!-- Privacy Status Note -->
+<div class="flex items-center justify-between bg-surface-container-low/60 rounded-lg px-2.5 py-1.5 my-2">
+<div class="flex items-center gap-1 text-xs text-secondary">
+<span class="material-symbols-outlined text-[15px] text-secondary">lock</span>
+<span>+880 1711 •••• 92</span>
+</div>
+<button class="text-xs text-primary font-semibold hover:underline" type="button">
+            Request Phone
+          </button>
+</div>
+<!-- Actions -->
+<div class="grid grid-cols-2 gap-2 pt-1">
+<button class="h-10 rounded-lg bg-primary text-on-primary font-label-md text-label-md flex items-center justify-center gap-1.5 hover:bg-primary-container active:scale-95 transition-all" type="button">
+<span class="material-symbols-outlined text-[18px]">phone_in_talk</span>
+            Intercom Audio
+          </button>
+<button class="h-10 rounded-lg bg-surface-container-lowest text-on-surface border border-outline-variant font-label-md text-label-md flex items-center justify-center gap-1.5 hover:bg-surface-container active:scale-95 transition-all" type="button">
+<span class="material-symbols-outlined text-[18px]">chat</span>
+            Send Message
+          </button>
+</div>
+</article>
+<!-- Card 2: Flat 4B -->
+<article class="bg-surface-container-lowest rounded-xl border border-outline-variant/60 p-space-md shadow-sm hover:shadow-md transition-shadow">
+<!-- Header row -->
+<div class="flex items-start justify-between gap-2 border-b border-outline-variant/30 pb-space-xs mb-space-xs">
+<div class="flex items-center gap-2">
+<span class="w-8 h-8 rounded-lg bg-secondary-fixed text-on-secondary-fixed font-headline-md text-headline-md font-bold flex items-center justify-center text-sm">
+              4B
+            </span>
+<div>
+<p class="font-label-sm text-label-sm font-semibold text-secondary">4th Floor • West Wing</p>
+<h3 class="font-headline-md-mobile text-headline-md-mobile font-bold text-on-surface">Dr. Nadia Rahman</h3>
+</div>
+</div>
+<!-- Role Badge -->
+<div class="flex flex-col items-end">
+<span class="inline-flex items-center px-2 py-0.5 rounded-full font-label-sm text-[10px] uppercase tracking-wide bg-emerald-50 border border-emerald-200 text-emerald-800 font-semibold">
+              Resident Tenant
+            </span>
+</div>
+</div>
+<!-- Household & Asset Details -->
+<div class="space-y-1 py-1 font-body-sm text-body-sm text-secondary">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-on-surface-variant">medical_services</span>
+<span class="truncate">Assoc. Professor, Apollo/Evercare Dhaka</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-on-surface-variant">directions_car</span>
+<span class="truncate">Dhaka Metro-BHA 11-4021 <span class="text-xs text-primary font-semibold">(P7)</span></span>
+</div>
+</div>
+<!-- Actions -->
+<div class="grid grid-cols-2 gap-2 pt-2">
+<button class="h-10 rounded-lg bg-primary text-on-primary font-label-md text-label-md flex items-center justify-center gap-1.5 hover:bg-primary-container active:scale-95 transition-all" type="button">
+<span class="material-symbols-outlined text-[18px]">phone_in_talk</span>
+            Intercom Call
+          </button>
+<button class="h-10 rounded-lg bg-surface-container-lowest text-on-surface border border-outline-variant font-label-md text-label-md flex items-center justify-center gap-1.5 hover:bg-surface-container active:scale-95 transition-all" type="button">
+<span class="material-symbols-outlined text-[18px]">forum</span>
+            Chat
+          </button>
+</div>
+</article>
+<!-- Card 3: Flat 7A -->
+<article class="bg-surface-container-lowest rounded-xl border border-outline-variant/60 p-space-md shadow-sm hover:shadow-md transition-shadow">
+<!-- Header row -->
+<div class="flex items-start justify-between gap-2 border-b border-outline-variant/30 pb-space-xs mb-space-xs">
+<div class="flex items-center gap-2">
+<span class="w-8 h-8 rounded-lg bg-primary-fixed text-primary font-headline-md text-headline-md font-bold flex items-center justify-center text-sm">
+              7A
+            </span>
+<div>
+<p class="font-label-sm text-label-sm font-semibold text-secondary">7th Floor • Corner Suite</p>
+<h3 class="font-headline-md-mobile text-headline-md-mobile font-bold text-on-surface">Barrister Farhana Chowdhury</h3>
+</div>
+</div>
+<!-- Role Badges -->
+<div class="flex flex-col items-end gap-1">
+<span class="inline-flex items-center px-2 py-0.5 rounded-full font-label-sm text-[10px] uppercase tracking-wide bg-blue-50 border border-blue-200 text-blue-800 font-semibold">
+              Owner
+            </span>
+<span class="inline-flex items-center px-2 py-0.5 rounded-full font-label-sm text-[10px] uppercase tracking-wide bg-purple-50 border border-purple-200 text-purple-800 font-semibold">
+              Committee Treasurer
+            </span>
+</div>
+</div>
+<!-- Household & Asset Details -->
+<div class="grid grid-cols-2 gap-2 text-secondary py-1 font-body-sm text-body-sm">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-on-surface-variant">account_balance</span>
+<span class="truncate">Supreme Court Advocate</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-on-surface-variant">directions_car</span>
+<span class="truncate">DM-DHA 33-1092 (P12)</span>
+</div>
+</div>
+<!-- Actions -->
+<div class="grid grid-cols-2 gap-2 pt-2">
+<button class="h-10 rounded-lg bg-primary text-on-primary font-label-md text-label-md flex items-center justify-center gap-1.5 hover:bg-primary-container active:scale-95 transition-all" type="button">
+<span class="material-symbols-outlined text-[18px]">phone_in_talk</span>
+            Intercom Call
+          </button>
+<button class="h-10 rounded-lg bg-purple-50 text-purple-800 border border-purple-200 font-label-md text-label-md flex items-center justify-center gap-1.5 hover:bg-purple-100 active:scale-95 transition-all" type="button">
+<span class="material-symbols-outlined text-[18px]">history_edu</span>
+            Official Memo
+          </button>
+</div>
+</article>
+<!-- Card 4: Flat 7C -->
+<article class="bg-surface-container-lowest rounded-xl border border-outline-variant/60 p-space-md shadow-sm hover:shadow-md transition-shadow relative overflow-hidden">
+<!-- Top decorative ribbon for penthouse / building lead -->
+<div class="absolute top-0 right-0 w-24 h-1.5 bg-gradient-to-l from-primary to-tertiary"></div>
+<!-- Header row -->
+<div class="flex items-start justify-between gap-2 border-b border-outline-variant/30 pb-space-xs mb-space-xs">
+<div class="flex items-center gap-2">
+<span class="w-8 h-8 rounded-lg bg-primary text-on-primary font-headline-md text-headline-md font-bold flex items-center justify-center text-sm shadow-sm">
+              7C
+            </span>
+<div>
+<p class="font-label-sm text-label-sm font-semibold text-secondary">Penthouse • North Terrace</p>
+<h3 class="font-headline-md-mobile text-headline-md-mobile font-bold text-on-surface">Tanvir Ahmed</h3>
+</div>
+</div>
+<!-- Role Badges -->
+<div class="flex flex-col items-end gap-1">
+<span class="inline-flex items-center px-2 py-0.5 rounded-full font-label-sm text-[10px] uppercase tracking-wide bg-blue-50 border border-blue-200 text-blue-800 font-semibold">
+              Owner / Lead
+            </span>
+<span class="inline-flex items-center px-2 py-0.5 rounded-full font-label-sm text-[10px] uppercase tracking-wide bg-purple-50 border border-purple-200 text-purple-800 font-semibold">
+              Society Secretary
+            </span>
+</div>
+</div>
+<!-- Household & Asset Details -->
+<div class="grid grid-cols-2 gap-2 text-secondary py-1 font-body-sm text-body-sm">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-on-surface-variant">home_work</span>
+<span>Building Convener</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-on-surface-variant">directions_car</span>
+<span class="truncate">DM-BHA 55-9001 (P1)</span>
+</div>
+</div>
+<!-- Actions -->
+<div class="grid grid-cols-2 gap-2 pt-2">
+<button class="h-10 rounded-lg bg-primary text-on-primary font-label-md text-label-md flex items-center justify-center gap-1.5 hover:bg-primary-container active:scale-95 transition-all" type="button">
+<span class="material-symbols-outlined text-[18px]">phone_in_talk</span>
+            Intercom Call
+          </button>
+<button class="h-10 rounded-lg bg-surface-container-lowest text-on-surface border border-outline-variant font-label-md text-label-md flex items-center justify-center gap-1.5 hover:bg-surface-container active:scale-95 transition-all" type="button">
+<span class="material-symbols-outlined text-[18px]">chat</span>
+            Chat
+          </button>
+</div>
+</article>
+</section>
+<!-- PRIVACY ASSURANCE COMPLIANCE FOOTER NOTE -->
+<aside class="p-space-md rounded-xl bg-surface-container-low border border-outline-variant/40 flex items-start gap-space-xs text-secondary">
+<span class="material-symbols-outlined text-[20px] text-primary flex-shrink-0 mt-0.5">verified_user</span>
+<p class="font-body-sm text-body-sm leading-relaxed">
+        Resident privacy protected. External phone numbers concealed in accordance with BuildingOS Society Privacy Bylaws. Intercom calls routed via in-app VoIP gateway.
+      </p>
+</aside>
+</main>
+<!-- BOTTOM NAVIGATION BAR (Shared Component JSON Blueprint) -->
+<!-- Contextual State: "Community" is active -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center h-16 px-space-sm bg-surface-container-lowest dark:bg-inverse-surface shadow-md">
+<!-- Item 1: Dashboard -->
+<a class="flex flex-col items-center justify-center text-secondary dark:text-secondary-fixed-dim font-medium hover:text-primary dark:hover:text-inverse-primary active:scale-95 transition-transform duration-150" href="#dashboard">
+<span class="material-symbols-outlined text-[22px]">dashboard</span>
+<span class="font-label-sm text-label-sm mt-0.5">Dashboard</span>
+</a>
+<!-- Item 2: Units -->
+<a class="flex flex-col items-center justify-center text-secondary dark:text-secondary-fixed-dim font-medium hover:text-primary dark:hover:text-inverse-primary active:scale-95 transition-transform duration-150" href="#units">
+<span class="material-symbols-outlined text-[22px]">domain</span>
+<span class="font-label-sm text-label-sm mt-0.5">Units</span>
+</a>
+<!-- Item 3: Community (ACTIVE) -->
+<a class="flex flex-col items-center justify-center text-primary dark:text-inverse-primary font-bold relative after:content-[''] after:w-1.5 after:h-1.5 after:bg-primary dark:after:bg-inverse-primary after:rounded-full after:mt-1 active:scale-95 transition-transform duration-150" href="#community">
+<span class="material-symbols-outlined text-[22px] fill-icon">forum</span>
+<span class="font-label-sm text-label-sm mt-0.5">Community</span>
+</a>
+<!-- Item 4: Notices -->
+<a class="flex flex-col items-center justify-center text-secondary dark:text-secondary-fixed-dim font-medium hover:text-primary dark:hover:text-inverse-primary active:scale-95 transition-transform duration-150" href="#notices">
+<span class="material-symbols-outlined text-[22px]">campaign</span>
+<span class="font-label-sm text-label-sm mt-0.5">Notices</span>
+</a>
+<!-- Item 5: Passes -->
+<a class="flex flex-col items-center justify-center text-secondary dark:text-secondary-fixed-dim font-medium hover:text-primary dark:hover:text-inverse-primary active:scale-95 transition-transform duration-150" href="#passes">
+<span class="material-symbols-outlined text-[22px]">badge</span>
+<span class="font-label-sm text-label-sm mt-0.5">Passes</span>
+</a>
+</nav>
+</body></html>

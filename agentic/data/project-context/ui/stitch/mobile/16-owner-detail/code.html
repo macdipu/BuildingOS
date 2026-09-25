@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Owner Profile - BuildingOS</title>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Fonts: Inter & Plus Jakarta Sans -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "surface-container-high": "#dce9ff",
+            "background": "#f8f9ff",
+            "on-tertiary": "#ffffff",
+            "tertiary-container": "#007d57",
+            "on-secondary-fixed": "#131b2e",
+            "secondary-fixed": "#dae2fd",
+            "on-error-container": "#93000a",
+            "tertiary-fixed-dim": "#68dba9",
+            "outline": "#737686",
+            "surface-container-highest": "#d3e4fe",
+            "primary-container": "#2563eb",
+            "primary-fixed-dim": "#b4c5ff",
+            "on-tertiary-fixed-variant": "#005137",
+            "tertiary": "#006243",
+            "on-surface": "#0b1c30",
+            "on-secondary": "#ffffff",
+            "secondary-container": "#dae2fd",
+            "surface-dim": "#cbdbf5",
+            "primary": "#004ac6",
+            "on-primary-container": "#eeefff",
+            "inverse-surface": "#213145",
+            "on-error": "#ffffff",
+            "outline-variant": "#c3c6d7",
+            "on-tertiary-container": "#bdffdc",
+            "primary-fixed": "#dbe1ff",
+            "error-container": "#ffdad6",
+            "on-surface-variant": "#434655",
+            "secondary": "#565e74",
+            "secondary-fixed-dim": "#bec6e0",
+            "on-primary-fixed": "#00174b",
+            "on-secondary-fixed-variant": "#3f465c",
+            "on-secondary-container": "#5c647a",
+            "inverse-on-surface": "#eaf1ff",
+            "surface": "#f8f9ff",
+            "surface-container-low": "#eff4ff",
+            "surface-container": "#e5eeff",
+            "on-background": "#0b1c30",
+            "on-tertiary-fixed": "#002114",
+            "on-primary-fixed-variant": "#003ea8",
+            "error": "#ba1a1a",
+            "surface-container-lowest": "#ffffff",
+            "inverse-primary": "#b4c5ff",
+            "tertiary-fixed": "#85f8c4",
+            "surface-variant": "#d3e4fe",
+            "surface-tint": "#0053db",
+            "on-primary": "#ffffff",
+            "surface-bright": "#f8f9ff"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-2xs": "0.25rem",
+            "gutter-mobile": "1rem",
+            "space-sm": "0.75rem",
+            "space-lg": "1.5rem",
+            "space-2xl": "3rem",
+            "margin-mobile": "1rem",
+            "space-xs": "0.5rem",
+            "space-xl": "2rem",
+            "margin": "2rem",
+            "space-md": "1rem",
+            "gutter": "1.5rem"
+          },
+          "fontFamily": {
+            "body-md": ["Inter"],
+            "label-sm": ["Inter"],
+            "headline-lg": ["Plus Jakarta Sans"],
+            "label-md": ["Inter"],
+            "headline-md": ["Plus Jakarta Sans"],
+            "label-lg": ["Inter"],
+            "body-lg": ["Inter"],
+            "display-lg": ["Plus Jakarta Sans"],
+            "body-sm": ["Inter"],
+            "currency-md": ["Inter"],
+            "headline-xl": ["Plus Jakarta Sans"],
+            "currency-lg": ["Plus Jakarta Sans"],
+            "display-lg-mobile": ["Plus Jakarta Sans"]
+          },
+          "fontSize": {
+            "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+            "label-sm": ["11px", { "lineHeight": "14px", "letterSpacing": "0.02em", "fontWeight": "600" }],
+            "headline-lg": ["22px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "600" }],
+            "headline-md": ["18px", { "lineHeight": "24px", "letterSpacing": "-0.005em", "fontWeight": "600" }],
+            "label-lg": ["14px", { "lineHeight": "20px", "fontWeight": "600" }],
+            "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "display-lg": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "body-sm": ["12px", { "lineHeight": "16px", "fontWeight": "400" }],
+            "currency-md": ["15px", { "lineHeight": "20px", "fontWeight": "600" }],
+            "headline-xl": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.015em", "fontWeight": "600" }],
+            "currency-lg": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+            "display-lg-mobile": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "700" }]
+          }
+        }
+      }
+    };
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1;
+    }
+    .custom-scroll::-webkit-scrollbar {
+      display: none;
+    }
+    .custom-scroll {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+</head>
+<body class="bg-background text-on-surface antialiased min-h-screen flex flex-col font-body-md text-body-md select-none">
+<!-- TOP APP BAR (FOCUSED DETAIL SCREEN: Back Action suppresses global tab shell per rules) -->
+<header class="fixed top-0 left-0 w-full z-50 flex items-center justify-between h-16 px-space-md bg-surface-container-lowest shadow-sm">
+<div class="flex items-center gap-space-xs">
+<button aria-label="Go Back" class="w-10 h-10 flex items-center justify-center rounded-lg hover:bg-surface-container text-on-surface active:scale-95 transition-all" type="button">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<h1 class="text-headline-md font-headline-md font-bold tracking-tight text-on-surface">Owner Profile</h1>
+</div>
+<div class="flex items-center gap-space-xs">
+<button aria-label="Edit Profile" class="w-9 h-9 flex items-center justify-center rounded-lg hover:bg-surface-container text-on-surface-variant active:scale-95 transition-all" type="button">
+<span class="material-symbols-outlined">edit</span>
+</button>
+<button aria-label="Share Contact" class="w-9 h-9 flex items-center justify-center rounded-lg hover:bg-surface-container text-on-surface-variant active:scale-95 transition-all" type="button">
+<span class="material-symbols-outlined">share</span>
+</button>
+</div>
+</header>
+<!-- MAIN SCROLLABLE CONTENT CANVAS -->
+<main class="flex-1 w-full max-w-md mx-auto pt-20 pb-28 px-space-md flex flex-col gap-space-md">
+<!-- PROFILE HEADER CARD (Tier 1 Surface) -->
+<div class="bg-surface-container-lowest border border-outline-variant/60 rounded-xl p-space-md shadow-sm">
+<div class="flex items-start gap-space-sm">
+<div class="relative shrink-0">
+<img class="w-16 h-16 rounded-xl object-cover border border-outline-variant" data-alt="Sophisticated professional headshot of a middle-aged South Asian businessman named Tanvir Ahmed, wearing modern navy blue formal executive attire against a brightly lit clean white architectural corporate backdrop, natural soft studio lighting, ultra sharp focus, light mode corporate palette." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDsCf9zRuhU2ed2qdF5iXpKXwyTxZSDY71EWTXPmHXxSnd1rf7yKwugOQU8Z1TY5R-B26BXteo0yFJwyderYKxafVoYMXdTdleZ1Z-7fEFNju7AWgCUfx9tDNTNSdgiCvnA28RtwiEFWsPDlzbIjWb7hNru1yCHLJCuHKujeF9tMN0nIuxrufmTFHNeDqwwKScqmjAq2D1bCFRNTOthd1BsesroKXH8OCQn0GOH_tcdzWZ1HrIkg4Fw"/>
+<span class="absolute -bottom-1 -right-1 w-4 h-4 bg-tertiary-container rounded-full border-2 border-surface-container-lowest flex items-center justify-center" title="Active Landlord">
+<span class="material-symbols-outlined text-[10px] text-on-tertiary" style="font-variation-settings: 'FILL' 1;">check</span>
+</span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-center gap-space-xs flex-wrap">
+<h2 class="text-headline-md font-headline-md font-bold text-on-surface truncate">Tanvir Ahmed</h2>
+</div>
+<div class="mt-space-2xs">
+<span class="inline-flex items-center px-2 py-0.5 rounded-full text-label-sm font-label-sm bg-surface-container-low border border-outline-variant text-primary font-semibold">
+              Registered Owner &amp; Landlord
+            </span>
+</div>
+<p class="text-body-sm font-body-sm text-secondary mt-1 flex items-center gap-1">
+<span class="material-symbols-outlined text-sm text-secondary">apartment</span>
+            Green Valley Heights • 3 Flats Owned
+          </p>
+</div>
+</div>
+<!-- Divider -->
+<div class="h-px bg-outline-variant/40 my-space-md"></div>
+<!-- Identity & Contact Spec Grid -->
+<div class="grid grid-cols-1 gap-y-2.5 text-body-sm font-body-sm">
+<!-- Phone -->
+<div class="flex items-center justify-between">
+<span class="text-secondary flex items-center gap-1.5">
+<span class="material-symbols-outlined text-base text-outline">call</span>
+            Phone
+          </span>
+<div class="flex items-center gap-space-xs">
+<span class="font-semibold text-on-surface font-mono">+880 1711-987654</span>
+<a class="w-7 h-7 rounded-md bg-surface-container flex items-center justify-center text-primary hover:bg-surface-container-high transition-colors" href="tel:+8801711987654" title="One-tap Call">
+<span class="material-symbols-outlined text-sm">phone_in_talk</span>
+</a>
+</div>
+</div>
+<!-- Email -->
+<div class="flex items-center justify-between">
+<span class="text-secondary flex items-center gap-1.5">
+<span class="material-symbols-outlined text-base text-outline">mail</span>
+            Email
+          </span>
+<a class="font-medium text-primary hover:underline truncate max-w-[200px]" href="mailto:tanvir@ahmedholding.com">
+            tanvir@ahmedholding.com
+          </a>
+</div>
+<!-- NID -->
+<div class="flex items-center justify-between">
+<span class="text-secondary flex items-center gap-1.5">
+<span class="material-symbols-outlined text-base text-outline">badge</span>
+            National ID (NID)
+          </span>
+<span class="font-mono text-on-surface font-medium">19842691238479</span>
+</div>
+<!-- e-TIN Verified -->
+<div class="flex items-center justify-between">
+<span class="text-secondary flex items-center gap-1.5">
+<span class="material-symbols-outlined text-base text-outline">receipt_long</span>
+            Tax e-TIN
+          </span>
+<div class="flex items-center gap-1.5">
+<span class="font-mono text-on-surface font-medium">8129-3321-9901</span>
+<span class="inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded text-[10px] font-semibold bg-tertiary-container/15 text-tertiary">
+<span class="material-symbols-outlined text-[12px]" style="font-variation-settings: 'FILL' 1;">verified</span>
+              Verified
+            </span>
+</div>
+</div>
+</div>
+</div>
+<!-- HORIZONTAL TABS ROW -->
+<div class="custom-scroll flex items-center gap-2 overflow-x-auto pb-1 border-b border-outline-variant/50">
+<button class="px-space-md py-2 border-b-2 border-primary text-primary font-label-md text-label-md whitespace-nowrap">
+        Units &amp; Rent
+      </button>
+<button class="px-space-md py-2 border-b-2 border-transparent text-secondary hover:text-on-surface font-label-md text-label-md whitespace-nowrap transition-colors">
+        Payment Ledger
+      </button>
+<button class="px-space-md py-2 border-b-2 border-transparent text-secondary hover:text-on-surface font-label-md text-label-md whitespace-nowrap transition-colors">
+        Maintenance Dues
+      </button>
+<button class="px-space-md py-2 border-b-2 border-transparent text-secondary hover:text-on-surface font-label-md text-label-md whitespace-nowrap transition-colors">
+        Documents
+      </button>
+<button class="px-space-md py-2 border-b-2 border-transparent text-secondary hover:text-on-surface font-label-md text-label-md whitespace-nowrap transition-colors">
+        Activity
+      </button>
+</div>
+<!-- CONTENT: UNITS & RENT TAB -->
+<!-- 1. Portfolio Summary Box (Bento / Stat Matrix) -->
+<section class="bg-surface-container-lowest border border-outline-variant/60 rounded-xl p-space-md shadow-sm">
+<div class="flex items-center justify-between mb-space-sm">
+<h3 class="text-label-lg font-label-lg text-on-surface flex items-center gap-1.5">
+<span class="material-symbols-outlined text-primary text-base">pie_chart</span>
+          Portfolio Yield Summary
+        </h3>
+<span class="text-label-sm font-label-sm bg-surface-container text-secondary px-2 py-0.5 rounded">March 2025</span>
+</div>
+<div class="grid grid-cols-2 gap- space-xs gap-3">
+<!-- Yield Metric -->
+<div class="bg-surface-container-low rounded-lg p-space-sm border border-outline-variant/40 col-span-2 flex items-center justify-between">
+<div>
+<span class="text-body-sm font-body-sm text-secondary block">Total Monthly Rental Yield</span>
+<span class="text-currency-lg font-currency-lg font-bold text-on-surface">৳1,80,000 <span class="text-body-sm font-normal text-secondary">/ mo</span></span>
+</div>
+<div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-xl">account_balance_wallet</span>
+</div>
+</div>
+<!-- Rent Collected -->
+<div class="bg-surface-container-lowest border border-outline-variant/60 rounded-lg p-space-sm">
+<span class="text-body-sm font-body-sm text-secondary block">Rent Collected</span>
+<span class="text-currency-md font-currency-md font-bold text-tertiary block mt-0.5">৳1,10,000</span>
+<div class="mt-2 flex items-center gap-1.5">
+<div class="flex-1 bg-surface-container-high rounded-full h-1.5 overflow-hidden">
+<div class="bg-tertiary-container h-full rounded-full" style="width: 61.1%;"></div>
+</div>
+<span class="text-label-sm font-label-sm text-tertiary">61.1%</span>
+</div>
+</div>
+<!-- Outstanding Rent -->
+<div class="bg-surface-container-lowest border border-outline-variant/60 rounded-lg p-space-sm">
+<span class="text-body-sm font-body-sm text-secondary block">Outstanding Rent</span>
+<span class="text-currency-md font-currency-md font-bold text-error block mt-0.5">৳55,000</span>
+<span class="inline-flex items-center gap-1 text-[11px] font-medium text-error mt-2">
+<span class="w-1.5 h-1.5 rounded-full bg-error"></span> Unit 7C Due
+          </span>
+</div>
+<!-- Maintenance Payable -->
+<div class="col-span-2 bg-surface-container-lowest border border-outline-variant/60 rounded-lg px-space-sm py-2.5 flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-base">handyman</span>
+<span class="text-body-sm font-body-sm text-secondary">Owner Maintenance Payable</span>
+</div>
+<span class="text-currency-md font-currency-md font-semibold text-on-surface">৳12,500</span>
+</div>
+</div>
+</section>
+<!-- 2. Owned Units Mini-Cards -->
+<section class="space-y-space-xs">
+<div class="flex items-center justify-between px-0.5">
+<h3 class="text-label-lg font-label-lg text-on-surface">Owned Units (3 Flats)</h3>
+<span class="text-label-sm font-label-sm text-secondary">Green Valley Heights</span>
+</div>
+<!-- Unit 4A -->
+<div class="bg-surface-container-lowest border border-outline-variant/60 rounded-xl p-space-md shadow-sm space-y-2">
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-lg bg-surface-container-high text-primary flex items-center justify-center font-bold text-sm">
+              4A
+            </div>
+<div>
+<h4 class="font-headline-md text-[15px] font-bold text-on-surface">Unit 4A</h4>
+<p class="text-body-sm text-secondary">Occupied by <span class="font-semibold text-on-surface">Engr. Rafiqul Islam</span></p>
+</div>
+</div>
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-label-sm font-label-sm bg-surface-container-low text-tertiary border border-tertiary-container/30">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary-container"></span> Maint: Paid
+          </span>
+</div>
+<div class="flex items-center justify-between pt-1 border-t border-outline-variant/30 text-body-sm">
+<span class="text-secondary">Monthly Agreed Rent</span>
+<span class="font-semibold text-on-surface font-currency-md">৳55,000</span>
+</div>
+</div>
+<!-- Unit 4B -->
+<div class="bg-surface-container-lowest border border-outline-variant/60 rounded-xl p-space-md shadow-sm space-y-2">
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-lg bg-surface-container-high text-primary flex items-center justify-center font-bold text-sm">
+              4B
+            </div>
+<div>
+<h4 class="font-headline-md text-[15px] font-bold text-on-surface">Unit 4B</h4>
+<p class="text-body-sm text-secondary">Occupied by <span class="font-semibold text-on-surface">Dr. Nadia Rahman</span></p>
+</div>
+</div>
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-label-sm font-label-sm bg-surface-container-low text-tertiary border border-tertiary-container/30">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary-container"></span> Maint: Paid
+          </span>
+</div>
+<div class="flex items-center justify-between pt-1 border-t border-outline-variant/30 text-body-sm">
+<span class="text-secondary">Monthly Agreed Rent</span>
+<span class="font-semibold text-on-surface font-currency-md">৳55,000</span>
+</div>
+</div>
+<!-- Unit 7C (Alert/Notice State) -->
+<div class="bg-surface-container-lowest border border-error/40 rounded-xl p-space-md shadow-sm space-y-2 bg-gradient-to-r from-surface-container-lowest to-error-container/10">
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-lg bg-error-container text-error flex items-center justify-center font-bold text-sm">
+              7C
+            </div>
+<div>
+<div class="flex items-center gap-1.5">
+<h4 class="font-headline-md text-[15px] font-bold text-on-surface">Unit 7C</h4>
+<span class="text-[10px] font-bold uppercase tracking-wider text-error bg-error-container px-1.5 py-0.5 rounded">Vacating</span>
+</div>
+<p class="text-body-sm text-secondary">Notice Period Active (Exit end of Mar)</p>
+</div>
+</div>
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-label-sm font-label-sm bg-error-container text-on-error-container">
+<span class="w-1.5 h-1.5 rounded-full bg-error"></span> Overdue: ৳55,000
+          </span>
+</div>
+<div class="flex items-center justify-between pt-1 border-t border-outline-variant/30 text-body-sm">
+<span class="text-secondary">Base Contract Rent</span>
+<span class="font-semibold text-on-surface font-currency-md">৳70,000</span>
+</div>
+</div>
+</section>
+<!-- 3. Recent Financial Transactions -->
+<section class="bg-surface-container-lowest border border-outline-variant/60 rounded-xl p-space-md shadow-sm space-y-3">
+<div class="flex items-center justify-between">
+<h3 class="text-label-lg font-label-lg text-on-surface flex items-center gap-1.5">
+<span class="material-symbols-outlined text-primary text-base">receipt</span>
+          Recent Financial Transactions
+        </h3>
+<button class="text-label-sm font-label-sm text-primary hover:underline">View All</button>
+</div>
+<div class="divide-y divide-outline-variant/30">
+<!-- Transfer 1 -->
+<div class="py-2.5 flex items-center justify-between">
+<div class="flex items-center gap-2.5">
+<div class="w-9 h-9 rounded-lg bg-tertiary-container/15 text-tertiary flex items-center justify-center">
+<span class="material-symbols-outlined text-lg">south_west</span>
+</div>
+<div>
+<span class="text-body-sm font-semibold text-on-surface block">City Bank Transfer</span>
+<span class="text-[11px] text-secondary">Net Rent Payout • 05 Mar 2025</span>
+</div>
+</div>
+<div class="text-right">
+<span class="text-currency-md font-currency-md font-bold text-tertiary block">+৳1,06,700</span>
+<span class="text-[10px] text-secondary font-medium uppercase">Reconciled</span>
+</div>
+</div>
+<!-- Transfer 2 -->
+<div class="py-2.5 flex items-center justify-between">
+<div class="flex items-center gap-2.5">
+<div class="w-9 h-9 rounded-lg bg-surface-container-high text-secondary flex items-center justify-center">
+<span class="material-symbols-outlined text-lg">north_east</span>
+</div>
+<div>
+<span class="text-body-sm font-semibold text-on-surface block">Maintenance Paid</span>
+<span class="text-[11px] text-secondary">Quarterly payment • 01 Jan 2025</span>
+</div>
+</div>
+<div class="text-right">
+<span class="text-currency-md font-currency-md font-semibold text-on-surface-variant block">-৳18,000</span>
+<span class="text-[10px] text-secondary font-medium uppercase">Settled</span>
+</div>
+</div>
+</div>
+</section>
+<!-- 4. Document Vault -->
+<section class="bg-surface-container-lowest border border-outline-variant/60 rounded-xl p-space-md shadow-sm space-y-2.5">
+<div class="flex items-center justify-between">
+<h3 class="text-label-lg font-label-lg text-on-surface flex items-center gap-1.5">
+<span class="material-symbols-outlined text-primary text-base">folder_open</span>
+          Document Vault
+        </h3>
+<span class="text-label-sm font-label-sm text-secondary">2 Files</span>
+</div>
+<div class="space-y-2">
+<!-- Doc 1 -->
+<div class="p-2.5 rounded-lg border border-outline-variant/50 bg-surface flex items-center justify-between hover:bg-surface-container-low transition-colors cursor-pointer">
+<div class="flex items-center gap-2.5 min-w-0">
+<span class="material-symbols-outlined text-error text-xl">picture_as_pdf</span>
+<div class="truncate">
+<span class="text-body-sm font-medium text-on-surface block truncate">Title Deed Registered Copy</span>
+<span class="text-[11px] text-secondary font-mono">Banani_Flats.pdf • 4.2 MB</span>
+</div>
+</div>
+<button class="w-8 h-8 rounded flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-lg">download</span>
+</button>
+</div>
+<!-- Doc 2 -->
+<div class="p-2.5 rounded-lg border border-outline-variant/50 bg-surface flex items-center justify-between hover:bg-surface-container-low transition-colors cursor-pointer">
+<div class="flex items-center gap-2.5 min-w-0">
+<span class="material-symbols-outlined text-error text-xl">picture_as_pdf</span>
+<div class="truncate">
+<span class="text-body-sm font-medium text-on-surface block truncate">Power of Attorney</span>
+<span class="text-[11px] text-secondary font-mono">POA_2021.pdf • 1.8 MB</span>
+</div>
+</div>
+<button class="w-8 h-8 rounded flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-lg">download</span>
+</button>
+</div>
+</div>
+</section>
+</main>
+<!-- DOCKED BOTTOM ACTION DRAWER / BAR -->
+<aside class="fixed bottom-0 left-0 w-full z-40 bg-surface-container-lowest/95 backdrop-blur-md border-t border-outline-variant/60 px-space-md py-3 shadow-lg">
+<div class="max-w-md mx-auto grid grid-cols-5 gap-2">
+<!-- Call Owner (Secondary outline) -->
+<a class="col-span-2 h-11 border border-outline-variant text-on-surface font-label-md text-label-md rounded-lg flex items-center justify-center gap-1.5 hover:bg-surface-container active:scale-95 transition-all text-center" href="tel:+8801711987654">
+<span class="material-symbols-outlined text-lg">call</span>
+        Call Owner
+      </a>
+<!-- Generate Portfolio Statement (Primary blue) -->
+<button class="col-span-3 h-11 bg-primary text-on-primary font-label-md text-label-md font-semibold rounded-lg flex items-center justify-center gap-1.5 shadow hover:bg-primary-container active:scale-95 transition-all" type="button">
+<span class="material-symbols-outlined text-lg">description</span>
+        Generate Portfolio Statement
+      </button>
+</div>
+</aside>
+</body></html>

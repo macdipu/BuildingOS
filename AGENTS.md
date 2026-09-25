@@ -10,6 +10,26 @@ use case per action, repository pattern, SOLID, microservices in one monorepo. A
 and the Flutter layer-rules test enforce it; fix the code, never weaken the rule.
 
 <!-- agentic-kit:start -->
+## UI reference (Stitch mockups)
+
+Approved-for-reference UI mockups live in `agentic/data/project-context/ui/stitch/`
+(`mobile/` = Flutter `user_app`, `back-office/` = Next.js back-office web, `design-system/DESIGN.md`
+= tokens). [`ui/stitch/UI-INDEX.md`](agentic/data/project-context/ui/stitch/UI-INDEX.md) maps every
+screen to its BRD section, BOS work item, and task, and lists the UI-vs-BRD gaps.
+
+1. Planning (requirements, tech spec, task breakdown, sprint planning) of any work that touches a
+   screen: open UI-INDEX.md, then the screen's `screen.png` + `code.html`, and cross-check against
+   the BRD section. Every FE/Mobile task (and every BE task that serves a screen) fills the task
+   template's `## UI Reference` with the screen folder(s) and BRD section(s), or states `none`.
+2. The BRD governs behavior; the mockup governs layout and visual style. Anything shown only in
+   the mockup (UI-only rows in UI-INDEX.md) is not a requirement -- raise it as an open question or
+   CR, never implement it silently (core rule 9). BRD-required fields/states missing from the
+   mockup are still required.
+3. Implementation (FE/Mobile personas): build to the mockup layout using DESIGN.md tokens mapped
+   onto existing theme/shared components; mockup HTML is reference, not code to paste. Preview
+   verification compares against `screen.png`.
+4. This rule applies even on a routing-cache hit (the cache skips SKILL docs, not this file).
+
 # Agentic kit workflow
 
 ## Core behavior

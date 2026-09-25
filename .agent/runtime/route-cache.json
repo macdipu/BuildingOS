@@ -26,10 +26,9 @@
     "kit_version": "9d27e69f0c7d9ec1b500e0332a2fcda082d5402f36e35db385d376c6c6bd1c82"
   },
   "change_request:brownfield:user_app": {
-    "cached_at": "2026-09-23T10:45:50.195618+00:00",
+    "cached_at": "2026-09-25T03:14:27.643786+00:00",
     "decision": {
-      "persona": "mobile-agent",
-      "planning": "NO_REPLAN",
+      "notes": "UI work: read agentic/data/project-context/ui/stitch/UI-INDEX.md per AGENTS.md UI rule",
       "route": [
         "INTAKE",
         "CONTEXT",
@@ -42,15 +41,18 @@
         "COMPLETED"
       ],
       "skill_docs": [
-        "agentic/kit/agents/mobile-agent/AGENT.md",
+        "agentic/kit/skills/prompt-intake-adapter/SKILL.md",
+        "agentic/kit/skills/baseline-verifier/SKILL.md",
+        "agentic/kit/skills/change-impact-analyzer/SKILL.md",
+        "agentic/kit/skills/technical-readiness-verifier/SKILL.md",
+        "agentic/kit/skills/task-breakdown-agent/SKILL.md",
         "agentic/kit/skills/implementation-agent/SKILL.md",
         "agentic/kit/skills/device-preview-agent/SKILL.md",
-        "agentic/kit/skills/code-review-agent/SKILL.md",
-        "agentic/kit/skills/automated-qa-agent/SKILL.md"
+        "agentic/kit/agents/mobile-agent/AGENT.md"
       ],
-      "workflow_doc": "agentic/kit/workflows/brownfield.md"
+      "workflow_doc": "agentic/kit/workflows/change-request.md"
     },
-    "kit_version": "9d27e69f0c7d9ec1b500e0332a2fcda082d5402f36e35db385d376c6c6bd1c82"
+    "kit_version": "a5fa38adf19f15ba34501a5eab0d42f071bcd26292a61e928c90f71a1d36f5ec"
   },
   "existing_task:brownfield:account-service": {
     "cached_at": "2026-09-23T11:49:57.323198+00:00",

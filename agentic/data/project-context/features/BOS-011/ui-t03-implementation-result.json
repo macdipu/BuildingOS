@@ -6,10 +6,14 @@
     "features/units_ownership/presentation/building_opener.dart + app/session/shell_building_opener.dart: selecting a building on My Buildings makes it active and opens the shell (DI; feature does not import app state)",
     "Tenant/Committee sets configured; unreachable until backend adds those building roles (BuildingRole = BUILDING_ADMIN, OWNER)",
     "test/app/shell/nav_sets_test.dart + app_shell_test.dart",
-    "flutter analyze: No issues found; flutter test: 87 passed, 1 skipped"
+    "flutter analyze: No issues found; flutter test: 87 passed, 1 skipped",
+    "Committed as d606292 before this harness task was opened (task-start had been refused: context STALE); recorded retroactively after scoped context refresh"
   ],
   "blocking_issues": [],
   "open_questions": [],
   "recommended_next_step": "UI-T04 login/OTP restyle",
-  "outputs": {"task": "UI-T03", "verdict": "IMPLEMENTED"}
+  "outputs": {
+    "task": "UI-T03",
+    "verdict": "IMPLEMENTED"
+  }
 }

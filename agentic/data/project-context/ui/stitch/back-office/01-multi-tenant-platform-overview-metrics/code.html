@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>BuildingOS Super Admin - Platform Overview</title>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts: Plus Jakarta Sans & Inter -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS with Forms and Container Queries -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "primary-fixed": "#dbe1ff",
+            "on-tertiary": "#ffffff",
+            "surface-tint": "#0053db",
+            "on-background": "#0b1c30",
+            "secondary-container": "#dae2fd",
+            "secondary": "#565e74",
+            "tertiary-fixed": "#85f8c4",
+            "on-secondary-fixed-variant": "#3f465c",
+            "on-secondary-container": "#5c647a",
+            "on-secondary": "#ffffff",
+            "surface-container": "#e5eeff",
+            "on-tertiary-container": "#bdffdc",
+            "outline-variant": "#c3c6d7",
+            "inverse-surface": "#213145",
+            "background": "#f8f9ff",
+            "surface-container-high": "#dce9ff",
+            "tertiary-fixed-dim": "#68dba9",
+            "inverse-primary": "#b4c5ff",
+            "on-error-container": "#93000a",
+            "on-surface": "#0b1c30",
+            "surface-dim": "#cbdbf5",
+            "on-tertiary-fixed-variant": "#005137",
+            "error": "#ba1a1a",
+            "inverse-on-surface": "#eaf1ff",
+            "on-primary-container": "#eeefff",
+            "on-primary-fixed": "#00174b",
+            "surface-container-lowest": "#ffffff",
+            "primary-fixed-dim": "#b4c5ff",
+            "secondary-fixed": "#dae2fd",
+            "surface-bright": "#f8f9ff",
+            "on-primary": "#ffffff",
+            "on-primary-fixed-variant": "#003ea8",
+            "surface": "#f8f9ff",
+            "tertiary": "#006243",
+            "outline": "#737686",
+            "primary-container": "#2563eb",
+            "on-tertiary-fixed": "#002114",
+            "on-secondary-fixed": "#131b2e",
+            "tertiary-container": "#007d57",
+            "surface-variant": "#d3e4fe",
+            "on-surface-variant": "#434655",
+            "surface-container-low": "#eff4ff",
+            "secondary-fixed-dim": "#bec6e0",
+            "error-container": "#ffdad6",
+            "primary": "#004ac6",
+            "surface-container-highest": "#d3e4fe",
+            "on-error": "#ffffff"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "gutter": "1.5rem",
+            "space-sm": "0.75rem",
+            "margin": "2rem",
+            "space-lg": "1.5rem",
+            "gutter-mobile": "1rem",
+            "margin-mobile": "1rem",
+            "space-xl": "2rem",
+            "space-md": "1rem",
+            "space-2xl": "3rem",
+            "space-2xs": "0.25rem",
+            "space-xs": "0.5rem"
+          },
+          "fontFamily": {
+            "display-lg-mobile": ["Plus Jakarta Sans"],
+            "label-sm": ["Inter"],
+            "headline-xl": ["Plus Jakarta Sans"],
+            "currency-lg": ["Plus Jakarta Sans"],
+            "display-lg": ["Plus Jakarta Sans"],
+            "body-md": ["Inter"],
+            "body-lg": ["Inter"],
+            "label-lg": ["Inter"],
+            "label-md": ["Inter"],
+            "currency-md": ["Inter"],
+            "headline-lg": ["Plus Jakarta Sans"],
+            "body-sm": ["Inter"],
+            "headline-md": ["Plus Jakarta Sans"]
+          },
+          "fontSize": {
+            "display-lg-mobile": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+            "label-sm": ["11px", { "lineHeight": "14px", "letterSpacing": "0.02em", "fontWeight": "600" }],
+            "headline-xl": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.015em", "fontWeight": "600" }],
+            "currency-lg": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+            "display-lg": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+            "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "label-lg": ["14px", { "lineHeight": "20px", "fontWeight": "600" }],
+            "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "600" }],
+            "currency-md": ["15px", { "lineHeight": "20px", "fontWeight": "600" }],
+            "headline-lg": ["22px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "body-sm": ["12px", { "lineHeight": "16px", "fontWeight": "400" }],
+            "headline-md": ["18px", { "lineHeight": "24px", "letterSpacing": "-0.005em", "fontWeight": "600" }]
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-background text-on-surface antialiased flex min-h-screen selection:bg-primary selection:text-white">
+<!-- SideNavBar Component (Exact mapping from Shared Components JSON) -->
+<aside class="fixed top-0 left-0 h-screen w-64 flex flex-col bg-surface-container-lowest border-r border-outline-variant shadow-sm z-40">
+<div class="w-64 h-full p-space-md flex flex-col justify-between overflow-y-auto">
+<!-- Nav Header / Brand Anchor -->
+<div>
+<div class="flex items-center gap-space-sm px-space-xs py-space-sm mb-space-md">
+<div class="w-10 h-10 rounded-lg bg-primary flex items-center justify-center text-white font-headline-lg font-bold shadow-sm">
+<span class="material-symbols-outlined text-2xl" data-icon="domain">domain</span>
+</div>
+<div>
+<h1 class="text-headline-md font-headline-md font-bold text-primary leading-tight">BuildingOS</h1>
+<p class="text-label-sm font-label-sm text-secondary">Super Admin Suite</p>
+</div>
+</div>
+<!-- System Role Demarcation Badge -->
+<div class="mb-space-lg px-space-xs">
+<div class="bg-surface-container-low border border-outline-variant/60 rounded-lg p-2.5 flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-tertiary animate-pulse"></span>
+<span class="text-label-sm font-label-sm text-on-surface uppercase tracking-wider font-semibold">HQ Node: Dhaka Central</span>
+</div>
+<span class="text-[10px] font-semibold px-1.5 py-0.5 rounded bg-surface-container text-primary">v3.4.1</span>
+</div>
+</div>
+<!-- Navigation Tab Cluster (Semantic Match: 'Platform Overview' is ACTIVE) -->
+<nav class="space-y-1">
+<!-- Active: Platform Overview -->
+<a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg bg-surface-container-low text-primary font-semibold transition-all duration-150 active:scale-[0.99] group shadow-xs" href="#">
+<span class="material-symbols-outlined text-xl text-primary" data-icon="dashboard" data-weight="fill" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+<span class="text-label-lg font-label-lg">Platform Overview</span>
+</a>
+<!-- Inactive: Buildings Pipeline -->
+<a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low transition-colors duration-150 active:scale-[0.99] group" href="#">
+<span class="material-symbols-outlined text-xl group-hover:text-primary transition-colors" data-icon="domain">domain</span>
+<span class="text-label-lg font-label-lg">Buildings Pipeline</span>
+</a>
+<!-- Inactive: Subscriptions & Billing -->
+<a class="flex items-center justify-between px-space-md py-space-sm rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low transition-colors duration-150 active:scale-[0.99] group" href="#">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-xl group-hover:text-primary transition-colors" data-icon="receipt_long">receipt_long</span>
+<span class="text-label-lg font-label-lg">Subscriptions &amp; Billing</span>
+</div>
+<span class="text-[10px] font-bold px-1.5 py-0.5 rounded-full bg-primary/10 text-primary">BDT</span>
+</a>
+<!-- Inactive: System Audit & Security -->
+<a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low transition-colors duration-150 active:scale-[0.99] group" href="#">
+<span class="material-symbols-outlined text-xl group-hover:text-primary transition-colors" data-icon="shield">shield</span>
+<span class="text-label-lg font-label-lg">System Audit &amp; Security</span>
+</a>
+<!-- Inactive: User Entitlements -->
+<a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low transition-colors duration-150 active:scale-[0.99] group" href="#">
+<span class="material-symbols-outlined text-xl group-hover:text-primary transition-colors" data-icon="badge">badge</span>
+<span class="text-label-lg font-label-lg">User Entitlements</span>
+</a>
+<!-- Inactive: API & Webhooks -->
+<a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low transition-colors duration-150 active:scale-[0.99] group" href="#">
+<span class="material-symbols-outlined text-xl group-hover:text-primary transition-colors" data-icon="webhook">webhook</span>
+<span class="text-label-lg font-label-lg">API &amp; Webhooks</span>
+</a>
+<!-- Inactive: Settings -->
+<a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low transition-colors duration-150 active:scale-[0.99] group" href="#">
+<span class="material-symbols-outlined text-xl group-hover:text-primary transition-colors" data-icon="settings">settings</span>
+<span class="text-label-lg font-label-lg">Settings</span>
+</a>
+</nav>
+</div>
+<!-- Navigation Footer Anchor -->
+<div class="pt-space-md border-t border-outline-variant/50 space-y-1">
+<a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low transition-colors duration-150 active:scale-[0.99]" href="#">
+<span class="material-symbols-outlined text-xl" data-icon="menu_book">menu_book</span>
+<span class="text-label-md font-label-md">Documentation</span>
+</a>
+<a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low transition-colors duration-150 active:scale-[0.99]" href="#">
+<span class="material-symbols-outlined text-xl" data-icon="headset_mic">headset_mic</span>
+<span class="text-label-md font-label-md">Support</span>
+</a>
+<!-- Regional Compliance Note -->
+<div class="px-space-md py-2 mt-2 rounded bg-surface-container text-[11px] text-secondary font-label-sm">
+          RAJUK / DMP Guideline v2.2 Compliant
+        </div>
+</div>
+</div>
+</aside>
+<!-- Main Viewport Canvas (Offset by Sidebar 260px) -->
+<div class="pl-64 flex-1 flex flex-col min-w-0">
+<!-- TopNavBar Component (Mapped from Shared Components JSON) -->
+<header class="sticky top-0 right-0 z-30 h-16 w-full bg-surface-container-lowest border-b border-outline-variant shadow-sm flex items-center">
+<div class="flex justify-between items-center h-full px-space-lg max-w-full w-full">
+<!-- Left: Global Cluster Switcher & Search Bar -->
+<div class="flex items-center gap-space-lg">
+<!-- Cluster Selector (Dropdown) -->
+<div class="relative flex items-center">
+<button class="flex items-center gap-2 px-3 py-1.5 rounded-lg border border-outline-variant bg-surface hover:bg-surface-container-low transition-colors text-on-surface font-label-lg text-label-lg">
+<span class="w-2.5 h-2.5 rounded-full bg-tertiary"></span>
+<span class="font-bold">Dhaka Metro Cluster</span>
+<span class="material-symbols-outlined text-lg text-secondary" data-icon="expand_more">expand_more</span>
+</button>
+<div class="hidden ml-2 items-center gap-1.5 text-secondary text-label-sm font-label-sm md:flex">
+<span class="text-outline">/</span>
+<a class="hover:text-primary transition-colors" href="#">Chittagong Central</a>
+</div>
+</div>
+<!-- Global Search Bar with keyboard shortcut indicator -->
+<div class="relative w-72 lg:w-96">
+<span class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-secondary">
+<span class="material-symbols-outlined text-lg" data-icon="search">search</span>
+</span>
+<input class="w-full h-10 pl-9 pr-12 bg-surface border border-outline-variant rounded-lg text-body-md font-body-md text-on-surface placeholder:text-secondary focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all outline-none" placeholder="Search society, tax folio, bank ledger, admin..." type="text"/>
+<div class="absolute inset-y-0 right-0 flex items-center pr-2.5 pointer-events-none">
+<kbd class="px-1.5 py-0.5 text-[11px] font-semibold text-secondary bg-surface-container border border-outline-variant rounded shadow-xs">⌘K</kbd>
+</div>
+</div>
+</div>
+<!-- Right: Actions, Live Sync Indicator, Alerts & Super Admin Profile -->
+<div class="flex items-center gap-space-md">
+<!-- Live Operational Sync Status -->
+<div class="hidden xl:flex items-center gap-2 px-3 py-1 bg-surface-container-low border border-primary/20 rounded-full">
+<span class="relative flex h-2 w-2">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-tertiary opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-tertiary"></span>
+</span>
+<span class="text-label-sm font-label-sm font-semibold text-primary">System Operational</span>
+<span class="text-[11px] text-secondary font-mono">| 14ms latency</span>
+</div>
+<!-- Audit Log Quick Button -->
+<button class="hidden lg:flex items-center gap-1 px-3 py-1.5 rounded-lg border border-outline-variant hover:bg-surface-container-low text-on-surface font-label-md text-label-md transition-colors active:scale-[0.98]">
+<span class="material-symbols-outlined text-base text-secondary" data-icon="history">history</span>
+<span>Audit Log</span>
+</button>
+<!-- Notification Bell with Badge '3' -->
+<button class="relative p-2 rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-colors active:scale-[0.98]">
+<span class="material-symbols-outlined text-2xl" data-icon="notifications">notifications</span>
+<span class="absolute top-1.5 right-1.5 flex h-4 w-4 items-center justify-center rounded-full bg-error text-[10px] font-bold text-white shadow-sm ring-2 ring-surface-container-lowest">
+              3
+            </span>
+</button>
+<!-- Manage Accounts Icon -->
+<button class="p-2 rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-colors active:scale-[0.98]">
+<span class="material-symbols-outlined text-2xl" data-icon="manage_accounts">manage_accounts</span>
+</button>
+<!-- Vertical Divider -->
+<div class="h-6 w-px bg-outline-variant/60"></div>
+<!-- Super Admin Profile Cluster -->
+<div class="flex items-center gap-3 pl-1">
+<img class="w-9 h-9 rounded-full object-cover ring-2 ring-primary/20 shadow-xs" data-alt="A distinguished executive portrait of a South Asian Super Admin IT director in a crisp navy tailored blazer, set against a modern architectural tech office with soft daylight and high-contrast ambient blue accent lights." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCcnIP35-23uUrIIosx6LmF2PsBMtN1tnikmtTVvDz5Cjz80dNem01zj_Ebxs-Pnvi08vd1j4SYX2Mzq5ZuVpmFpHqH9r0ekAq1EwBadcr4IAiW7yWjktS-plmqgE14qbM_JzDd6xLk4gbsx3DQjPX8nvFgNd6dAhpxmW7nIN1XWu5nSaHSV3r7xY976-RZMdq_Iw_KQTA6BUBY8oETM0cte1b1DoJX_kzPrL92B7-DhD9dIe4AhdXk"/>
+<div class="hidden sm:block text-left">
+<div class="text-label-md font-label-lg text-on-surface leading-tight font-bold">Tanvir Ahmed</div>
+<div class="text-[11px] text-secondary font-label-sm">Chief Operations Admin</div>
+</div>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas (Scrollable) -->
+<main class="flex-1 p-space-lg lg:p-space-xl space-y-space-xl max-w-[1440px] w-full mx-auto">
+<!-- 1. Executive Header -->
+<section class="flex flex-col md:flex-row md:items-center justify-between gap-space-md">
+<div>
+<div class="flex items-center gap-3">
+<h1 class="text-headline-xl font-headline-xl font-bold text-on-surface">Platform Command Center</h1>
+<span class="px-2.5 py-0.5 rounded-full text-label-sm font-semibold bg-tertiary-fixed text-on-tertiary-fixed-variant border border-tertiary/20 flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span>
+              All Systems Nominal
+            </span>
+</div>
+<p class="text-body-md font-body-md text-secondary mt-1">
+            Global multi-tenant infrastructure, tenant telemetry &amp; portfolio performance across Bangladesh clusters
+          </p>
+</div>
+<!-- Trailing Action Controls -->
+<div class="flex items-center flex-wrap gap-2.5">
+<!-- Date Range Filter -->
+<button class="flex items-center gap-2 h-10 px-3.5 bg-surface-container-lowest border border-outline-variant rounded-lg text-on-surface font-label-md text-label-md hover:bg-surface-container-low transition-colors shadow-xs">
+<span class="material-symbols-outlined text-lg text-secondary" data-icon="calendar_month">calendar_month</span>
+<span class="font-medium">Q1 2025 (YTD)</span>
+<span class="material-symbols-outlined text-base text-secondary" data-icon="expand_more">expand_more</span>
+</button>
+<!-- Export Platform Report -->
+<button class="flex items-center gap-2 h-10 px-3.5 bg-surface-container-lowest border border-outline-variant rounded-lg text-on-surface font-label-md text-label-md hover:bg-surface-container-low transition-colors shadow-xs">
+<span class="material-symbols-outlined text-lg text-secondary" data-icon="download">download</span>
+<span class="font-medium">Export Report (CSV/PDF)</span>
+</button>
+<!-- Primary CTA Button: Deploy Building Tenant -->
+<button class="flex items-center gap-2 h-10 px-4 bg-primary-container text-white rounded-lg font-label-lg text-label-lg hover:bg-primary transition-all shadow-sm active:scale-[0.98]">
+<span class="material-symbols-outlined text-lg" data-icon="add_business">add_business</span>
+<span>+ Deploy Building Tenant</span>
+</button>
+</div>
+</section>
+<!-- 2. Top KPI Metric Grid (4 High-Contrast Cards) -->
+<section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-space-lg">
+<!-- Metric 1: Total Active Societies -->
+<div class="bg-surface-container-lowest p-space-lg rounded-xl border border-outline-variant/70 shadow-sm flex flex-col justify-between hover:border-primary/40 transition-colors">
+<div class="flex items-center justify-between text-secondary mb-2">
+<span class="text-label-md font-label-md uppercase tracking-wider font-semibold">Total Active Societies</span>
+<div class="w-8 h-8 rounded-lg bg-surface-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-xl" data-icon="apartment">apartment</span>
+</div>
+</div>
+<div>
+<div class="text-display-lg font-display-lg text-on-surface font-bold tracking-tight">148</div>
+<div class="flex items-center gap-2 mt-2">
+<span class="inline-flex items-center gap-0.5 text-label-sm font-label-sm font-semibold text-tertiary">
+<span class="material-symbols-outlined text-base" data-icon="trending_up">trending_up</span>
+                +12 this month
+              </span>
+<span class="text-secondary text-label-sm">• 99.4% uptime</span>
+</div>
+</div>
+</div>
+<!-- Metric 2: Managed Residential Units -->
+<div class="bg-surface-container-lowest p-space-lg rounded-xl border border-outline-variant/70 shadow-sm flex flex-col justify-between hover:border-primary/40 transition-colors">
+<div class="flex items-center justify-between text-secondary mb-2">
+<span class="text-label-md font-label-md uppercase tracking-wider font-semibold">Managed Residential Units</span>
+<div class="w-8 h-8 rounded-lg bg-surface-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-xl" data-icon="grid_view">grid_view</span>
+</div>
+</div>
+<div>
+<div class="text-display-lg font-display-lg text-on-surface font-bold tracking-tight">6,420 <span class="text-headline-md font-headline-md font-normal text-secondary">Units</span></div>
+<div class="text-label-sm font-label-sm text-secondary mt-2 truncate" title="Gulshan, Banani, Dhanmondi, Uttara, Bashundhara">
+              12 Zones: Gulshan, Banani, Dhanmondi, Uttara...
+            </div>
+</div>
+</div>
+<!-- Metric 3: Monthly Platform GMV -->
+<div class="bg-surface-container-lowest p-space-lg rounded-xl border border-outline-variant/70 shadow-sm flex flex-col justify-between hover:border-primary/40 transition-colors">
+<div class="flex items-center justify-between text-secondary mb-2">
+<span class="text-label-md font-label-md uppercase tracking-wider font-semibold">Monthly Platform GMV</span>
+<div class="w-8 h-8 rounded-lg bg-tertiary-fixed/40 flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined text-xl" data-icon="payments">payments</span>
+</div>
+</div>
+<div>
+<div class="text-currency-lg font-currency-lg text-on-surface font-bold tracking-tight">
+              ৳38.4 <span class="text-headline-md font-headline-md font-semibold text-secondary">Crore BDT</span>
+</div>
+<div class="flex items-center gap-1.5 mt-2 text-label-sm font-label-sm text-secondary">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span>
+<span>bKash, Nagad &amp; Trust Bank Escrow</span>
+</div>
+</div>
+</div>
+<!-- Metric 4: SaaS ARR / Platform MRR -->
+<div class="bg-surface-container-lowest p-space-lg rounded-xl border border-outline-variant/70 shadow-sm flex flex-col justify-between hover:border-primary/40 transition-colors">
+<div class="flex items-center justify-between text-secondary mb-2">
+<span class="text-label-md font-label-md uppercase tracking-wider font-semibold">SaaS ARR / Platform MRR</span>
+<div class="w-8 h-8 rounded-lg bg-secondary-container/50 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-xl" data-icon="finance_chip">finance_chip</span>
+</div>
+</div>
+<div>
+<div class="text-currency-lg font-currency-lg text-on-surface font-bold tracking-tight">
+              ৳24.8 <span class="text-headline-md font-headline-md font-semibold text-secondary">Lakh MRR</span>
+</div>
+<div class="flex items-center gap-2 mt-2">
+<span class="inline-flex items-center gap-0.5 text-label-sm font-label-sm font-semibold text-tertiary">
+<span class="material-symbols-outlined text-base" data-icon="arrow_upward">arrow_upward</span>
+                +18.2% MoM
+              </span>
+<span class="text-secondary text-label-sm">• NRR 114%</span>
+</div>
+</div>
+</div>
+</section>
+<!-- 3. Core Analytical Visualizations & Operational Feeds (2-Column Bento Structure) -->
+<section class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg">
+<!-- Left Column: Primary Operational Telemetry (8 Columns) -->
+<div class="lg:col-span-8 space-y-space-lg">
+<!-- Module 1: Building Onboarding & Health Telemetry Card -->
+<div class="bg-surface-container-lowest p-space-lg rounded-xl border border-outline-variant/70 shadow-sm">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-space-md border-b border-outline-variant/40">
+<div>
+<h2 class="text-headline-md font-headline-md font-bold text-on-surface">Building Onboarding &amp; Health Telemetry</h2>
+<p class="text-body-sm font-body-sm text-secondary">Regional telemetry across high-density residential and commercial towers</p>
+</div>
+<!-- Health Status Indicator Pills -->
+<div class="flex items-center gap-2 flex-wrap">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-label-sm font-label-sm bg-[#ECFDF5] text-[#065F46] border border-[#BBF7D0]">
+<span class="w-2 h-2 rounded-full bg-[#059669]"></span>
+                  Healthy (142)
+                </span>
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-label-sm font-label-sm bg-[#FFFBEB] text-[#92400E] border border-[#FDE68A]">
+<span class="w-2 h-2 rounded-full bg-[#D97706]"></span>
+                  Attention (4)
+                </span>
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-label-sm font-label-sm bg-[#FFF1F2] text-[#9F1239] border border-[#FECDD3]">
+<span class="w-2 h-2 rounded-full bg-[#E11D48]"></span>
+                  Suspended (2)
+                </span>
+</div>
+</div>
+<!-- Regional Breakdown & Interactive Map Visualizer -->
+<div class="mt-space-md grid grid-cols-1 md:grid-cols-3 gap-space-md">
+<!-- Regional Stat Box: Dhaka North -->
+<div class="p-3.5 rounded-lg bg-surface-container-low border border-outline-variant/50 hover:border-primary/50 transition-all">
+<div class="flex items-center justify-between text-secondary mb-1">
+<span class="text-label-md font-label-md font-semibold text-on-surface">Dhaka North</span>
+<span class="text-[11px] font-bold px-1.5 py-0.5 rounded bg-surface-container text-primary">Dense High-Rise</span>
+</div>
+<div class="text-headline-lg font-headline-lg font-bold text-on-surface">86 <span class="text-body-md font-body-md font-normal text-secondary">buildings</span></div>
+<div class="w-full bg-surface-container rounded-full h-1.5 mt-2.5 overflow-hidden">
+<div class="bg-primary h-1.5 rounded-full" style="width: 82%"></div>
+</div>
+<div class="flex justify-between items-center text-[11px] text-secondary mt-1.5">
+<span>Gulshan, Banani, Uttara</span>
+<span class="font-semibold text-on-surface">98.2% Health</span>
+</div>
+</div>
+<!-- Regional Stat Box: Dhaka South -->
+<div class="p-3.5 rounded-lg bg-surface-container-low border border-outline-variant/50 hover:border-primary/50 transition-all">
+<div class="flex items-center justify-between text-secondary mb-1">
+<span class="text-label-md font-label-md font-semibold text-on-surface">Dhaka South</span>
+<span class="text-[11px] font-bold px-1.5 py-0.5 rounded bg-surface-container text-primary">Commercial/Mixed</span>
+</div>
+<div class="text-headline-lg font-headline-lg font-bold text-on-surface">42 <span class="text-body-md font-body-md font-normal text-secondary">buildings</span></div>
+<div class="w-full bg-surface-container rounded-full h-1.5 mt-2.5 overflow-hidden">
+<div class="bg-tertiary h-1.5 rounded-full" style="width: 68%"></div>
+</div>
+<div class="flex justify-between items-center text-[11px] text-secondary mt-1.5">
+<span>Dhanmondi, Motijheel</span>
+<span class="font-semibold text-on-surface">95.4% Health</span>
+</div>
+</div>
+<!-- Regional Stat Box: Chittagong Metro -->
+<div class="p-3.5 rounded-lg bg-surface-container-low border border-outline-variant/50 hover:border-primary/50 transition-all">
+<div class="flex items-center justify-between text-secondary mb-1">
+<span class="text-label-md font-label-md font-semibold text-on-surface">Chittagong</span>
+<span class="text-[11px] font-bold px-1.5 py-0.5 rounded bg-surface-container text-primary">Port City Hub</span>
+</div>
+<div class="text-headline-lg font-headline-lg font-bold text-on-surface">20 <span class="text-body-md font-body-md font-normal text-secondary">buildings</span></div>
+<div class="w-full bg-surface-container rounded-full h-1.5 mt-2.5 overflow-hidden">
+<div class="bg-secondary h-1.5 rounded-full" style="width: 50%"></div>
+</div>
+<div class="flex justify-between items-center text-[11px] text-secondary mt-1.5">
+<span>GEC, Nasirabad, Khulshi</span>
+<span class="font-semibold text-on-surface">100% Health</span>
+</div>
+</div>
+</div>
+<!-- Simulated Regional Geographic Satellite Mesh Canvas -->
+<div class="mt-space-md p-space-md bg-surface border border-outline-variant/60 rounded-xl relative overflow-hidden">
+<div class="flex items-center justify-between mb-3 z-10 relative">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-xl" data-icon="map">map</span>
+<span class="text-label-lg font-label-lg text-on-surface font-semibold">Live Bangladesh Cluster Node Topology</span>
+</div>
+<span class="text-label-sm font-label-sm text-secondary bg-surface-container-lowest px-2 py-0.5 rounded border border-outline-variant/50">
+                  Dual-Band GPS Sync
+                </span>
+</div>
+<!-- Map Visual Placeholder with Data Location -->
+<div class="h-44 w-full rounded-lg bg-surface-container relative flex items-center justify-center overflow-hidden border border-outline-variant/40" data-location="Dhaka" style="">
+<!-- Decorative Geo SVG Grid Nodes -->
+<svg class="absolute inset-0 w-full h-full opacity-30 stroke-primary/30" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<pattern height="32" id="grid-pattern" patternunits="userSpaceOnUse" width="32">
+<path d="M 32 0 L 0 0 0 32" fill="none" stroke="currentColor" stroke-width="0.75"></path>
+</pattern>
+</defs>
+<rect fill="url(#grid-pattern)" height="100%" width="100%"></rect>
+</svg>
+<!-- Simulated Node Clusters -->
+<div class="absolute top-1/4 left-1/3 flex flex-col items-center">
+<span class="relative flex h-3 w-3">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+<span class="relative inline-flex rounded-full h-3 w-3 bg-primary"></span>
+</span>
+<span class="mt-1 px-1.5 py-0.5 bg-surface-container-lowest/90 backdrop-blur-xs text-[10px] font-bold text-on-surface rounded shadow-xs border border-outline-variant/40">Dhaka North (86)</span>
+</div>
+<div class="absolute top-1/2 left-2/5 flex flex-col items-center">
+<span class="relative flex h-2.5 w-2.5">
+<span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-tertiary"></span>
+</span>
+<span class="mt-1 px-1.5 py-0.5 bg-surface-container-lowest/90 backdrop-blur-xs text-[10px] font-bold text-on-surface rounded shadow-xs border border-outline-variant/40">Dhaka South (42)</span>
+</div>
+<div class="absolute bottom-1/4 right-1/4 flex flex-col items-center">
+<span class="relative flex h-2.5 w-2.5">
+<span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-primary"></span>
+</span>
+<span class="mt-1 px-1.5 py-0.5 bg-surface-container-lowest/90 backdrop-blur-xs text-[10px] font-bold text-on-surface rounded shadow-xs border border-outline-variant/40">Chittagong (20)</span>
+</div>
+<div class="text-center z-10 bg-surface-container-lowest/80 backdrop-blur-sm px-4 py-2 rounded-lg border border-outline-variant/40 shadow-xs">
+<p class="text-label-md font-label-md text-on-surface font-semibold">148 Connected Society Smart Consoles</p>
+<p class="text-body-sm font-body-sm text-secondary">Zero packet drops across DESCO &amp; DPDC IoT energy meters</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Module 2: Live Real-Time Transactions & Gateway Throughput -->
+<div class="bg-surface-container-lowest p-space-lg rounded-xl border border-outline-variant/70 shadow-sm">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between pb-space-md border-b border-outline-variant/40 gap-2">
+<div>
+<h2 class="text-headline-md font-headline-md font-bold text-on-surface">Live Real-Time Transactions &amp; Gateway Throughput</h2>
+<p class="text-body-sm font-body-sm text-secondary">Rent escrow clearing, service maintenance charges, and utility automated settlements</p>
+</div>
+<div class="flex items-center gap-2">
+<span class="px-2 py-1 rounded bg-surface-container text-label-sm font-semibold text-primary">
+                  1,840 txns/hr
+                </span>
+<span class="text-secondary text-xs">• 99.98% Gateway Success</span>
+</div>
+</div>
+<!-- Transaction Flow Channel Pills -->
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-3 my-4">
+<div class="p-3 bg-surface rounded-lg border border-outline-variant/50 flex items-center justify-between">
+<div class="flex items-center gap-2.5">
+<span class="w-3 h-3 rounded-full bg-[#E2136E]"></span>
+<div>
+<div class="text-label-md font-label-md font-bold text-on-surface">bKash MFS API</div>
+<div class="text-[11px] text-secondary">Direct Merchant Escrow</div>
+</div>
+</div>
+<span class="text-label-md font-semibold text-tertiary">48.2%</span>
+</div>
+<div class="p-3 bg-surface rounded-lg border border-outline-variant/50 flex items-center justify-between">
+<div class="flex items-center gap-2.5">
+<span class="w-3 h-3 rounded-full bg-primary"></span>
+<div>
+<div class="text-label-md font-label-md font-bold text-on-surface">NPSB / BEFTN Rail</div>
+<div class="text-[11px] text-secondary">Corporate Banking Clearing</div>
+</div>
+</div>
+<span class="text-label-md font-semibold text-tertiary">36.5%</span>
+</div>
+<div class="p-3 bg-surface rounded-lg border border-outline-variant/50 flex items-center justify-between">
+<div class="flex items-center gap-2.5">
+<span class="w-3 h-3 rounded-full bg-[#F7931E]"></span>
+<div>
+<div class="text-label-md font-label-md font-bold text-on-surface">Nagad Business</div>
+<div class="text-[11px] text-secondary">Postal Fast-Settlement</div>
+</div>
+</div>
+<span class="text-label-md font-semibold text-tertiary">15.3%</span>
+</div>
+</div>
+<!-- Recent Ledger Feed with Live Settlement Badges -->
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="border-b border-outline-variant text-[11px] font-semibold text-secondary uppercase tracking-wider bg-surface/50">
+<th class="py-2.5 px-3">Transaction Reference</th>
+<th class="py-2.5 px-3">Building Society</th>
+<th class="py-2.5 px-3">Gateway Rail</th>
+<th class="py-2.5 px-3">Amount (BDT)</th>
+<th class="py-2.5 px-3 text-right">Settlement State</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/40 text-body-sm font-body-sm">
+<!-- Row 1 -->
+<tr class="hover:bg-surface-container-low/60 transition-colors">
+<td class="py-3 px-3 font-mono text-[12px] font-semibold text-primary">TXN-DHK-99824</td>
+<td class="py-3 px-3">
+<div class="font-semibold text-on-surface">Lakeview Heights (Apt 8B)</div>
+<div class="text-[11px] text-secondary">Gulshan-2 • Resident: K. Rahman</div>
+</td>
+<td class="py-3 px-3">
+<span class="inline-flex items-center gap-1.5 text-xs text-on-surface">
+<span class="w-2 h-2 rounded-full bg-[#E2136E]"></span> bKash Direct
+                      </span>
+</td>
+<td class="py-3 px-3 font-semibold text-on-surface">৳ 45,000</td>
+<td class="py-3 px-3 text-right">
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-label-sm font-semibold bg-[#ECFDF5] text-[#065F46]">
+<span class="w-1.5 h-1.5 rounded-full bg-[#059669]"></span>
+                        Verified Escrow
+                      </span>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-surface-container-low/60 transition-colors">
+<td class="py-3 px-3 font-mono text-[12px] font-semibold text-primary">TXN-DHK-99823</td>
+<td class="py-3 px-3">
+<div class="font-semibold text-on-surface">Green Concord Tower</div>
+<div class="text-[11px] text-secondary">Banani Block C • Commercial Maintenance</div>
+</td>
+<td class="py-3 px-3">
+<span class="inline-flex items-center gap-1.5 text-xs text-on-surface">
+<span class="w-2 h-2 rounded-full bg-primary"></span> Trust Bank NPSB
+                      </span>
+</td>
+<td class="py-3 px-3 font-semibold text-on-surface">৳ 1,85,000</td>
+<td class="py-3 px-3 text-right">
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-label-sm font-semibold bg-[#ECFDF5] text-[#065F46]">
+<span class="w-1.5 h-1.5 rounded-full bg-[#059669]"></span>
+                        Settled
+                      </span>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-surface-container-low/60 transition-colors">
+<td class="py-3 px-3 font-mono text-[12px] font-semibold text-primary">TXN-DHK-99822</td>
+<td class="py-3 px-3">
+<div class="font-semibold text-on-surface">Rangs Platinum Residency</div>
+<div class="text-[11px] text-secondary">Dhanmondi 8A • Generator Overhaul Surcharge</div>
+</td>
+<td class="py-3 px-3">
+<span class="inline-flex items-center gap-1.5 text-xs text-on-surface">
+<span class="w-2 h-2 rounded-full bg-[#F7931E]"></span> Nagad Pay
+                      </span>
+</td>
+<td class="py-3 px-3 font-semibold text-on-surface">৳ 18,200</td>
+<td class="py-3 px-3 text-right">
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-label-sm font-semibold bg-[#FFFBEB] text-[#92400E]">
+<span class="w-1.5 h-1.5 rounded-full bg-[#D97706]"></span>
+                        Clearing (BEFTN)
+                      </span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<!-- Right Column: Alerts, SLA Monitors & Cluster Summaries (4 Columns) -->
+<div class="lg:col-span-4 space-y-space-lg">
+<!-- Module 3: Critical Platform Alerts & SLA Monitors -->
+<div class="bg-surface-container-lowest p-space-lg rounded-xl border border-outline-variant/70 shadow-sm">
+<div class="flex items-center justify-between pb-space-sm border-b border-outline-variant/40">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-error text-xl" data-icon="notification_important">notification_important</span>
+<h2 class="text-headline-md font-headline-md font-bold text-on-surface">Platform Alerts &amp; SLA</h2>
+</div>
+<span class="text-label-sm font-label-sm font-semibold text-error bg-error-container/60 px-2 py-0.5 rounded-full">
+                Active 3
+              </span>
+</div>
+<!-- Priority Alert Cards List -->
+<div class="mt-space-md space-y-3">
+<!-- Priority Alert 1: Trust Bank Webhook Latency -->
+<div class="p-3.5 rounded-lg border border-[#FDE68A] bg-[#FFFBEB] flex flex-col gap-1.5">
+<div class="flex items-center justify-between">
+<span class="text-[11px] font-bold uppercase tracking-wider text-[#92400E] flex items-center gap-1">
+<span class="material-symbols-outlined text-sm" data-icon="warning">warning</span>
+                    Latency Elevation
+                  </span>
+<span class="text-[10px] text-secondary font-mono">12m ago</span>
+</div>
+<div class="text-label-md font-label-md font-bold text-on-surface">Trust Bank API Webhook latency elevated (420ms)</div>
+<p class="text-body-sm font-body-sm text-secondary">Auto-retry fallback to NPSB batch reconciliation channel triggered automatically.</p>
+<div class="pt-1 flex items-center gap-2">
+<button class="text-label-sm font-label-sm font-semibold text-primary hover:underline">Route traffic</button>
+<span class="text-secondary">•</span>
+<button class="text-label-sm font-label-sm text-secondary hover:underline">Acknowledge</button>
+</div>
+</div>
+<!-- Priority Alert 2: Society License Renewals -->
+<div class="p-3.5 rounded-lg border border-outline-variant/80 bg-surface-container-low flex flex-col gap-1.5">
+<div class="flex items-center justify-between">
+<span class="text-[11px] font-bold uppercase tracking-wider text-secondary flex items-center gap-1">
+<span class="material-symbols-outlined text-sm text-primary" data-icon="schedule">schedule</span>
+                    Subscription Cycle
+                  </span>
+<span class="text-[10px] text-secondary font-mono">2h ago</span>
+</div>
+<div class="text-label-md font-label-md font-bold text-on-surface">2 Societies nearing license renewal in 7 days</div>
+<p class="text-body-sm font-body-sm text-secondary">Gulshan South Avenue Association &amp; Green Delta Society pending invoice release.</p>
+<div class="pt-1">
+<button class="text-label-sm font-label-sm font-semibold text-primary hover:underline">Dispatch Renewal Notice</button>
+</div>
+</div>
+<!-- Priority Alert 3: DMP Police Verification Gateway -->
+<div class="p-3.5 rounded-lg border border-[#BBF7D0] bg-[#ECFDF5] flex flex-col gap-1.5">
+<div class="flex items-center justify-between">
+<span class="text-[11px] font-bold uppercase tracking-wider text-[#065F46] flex items-center gap-1">
+<span class="material-symbols-outlined text-sm text-[#059669]" data-icon="check_circle">check_circle</span>
+                    Operational Guard
+                  </span>
+<span class="text-[10px] text-[#065F46] font-mono">Live</span>
+</div>
+<div class="text-label-md font-label-md font-bold text-on-surface">DMP Police Verification service gateway 100% operational</div>
+<p class="text-body-sm font-body-sm text-secondary">Dhaka Metropolitan Police citizen tenancy registry sync uptime: 100% (Last checked 40s ago).</p>
+</div>
+</div>
+</div>
+<!-- Module 4: Cluster Performance Summary Table -->
+<div class="bg-surface-container-lowest p-space-lg rounded-xl border border-outline-variant/70 shadow-sm">
+<div class="flex items-center justify-between pb-space-sm border-b border-outline-variant/40">
+<h2 class="text-headline-md font-headline-md font-bold text-on-surface">Cluster Performance Summary</h2>
+<a class="text-label-sm font-label-sm text-primary font-semibold hover:underline" href="#">View All</a>
+</div>
+<div class="mt-space-md">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="border-b border-outline-variant text-[11px] font-semibold text-secondary uppercase tracking-wider">
+<th class="pb-2">Cluster</th>
+<th class="pb-2 text-center">Towers</th>
+<th class="pb-2 text-center">Units</th>
+<th class="pb-2 text-right">Collection</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/40 text-body-sm font-body-sm">
+<!-- Banani Cluster -->
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="py-2.5 font-bold text-on-surface flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+                        Banani
+                      </td>
+<td class="py-2.5 text-center text-secondary">34</td>
+<td class="py-2.5 text-center text-secondary">1,480</td>
+<td class="py-2.5 text-right font-semibold text-[#065F46]">98.4%</td>
+</tr>
+<!-- Gulshan Cluster -->
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="py-2.5 font-bold text-on-surface flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-tertiary"></span>
+                        Gulshan
+                      </td>
+<td class="py-2.5 text-center text-secondary">52</td>
+<td class="py-2.5 text-center text-secondary">2,340</td>
+<td class="py-2.5 text-right font-semibold text-[#065F46]">99.1%</td>
+</tr>
+<!-- Dhanmondi Cluster -->
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="py-2.5 font-bold text-on-surface flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-[#D97706]"></span>
+                        Dhanmondi
+                      </td>
+<td class="py-2.5 text-center text-secondary">28</td>
+<td class="py-2.5 text-center text-secondary">1,120</td>
+<td class="py-2.5 text-right font-semibold text-[#92400E]">94.6%</td>
+</tr>
+<!-- Uttara Cluster -->
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="py-2.5 font-bold text-on-surface flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+                        Uttara
+                      </td>
+<td class="py-2.5 text-center text-secondary">20</td>
+<td class="py-2.5 text-center text-secondary">920</td>
+<td class="py-2.5 text-right font-semibold text-[#065F46]">97.8%</td>
+</tr>
+<!-- Chittagong Cluster -->
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="py-2.5 font-bold text-on-surface flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+                        Chittagong
+                      </td>
+<td class="py-2.5 text-center text-secondary">14</td>
+<td class="py-2.5 text-center text-secondary">560</td>
+<td class="py-2.5 text-right font-semibold text-[#065F46]">96.2%</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Quick Security Verification Seal -->
+<div class="mt-4 p-3 bg-surface-container-low rounded-lg border border-outline-variant/60 flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-base" data-icon="verified_user">verified_user</span>
+<span class="text-[11px] font-semibold text-on-surface">Escrow Multi-Sig Integrity: 100%</span>
+</div>
+<span class="text-[10px] font-mono text-secondary">Checked 1m ago</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+</div>
+</body></html>

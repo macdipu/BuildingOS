@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Tenant Directory - Green Valley Heights</title>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "inverse-on-surface": "#eaf1ff",
+            "on-tertiary": "#ffffff",
+            "on-primary-fixed": "#00174b",
+            "tertiary": "#006243",
+            "inverse-primary": "#b4c5ff",
+            "tertiary-fixed-dim": "#68dba9",
+            "on-surface": "#0b1c30",
+            "surface-tint": "#0053db",
+            "surface-container-highest": "#d3e4fe",
+            "on-primary-container": "#eeefff",
+            "inverse-surface": "#213145",
+            "secondary-fixed": "#dae2fd",
+            "primary-fixed-dim": "#b4c5ff",
+            "on-error-container": "#93000a",
+            "on-primary-fixed-variant": "#003ea8",
+            "on-tertiary-fixed": "#002114",
+            "outline-variant": "#c3c6d7",
+            "background": "#f8f9ff",
+            "on-primary": "#ffffff",
+            "secondary-container": "#dae2fd",
+            "on-secondary-container": "#5c647a",
+            "surface-container": "#e5eeff",
+            "surface": "#f8f9ff",
+            "surface-container-low": "#eff4ff",
+            "on-background": "#0b1c30",
+            "surface-container-high": "#dce9ff",
+            "surface-variant": "#d3e4fe",
+            "on-secondary-fixed": "#131b2e",
+            "on-secondary": "#ffffff",
+            "primary-container": "#2563eb",
+            "secondary-fixed-dim": "#bec6e0",
+            "on-tertiary-container": "#bdffdc",
+            "tertiary-fixed": "#85f8c4",
+            "on-tertiary-fixed-variant": "#005137",
+            "surface-bright": "#f8f9ff",
+            "error-container": "#ffdad6",
+            "secondary": "#565e74",
+            "error": "#ba1a1a",
+            "outline": "#737686",
+            "surface-dim": "#cbdbf5",
+            "on-surface-variant": "#434655",
+            "surface-container-lowest": "#ffffff",
+            "on-error": "#ffffff",
+            "primary": "#004ac6",
+            "tertiary-container": "#007d57",
+            "primary-fixed": "#dbe1ff",
+            "on-secondary-fixed-variant": "#3f465c"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-xs": "0.5rem",
+            "space-2xl": "3rem",
+            "space-lg": "1.5rem",
+            "margin-mobile": "1rem",
+            "space-sm": "0.75rem",
+            "space-2xs": "0.25rem",
+            "gutter-mobile": "1rem",
+            "space-xl": "2rem",
+            "gutter": "1.5rem",
+            "space-md": "1rem",
+            "margin": "2rem"
+          },
+          "fontFamily": {
+            "body-md": ["Inter"],
+            "display-lg-mobile": ["Plus Jakarta Sans"],
+            "display-lg": ["Plus Jakarta Sans"],
+            "headline-xl": ["Plus Jakarta Sans"],
+            "headline-md": ["Plus Jakarta Sans"],
+            "body-lg": ["Inter"],
+            "label-sm": ["Inter"],
+            "currency-md": ["Inter"],
+            "currency-lg": ["Plus Jakarta Sans"],
+            "body-sm": ["Inter"],
+            "label-lg": ["Inter"],
+            "label-md": ["Inter"],
+            "headline-lg": ["Plus Jakarta Sans"]
+          },
+          "fontSize": {
+            "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+            "display-lg-mobile": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+            "display-lg": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "headline-xl": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.015em", "fontWeight": "600" }],
+            "headline-md": ["18px", { "lineHeight": "24px", "letterSpacing": "-0.005em", "fontWeight": "600" }],
+            "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "label-sm": ["11px", { "lineHeight": "14px", "letterSpacing": "0.02em", "fontWeight": "600" }],
+            "currency-md": ["15px", { "lineHeight": "20px", "fontWeight": "600" }],
+            "currency-lg": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+            "body-sm": ["12px", { "lineHeight": "16px", "fontWeight": "400" }],
+            "label-lg": ["14px", { "lineHeight": "20px", "fontWeight": "600" }],
+            "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "600" }],
+            "headline-lg": ["22px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600" }]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1;
+    }
+    /* Hide scrollbar for clean horizontal swipe tabs */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+</head>
+<body class="bg-background text-on-surface antialiased min-h-screen pb-24 selection:bg-surface-container-highest">
+<!-- TOP APP BAR (Shared Component JSON Source) -->
+<header class="fixed top-0 left-0 w-full z-40 flex justify-between items-center h-16 px-space-md bg-surface-container-lowest dark:bg-inverse-surface shadow-sm">
+<div class="flex items-center gap-space-xs">
+<div class="w-10 h-10 rounded-xl bg-surface-container-low flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-primary text-[24px]">apartment</span>
+</div>
+<div>
+<h1 class="text-headline-md font-headline-md font-bold text-primary dark:text-inverse-primary leading-tight">Green Valley Heights</h1>
+<p class="text-body-sm font-body-sm text-secondary flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px] text-outline">location_on</span>
+          Banani, Dhaka
+        </p>
+</div>
+</div>
+<div class="flex items-center gap-space-2xs">
+<button aria-label="Notifications" class="p-2 rounded-full hover:bg-surface-container active:scale-95 transition-all text-secondary">
+<span class="material-symbols-outlined text-[22px]">notifications</span>
+</button>
+<div class="w-8 h-8 rounded-full ring-2 ring-surface-container-high overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Corporate headshot of an experienced South Asian commercial property manager in professional formal attire against a blurred sleek architectural building background with clean high-key lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBgHU9KtYTQQZSKAsgnoDvlWrVAOhdny3fkaRcgQD5w0NYfuBXy-8c_c0kjIhwdhWqjo-BhowN0KunNvm3HM0ch0R7tAe-PSX06uULEe1UGvEIIXkrBSgFV7_qPJyJOacZv1659cdOcV4KJzL85j3E27htczxvPrQJo8W_MjePNMn8ahSbNFm-Xowsda8K0Mdx3cRSx6fpOm4m_MlnBwe3mbckNKAL46HSRAlWzRuGqrE5uPZnkVO3s"/>
+</div>
+</div>
+</header>
+<!-- MAIN VIEWPORT CONTENT -->
+<main class="pt-20 px-space-md max-w-lg mx-auto flex flex-col gap-space-md">
+<!-- KPI STATS & OCCUPANCY ASYMMETRIC BANNER -->
+<section class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm border border-outline-variant/30 relative overflow-hidden">
+<div class="absolute -right-6 -bottom-6 w-28 h-28 bg-surface-container rounded-full opacity-60 pointer-events-none"></div>
+<div class="flex items-center justify-between gap-space-xs relative z-10">
+<div class="flex items-center gap-2.5">
+<div class="p-2 bg-tertiary-container/10 rounded-lg text-tertiary">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">pie_chart</span>
+</div>
+<div>
+<span class="text-label-sm font-label-sm text-secondary uppercase tracking-wider block">Occupancy Rate</span>
+<div class="flex items-baseline gap-1.5 mt-0.5">
+<span class="text-headline-md font-headline-md font-bold text-on-surface">94.4%</span>
+<span class="text-body-sm font-body-sm text-secondary">(34/36 Flats)</span>
+</div>
+</div>
+</div>
+<div class="text-right">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-50 text-tertiary text-label-sm font-label-sm border border-emerald-200">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary animate-pulse"></span>
+            2 Vacant
+          </span>
+<p class="text-body-sm font-body-sm text-secondary mt-1">DPDC / WASA Active</p>
+</div>
+</div>
+<!-- Mini Progress Track -->
+<div class="w-full bg-surface-container rounded-full h-1.5 mt-3 overflow-hidden">
+<div class="bg-tertiary h-1.5 rounded-full" style="width: 94.4%"></div>
+</div>
+</section>
+<!-- SEARCH & ACTION FILTER CLUSTER -->
+<section class="flex items-center gap-space-xs">
+<div class="relative flex-1">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-outline">
+<span class="material-symbols-outlined text-[20px]">search</span>
+</div>
+<input class="w-full pl-9 pr-3 py-2 text-body-md font-body-md rounded-lg bg-surface-container-lowest border border-outline-variant/60 focus:border-primary focus:ring-2 focus:ring-primary/20 placeholder:text-outline/70 transition-all outline-none" placeholder="Search tenant name, flat, phone..." type="text"/>
+</div>
+<button aria-label="Filter" class="h-10 w-10 flex-shrink-0 flex items-center justify-center rounded-lg bg-surface-container-lowest border border-outline-variant/60 text-secondary hover:bg-surface-container hover:text-primary active:scale-95 transition-all shadow-sm">
+<span class="material-symbols-outlined text-[22px]">tune</span>
+</button>
+</section>
+<!-- HORIZONTAL TAB / FILTER CHIPS -->
+<nav aria-label="Tenant Filters" class="flex items-center gap-2 overflow-x-auto no-scrollbar py-0.5">
+<!-- Active Chip -->
+<button class="flex-shrink-0 px-3 py-1.5 rounded-full bg-primary text-on-primary text-label-md font-label-md shadow-sm transition-transform active:scale-95 flex items-center gap-1.5">
+<span>All</span>
+<span class="bg-white/20 text-on-primary rounded-full px-1.5 py-0.2 text-[10px] font-bold">28</span>
+</button>
+<!-- Standard Chip -->
+<button class="flex-shrink-0 px-3 py-1.5 rounded-full bg-surface-container-lowest border border-outline-variant/50 text-secondary hover:bg-surface-container text-label-md font-label-md transition-all active:scale-95 flex items-center gap-1.5">
+<span>Active Leases</span>
+<span class="bg-surface-container text-on-surface-variant rounded-full px-1.5 py-0.2 text-[10px] font-semibold">25</span>
+</button>
+<!-- Standard Chip -->
+<button class="flex-shrink-0 px-3 py-1.5 rounded-full bg-surface-container-lowest border border-outline-variant/50 text-secondary hover:bg-surface-container text-label-md font-label-md transition-all active:scale-95 flex items-center gap-1.5">
+<span>Notice Period</span>
+<span class="bg-amber-100 text-amber-900 rounded-full px-1.5 py-0.2 text-[10px] font-semibold">2</span>
+</button>
+<!-- Warning Chip -->
+<button class="flex-shrink-0 px-3 py-1.5 rounded-full bg-surface-container-lowest border border-error/30 text-error hover:bg-error-container/20 text-label-md font-label-md transition-all active:scale-95 flex items-center gap-1.5">
+<span>Overdue Dues</span>
+<span class="bg-error text-on-error rounded-full px-1.5 py-0.2 text-[10px] font-bold">3</span>
+</button>
+</nav>
+<!-- SECTION TITLE WITH QUICK STAT -->
+<div class="flex items-center justify-between px-0.5 pt-1">
+<h2 class="text-label-lg font-label-lg text-secondary">Assigned Units &amp; Occupants</h2>
+<span class="text-label-sm font-label-sm text-outline">Dhaka North Corporation (DNCC)</span>
+</div>
+<!-- TENANT CARD 1: Engr. Rafiqul Islam -->
+<article class="bg-surface-container-lowest rounded-xl p-space-md border border-outline-variant/40 shadow-sm flex flex-col gap-3 relative transition-all hover:border-outline-variant">
+<!-- Card Header: Flat, Role, Menu -->
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-3">
+<div class="relative w-12 h-12 rounded-xl overflow-hidden bg-surface-container flex-shrink-0 border border-outline-variant/30">
+<img class="w-full h-full object-cover" data-alt="Professional studio portrait of an elderly Bangladeshi male civil engineer with neat silver hair, wearing clean formal glasses and light blue executive shirt in natural corporate daylight setting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBEc_O2U5g-kqpkHTDJ9oVVrjbrEyw_3sBsuxyyJ4DCmkiJ1F_W0s4Z5vvlSxrbetzn8dBcLNpq87J9yiZqOHdgfmk2C0VlGGcF8znjo6rz7diviYo3kRHNKuPS7tHaZikS3OivXxhQZIE6Jvjk_KokLkxMyCvxLo3kqbYH5n6USgHg0xJ2TMa791BoMTje2Mz0k0BuFYs7KD56Mu5cmXqOGEe408he4j83cmWM18xidmekoTEIV68n"/>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<h3 class="text-headline-md font-headline-md text-on-surface">Engr. Rafiqul Islam</h3>
+<span class="px-2 py-0.5 rounded-full bg-blue-50 text-primary text-label-sm font-label-sm border border-blue-200">Flat 4A</span>
+</div>
+<p class="text-body-sm font-body-sm text-secondary flex items-center gap-1 mt-0.5">
+<span>3 BHK, 4th Floor</span>
+<span class="inline-block w-1 h-1 rounded-full bg-outline"></span>
+<span class="font-currency-md">+880 1711-987654</span>
+</p>
+</div>
+</div>
+<button aria-label="Options" class="text-outline hover:text-on-surface p-1 rounded-full transition-colors">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</div>
+<!-- Financial & Lease Metadata Bento Row -->
+<div class="grid grid-cols-2 gap-2 bg-surface-container-low/50 rounded-lg p-2.5 border border-outline-variant/20">
+<div>
+<span class="text-label-sm font-label-sm text-secondary block">Monthly Rent</span>
+<span class="text-currency-md font-currency-md text-on-surface font-bold">৳ 55,000</span>
+</div>
+<div class="text-right">
+<span class="text-label-sm font-label-sm text-secondary block">Lease Status</span>
+<span class="text-body-sm font-body-sm text-tertiary font-semibold flex items-center justify-end gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span>
+            Active (31 May 2025)
+          </span>
+</div>
+</div>
+<!-- Footer: Rent Status Badge & Quick Actions -->
+<div class="flex items-center justify-between pt-1 border-t border-outline-variant/20">
+<!-- Paid Badge -->
+<div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-50 text-tertiary border border-emerald-200 text-label-sm font-label-sm">
+<span class="w-2 h-2 rounded-full bg-tertiary"></span>
+          Paid (March)
+        </div>
+<!-- Communication Action Buttons -->
+<div class="flex items-center gap-2">
+<a class="p-2 rounded-lg bg-surface-container text-on-surface-variant hover:bg-surface-container-high transition-transform active:scale-95 flex items-center justify-center" href="tel:+8801711987654" title="Call Rafiqul">
+<span class="material-symbols-outlined text-[18px]">call</span>
+</a>
+<a class="p-2 rounded-lg bg-surface-container text-on-surface-variant hover:bg-surface-container-high transition-transform active:scale-95 flex items-center justify-center" href="sms:+8801711987654" title="Send SMS">
+<span class="material-symbols-outlined text-[18px]">chat</span>
+</a>
+<button class="px-3 py-1.5 rounded-lg bg-surface-container-low text-primary text-label-md font-label-md hover:bg-surface-container transition-all active:scale-95">
+            Ledger
+          </button>
+</div>
+</div>
+</article>
+<!-- TENANT CARD 2: Dr. Nadia Rahman -->
+<article class="bg-surface-container-lowest rounded-xl p-space-md border border-outline-variant/40 shadow-sm flex flex-col gap-3 relative transition-all hover:border-outline-variant">
+<!-- Card Header -->
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-3">
+<div class="relative w-12 h-12 rounded-xl overflow-hidden bg-surface-container flex-shrink-0 border border-outline-variant/30">
+<img class="w-full h-full object-cover" data-alt="Contemporary crisp portrait of a confident female South Asian medical doctor in sophisticated professional medical scrub coat against an organized clean light-mode clinic interior setting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCw2c6IATFRIZV1yF95e1uSh_Sw5iTXiP7iFOaAbsqPA12z2XV-jpfNtcExMjxOQBZ5AtZVipj262CB4sNnP2mh82D9O1853n2JhJ98oQyDN83MVmIi-CZpr75lQgfSMUb-8c_-h0SDIeAT37t9aleC5UWLVJ2RmR-iQV7e7UP7gob_VYDQyy9cCAm2uM-W6x3IsOzBrCXgS-QJVuEgtQYNWX_IlCBSzQxhnqb4sM03Z0xZ_62N_jyu"/>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<h3 class="text-headline-md font-headline-md text-on-surface">Dr. Nadia Rahman</h3>
+<span class="px-2 py-0.5 rounded-full bg-blue-50 text-primary text-label-sm font-label-sm border border-blue-200">Flat 4B</span>
+</div>
+<p class="text-body-sm font-body-sm text-secondary flex items-center gap-1 mt-0.5">
+<span>3 BHK, 4th Floor</span>
+<span class="inline-block w-1 h-1 rounded-full bg-outline"></span>
+<span class="font-currency-md">+880 1819-234567</span>
+</p>
+</div>
+</div>
+<button aria-label="Options" class="text-outline hover:text-on-surface p-1 rounded-full transition-colors">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</div>
+<!-- Metadata Bento Row -->
+<div class="grid grid-cols-2 gap-2 bg-surface-container-low/50 rounded-lg p-2.5 border border-outline-variant/20">
+<div>
+<span class="text-label-sm font-label-sm text-secondary block">Monthly Rent</span>
+<span class="text-currency-md font-currency-md text-on-surface font-bold">৳ 55,000</span>
+</div>
+<div class="text-right">
+<span class="text-label-sm font-label-sm text-secondary block">Lease Status</span>
+<span class="text-body-sm font-body-sm text-tertiary font-semibold flex items-center justify-end gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span>
+            Active (15 Aug 2025)
+          </span>
+</div>
+</div>
+<!-- Footer: Rent Status Badge & Quick Actions -->
+<div class="flex items-center justify-between pt-1 border-t border-outline-variant/20">
+<div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-50 text-tertiary border border-emerald-200 text-label-sm font-label-sm">
+<span class="w-2 h-2 rounded-full bg-tertiary"></span>
+          Paid (March)
+        </div>
+<div class="flex items-center gap-2">
+<a class="p-2 rounded-lg bg-surface-container text-on-surface-variant hover:bg-surface-container-high transition-transform active:scale-95 flex items-center justify-center" href="tel:+8801819234567">
+<span class="material-symbols-outlined text-[18px]">call</span>
+</a>
+<a class="p-2 rounded-lg bg-surface-container text-on-surface-variant hover:bg-surface-container-high transition-transform active:scale-95 flex items-center justify-center" href="sms:+8801819234567">
+<span class="material-symbols-outlined text-[18px]">chat</span>
+</a>
+<button class="px-3 py-1.5 rounded-lg bg-surface-container-low text-primary text-label-md font-label-md hover:bg-surface-container transition-all active:scale-95">
+            Ledger
+          </button>
+</div>
+</div>
+</article>
+<!-- TENANT CARD 3: Kabir Hossain (Verification Pending bKash) -->
+<article class="bg-surface-container-lowest rounded-xl p-space-md border border-outline-variant/40 shadow-sm flex flex-col gap-3 relative transition-all hover:border-amber-300">
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-3">
+<div class="relative w-12 h-12 rounded-xl overflow-hidden bg-surface-container flex-shrink-0 border border-outline-variant/30">
+<img class="w-full h-full object-cover" data-alt="Portrait of a mid-thirties South Asian business professional male with trimmed beard and modern casual corporate collar shirt against a bright sunlit modern office window." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCcpQCPiftbTE5p4qieC2CKPHcAlIK2K6VKeBqdod58nQLLRe72SM_1nlu0b0QCQm7eBMKP7N-LAGBJPc3-Ooyh0CrMzsuWWz6SU0iNpYupuEg9H_z0hoW2lgMgQIcTEYbP6HeNRi-REXFpc140fa1vjfwG_qWozyqd_FrCnfh-DGjkV1y0jR4LMcD92G5truhlEaw2gTcZGQtVS9MLkDOj_gQ1yGn9AaYuaxaFE5id8xP0s_vnixId"/>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<h3 class="text-headline-md font-headline-md text-on-surface">Kabir Hossain</h3>
+<span class="px-2 py-0.5 rounded-full bg-blue-50 text-primary text-label-sm font-label-sm border border-blue-200">Flat 5A</span>
+</div>
+<p class="text-body-sm font-body-sm text-secondary flex items-center gap-1 mt-0.5">
+<span>2 BHK, 5th Floor</span>
+<span class="inline-block w-1 h-1 rounded-full bg-outline"></span>
+<span class="font-currency-md">+880 1912-334455</span>
+</p>
+</div>
+</div>
+<button aria-label="Options" class="text-outline hover:text-on-surface p-1 rounded-full transition-colors">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</div>
+<!-- Metadata Bento Row -->
+<div class="grid grid-cols-2 gap-2 bg-surface-container-low/50 rounded-lg p-2.5 border border-outline-variant/20">
+<div>
+<span class="text-label-sm font-label-sm text-secondary block">Monthly Rent</span>
+<span class="text-currency-md font-currency-md text-on-surface font-bold">৳ 45,000</span>
+</div>
+<div class="text-right">
+<span class="text-label-sm font-label-sm text-secondary block">Lease Status</span>
+<span class="text-body-sm font-body-sm text-tertiary font-semibold flex items-center justify-end gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span>
+            Active (30 Nov 2025)
+          </span>
+</div>
+</div>
+<!-- Footer: Verification Pending Pill & Actions -->
+<div class="flex items-center justify-between pt-1 border-t border-outline-variant/20">
+<div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-amber-50 text-amber-900 border border-amber-200 text-label-sm font-label-sm">
+<span class="w-2 h-2 rounded-full bg-amber-500 animate-pulse"></span>
+<span>Verification Pending</span>
+<span class="font-mono text-[10px] text-pink-700 bg-pink-50 px-1 rounded border border-pink-200">bKash ৳45k</span>
+</div>
+<div class="flex items-center gap-2">
+<a class="p-2 rounded-lg bg-surface-container text-on-surface-variant hover:bg-surface-container-high transition-transform active:scale-95 flex items-center justify-center" href="tel:+8801912334455">
+<span class="material-symbols-outlined text-[18px]">call</span>
+</a>
+<button class="px-2.5 py-1.5 rounded-lg bg-tertiary text-on-tertiary text-label-sm font-label-sm hover:bg-tertiary-container transition-all active:scale-95 flex items-center gap-1 shadow-sm">
+<span class="material-symbols-outlined text-[15px]">check_circle</span>
+            Verify
+          </button>
+</div>
+</div>
+</article>
+<!-- TENANT CARD 4: Mahmudul Hasan (Notice Period & 14 Days Overdue) -->
+<article class="bg-surface-container-lowest rounded-xl p-space-md border border-error/30 shadow-sm flex flex-col gap-3 relative transition-all hover:border-error">
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-3">
+<div class="relative w-12 h-12 rounded-xl overflow-hidden bg-surface-container flex-shrink-0 border border-outline-variant/30">
+<img class="w-full h-full object-cover" data-alt="Portrait of an intelligent South Asian corporate executive in his late forties wearing dark navy suit jacket and glasses with clean architectural ambient light in background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCbHZ96E6H5YSvqAK_lw96Z3zf1_DSMglL2MwOhGyGE-tT3OCYeRBWhX_4yYzIQGPazsnVVNKSrDXHPClfE3md5YiROBq5WDtjrjVshhCsxmkVNbqBWDLInSYUPJfoYSC0nnuaqqCEI8kWsHEfYMknCqWGxGy3qDSOIQA6aMFlSpI6E7kW4M9Xojh7Y8sld7-XBRsdJmP96nD7lYzFsRV64R0cj9EFNQmIpmUV63pvg0RxhFwpoZIaT"/>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<h3 class="text-headline-md font-headline-md text-on-surface">Mahmudul Hasan</h3>
+<span class="px-2 py-0.5 rounded-full bg-blue-50 text-primary text-label-sm font-label-sm border border-blue-200">Flat 6B</span>
+</div>
+<p class="text-body-sm font-body-sm text-secondary flex items-center gap-1 mt-0.5">
+<span>3 BHK, 6th Floor</span>
+<span class="inline-block w-1 h-1 rounded-full bg-outline"></span>
+<span class="font-currency-md">+880 1715-667788</span>
+</p>
+</div>
+</div>
+<button aria-label="Options" class="text-outline hover:text-on-surface p-1 rounded-full transition-colors">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</div>
+<!-- Notice Alert Banner -->
+<div class="bg-amber-50/70 border border-amber-200 rounded-lg px-2.5 py-1.5 flex items-center justify-between text-body-sm font-body-sm">
+<span class="text-amber-900 font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-amber-700 text-[16px]">hourglass_top</span>
+          Notice Period
+        </span>
+<span class="text-amber-800 text-label-sm font-label-sm">Vacating 30 Apr 2025</span>
+</div>
+<!-- Metadata Bento Row -->
+<div class="grid grid-cols-2 gap-2 bg-surface-container-low/50 rounded-lg p-2.5 border border-outline-variant/20">
+<div>
+<span class="text-label-sm font-label-sm text-secondary block">Monthly Rent</span>
+<span class="text-currency-md font-currency-md text-on-surface font-bold">৳ 52,000</span>
+</div>
+<div class="text-right">
+<span class="text-label-sm font-label-sm text-secondary block">Overdue Duration</span>
+<span class="text-label-sm font-label-sm text-error font-bold flex items-center justify-end gap-1">
+<span class="material-symbols-outlined text-[14px]">warning</span>
+            14 Days Overdue
+          </span>
+</div>
+</div>
+<!-- Footer: Overdue Alert Chip & Quick Action -->
+<div class="flex items-center justify-between pt-1 border-t border-outline-variant/20">
+<div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-error-container/40 text-error border border-error/30 text-label-sm font-label-sm">
+<span class="w-2 h-2 rounded-full bg-error"></span>
+          ৳52,000 Due (Notice)
+        </div>
+<div class="flex items-center gap-2">
+<a class="p-2 rounded-lg bg-surface-container text-on-surface-variant hover:bg-surface-container-high transition-transform active:scale-95 flex items-center justify-center" href="tel:+8801715667788">
+<span class="material-symbols-outlined text-[18px]">call</span>
+</a>
+<button class="px-2.5 py-1.5 rounded-lg bg-error text-on-error text-label-sm font-label-sm hover:opacity-95 transition-all active:scale-95 flex items-center gap-1 shadow-sm">
+<span class="material-symbols-outlined text-[14px]">send</span>
+            Reminder
+          </button>
+</div>
+</div>
+</article>
+</main>
+<!-- FLOATING ACTION BUTTON: + Register Tenant -->
+<aside class="fixed bottom-20 right-4 z-40">
+<button class="flex items-center gap-2 px-4 py-3 bg-primary hover:bg-primary-container text-on-primary rounded-full shadow-lg shadow-primary/25 active:scale-95 transition-all group">
+<span class="material-symbols-outlined text-[20px] transition-transform group-hover:rotate-90">add</span>
+<span class="text-label-lg font-label-lg tracking-wide">+ Register Tenant</span>
+</button>
+</aside>
+<!-- BOTTOM NAVIGATION BAR (Shared Component JSON Source) -->
+<!-- Target Screen: Units is Active tab -->
+<nav class="fixed bottom-0 left-0 w-full z-50 h-16 flex justify-around items-center px-space-xs bg-surface-container-lowest dark:bg-inverse-surface shadow-sm">
+<!-- Tab 1: Home -->
+<a class="flex flex-col items-center justify-center text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-inverse-primary transition-colors duration-150 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined text-[22px]">dashboard</span>
+<span class="text-label-sm font-label-sm mt-0.5">Home</span>
+</a>
+<!-- Tab 2: Units (Active per Contextual State Lock) -->
+<a class="flex flex-col items-center justify-center text-primary dark:text-inverse-primary font-semibold relative after:content-[''] after:w-1.5 after:h-1.5 after:bg-primary dark:after:bg-inverse-primary after:rounded-full after:mt-1 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined text-[22px]" style="font-variation-settings: 'FILL' 1;">domain</span>
+<span class="text-label-sm font-label-sm mt-0.5">Units</span>
+</a>
+<!-- Tab 3: Finance -->
+<a class="flex flex-col items-center justify-center text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-inverse-primary transition-colors duration-150 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined text-[22px]">account_balance_wallet</span>
+<span class="text-label-sm font-label-sm mt-0.5">Finance</span>
+</a>
+<!-- Tab 4: Work -->
+<a class="flex flex-col items-center justify-center text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-inverse-primary transition-colors duration-150 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined text-[22px]">construction</span>
+<span class="text-label-sm font-label-sm mt-0.5">Work</span>
+</a>
+<!-- Tab 5: Community -->
+<a class="flex flex-col items-center justify-center text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-inverse-primary transition-colors duration-150 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined text-[22px]">groups</span>
+<span class="text-label-sm font-label-sm mt-0.5">Community</span>
+</a>
+</nav>
+</body></html>

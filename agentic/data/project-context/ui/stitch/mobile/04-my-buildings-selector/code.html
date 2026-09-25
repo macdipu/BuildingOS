@@ -1,0 +1,383 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>BuildingOS - My Buildings / Portfolio Selector</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@600;700;800&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "inverse-primary": "#b4c5ff",
+            "inverse-on-surface": "#eaf1ff",
+            "error": "#ba1a1a",
+            "surface-container-low": "#eff4ff",
+            "surface-dim": "#cbdbf5",
+            "on-tertiary": "#ffffff",
+            "primary-fixed-dim": "#b4c5ff",
+            "on-tertiary-fixed": "#002114",
+            "surface-container-high": "#dce9ff",
+            "on-surface-variant": "#434655",
+            "primary-container": "#2563eb",
+            "on-secondary": "#ffffff",
+            "on-error": "#ffffff",
+            "tertiary-container": "#007d57",
+            "tertiary": "#006243",
+            "surface-bright": "#f8f9ff",
+            "primary-fixed": "#dbe1ff",
+            "on-tertiary-fixed-variant": "#005137",
+            "surface-tint": "#0053db",
+            "primary": "#004ac6",
+            "on-tertiary-container": "#bdffdc",
+            "secondary-fixed": "#dae2fd",
+            "secondary-fixed-dim": "#bec6e0",
+            "on-secondary-container": "#5c647a",
+            "outline": "#737686",
+            "on-surface": "#0b1c30",
+            "on-error-container": "#93000a",
+            "secondary-container": "#dae2fd",
+            "error-container": "#ffdad6",
+            "on-background": "#0b1c30",
+            "surface": "#f8f9ff",
+            "tertiary-fixed-dim": "#68dba9",
+            "on-secondary-fixed-variant": "#3f465c",
+            "outline-variant": "#c3c6d7",
+            "secondary": "#565e74",
+            "tertiary-fixed": "#85f8c4",
+            "on-primary-fixed": "#00174b",
+            "background": "#f8f9ff",
+            "surface-container-highest": "#d3e4fe",
+            "surface-container-lowest": "#ffffff",
+            "on-primary-fixed-variant": "#003ea8",
+            "surface-variant": "#d3e4fe",
+            "surface-container": "#e5eeff",
+            "on-primary": "#ffffff",
+            "on-primary-container": "#eeefff",
+            "on-secondary-fixed": "#131b2e",
+            "inverse-surface": "#213145"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "margin": "2rem",
+            "gutter": "1.5rem",
+            "gutter-mobile": "1rem",
+            "space-sm": "0.75rem",
+            "space-md": "1rem",
+            "space-lg": "1.5rem",
+            "space-xs": "0.5rem",
+            "space-2xl": "3rem",
+            "margin-mobile": "1rem",
+            "space-xl": "2rem",
+            "space-2xs": "0.25rem"
+          },
+          "fontFamily": {
+            "currency-lg": ["Plus Jakarta Sans"],
+            "body-sm": ["Inter"],
+            "display-lg-mobile": ["Plus Jakarta Sans"],
+            "body-md": ["Inter"],
+            "headline-lg": ["Plus Jakarta Sans"],
+            "headline-md": ["Plus Jakarta Sans"],
+            "body-lg": ["Inter"],
+            "label-lg": ["Inter"],
+            "currency-md": ["Inter"],
+            "label-md": ["Inter"],
+            "display-lg": ["Plus Jakarta Sans"],
+            "headline-xl": ["Plus Jakarta Sans"],
+            "label-sm": ["Inter"]
+          },
+          "fontSize": {
+            "currency-lg": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+            "body-sm": ["12px", { "lineHeight": "16px", "fontWeight": "400" }],
+            "display-lg-mobile": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+            "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+            "headline-lg": ["22px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "headline-md": ["18px", { "lineHeight": "24px", "letterSpacing": "-0.005em", "fontWeight": "600" }],
+            "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "label-lg": ["14px", { "lineHeight": "20px", "fontWeight": "600" }],
+            "currency-md": ["15px", { "lineHeight": "20px", "fontWeight": "600" }],
+            "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "600" }],
+            "display-lg": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "headline-xl": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.015em", "fontWeight": "600" }],
+            "label-sm": ["11px", { "lineHeight": "14px", "letterSpacing": "0.02em", "fontWeight": "600" }]
+          }
+        },
+      },
+    }
+  </script>
+</head>
+<body class="bg-background text-on-surface antialiased flex justify-center min-h-screen">
+<!-- Mobile Device Simulation Frame / Shell -->
+<div class="w-full max-w-[440px] bg-background min-h-screen relative flex flex-col pb-24 shadow-2xl border-x border-outline-variant/30">
+<!-- Top App Bar (Shared Component Anchor) -->
+<header class="fixed top-0 left-0 right-0 max-w-[440px] mx-auto w-full z-50 flex justify-between items-center h-16 px-space-md bg-surface-container-lowest shadow-sm">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[24px]">apartment</span>
+<span class="font-headline-md text-headline-md font-bold text-primary tracking-tight">Green Valley Heights</span>
+</div>
+<div class="flex items-center gap-space-xs">
+<button aria-label="Notifications" class="w-9 h-9 rounded-full flex items-center justify-center hover:bg-surface-container transition-colors duration-150 active:scale-95 text-secondary relative">
+<span class="material-symbols-outlined text-[22px]">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 rounded-full bg-error"></span>
+</button>
+</div>
+</header>
+<!-- Main Content Area -->
+<main class="flex-1 px-space-md pt-20 flex flex-col gap-space-md">
+<!-- User Greeting & Profile Row -->
+<section class="flex items-center justify-between pt-space-xs">
+<div class="flex items-center gap-space-sm">
+<div class="relative">
+<img class="w-11 h-11 rounded-full object-cover border-2 border-surface-container-lowest shadow-sm" data-alt="Close up portrait photograph of Tanvir Ahmed, a confident 38-year-old South Asian male property executive in formal navy attire smiling gently, set against a pristine, sunlit high-end minimalist corporate property lobby in Dhaka, professional lighting, rich textures." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAhLQPDSwsQfSA4BptPKHN7Q2GUjNlc5HkxdD9iB6LOz0O7IpwquyKqyEIogghuYCNyRTKCgVEnSnS9A-3LQIOjLPGJchqF2o1jm_B7ULUxsz5lZXzkmRu-BSowvwKEvB5zwCyvACy-h8X-fqOxpz12JLdxq3keQSwAR_eAyKAhk2Y1N0tKgZfIEo9u5Qp9X_C3qfInC1zPFumlAUjwHt5r-jesmY4crT54WBL7QXC7Oz__Vn0oXY-N">
+<span class="absolute bottom-0 right-0 w-3 h-3 bg-tertiary-container border-2 border-surface-container-lowest rounded-full"></span>
+</div>
+<div>
+<p class="font-label-sm text-label-sm text-secondary leading-tight">As-salamu alaykum,</p>
+<h1 class="font-headline-md text-headline-md text-on-surface font-bold tracking-tight">Tanvir Ahmed</h1>
+</div>
+</div>
+<button class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-primary-container text-on-primary font-label-md text-label-md shadow-sm hover:opacity-90 active:scale-95 transition-all">
+<span class="material-symbols-outlined text-[16px]">add</span>
+<span>Add Building</span>
+</button>
+</section>
+<!-- Search and Filter Bar -->
+<section class="flex items-center gap-space-xs">
+<div class="relative flex-1">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-[20px]">search</span>
+<input class="w-full h-10 pl-9 pr-3 rounded-lg bg-surface-container-lowest border border-outline-variant text-on-surface placeholder:text-outline font-body-md text-body-md focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all shadow-sm" placeholder="Search buildings, flats, areas..." type="text">
+</div>
+<button aria-label="Filter Properties" class="h-10 w-10 flex items-center justify-center rounded-lg bg-surface-container-lowest border border-outline-variant text-secondary hover:bg-surface-container active:scale-95 transition-colors shadow-sm">
+<span class="material-symbols-outlined text-[20px]">tune</span>
+</button>
+</section>
+<!-- Segmented Tabs (Horizontal Scrollable) -->
+<section class="flex items-center gap-space-xs overflow-x-auto no-scrollbar py-1">
+<button class="px-3.5 py-1.5 rounded-full bg-primary text-on-primary font-label-md text-label-md whitespace-nowrap shadow-sm">
+          My Buildings (2)
+        </button>
+<button class="px-3.5 py-1.5 rounded-full bg-surface-container-lowest border border-outline-variant text-secondary font-label-md text-label-md whitespace-nowrap hover:bg-surface-container transition-colors">
+          My Properties (3)
+        </button>
+<button class="px-3.5 py-1.5 rounded-full bg-surface-container-lowest border border-outline-variant text-secondary font-label-md text-label-md whitespace-nowrap hover:bg-surface-container transition-colors flex items-center gap-1.5">
+<span>Pending Invites</span>
+<span class="inline-flex items-center justify-center w-4 h-4 rounded-full bg-tertiary-container text-on-primary text-[10px] font-bold">1</span>
+</button>
+<button class="px-3.5 py-1.5 rounded-full bg-surface-container-lowest border border-outline-variant text-secondary font-label-md text-label-md whitespace-nowrap hover:bg-surface-container transition-colors flex items-center gap-1.5">
+<span>Applications</span>
+<span class="inline-flex items-center justify-center px-1.5 h-4 rounded-full bg-secondary-container text-on-secondary-fixed text-[10px] font-bold">1 Under Review</span>
+</button>
+</section>
+<!-- Property Portfolio Ledger List -->
+<div class="flex flex-col gap-space-md">
+<!-- Card 1 (Active Context: Green Valley Heights) -->
+<article class="p-4 rounded-xl bg-surface-container-lowest border border-outline-variant shadow-sm relative overflow-hidden flex flex-col gap-3">
+<!-- Active Context Indicator Stripe -->
+<div class="absolute left-0 top-0 bottom-0 w-1.5 bg-primary"></div>
+<div class="flex justify-between items-start pl-1">
+<div class="flex flex-col">
+<div class="flex items-center gap-2 mb-1">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-label-sm font-label-sm bg-[#ECFDF5] text-[#065F46] font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-[#059669]"></span>
+                  Active
+                </span>
+<span class="inline-flex items-center px-2 py-0.5 rounded-full text-label-sm font-label-sm bg-surface-container text-primary font-semibold">
+                  Current Building
+                </span>
+</div>
+<h2 class="font-headline-md text-headline-md text-on-surface font-bold">Green Valley Heights</h2>
+<p class="font-body-sm text-body-sm text-secondary flex items-center gap-1 mt-0.5">
+<span class="material-symbols-outlined text-[16px] text-outline">location_on</span>
+                Road 12, Banani, Dhaka
+              </p>
+</div>
+<div class="w-10 h-10 rounded-lg bg-surface-container-low flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[24px]">corporate_fare</span>
+</div>
+</div>
+<!-- Role & Unit Summary Chips -->
+<div class="flex flex-wrap gap-2 pl-1">
+<div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-[#EFF6FF] border border-[#BFDBFE] text-primary font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[14px]">shield_person</span>
+<span>Building Manager &amp; Owner</span>
+</div>
+<div class="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-surface-bright border border-outline-variant text-secondary font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[14px]">door_front</span>
+<span>18 Units (Flat 4A, 4B owned)</span>
+</div>
+</div>
+<!-- Alert Pill (Rent Overdue) -->
+<div class="flex items-center justify-between p-2.5 rounded-lg bg-[#FFF1F2] border border-[#FECDD3] pl-3">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-[#E11D48] animate-pulse"></span>
+<span class="font-label-md text-label-md text-[#9F1239]">3 Rent Dues</span>
+</div>
+<span class="font-currency-md text-currency-md text-[#9F1239] font-bold">৳ 1,45,000</span>
+</div>
+<!-- Action CTA -->
+<div class="pt-1">
+<button class="w-full h-10 rounded-lg bg-primary-container text-on-primary font-label-md text-label-md flex items-center justify-center gap-1.5 shadow-sm hover:opacity-90 active:scale-[0.98] transition-transform">
+<span>Open Building</span>
+<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+</div>
+</article>
+<!-- Card 2: Shanta Pinnacle Residences -->
+<article class="p-4 rounded-xl bg-surface-container-lowest border border-outline-variant shadow-sm flex flex-col gap-3">
+<div class="flex justify-between items-start">
+<div class="flex flex-col">
+<div class="flex items-center gap-2 mb-1">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-label-sm font-label-sm bg-[#ECFDF5] text-[#065F46] font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-[#059669]"></span>
+                  Active
+                </span>
+<span class="inline-flex items-center px-2 py-0.5 rounded-full text-label-sm font-label-sm bg-[#EFF6FF] border border-[#BFDBFE] text-primary font-semibold">
+                  Unit Owner (Flat 6B)
+                </span>
+</div>
+<h2 class="font-headline-md text-headline-md text-on-surface font-bold">Shanta Pinnacle Residences</h2>
+<p class="font-body-sm text-body-sm text-secondary flex items-center gap-1 mt-0.5">
+<span class="material-symbols-outlined text-[16px] text-outline">location_on</span>
+                Dhanmondi 27, Dhaka
+              </p>
+</div>
+<div class="w-10 h-10 rounded-lg bg-surface-container-low flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-[24px]">apartment</span>
+</div>
+</div>
+<!-- Alert Pill: Maintenance Due -->
+<div class="flex items-center justify-between p-2.5 rounded-lg bg-[#FFFBEB] border border-[#FDE68A]">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-[#D97706]"></span>
+<span class="font-label-md text-label-md text-[#92400E]">Maintenance Due</span>
+</div>
+<span class="font-currency-md text-currency-md text-[#92400E] font-bold">৳ 8,500</span>
+</div>
+<!-- Action CTA -->
+<div>
+<button class="w-full h-10 rounded-lg bg-surface-container-lowest border border-outline-variant text-on-surface hover:bg-surface-container font-label-md text-label-md flex items-center justify-center gap-1.5 active:scale-[0.98] transition-transform shadow-sm">
+<span>Open Building</span>
+<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+</div>
+</article>
+<!-- Card 3: Pending Invitation (Navana Tower) -->
+<article class="p-4 rounded-xl bg-surface-container-lowest border-2 border-dashed border-outline-variant shadow-sm flex flex-col gap-3">
+<div class="flex justify-between items-start">
+<div class="flex flex-col">
+<div class="flex items-center gap-2 mb-1">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-label-sm font-label-sm bg-[#FAF5FF] border border-[#E9D5FF] text-[#7C3AED] font-semibold">
+<span class="material-symbols-outlined text-[12px]">mail</span>
+                  Invitation Received
+                </span>
+</div>
+<h2 class="font-headline-md text-headline-md text-on-surface font-bold">Navana Tower</h2>
+<p class="font-body-sm text-body-sm text-secondary flex items-center gap-1 mt-0.5">
+<span class="material-symbols-outlined text-[16px] text-outline">location_on</span>
+                Gulshan 1, Dhaka
+              </p>
+</div>
+<span class="px-2 py-1 rounded bg-[#FAF5FF] text-[#7C3AED] font-label-sm text-label-sm font-semibold">
+              Committee Member
+            </span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant bg-surface-container-low p-2 rounded-lg">
+            Management Board invited you to join the Executive Steering Committee for FY 2025.
+          </p>
+<!-- Dual Buttons: Accept / Decline -->
+<div class="grid grid-cols-2 gap-2 pt-1">
+<button class="h-10 rounded-lg bg-[#059669] hover:bg-[#047857] text-on-primary font-label-md text-label-md flex items-center justify-center gap-1 shadow-sm active:scale-95 transition-all">
+<span class="material-symbols-outlined text-[16px]">check_circle</span>
+<span>Accept Invite</span>
+</button>
+<button class="h-10 rounded-lg bg-surface-container-lowest border border-outline-variant hover:bg-surface-container text-secondary font-label-md text-label-md flex items-center justify-center gap-1 active:scale-95 transition-all">
+<span class="material-symbols-outlined text-[16px]">close</span>
+<span>Decline</span>
+</button>
+</div>
+</article>
+<!-- Card 4: Application Under Verification (Rangs Eminence) -->
+<article class="p-4 rounded-xl bg-surface-container-lowest border border-outline-variant shadow-sm flex flex-col gap-3">
+<div class="flex justify-between items-start">
+<div class="flex flex-col">
+<div class="flex items-center gap-2 mb-1">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-label-sm font-label-sm bg-surface-container text-primary font-semibold">
+<span class="material-symbols-outlined text-[12px] animate-spin">sync</span>
+                  Under Verification
+                </span>
+</div>
+<h2 class="font-headline-md text-headline-md text-on-surface font-bold">Rangs Eminence</h2>
+<p class="font-body-sm text-body-sm text-secondary flex items-center gap-1 mt-0.5">
+<span class="material-symbols-outlined text-[16px] text-outline">location_on</span>
+                Uttara Sector 4, Dhaka
+              </p>
+</div>
+<div class="w-10 h-10 rounded-lg bg-surface-container-low flex items-center justify-center text-outline">
+<span class="material-symbols-outlined text-[24px]">verified</span>
+</div>
+</div>
+<div class="flex items-center justify-between text-body-sm font-body-sm text-secondary border-t border-outline-variant/30 pt-2.5">
+<span>Submitted: Flat 5B Ownership Deed</span>
+<span class="font-label-sm text-label-sm text-primary font-semibold">Step 2 of 3</span>
+</div>
+<div>
+<button class="w-full h-10 rounded-lg bg-surface-container-lowest border border-outline-variant text-on-surface hover:bg-surface-container font-label-md text-label-md flex items-center justify-center gap-1.5 active:scale-[0.98] transition-transform shadow-sm">
+<span class="material-symbols-outlined text-[18px]">visibility</span>
+<span>View Application</span>
+</button>
+</div>
+</article>
+</div>
+<!-- Quick Bottom Actions Section -->
+<section class="mt-2 flex flex-col gap-space-xs mb-4">
+<button class="w-full h-11 rounded-lg bg-surface-container-lowest border-2 border-primary/20 hover:border-primary text-primary font-label-md text-label-md flex items-center justify-center gap-2 shadow-sm transition-all active:scale-[0.99]">
+<span class="material-symbols-outlined text-[20px]">add_business</span>
+<span>Register New Building</span>
+</button>
+<button class="w-full h-11 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface-variant font-label-md text-label-md flex items-center justify-center gap-2 transition-colors active:scale-[0.99]">
+<span class="material-symbols-outlined text-[20px]">pin</span>
+<span>Join with Invite Code</span>
+</button>
+</section>
+</main>
+<!-- Bottom Navigation Bar (Shared Component Anchor) -->
+<!-- Destination Rule logic: This is a top-level portfolio selector dashboard destination. Active tab maps to Units/Building context -->
+<nav class="fixed bottom-0 left-0 right-0 max-w-[440px] mx-auto w-full z-50 h-16 flex justify-around items-center px-space-xs bg-surface-container-lowest shadow-sm">
+<!-- Tab 1: Home -->
+<a aria-label="Home" class="flex flex-col items-center justify-center text-secondary hover:text-primary transition-colors duration-150 active:scale-90" href="#home">
+<span class="material-symbols-outlined text-[24px]">dashboard</span>
+<span class="text-label-sm font-label-sm">Home</span>
+</a>
+<!-- Tab 2: Units (Active Navigation - Building & Portfolio Selector context) -->
+<a aria-label="Units" class="flex flex-col items-center justify-center text-primary font-semibold relative after:content-[''] after:w-1.5 after:h-1.5 after:bg-primary after:rounded-full after:mt-1 active:scale-90 transition-transform duration-150" href="#units">
+<span class="material-symbols-outlined text-[24px]" style="font-variation-settings: 'FILL' 1;">domain</span>
+<span class="text-label-sm font-label-sm">Units</span>
+</a>
+<!-- Tab 3: Finance -->
+<a aria-label="Finance" class="flex flex-col items-center justify-center text-secondary hover:text-primary transition-colors duration-150 active:scale-90" href="#finance">
+<span class="material-symbols-outlined text-[24px]">account_balance_wallet</span>
+<span class="text-label-sm font-label-sm">Finance</span>
+</a>
+<!-- Tab 4: Work -->
+<a aria-label="Work" class="flex flex-col items-center justify-center text-secondary hover:text-primary transition-colors duration-150 active:scale-90" href="#work">
+<span class="material-symbols-outlined text-[24px]">construction</span>
+<span class="text-label-sm font-label-sm">Work</span>
+</a>
+<!-- Tab 5: Community -->
+<a aria-label="Community" class="flex flex-col items-center justify-center text-secondary hover:text-primary transition-colors duration-150 active:scale-90" href="#community">
+<span class="material-symbols-outlined text-[24px]">groups</span>
+<span class="text-label-sm font-label-sm">Community</span>
+</a>
+</nav>
+</div>
+</body></html>

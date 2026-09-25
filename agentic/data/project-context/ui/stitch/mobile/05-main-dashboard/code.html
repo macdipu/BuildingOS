@@ -1,0 +1,435 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>BuildingOS - Main Dashboard</title>
+<!-- Google Fonts: Inter & Plus Jakarta Sans -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@600;700;800&amp;display=swap" rel="stylesheet">
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<!-- Tailwind CSS v3 with Plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "primary-container": "#2563eb",
+            "primary-fixed-dim": "#b4c5ff",
+            "tertiary-fixed": "#85f8c4",
+            "primary-fixed": "#dbe1ff",
+            "on-tertiary-fixed": "#002114",
+            "surface-variant": "#d3e4fe",
+            "error-container": "#ffdad6",
+            "inverse-surface": "#213145",
+            "secondary-container": "#dae2fd",
+            "tertiary": "#006243",
+            "surface": "#f8f9ff",
+            "background": "#f8f9ff",
+            "secondary-fixed": "#dae2fd",
+            "surface-container-low": "#eff4ff",
+            "error": "#ba1a1a",
+            "on-primary-fixed": "#00174b",
+            "on-tertiary": "#ffffff",
+            "on-tertiary-fixed-variant": "#005137",
+            "outline": "#737686",
+            "on-error-container": "#93000a",
+            "on-background": "#0b1c30",
+            "on-error": "#ffffff",
+            "on-primary-container": "#eeefff",
+            "surface-dim": "#cbdbf5",
+            "on-primary": "#ffffff",
+            "surface-bright": "#f8f9ff",
+            "surface-container-highest": "#d3e4fe",
+            "outline-variant": "#c3c6d7",
+            "inverse-primary": "#b4c5ff",
+            "surface-tint": "#0053db",
+            "tertiary-fixed-dim": "#68dba9",
+            "on-primary-fixed-variant": "#003ea8",
+            "surface-container-lowest": "#ffffff",
+            "secondary-fixed-dim": "#bec6e0",
+            "on-surface": "#0b1c30",
+            "on-secondary": "#ffffff",
+            "primary": "#004ac6",
+            "surface-container": "#e5eeff",
+            "inverse-on-surface": "#eaf1ff",
+            "on-surface-variant": "#434655",
+            "on-secondary-fixed": "#131b2e",
+            "surface-container-high": "#dce9ff",
+            "tertiary-container": "#007d57",
+            "on-tertiary-container": "#bdffdc",
+            "secondary": "#565e74",
+            "on-secondary-fixed-variant": "#3f465c",
+            "on-secondary-container": "#5c647a"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "gutter": "1.5rem",
+            "space-lg": "1.5rem",
+            "space-xl": "2rem",
+            "space-md": "1rem",
+            "space-sm": "0.75rem",
+            "gutter-mobile": "1rem",
+            "margin-mobile": "1rem",
+            "margin": "2rem",
+            "space-2xl": "3rem",
+            "space-2xs": "0.25rem",
+            "space-xs": "0.5rem"
+          },
+          "fontFamily": {
+            "body-md": ["Inter"],
+            "display-lg-mobile": ["Plus Jakarta Sans"],
+            "body-lg": ["Inter"],
+            "headline-lg": ["Plus Jakarta Sans"],
+            "headline-xl": ["Plus Jakarta Sans"],
+            "label-md": ["Inter"],
+            "label-lg": ["Inter"],
+            "currency-lg": ["Plus Jakarta Sans"],
+            "currency-md": ["Inter"],
+            "label-sm": ["Inter"],
+            "display-lg": ["Plus Jakarta Sans"],
+            "headline-md": ["Plus Jakarta Sans"],
+            "body-sm": ["Inter"]
+          },
+          "fontSize": {
+            "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+            "display-lg-mobile": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+            "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "headline-lg": ["22px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "headline-xl": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.015em", "fontWeight": "600" }],
+            "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "600" }],
+            "label-lg": ["14px", { "lineHeight": "20px", "fontWeight": "600" }],
+            "currency-lg": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+            "currency-md": ["15px", { "lineHeight": "20px", "fontWeight": "600" }],
+            "label-sm": ["11px", { "lineHeight": "14px", "letterSpacing": "0.02em", "fontWeight": "600" }],
+            "display-lg": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "headline-md": ["18px", { "lineHeight": "24px", "letterSpacing": "-0.005em", "fontWeight": "600" }],
+            "body-sm": ["12px", { "lineHeight": "16px", "fontWeight": "400" }]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      line-height: 1;
+    }
+    .material-symbols-outlined.fill {
+      font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+  </style>
+</head>
+<body class="bg-background text-on-background antialiased min-h-screen pb-24 selection:bg-surface-variant">
+<!-- ================= TOP APP BAR (Shared Component JSON Blueprint) ================= -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center h-16 px-space-md bg-surface-container-lowest dark:bg-inverse-surface shadow-sm dark:shadow-none">
+<div class="flex items-center space-x-space-xs">
+<div class="w-10 h-10 rounded-lg bg-surface-container-low flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">apartment</span>
+</div>
+<div>
+<div class="flex items-center space-x-1">
+<h1 class="text-headline-md font-headline-md font-bold text-primary dark:text-inverse-primary truncate max-w-[200px] leading-tight">
+            Green Valley Heights
+          </h1>
+<span class="material-symbols-outlined text-outline text-[18px]">arrow_drop_down</span>
+</div>
+<p class="text-body-sm font-body-sm text-secondary truncate max-w-[210px]">Road 12, Banani, Dhaka</p>
+</div>
+</div>
+<div class="flex items-center space-x-space-xs">
+<!-- Role Badge -->
+<span class="inline-flex items-center px-2 py-0.5 rounded-full text-label-sm font-label-sm bg-on-background text-surface-container-lowest">Building Lead</span>
+<!-- Notifications Action with Counter Badge -->
+<button class="relative p-2 rounded-lg text-primary hover:bg-surface-container active:scale-95 transition-all">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-error ring-2 ring-surface-container-lowest"></span>
+</button>
+</div>
+</header>
+<!-- ================= MAIN CONTENT CANVAS ================= -->
+<main class="pt-20 px-space-md max-w-md mx-auto space-y-space-md">
+<!-- Sub-header Role Demarcation -->
+<div class="flex items-center justify-between py-1">
+<div class="flex items-center space-x-2">
+<span class="w-2 h-2 rounded-full bg-tertiary-container"></span>
+<span class="text-label-sm font-label-sm text-secondary">System Mode: Property Lead Active</span>
+</div>
+<span class="text-label-sm font-label-sm text-outline">Q1 FY2025</span>
+</div>
+<!-- ================= FINANCIAL & OPERATIONAL BENTO ================= -->
+<section class="space-y-space-sm">
+<!-- Primary Card: Outstanding Amount Alert -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-space-md shadow-sm">
+<div class="flex items-center justify-between mb-space-xs">
+<span class="text-label-md font-label-md text-secondary">Total Outstanding</span>
+<span class="inline-flex items-center space-x-1 px-2 py-0.5 rounded-full text-label-sm font-label-sm bg-error-container text-on-error-container font-semibold">
+<span class="material-symbols-outlined text-[13px]">warning</span>
+<span class="">14% vs last month</span>
+</span>
+</div>
+<div class="flex items-baseline space-x-1 mb-space-sm">
+<span class="text-currency-lg font-currency-lg text-error">৳3,45,000</span>
+<span class="text-body-sm font-body-sm text-secondary">overdue balance</span>
+</div>
+<!-- Micro Ledger Breakdown -->
+<div class="grid grid-cols-2 gap-space-xs pt-space-xs border-t border-surface-container">
+<div class="bg-surface-container-low rounded-lg p-space-xs">
+<span class="text-label-sm font-label-sm text-secondary block">Rent Overdue</span>
+<div class="flex justify-between items-baseline mt-0.5">
+<span class="text-currency-md font-currency-md text-on-surface">৳2,20,000</span>
+<span class="text-label-sm font-label-sm text-error">4 units</span>
+</div>
+</div>
+<div class="bg-surface-container-low rounded-lg p-space-xs">
+<span class="text-label-sm font-label-sm text-secondary block">Maintenance</span>
+<div class="flex justify-between items-baseline mt-0.5">
+<span class="text-currency-md font-currency-md text-on-surface">৳1,25,000</span>
+<span class="text-label-sm font-label-sm text-error">7 units</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Secondary Bento Grid: Collection Progress & Occupancy -->
+<div class="grid grid-cols-1 gap-space-sm">
+<!-- Collection Progress Card -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-space-md shadow-sm">
+<div class="flex justify-between items-start mb-2">
+<div>
+<span class="text-label-md font-label-md text-secondary block">Collected This Month</span>
+<div class="text-currency-lg font-currency-lg text-primary mt-0.5">৳12,85,000</div>
+</div>
+<div class="text-right">
+<span class="text-label-sm font-label-sm text-secondary block">Monthly Target</span>
+<span class="text-body-sm font-body-sm text-on-surface font-semibold">৳16,30,000</span>
+</div>
+</div>
+<!-- Progress Bar Indicator -->
+<div class="space-y-1.5 mt-space-xs">
+<div class="w-full bg-surface-container rounded-full h-2.5 overflow-hidden">
+<div class="bg-primary-container h-full rounded-full transition-all duration-500" style="width: 78.8%"></div>
+</div>
+<div class="flex justify-between items-center text-label-sm font-label-sm">
+<span class="text-tertiary flex items-center space-x-1 font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary inline-block"></span>
+<span class="">78.8% Collected</span>
+</span>
+<span class="text-secondary">৳3,45,000 Pending</span>
+</div>
+</div>
+</div>
+<!-- Dual Mini-Card Grid (Occupancy & Maintenance) -->
+<div class="grid grid-cols-2 gap-space-sm">
+<!-- Occupancy Rate -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-space-md shadow-sm flex flex-col justify-between">
+<div class="flex justify-between items-start">
+<span class="text-label-md font-label-md text-secondary">Occupancy</span>
+<span class="p-1 rounded bg-surface-container-low text-primary">
+<span class="material-symbols-outlined text-[18px]">group</span>
+</span>
+</div>
+<div class="mt-space-xs">
+<div class="text-currency-lg font-currency-lg text-on-surface">94.4%</div>
+<p class="text-label-sm font-label-sm text-secondary mt-0.5">34 / 36 Units Active</p>
+<div class="inline-flex items-center space-x-1 mt-1 text-label-sm font-label-sm text-primary">
+<span class="w-1.5 h-1.5 rounded-full bg-primary inline-block"></span>
+<span class="">2 Vacant</span>
+</div>
+</div>
+</div>
+<!-- Open Works Metric -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-space-md shadow-sm flex flex-col justify-between">
+<div class="flex justify-between items-start">
+<span class="text-label-md font-label-md text-secondary">Maintenance</span>
+<span class="p-1 rounded bg-error-container text-on-error-container">
+<span class="material-symbols-outlined text-[18px]">construction</span>
+</span>
+</div>
+<div class="mt-space-xs">
+<div class="text-currency-lg font-currency-lg text-on-surface">5 Active</div>
+<p class="text-label-sm font-label-sm text-secondary mt-0.5">Assigned to team</p>
+<div class="inline-flex items-center space-x-1 mt-1 text-label-sm font-label-sm text-error font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-error inline-block"></span>
+<span class="">2 Critical Alerts</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ================= QUICK ACTIONS GRID ================= -->
+<section class="space-y-space-xs">
+<div class="flex justify-between items-center px-0.5">
+<h2 class="text-label-lg font-label-lg text-on-surface">Quick Actions</h2>
+<span class="text-label-sm font-label-sm text-primary">Customize</span>
+</div>
+<div class="grid grid-cols-3 gap-2.5">
+<!-- Primary Action: Collect Rent -->
+<button class="col-span-1 bg-primary text-on-primary rounded-xl p-3 flex flex-col items-center justify-center text-center shadow-sm active:scale-95 transition-transform">
+<div class="w-10 h-10 rounded-lg bg-white/20 flex items-center justify-center mb-1.5">
+<span class="material-symbols-outlined text-[22px]">account_balance_wallet</span>
+</div>
+<span class="text-label-md font-label-md leading-tight">Collect Rent</span>
+</button>
+<!-- Action: Add Expense -->
+<button class="col-span-1 bg-surface-container-lowest border border-outline-variant text-on-surface rounded-xl p-3 flex flex-col items-center justify-center text-center shadow-sm active:scale-95 transition-transform hover:bg-surface-container-low">
+<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-secondary mb-1.5">
+<span class="material-symbols-outlined text-[22px]">receipt_long</span>
+</div>
+<span class="text-label-md font-label-md leading-tight">Add Expense</span>
+</button>
+<!-- Action: Create Work -->
+<button class="col-span-1 bg-surface-container-lowest border border-outline-variant text-on-surface rounded-xl p-3 flex flex-col items-center justify-center text-center shadow-sm active:scale-95 transition-transform hover:bg-surface-container-low">
+<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-secondary mb-1.5">
+<span class="material-symbols-outlined text-[22px]">construction</span>
+</div>
+<span class="text-label-md font-label-md leading-tight">Create Work</span>
+</button>
+<!-- Action: Post Announcement -->
+<button class="col-span-1 bg-surface-container-lowest border border-outline-variant text-on-surface rounded-xl p-3 flex flex-col items-center justify-center text-center shadow-sm active:scale-95 transition-transform hover:bg-surface-container-low">
+<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-secondary mb-1.5">
+<span class="material-symbols-outlined text-[22px]">campaign</span>
+</div>
+<span class="text-label-md font-label-md leading-tight">Announcement</span>
+</button>
+<!-- Action: View Report -->
+<button class="col-span-2 bg-surface-container-lowest border border-outline-variant text-on-surface rounded-xl p-3 flex items-center justify-center space-x-3 text-center shadow-sm active:scale-95 transition-transform hover:bg-surface-container-low">
+<div class="w-8 h-8 rounded-lg bg-surface-container flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-[20px]">analytics</span>
+</div>
+<span class="text-label-md font-label-md">Audit &amp; Finance Report</span>
+</button>
+</div>
+</section>
+<!-- ================= LATEST BUILDING ANNOUNCEMENTS ================= -->
+<section class="space-y-space-xs">
+<div class="flex justify-between items-center px-0.5">
+<h2 class="text-label-lg font-label-lg text-on-surface">Urgent Announcement</h2>
+<span class="text-label-sm font-label-sm text-secondary">1 Active</span>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-space-md shadow-sm relative overflow-hidden">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-error"></div>
+<div class="flex items-start space-x-3">
+<div class="w-10 h-10 rounded-lg bg-error-container text-on-error-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[20px]">water_damage</span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-center justify-between mb-1">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-label-sm font-label-sm bg-error-container text-on-error-container font-semibold">
+                High Priority Notice
+              </span>
+<span class="text-label-sm font-label-sm text-secondary">Tomorrow</span>
+</div>
+<h3 class="text-body-lg font-body-lg font-semibold text-on-surface truncate">Water Tank Cleaning &amp; Treatment</h3>
+<p class="text-body-sm font-body-sm text-secondary mt-0.5">
+              Scheduled main supply shutoff: <strong class="text-on-surface">10:00 AM - 2:00 PM</strong>. Water reservoirs will undergo chlorine sterilization.
+            </p>
+<div class="flex items-center space-x-4 mt-space-xs pt-space-xs border-t border-surface-container text-label-sm font-label-sm text-secondary">
+<span class="flex items-center space-x-1">
+<span class="material-symbols-outlined text-[14px]">schedule</span>
+<span class="">4h duration</span>
+</span>
+<span class="flex items-center space-x-1">
+<span class="material-symbols-outlined text-[14px]">apartment</span>
+<span class="">All Towers Affected</span>
+</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ================= UPCOMING GOVERNANCE & MEETINGS ================= -->
+<section class="space-y-space-xs">
+<div class="flex justify-between items-center px-0.5">
+<h2 class="text-label-lg font-label-lg text-on-surface">Upcoming Governance &amp; Meetings</h2>
+<a class="text-label-sm font-label-sm text-primary font-semibold" href="#">View Calendar</a>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-space-md shadow-sm">
+<div class="flex items-start space-x-3.5">
+<!-- Calendar Date Tile -->
+<div class="w-12 h-14 bg-surface-container rounded-lg border border-outline-variant flex flex-col items-center justify-center shrink-0 text-center">
+<span class="text-label-sm font-label-sm text-secondary uppercase leading-none">Mar</span>
+<span class="text-headline-md font-headline-md font-bold text-primary leading-none mt-1">28</span>
+</div>
+<!-- Meeting Information -->
+<div class="flex-1 min-w-0">
+<div class="flex items-center space-x-2">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-label-sm font-label-sm bg-surface-container text-secondary font-semibold">
+                General Assembly
+              </span>
+<span class="text-label-sm font-label-sm text-tertiary flex items-center">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary mr-1"></span>
+                Confirmed
+              </span>
+</div>
+<h3 class="text-body-md font-body-md font-bold text-on-surface mt-1 truncate">
+              Annual General Body Meeting (AGM) 2025
+            </h3>
+<div class="grid grid-cols-2 gap-1 mt-2 text-label-sm font-label-sm text-secondary">
+<div class="flex items-center space-x-1 truncate">
+<span class="material-symbols-outlined text-[15px] text-outline">schedule</span>
+<span class="">7:30 PM - 9:30 PM</span>
+</div>
+<div class="flex items-center space-x-1 truncate">
+<span class="material-symbols-outlined text-[15px] text-outline">meeting_room</span>
+<span class="">Community Hall (L2)</span>
+</div>
+</div>
+<!-- RSVP Status Bar -->
+<div class="mt-space-sm pt-space-xs border-t border-surface-container flex items-center justify-between">
+<div class="flex items-center space-x-1.5">
+<span class="material-symbols-outlined text-[16px] text-primary">how_to_reg</span>
+<span class="text-label-sm font-label-sm text-on-surface font-semibold">18 Unit Owners RSVP'd</span>
+</div>
+<button class="px-2.5 py-1 text-label-sm font-label-sm bg-primary text-on-primary rounded font-semibold active:scale-95 transition-transform">
+                Meeting Docket
+              </button>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- ================= BOTTOM NAVIGATION BAR (Shared Component JSON Blueprint) ================= -->
+<!-- 
+    Destination Rule: Main Dashboard is a primary destination. Shell rendered.
+    Active Tab Logic: 'Home' corresponds to index 0, mapped to Active classes from JSON.
+  -->
+<nav class="fixed bottom-0 left-0 w-full z-50 h-16 flex justify-around items-center px-space-xs bg-surface-container-lowest dark:bg-inverse-surface shadow-sm dark:shadow-none">
+<!-- Item 1: Home (ACTIVE) -->
+<a class="flex flex-col items-center justify-center text-primary dark:text-inverse-primary font-semibold relative after:content-[''] after:w-1.5 after:h-1.5 after:bg-primary dark:after:bg-inverse-primary after:rounded-full after:mt-1 hover:text-primary dark:hover:text-inverse-primary transition-colors duration-150 active:scale-90" href="#">
+<span class="material-symbols-outlined fill text-[22px]">dashboard</span>
+<span class="text-label-sm font-label-sm">Home</span>
+</a>
+<!-- Item 2: Units -->
+<a class="flex flex-col items-center justify-center text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-inverse-primary transition-colors duration-150 active:scale-90" href="#">
+<span class="material-symbols-outlined text-[22px]">domain</span>
+<span class="text-label-sm font-label-sm">Units</span>
+</a>
+<!-- Item 3: Finance -->
+<a class="flex flex-col items-center justify-center text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-inverse-primary transition-colors duration-150 active:scale-90" href="#">
+<span class="material-symbols-outlined text-[22px]">account_balance_wallet</span>
+<span class="text-label-sm font-label-sm">Finance</span>
+</a>
+<!-- Item 4: Work -->
+<a class="flex flex-col items-center justify-center text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-inverse-primary transition-colors duration-150 active:scale-90" href="#">
+<span class="material-symbols-outlined text-[22px]">construction</span>
+<span class="text-label-sm font-label-sm">Work</span>
+</a>
+<!-- Item 5: Community -->
+<a class="flex flex-col items-center justify-center text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-inverse-primary transition-colors duration-150 active:scale-90" href="#">
+<span class="material-symbols-outlined text-[22px]">groups</span>
+<span class="text-label-sm font-label-sm">Community</span>
+</a>
+</nav>
+
+
+</body></html>

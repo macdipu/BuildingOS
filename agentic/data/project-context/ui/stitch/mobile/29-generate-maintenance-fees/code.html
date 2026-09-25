@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>29. Generate Maintenance Fees - BuildingOS</title>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts: Plus Jakarta Sans & Inter -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "surface-bright": "#f8f9ff",
+            "on-surface": "#0b1c30",
+            "error": "#ba1a1a",
+            "inverse-on-surface": "#eaf1ff",
+            "surface-container-high": "#dce9ff",
+            "surface-container": "#e5eeff",
+            "surface-tint": "#0053db",
+            "tertiary-fixed": "#85f8c4",
+            "on-primary-fixed-variant": "#003ea8",
+            "secondary-fixed": "#dae2fd",
+            "on-tertiary-fixed-variant": "#005137",
+            "primary-fixed": "#dbe1ff",
+            "inverse-primary": "#b4c5ff",
+            "primary-container": "#2563eb",
+            "tertiary": "#006243",
+            "secondary": "#565e74",
+            "on-error": "#ffffff",
+            "secondary-fixed-dim": "#bec6e0",
+            "on-error-container": "#93000a",
+            "surface-dim": "#cbdbf5",
+            "outline": "#737686",
+            "on-primary-fixed": "#00174b",
+            "inverse-surface": "#213145",
+            "on-tertiary": "#ffffff",
+            "surface-container-lowest": "#ffffff",
+            "on-primary-container": "#eeefff",
+            "on-primary": "#ffffff",
+            "on-secondary": "#ffffff",
+            "primary-fixed-dim": "#b4c5ff",
+            "tertiary-fixed-dim": "#68dba9",
+            "tertiary-container": "#007d57",
+            "on-background": "#0b1c30",
+            "surface-container-highest": "#d3e4fe",
+            "on-tertiary-fixed": "#002114",
+            "on-tertiary-container": "#bdffdc",
+            "primary": "#004ac6",
+            "surface": "#f8f9ff",
+            "on-secondary-container": "#5c647a",
+            "on-secondary-fixed": "#131b2e",
+            "error-container": "#ffdad6",
+            "on-secondary-fixed-variant": "#3f465c",
+            "on-surface-variant": "#434655",
+            "surface-container-low": "#eff4ff",
+            "outline-variant": "#c3c6d7",
+            "background": "#f8f9ff",
+            "secondary-container": "#dae2fd",
+            "surface-variant": "#d3e4fe"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-lg": "1.5rem",
+            "margin-mobile": "1rem",
+            "space-md": "1rem",
+            "space-sm": "0.75rem",
+            "space-2xs": "0.25rem",
+            "space-xs": "0.5rem",
+            "space-xl": "2rem",
+            "gutter-mobile": "1rem",
+            "margin": "2rem",
+            "space-2xl": "3rem",
+            "gutter": "1.5rem"
+          },
+          "fontFamily": {
+            "headline-xl": ["Plus Jakarta Sans"],
+            "label-lg": ["Inter"],
+            "headline-lg": ["Plus Jakarta Sans"],
+            "body-sm": ["Inter"],
+            "body-lg": ["Inter"],
+            "label-md": ["Inter"],
+            "label-sm": ["Inter"],
+            "display-lg": ["Plus Jakarta Sans"],
+            "currency-lg": ["Plus Jakarta Sans"],
+            "display-lg-mobile": ["Plus Jakarta Sans"],
+            "currency-md": ["Inter"],
+            "headline-md": ["Plus Jakarta Sans"],
+            "body-md": ["Inter"]
+          },
+          "fontSize": {
+            "headline-xl": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.015em", "fontWeight": "600" }],
+            "label-lg": ["14px", { "lineHeight": "20px", "fontWeight": "600" }],
+            "headline-lg": ["22px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "body-sm": ["12px", { "lineHeight": "16px", "fontWeight": "400" }],
+            "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "600" }],
+            "label-sm": ["11px", { "lineHeight": "14px", "letterSpacing": "0.02em", "fontWeight": "600" }],
+            "display-lg": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "currency-lg": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+            "display-lg-mobile": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+            "currency-md": ["15px", { "lineHeight": "20px", "fontWeight": "600" }],
+            "headline-md": ["18px", { "lineHeight": "24px", "letterSpacing": "-0.005em", "fontWeight": "600" }],
+            "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      line-height: 1;
+      display: inline-block;
+      vertical-align: middle;
+    }
+  </style>
+</head>
+<body class="bg-background text-on-surface antialiased min-h-screen pb-36">
+<!-- Linear Task Flow Header (Destination Rule: Suppresses BottomNavBar & SideNav for Transactional Journey) -->
+<header class="sticky top-0 left-0 w-full z-40 bg-surface-container-lowest shadow-sm flex items-center justify-between px-space-md h-16">
+<div class="flex items-center gap-space-sm">
+<button aria-label="Go Back" class="w-9 h-9 rounded-lg flex items-center justify-center text-on-surface-variant hover:bg-surface-container transition-colors active:scale-95 duration-100" type="button">
+<span class="material-symbols-outlined text-[22px]">arrow_back</span>
+</button>
+<div>
+<h1 class="font-headline-md text-headline-md text-on-surface leading-tight">Generate Monthly Dues</h1>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Building Assessment Engine • Step 1 of 2</p>
+</div>
+</div>
+<button aria-label="Close" class="w-9 h-9 rounded-lg flex items-center justify-center text-on-surface-variant hover:bg-surface-container transition-colors active:scale-95 duration-100" type="button">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</header>
+<main class="max-w-md mx-auto px-margin-mobile pt-space-md space-y-space-md">
+<!-- Governance Banner Notice -->
+<div class="bg-surface-container-low border border-surface-container-high rounded-xl p-space-md flex gap-space-sm items-start shadow-sm">
+<div class="w-8 h-8 rounded-lg bg-surface-container-high text-primary flex items-center justify-center shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[18px]">verified_user</span>
+</div>
+<div>
+<span class="inline-block px-1.5 py-0.5 bg-surface-container text-primary font-label-sm text-label-sm rounded mb-1">GVH-BYLAW § 14.2</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+<strong class="font-label-md text-on-surface">Automated Monthly Billing Cycle —</strong> Generating dues will create verified association invoices for all registered units under Green Valley Heights Association Bylaws.
+        </p>
+</div>
+</div>
+<!-- Section 1: Assessment Parameters Form Card -->
+<section class="bg-surface-container-lowest border border-outline-variant rounded-xl p-space-md shadow-sm space-y-space-md">
+<div class="flex items-center justify-between border-b border-outline-variant pb-space-sm">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[20px]">tune</span>
+<h2 class="font-headline-md text-headline-md text-on-surface">Assessment Parameters</h2>
+</div>
+<span class="font-label-sm text-label-sm text-tertiary bg-on-tertiary-container/30 px-2 py-0.5 rounded-full font-semibold">Active Period</span>
+</div>
+<!-- Billing Cycle & Due Date Grid -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-space-sm">
+<!-- Billing Month -->
+<div>
+<label class="block font-label-md text-label-md text-on-surface-variant mb-1.5" for="billing-month">Billing Cycle Month</label>
+<div class="relative">
+<select class="w-full h-10 bg-surface-container-lowest border border-outline-variant rounded-lg px-3 pr-8 font-body-md text-body-md text-on-surface focus:border-primary-container focus:ring-2 focus:ring-primary-container/20 appearance-none" id="billing-month">
+<option selected="" value="march-2025">March 2025</option>
+<option value="april-2025">April 2025</option>
+<option value="may-2025">May 2025</option>
+</select>
+<span class="material-symbols-outlined absolute right-2.5 top-2.5 text-outline pointer-events-none text-[20px]">expand_more</span>
+</div>
+</div>
+<!-- Due Date -->
+<div>
+<label class="block font-label-md text-label-md text-on-surface-variant mb-1.5" for="due-date">Due Date</label>
+<div class="relative">
+<input class="w-full h-10 bg-surface-container-lowest border border-outline-variant rounded-lg px-3 pr-8 font-body-md text-body-md text-on-surface focus:border-primary-container focus:ring-2 focus:ring-primary-container/20" id="due-date" type="text" value="10 March 2025"/>
+<span class="material-symbols-outlined absolute right-2.5 top-2.5 text-outline pointer-events-none text-[20px]">calendar_today</span>
+</div>
+<p class="font-body-sm text-body-sm text-secondary mt-1 flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-tertiary">schedule</span> Grace period: 5 days
+          </p>
+</div>
+</div>
+<!-- Assessment Model Selector -->
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-2">Assessment Model</label>
+<div class="space-y-2">
+<!-- Option 1: Selected -->
+<label class="flex items-center justify-between p-3 rounded-lg border-2 border-primary bg-surface-container-low cursor-pointer transition-all">
+<div class="flex items-center gap-2.5">
+<input checked="" class="w-4 h-4 text-primary focus:ring-primary" name="assessment-model" type="radio"/>
+<div>
+<p class="font-label-md text-label-md text-on-surface">Fixed Standard Rate</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Uniform assessment levied per registered apartment</p>
+</div>
+</div>
+<span class="font-currency-md text-currency-md text-primary font-bold">৳6,500 <span class="font-body-sm text-[11px] font-normal text-secondary">/ flat</span></span>
+</label>
+<!-- Option 2 -->
+<label class="flex items-center justify-between p-3 rounded-lg border border-outline-variant bg-surface-container-lowest hover:bg-surface-bright cursor-pointer transition-all">
+<div class="flex items-center gap-2.5">
+<input class="w-4 h-4 text-primary focus:ring-primary" name="assessment-model" type="radio"/>
+<div>
+<p class="font-label-md text-label-md text-on-surface">Area / Sqft Pro-Rata</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Calculation determined by deed gross square footage</p>
+</div>
+</div>
+<span class="font-currency-md text-currency-md text-on-surface font-semibold">৳3.2 <span class="font-body-sm text-[11px] font-normal text-secondary">/ sqft</span></span>
+</label>
+<!-- Option 3 -->
+<label class="flex items-center justify-between p-3 rounded-lg border border-outline-variant bg-surface-container-lowest hover:bg-surface-bright cursor-pointer transition-all">
+<div class="flex items-center gap-2.5">
+<input class="w-4 h-4 text-primary focus:ring-primary" name="assessment-model" type="radio"/>
+<div>
+<p class="font-label-md text-label-md text-on-surface">Tiered BHK Surcharge</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Graduated scale based on layout density (2BHK / 3BHK / Penthouse)</p>
+</div>
+</div>
+<span class="font-label-sm text-label-sm text-secondary font-medium">Custom</span>
+</label>
+</div>
+</div>
+</section>
+<!-- Section 2: Itemized Expense Breakdown -->
+<section class="bg-surface-container-lowest border border-outline-variant rounded-xl p-space-md shadow-sm space-y-space-md">
+<div class="flex items-center justify-between border-b border-outline-variant pb-space-sm">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[20px]">receipt_long</span>
+<div>
+<h2 class="font-headline-md text-headline-md text-on-surface">Itemized Budget Allocation</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Underlying operating &amp; reserve expenses</p>
+</div>
+</div>
+<span class="font-label-sm text-label-sm px-2 py-0.5 rounded bg-surface-container text-on-surface-variant">6 Line Items</span>
+</div>
+<!-- Line items list -->
+<div class="divide-y divide-outline-variant/60 font-body-sm text-body-sm">
+<div class="py-2.5 flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[17px] text-outline">shield</span>
+<span class="text-on-surface">24/7 Security Guard &amp; CCTV Service</span>
+</div>
+<span class="font-currency-md text-currency-md text-on-surface">৳65,000</span>
+</div>
+<div class="py-2.5 flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[17px] text-outline">elevator</span>
+<span class="text-on-surface">Lift AMC (Schindler Lift Maintenance)</span>
+</div>
+<span class="font-currency-md text-currency-md text-on-surface">৳28,000</span>
+</div>
+<div class="py-2.5 flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[17px] text-outline">bolt</span>
+<span class="text-on-surface">Standby Generator Diesel &amp; Maintenance</span>
+</div>
+<span class="font-currency-md text-currency-md text-on-surface">৳45,000</span>
+</div>
+<div class="py-2.5 flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[17px] text-outline">cleaning_services</span>
+<span class="text-on-surface">Common Area Cleaning, Waste &amp; Sanitization</span>
+</div>
+<span class="font-currency-md text-currency-md text-on-surface">৳32,000</span>
+</div>
+<div class="py-2.5 flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[17px] text-outline">badge</span>
+<span class="text-on-surface">Society Administrative Staff &amp; Accountant</span>
+</div>
+<span class="font-currency-md text-currency-md text-on-surface">৳30,000</span>
+</div>
+<div class="py-2.5 flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[17px] text-tertiary">savings</span>
+<span class="text-on-surface font-medium">Association Sinking Capital Reserve Levy (15%)</span>
+</div>
+<span class="font-currency-md text-currency-md text-tertiary font-semibold">৳34,000</span>
+</div>
+</div>
+<!-- Ledger Summary Box -->
+<div class="p-3 bg-surface-container-low rounded-lg border border-surface-container flex items-center justify-between">
+<div>
+<p class="font-label-sm text-label-sm text-secondary">Total Assessment Budget</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Allocated uniformly across 36 Flats</p>
+</div>
+<div class="text-right">
+<p class="font-currency-lg text-currency-lg text-primary">৳2,34,000</p>
+<p class="font-label-sm text-label-sm text-tertiary">Balanced (৳0 Variance)</p>
+</div>
+</div>
+</section>
+<!-- Section 3: Target Unit Selection -->
+<section class="bg-surface-container-lowest border border-outline-variant rounded-xl p-space-md shadow-sm space-y-space-md">
+<div class="flex items-center gap-space-xs border-b border-outline-variant pb-space-sm">
+<span class="material-symbols-outlined text-primary text-[20px]">apartment</span>
+<h2 class="font-headline-md text-headline-md text-on-surface">Target Unit Selection</h2>
+</div>
+<!-- Radio Selection -->
+<div class="space-y-3">
+<label class="flex items-start gap-3 p-3 rounded-lg border border-primary bg-surface-container-low cursor-pointer">
+<input checked="" class="mt-0.5 w-4 h-4 text-primary focus:ring-primary" name="unit-scope" type="radio"/>
+<div class="flex-1">
+<div class="flex items-center justify-between">
+<p class="font-label-md text-label-md text-on-surface">All 36 Units in Green Valley Heights</p>
+<span class="font-label-sm text-label-sm text-primary font-semibold">Tower A &amp; B</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">34 Owner/Tenant Occupied • 2 Developer Reserved</p>
+</div>
+</label>
+<!-- Vacant Unit Toggle -->
+<div class="pt-2 border-t border-outline-variant/60 flex items-center justify-between">
+<div class="pr-3">
+<p class="font-label-md text-label-md text-on-surface">Developer Ledger Inclusion</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Include 2 vacant units in developer ledger</p>
+</div>
+<!-- Toggle Switch -->
+<label class="relative inline-flex items-center cursor-pointer shrink-0">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-outline-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-surface-container-lowest after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-surface-container-lowest after:border-outline-variant after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+</div>
+</section>
+<!-- Section 4: Auto-Notification & Dispatch -->
+<section class="bg-surface-container-lowest border border-outline-variant rounded-xl p-space-md shadow-sm space-y-space-md">
+<div class="flex items-center gap-space-xs border-b border-outline-variant pb-space-sm">
+<span class="material-symbols-outlined text-primary text-[20px]">forward_to_inbox</span>
+<h2 class="font-headline-md text-headline-md text-on-surface">Auto-Notification &amp; Dispatch</h2>
+</div>
+<div class="space-y-3">
+<!-- Checkbox 1 -->
+<label class="flex items-start gap-3 cursor-pointer">
+<input checked="" class="mt-0.5 w-[18px] h-[18px] rounded text-primary border-outline-variant focus:ring-primary" type="checkbox"/>
+<div>
+<p class="font-label-md text-label-md text-on-surface">Send instant SMS &amp; WhatsApp notification</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Notifies all 36 registered flat owners via verified Bangladesh phone numbers with payment gateway deep-links.</p>
+</div>
+</label>
+<!-- Checkbox 2 -->
+<label class="flex items-start gap-3 cursor-pointer">
+<input checked="" class="mt-0.5 w-[18px] h-[18px] rounded text-primary border-outline-variant focus:ring-primary" type="checkbox"/>
+<div>
+<p class="font-label-md text-label-md text-on-surface">Issue downloadable digital PDF vouchers</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Immediately archive serialized invoices into the Tenant/Owner Document Vault for tax and compliance.</p>
+</div>
+</label>
+</div>
+</section>
+</main>
+<!-- Sticky Action Footer Dock -->
+<footer class="fixed bottom-0 left-0 w-full z-40 bg-surface-container-lowest shadow-sm p-margin-mobile">
+<div class="max-w-md mx-auto space-y-2">
+<!-- Primary Action CTA -->
+<button class="w-full h-12 bg-primary-container hover:bg-primary text-on-primary font-label-lg text-label-lg rounded-lg shadow-sm flex items-center justify-center gap-2 active:scale-95 transition-all duration-150" type="button">
+<span class="material-symbols-outlined text-[20px]">send</span>
+<span>Generate &amp; Dispatch 36 Invoices (৳2,34,000)</span>
+</button>
+<!-- Secondary Cancel CTA -->
+<button class="w-full h-10 bg-transparent hover:bg-surface-container text-secondary font-label-md text-label-md rounded-lg flex items-center justify-center transition-colors" type="button">
+        Cancel Assessment Run
+      </button>
+</div>
+</footer>
+</body></html>

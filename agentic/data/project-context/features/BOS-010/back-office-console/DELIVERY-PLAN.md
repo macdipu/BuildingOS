@@ -16,5 +16,12 @@ accepted TECH-SPEC.md scope.
 | F6-T9 | System + Dashboard screens (BOC-08/09) | F6-T5, F6-T6 |
 | F6-T10 | QA: browser walkthrough, release readiness | All |
 
+UI reference (see `../../../ui/stitch/UI-INDEX.md`; layout only, BRD governs behavior):
+F6-T6 nav shell ← `back-office/01` sidebar vs §149.2 nav; F6-T7 ← `back-office/02` (buildings /
+applications) + `back-office/03` (subscriptions); F6-T8 ← no mockup (Users/Support) — plan from
+§149.2/§149.11–149.12 + DESIGN.md, `back-office/02` for the onboarding view; F6-T9 ←
+`back-office/01` (dashboard) + `back-office/04` (audit/system). Conflicts C-2 (automated
+billing) and C-3 (kanban vs §149.4 states) are excluded from scope pending operator decision.
+
 Split further if a task cannot finish within the harness task budget. One task-finish
 commit per bounded task.

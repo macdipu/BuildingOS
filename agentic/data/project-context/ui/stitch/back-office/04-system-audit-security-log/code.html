@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>BuildingOS Super Admin — System Audit &amp; Security</title>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts: Plus Jakarta Sans & Inter -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@600;700;800&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS v3 with Plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Configuration verbatim -->
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "primary-fixed": "#dbe1ff",
+            "on-tertiary": "#ffffff",
+            "surface-tint": "#0053db",
+            "on-background": "#0b1c30",
+            "secondary-container": "#dae2fd",
+            "secondary": "#565e74",
+            "tertiary-fixed": "#85f8c4",
+            "on-secondary-fixed-variant": "#3f465c",
+            "on-secondary-container": "#5c647a",
+            "on-secondary": "#ffffff",
+            "surface-container": "#e5eeff",
+            "on-tertiary-container": "#bdffdc",
+            "outline-variant": "#c3c6d7",
+            "inverse-surface": "#213145",
+            "background": "#f8f9ff",
+            "surface-container-high": "#dce9ff",
+            "tertiary-fixed-dim": "#68dba9",
+            "inverse-primary": "#b4c5ff",
+            "on-error-container": "#93000a",
+            "on-surface": "#0b1c30",
+            "surface-dim": "#cbdbf5",
+            "on-tertiary-fixed-variant": "#005137",
+            "error": "#ba1a1a",
+            "inverse-on-surface": "#eaf1ff",
+            "on-primary-container": "#eeefff",
+            "on-primary-fixed": "#00174b",
+            "surface-container-lowest": "#ffffff",
+            "primary-fixed-dim": "#b4c5ff",
+            "secondary-fixed": "#dae2fd",
+            "surface-bright": "#f8f9ff",
+            "on-primary": "#ffffff",
+            "on-primary-fixed-variant": "#003ea8",
+            "surface": "#f8f9ff",
+            "tertiary": "#006243",
+            "outline": "#737686",
+            "primary-container": "#2563eb",
+            "on-tertiary-fixed": "#002114",
+            "on-secondary-fixed": "#131b2e",
+            "tertiary-container": "#007d57",
+            "surface-variant": "#d3e4fe",
+            "on-surface-variant": "#434655",
+            "surface-container-low": "#eff4ff",
+            "secondary-fixed-dim": "#bec6e0",
+            "error-container": "#ffdad6",
+            "primary": "#004ac6",
+            "surface-container-highest": "#d3e4fe",
+            "on-error": "#ffffff"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "gutter": "1.5rem",
+            "space-sm": "0.75rem",
+            "margin": "2rem",
+            "space-lg": "1.5rem",
+            "gutter-mobile": "1rem",
+            "margin-mobile": "1rem",
+            "space-xl": "2rem",
+            "space-md": "1rem",
+            "space-2xl": "3rem",
+            "space-2xs": "0.25rem",
+            "space-xs": "0.5rem"
+          },
+          "fontFamily": {
+            "display-lg-mobile": ["Plus Jakarta Sans"],
+            "label-sm": ["Inter"],
+            "headline-xl": ["Plus Jakarta Sans"],
+            "currency-lg": ["Plus Jakarta Sans"],
+            "display-lg": ["Plus Jakarta Sans"],
+            "body-md": ["Inter"],
+            "body-lg": ["Inter"],
+            "label-lg": ["Inter"],
+            "label-md": ["Inter"],
+            "currency-md": ["Inter"],
+            "headline-lg": ["Plus Jakarta Sans"],
+            "body-sm": ["Inter"],
+            "headline-md": ["Plus Jakarta Sans"],
+            "mono": ["JetBrains Mono", "monospace"]
+          },
+          "fontSize": {
+            "display-lg-mobile": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+            "label-sm": ["11px", { "lineHeight": "14px", "letterSpacing": "0.02em", "fontWeight": "600" }],
+            "headline-xl": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.015em", "fontWeight": "600" }],
+            "currency-lg": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+            "display-lg": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+            "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "label-lg": ["14px", { "lineHeight": "20px", "fontWeight": "600" }],
+            "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "600" }],
+            "currency-md": ["15px", { "lineHeight": "20px", "fontWeight": "600" }],
+            "headline-lg": ["22px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "body-sm": ["12px", { "lineHeight": "16px", "fontWeight": "400" }],
+            "headline-md": ["18px", { "lineHeight": "24px", "letterSpacing": "-0.005em", "fontWeight": "600" }]
+          }
+        },
+      },
+    }
+  </script>
+</head>
+<body class="bg-background text-on-surface antialiased min-h-screen flex selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- ========================================================= -->
+<!-- SHARED COMPONENT: SideNavBar                              -->
+<!-- ========================================================= -->
+<aside class="fixed top-0 left-0 h-screen w-64 flex flex-col bg-surface-container-lowest dark:bg-inverse-surface border-r border-outline-variant dark:border-outline shadow-sm dark:shadow-none z-40">
+<div class="w-64 h-full p-space-md flex flex-col justify-between overflow-y-auto">
+<!-- Top Rail: Logo & Nav items -->
+<div class="flex flex-col gap-space-md">
+<!-- Header / Logo -->
+<div class="flex items-center gap-space-sm px-space-xs py-space-2xs">
+<div class="w-9 h-9 rounded-lg bg-primary flex items-center justify-center text-white shadow-sm font-bold text-lg tracking-wider">
+            B
+          </div>
+<div class="flex flex-col">
+<span class="text-headline-md font-headline-md font-bold text-primary dark:text-inverse-primary leading-tight">BuildingOS</span>
+<span class="text-label-sm font-label-sm text-secondary tracking-normal">Super Admin Suite</span>
+</div>
+</div>
+<!-- Navigation Tabs -->
+<nav class="flex flex-col gap-1 mt-2">
+<!-- 1. Platform Overview (Inactive) -->
+<a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg text-on-surface-variant dark:text-surface-variant hover:text-on-surface dark:hover:text-inverse-on-surface hover:bg-surface-container-low dark:hover:bg-surface-container transition-colors duration-150 transition-all duration-150 active:scale-[0.99] group" href="#">
+<span class="material-symbols-outlined text-[20px] text-secondary group-hover:text-primary transition-colors">dashboard</span>
+<span class="text-label-md font-label-md">Platform Overview</span>
+</a>
+<!-- 2. Buildings Pipeline (Inactive) -->
+<a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg text-on-surface-variant dark:text-surface-variant hover:text-on-surface dark:hover:text-inverse-on-surface hover:bg-surface-container-low dark:hover:bg-surface-container transition-colors duration-150 transition-all duration-150 active:scale-[0.99] group" href="#">
+<span class="material-symbols-outlined text-[20px] text-secondary group-hover:text-primary transition-colors">domain</span>
+<span class="text-label-md font-label-md">Buildings Pipeline</span>
+</a>
+<!-- 3. Subscriptions & Billing (Inactive) -->
+<a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg text-on-surface-variant dark:text-surface-variant hover:text-on-surface dark:hover:text-inverse-on-surface hover:bg-surface-container-low dark:hover:bg-surface-container transition-colors duration-150 transition-all duration-150 active:scale-[0.99] group" href="#">
+<span class="material-symbols-outlined text-[20px] text-secondary group-hover:text-primary transition-colors">receipt_long</span>
+<span class="text-label-md font-label-md">Subscriptions &amp; Billing</span>
+</a>
+<!-- 4. System Audit & Security (ACTIVE LOCK) -->
+<a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg bg-surface-container-low dark:bg-surface-container text-primary dark:text-inverse-primary font-semibold hover:bg-surface-container-low dark:hover:bg-surface-container transition-colors duration-150 transition-all duration-150 active:scale-[0.99] shadow-sm" href="#">
+<span class="material-symbols-outlined text-[20px] text-primary" style="font-variation-settings: 'FILL' 1;">shield</span>
+<span class="text-label-md font-label-md">System Audit &amp; Security</span>
+</a>
+<!-- 5. User Entitlements (Inactive) -->
+<a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg text-on-surface-variant dark:text-surface-variant hover:text-on-surface dark:hover:text-inverse-on-surface hover:bg-surface-container-low dark:hover:bg-surface-container transition-colors duration-150 transition-all duration-150 active:scale-[0.99] group" href="#">
+<span class="material-symbols-outlined text-[20px] text-secondary group-hover:text-primary transition-colors">badge</span>
+<span class="text-label-md font-label-md">User Entitlements</span>
+</a>
+<!-- 6. API & Webhooks (Inactive) -->
+<a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg text-on-surface-variant dark:text-surface-variant hover:text-on-surface dark:hover:text-inverse-on-surface hover:bg-surface-container-low dark:hover:bg-surface-container transition-colors duration-150 transition-all duration-150 active:scale-[0.99] group" href="#">
+<span class="material-symbols-outlined text-[20px] text-secondary group-hover:text-primary transition-colors">webhook</span>
+<span class="text-label-md font-label-md">API &amp; Webhooks</span>
+</a>
+<!-- 7. Settings (Inactive) -->
+<a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg text-on-surface-variant dark:text-surface-variant hover:text-on-surface dark:hover:text-inverse-on-surface hover:bg-surface-container-low dark:hover:bg-surface-container transition-colors duration-150 transition-all duration-150 active:scale-[0.99] group" href="#">
+<span class="material-symbols-outlined text-[20px] text-secondary group-hover:text-primary transition-colors">settings</span>
+<span class="text-label-md font-label-md">Settings</span>
+</a>
+</nav>
+</div>
+<!-- Footer Rail: Documentation & Support -->
+<div class="pt-space-md border-t border-outline-variant/60 flex flex-col gap-1">
+<a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low transition-colors duration-150" href="#">
+<span class="material-symbols-outlined text-[18px] text-secondary">menu_book</span>
+<span class="text-label-md font-label-md">Documentation</span>
+</a>
+<a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low transition-colors duration-150" href="#">
+<span class="material-symbols-outlined text-[18px] text-secondary">headset_mic</span>
+<span class="text-label-md font-label-md">Support</span>
+</a>
+</div>
+</div>
+</aside>
+<!-- ========================================================= -->
+<!-- MAIN WORKSPACE CONTAINER (Offset by 256px for Sidebar)    -->
+<!-- ========================================================= -->
+<div class="flex-1 ml-64 flex flex-col min-w-0">
+<!-- ========================================================= -->
+<!-- SHARED COMPONENT: TopNavBar                               -->
+<!-- ========================================================= -->
+<header class="sticky top-0 right-0 z-30 h-16 w-full bg-surface-container-lowest dark:bg-inverse-surface border-b border-outline-variant dark:border-outline shadow-sm dark:shadow-none">
+<div class="flex justify-between items-center h-full px-space-lg max-w-full">
+<!-- Left: Search & Region Nav Links -->
+<div class="flex items-center gap-space-lg flex-1 max-w-2xl">
+<!-- Search Bar (on_left) -->
+<div class="relative w-72">
+<span class="material-symbols-outlined absolute left-3 top-2.5 text-secondary text-[20px]">search</span>
+<input class="w-full h-10 pl-9 pr-3 rounded-lg border border-outline-variant bg-surface text-body-md font-body-md text-on-surface placeholder:text-secondary focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all outline-none" placeholder="Search audit hashes, IP, actor..." type="text"/>
+</div>
+<!-- Regional Links from JSON -->
+<div class="flex items-center gap-space-md text-label-md font-label-md">
+<span class="text-outline-variant font-normal">|</span>
+<a class="text-primary dark:text-inverse-primary font-semibold flex items-center gap-1.5 transition-colors" href="#">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+              Dhaka Metro
+            </a>
+<a class="text-on-surface-variant dark:text-surface-variant hover:text-on-surface dark:hover:text-inverse-on-surface transition-colors" href="#">
+              Chittagong Central
+            </a>
+</div>
+</div>
+<!-- Right: Actions & User Avatar -->
+<div class="flex items-center gap-space-md">
+<!-- Trailing Secondary Action -->
+<button class="h-9 px-space-md rounded-lg border border-outline-variant bg-surface hover:bg-surface-container-low text-on-surface text-label-md font-label-md transition-colors flex items-center gap-1.5 active:scale-[0.98]">
+<span class="material-symbols-outlined text-[18px] text-secondary">history_edu</span>
+            Audit Log
+          </button>
+<!-- Trailing Primary Action (System Operational) -->
+<div class="flex items-center gap-2 px-space-sm py-1.5 rounded-full bg-tertiary/10 border border-tertiary/20 text-tertiary text-label-sm font-label-sm">
+<span class="w-2 h-2 rounded-full bg-tertiary animate-pulse"></span>
+            System Operational
+          </div>
+<!-- Trailing Icon Actions -->
+<button class="p-2 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low rounded-lg transition-colors relative" title="Notifications">
+<span class="material-symbols-outlined text-[20px]">notifications</span>
+<span class="absolute top-1.5 right-1.5 w-2 h-2 bg-error rounded-full"></span>
+</button>
+<button class="p-2 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low rounded-lg transition-colors" title="Manage Accounts">
+<span class="material-symbols-outlined text-[20px]">manage_accounts</span>
+</button>
+<div class="h-6 w-px bg-outline-variant"></div>
+<!-- Profile Badge -->
+<div class="flex items-center gap-2.5 pl-1">
+<div class="w-8 h-8 rounded-full bg-primary-fixed text-on-primary-fixed flex items-center justify-center font-bold text-label-md ring-2 ring-primary/20">
+              SA
+            </div>
+<div class="hidden xl:flex flex-col">
+<span class="text-label-md font-label-md text-on-surface leading-tight">SuperAdmin</span>
+<span class="text-label-sm font-label-sm text-secondary">Farzana (HQ)</span>
+</div>
+</div>
+</div>
+</div>
+</header>
+<!-- ========================================================= -->
+<!-- CONTENT CANVAS                                            -->
+<!-- ========================================================= -->
+<main class="p-space-xl max-w-[1440px] w-full mx-auto space-y-space-xl">
+<!-- 1. Header Section -->
+<section class="flex flex-col lg:flex-row lg:items-center justify-between gap-space-lg pb-space-sm border-b border-outline-variant/60">
+<div>
+<div class="flex items-center gap-2 mb-1">
+<span class="px-2 py-0.5 rounded text-[11px] font-semibold tracking-wider uppercase bg-primary text-white">Tier 0 Security</span>
+<span class="text-secondary text-body-sm font-body-sm">• Live Merkle Tree Ledger Active</span>
+</div>
+<h1 class="text-headline-xl font-headline-xl text-on-surface">
+            System Audit, Access Governance &amp; Security Log
+          </h1>
+<p class="text-body-md font-body-md text-secondary mt-1">
+            Cryptographic ledger integrity, administrative actions log, DMP regulatory sync, and automated security posture monitoring.
+          </p>
+</div>
+<!-- Controls Cluster -->
+<div class="flex flex-wrap items-center gap-space-sm">
+<!-- Live Streaming Toggle -->
+<div class="flex items-center gap-2 px-space-md py-2 bg-surface-container-lowest border border-outline-variant rounded-lg shadow-sm">
+<span class="relative flex h-2.5 w-2.5">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-tertiary opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-tertiary"></span>
+</span>
+<span class="text-label-md font-label-md text-on-surface">Live Streaming:</span>
+<span class="text-label-md font-label-md text-tertiary font-bold">ON</span>
+</div>
+<!-- Export Trail Action -->
+<button class="flex items-center gap-1.5 px-space-md py-2 bg-surface-container-lowest hover:bg-surface-container-low border border-outline-variant rounded-lg text-on-surface text-label-md font-label-md transition-colors shadow-sm">
+<span class="material-symbols-outlined text-[18px] text-secondary">download</span>
+            Export Audit Trail (JSON/CSV)
+          </button>
+<!-- Primary Compliance CTA -->
+<button class="flex items-center gap-2 px-space-md py-2 bg-primary-container hover:bg-primary text-white rounded-lg text-label-md font-label-md transition-all shadow-sm active:scale-[0.98]">
+<span class="material-symbols-outlined text-[18px]">verified</span>
+            Generate Compliance Certificate
+          </button>
+</div>
+</section>
+<!-- 2. Security & Compliance Health Overview Cards (Bento Metric Layout) -->
+<section class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-space-lg">
+<!-- Card 1: Posture Score -->
+<div class="bg-surface-container-lowest border border-outline-variant/80 rounded-xl p-space-md shadow-sm flex flex-col justify-between hover:border-primary/50 transition-colors">
+<div>
+<div class="flex items-center justify-between">
+<span class="text-label-sm font-label-sm text-secondary uppercase tracking-wider">Security Posture Score</span>
+<span class="material-symbols-outlined text-primary text-[20px]">verified_user</span>
+</div>
+<div class="mt-space-sm flex items-baseline gap-2">
+<span class="text-headline-xl font-headline-xl text-on-surface">99.8%</span>
+<span class="text-label-sm font-label-sm text-tertiary font-semibold flex items-center gap-0.5">
+<span class="material-symbols-outlined text-[14px]">arrow_upward</span> Compliant
+              </span>
+</div>
+</div>
+<div class="mt-space-md pt-space-xs border-t border-outline-variant/40 text-body-sm font-body-sm text-secondary">
+            ISO 27001 &amp; Bangladesh Data Protection standards
+          </div>
+</div>
+<!-- Card 2: Ledger Cryptographic Verification -->
+<div class="bg-surface-container-lowest border border-outline-variant/80 rounded-xl p-space-md shadow-sm flex flex-col justify-between hover:border-primary/50 transition-colors">
+<div>
+<div class="flex items-center justify-between">
+<span class="text-label-sm font-label-sm text-secondary uppercase tracking-wider">Ledger Cryptographic Verification</span>
+<span class="material-symbols-outlined text-tertiary text-[20px]">lock_reset</span>
+</div>
+<div class="mt-space-sm flex items-baseline gap-2">
+<span class="text-headline-xl font-headline-xl text-tertiary">100%</span>
+<span class="text-label-sm font-label-sm text-on-surface font-semibold">Tamper-Proof</span>
+</div>
+</div>
+<div class="mt-space-md pt-space-xs border-t border-outline-variant/40 text-body-sm font-body-sm text-secondary truncate" title="SHA-256 Merkle root verified at 11:00 AM">
+            SHA-256 Merkle root verified at 11:00 AM
+          </div>
+</div>
+<!-- Card 3: DMP Police Verification Sync -->
+<div class="bg-surface-container-lowest border border-outline-variant/80 rounded-xl p-space-md shadow-sm flex flex-col justify-between hover:border-primary/50 transition-colors">
+<div>
+<div class="flex items-center justify-between">
+<span class="text-label-sm font-label-sm text-secondary uppercase tracking-wider">DMP Police Verification Sync</span>
+<span class="material-symbols-outlined text-primary-container text-[20px]">local_police</span>
+</div>
+<div class="mt-space-sm flex items-baseline gap-2">
+<span class="text-headline-xl font-headline-xl text-on-surface">99.1%</span>
+<span class="text-label-sm font-label-sm text-tertiary font-semibold">Verified</span>
+</div>
+</div>
+<div class="mt-space-md pt-space-xs border-t border-outline-variant/40 text-body-sm font-body-sm text-secondary truncate">
+            Citizen profiles matched with DMP CIMS database
+          </div>
+</div>
+<!-- Card 4: Active Admin Sessions -->
+<div class="bg-surface-container-lowest border border-outline-variant/80 rounded-xl p-space-md shadow-sm flex flex-col justify-between hover:border-primary/50 transition-colors">
+<div>
+<div class="flex items-center justify-between">
+<span class="text-label-sm font-label-sm text-secondary uppercase tracking-wider">Active Admin Sessions</span>
+<span class="material-symbols-outlined text-on-secondary-container text-[20px]">admin_panel_settings</span>
+</div>
+<div class="mt-space-sm flex items-baseline gap-2">
+<span class="text-headline-xl font-headline-xl text-on-surface">4</span>
+<span class="text-label-md font-label-md text-secondary">Super Admins</span>
+</div>
+</div>
+<div class="mt-space-md pt-space-xs border-t border-outline-variant/40 text-body-sm font-body-sm text-secondary flex items-center gap-1 text-[#059669]">
+<span class="material-symbols-outlined text-[15px]">key</span>
+            All multi-factor authentication / 2FA enforced
+          </div>
+</div>
+</section>
+<!-- 3. Audit Log Filter Bar -->
+<section class="bg-surface-container-lowest border border-outline-variant/80 rounded-xl p-space-md shadow-sm space-y-space-md">
+<div class="flex flex-col xl:flex-row items-stretch xl:items-center justify-between gap-space-md">
+<!-- Global Search Input -->
+<div class="relative flex-1">
+<span class="material-symbols-outlined absolute left-3.5 top-2.5 text-secondary text-[20px]">search</span>
+<input class="w-full h-10 pl-10 pr-4 rounded-lg border border-outline-variant bg-surface text-body-md font-body-md text-on-surface placeholder:text-secondary focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none" placeholder="Filter events by user, IP address, building ID, action type..." type="text"/>
+</div>
+<!-- Selectors Cluster -->
+<div class="flex flex-wrap items-center gap-space-sm">
+<!-- Date/Time Selector -->
+<div class="flex items-center gap-1.5 h-10 px-3 bg-surface border border-outline-variant rounded-lg text-body-md font-body-md text-on-surface cursor-pointer hover:border-outline">
+<span class="material-symbols-outlined text-secondary text-[18px]">calendar_today</span>
+<span>Past 24 Hours</span>
+<span class="material-symbols-outlined text-secondary text-[18px] ml-1">expand_more</span>
+</div>
+<!-- Severity Filter -->
+<div class="flex items-center gap-1.5 h-10 px-3 bg-surface border border-outline-variant rounded-lg text-body-md font-body-md text-on-surface cursor-pointer hover:border-outline">
+<span class="material-symbols-outlined text-secondary text-[18px]">filter_list</span>
+<span class="text-secondary font-label-md">Severity:</span>
+<span class="font-medium">All Events</span>
+<span class="material-symbols-outlined text-secondary text-[18px]">expand_more</span>
+</div>
+<!-- Building Selector -->
+<div class="flex items-center gap-1.5 h-10 px-3 bg-surface border border-outline-variant rounded-lg text-body-md font-body-md text-on-surface cursor-pointer hover:border-outline">
+<span class="material-symbols-outlined text-secondary text-[18px]">apartment</span>
+<span class="text-secondary font-label-md">Building:</span>
+<span class="font-medium">All Properties (Dhaka Metro)</span>
+<span class="material-symbols-outlined text-secondary text-[18px]">expand_more</span>
+</div>
+<button class="h-10 px-3.5 bg-surface-container-low hover:bg-surface-container text-primary rounded-lg text-label-md font-label-md transition-colors flex items-center gap-1">
+<span class="material-symbols-outlined text-[18px]">restart_alt</span>
+              Reset
+            </button>
+</div>
+</div>
+<!-- Quick Tag Toggles -->
+<div class="flex flex-wrap items-center gap-2 pt-2 border-t border-outline-variant/40 text-label-sm font-label-sm">
+<span class="text-secondary mr-1">Quick Filters:</span>
+<span class="px-2.5 py-1 rounded-full bg-primary-fixed text-on-primary-fixed border border-primary/20 cursor-pointer font-medium">All (14,291)</span>
+<span class="px-2.5 py-1 rounded-full bg-surface border border-outline-variant text-on-surface-variant hover:bg-surface-container-low cursor-pointer flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-error"></span> Critical / Security (12)
+          </span>
+<span class="px-2.5 py-1 rounded-full bg-surface border border-outline-variant text-on-surface-variant hover:bg-surface-container-low cursor-pointer flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-[#059669]"></span> Financial Mutation (842)
+          </span>
+<span class="px-2.5 py-1 rounded-full bg-surface border border-outline-variant text-on-surface-variant hover:bg-surface-container-low cursor-pointer flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span> Config Change (54)
+          </span>
+<span class="px-2.5 py-1 rounded-full bg-surface border border-outline-variant text-on-surface-variant hover:bg-surface-container-low cursor-pointer flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span> DMP Sync Records (310)
+          </span>
+</div>
+</section>
+<!-- 4. Immutable System Audit Log Table -->
+<section class="bg-surface-container-lowest border border-outline-variant/80 rounded-xl shadow-sm overflow-hidden">
+<!-- Table Top Header -->
+<div class="p-space-md border-b border-outline-variant/80 flex items-center justify-between bg-surface-bright">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-primary text-[22px]">data_table</span>
+<div>
+<h2 class="text-headline-md font-headline-md text-on-surface">Immutable Cryptographic Audit Trail</h2>
+<p class="text-body-sm font-body-sm text-secondary">Append-only Merkle-verified chronological operational transactions</p>
+</div>
+</div>
+<div class="text-label-sm font-label-sm text-secondary flex items-center gap-2">
+<span>Buffer Status: <strong class="text-tertiary">Synced</strong></span>
+<span>•</span>
+<span>Batch Hash: <code class="font-mono text-[11px] bg-surface-container-low px-1.5 py-0.5 rounded text-on-surface">#0x99e2f...1b7a</code></span>
+</div>
+</div>
+<!-- Dense Data Table Container -->
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low/70 border-b border-outline-variant/80 text-label-sm font-label-sm text-secondary uppercase tracking-wider">
+<th class="py-3 px-4 font-semibold">Timestamp &amp; Event Hash</th>
+<th class="py-3 px-4 font-semibold">Initiator &amp; Role</th>
+<th class="py-3 px-4 font-semibold">Event Category</th>
+<th class="py-3 px-4 font-semibold">Target Entity</th>
+<th class="py-3 px-4 font-semibold">IP Address &amp; Network</th>
+<th class="py-3 px-4 font-semibold">Ledger Status</th>
+<th class="py-3 px-4 text-right font-semibold">Action</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/40 text-body-sm font-body-sm">
+<!-- Row 1: Financial Ledger Mutation -->
+<tr class="hover:bg-surface-container-low/40 transition-colors">
+<td class="py-3.5 px-4">
+<div class="font-medium text-on-surface">20 Mar 2025 <span class="text-secondary font-mono text-[11px]">11:42:15</span></div>
+<div class="font-mono text-[11px] text-primary select-all">#sha256:7f9a8b1c4e23c</div>
+</td>
+<td class="py-3.5 px-4">
+<div class="font-semibold text-on-surface">Tanvir Ahmed</div>
+<div class="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-semibold bg-[#F1F5F9] border border-[#CBD5E1] text-[#334155] uppercase mt-0.5">
+                    Building Lead • GVH
+                  </div>
+</td>
+<td class="py-3.5 px-4">
+<span class="inline-flex items-center gap-1.5 text-on-surface font-medium">
+<span class="w-2 h-2 rounded-full bg-[#059669]"></span>
+                    Financial Ledger Mutation
+                  </span>
+<div class="text-[11px] text-secondary">DESCO Utility Split Recalculation</div>
+</td>
+<td class="py-3.5 px-4">
+<div class="font-medium text-on-surface">Flat 4A Rent Split Escrow</div>
+<div class="font-mono text-[11px] text-secondary">#RCP-2025-0302 • ৳ 42,500</div>
+</td>
+<td class="py-3.5 px-4">
+<div class="font-mono text-[11px] text-on-surface">103.147.218.42</div>
+<div class="text-[11px] text-secondary">Dhaka, Fiber@Home • Mac Chrome</div>
+</td>
+<td class="py-3.5 px-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-[#ECFDF5] text-[#065F46] border border-[#A7F3D0]">
+<span class="w-1.5 h-1.5 rounded-full bg-[#059669]"></span>
+                    Cryptographically Verified
+                  </span>
+</td>
+<td class="py-3.5 px-4 text-right">
+<button class="px-2.5 py-1 rounded border border-outline-variant hover:bg-surface-container-low text-primary text-label-sm font-label-sm transition-colors">
+                    Details
+                  </button>
+</td>
+</tr>
+<!-- Row 2: DMP Citizen Record Dispatch -->
+<tr class="hover:bg-surface-container-low/40 transition-colors">
+<td class="py-3.5 px-4">
+<div class="font-medium text-on-surface">20 Mar 2025 <span class="text-secondary font-mono text-[11px]">11:39:04</span></div>
+<div class="font-mono text-[11px] text-primary select-all">#sha256:d4c21a99801f9</div>
+</td>
+<td class="py-3.5 px-4">
+<div class="font-semibold text-on-surface">System Cron Worker</div>
+<div class="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-semibold bg-surface-container-high text-on-secondary-fixed uppercase mt-0.5">
+                    Automated Service
+                  </div>
+</td>
+<td class="py-3.5 px-4">
+<span class="inline-flex items-center gap-1.5 text-on-surface font-medium">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+                    DMP Citizen Record Dispatch
+                  </span>
+<div class="text-[11px] text-secondary">Gulshan Police Thana API Sync</div>
+</td>
+<td class="py-3.5 px-4">
+<div class="font-medium text-on-surface">Tenant Registration Card</div>
+<div class="font-mono text-[11px] text-secondary">NID: 19922692019482711</div>
+</td>
+<td class="py-3.5 px-4">
+<div class="font-mono text-[11px] text-on-surface">Internal Microservice VPC</div>
+<div class="text-[11px] text-secondary">ap-south-1 • gRPC Daemon</div>
+</td>
+<td class="py-3.5 px-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-[#ECFDF5] text-[#065F46] border border-[#A7F3D0]">
+<span class="w-1.5 h-1.5 rounded-full bg-[#059669]"></span>
+                    Cryptographically Verified
+                  </span>
+</td>
+<td class="py-3.5 px-4 text-right">
+<button class="px-2.5 py-1 rounded border border-outline-variant hover:bg-surface-container-low text-primary text-label-sm font-label-sm transition-colors">
+                    Details
+                  </button>
+</td>
+</tr>
+<!-- Row 3: Admin Privilege Escalation (Critical/Blocked) -->
+<tr class="hover:bg-error-container/20 transition-colors bg-error-container/5">
+<td class="py-3.5 px-4">
+<div class="font-medium text-on-surface">20 Mar 2025 <span class="text-secondary font-mono text-[11px]">11:21:49</span></div>
+<div class="font-mono text-[11px] text-error select-all">#sha256:008caef90021b</div>
+</td>
+<td class="py-3.5 px-4">
+<div class="font-semibold text-on-surface">Estate Manager #884</div>
+<div class="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-semibold bg-[#F1F5F9] border border-[#CBD5E1] text-[#334155] uppercase mt-0.5">
+                    Manager
+                  </div>
+</td>
+<td class="py-3.5 px-4">
+<span class="inline-flex items-center gap-1.5 text-error font-medium">
+<span class="w-2 h-2 rounded-full bg-error"></span>
+                    Admin Privilege Escalation
+                  </span>
+<div class="text-[11px] text-secondary">Attempted Root Role Self-Assignment</div>
+</td>
+<td class="py-3.5 px-4">
+<div class="font-medium text-on-surface">System Master Key Ring</div>
+<div class="font-mono text-[11px] text-secondary">Target: 'SuperAdmin' Policy</div>
+</td>
+<td class="py-3.5 px-4">
+<div class="font-mono text-[11px] text-error font-semibold">182.16.49.201</div>
+<div class="text-[11px] text-secondary">Uttara ISP • Unrecognized Linux</div>
+</td>
+<td class="py-3.5 px-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-[#FFF1F2] text-[#9F1239] border border-[#FECDD3]">
+<span class="w-1.5 h-1.5 rounded-full bg-error"></span>
+                    Authorization Denied (Blocked)
+                  </span>
+</td>
+<td class="py-3.5 px-4 text-right">
+<button class="px-2.5 py-1 rounded border border-error/40 hover:bg-error-container text-error text-label-sm font-label-sm transition-colors">
+                    Review
+                  </button>
+</td>
+</tr>
+<!-- Row 4: Ownership Transfer Recorded -->
+<tr class="hover:bg-surface-container-low/40 transition-colors">
+<td class="py-3.5 px-4">
+<div class="font-medium text-on-surface">20 Mar 2025 <span class="text-secondary font-mono text-[11px]">11:05:18</span></div>
+<div class="font-mono text-[11px] text-primary select-all">#sha256:33bc99014efa1</div>
+</td>
+<td class="py-3.5 px-4">
+<div class="font-semibold text-on-surface">SuperAdmin: Farzana</div>
+<div class="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-semibold bg-[#0F172A] text-white uppercase mt-0.5">
+                    Super Admin HQ
+                  </div>
+</td>
+<td class="py-3.5 px-4">
+<span class="inline-flex items-center gap-1.5 text-on-surface font-medium">
+<span class="w-2 h-2 rounded-full bg-[#7C3AED]"></span>
+                    Ownership Transfer Recorded
+                  </span>
+<div class="text-[11px] text-secondary">Sub-Registry Office Attestation</div>
+</td>
+<td class="py-3.5 px-4">
+<div class="font-medium text-on-surface">Flat 7C Ownership Transfer Deed</div>
+<div class="font-mono text-[11px] text-secondary">#DH-BAN-2025-411 • Banani Heights</div>
+</td>
+<td class="py-3.5 px-4">
+<div class="font-mono text-[11px] text-on-surface">103.205.71.12</div>
+<div class="text-[11px] text-secondary">Gulshan HQ • Secured Hardware VPN</div>
+</td>
+<td class="py-3.5 px-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-[#ECFDF5] text-[#065F46] border border-[#A7F3D0]">
+<span class="w-1.5 h-1.5 rounded-full bg-[#059669]"></span>
+                    Cryptographically Verified
+                  </span>
+</td>
+<td class="py-3.5 px-4 text-right">
+<button class="px-2.5 py-1 rounded border border-outline-variant hover:bg-surface-container-low text-primary text-label-sm font-label-sm transition-colors">
+                    Details
+                  </button>
+</td>
+</tr>
+<!-- Row 5: API Webhook Retry -->
+<tr class="hover:bg-surface-container-low/40 transition-colors">
+<td class="py-3.5 px-4">
+<div class="font-medium text-on-surface">20 Mar 2025 <span class="text-secondary font-mono text-[11px]">10:52:40</span></div>
+<div class="font-mono text-[11px] text-primary select-all">#sha256:5a8e23bb4109c</div>
+</td>
+<td class="py-3.5 px-4">
+<div class="font-semibold text-on-surface">System Cron Worker</div>
+<div class="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-semibold bg-surface-container-high text-on-secondary-fixed uppercase mt-0.5">
+                    Automated Service
+                  </div>
+</td>
+<td class="py-3.5 px-4">
+<span class="inline-flex items-center gap-1.5 text-on-surface font-medium">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+                    API Webhook Retry
+                  </span>
+<div class="text-[11px] text-secondary">bKash Payment Gateway Token Refresh</div>
+</td>
+<td class="py-3.5 px-4">
+<div class="font-medium text-on-surface">Gateway Token Renewal</div>
+<div class="font-mono text-[11px] text-secondary">Merchant: BLD-OS-8891</div>
+</td>
+<td class="py-3.5 px-4">
+<div class="font-mono text-[11px] text-on-surface">Internal Microservice VPC</div>
+<div class="text-[11px] text-secondary">Payment Ingress Lambda #04</div>
+</td>
+<td class="py-3.5 px-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-[#ECFDF5] text-[#065F46] border border-[#A7F3D0]">
+<span class="w-1.5 h-1.5 rounded-full bg-[#059669]"></span>
+                    Cryptographically Verified
+                  </span>
+</td>
+<td class="py-3.5 px-4 text-right">
+<button class="px-2.5 py-1 rounded border border-outline-variant hover:bg-surface-container-low text-primary text-label-sm font-label-sm transition-colors">
+                    Details
+                  </button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Table Footer / Pagination -->
+<div class="p-space-md border-t border-outline-variant/80 flex items-center justify-between text-body-sm font-body-sm bg-surface-bright">
+<div class="text-secondary">
+            Showing <strong class="text-on-surface">1 - 5</strong> of <strong class="text-on-surface">14,291</strong> cryptographic ledger events
+          </div>
+<div class="flex items-center gap-2">
+<button class="px-3 py-1.5 rounded border border-outline-variant text-secondary hover:bg-surface-container-low disabled:opacity-50 text-label-sm font-label-sm" disabled="">
+              Previous
+            </button>
+<span class="px-3 py-1 bg-primary text-white rounded text-label-sm font-label-sm font-semibold">1</span>
+<button class="px-3 py-1 rounded hover:bg-surface-container-low text-on-surface text-label-sm font-label-sm">2</button>
+<button class="px-3 py-1 rounded hover:bg-surface-container-low text-on-surface text-label-sm font-label-sm">3</button>
+<span class="text-secondary">...</span>
+<button class="px-3 py-1 rounded hover:bg-surface-container-low text-on-surface text-label-sm font-label-sm">285</button>
+<button class="px-3 py-1.5 rounded border border-outline-variant text-on-surface hover:bg-surface-container-low text-label-sm font-label-sm">
+              Next
+            </button>
+</div>
+</div>
+</section>
+<!-- 5. Compliance & Security Checkpoint Panel -->
+<section class="bg-surface-container-lowest border border-outline-variant/80 rounded-xl p-space-lg shadow-sm">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-space-md pb-space-md border-b border-outline-variant/60">
+<div>
+<h3 class="text-headline-md font-headline-md text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[22px]">policy</span>
+              Statutory Compliance &amp; Regulatory Checkpoints
+            </h3>
+<p class="text-body-sm font-body-sm text-secondary">
+              Continuous validation against national financial and property registry statutes in the People's Republic of Bangladesh
+            </p>
+</div>
+<div class="text-label-sm font-label-sm text-secondary">
+            Last automated validator run: <span class="font-mono text-on-surface font-semibold">Today, 11:30 AM (UTC+6)</span>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-lg mt-space-lg">
+<!-- Badge 1: Bangladesh Bank FinTech -->
+<div class="p-space-md rounded-lg border border-outline-variant/80 bg-surface flex flex-col justify-between hover:border-tertiary transition-colors">
+<div class="flex items-start gap-3">
+<div class="w-10 h-10 rounded-lg bg-tertiary/10 text-tertiary flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-[24px]">account_balance</span>
+</div>
+<div>
+<h4 class="font-semibold text-on-surface text-body-md font-body-md">Bangladesh Bank FinTech Payment Guideline</h4>
+<p class="text-body-sm font-body-sm text-secondary mt-1">Escrow reconciliation for tenant service dues compliant with PSD Circular No. 04/2021.</p>
+</div>
+</div>
+<div class="mt-space-md pt-2 border-t border-outline-variant/40 flex items-center justify-between">
+<span class="inline-flex items-center gap-1.5 text-label-sm font-label-sm text-[#059669] font-semibold">
+<span class="material-symbols-outlined text-[16px]">check_circle</span>
+                Audited &amp; Compliant
+              </span>
+<span class="text-label-sm font-label-sm font-mono text-secondary">v4.2 Passed</span>
+</div>
+</div>
+<!-- Badge 2: DNCC Municipal Bylaw -->
+<div class="p-space-md rounded-lg border border-outline-variant/80 bg-surface flex flex-col justify-between hover:border-primary transition-colors">
+<div class="flex items-start gap-3">
+<div class="w-10 h-10 rounded-lg bg-primary/10 text-primary flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-[24px]">location_city</span>
+</div>
+<div>
+<h4 class="font-semibold text-on-surface text-body-md font-body-md">DNCC Municipal Living Standard Bylaw § 14</h4>
+<p class="text-body-sm font-body-sm text-secondary mt-1">Waste management fee escrow split, emergency maintenance reserve ledger, and safety disclosure compliance.</p>
+</div>
+</div>
+<div class="mt-space-md pt-2 border-t border-outline-variant/40 flex items-center justify-between">
+<span class="inline-flex items-center gap-1.5 text-label-sm font-label-sm text-primary font-semibold">
+<span class="material-symbols-outlined text-[16px]">check_circle</span>
+                Certified Valid
+              </span>
+<span class="text-label-sm font-label-sm font-mono text-secondary">DNCC-2024-R8</span>
+</div>
+</div>
+<!-- Badge 3: Digital Security Act -->
+<div class="p-space-md rounded-lg border border-outline-variant/80 bg-surface flex flex-col justify-between hover:border-tertiary transition-colors">
+<div class="flex items-start gap-3">
+<div class="w-10 h-10 rounded-lg bg-tertiary/10 text-tertiary flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-[24px]">security</span>
+</div>
+<div>
+<h4 class="font-semibold text-on-surface text-body-md font-body-md">Digital Security Act 2018 Certified</h4>
+<p class="text-body-sm font-body-sm text-secondary mt-1">Tenant identity cryptography, multi-tenant database partitioning, and tenant data sovereign hosting inside Bangladesh.</p>
+</div>
+</div>
+<div class="mt-space-md pt-2 border-t border-outline-variant/40 flex items-center justify-between">
+<span class="inline-flex items-center gap-1.5 text-label-sm font-label-sm text-[#059669] font-semibold">
+<span class="material-symbols-outlined text-[16px]">check_circle</span>
+                Level 3 Verification
+              </span>
+<span class="text-label-sm font-label-sm font-mono text-secondary">CERT-BD #9012</span>
+</div>
+</div>
+</div>
+</section>
+</main>
+</div>
+</body></html>

@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Green Valley Heights - Visitor &amp; Gate Pass Management</title>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts: Plus Jakarta Sans & Inter -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "secondary-fixed-dim": "#bec6e0",
+            "surface": "#f8f9ff",
+            "primary-fixed": "#dbe1ff",
+            "primary-container": "#2563eb",
+            "surface-container-highest": "#d3e4fe",
+            "surface-bright": "#f8f9ff",
+            "inverse-surface": "#213145",
+            "surface-variant": "#d3e4fe",
+            "tertiary-fixed": "#85f8c4",
+            "on-tertiary-container": "#bdffdc",
+            "secondary-container": "#dae2fd",
+            "secondary": "#565e74",
+            "on-error-container": "#93000a",
+            "on-surface-variant": "#434655",
+            "inverse-primary": "#b4c5ff",
+            "primary-fixed-dim": "#b4c5ff",
+            "surface-container": "#e5eeff",
+            "on-secondary": "#ffffff",
+            "on-tertiary-fixed": "#002114",
+            "error": "#ba1a1a",
+            "on-primary-fixed-variant": "#003ea8",
+            "on-tertiary-fixed-variant": "#005137",
+            "surface-dim": "#cbdbf5",
+            "error-container": "#ffdad6",
+            "surface-container-low": "#eff4ff",
+            "on-background": "#0b1c30",
+            "on-secondary-fixed": "#131b2e",
+            "background": "#f8f9ff",
+            "on-secondary-container": "#5c647a",
+            "on-primary": "#ffffff",
+            "outline": "#737686",
+            "tertiary": "#006243",
+            "on-secondary-fixed-variant": "#3f465c",
+            "on-surface": "#0b1c30",
+            "on-primary-container": "#eeefff",
+            "tertiary-fixed-dim": "#68dba9",
+            "on-tertiary": "#ffffff",
+            "surface-container-high": "#dce9ff",
+            "on-primary-fixed": "#00174b",
+            "inverse-on-surface": "#eaf1ff",
+            "surface-container-lowest": "#ffffff",
+            "secondary-fixed": "#dae2fd",
+            "surface-tint": "#0053db",
+            "on-error": "#ffffff",
+            "primary": "#004ac6",
+            "outline-variant": "#c3c6d7",
+            "tertiary-container": "#007d57"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-lg": "1.5rem",
+            "space-xl": "2rem",
+            "space-2xl": "3rem",
+            "margin-mobile": "1rem",
+            "space-md": "1rem",
+            "space-sm": "0.75rem",
+            "space-2xs": "0.25rem",
+            "gutter-mobile": "1rem",
+            "gutter": "1.5rem",
+            "space-xs": "0.5rem",
+            "margin": "2rem"
+          },
+          "fontFamily": {
+            "label-sm": ["Inter"],
+            "headline-lg": ["Plus Jakarta Sans"],
+            "label-md": ["Inter"],
+            "body-sm": ["Inter"],
+            "currency-lg": ["Plus Jakarta Sans"],
+            "body-md": ["Inter"],
+            "display-lg": ["Plus Jakarta Sans"],
+            "body-lg": ["Inter"],
+            "display-lg-mobile": ["Plus Jakarta Sans"],
+            "currency-md": ["Inter"],
+            "headline-md": ["Plus Jakarta Sans"],
+            "label-lg": ["Inter"],
+            "headline-xl": ["Plus Jakarta Sans"]
+          },
+          "fontSize": {
+            "label-sm": ["11px", { "lineHeight": "14px", "letterSpacing": "0.02em", "fontWeight": "600" }],
+            "headline-lg": ["22px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "600" }],
+            "body-sm": ["12px", { "lineHeight": "16px", "fontWeight": "400" }],
+            "currency-lg": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+            "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+            "display-lg": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "display-lg-mobile": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+            "currency-md": ["15px", { "lineHeight": "20px", "fontWeight": "600" }],
+            "headline-md": ["18px", { "lineHeight": "24px", "letterSpacing": "-0.005em", "fontWeight": "600" }],
+            "label-lg": ["14px", { "lineHeight": "20px", "fontWeight": "600" }],
+            "headline-xl": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.015em", "fontWeight": "600" }]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1;
+    }
+    /* QR pattern background simulation */
+    .qr-grid-pattern {
+      background-image: 
+        radial-gradient(circle at 1px 1px, #0b1c30 1.2px, transparent 0);
+      background-size: 8px 8px;
+    }
+  </style>
+</head>
+<body class="bg-background text-on-surface antialiased min-h-screen pb-24 selection:bg-surface-variant selection:text-primary">
+<!-- Top App Bar (Header Anchor) -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-space-md h-14 bg-surface-container-lowest shadow-sm border-b border-outline-variant">
+<div class="flex items-center space-x-space-xs">
+<button aria-label="Go Back" class="p-1.5 -ml-1 text-on-surface hover:bg-surface-container-high rounded-lg active:scale-95 transition-transform duration-150 flex items-center justify-center" type="button">
+<span class="material-symbols-outlined" data-icon="arrow_back">arrow_back</span>
+</button>
+<div>
+<div class="flex items-center space-x-1">
+<span class="text-label-sm font-label-sm text-secondary">Banani, Dhaka • Gate Post 01</span>
+</div>
+<h1 class="text-headline-md font-headline-md font-bold text-on-surface tracking-tight leading-tight">Visitor &amp; Delivery Passes</h1>
+</div>
+</div>
+<div class="flex items-center space-x-1">
+<button aria-label="Scan QR Code" class="p-2 text-secondary hover:text-primary hover:bg-surface-container-high rounded-lg active:scale-95 transition-transform duration-150" type="button">
+<span class="material-symbols-outlined" data-icon="qr_code_scanner">qr_code_scanner</span>
+</button>
+<button aria-label="Gate History Logs" class="p-2 text-secondary hover:text-primary hover:bg-surface-container-high rounded-lg active:scale-95 transition-transform duration-150" type="button">
+<span class="material-symbols-outlined" data-icon="history">history</span>
+</button>
+</div>
+</header>
+<!-- Main Scrollable Canvas -->
+<main class="max-w-md mx-auto pt-16 px-space-md space-y-space-md">
+<!-- Top Action Bento Header -->
+<section class="mt-2 space-y-space-xs">
+<!-- Create Pre-Approved Pass Card -->
+<div class="bg-primary text-on-primary rounded-xl p- space-md shadow-sm relative overflow-hidden active:scale-[0.99] transition-transform">
+<div class="absolute -right-4 -bottom-6 w-28 h-28 bg-white/10 rounded-full blur-xl pointer-events-none"></div>
+<div class="flex items-start justify-between relative z-10">
+<div class="space-y-1">
+<span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-white/20 text-on-primary text-label-sm font-label-sm backdrop-blur-sm">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary-fixed animate-pulse"></span>
+              Fast-Track Entry Gate
+            </span>
+<h2 class="text-headline-lg font-headline-lg font-bold text-white pt-1">
+              + Create Pre-Approved Pass
+            </h2>
+<p class="text-body-sm font-body-sm text-primary-fixed max-w-[260px]">
+              Instant digital QR pass &amp; 4-digit OTP for private guests, courier drop-offs, or technicians.
+            </p>
+</div>
+<div class="w-11 h-11 rounded-lg bg-white/10 border border-white/20 flex items-center justify-center text-white shrink-0">
+<span class="material-symbols-outlined text-2xl" data-icon="badge">badge</span>
+</div>
+</div>
+<div class="mt-4 pt-3 border-t border-white/15 flex items-center justify-between">
+<button class="w-full py-2.5 px-4 bg-surface-container-lowest text-primary hover:bg-surface-container font-label-lg text-label-lg rounded-lg shadow-sm flex items-center justify-center space-x-2 transition-colors" type="button">
+<span class="material-symbols-outlined" data-icon="add_circle">add_circle</span>
+<span>Issue New Guest Pass</span>
+</button>
+</div>
+</div>
+<!-- Real-Time Metrics Chip -->
+<div class="flex items-center justify-between bg-surface-container-lowest border border-outline-variant rounded-xl p-space-sm shadow-sm">
+<div class="flex items-center space-x-2">
+<span class="p-1.5 bg-surface-container rounded-lg text-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-lg" data-icon="shield">shield</span>
+</span>
+<div>
+<div class="text-label-sm font-label-sm text-secondary">Gate Status Summary</div>
+<div class="text-label-md font-label-md text-on-surface font-bold">2 Expected Today • 1 Inside Premise</div>
+</div>
+</div>
+<span class="inline-flex items-center px-2 py-0.5 rounded-full text-label-sm font-label-sm bg-surface-container-low text-primary border border-outline-variant font-medium">
+          Live Sync
+        </span>
+</div>
+</section>
+<!-- Active Pass Section (Live Digital Pass) -->
+<section class="space-y-space-xs">
+<div class="flex items-center justify-between px-1">
+<h3 class="text-headline-md font-headline-md font-bold text-on-surface tracking-tight">Active Digital Pass</h3>
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-label-sm font-label-sm bg-tertiary-fixed/20 text-tertiary border border-tertiary/20">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary mr-1.5"></span>
+          Pre-Approved • Valid until 11:00 PM
+        </span>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl shadow-sm overflow-hidden">
+<!-- Pass Top Identifier Bar -->
+<div class="p-space-md border-b border-outline-variant bg-surface-container-low flex justify-between items-center">
+<div class="flex items-center space-x-2">
+<div class="w-8 h-8 rounded-lg bg-primary-container text-on-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-lg" data-icon="groups">groups</span>
+</div>
+<div>
+<span class="text-label-sm font-label-sm text-secondary uppercase tracking-wider">Pass Type</span>
+<div class="text-headline-md font-headline-md font-bold text-on-surface">Guest Visitor</div>
+</div>
+</div>
+<div class="text-right">
+<span class="text-label-sm font-label-sm text-secondary">Gate Entry Code</span>
+<div class="text-currency-lg font-currency-lg font-bold text-primary tracking-wider">#8491</div>
+</div>
+</div>
+<div class="p-space-md space-y-space-sm">
+<!-- Visitor & Host Details -->
+<div class="grid grid-cols-2 gap-3 pb-3 border-b border-outline-variant">
+<div>
+<span class="text-label-sm font-label-sm text-secondary">Primary Guest</span>
+<div class="text-label-lg font-label-lg font-bold text-on-surface">Kamrul Hassan &amp; Family</div>
+<span class="text-body-sm font-body-sm text-secondary">3 Adults • 1 Child</span>
+</div>
+<div>
+<span class="text-label-sm font-label-sm text-secondary">Destination Unit</span>
+<div class="text-label-lg font-label-lg font-bold text-on-surface">Flat 4A</div>
+<span class="text-body-sm font-body-sm text-secondary">Host: Engr. Rafiqul Islam</span>
+</div>
+</div>
+<!-- Time & Purpose Info -->
+<div class="space-y-2">
+<div class="flex items-start space-x-2.5">
+<span class="material-symbols-outlined text-secondary text-base mt-0.5" data-icon="schedule">schedule</span>
+<div class="text-body-sm font-body-sm">
+<span class="text-secondary font-medium">Expected Arrival:</span>
+<span class="text-on-surface font-semibold ml-1">Today, 20 Mar 2025 • 05:30 PM - 09:00 PM</span>
+</div>
+</div>
+<div class="flex items-start space-x-2.5">
+<span class="material-symbols-outlined text-secondary text-base mt-0.5" data-icon="event_note">event_note</span>
+<div class="text-body-sm font-body-sm">
+<span class="text-secondary font-medium">Purpose:</span>
+<span class="text-on-surface font-semibold ml-1">Family Dinner / Social Visit</span>
+</div>
+</div>
+</div>
+<!-- Vehicle Allocation Strip -->
+<div class="bg-surface-container p-2.5 rounded-lg border border-outline-variant flex items-center justify-between">
+<div class="flex items-center space-x-2">
+<span class="material-symbols-outlined text-primary text-xl" data-icon="directions_car">directions_car</span>
+<div class="leading-tight">
+<div class="text-label-md font-label-md text-on-surface font-semibold">Dhaka Metro-GA 19-3044</div>
+<div class="text-label-sm font-label-sm text-secondary">Guest Parking Slot G-2 allocated</div>
+</div>
+</div>
+<span class="px-2 py-0.5 rounded text-label-sm font-label-sm bg-surface-container-lowest text-primary font-bold border border-outline-variant">
+              Bay G-2
+            </span>
+</div>
+<!-- QR Scannable Container -->
+<div class="flex flex-col items-center justify-center p-4 bg-surface rounded-xl border border-outline-variant">
+<div class="relative p-2.5 bg-surface-container-lowest rounded-lg border border-outline-variant shadow-inner">
+<!-- Visual Mock of scannable high-density proptech QR pass -->
+<div class="w-36 h-36 border border-on-surface/20 rounded p-1 flex flex-col justify-between qr-grid-pattern relative">
+<!-- QR Corner Finders -->
+<div class="flex justify-between w-full">
+<div class="w-7 h-7 border-4 border-on-surface rounded-sm p-0.5 flex items-center justify-center bg-white">
+<div class="w-3 h-3 bg-on-surface"></div>
+</div>
+<div class="w-7 h-7 border-4 border-on-surface rounded-sm p-0.5 flex items-center justify-center bg-white">
+<div class="w-3 h-3 bg-on-surface"></div>
+</div>
+</div>
+<!-- Middle Logo Glyph -->
+<div class="self-center w-8 h-8 rounded bg-primary text-white flex items-center justify-center shadow-md">
+<span class="material-symbols-outlined text-sm" data-icon="apartment">apartment</span>
+</div>
+<div class="flex justify-start w-full">
+<div class="w-7 h-7 border-4 border-on-surface rounded-sm p-0.5 flex items-center justify-center bg-white">
+<div class="w-3 h-3 bg-on-surface"></div>
+</div>
+</div>
+</div>
+</div>
+<p class="mt-2 text-label-sm font-label-sm text-secondary text-center">
+              Scan at Main Boom Barrier or Present OTP <span class="font-bold text-on-surface">#8491</span>
+</p>
+<!-- Share Action Button -->
+<button class="mt-3 w-full py-2 px-3 bg-surface-container-high hover:bg-surface-container text-on-surface font-label-md text-label-md rounded-lg border border-outline-variant flex items-center justify-center space-x-2 active:scale-95 transition-all" type="button">
+<span class="material-symbols-outlined text-tertiary text-lg" data-icon="share">share</span>
+<span class="font-semibold">Share Pass via WhatsApp / SMS</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Recent Gate Logs & Inside Premise Feed -->
+<section class="space-y-space-xs">
+<div class="flex items-center justify-between px-1">
+<h3 class="text-headline-md font-headline-md font-bold text-on-surface tracking-tight">Gate Activity &amp; Deliveries</h3>
+<span class="text-label-sm font-label-sm text-secondary flex items-center gap-1">
+<span class="w-2 h-2 rounded-full bg-error animate-ping"></span>
+          Live Stream
+        </span>
+</div>
+<!-- Feed Item 1: Urgent Action Required (Delivery at Gate) -->
+<div class="bg-surface-container-lowest border-2 border-primary/40 rounded-xl p-space-md shadow-sm space-y-space-xs">
+<div class="flex items-start justify-between">
+<div class="flex items-start space-x-2.5">
+<div class="w-9 h-9 rounded-lg bg-surface-container-high text-primary flex items-center justify-center shrink-0 mt-0.5">
+<span class="material-symbols-outlined" data-icon="two_wheeler">two_wheeler</span>
+</div>
+<div>
+<div class="flex items-center gap-1.5">
+<span class="text-label-lg font-label-lg font-bold text-on-surface">Foodpanda Delivery Rider</span>
+<span class="inline-flex items-center px-1.5 py-0.2 rounded text-[10px] font-bold bg-error-container text-on-error-container">
+                  Gate Barrier
+                </span>
+</div>
+<p class="text-body-sm font-body-sm text-error font-medium">Currently at Main Gate • Awaiting Entry Confirmation</p>
+</div>
+</div>
+<span class="text-label-sm font-label-sm text-secondary font-medium">Just now</span>
+</div>
+<!-- Rider Context Ledger -->
+<div class="bg-surface-container-low rounded-lg p-2.5 border border-outline-variant space-y-1">
+<div class="flex justify-between text-body-sm font-body-sm">
+<span class="text-secondary">Delivery Destination:</span>
+<span class="font-semibold text-on-surface">Flat 4A • Order #FP-9921</span>
+</div>
+<div class="flex justify-between text-body-sm font-body-sm">
+<span class="text-secondary">Rider Identification:</span>
+<span class="font-medium text-on-surface">Sohel Rana (Bike: DH-HA-12)</span>
+</div>
+</div>
+<!-- Immediate Action CTAs -->
+<div class="grid grid-cols-2 gap-2 pt-1">
+<button class="py-2.5 px-2 bg-primary text-on-primary rounded-lg font-label-md text-label-md shadow-sm hover:bg-primary-container active:scale-95 transition-all flex items-center justify-center space-x-1.5" type="button">
+<span class="material-symbols-outlined text-base" data-icon="check_circle">check_circle</span>
+<span>Allow Entry (OTP #3312)</span>
+</button>
+<button class="py-2.5 px-2 bg-surface-container-lowest border border-outline-variant text-error hover:bg-error-container/20 rounded-lg font-label-md text-label-md active:scale-95 transition-all flex items-center justify-center space-x-1" type="button">
+<span class="material-symbols-outlined text-base" data-icon="door_front">door_front</span>
+<span>Deny / Leave with Guard</span>
+</button>
+</div>
+</div>
+<!-- Feed Item 2: Completed Gate Record -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-space-md shadow-sm space-y-2">
+<div class="flex items-start justify-between">
+<div class="flex items-start space-x-2.5">
+<div class="w-9 h-9 rounded-lg bg-surface-container text-secondary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined" data-icon="local_shipping">local_shipping</span>
+</div>
+<div>
+<div class="flex items-center gap-1.5">
+<span class="text-label-lg font-label-lg font-bold text-on-surface">Amazon / Daraz Courier</span>
+<span class="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-semibold bg-tertiary-fixed/30 text-tertiary">
+                  Checked Out
+                </span>
+</div>
+<p class="text-body-sm font-body-sm text-secondary">Logged at Security Post #1 (Subrata)</p>
+</div>
+</div>
+<span class="text-label-sm font-label-sm text-secondary">02:22 PM</span>
+</div>
+<div class="flex items-center justify-between text-body-sm font-body-sm px-1 py-1.5 rounded bg-surface border border-outline-variant">
+<div class="flex items-center space-x-1 text-secondary">
+<span class="material-symbols-outlined text-base" data-icon="timer">timer</span>
+<span>Checked In: 02:15 PM • Duration: 7 mins</span>
+</div>
+<div class="flex items-center space-x-1 text-on-surface font-medium">
+<span class="material-symbols-outlined text-base text-primary" data-icon="inventory_2">inventory_2</span>
+<span>Parcel Drop-off</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Bottom Quick Actions Bento Cluster -->
+<section class="space-y-space-xs pt-1">
+<h3 class="text-headline-md font-headline-md font-bold text-on-surface px-1">Gate Facilitation</h3>
+<div class="grid grid-cols-2 gap-2.5">
+<!-- Intercom Button -->
+<button class="p-3 bg-surface-container-lowest border border-outline-variant rounded-xl shadow-sm flex flex-col items-start justify-between text-left hover:bg-surface-container-low active:scale-95 transition-all h-24" type="button">
+<div class="w-8 h-8 rounded-lg bg-primary-fixed text-primary flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="call">call</span>
+</div>
+<div>
+<div class="text-label-lg font-label-lg font-bold text-on-surface">Guard Intercom</div>
+<div class="text-label-sm font-label-sm text-secondary">Direct Line: Post #1 &amp; #2</div>
+</div>
+</button>
+<!-- Frequent Visitors -->
+<button class="p-3 bg-surface-container-lowest border border-outline-variant rounded-xl shadow-sm flex flex-col items-start justify-between text-left hover:bg-surface-container-low active:scale-95 transition-all h-24" type="button">
+<div class="w-8 h-8 rounded-lg bg-secondary-fixed text-on-secondary-fixed flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="passkey">passkey</span>
+</div>
+<div>
+<div class="text-label-lg font-label-lg font-bold text-on-surface">Frequent Pass</div>
+<div class="text-label-sm font-label-sm text-secondary">Maid, Driver, Delivery</div>
+</div>
+</button>
+</div>
+</section>
+</main>
+<!-- Bottom Navigation Bar (Docked Semantic Shell with style_ mapping from JSON) -->
+<!-- Active Tab: Passes (matches visitor gate pass flow) -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center h-16 px-space-sm bg-surface-container-lowest shadow-md border-t border-outline-variant">
+<!-- Tab 1: Dashboard -->
+<a class="flex flex-col items-center justify-center text-secondary font-medium hover:text-primary active:scale-95 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined text-2xl" data-icon="dashboard">dashboard</span>
+<span class="text-label-sm font-label-sm mt-0.5">Dashboard</span>
+</a>
+<!-- Tab 2: Units -->
+<a class="flex flex-col items-center justify-center text-secondary font-medium hover:text-primary active:scale-95 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined text-2xl" data-icon="domain">domain</span>
+<span class="text-label-sm font-label-sm mt-0.5">Units</span>
+</a>
+<!-- Tab 3: Community -->
+<a class="flex flex-col items-center justify-center text-secondary font-medium hover:text-primary active:scale-95 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined text-2xl" data-icon="forum">forum</span>
+<span class="text-label-sm font-label-sm mt-0.5">Community</span>
+</a>
+<!-- Tab 4: Notices -->
+<a class="flex flex-col items-center justify-center text-secondary font-medium hover:text-primary active:scale-95 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined text-2xl" data-icon="campaign">campaign</span>
+<span class="text-label-sm font-label-sm mt-0.5">Notices</span>
+</a>
+<!-- Tab 5: Passes (ACTIVE DESTINATION) -->
+<a class="flex flex-col items-center justify-center text-primary font-bold relative after:content-[''] after:w-1.5 after:h-1.5 after:bg-primary after:rounded-full after:mt-1 active:scale-95 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined text-2xl" data-icon="badge" data-weight="fill" style="font-variation-settings: 'FILL' 1;">badge</span>
+<span class="text-label-sm font-label-sm mt-0.5">Passes</span>
+</a>
+</nav>
+<script>
+    // Lightweight atmospheric interaction for gate approval response
+    document.addEventListener('DOMContentLoaded', () => {
+      const allowBtn = document.querySelector('button:has(span[data-icon="check_circle"])');
+      if (allowBtn) {
+        allowBtn.addEventListener('click', () => {
+          allowBtn.innerHTML = '<span class="material-symbols-outlined text-base" data-icon="done_all">done_all</span><span>Barrier Opened • OTP Logged</span>';
+          allowBtn.classList.remove('bg-primary');
+          allowBtn.classList.add('bg-tertiary-container', 'text-white');
+        });
+      }
+    });
+  </script>
+</body></html>

@@ -1,0 +1,236 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>BuildingOS - Login</title>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<!-- Google Fonts: Plus Jakarta Sans & Inter -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@600;700;800&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Theme Configuration verbatim from instructions -->
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "inverse-primary": "#b4c5ff",
+            "inverse-on-surface": "#eaf1ff",
+            "error": "#ba1a1a",
+            "surface-container-low": "#eff4ff",
+            "surface-dim": "#cbdbf5",
+            "on-tertiary": "#ffffff",
+            "primary-fixed-dim": "#b4c5ff",
+            "on-tertiary-fixed": "#002114",
+            "surface-container-high": "#dce9ff",
+            "on-surface-variant": "#434655",
+            "primary-container": "#2563eb",
+            "on-secondary": "#ffffff",
+            "on-error": "#ffffff",
+            "tertiary-container": "#007d57",
+            "tertiary": "#006243",
+            "surface-bright": "#f8f9ff",
+            "primary-fixed": "#dbe1ff",
+            "on-tertiary-fixed-variant": "#005137",
+            "surface-tint": "#0053db",
+            "primary": "#004ac6",
+            "on-tertiary-container": "#bdffdc",
+            "secondary-fixed": "#dae2fd",
+            "secondary-fixed-dim": "#bec6e0",
+            "on-secondary-container": "#5c647a",
+            "outline": "#737686",
+            "on-surface": "#0b1c30",
+            "on-error-container": "#93000a",
+            "secondary-container": "#dae2fd",
+            "error-container": "#ffdad6",
+            "on-background": "#0b1c30",
+            "surface": "#f8f9ff",
+            "tertiary-fixed-dim": "#68dba9",
+            "on-secondary-fixed-variant": "#3f465c",
+            "outline-variant": "#c3c6d7",
+            "secondary": "#565e74",
+            "tertiary-fixed": "#85f8c4",
+            "on-primary-fixed": "#00174b",
+            "background": "#f8f9ff",
+            "surface-container-highest": "#d3e4fe",
+            "surface-container-lowest": "#ffffff",
+            "on-primary-fixed-variant": "#003ea8",
+            "surface-variant": "#d3e4fe",
+            "surface-container": "#e5eeff",
+            "on-primary": "#ffffff",
+            "on-primary-container": "#eeefff",
+            "on-secondary-fixed": "#131b2e",
+            "inverse-surface": "#213145"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "margin": "2rem",
+            "gutter": "1.5rem",
+            "gutter-mobile": "1rem",
+            "space-sm": "0.75rem",
+            "space-md": "1rem",
+            "space-lg": "1.5rem",
+            "space-xs": "0.5rem",
+            "space-2xl": "3rem",
+            "margin-mobile": "1rem",
+            "space-xl": "2rem",
+            "space-2xs": "0.25rem"
+          },
+          "fontFamily": {
+            "currency-lg": ["Plus Jakarta Sans"],
+            "body-sm": ["Inter"],
+            "display-lg-mobile": ["Plus Jakarta Sans"],
+            "body-md": ["Inter"],
+            "headline-lg": ["Plus Jakarta Sans"],
+            "headline-md": ["Plus Jakarta Sans"],
+            "body-lg": ["Inter"],
+            "label-lg": ["Inter"],
+            "currency-md": ["Inter"],
+            "label-md": ["Inter"],
+            "display-lg": ["Plus Jakarta Sans"],
+            "headline-xl": ["Plus Jakarta Sans"],
+            "label-sm": ["Inter"]
+          },
+          "fontSize": {
+            "currency-lg": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+            "body-sm": ["12px", { "lineHeight": "16px", "fontWeight": "400" }],
+            "display-lg-mobile": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+            "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+            "headline-lg": ["22px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "headline-md": ["18px", { "lineHeight": "24px", "letterSpacing": "-0.005em", "fontWeight": "600" }],
+            "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "label-lg": ["14px", { "lineHeight": "20px", "fontWeight": "600" }],
+            "currency-md": ["15px", { "lineHeight": "20px", "fontWeight": "600" }],
+            "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "600" }],
+            "display-lg": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "headline-xl": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.015em", "fontWeight": "600" }],
+            "label-sm": ["11px", { "lineHeight": "14px", "letterSpacing": "0.02em", "fontWeight": "600" }]
+          }
+        },
+      },
+    }
+  </script>
+</head>
+<body class="bg-background text-on-surface antialiased min-h-screen flex flex-col justify-between selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- Mobile Top Action Bar (Header Controls) -->
+<header class="w-full max-w-md mx-auto px-space-md pt-space-md flex items-center justify-between z-10">
+<!-- Language Selector Pill -->
+<div aria-label="Language selector" class="inline-flex items-center p-1 bg-surface-container rounded-full border border-outline-variant/60 shadow-sm" role="group">
+<button class="px-space-xs py-0.5 rounded-full bg-surface-container-lowest text-primary shadow-xs font-label-sm text-label-sm transition-all duration-150" type="button">
+        EN
+      </button>
+<button class="px-space-xs py-0.5 rounded-full text-secondary hover:text-on-surface font-label-sm text-label-sm transition-all duration-150" type="button">
+        বাং
+      </button>
+</div>
+<!-- Support Help Button -->
+<button aria-label="Customer Support" class="inline-flex items-center gap-1 px-space-xs py-1 text-secondary hover:text-primary transition-colors duration-150 rounded-lg hover:bg-surface-container-high" type="button">
+<span class="material-symbols-outlined text-[20px]" data-icon="support_agent">support_agent</span>
+<span class="font-label-sm text-label-sm">Support</span>
+</button>
+</header>
+<!-- Main Login Journey Canvas -->
+<main class="w-full max-w-md mx-auto px-space-md py-space-sm flex-1 flex flex-col justify-center">
+<!-- Brand Identity & Hero Section -->
+<div class="mb-space-lg">
+<!-- App Brandmark -->
+<div class="flex items-center gap-2 mb-space-md">
+<div class="w-10 h-10 rounded-xl bg-primary-container text-on-primary flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-[24px]" data-icon="apartment">apartment</span>
+</div>
+<div>
+<span class="font-headline-lg text-headline-lg font-bold text-on-surface tracking-tight block leading-none">Building<span class="text-primary-container">OS</span></span>
+<span class="font-label-sm text-label-sm text-secondary uppercase tracking-wider block mt-0.5">Property Intelligence</span>
+</div>
+</div>
+<!-- Welcome Headings -->
+<h1 class="font-display-lg-mobile text-display-lg-mobile text-on-surface tracking-tight font-bold">Welcome back</h1>
+<p class="font-body-md text-body-md text-secondary mt-1 max-w-xs leading-relaxed">
+        Manage your properties, rent collections, and community in one place
+      </p>
+</div>
+<!-- Login Authentication Card -->
+<div class="bg-surface-container-lowest border border-outline-variant/50 rounded-xl p-space-md shadow-sm">
+<form class="space-y-space-md" onsubmit="event.preventDefault();">
+<!-- Phone Number Input Group -->
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-space-2xs" for="phone-input">
+            Phone Number
+          </label>
+<div class="relative flex rounded-lg border border-outline-variant focus-within:border-primary-container focus-within:ring-2 focus-within:ring-primary-container/20 transition-all bg-surface-container-lowest overflow-hidden">
+<!-- Bangladesh Flag + Country Code Prefix -->
+<button aria-label="Select Country Code" class="inline-flex items-center gap-1.5 px-3 py-2.5 bg-surface-container-low border-r border-outline-variant text-on-surface hover:bg-surface-container transition-colors focus:outline-none shrink-0" type="button">
+<!-- Inline BD Flag Representation -->
+<span class="w-5 h-3.5 rounded-[2px] bg-[#006a4e] relative flex items-center justify-center overflow-hidden shrink-0 shadow-xs">
+<span class="w-2.5 h-2.5 rounded-full bg-[#f42a41] absolute -left-[1px]"></span>
+</span>
+<span class="font-label-md text-label-md font-semibold text-on-surface">+880</span>
+<span class="material-symbols-outlined text-[16px] text-secondary" data-icon="arrow_drop_down">arrow_drop_down</span>
+</button>
+<!-- Phone Digits Input -->
+<input class="w-full px-3 py-2.5 bg-transparent text-on-surface placeholder:text-outline font-body-lg text-body-lg border-0 focus:ring-0 focus:outline-none tracking-wide" id="phone-input" inputmode="numeric" name="phone" placeholder="01712-345678" required="" type="tel">
+</div>
+<!-- Explanatory Helper Text -->
+<div class="flex items-start gap-1.5 mt-2">
+<span class="material-symbols-outlined text-[15px] text-secondary shrink-0 mt-0.5" data-icon="lock_clock">lock_clock</span>
+<p class="font-body-sm text-body-sm text-secondary">
+              We will send a 6-digit verification code to this number
+            </p>
+</div>
+</div>
+<!-- Primary Action Button -->
+<button class="w-full h-12 bg-primary-container hover:bg-primary text-on-primary rounded-lg font-label-lg text-label-lg font-bold flex items-center justify-center gap-2 shadow-sm active:scale-[0.98] transition-transform duration-100" type="submit">
+<span>Continue with Phone</span>
+<span class="material-symbols-outlined text-[18px]" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</form>
+<!-- Visual Demarcation / Divider -->
+<div class="relative my-space-md flex items-center justify-center">
+<div class="w-full border-t border-outline-variant/60"></div>
+<span class="absolute px-3 bg-surface-container-lowest font-label-sm text-label-sm text-secondary tracking-normal">
+          Or connect with
+        </span>
+</div>
+<!-- Secondary Action Button (Google Auth) -->
+<button class="w-full h-12 bg-surface-container-lowest border border-outline-variant/80 hover:bg-surface-container-low text-on-surface rounded-lg font-label-lg text-label-lg font-semibold flex items-center justify-center gap-3 transition-colors duration-150 active:scale-[0.98]" type="button">
+<!-- Standard Google G Icon -->
+<svg aria-hidden="true" class="w-5 h-5 shrink-0" viewBox="0 0 24 24">
+<path d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.8-2.4 3.65v3.03h3.88c2.27-2.09 3.66-5.17 3.66-9.12z" fill="#4285F4"></path>
+<path d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.03c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.25v3.13C3.28 21.43 7.35 24 12 24z" fill="#34A853"></path>
+<path d="M5.28 14.29c-.25-.72-.38-1.49-.38-2.29s.13-1.57.38-2.29V6.58H1.25C.45 8.18 0 9.99 0 12s.45 3.82 1.25 5.42l4.03-3.13z" fill="#FBBC05"></path>
+<path d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.35 0 3.28 2.57 1.25 6.58l4.03 3.13c.95-2.83 3.6-4.96 6.72-4.96z" fill="#EA4335"></path>
+</svg>
+<span>Continue with Google</span>
+</button>
+<!-- Terms & Privacy Legal Disclaimer -->
+<p class="font-body-sm text-body-sm text-secondary text-center mt-space-md leading-relaxed px-1">
+        By continuing, you agree to BuildingOS <a class="text-primary hover:underline font-semibold" href="#">Terms of Service</a> and <a class="text-primary hover:underline font-semibold" href="#">Privacy Policy</a>
+</p>
+</div>
+</main>
+<!-- Role Guidance Footer Banner (Regionally Attuned Multitenancy) -->
+<footer class="w-full max-w-md mx-auto px-space-md pb-space-md pt-space-xs">
+<div class="bg-surface-container-high/60 border border-outline-variant/60 rounded-xl p-space-sm flex items-start gap-2.5">
+<div class="w-7 h-7 rounded-lg bg-surface-container text-primary flex items-center justify-center shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[18px]" data-icon="badge">badge</span>
+</div>
+<div>
+<p class="font-label-sm text-label-sm text-on-surface font-semibold tracking-wide">
+          Owner, Tenant, Property Manager or Committee Member?
+        </p>
+<p class="font-body-sm text-body-sm text-secondary mt-0.5">
+          Use your registered phone number to automatically load your designated property role.
+        </p>
+</div>
+</div>
+</footer>
+</body></html>

@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Society Polls &amp; AGM Voting - Green Valley Heights</title>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts: Inter & Plus Jakarta Sans -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "secondary-fixed-dim": "#bec6e0",
+            "surface": "#f8f9ff",
+            "primary-fixed": "#dbe1ff",
+            "primary-container": "#2563eb",
+            "surface-container-highest": "#d3e4fe",
+            "surface-bright": "#f8f9ff",
+            "inverse-surface": "#213145",
+            "surface-variant": "#d3e4fe",
+            "tertiary-fixed": "#85f8c4",
+            "on-tertiary-container": "#bdffdc",
+            "secondary-container": "#dae2fd",
+            "secondary": "#565e74",
+            "on-error-container": "#93000a",
+            "on-surface-variant": "#434655",
+            "inverse-primary": "#b4c5ff",
+            "primary-fixed-dim": "#b4c5ff",
+            "surface-container": "#e5eeff",
+            "on-secondary": "#ffffff",
+            "on-tertiary-fixed": "#002114",
+            "error": "#ba1a1a",
+            "on-primary-fixed-variant": "#003ea8",
+            "on-tertiary-fixed-variant": "#005137",
+            "surface-dim": "#cbdbf5",
+            "error-container": "#ffdad6",
+            "surface-container-low": "#eff4ff",
+            "on-background": "#0b1c30",
+            "on-secondary-fixed": "#131b2e",
+            "background": "#f8f9ff",
+            "on-secondary-container": "#5c647a",
+            "on-primary": "#ffffff",
+            "outline": "#737686",
+            "tertiary": "#006243",
+            "on-secondary-fixed-variant": "#3f465c",
+            "on-surface": "#0b1c30",
+            "on-primary-container": "#eeefff",
+            "tertiary-fixed-dim": "#68dba9",
+            "on-tertiary": "#ffffff",
+            "surface-container-high": "#dce9ff",
+            "on-primary-fixed": "#00174b",
+            "inverse-on-surface": "#eaf1ff",
+            "surface-container-lowest": "#ffffff",
+            "secondary-fixed": "#dae2fd",
+            "surface-tint": "#0053db",
+            "on-error": "#ffffff",
+            "primary": "#004ac6",
+            "outline-variant": "#c3c6d7",
+            "tertiary-container": "#007d57"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-lg": "1.5rem",
+            "space-xl": "2rem",
+            "space-2xl": "3rem",
+            "margin-mobile": "1rem",
+            "space-md": "1rem",
+            "space-sm": "0.75rem",
+            "space-2xs": "0.25rem",
+            "gutter-mobile": "1rem",
+            "gutter": "1.5rem",
+            "space-xs": "0.5rem",
+            "margin": "2rem"
+          },
+          "fontFamily": {
+            "label-sm": ["Inter"],
+            "headline-lg": ["Plus Jakarta Sans"],
+            "label-md": ["Inter"],
+            "body-sm": ["Inter"],
+            "currency-lg": ["Plus Jakarta Sans"],
+            "body-md": ["Inter"],
+            "display-lg": ["Plus Jakarta Sans"],
+            "body-lg": ["Inter"],
+            "display-lg-mobile": ["Plus Jakarta Sans"],
+            "currency-md": ["Inter"],
+            "headline-md": ["Plus Jakarta Sans"],
+            "label-lg": ["Inter"],
+            "headline-xl": ["Plus Jakarta Sans"]
+          },
+          "fontSize": {
+            "label-sm": ["11px", {"lineHeight": "14px", "letterSpacing": "0.02em", "fontWeight": "600"}],
+            "headline-lg": ["22px", {"lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+            "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+            "body-sm": ["12px", {"lineHeight": "16px", "fontWeight": "400"}],
+            "currency-lg": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+            "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+            "display-lg": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+            "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+            "display-lg-mobile": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+            "currency-md": ["15px", {"lineHeight": "20px", "fontWeight": "600"}],
+            "headline-md": ["18px", {"lineHeight": "24px", "letterSpacing": "-0.005em", "fontWeight": "600"}],
+            "label-lg": ["14px", {"lineHeight": "20px", "fontWeight": "600"}],
+            "headline-xl": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.015em", "fontWeight": "600"}]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1;
+    }
+    /* Custom radio appearance */
+    .radio-card input[type="radio"]:checked + div {
+      border-color: #004ac6;
+      background-color: #eff4ff;
+    }
+    .radio-card input[type="radio"]:checked + div .radio-dot {
+      border-color: #004ac6;
+      background-color: #004ac6;
+      box-shadow: inset 0 0 0 3px #ffffff;
+    }
+  </style>
+</head>
+<body class="bg-surface text-on-surface antialiased flex justify-center min-h-screen">
+<!-- Mobile Device Simulation Frame (Locks to standard mobile viewport width) -->
+<main class="w-full max-w-md bg-surface flex flex-col min-h-screen relative pb-12 shadow-xl">
+<!-- Top App Bar (Task-focused context: Back action present) -->
+<header class="sticky top-0 z-40 bg-surface-container-lowest border-b border-outline-variant/40 px-space-md h-14 flex items-center justify-between shadow-sm">
+<div class="flex items-center gap-space-xs">
+<button aria-label="Go Back" class="w-9 h-9 flex items-center justify-center rounded-lg text-secondary hover:bg-surface-container active:scale-95 transition-transform" type="button">
+<span class="material-symbols-outlined text-[22px]">arrow_back</span>
+</button>
+<div class="flex flex-col">
+<h1 class="font-headline-md text-headline-md font-bold text-on-surface leading-tight">Society Polls &amp; Voting</h1>
+<span class="font-label-sm text-label-sm text-secondary">Green Valley Heights • Banani</span>
+</div>
+</div>
+<div class="flex items-center gap-1">
+<button class="w-9 h-9 flex items-center justify-center rounded-lg text-secondary hover:bg-surface-container active:scale-95 transition-transform" title="Voting Bylaws &amp; Help" type="button">
+<span class="material-symbols-outlined text-[20px]">help_outline</span>
+</button>
+<button class="w-9 h-9 flex items-center justify-center rounded-lg text-secondary hover:bg-surface-container active:scale-95 transition-transform" title="Past Vote History" type="button">
+<span class="material-symbols-outlined text-[20px]">history_edu</span>
+</button>
+</div>
+</header>
+<!-- Scrollable Content Canvas -->
+<div class="p-space-md flex flex-col gap-space-md">
+<!-- Governance Quorum & Voter Eligibility Banner -->
+<section class="bg-surface-container-lowest rounded-xl p-space-md border border-outline-variant/50 shadow-sm flex flex-col gap-space-sm relative overflow-hidden">
+<div class="absolute -top-10 -right-10 w-28 h-28 bg-primary/5 rounded-full pointer-events-none"></div>
+<div class="flex items-start justify-between gap-space-xs">
+<div>
+<div class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-primary-fixed text-primary text-[11px] font-label-sm tracking-wide font-semibold mb-1">
+<span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
+              Active Voting Session
+            </div>
+<h2 class="font-headline-md text-headline-md text-on-surface">FY 2025 AGM Resolutions</h2>
+</div>
+<!-- Countdown Timer Pill -->
+<div class="flex items-center gap-1 bg-surface-container-high px-2.5 py-1 rounded-full text-secondary font-label-sm text-[11px] font-semibold whitespace-nowrap border border-outline-variant/30">
+<span class="material-symbols-outlined text-[13px] text-primary">timer</span>
+<span>2 Days 14 Hrs left</span>
+</div>
+</div>
+<!-- Voter Weight Details -->
+<div class="bg-surface-container-low rounded-lg p-2.5 flex items-center justify-between border border-outline-variant/30">
+<div class="flex items-center gap-2">
+<div class="w-7 h-7 rounded-full bg-primary/10 text-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-[16px]">how_to_reg</span>
+</div>
+<div>
+<p class="font-label-md text-label-md text-on-surface font-semibold">Flat 4A <span class="text-secondary font-normal">• Deed Lot #088</span></p>
+<p class="font-body-sm text-body-sm text-secondary">Owner Voter • 1 Vote Weighted per Deed</p>
+</div>
+</div>
+<span class="px-2 py-0.5 text-[10px] font-label-sm font-semibold rounded bg-[#ECFDF5] text-[#065F46] border border-[#BBF7D0]">
+            ELIGIBLE
+          </span>
+</div>
+<!-- Quorum Gauge -->
+<div class="flex flex-col gap-1.5 pt-1">
+<div class="flex items-center justify-between text-secondary">
+<span class="font-label-sm text-label-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-tertiary">check_circle</span>
+              Quorum Status: <strong>24/36 Votes Cast</strong>
+</span>
+<span class="font-label-sm text-label-sm text-tertiary font-bold">66.7% (Met § 18 Bylaws)</span>
+</div>
+<div class="w-full bg-surface-container h-2 rounded-full overflow-hidden flex">
+<!-- 50% Threshold Marker represented via layout -->
+<div class="bg-tertiary h-full rounded-full transition-all duration-500" style="width: 66.7%;"></div>
+</div>
+<p class="text-[10px] font-body-sm text-secondary">Statutory AGM quorum requires minimum 50% deed owner turnout.</p>
+</div>
+</section>
+<!-- Section Title -->
+<div class="flex items-center justify-between px-1">
+<h3 class="font-headline-md text-headline-md text-on-surface">Pending Resolutions (1)</h3>
+<span class="font-label-sm text-label-sm text-primary font-semibold">Action Required</span>
+</div>
+<!-- ACTIVE POLL CARD 1: PENDING VOTE -->
+<section class="bg-surface-container-lowest rounded-xl p-space-md border border-outline-variant/60 shadow-sm flex flex-col gap-space-sm relative">
+<!-- Card Header Info -->
+<div class="flex flex-col gap-1">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm font-semibold text-secondary tracking-wide">#RES-2025-04 • Capital Expenditure</span>
+<span class="px-2 py-0.5 rounded-full text-[10px] font-label-sm font-semibold bg-amber-50 text-amber-800 border border-amber-200 flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-amber-600"></span>
+              Awaiting Your Vote
+            </span>
+</div>
+<h4 class="font-headline-md text-headline-md text-on-surface font-bold">
+            Installation of 15 kW Rooftop Solar Hybrid Grid-Tie Inverter System
+          </h4>
+</div>
+<!-- Proposal Summary Bento Block -->
+<div class="bg-surface-container-low rounded-lg p-3 border border-outline-variant/40 flex flex-col gap-2">
+<p class="font-body-md text-body-md text-on-surface leading-relaxed">
+            Proposal to install solar panels on common roof terrace to reduce common area monthly electric bills (lift, lobby lights, pumps) by ~38%.
+          </p>
+<div class="grid grid-cols-2 gap-2 pt-1 border-t border-outline-variant/30">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-secondary">Estimated Budget</span>
+<span class="font-currency-md text-currency-md text-on-surface font-bold">৳ 8,50,000</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-secondary">Funding Mechanism</span>
+<span class="font-body-sm text-body-sm text-on-surface font-medium">50% Sinking / 50% Levy</span>
+</div>
+</div>
+<p class="font-body-sm text-body-sm text-secondary italic">
+            *Flat 4A share: ৳11,800 total split across two equal monthly billings (July &amp; August 2025).
+          </p>
+</div>
+<!-- Memo Link Accordion -->
+<button class="flex items-center justify-between text-primary font-label-md text-label-md hover:underline py-0.5" type="button">
+<span class="flex items-center gap-1.5 font-semibold">
+<span class="material-symbols-outlined text-[18px]">description</span>
+            Read Feasibility Study &amp; 3 Vendor Quotes
+          </span>
+<span class="material-symbols-outlined text-[16px]">open_in_new</span>
+</button>
+<!-- Official Interactive Ballot Form -->
+<form class="flex flex-col gap-2.5 pt-2">
+<span class="font-label-md text-label-md text-on-surface font-bold uppercase tracking-wider text-[11px]">
+            Official Ballot Choice:
+          </span>
+<!-- Option A -->
+<label class="radio-card block cursor-pointer">
+<input checked="" class="sr-only" name="ballot_res_4" type="radio" value="A"/>
+<div class="p-3 rounded-lg border border-outline-variant/60 flex items-start gap-3 transition-colors bg-surface-container-lowest hover:bg-surface-container-low">
+<div class="w-4 h-4 rounded-full border-2 border-outline mt-0.5 flex-shrink-0 radio-dot"></div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-bold text-on-surface">Option A: Approve Solar Installation</span>
+<span class="font-body-sm text-body-sm text-secondary">Approve ৳8.5L budget, contract award, and 2-month special levy.</span>
+</div>
+</div>
+</label>
+<!-- Option B -->
+<label class="radio-card block cursor-pointer">
+<input class="sr-only" name="ballot_res_4" type="radio" value="B"/>
+<div class="p-3 rounded-lg border border-outline-variant/60 flex items-start gap-3 transition-colors bg-surface-container-lowest hover:bg-surface-container-low">
+<div class="w-4 h-4 rounded-full border-2 border-outline mt-0.5 flex-shrink-0 radio-dot"></div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-bold text-on-surface">Option B: Reject Proposal</span>
+<span class="font-body-sm text-body-sm text-secondary">Maintain existing DPDC 100% grid dependency without capital outlay.</span>
+</div>
+</div>
+</label>
+<!-- Option C -->
+<label class="radio-card block cursor-pointer">
+<input class="sr-only" name="ballot_res_4" type="radio" value="C"/>
+<div class="p-3 rounded-lg border border-outline-variant/60 flex items-start gap-3 transition-colors bg-surface-container-lowest hover:bg-surface-container-low">
+<div class="w-4 h-4 rounded-full border-2 border-outline mt-0.5 flex-shrink-0 radio-dot"></div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-bold text-on-surface">Option C: Abstain from Voting</span>
+<span class="font-body-sm text-body-sm text-secondary">Count toward meeting quorum without taking an affirmative or negative stance.</span>
+</div>
+</div>
+</label>
+<!-- Cast Vote Action CTA with Security Safeguards -->
+<div class="pt-2 flex flex-col gap-2">
+<button class="w-full h-11 bg-primary text-on-primary rounded-lg font-label-lg text-label-lg font-semibold flex items-center justify-center gap-2 hover:bg-primary/90 active:scale-[0.99] transition-all shadow-sm" type="button">
+<span class="material-symbols-outlined text-[18px]">verified_user</span>
+              Cast Official Vote (Flat 4A)
+            </button>
+<div class="flex items-center justify-center gap-1.5 text-secondary">
+<span class="material-symbols-outlined text-[14px]">lock</span>
+<span class="font-body-sm text-[11px] text-secondary">Biometric / OTP Signed • Recorded to BuildingOS Tamper-Proof Audit Log</span>
+</div>
+</div>
+</form>
+</section>
+<!-- Section Title -->
+<div class="flex items-center justify-between px-1 pt-1">
+<h3 class="font-headline-md text-headline-md text-on-surface">Completed Ballots (1)</h3>
+<span class="font-label-sm text-label-sm text-tertiary font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-[15px]">done_all</span> Live Tallies
+        </span>
+</div>
+<!-- ACTIVE POLL CARD 2: COMPLETED VOTE & REAL-TIME RESULTS -->
+<section class="bg-surface-container-lowest rounded-xl p-space-md border border-outline-variant/50 shadow-sm flex flex-col gap-space-sm">
+<div class="flex flex-col gap-1">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm font-semibold text-secondary tracking-wide">#RES-2025-03 • Security Bylaws</span>
+<!-- User Voted Badge -->
+<span class="px-2.5 py-0.5 rounded-full text-[11px] font-label-sm font-semibold bg-[#ECFDF5] text-[#065F46] border border-[#BBF7D0] flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px] text-[#059669]">check</span>
+              You Voted: Approved
+            </span>
+</div>
+<h4 class="font-headline-md text-headline-md text-on-surface font-bold">
+            Mandatory Visitor Biometric / OTP Gate Pass Policy
+          </h4>
+<p class="font-body-sm text-body-sm text-secondary">
+            Enactment of automated gate kiosk access control for contractors, delivery agents, and guest vehicles.
+          </p>
+</div>
+<!-- Real-Time Result Breakdown -->
+<div class="bg-surface-container-low rounded-lg p-3 border border-outline-variant/40 flex flex-col gap-3">
+<div class="flex items-center justify-between pb-1 border-b border-outline-variant/30">
+<span class="font-label-md text-label-md text-on-surface font-bold">Live Voting Breakdown</span>
+<span class="font-label-sm text-label-sm text-secondary">Total: <strong>24 of 36 unit owners</strong></span>
+</div>
+<!-- Progress Group: Yes -->
+<div class="flex flex-col gap-1">
+<div class="flex justify-between font-label-sm text-label-sm">
+<span class="text-on-surface font-medium flex items-center gap-1.5">
+<span class="w-2.5 h-2.5 rounded-full bg-tertiary"></span>
+                Yes / In Favor
+              </span>
+<span class="font-bold text-on-surface">21 votes (87.5%)</span>
+</div>
+<div class="w-full bg-surface-container h-2 rounded-full overflow-hidden">
+<div class="bg-tertiary h-full rounded-full" style="width: 87.5%;"></div>
+</div>
+</div>
+<!-- Progress Group: No -->
+<div class="flex flex-col gap-1">
+<div class="flex justify-between font-label-sm text-label-sm">
+<span class="text-on-surface font-medium flex items-center gap-1.5">
+<span class="w-2.5 h-2.5 rounded-full bg-error"></span>
+                No / Oppose
+              </span>
+<span class="font-bold text-on-surface">2 votes (8.3%)</span>
+</div>
+<div class="w-full bg-surface-container h-2 rounded-full overflow-hidden">
+<div class="bg-error h-full rounded-full" style="width: 8.3%;"></div>
+</div>
+</div>
+<!-- Progress Group: Abstain -->
+<div class="flex flex-col gap-1">
+<div class="flex justify-between font-label-sm text-label-sm">
+<span class="text-on-surface font-medium flex items-center gap-1.5">
+<span class="w-2.5 h-2.5 rounded-full bg-secondary"></span>
+                Abstain
+              </span>
+<span class="font-bold text-on-surface">1 vote (4.2%)</span>
+</div>
+<div class="w-full bg-surface-container h-2 rounded-full overflow-hidden">
+<div class="bg-secondary/50 h-full rounded-full" style="width: 4.2%;"></div>
+</div>
+</div>
+<div class="pt-1 flex items-center justify-between text-[11px] font-label-sm text-secondary border-t border-outline-variant/30">
+<span>Threshold Needed: 66% Special Majority</span>
+<span class="text-tertiary font-bold">Trend: Passing</span>
+</div>
+</div>
+</section>
+<!-- Archived / Past Polls Footer Navigation -->
+<section class="mt-2 bg-surface-container-lowest rounded-xl p-space-md border border-outline-variant/40 flex items-center justify-between shadow-sm">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-[22px]">inventory_2</span>
+</div>
+<div>
+<h5 class="font-label-lg text-label-lg font-bold text-on-surface">Historical Society Ballots</h5>
+<p class="font-body-sm text-body-sm text-secondary">Archives of AGM 2024 &amp; EGM resolutions</p>
+</div>
+</div>
+<button class="w-8 h-8 rounded-full flex items-center justify-center text-secondary hover:bg-surface-container" type="button">
+<span class="material-symbols-outlined text-[20px]">chevron_right</span>
+</button>
+</section>
+</div>
+</main>
+</body></html>

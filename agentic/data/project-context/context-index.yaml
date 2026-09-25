@@ -39,6 +39,14 @@ project_docs:
       moved from future scope (§3.2) to in-scope Phase 6, MVP inclusion OPEN
       (§125); cross-refs in §3,4,8.6,8.7,9,28,31,37,85,91,112,115,123,134-138,
       149.16. Tracked by BOS-007 in BOS-001/BACKLOG.md.
+  UI:
+    status: DRAFT
+    path: agentic/data/project-context/ui/stitch/UI-INDEX.md
+    note: >-
+      Stitch UI mockups imported 2026-09-25 (4 back-office web + 42 mobile
+      screens, design-system/DESIGN.md tokens). Layout/style reference only;
+      BRD governs behavior. UI-INDEX maps screen -> BRD section -> BOS item ->
+      task and lists UI-only / BRD-only gaps. Not human-approved as scope.
 features:
   BOS-001:
     status: SUPERSEDED
@@ -98,3 +106,14 @@ features:
       building application/approval lifecycle, units/ownership, subscription/
       entitlements, and the back-office console (BRD §4, §8.12,
       §110.1-110.4, §149). Supersedes BOS-001/BOS-002 scope.
+  BOS-011:
+    status: IN_PROGRESS
+    path: agentic/data/project-context/features/BOS-011
+    stage: IMPLEMENTATION
+    work_type: change_request
+    run_id: RUN-13923DE4E9D64BECBEE263998E681BEE
+    technical_approval: APPROVED
+    summary: >-
+      Align delivered BOS-010 mobile screens to Stitch UI: Stitch blue theme
+      (D-01), BRD §37 per-role nav (D-02), splash §39, unit list filter/search/
+      sort §48, Save & Add Another §49, restyles. Tasks UI-T01..UI-T10.

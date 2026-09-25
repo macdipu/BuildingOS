@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>33. Expense Detail</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "surface-bright": "#f8f9ff",
+            "on-surface": "#0b1c30",
+            "error": "#ba1a1a",
+            "inverse-on-surface": "#eaf1ff",
+            "surface-container-high": "#dce9ff",
+            "surface-container": "#e5eeff",
+            "surface-tint": "#0053db",
+            "tertiary-fixed": "#85f8c4",
+            "on-primary-fixed-variant": "#003ea8",
+            "secondary-fixed": "#dae2fd",
+            "on-tertiary-fixed-variant": "#005137",
+            "primary-fixed": "#dbe1ff",
+            "inverse-primary": "#b4c5ff",
+            "primary-container": "#2563eb",
+            "tertiary": "#006243",
+            "secondary": "#565e74",
+            "on-error": "#ffffff",
+            "secondary-fixed-dim": "#bec6e0",
+            "on-error-container": "#93000a",
+            "surface-dim": "#cbdbf5",
+            "outline": "#737686",
+            "on-primary-fixed": "#00174b",
+            "inverse-surface": "#213145",
+            "on-tertiary": "#ffffff",
+            "surface-container-lowest": "#ffffff",
+            "on-primary-container": "#eeefff",
+            "on-primary": "#ffffff",
+            "on-secondary": "#ffffff",
+            "primary-fixed-dim": "#b4c5ff",
+            "tertiary-fixed-dim": "#68dba9",
+            "tertiary-container": "#007d57",
+            "on-background": "#0b1c30",
+            "surface-container-highest": "#d3e4fe",
+            "on-tertiary-fixed": "#002114",
+            "on-tertiary-container": "#bdffdc",
+            "primary": "#004ac6",
+            "surface": "#f8f9ff",
+            "on-secondary-container": "#5c647a",
+            "on-secondary-fixed": "#131b2e",
+            "error-container": "#ffdad6",
+            "on-secondary-fixed-variant": "#3f465c",
+            "on-surface-variant": "#434655",
+            "surface-container-low": "#eff4ff",
+            "outline-variant": "#c3c6d7",
+            "background": "#f8f9ff",
+            "secondary-container": "#dae2fd",
+            "surface-variant": "#d3e4fe"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-lg": "1.5rem",
+            "margin-mobile": "1rem",
+            "space-md": "1rem",
+            "space-sm": "0.75rem",
+            "space-2xs": "0.25rem",
+            "space-xs": "0.5rem",
+            "space-xl": "2rem",
+            "gutter-mobile": "1rem",
+            "margin": "2rem",
+            "space-2xl": "3rem",
+            "gutter": "1.5rem"
+          },
+          "fontFamily": {
+            "headline-xl": ["Plus Jakarta Sans"],
+            "label-lg": ["Inter"],
+            "headline-lg": ["Plus Jakarta Sans"],
+            "body-sm": ["Inter"],
+            "body-lg": ["Inter"],
+            "label-md": ["Inter"],
+            "label-sm": ["Inter"],
+            "display-lg": ["Plus Jakarta Sans"],
+            "currency-lg": ["Plus Jakarta Sans"],
+            "display-lg-mobile": ["Plus Jakarta Sans"],
+            "currency-md": ["Inter"],
+            "headline-md": ["Plus Jakarta Sans"],
+            "body-md": ["Inter"]
+          },
+          "fontSize": {
+            "headline-xl": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.015em", "fontWeight": "600"}],
+            "label-lg": ["14px", {"lineHeight": "20px", "fontWeight": "600"}],
+            "headline-lg": ["22px", {"lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+            "body-sm": ["12px", {"lineHeight": "16px", "fontWeight": "400"}],
+            "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+            "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+            "label-sm": ["11px", {"lineHeight": "14px", "letterSpacing": "0.02em", "fontWeight": "600"}],
+            "display-lg": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+            "currency-lg": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+            "display-lg-mobile": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+            "currency-md": ["15px", {"lineHeight": "20px", "fontWeight": "600"}],
+            "headline-md": ["18px", {"lineHeight": "24px", "letterSpacing": "-0.005em", "fontWeight": "600"}],
+            "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1;
+    }
+  </style>
+</head>
+<body class="bg-background text-on-surface font-body-md antialiased min-h-screen pb-36">
+<!-- Top App Bar for Linear/Detail View (Back navigation, share, and PDF actions) -->
+<header class="fixed top-0 left-0 w-full z-40 bg-surface-container-lowest shadow-sm flex items-center justify-between h-16 px-margin-mobile">
+<div class="flex items-center gap-space-xs">
+<button aria-label="Go back" class="p-space-xs -ml-2 rounded-lg text-on-surface hover:bg-surface-container active:scale-95 transition-transform duration-100 flex items-center justify-center" type="button">
+<span class="material-symbols-outlined text-primary text-2xl">arrow_back</span>
+</button>
+<div>
+<span class="font-label-sm text-label-sm text-outline uppercase tracking-wider block">Expense Voucher</span>
+<h1 class="font-headline-md text-headline-md text-on-surface font-bold leading-tight">#EXP-2025-0315</h1>
+</div>
+</div>
+<div class="flex items-center gap-space-2xs">
+<button aria-label="Share voucher" class="p-space-xs rounded-lg text-secondary hover:text-primary hover:bg-surface-container active:scale-95 transition-transform duration-100 flex items-center justify-center" type="button">
+<span class="material-symbols-outlined text-xl">share</span>
+</button>
+<button aria-label="Download PDF" class="p-space-xs rounded-lg text-secondary hover:text-primary hover:bg-surface-container active:scale-95 transition-transform duration-100 flex items-center justify-center" type="button">
+<span class="material-symbols-outlined text-xl">picture_as_pdf</span>
+</button>
+</div>
+</header>
+<!-- Main Content Body -->
+<main class="pt-20 px-margin-mobile space-y-space-md max-w-md mx-auto">
+<!-- Status Banner Card -->
+<section class="bg-surface-container-lowest rounded-xl border border-outline-variant p-space-md shadow-sm relative overflow-hidden">
+<div class="absolute top-0 right-0 w-32 h-32 bg-secondary-fixed/30 rounded-full blur-2xl pointer-events-none -mr-10 -mt-10"></div>
+<div class="flex items-center justify-between mb-space-sm relative z-10">
+<!-- Status Pill: Amber Due/Pending -->
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-semibold tracking-wide bg-[#FFFBEB] text-[#92400E] border border-[#FDE68A]">
+<span class="w-1.5 h-1.5 rounded-full bg-[#D97706] animate-pulse"></span>
+          Pending Committee Signoff
+        </span>
+<span class="font-label-sm text-label-sm text-outline flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">calendar_today</span>
+          15 March 2025
+        </span>
+</div>
+<div class="space-y-1 relative z-10">
+<span class="font-label-sm text-label-sm text-secondary uppercase tracking-wider">Total Disbursable Amount</span>
+<div class="font-display-lg-mobile text-display-lg-mobile text-on-surface font-bold tracking-tight text-primary">
+          ৳ 15,400 <span class="text-label-lg font-label-lg text-outline font-normal">BDT</span>
+</div>
+<p class="font-headline-md text-headline-md text-on-surface font-semibold pt-1">
+          Emergency Sump Pump Motor Rewinding
+        </p>
+</div>
+<div class="mt-space-sm pt-space-xs border-t border-outline-variant flex items-center justify-between text-secondary">
+<span class="font-body-sm text-body-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-base text-tertiary">security</span>
+          GVH Reserve Fund Account
+        </span>
+<span class="font-label-sm text-label-sm font-semibold text-primary">Bylaw Sec 11</span>
+</div>
+</section>
+<!-- Dual Sign-off Approval Tracker Card -->
+<section class="bg-surface-container-lowest rounded-xl border border-outline-variant p-space-md shadow-sm">
+<div class="flex items-center justify-between mb-space-md">
+<h2 class="font-headline-md text-headline-md text-on-surface font-bold flex items-center gap-1.5">
+<span class="material-symbols-outlined text-primary text-xl">fact_check</span>
+          Dual Sign-off Tracker
+        </h2>
+<span class="font-label-sm text-label-sm bg-surface-container text-primary font-semibold px-2 py-0.5 rounded">2 of 3 Done</span>
+</div>
+<!-- Stepper / Timeline -->
+<div class="relative pl-6 space-y-6 before:absolute before:left-2.5 before:top-2 before:bottom-3 before:w-0.5 before:bg-outline-variant">
+<!-- Step 1: Verification Completed -->
+<div class="relative">
+<div class="absolute -left-6 top-0.5 w-5 h-5 rounded-full bg-tertiary flex items-center justify-center text-on-tertiary shadow-sm">
+<span class="material-symbols-outlined text-xs" style="font-variation-settings: 'FILL' 1;">check</span>
+</div>
+<div>
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md text-on-surface font-semibold">Estate Manager Verification</span>
+<span class="font-label-sm text-label-sm text-[#15803D] bg-[#F0FDF4] px-1.5 py-0.5 rounded font-semibold border border-[#BBF7D0]">Verified</span>
+</div>
+<p class="font-body-sm text-body-sm text-secondary mt-0.5">
+              Tanvir K. <span class="text-outline">(Estate Manager • Staff #884)</span>
+</p>
+<span class="font-body-sm text-body-sm text-outline flex items-center gap-1 mt-1">
+<span class="material-symbols-outlined text-xs">schedule</span>
+              15 Mar 2025, 02:30 PM
+            </span>
+</div>
+</div>
+<!-- Step 2: Treasurer Reviewed -->
+<div class="relative">
+<div class="absolute -left-6 top-0.5 w-5 h-5 rounded-full bg-tertiary flex items-center justify-center text-on-tertiary shadow-sm">
+<span class="material-symbols-outlined text-xs" style="font-variation-settings: 'FILL' 1;">check</span>
+</div>
+<div>
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md text-on-surface font-semibold">Committee Treasurer Review</span>
+<span class="font-label-sm text-label-sm text-[#15803D] bg-[#F0FDF4] px-1.5 py-0.5 rounded font-semibold border border-[#BBF7D0]">Approved</span>
+</div>
+<p class="font-body-sm text-body-sm text-secondary mt-0.5">
+              Barrister Farhana Chowdhury <span class="text-outline">(Treasurer)</span>
+</p>
+<span class="font-body-sm text-body-sm text-outline flex items-center gap-1 mt-1">
+<span class="material-symbols-outlined text-xs">schedule</span>
+              16 Mar 2025, 11:00 AM
+            </span>
+</div>
+</div>
+<!-- Step 3: Final Approval (Pulsing / Pending) -->
+<div class="relative">
+<div class="absolute -left-6 top-0.5 w-5 h-5 rounded-full bg-[#FFFBEB] border-2 border-[#D97706] flex items-center justify-center shadow-sm">
+<span class="w-2 h-2 rounded-full bg-[#D97706] animate-ping"></span>
+</div>
+<div>
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md text-on-surface font-semibold">Society Secretary Final Signoff</span>
+<span class="font-label-sm text-label-sm text-[#92400E] bg-[#FFFBEB] px-1.5 py-0.5 rounded font-semibold border border-[#FDE68A]">Pending</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface font-medium mt-0.5">
+              Assigned to Tanvir Ahmed <span class="text-outline">(Building Lead)</span>
+</p>
+<span class="font-body-sm text-body-sm text-error flex items-center gap-1 mt-1 font-medium">
+<span class="material-symbols-outlined text-xs">hourglass_top</span>
+              Awaiting your authorization signature
+            </span>
+</div>
+</div>
+</div>
+</section>
+<!-- Voucher Meta & Vendor Details Card -->
+<section class="bg-surface-container-lowest rounded-xl border border-outline-variant p-space-md shadow-sm space-y-space-sm">
+<h2 class="font-headline-md text-headline-md text-on-surface font-bold flex items-center gap-1.5 border-b border-outline-variant pb-space-xs">
+<span class="material-symbols-outlined text-primary text-xl">store</span>
+        Vendor &amp; Payment Details
+      </h2>
+<div class="grid grid-cols-1 gap-space-sm">
+<div>
+<span class="font-label-sm text-label-sm text-outline uppercase block">Expense Category</span>
+<div class="flex items-center gap-1.5 mt-0.5">
+<span class="material-symbols-outlined text-primary text-sm">plumbing</span>
+<span class="font-body-md text-body-md text-on-surface font-medium">Emergency Mechanical &amp; Plumbing</span>
+</div>
+</div>
+<div class="bg-surface-container-low rounded-lg p-space-sm border border-outline-variant">
+<div class="flex items-start justify-between">
+<div>
+<span class="font-label-sm text-label-sm text-outline uppercase block">Vendor / Payee</span>
+<span class="font-label-lg text-label-lg text-on-surface font-bold block">Rahim Engineering Works</span>
+<span class="font-body-sm text-body-sm text-secondary flex items-center gap-1 mt-0.5">
+<span class="material-symbols-outlined text-xs text-outline">location_on</span>
+                Banani, Dhaka
+              </span>
+</div>
+<span class="font-label-sm text-label-sm bg-surface-container-lowest border border-outline-variant text-secondary px-2 py-0.5 rounded font-mono">
+              BIN-99214-DHK
+            </span>
+</div>
+</div>
+<div>
+<span class="font-label-sm text-label-sm text-outline uppercase block">Payment Method</span>
+<div class="flex items-start gap-2 mt-1">
+<span class="material-symbols-outlined text-primary text-base mt-0.5">account_balance</span>
+<div>
+<p class="font-body-md text-body-md text-on-surface font-medium">Association Account Cheque #CHQ-88201</p>
+<p class="font-body-sm text-body-sm text-secondary">Trust Bank A/C #4402 (GVH Maintenance)</p>
+</div>
+</div>
+</div>
+<div class="pt-space-2xs border-t border-outline-variant">
+<span class="font-label-sm text-label-sm text-outline uppercase block">Initiated By</span>
+<div class="flex items-center gap-2 mt-1">
+<div class="w-7 h-7 rounded-full bg-secondary-container text-on-secondary-fixed flex items-center justify-center font-bold text-xs">
+              TK
+            </div>
+<div>
+<span class="font-body-md text-body-md font-semibold text-on-surface">Tanvir K.</span>
+<span class="font-body-sm text-body-sm text-outline ml-1">(Estate Manager • Staff ID #884)</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Itemized Bill Breakdown Table -->
+<section class="bg-surface-container-lowest rounded-xl border border-outline-variant p-space-md shadow-sm">
+<div class="flex items-center justify-between border-b border-outline-variant pb-space-xs mb-space-sm">
+<h2 class="font-headline-md text-headline-md text-on-surface font-bold flex items-center gap-1.5">
+<span class="material-symbols-outlined text-primary text-xl">receipt_long</span>
+          Itemized Bill Breakdown
+        </h2>
+<span class="font-label-sm text-label-sm text-secondary">3 Line Items</span>
+</div>
+<div class="divide-y divide-outline-variant">
+<!-- Item 1 -->
+<div class="py-space-xs flex justify-between items-start gap-2">
+<div class="space-y-0.5">
+<p class="font-body-md text-body-md text-on-surface font-medium">Submersible Copper Coil Rewinding</p>
+<p class="font-body-sm text-body-sm text-outline">Industrial grade gauge-18 copper with insulation</p>
+</div>
+<div class="font-label-lg text-label-lg text-on-surface font-semibold whitespace-nowrap">
+            ৳ 9,500
+          </div>
+</div>
+<!-- Item 2 -->
+<div class="py-space-xs flex justify-between items-start gap-2">
+<div class="space-y-0.5">
+<p class="font-body-md text-body-md text-on-surface font-medium">Heavy Duty Capacitor &amp; Seal Replacement</p>
+<p class="font-body-sm text-body-sm text-outline">German standard double-mechanical water seal</p>
+</div>
+<div class="font-label-lg text-label-lg text-on-surface font-semibold whitespace-nowrap">
+            ৳ 3,400
+          </div>
+</div>
+<!-- Item 3 -->
+<div class="py-space-xs flex justify-between items-start gap-2">
+<div class="space-y-0.5">
+<p class="font-body-md text-body-md text-on-surface font-medium">Emergency Labor &amp; 24/7 Overtime Surcharge</p>
+<p class="font-body-sm text-body-sm text-outline">Night deployment to prevent basement waterlogging</p>
+</div>
+<div class="font-label-lg text-label-lg text-on-surface font-semibold whitespace-nowrap">
+            ৳ 2,500
+          </div>
+</div>
+<!-- Total -->
+<div class="pt-space-sm flex justify-between items-center bg-surface-container-low -mx-space-md px-space-md -mb-space-md pb-space-md rounded-b-xl mt-space-xs">
+<span class="font-headline-md text-headline-md text-on-surface font-bold">Total Invoice Amount</span>
+<span class="font-currency-lg text-currency-lg text-primary font-bold">৳ 15,400</span>
+</div>
+</div>
+</section>
+<!-- Supporting Tax Bill / Cash Memo -->
+<section class="bg-surface-container-lowest rounded-xl border border-outline-variant p-space-md shadow-sm">
+<h2 class="font-headline-md text-headline-md text-on-surface font-bold flex items-center gap-1.5 mb-space-sm">
+<span class="material-symbols-outlined text-primary text-xl">attach_file</span>
+        Supporting Tax Bill / Cash Memo
+      </h2>
+<div class="flex items-center justify-between p-space-sm bg-surface-container-low rounded-lg border border-outline-variant hover:border-primary transition-colors duration-150">
+<div class="flex items-center gap-space-sm overflow-hidden">
+<div class="w-12 h-14 bg-surface-container-lowest border border-outline-variant rounded flex flex-col items-center justify-center flex-shrink-0 shadow-xs">
+<span class="material-symbols-outlined text-error text-2xl">description</span>
+<span class="font-label-sm text-[9px] font-bold text-outline">PDF</span>
+</div>
+<div class="truncate">
+<span class="font-label-md text-label-md text-on-surface font-semibold block truncate">Rahim_Eng_Memo_0315.pdf</span>
+<span class="font-body-sm text-body-sm text-outline">1.4 MB • Signed &amp; Stamped</span>
+</div>
+</div>
+<button class="ml-2 px-3 py-1.5 bg-surface-container-lowest border border-outline-variant hover:bg-surface-container text-primary font-label-sm text-label-sm rounded font-semibold flex items-center gap-1 active:scale-95 transition-all whitespace-nowrap" type="button">
+<span class="material-symbols-outlined text-sm">visibility</span>
+          View Original
+        </button>
+</div>
+<!-- Governance Ledger Footnote -->
+<div class="mt-space-sm pt-space-xs flex items-start gap-2 text-outline font-body-sm text-body-sm">
+<span class="material-symbols-outlined text-secondary text-base mt-0.5">account_balance_wallet</span>
+<p class="leading-snug">
+          Debits from Trust Bank Society Operating Account upon dual signoff completion under GVH Bylaw Section 11.
+        </p>
+</div>
+</section>
+</main>
+<!-- Sticky Bottom Action Bar (Fixed elevated surface) -->
+<aside aria-label="Action Bar" class="fixed bottom-0 left-0 w-full z-40 bg-surface-container-lowest border-t border-outline-variant p-margin-mobile shadow-[0_-4px_12px_rgba(15,23,42,0.06)]">
+<div class="max-w-md mx-auto space-y-space-xs">
+<button class="w-full h-12 bg-primary hover:bg-primary-container text-on-primary font-label-lg text-label-lg font-bold rounded-lg shadow-sm flex items-center justify-center gap-2 active:scale-[0.98] transition-transform duration-100" type="button">
+<span class="material-symbols-outlined text-xl" style="font-variation-settings: 'FILL' 1;">draw</span>
+        Approve &amp; Authorize Disbursement
+      </button>
+<button class="w-full h-10 bg-transparent hover:bg-surface-container text-error border border-outline-variant font-label-md text-label-md font-semibold rounded-lg flex items-center justify-center gap-1.5 active:scale-[0.98] transition-transform duration-100" type="button">
+<span class="material-symbols-outlined text-lg">cancel</span>
+        Reject or Request Audit Clarification
+      </button>
+</div>
+</aside>
+</body></html>

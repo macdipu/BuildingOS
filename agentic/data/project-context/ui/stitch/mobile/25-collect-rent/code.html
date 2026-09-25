@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Collect Rent - BuildingOS</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "on-primary-fixed-variant": "#003ea8",
+            "on-error-container": "#93000a",
+            "tertiary-fixed": "#85f8c4",
+            "surface-bright": "#f8f9ff",
+            "background": "#f8f9ff",
+            "surface-container-highest": "#d3e4fe",
+            "on-secondary-fixed-variant": "#3f465c",
+            "surface-variant": "#d3e4fe",
+            "error": "#ba1a1a",
+            "inverse-primary": "#b4c5ff",
+            "inverse-on-surface": "#eaf1ff",
+            "tertiary-fixed-dim": "#68dba9",
+            "on-primary-container": "#eeefff",
+            "surface-container": "#e5eeff",
+            "on-tertiary-fixed-variant": "#005137",
+            "on-background": "#0b1c30",
+            "tertiary-container": "#007d57",
+            "surface-tint": "#0053db",
+            "primary": "#004ac6",
+            "surface-container-lowest": "#ffffff",
+            "primary-fixed-dim": "#b4c5ff",
+            "outline-variant": "#c3c6d7",
+            "on-error": "#ffffff",
+            "error-container": "#ffdad6",
+            "on-tertiary-fixed": "#002114",
+            "secondary-fixed": "#dae2fd",
+            "inverse-surface": "#213145",
+            "secondary-container": "#dae2fd",
+            "tertiary": "#006243",
+            "primary-container": "#2563eb",
+            "secondary-fixed-dim": "#bec6e0",
+            "on-tertiary": "#ffffff",
+            "on-secondary-fixed": "#131b2e",
+            "secondary": "#565e74",
+            "on-secondary-container": "#5c647a",
+            "on-primary-fixed": "#00174b",
+            "on-primary": "#ffffff",
+            "on-surface": "#0b1c30",
+            "on-tertiary-container": "#bdffdc",
+            "surface-container-low": "#eff4ff",
+            "on-secondary": "#ffffff",
+            "on-surface-variant": "#434655",
+            "outline": "#737686",
+            "surface": "#f8f9ff",
+            "surface-dim": "#cbdbf5",
+            "primary-fixed": "#dbe1ff",
+            "surface-container-high": "#dce9ff"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-sm": "0.75rem",
+            "gutter": "1.5rem",
+            "margin": "2rem",
+            "space-xs": "0.5rem",
+            "space-2xl": "3rem",
+            "space-lg": "1.5rem",
+            "margin-mobile": "1rem",
+            "gutter-mobile": "1rem",
+            "space-2xs": "0.25rem",
+            "space-xl": "2rem",
+            "space-md": "1rem"
+          },
+          "fontFamily": {
+            "currency-lg": ["Plus Jakarta Sans"],
+            "label-md": ["Inter"],
+            "headline-lg": ["Plus Jakarta Sans"],
+            "body-lg": ["Inter"],
+            "currency-md": ["Inter"],
+            "label-sm": ["Inter"],
+            "display-lg-mobile": ["Plus Jakarta Sans"],
+            "body-md": ["Inter"],
+            "headline-md": ["Plus Jakarta Sans"],
+            "body-sm": ["Inter"],
+            "label-lg": ["Inter"],
+            "display-lg": ["Plus Jakarta Sans"],
+            "headline-xl": ["Plus Jakarta Sans"]
+          },
+          "fontSize": {
+            "currency-lg": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+            "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "600" }],
+            "headline-lg": ["22px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "currency-md": ["15px", { "lineHeight": "20px", "fontWeight": "600" }],
+            "label-sm": ["11px", { "lineHeight": "14px", "letterSpacing": "0.02em", "fontWeight": "600" }],
+            "display-lg-mobile": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+            "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+            "headline-md": ["18px", { "lineHeight": "24px", "letterSpacing": "-0.005em", "fontWeight": "600" }],
+            "body-sm": ["12px", { "lineHeight": "16px", "fontWeight": "400" }],
+            "label-lg": ["14px", { "lineHeight": "20px", "fontWeight": "600" }],
+            "display-lg": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "headline-xl": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.015em", "fontWeight": "600" }]
+          }
+        },
+      },
+    }
+  </script>
+</head>
+<body class="bg-surface text-on-surface antialiased font-body-md text-body-md selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- Mobile Container Wrapper with responsive desktop preview containment -->
+<div class="min-h-screen bg-surface flex justify-center">
+<main class="w-full max-w-md bg-surface flex flex-col min-h-screen relative pb-32">
+<!-- Top Navigation Bar (Task-Focused with Dismissal Action) -->
+<header class="sticky top-0 z-40 bg-surface-container-lowest shadow-sm flex items-center justify-between px-space-md h-16 border-b border-outline-variant">
+<div class="flex items-center gap-space-sm">
+<button aria-label="Close" class="w-10 h-10 rounded-full flex items-center justify-center text-on-surface hover:bg-surface-container transition-colors duration-150 active:scale-95" type="button">
+<span class="material-symbols-outlined text-[24px]">close</span>
+</button>
+<div class="flex flex-col">
+<h1 class="font-headline-md text-headline-md font-bold text-on-surface leading-tight">Record Rent Payment</h1>
+<p class="font-label-sm text-label-sm text-secondary flex items-center gap-1">
+<span>Flat 6B</span>
+<span class="inline-block w-1 h-1 rounded-full bg-secondary"></span>
+<span class="font-medium text-on-surface-variant">Mahmudul Hasan</span>
+</p>
+</div>
+</div>
+<div class="flex items-center gap-1">
+<span class="inline-flex items-center px-2 py-0.5 rounded-full text-label-sm font-label-sm font-semibold bg-surface-container-high text-primary">
+            Unit 6B
+          </span>
+</div>
+</header>
+<!-- Scrollable Content Canvas -->
+<div class="flex-1 px-space-md pt-space-md space-y-space-md">
+<!-- Target Unit & Overdue Notice Banner -->
+<section class="bg-surface-container-lowest rounded-xl p-space-md border border-outline-variant shadow-sm relative overflow-hidden">
+<div class="absolute top-0 left-0 bottom-0 w-1.5 bg-error"></div>
+<div class="flex items-start justify-between">
+<div class="space-y-1">
+<div class="flex items-center gap-2">
+<span class="inline-flex items-center px-2 py-0.5 rounded-full text-label-sm font-label-sm font-semibold bg-error-container text-on-error-container">
+<span class="w-1.5 h-1.5 rounded-full bg-error mr-1.5"></span>
+                  Overdue Balance
+                </span>
+<span class="text-label-sm font-label-sm text-secondary">Due Mar 10, 2025</span>
+</div>
+<div class="flex items-baseline gap-1 pt-1">
+<span class="font-currency-lg text-currency-lg font-bold text-on-surface">৳ 52,000</span>
+<span class="text-body-sm font-body-sm text-secondary">(March 2025 Rent + Service charge)</span>
+</div>
+</div>
+<div class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center text-primary flex-shrink-0">
+<span class="material-symbols-outlined text-[22px]">domain</span>
+</div>
+</div>
+<div class="mt-space-sm pt-space-sm border-t border-surface-container-high flex items-center justify-between text-body-sm font-body-sm">
+<div class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px] text-secondary">person</span>
+<span class="font-medium text-on-surface">Mahmudul Hasan</span>
+</div>
+<a class="text-primary font-label-md font-semibold flex items-center gap-1 hover:underline" href="tel:+8801715667788">
+<span class="material-symbols-outlined text-[16px]">call</span>
+              +880 1715-667788
+            </a>
+</div>
+</section>
+<!-- Payment Input Form Section -->
+<section class="bg-surface-container-lowest rounded-xl p-space-md border border-outline-variant shadow-sm space-y-space-md">
+<div class="flex items-center justify-between">
+<h2 class="font-headline-md text-headline-md font-bold text-on-surface">Payment Details</h2>
+<span class="text-label-sm font-label-sm text-secondary">Step 1 of 2</span>
+</div>
+<!-- Amount Received Input Field with Fixed Prefix -->
+<div>
+<label class="block font-label-md text-label-md text-on-surface-variant mb-1.5" for="amount-received">
+              Amount Received <span class="text-error">*</span>
+</label>
+<div class="relative flex rounded-lg shadow-sm">
+<span class="inline-flex items-center px-3.5 rounded-l-lg border border-r-0 border-outline-variant bg-surface-container-low font-headline-md text-headline-md font-bold text-on-surface">
+                ৳
+              </span>
+<input class="block w-full min-w-0 flex-1 rounded-none rounded-r-lg border-outline-variant font-currency-lg text-currency-lg font-bold text-on-surface focus:border-primary focus:ring-2 focus:ring-primary/20 py-2.5 px-3" id="amount-received" name="amount-received" placeholder="0.00" type="text" value="52,000"/>
+</div>
+<p class="mt-1 text-label-sm font-label-sm text-secondary flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-tertiary">check_circle</span>
+              Pre-filled with total outstanding dues
+            </p>
+</div>
+<!-- Payment Date (Picker format) -->
+<div>
+<label class="block font-label-md text-label-md text-on-surface-variant mb-1.5" for="payment-date">
+              Payment Date <span class="text-error">*</span>
+</label>
+<div class="relative">
+<input class="w-full bg-surface-container-lowest border border-outline-variant rounded-lg py-2.5 pl-10 pr-4 font-body-md text-body-md text-on-surface focus:border-primary focus:ring-2 focus:ring-primary/20 cursor-pointer" id="payment-date" readonly="" type="text" value="19 March 2025"/>
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-secondary">
+<span class="material-symbols-outlined text-[20px]">calendar_today</span>
+</div>
+<div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none text-secondary">
+<span class="material-symbols-outlined text-[18px]">edit_calendar</span>
+</div>
+</div>
+</div>
+<!-- Payment Method Selector Chips -->
+<div>
+<label class="block font-label-md text-label-md text-on-surface-variant mb-2">
+              Payment Method <span class="text-error">*</span>
+</label>
+<div class="grid grid-cols-2 gap-2">
+<!-- bKash Merchant (Selected) -->
+<label class="relative flex items-center p-3 rounded-lg border-2 border-primary bg-primary-fixed/30 cursor-pointer transition-all">
+<input checked="" class="h-4 w-4 text-primary border-outline focus:ring-primary" name="payment-method" type="radio" value="bkash"/>
+<div class="ml-2.5 flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+<span class="font-label-md text-label-md text-primary font-bold">bKash Merchant</span>
+</div>
+</label>
+<!-- Nagad -->
+<label class="relative flex items-center p-3 rounded-lg border border-outline-variant bg-surface-container-lowest hover:bg-surface-container-low cursor-pointer transition-all">
+<input class="h-4 w-4 text-primary border-outline focus:ring-primary" name="payment-method" type="radio" value="nagad"/>
+<div class="ml-2.5 flex items-center gap-2">
+<span class="font-label-md text-label-md text-on-surface font-medium">Nagad</span>
+</div>
+</label>
+<!-- Bank Transfer -->
+<label class="relative flex items-center p-3 rounded-lg border border-outline-variant bg-surface-container-lowest hover:bg-surface-container-low cursor-pointer transition-all">
+<input class="h-4 w-4 text-primary border-outline focus:ring-primary" name="payment-method" type="radio" value="bank"/>
+<div class="ml-2.5 flex items-center gap-2">
+<span class="font-label-md text-label-md text-on-surface font-medium">Bank Transfer</span>
+</div>
+</label>
+<!-- Cash in Hand -->
+<label class="relative flex items-center p-3 rounded-lg border border-outline-variant bg-surface-container-lowest hover:bg-surface-container-low cursor-pointer transition-all">
+<input class="h-4 w-4 text-primary border-outline focus:ring-primary" name="payment-method" type="radio" value="cash"/>
+<div class="ml-2.5 flex items-center gap-2">
+<span class="font-label-md text-label-md text-on-surface font-medium">Cash in Hand</span>
+</div>
+</label>
+<!-- Cheque (Span full width) -->
+<label class="relative flex items-center p-3 col-span-2 rounded-lg border border-outline-variant bg-surface-container-lowest hover:bg-surface-container-low cursor-pointer transition-all">
+<input class="h-4 w-4 text-primary border-outline focus:ring-primary" name="payment-method" type="radio" value="cheque"/>
+<div class="ml-2.5 flex items-center gap-2">
+<span class="font-label-md text-label-md text-on-surface font-medium">Bank Cheque / Pay Order</span>
+</div>
+</label>
+</div>
+</div>
+<!-- Reference / TrxID Input Field -->
+<div>
+<label class="block font-label-md text-label-md text-on-surface-variant mb-1.5" for="trx-id">
+              Reference / TrxID <span class="text-error">*</span>
+</label>
+<div class="relative">
+<input class="w-full bg-surface-container-lowest border border-outline-variant rounded-lg py-2.5 pl-10 pr-10 font-body-md text-body-md text-on-surface focus:border-primary focus:ring-2 focus:ring-primary/20" id="trx-id" type="text" value="bKash TrxID: 9L48K2M19"/>
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-secondary">
+<span class="material-symbols-outlined text-[20px]">pin</span>
+</div>
+<div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none text-tertiary">
+<span class="material-symbols-outlined text-[20px]" data-weight="fill" style="font-variation-settings: 'FILL' 1;">verified</span>
+</div>
+</div>
+</div>
+<!-- Payer Phone Number -->
+<div>
+<label class="block font-label-md text-label-md text-on-surface-variant mb-1.5" for="payer-phone">
+              Payer Phone Number <span class="text-error">*</span>
+</label>
+<div class="relative">
+<input class="w-full bg-surface-container-lowest border border-outline-variant rounded-lg py-2.5 pl-10 pr-4 font-body-md text-body-md text-on-surface focus:border-primary focus:ring-2 focus:ring-primary/20" id="payer-phone" type="tel" value="+880 1715-667788"/>
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-secondary">
+<span class="material-symbols-outlined text-[20px]">smartphone</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Automated Fund Split / Allocation Breakdown Card -->
+<section class="bg-surface-container-lowest rounded-xl p-space-md border border-outline-variant shadow-sm space-y-space-md">
+<div class="flex items-center justify-between pb-2 border-b border-surface-container-high">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[20px]">account_tree</span>
+<h2 class="font-headline-md text-headline-md font-bold text-on-surface">Fund Allocation Split</h2>
+</div>
+<span class="inline-flex items-center px-2 py-0.5 rounded-full text-label-sm font-label-sm font-semibold bg-tertiary-fixed text-on-tertiary-fixed-variant">
+              Auto-Split Active
+            </span>
+</div>
+<div class="space-y-3">
+<!-- Base Rent -->
+<div class="flex items-center justify-between p-2.5 rounded-lg bg-surface-container-low border border-surface-container-highest">
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded-lg bg-primary-fixed flex items-center justify-center text-primary font-bold">
+<span class="material-symbols-outlined text-[18px]">real_estate_agent</span>
+</div>
+<div>
+<p class="font-label-md text-label-md font-bold text-on-surface">Base Rent to Landlord</p>
+<p class="font-body-sm text-body-sm text-secondary">A/C: City Bank (***9012)</p>
+</div>
+</div>
+<span class="font-currency-md text-currency-md font-bold text-on-surface">৳ 47,000</span>
+</div>
+<!-- Maintenance Fund -->
+<div class="flex items-center justify-between p-2.5 rounded-lg bg-surface-container-low border border-surface-container-highest">
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded-lg bg-tertiary-container/20 flex items-center justify-center text-tertiary font-bold">
+<span class="material-symbols-outlined text-[18px]">engineering</span>
+</div>
+<div>
+<p class="font-label-md text-label-md font-bold text-on-surface">Building Maintenance Fund</p>
+<p class="font-body-sm text-body-sm text-secondary">Society Central Treasury</p>
+</div>
+</div>
+<span class="font-currency-md text-currency-md font-bold text-on-surface">৳ 5,000</span>
+</div>
+<!-- Sinking Reserve Fund -->
+<div class="flex items-center justify-between p-2.5 rounded-lg bg-surface-container-lowest border border-outline-variant">
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded-lg bg-surface-container flex items-center justify-center text-secondary font-bold">
+<span class="material-symbols-outlined text-[18px]">savings</span>
+</div>
+<div>
+<p class="font-label-md text-label-md font-semibold text-on-surface">Sinking Reserve Fund</p>
+<p class="font-body-sm text-body-sm text-secondary">Emergency Capital Reserve</p>
+</div>
+</div>
+<span class="font-currency-md text-currency-md font-semibold text-secondary">৳ 0</span>
+</div>
+</div>
+<!-- Fee Toggle Control -->
+<div class="pt-2 border-t border-surface-container-high">
+<label class="flex items-start justify-between cursor-pointer select-none">
+<div class="pr-3">
+<p class="font-label-md text-label-md font-semibold text-on-surface">Auto-deduct 3% platform fee</p>
+<p class="font-body-sm text-body-sm text-secondary">৳1,410 will be disbursed to BuildingOS Platform Treasury</p>
+</div>
+<div class="relative inline-flex items-center cursor-pointer flex-shrink-0 mt-0.5">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-outline-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</div>
+</label>
+</div>
+</section>
+<!-- Voucher Upload Screenshot with Photo Preview Thumbnail -->
+<section class="bg-surface-container-lowest rounded-xl p-space-md border border-outline-variant shadow-sm space-y-space-sm">
+<div class="flex items-center justify-between">
+<h2 class="font-headline-md text-headline-md font-bold text-on-surface">Receipt / Voucher Screenshot</h2>
+<span class="text-label-sm font-label-sm text-tertiary flex items-center gap-1 font-semibold">
+<span class="material-symbols-outlined text-[16px]">cloud_done</span> 1 File Attached
+            </span>
+</div>
+<div class="flex items-center gap-space-sm p-2.5 rounded-lg bg-surface-container-low border border-outline-variant">
+<!-- Thumbnail Image with required data-alt -->
+<div class="relative w-16 h-16 rounded-lg overflow-hidden border border-outline-variant flex-shrink-0 bg-surface-container">
+<img class="w-full h-full object-cover" data-alt="A clean, close-up photograph of a digital smartphone payment receipt notification displaying a verified bKash mobile transaction on a crisp high-resolution screen with clear typography, illuminated by soft natural ambient indoor lighting in a modern corporate office." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAuBoAL-1CzWOqaJOWEab3ZxT0D8drv8WtKrxqhYlSaX05eaFRBSkL5R0N7YCJlQCwj0yLxn--aVOELjQ1oYfKaRDlsSGuiFVa5TORvQKNPniXfTHzQCSkOpf6fhheB_yZpD3D_SHWSNBa3n5mC9gSdgxSaP7UCnR--JuBp8BxIoElM1zwaE5qhg4RdBwOtmOkLXIVTRaBkSD-BlLDMcrkOoWL8dFegB9q4bUdYxpb-ofGIOQeRzgRR"/>
+<div class="absolute inset-0 bg-black/10"></div>
+</div>
+<div class="flex-1 min-w-0">
+<p class="font-label-md text-label-md font-bold text-on-surface truncate">bKash_Receipt_Trx9L48K2M19.png</p>
+<p class="font-body-sm text-body-sm text-secondary">420 KB • Uploaded just now</p>
+<div class="flex items-center gap-2 mt-1">
+<button class="font-label-sm text-label-sm text-primary font-semibold hover:underline" type="button">Replace</button>
+<span class="text-outline-variant">•</span>
+<button class="font-label-sm text-label-sm text-error font-semibold hover:underline" type="button">Remove</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Notes / Memo Textarea -->
+<section class="bg-surface-container-lowest rounded-xl p-space-md border border-outline-variant shadow-sm space-y-space-xs">
+<label class="block font-label-md text-label-md text-on-surface-variant" for="memo-notes">
+            Transaction Notes &amp; Internal Memo
+          </label>
+<div class="relative">
+<textarea class="w-full bg-surface-container-lowest border border-outline-variant rounded-lg p-3 font-body-md text-body-md text-on-surface focus:border-primary focus:ring-2 focus:ring-primary/20 placeholder:text-secondary" id="memo-notes" rows="3">Received via bKash merchant counter, verified with SMS notification.</textarea>
+</div>
+<p class="text-label-sm font-label-sm text-secondary">Auditable note recorded permanently in Flat 6B ledger.</p>
+</section>
+</div>
+<!-- Sticky Bottom Action Footer (Task-Focused Destination with Confirm & Cancel) -->
+<footer class="fixed bottom-0 left-0 right-0 z-50 bg-surface-container-lowest/95 backdrop-blur-md border-t border-outline-variant py-3 px-space-md max-w-md mx-auto shadow-lg space-y-2">
+<!-- Confirm and Record Payment CTA -->
+<button class="w-full h-12 bg-primary-container hover:bg-primary text-on-primary font-label-lg text-label-lg font-bold rounded-lg shadow-md flex items-center justify-center gap-2 transition-all duration-150 active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2" type="button">
+<span class="material-symbols-outlined text-[20px]">assignment_turned_in</span>
+<span>Confirm &amp; Record Payment</span>
+<span class="font-normal opacity-90 text-label-md">(৳52,000)</span>
+</button>
+<!-- Cancel CTA -->
+<button class="w-full h-10 bg-transparent hover:bg-surface-container text-secondary hover:text-on-surface font-label-md text-label-md font-semibold rounded-lg transition-colors duration-150" type="button">
+          Cancel
+        </button>
+</footer>
+</main>
+</div>
+</body></html>

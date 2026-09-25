@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Payment Detail &amp; Receipt - BuildingOS</title>
+<!-- Material Symbols Outlined Font -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS Play CDN -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "on-primary-fixed-variant": "#003ea8",
+            "on-error-container": "#93000a",
+            "tertiary-fixed": "#85f8c4",
+            "surface-bright": "#f8f9ff",
+            "background": "#f8f9ff",
+            "surface-container-highest": "#d3e4fe",
+            "on-secondary-fixed-variant": "#3f465c",
+            "surface-variant": "#d3e4fe",
+            "error": "#ba1a1a",
+            "inverse-primary": "#b4c5ff",
+            "inverse-on-surface": "#eaf1ff",
+            "tertiary-fixed-dim": "#68dba9",
+            "on-primary-container": "#eeefff",
+            "surface-container": "#e5eeff",
+            "on-tertiary-fixed-variant": "#005137",
+            "on-background": "#0b1c30",
+            "tertiary-container": "#007d57",
+            "surface-tint": "#0053db",
+            "primary": "#004ac6",
+            "surface-container-lowest": "#ffffff",
+            "primary-fixed-dim": "#b4c5ff",
+            "outline-variant": "#c3c6d7",
+            "on-error": "#ffffff",
+            "error-container": "#ffdad6",
+            "on-tertiary-fixed": "#002114",
+            "secondary-fixed": "#dae2fd",
+            "inverse-surface": "#213145",
+            "secondary-container": "#dae2fd",
+            "tertiary": "#006243",
+            "primary-container": "#2563eb",
+            "secondary-fixed-dim": "#bec6e0",
+            "on-tertiary": "#ffffff",
+            "on-secondary-fixed": "#131b2e",
+            "secondary": "#565e74",
+            "on-secondary-container": "#5c647a",
+            "on-primary-fixed": "#00174b",
+            "on-primary": "#ffffff",
+            "on-surface": "#0b1c30",
+            "on-tertiary-container": "#bdffdc",
+            "surface-container-low": "#eff4ff",
+            "on-secondary": "#ffffff",
+            "on-surface-variant": "#434655",
+            "outline": "#737686",
+            "surface": "#f8f9ff",
+            "surface-dim": "#cbdbf5",
+            "primary-fixed": "#dbe1ff",
+            "surface-container-high": "#dce9ff"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-sm": "0.75rem",
+            "gutter": "1.5rem",
+            "margin": "2rem",
+            "space-xs": "0.5rem",
+            "space-2xl": "3rem",
+            "space-lg": "1.5rem",
+            "margin-mobile": "1rem",
+            "gutter-mobile": "1rem",
+            "space-2xs": "0.25rem",
+            "space-xl": "2rem",
+            "space-md": "1rem"
+          },
+          "fontFamily": {
+            "currency-lg": ["Plus Jakarta Sans"],
+            "label-md": ["Inter"],
+            "headline-lg": ["Plus Jakarta Sans"],
+            "body-lg": ["Inter"],
+            "currency-md": ["Inter"],
+            "label-sm": ["Inter"],
+            "display-lg-mobile": ["Plus Jakarta Sans"],
+            "body-md": ["Inter"],
+            "headline-md": ["Plus Jakarta Sans"],
+            "body-sm": ["Inter"],
+            "label-lg": ["Inter"],
+            "display-lg": ["Plus Jakarta Sans"],
+            "headline-xl": ["Plus Jakarta Sans"]
+          },
+          "fontSize": {
+            "currency-lg": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+            "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "600" }],
+            "headline-lg": ["22px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "currency-md": ["15px", { "lineHeight": "20px", "fontWeight": "600" }],
+            "label-sm": ["11px", { "lineHeight": "14px", "letterSpacing": "0.02em", "fontWeight": "600" }],
+            "display-lg-mobile": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+            "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+            "headline-md": ["18px", { "lineHeight": "24px", "letterSpacing": "-0.005em", "fontWeight": "600" }],
+            "body-sm": ["12px", { "lineHeight": "16px", "fontWeight": "400" }],
+            "label-lg": ["14px", { "lineHeight": "20px", "fontWeight": "600" }],
+            "display-lg": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "headline-xl": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.015em", "fontWeight": "600" }]
+          }
+        },
+      },
+    }
+  </script>
+</head>
+<body class="bg-background text-on-surface antialiased min-h-screen flex justify-center selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- Mobile Viewport Container (BuildingOS Mobile App Canvas) -->
+<div class="w-full max-w-md bg-surface flex flex-col min-h-screen relative shadow-2xl pb-12">
+<!-- Top Navigation Header (Screen 26 Context: Detail journey with Back arrow) -->
+<header class="sticky top-0 z-40 bg-surface-container-lowest/95 backdrop-blur-md px-space-md py-space-sm flex items-center justify-between shadow-sm">
+<div class="flex items-center gap-space-xs">
+<button aria-label="Go Back" class="w-10 h-10 flex items-center justify-center rounded-lg text-on-surface hover:bg-surface-container active:scale-95 transition-all" type="button">
+<span class="material-symbols-outlined" data-icon="arrow_back">arrow_back</span>
+</button>
+<div>
+<h1 class="text-headline-md font-headline-md text-on-surface font-bold leading-tight">Payment Receipt</h1>
+<p class="text-label-sm font-label-sm text-secondary font-mono tracking-tight">Receipt #RCP-2025-0302</p>
+</div>
+</div>
+<div class="flex items-center gap-1">
+<button aria-label="Share" class="w-9 h-9 flex items-center justify-center rounded-lg text-secondary hover:text-primary hover:bg-surface-container active:scale-95 transition-all" type="button">
+<span class="material-symbols-outlined" data-icon="share">share</span>
+</button>
+<button aria-label="Receipt Options" class="w-9 h-9 flex items-center justify-center rounded-lg text-secondary hover:text-primary hover:bg-surface-container active:scale-95 transition-all" type="button">
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</button>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-1 px-space-md pt-space-md space-y-space-md">
+<!-- Official Ticket Scalloped Voucher Card -->
+<section class="relative bg-surface-container-lowest rounded-xl border border-outline-variant shadow-sm overflow-hidden">
+<!-- Scallop Top Edge Pattern Indicator -->
+<div class="h-1.5 w-full bg-tertiary"></div>
+<!-- Receipt Card Header / Primary Status -->
+<div class="p-space-md text-center border-b border-outline-variant/60 relative">
+<!-- Building watermark badge -->
+<div class="inline-flex items-center gap-1.5 px-space-xs py-1 rounded-full bg-surface-container-low border border-outline-variant/80 mb-space-sm">
+<span class="material-symbols-outlined text-primary text-[15px]" data-icon="apartment">apartment</span>
+<span class="text-label-sm font-label-sm font-bold text-on-surface tracking-tight">Green Valley Heights</span>
+<span class="w-1 h-1 rounded-full bg-outline"></span>
+<span class="text-label-sm font-label-sm text-secondary">Apt 4A</span>
+</div>
+<!-- Settled Status Indicator -->
+<div class="flex items-center justify-center gap-1.5 mb-space-xs">
+<div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-tertiary-fixed text-on-tertiary-fixed-variant text-label-sm font-label-sm font-semibold">
+<span class="material-symbols-outlined text-[16px] text-tertiary" data-icon="check_circle" data-weight="fill" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span>Payment Settled &amp; Reconciled</span>
+</div>
+</div>
+<!-- Big Amount Display -->
+<div class="mt-2 mb-1 flex items-baseline justify-center gap-1">
+<span class="text-headline-md font-headline-md text-on-surface-variant font-semibold">৳</span>
+<span class="text-display-lg-mobile font-display-lg-mobile text-on-surface font-extrabold tracking-tight">55,000</span>
+<span class="text-label-sm font-label-sm text-secondary font-mono">.00 BDT</span>
+</div>
+<!-- Transaction Metas -->
+<div class="flex flex-col items-center justify-center gap-1 text-secondary">
+<div class="flex items-center gap-1.5 text-body-sm font-body-sm">
+<span class="material-symbols-outlined text-[15px]" data-icon="calendar_today">calendar_today</span>
+<span>02 March 2025 at 11:32 AM</span>
+</div>
+<div class="flex items-center gap-1 text-label-sm font-label-sm font-mono bg-surface-container-low px-2 py-0.5 rounded">
+<span class="text-secondary">TXN ID:</span>
+<span class="text-on-surface font-semibold">BDT-CB-8829104</span>
+<button aria-label="Copy Transaction ID" class="ml-1 text-primary hover:text-on-primary-fixed-variant" type="button">
+<span class="material-symbols-outlined text-[14px]" data-icon="content_copy">content_copy</span>
+</button>
+</div>
+</div>
+<!-- Scallop cutout left & right -->
+<div class="absolute -bottom-3.5 -left-3.5 w-7 h-7 rounded-full bg-surface border border-outline-variant shadow-inner"></div>
+<div class="absolute -bottom-3.5 -right-3.5 w-7 h-7 rounded-full bg-surface border border-outline-variant shadow-inner"></div>
+</div>
+<!-- Perforated Divider Simulation -->
+<div class="relative py-2 border-b border-dashed border-outline-variant/80 bg-surface-container-lowest">
+<div class="text-[10px] uppercase tracking-widest text-center text-outline font-label-sm">Official System Ledger Record</div>
+</div>
+<!-- Detailed Specifications List -->
+<div class="p-space-md space-y-space-sm bg-surface-container-lowest">
+<!-- Received From -->
+<div class="flex items-start justify-between gap-space-xs text-body-sm font-body-sm">
+<div class="flex items-center gap-1.5 text-secondary min-w-[110px]">
+<span class="material-symbols-outlined text-[16px] text-outline" data-icon="person">person</span>
+<span>Received From</span>
+</div>
+<div class="text-right">
+<div class="text-on-surface font-semibold">Engr. Rafiqul Islam</div>
+<div class="inline-flex items-center gap-1 mt-0.5 px-1.5 py-0.5 rounded bg-surface-container-low border border-outline-variant/60 text-label-sm font-label-sm text-secondary">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span>
+<span>Flat 4A Tenant</span>
+</div>
+</div>
+</div>
+<div class="h-[1px] bg-surface-container"></div>
+<!-- Collected By -->
+<div class="flex items-start justify-between gap-space-xs text-body-sm font-body-sm">
+<div class="flex items-center gap-1.5 text-secondary min-w-[110px]">
+<span class="material-symbols-outlined text-[16px] text-outline" data-icon="admin_panel_settings">admin_panel_settings</span>
+<span>Collected By</span>
+</div>
+<div class="text-right">
+<div class="text-on-surface font-semibold">Estate Manager</div>
+<div class="text-body-sm text-secondary">Tanvir K. (Staff ID #884)</div>
+</div>
+</div>
+<div class="h-[1px] bg-surface-container"></div>
+<!-- Destination Account -->
+<div class="flex items-start justify-between gap-space-xs text-body-sm font-body-sm">
+<div class="flex items-center gap-1.5 text-secondary min-w-[110px]">
+<span class="material-symbols-outlined text-[16px] text-outline" data-icon="account_balance">account_balance</span>
+<span>Destination</span>
+</div>
+<div class="text-right max-w-[210px]">
+<div class="text-on-surface font-semibold leading-snug">Trust Bank Association Operational</div>
+<div class="font-mono text-label-sm font-label-sm text-secondary">A/C #4402 (Gulshan Br.)</div>
+</div>
+</div>
+<div class="h-[1px] bg-surface-container"></div>
+<!-- Payment Method -->
+<div class="flex items-start justify-between gap-space-xs text-body-sm font-body-sm">
+<div class="flex items-center gap-1.5 text-secondary min-w-[110px]">
+<span class="material-symbols-outlined text-[16px] text-outline" data-icon="credit_card">credit_card</span>
+<span>Method</span>
+</div>
+<div class="text-right">
+<div class="text-on-surface font-semibold">City Bank Online Transfer</div>
+<div class="inline-flex items-center gap-1 mt-0.5 px-2 py-0.5 rounded bg-surface-container text-label-sm font-label-sm text-on-surface-variant font-mono">
+<span class="material-symbols-outlined text-[12px] text-primary" data-icon="sync_alt">sync_alt</span>
+<span>BEFTN / NPSB</span>
+</div>
+</div>
+</div>
+<div class="h-[1px] bg-surface-container"></div>
+<!-- Allocated Breakdown Bento Module -->
+<div class="bg-surface-container-low rounded-lg p-space-sm border border-outline-variant/60">
+<div class="flex items-center justify-between text-label-sm font-label-sm text-secondary mb-2">
+<span class="font-bold uppercase tracking-wider text-on-surface-variant">Ledger Allocation</span>
+<span class="text-primary font-mono font-semibold">March 2025</span>
+</div>
+<div class="space-y-1.5 text-body-sm font-body-sm">
+<div class="flex justify-between items-center">
+<span class="text-secondary flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[14px] text-outline" data-icon="key">key</span>
+                  March 2025 House Rent
+                </span>
+<span class="font-mono font-semibold text-on-surface">৳ 50,000</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-secondary flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[14px] text-outline" data-icon="build">build</span>
+                  Monthly Maintenance (CAM)
+                </span>
+<span class="font-mono font-semibold text-on-surface">৳ 5,000</span>
+</div>
+</div>
+</div>
+<!-- Net Landlord Credit Module -->
+<div class="bg-tertiary-fixed/30 rounded-lg p-space-sm border border-tertiary-fixed flex items-start gap-2.5">
+<span class="material-symbols-outlined text-tertiary mt-0.5 text-[20px]" data-icon="savings">savings</span>
+<div class="flex-1">
+<div class="flex justify-between items-baseline">
+<span class="text-label-md font-label-md text-on-surface font-bold">Net Landlord Credit</span>
+<span class="text-currency-md font-currency-md text-tertiary font-bold font-mono">৳ 48,500</span>
+</div>
+<p class="text-label-sm font-label-sm text-on-surface-variant mt-0.5 leading-normal">
+                Transferred to Tanvir Ahmed A/C on 05 Mar after association reserve levy deduction.
+              </p>
+</div>
+</div>
+</div>
+<!-- Digital Security & Audit Stamp Footer -->
+<div class="bg-surface-container-low px-space-md py-space-sm border-t border-outline-variant flex items-center justify-between gap-3">
+<div class="flex-1">
+<div class="flex items-center gap-1 text-label-sm font-label-sm font-bold text-on-surface">
+<span class="material-symbols-outlined text-primary text-[16px]" data-icon="verified_user">verified_user</span>
+<span>BD Digital Signature</span>
+</div>
+<div class="font-mono text-label-sm font-label-sm text-secondary mt-0.5">
+              Verified Hash: <span class="text-on-surface font-semibold font-mono">#DGT-89A-002</span>
+</div>
+<div class="text-[10px] text-outline mt-0.5">Timestamp: 2025-03-02T11:32:08+06:00</div>
+</div>
+<!-- QR Code Verification Card -->
+<div class="w-14 h-14 bg-surface-container-lowest border border-outline-variant rounded-lg p-1 flex flex-col items-center justify-center shadow-xs shrink-0" title="Scan to verify official digitally signed receipt">
+<!-- Simulated High-Precision QR Grid Icon -->
+<span class="material-symbols-outlined text-[36px] text-on-surface" data-icon="qr_code_2">qr_code_2</span>
+<span class="text-[8px] text-secondary font-mono tracking-tighter">VERIFY</span>
+</div>
+</div>
+</section>
+<!-- Security Guarantee Note -->
+<div class="flex items-center justify-center gap-1.5 text-label-sm font-label-sm text-secondary text-center px-4">
+<span class="material-symbols-outlined text-[14px] text-tertiary" data-icon="lock">lock</span>
+<span>Cryptographically locked ledger record compliant with Bangladesh Bank FinTech Act.</span>
+</div>
+<!-- Action Cluster -->
+<div class="space-y-space-xs pt-1">
+<!-- Primary Action: Print / Download -->
+<button class="w-full h-12 bg-primary-container hover:bg-primary text-on-primary rounded-lg font-label-lg font-semibold flex items-center justify-center gap-2 shadow-sm active:scale-[0.99] transition-all" type="button">
+<span class="material-symbols-outlined text-[20px]" data-icon="download">download</span>
+<span>Print / Download Official Receipt</span>
+</button>
+<!-- Secondary Action: Share with Tenant -->
+<button class="w-full h-11 bg-surface-container-lowest hover:bg-surface-container-low text-on-surface border border-outline-variant rounded-lg font-label-lg font-semibold flex items-center justify-center gap-2 active:scale-[0.99] transition-all" type="button">
+<span class="material-symbols-outlined text-[18px] text-secondary" data-icon="send">send</span>
+<span>Share with Tenant</span>
+</button>
+<!-- Danger / Correction Action: Request Reversal / Refund -->
+<div class="pt-2 text-center">
+<button class="inline-flex items-center gap-1 text-label-md font-label-md text-error hover:text-on-error-container hover:underline py-1 px-2 rounded transition-colors" type="button">
+<span class="material-symbols-outlined text-[16px]" data-icon="undo">undo</span>
+<span>Request Reversal / Refund</span>
+</button>
+</div>
+</div>
+</main>
+</div>
+</body></html>
