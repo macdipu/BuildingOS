@@ -120,6 +120,7 @@ class UnitDetailPage extends StatelessWidget {
               },
               child: Text(TextEnum.uoOwnership.tr),
             ),
+            const SizedBox(height: 8),
             if (data.$1.canEditUnits)
               PropertyAction(
                 label: TextEnum.uoEditUnit.tr,

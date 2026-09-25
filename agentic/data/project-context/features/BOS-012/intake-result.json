@@ -1,0 +1,1 @@
+{"status":"READY","evidence":["agentic/data/project-context/features/BOS-012/CR.md","operator chat 2026-09-25: 'commit bookkeeping, then fix the two visual gaps'"],"blocking_issues":[],"open_questions":[],"recommended_next_step":"Context","outputs":{"work_item_id":"BOS-012","work_type":"change_request","project_type":"brownfield","level":"TASK","sprint_handling":"BACKLOG_ONLY"}}

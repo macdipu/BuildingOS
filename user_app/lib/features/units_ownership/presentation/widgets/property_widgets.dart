@@ -105,8 +105,10 @@ class _PropertyActionState extends State<PropertyAction> {
   }
 
   @override
+  // Full-width like the Stitch mockup CTAs; every caller sits in a Column.
   Widget build(BuildContext context) => Column(
     mainAxisSize: MainAxisSize.min,
+    crossAxisAlignment: CrossAxisAlignment.stretch,
     children: [
       FilledButton(
         onPressed: busy ? null : run,

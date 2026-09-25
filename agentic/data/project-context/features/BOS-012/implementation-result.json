@@ -1,0 +1,15 @@
+{
+  "status": "READY",
+  "evidence": [
+    "user_app/lib/core/widgets/buttons/common_button.dart: default CTA background primary-container #2563EB, white foreground (dark: onPrimaryContainer); explicit colors still override",
+    "user_app/lib/app/theme/app_theme.dart: filledButtonTheme = Stitch CTA, 48px, radius 8",
+    "user_app/lib/features/units_ownership/presentation/widgets/property_widgets.dart: PropertyAction full width",
+    "unit_detail_page.dart: 8px gap between Ownership and Edit unit (side effect of full-width actions)",
+    "test/app/theme/stitch_cta_test.dart (CTA color, full width, 48px)",
+    "Emulator Pixel_4a: qa/03-login.png, 04-otp.png, 01-unit-detail.png, 02-add-unit.png",
+    "flutter analyze: No issues found; flutter test: 96 passed, 1 skipped"
+  ],
+  "blocking_issues": [], "open_questions": [],
+  "recommended_next_step": "Review, QA, release approval",
+  "outputs": {"task": "UI-F01", "verdict": "IMPLEMENTED"}
+}

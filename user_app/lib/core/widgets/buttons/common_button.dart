@@ -385,9 +385,11 @@ class CommonButton extends StatelessWidget {
       );
     }
 
+    // Stitch primary CTA fills primary-container (#2563EB), not primary.
     return _ButtonTheme(
-      background: backgroundColor ?? context.primary,
-      foreground: foregroundColor ?? context.onPrimary,
+      background: backgroundColor ?? context.primaryContainer,
+      foreground: foregroundColor ??
+          (context.isDarkMode ? context.onPrimaryContainer : Colors.white),
       border: borderColor,
     );
   }
