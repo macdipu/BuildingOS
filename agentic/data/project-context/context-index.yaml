@@ -119,3 +119,13 @@ features:
       Align delivered BOS-010 mobile screens to Stitch UI: Stitch blue theme
       (D-01), BRD §37 per-role nav (D-02), splash §39, unit list filter/search/
       sort §48, Save & Add Another §49, restyles. Tasks UI-T01..UI-T10.
+  BOS-012:
+    status: COMPLETED
+    path: agentic/data/project-context/features/BOS-012
+    stage: COMPLETED
+    work_type: change_request
+    run_id: RUN-3E204CA14C934E4EAA374F6163F7AB96
+    technical_approval: APPROVED
+    release_approval: APPROVED
+    last_commit: 547fc75
+    summary: Stitch CTA color (#2563EB) and full-width 48px action buttons; closes BOS-011 QA visual gaps.

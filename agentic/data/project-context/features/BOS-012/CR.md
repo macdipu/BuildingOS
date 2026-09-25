@@ -1,6 +1,6 @@
 # BOS-012 — CR: close BOS-011 QA visual gaps
 
-Type: change_request (brownfield, `user_app` only). Status: IMPLEMENTATION.
+Type: change_request (brownfield, `user_app` only). Status: COMPLETED (release approved by macdipu 2026-09-25; QA_PASS on Pixel_4a).
 Raised: 2026-09-25 by operator (macdipu), chat: "commit bookkeeping, then fix the two visual gaps".
 Source: BOS-011 [qa/QA.md](../BOS-011/qa/QA.md) "Visual deviations"; Stitch mockups mobile/02, 03, 11, 12.
 
