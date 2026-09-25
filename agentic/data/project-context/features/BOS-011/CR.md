@@ -1,7 +1,7 @@
 # BOS-011 — CR: align delivered mobile screens to Stitch UI
 
 Type: change_request (brownfield, module `user_app` + one `building-service` query extension)
-Status: IMPLEMENTATION (technical approved by macdipu 2026-09-25)
+Status: COMPLETED (technical + release approved by macdipu 2026-09-25; QA_PASS on Pixel_4a, see qa/QA.md)
 Raised: 2026-09-25 by operator (macdipu), chat: "yes use stitch blue, per-role nav, create the CR"
 
 ## Source

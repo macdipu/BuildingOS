@@ -107,12 +107,14 @@ features:
       entitlements, and the back-office console (BRD §4, §8.12,
       §110.1-110.4, §149). Supersedes BOS-001/BOS-002 scope.
   BOS-011:
-    status: IN_PROGRESS
+    status: COMPLETED
     path: agentic/data/project-context/features/BOS-011
-    stage: IMPLEMENTATION
+    stage: COMPLETED
     work_type: change_request
     run_id: RUN-13923DE4E9D64BECBEE263998E681BEE
     technical_approval: APPROVED
+    release_approval: APPROVED
+    last_commit: d8e851f
     summary: >-
       Align delivered BOS-010 mobile screens to Stitch UI: Stitch blue theme
       (D-01), BRD §37 per-role nav (D-02), splash §39, unit list filter/search/

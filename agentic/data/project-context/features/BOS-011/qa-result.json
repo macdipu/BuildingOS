@@ -1,0 +1,13 @@
+{
+  "status": "READY",
+  "evidence": [
+    "agentic/data/project-context/features/BOS-011/qa/QA.md",
+    "agentic/data/project-context/features/BOS-011/qa/01-login.png .. 10-cold-restart.png (Pixel_4a emulator, API 37)",
+    "DEF-01 fixed (d8e851f) and verified: splash routes to login without session and to dashboard with session",
+    "flutter analyze clean; flutter test 94 passed 1 skipped; mvn -pl building-service verify 118/0"
+  ],
+  "blocking_issues": [],
+  "open_questions": [],
+  "recommended_next_step": "Operator release approval",
+  "outputs": {"verdict": "QA_PASS", "follow_ups": ["CommonButton CTA color -> primary-container", "full-width PropertyAction CTAs"]}
+}

@@ -1,6 +1,6 @@
 # BOS-011 tasks
 
-Status: APPROVED (technical gate, macdipu 2026-09-25). One task = one commit.
+Status: COMPLETED (release approved macdipu 2026-09-25). One task = one commit.
 
 | Task | Category | Title | Depends on | Status |
 |---|---|---|---|---|
@@ -13,7 +13,7 @@ Status: APPROVED (technical gate, macdipu 2026-09-25). One task = one commit.
 | UI-T07 | Mobile | Unit list filter/search/sort + restyle | UI-T01, UI-T06 | DONE 77e194f |
 | UI-T08 | Mobile | Unit form Save & Add Another + restyle | UI-T01 | DONE 930bbea |
 | UI-T09 | Mobile | Unit detail, ownership, transfer, members restyle | UI-T01 | DONE 563f385 |
-| UI-T10 | QA | Visual + regression QA | UI-T01..UI-T09 | TODO |
-| UI-T11 | Mobile | DEF-01 splash controller never instantiated | UI-T02 | TODO |
+| UI-T10 | QA | Visual + regression QA | UI-T01..UI-T09 | DONE (qa/QA.md) |
+| UI-T11 | Mobile | DEF-01 splash controller never instantiated | UI-T02 | DONE d8e851f |
 
 Parallel after UI-T01: UI-T02, T04, T05, T08, T09. UI-T06 (BE) can start immediately.
