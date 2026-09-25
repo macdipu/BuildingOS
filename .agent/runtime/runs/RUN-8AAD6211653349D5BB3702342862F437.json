@@ -5585,6 +5585,19 @@
         }
       },
       "created_at": "2026-09-25T10:13:51.778007+00:00"
+    },
+    {
+      "run_id": "RUN-8AAD6211653349D5BB3702342862F437",
+      "event": "COMMIT_RECORDED",
+      "payload": {
+        "sha": "89112c7",
+        "subject": "feat(bos-010-f6): add audit log aggregation API (F6-T5d)",
+        "work_item": "BOS-010-F6",
+        "task": "F6-T5d",
+        "run": "RUN-8AAD6211653349D5BB3702342862F437",
+        "commit_trigger": "task-finish"
+      },
+      "created_at": "2026-09-25T10:13:52.535614+00:00"
     }
   ],
   "tool_calls": {}
