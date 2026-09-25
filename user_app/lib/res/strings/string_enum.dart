@@ -345,7 +345,13 @@ enum TextEnum {
   uoHistoryScope(
     en: "Only records authorized for your account are shown.",
     bn: "শুধু আপনার অ্যাকাউন্টের অনুমোদিত তথ্য দেখানো হচ্ছে।",
-  )
+  ),
+  splashBrand(en: "BuildingOS", bn: "বিল্ডিংওএস"),
+  splashTagline(
+    en: "Property & Community Operating System",
+    bn: "সম্পত্তি ও কমিউনিটি অপারেটিং সিস্টেম",
+  ),
+  splashLoading(en: "Loading your buildings…", bn: "আপনার ভবনগুলো লোড হচ্ছে…")
   // Add more entries as required
   ;
 

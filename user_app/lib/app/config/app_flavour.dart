@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:developer';
 
 import 'package:customer/app/config/app_config.dart';
+import 'package:customer/app/session/active_building_service.dart';
 import 'package:customer/core/auth/session_expiry_notifier.dart';
 import 'package:customer/core/database/client/preference_cache.dart';
 import 'package:customer/core/network/client/api_client.dart';
@@ -41,5 +42,6 @@ void _initialize() {
     ),
     permanent: true,
   );
+  Get.put<ActiveBuildingService>(ActiveBuildingService(), permanent: true);
   Get.lazyPut<NotificationService>(() => NotificationService(), fenix: true);
 }

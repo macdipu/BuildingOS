@@ -1,0 +1,15 @@
+{
+  "status": "READY",
+  "evidence": [
+    "user_app/lib/app/startup/start_destination.dart: pure BRD 39 resolver (one building + no pending invitation + no in-progress application -> dashboard, else My Buildings)",
+    "user_app/lib/app/startup/splash_controller.dart, splash_binding.dart, splash_screen.dart (mockup 01 layout; mockup-only fake progress messages not used)",
+    "user_app/lib/app/session/active_building_service.dart registered permanent in app_flavour.dart",
+    "app_pages.dart initial route -> /splash; OTP success -> /splash so post-login routing follows BRD 39",
+    "test/app/startup/splash_controller_test.dart (7 branch cases) + splash_screen_test.dart (2 widget cases)",
+    "flutter analyze: No issues found; flutter test: All tests passed"
+  ],
+  "blocking_issues": [],
+  "open_questions": [],
+  "recommended_next_step": "UI-T03 per-role nav",
+  "outputs": {"task": "UI-T02", "verdict": "IMPLEMENTED"}
+}

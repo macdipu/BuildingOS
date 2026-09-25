@@ -103,7 +103,7 @@ class _LoginOtpVerifyScreenState extends State<LoginOtpVerifyScreen> {
         onTap: () async {
           final success = await _controller.verifyOtp();
           if (success) {
-            unawaited(Get.offAllNamed(AppRoutes.appShell));
+            unawaited(Get.offAllNamed(AppRoutes.splash));
           }
         },
       ),
