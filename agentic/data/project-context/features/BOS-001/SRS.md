@@ -31,8 +31,7 @@ Security test JWTs are generated in test fixtures and never become a production 
 ## Future invariant acceptance
 FIN-01: 25,000 due and 15,000 payment yields 10,000 remaining through allocation (§143B).
 FIN-02: 50,000 payment against 20,000 invoice creates a 30,000 advance ledger entry (§143C).
-FIN-03: Offline replay uses the same idempotency key and returns one official payment/receipt (§143D).
-FIN-04: Payment reversal retains original record, reverses allocations and emits audit (§§24,113).
+FIN-03: Payment reversal retains original record, reverses allocations and emits audit (§§24,113).
 OWN-01: Transfer closes the old period, preserves history and leaves the lease unchanged (§143E).
 AUTH-01: Owner with three units sees those units only (§143A).
 These are backlog criteria, not tests executed in BOS-001.

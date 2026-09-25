@@ -21,7 +21,7 @@ NO_REPLAN for this bounded milestone: no team capacity, sprint dates, or existin
 - Reuse plan and baseline checks for user_app, without presenting its generic auth as BuildingOS auth.
 
 ## Excluded from this milestone
-Production deployment; real SMS/Google provider integration; financial mutations; dashboards with invented totals; all future service skeletons; offline payment claims before durable storage and server idempotency exist.
+Production deployment; real SMS/Google provider integration; financial mutations; dashboards with invented totals; all future service skeletons.
 
 ## Acceptance
 1. Local services build and expose health endpoints; gateway forwards an authenticated foundation request.

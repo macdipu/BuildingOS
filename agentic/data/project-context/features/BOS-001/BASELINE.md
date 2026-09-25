@@ -10,7 +10,7 @@ Confidence: source-backed observations below; runtime application behavior is un
 - AppConfig uses compile-time configuration and defaults to api.example.com.
 - AuthHttpImpl calls an email-login endpoint and expects messageCode/response; this differs from the BRD phone/Google flow and success/data/meta/traceId envelope.
 - AuthCacheImpl persists UserInfo through PreferenceCache; token fields and refresh behavior need a targeted security review before real authentication.
-- pubspec.yaml has SharedPreferences/secure storage, but no Drift dependency.
+- pubspec.yaml has SharedPreferences/secure storage.
 - backend/, contracts/, root .github/workflows/ do not exist.
 - Framework detection during kit adoption did not find the nested Flutter module.
 - Existing BRD was staged before this session; preserve it unchanged.
@@ -33,7 +33,7 @@ The prior installation session passed 49 kit tests; that is not application QA.
 ## Reuse and impact
 Keep user_app in place; do not rename package or move directories as part of foundation.
 Keep UI → controller → use case → repository boundaries, GetX bindings, existing semantic theme and spacing tokens.
-Use generator for new Flutter features. Introduce Drift only with scoped schema/migration work; do not use generic preference cache for financial mutations.
+Use generator for new Flutter features. Do not use generic preference cache for financial mutations.
 Backend foundation is new and can be tested independently of the client.
 
 ## Refresh triggers

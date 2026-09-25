@@ -10,7 +10,6 @@ public enum Feature {
     WORK_ORDERS("work_orders.enabled", Kind.FLAG),
     REPORTS_PDF_EXPORT("reports.pdf_export", Kind.FLAG),
     REPORTS_EXCEL_EXPORT("reports.excel_export", Kind.FLAG),
-    OFFLINE_SYNC("offline_sync.enabled", Kind.FLAG),
     MAX_UNITS("max_units", Kind.LIMIT),
     MAX_USERS("max_users", Kind.LIMIT),
     STORAGE_LIMIT_MB("storage_limit_mb", Kind.LIMIT),

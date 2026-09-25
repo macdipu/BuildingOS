@@ -64,7 +64,7 @@ Flutter submit screen, suspend/reactivate in the first G2 slice (D-14).
 | ID | Requirement and acceptance | BRD source | Pending |
 |---|---|---|---|
 | SUB-01 | **Superseded by D-22..D-25 → [F5a RV-01..RV-11](subscription-plans/REQUIREMENTS.md)** (per-user subscriptions). Original text: Subscription is building-level by default; one user's membership across buildings never merges their subscriptions. States: `TRIAL, ACTIVE, PAST_DUE, GRACE_PERIOD, SUSPENDED, CANCELLED, EXPIRED`. | §8.12, §110.3, §149.15 | none |
-| SUB-02 | **Amended by D-23/D-27:** free tier (maintenance) for every user, admin-editable. Original text: Entitlements (`rent_management.enabled, maintenance.enabled, work_orders.enabled, reports.*, offline_sync.enabled, max_units, max_users, storage_limit_mb, support_tier`) are enforced authoritatively by backend; UI may only hide/disable for UX. Suspension never deletes customer data; restricted behavior during grace/suspension is explicit and policy-driven. | §149.16 | none |
+| SUB-02 | **Amended by D-23/D-27:** free tier (maintenance) for every user, admin-editable. Original text: Entitlements (`rent_management.enabled, maintenance.enabled, work_orders.enabled, reports.*, max_units, max_users, storage_limit_mb, support_tier`) are enforced authoritatively by backend; UI may only hide/disable for UX. Suspension never deletes customer data; restricted behavior during grace/suspension is explicit and policy-driven. | §149.16 | none |
 | SUB-03 | **Amended by D-19/D-25:** no trials for now; plans also granted by user self-subscribe. Original text: Back-office **plan CRUD**: an authorized back-office role creates/edits/retires `SubscriptionPlan` records (name, unit/user/storage limits, enabled features, trial length) — no hardcoded MVP plan catalog is shipped; plans are entirely admin-configured data. Building-subscription actions (assign/change plan, start/extend/end trial, suspend/reactivate, cancel, inspect history/effective entitlements) reference these operator-defined plans. All actions audited. MVP excludes automated charging, payment-provider billing collection, invoices/tax automation, and organization-level consolidated billing. | §149.15,§149.19,§149.23 | none (D-08 resolved) |
 
 ### G6 — Back-office console, support & audit
@@ -85,7 +85,7 @@ entitlements as a substitute for building authorization.
 
 ## Explicitly deferred (unaffected milestones)
 
-Rental/tenant/lease (BOS-003), payments (BOS-004), offline sync (BOS-005), work orders
+Rental/tenant/lease (BOS-003), payments (BOS-004), work orders
 (BOS-006), announcements (BOS-007), reporting/dashboards (BOS-008), security/release
 hardening (BOS-009). Automated subscription billing and promotional/CRM features stay
 deferred per §149.23/§125.

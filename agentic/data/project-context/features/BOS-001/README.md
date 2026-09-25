@@ -23,8 +23,8 @@ building service (`backend/`), separate PostgreSQL databases/credentials and Kaf
 (`infra/docker/`), independent JWT security at gateway and each service, health/readiness/
 correlation conventions, Kafka/OpenAPI contracts (`contracts/`), and local verification/CI
 (`scripts/`, `.github/workflows/platform.yml`).
-Phone/Google login and building/units/ownership follow in BOS-002; money and offline sync
-follow with their correctness tests.
+Phone/Google login and building/units/ownership follow in BOS-002; money
+follows with its correctness tests.
 
 ## Findings
 Read all 148 BRD sections. The client is a generic starter with placeholder shell screens;

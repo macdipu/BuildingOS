@@ -39,7 +39,7 @@ See [BASELINE.md](BASELINE.md) for scoped source findings and verification limit
 ## Outside this milestone's implementation scope
 
 Rental/tenant/lease implementation (BOS-003), financial transactions (BOS-004),
-offline financial sync (BOS-005), reporting dashboards (BOS-008), production deployment,
+reporting dashboards (BOS-008), production deployment,
 and all twelve proposed deployables. Ownership transfer must not mutate a lease;
 the full lease-preservation integration scenario will be completed when Rental exists.
 No fake financial/dashboard values or login bypass is part of this plan.

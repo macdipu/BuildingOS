@@ -65,5 +65,5 @@ Configuration, service health, Docker daemon and dependency downloads must be ve
 The approved architecture does not resolve future product questions Q-01–Q-05.
 
 ## ADRs
-See adr/ADR-001-platform-boundaries.md. Later finance, sync, reporting and real authentication decisions get scoped ADRs when their contracts are ready.
+See adr/ADR-001-platform-boundaries.md. Later finance, reporting and real authentication decisions get scoped ADRs when their contracts are ready.
 References: FEATURE.md, SRS.md, BASELINE.md; BRD §§6–18,93–110,123,141,144.

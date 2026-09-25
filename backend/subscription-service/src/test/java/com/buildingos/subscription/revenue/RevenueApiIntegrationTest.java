@@ -222,8 +222,8 @@ class RevenueApiIntegrationTest {
 
     @Test
     void selfSubscribeRules() throws Exception {
-        var adminOnlyPlan = createPlan(false, "{\"offline_sync.enabled\":true}");
-        var openPlan = createPlan(true, "{\"offline_sync.enabled\":true}");
+        var adminOnlyPlan = createPlan(false, "{\"work_orders.enabled\":true}");
+        var openPlan = createPlan(true, "{\"work_orders.enabled\":true}");
         var user = UUID.randomUUID();
 
         var listed = send("GET", "/api/v1/me/plans", token(user), null).data();
@@ -242,7 +242,7 @@ class RevenueApiIntegrationTest {
         assertThat(ok.status()).isEqualTo(201);
         assertThat(ok.data().path("grantedBy").asString()).isEqualTo("SELF_SERVICE");
         assertThat(ok.data().path("userId").asString()).isEqualTo(user.toString());
-        assertThat(ok.data().path("effectiveEntitlements").path("offline_sync.enabled").asBoolean()).isTrue();
+        assertThat(ok.data().path("effectiveEntitlements").path("work_orders.enabled").asBoolean()).isTrue();
 
         var again = send("POST", "/api/v1/me/subscription", token(user), subscribeJson(openPlan, "YEARLY"));
         assertThat(again.status()).isEqualTo(409);

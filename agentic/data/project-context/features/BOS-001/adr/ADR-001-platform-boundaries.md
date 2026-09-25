@@ -15,7 +15,7 @@ Production identity-provider choice now would invent missing requirements.
 Relocating the existing Flutter project adds unrelated migration risk.
 
 ## Consequences
-A small runnable foundation precedes user-facing features. Real auth/onboarding, financial allocation, offline sync and projections remain scoped later tasks with their own tests and required ADRs.
+A small runnable foundation precedes user-facing features. Real auth/onboarding, financial allocation and projections remain scoped later tasks with their own tests and required ADRs.
 Credentials, CORS, deployment and tenancy checks cannot be inherited blindly from local test fixtures.
 No distributed transaction coordinator or cross-service database join is introduced.
 

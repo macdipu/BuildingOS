@@ -69,8 +69,8 @@ from the current BRD instead.
 
 ## Explicitly out of scope (unaffected by this restart, per BACKLOG.md milestones)
 
-Rental/tenant/lease (BOS-003), payment/financial transactions (BOS-004), offline
-sync (BOS-005), work orders (BOS-006), announcements/notifications (BOS-007),
+Rental/tenant/lease (BOS-003), payment/financial transactions (BOS-004), work
+orders (BOS-006), announcements/notifications (BOS-007),
 reporting/dashboards (BOS-008), and security/load/release hardening (BOS-009).
 Also out of scope per BRD §149.23: automated subscription billing/payment-provider
 integration, organization-level consolidated billing, and (per §125/new exclusions)
