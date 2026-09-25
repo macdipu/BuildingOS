@@ -1,134 +1,31 @@
 system:
-  status: AVAILABLE
-  context_file: agentic/data/project-context/features/BOS-001/CONTINUATION-REVIEW.md
-  scope: platform-foundation-and-flutter-integration-seams
+  status: MISSING
 modules:
   kit-runtime:
     status: AVAILABLE
     context_file: agentic/data/project-context/kit-runtime.json
     freshness_strategy: scoped-file-sha256
-  user_app:
-    status: AVAILABLE
-    context_file: agentic/data/project-context/features/BOS-002/BASELINE.md
-    scope: identity-building-client-integration
-    runtime_verified: false
-  backend:
-    status: AVAILABLE
-    context_file: agentic/data/project-context/features/BOS-001/CONTINUATION-REVIEW.md
-    scope: platform-foundation
-    runtime_verified: true
-project_docs:
-  ARCHITECTURE:
-    status: DRAFT
-    path: agentic/data/project-context/ARCHITECTURE.md
-    note: Scoped synthesis of delivered BOS-010 services and proposed F4; not human-approved.
-  BRD:
-    status: DRAFT
-    path: agentic/data/project-context/BuildingOS_BRD_Agentic_Development.md
-    note: >-
-      User-designated source; technical approval tracked independently.
-      Revised 2026-09-22: adds SaaS back-office/subscription/onboarding domain
-      as CORE PRODUCT SCOPE (roles in §4, Subscription Service §8.12, building
-      application/lifecycle §110.2-110.3, full spec §149, Phase 1B). Tracked by
-      BOS-010; identity, revenue foundation and F2 delivered for local/test;
-      F4 units/ownership approved; implementation in progress. Fixed an unclosed 4-backtick fence at
-      line 1 (paste artifact) that broke markdown rendering of the whole file.
-      Revised 2026-09-25: adds building community communication (§150) --
-      notice board rules, in-building community chat (channels, DMs,
-      moderation, offline send), FCM push device registry/preferences; chat
-      moved from future scope (§3.2) to in-scope Phase 6, MVP inclusion OPEN
-      (§125); cross-refs in §3,4,8.6,8.7,9,28,31,37,85,91,112,115,123,134-138,
-      149.16. Tracked by BOS-007 in BOS-001/BACKLOG.md.
-      Revised 2026-09-25 (Stitch UI review, UI-INDEX C-12/C-13): notice
-      category list decided (§150.2); polls/AGM voting added to future scope
-      and visitor gate pass confirmed excluded (§3.2).
-  UI:
-    status: DRAFT
-    path: agentic/data/project-context/ui/stitch/UI-INDEX.md
-    note: >-
-      Stitch UI mockups imported 2026-09-25 (4 back-office web + 42 mobile
-      screens, design-system/DESIGN.md tokens). Layout/style reference only;
-      BRD governs behavior. UI-INDEX maps screen -> BRD section -> BOS item ->
-      task and lists UI-only / BRD-only gaps. Not human-approved as scope.
-features:
-  BOS-001:
-    status: SUPERSEDED
-    path: agentic/data/project-context/features/BOS-001
-    stage: COMPLETED
-    technical_approval: APPROVED
-    release_approval: APPROVED
-    run_id: RUN-85F84025CDE9409DB09779174AC7CB86
-    superseded_by: BOS-010
-    superseded_reason: >-
-      2026-09-22 BRD revision redefines the platform as multi-tenant SaaS
-      (global user identity, platform roles, building application/approval
-      lifecycle, subscription/entitlements, back-office app). Delivered code
-      (gateway/identity-service/building-service metadata skeleton, no
-      business logic) is kept as reusable baseline; it is not being deleted,
-      but its identity/building assumptions are superseded and must be
-      re-verified under BOS-010 before further business logic is added.
-  BOS-002:
-    status: SUPERSEDED
-    path: agentic/data/project-context/features/BOS-002
-    stage: REQUIREMENTS
-    approval: PLANNING_ONLY
-    planning: BACKLOG_ONLY
-    run_id: RUN-AC70D215A0924BC3AE9B56B7FD4BCF1B
-    run_status: CANCELLED
-    superseded_by: BOS-010
-    superseded_reason: >-
-      Operator asked for a full restart from INTAKE under the revised BRD
-      rather than continuing this narrower (mobile-only, direct building
-      creation, no back-office) slice. Planning artifacts kept as historical
-      record and decision reference (D-01 dev OTP, D-02 admin bootstrap
-      pattern); no implementation happened.
-  BOS-010:
-    status: IN_PROGRESS
-    path: agentic/data/project-context/features/BOS-010
-    planning: EPIC_PROVISIONAL
-    updated: "2026-09-24"
-    completed_tasks: [TASK-001, TASK-002, TASK-003, TASK-004, TASK-005, TASK-006, TASK-007, TASK-008]
-    last_commit: e1c64f3
-    completed_slices: [F5a-revenue-foundation (RUN-4ABC6B2BAC974B0E878CA39C9A27AE00), F2-building-application (RUN-5AC974860CB74DA790FDBA00532A15A2)]
-    current_slice: F4-units-ownership
-    current_run: RUN-C73FA516545143FAA9B35B168EEFE0C9
-    current_stage: IMPLEMENTATION
-    current_review_packet: agentic/data/project-context/features/BOS-010/units-ownership/APPROVAL.md
-    completed_subtasks: [F4-T1a, F4-T1b, F4-T2, F4-T3a, F4-T3b, F4-T4a, F4-T4b]
-    next_action: F4-T5 outbox publisher (spring-kafka, operator-approved 2026-09-24) and transfer documents
-    resolved: [D-01, D-02, D-07, D-08, D-11, D-12, D-13, D-14, D-16, D-17, D-18, D-20, D-22, D-23, D-24, D-25, D-26, D-27, D-28, D-29, D-30, D-31, D-32, F4-UO-D01, F4-UO-D02, F4-UO-D03, F4-UO-D04, ADR-F4-001]
-    superseded: [D-15, D-19, D-21]
-    open: [D-09-backoffice-technology, D-10-support-session-scopes]
-    brd_deviations: [D-22-per-user-subscriptions, D-26-creation-fee-instead-of-approval-subscription]
-    otp_provider: development-fixed-code-adapter (local/test); sms provider boundary, no vendor
-    phone_format: canonical 01XXXXXXXXX (TASK-007)
-    admin_bootstrap: deploy-time-seed-script-carried-from-BOS-002
-    task_index: agentic/data/project-context/features/BOS-010/TASKS.md
-    note: >-
-      Full-restart work item for the revised BRD: global user identity,
-      building application/approval lifecycle, units/ownership, subscription/
-      entitlements, and the back-office console (BRD §4, §8.12,
-      §110.1-110.4, §149). Supersedes BOS-001/BOS-002 scope.
-  BOS-011:
-    status: COMPLETED
-    path: agentic/data/project-context/features/BOS-011
-    stage: COMPLETED
-    work_type: change_request
-    run_id: RUN-13923DE4E9D64BECBEE263998E681BEE
-    technical_approval: APPROVED
-    release_approval: APPROVED
-    last_commit: d8e851f
-    summary: >-
-      Align delivered BOS-010 mobile screens to Stitch UI: Stitch blue theme
-      (D-01), BRD §37 per-role nav (D-02), splash §39, unit list filter/search/
-      sort §48, Save & Add Another §49, restyles. Tasks UI-T01..UI-T10.
-  BOS-012:
-    status: COMPLETED
-    path: agentic/data/project-context/features/BOS-012
-    stage: COMPLETED
-    work_type: change_request
-    run_id: RUN-3E204CA14C934E4EAA374F6163F7AB96
-    technical_approval: APPROVED
-    release_approval: APPROVED
-    last_commit: 547fc75
-    summary: Stitch CTA color (#2563EB) and full-width 48px action buttons; closes BOS-011 QA visual gaps.
+# project_docs:              # whole-app/whole-project BRD/PRD/SRD/ARCHITECTURE, see project-context/README.md
+#   BRD:                      # human-authored only
+#     status: READY
+#     path: agentic/data/project-context/BRD.md
+#   PRD:                      # human-authored only
+#     status: DRAFT
+#     path: agentic/data/project-context/PRD.md
+#   SRD:                      # generated by srs-generator, needs human approval before use as baseline
+#     status: DRAFT           # DRAFT (generated, unreviewed) | APPROVED (human signed off)
+#     path: agentic/data/project-context/SRD.md
+#     approved_by: null       # set by the human reviewer, e.g. "jane@company.com"
+#     approved_at: null       # set alongside approved_by, ISO 8601
+#   ARCHITECTURE:             # project-level HLD (template project-hld.md), generated by technical-architecture-planner, needs human approval
+#     status: DRAFT
+#     path: agentic/data/project-context/ARCHITECTURE.md
+#     approved_by: null
+#     approved_at: null
+project_docs: {}
+# features:
+#   FEATURE-042:
+#     status: READY            # DRAFT | READY | TECHNICAL_READY | IN_PROGRESS | DONE
+#     path: agentic/data/project-context/features/FEATURE-042
+#     last_indexed_revision: null
+features: {}

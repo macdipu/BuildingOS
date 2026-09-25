@@ -20,12 +20,12 @@ agentic/
 │   └── runtime/                  # runtime guides, hooks, Python package, tests
 └── data/                              # DATA — see data/README.md
     ├── project-context/                # per-project discovery cache + generated feature docs
-    └── work-items/                       # freeform task docs (not templated feature artifacts)
 
-.agent/                                # repo root — agent state, git-tracked
-├── HANDOFF.md, sessions/*.md          # cross-agent handoff notes (full ## Runtime per session)
-└── runtime/                           # active-task pointer, runs/*.json ledger, route cache
-                                       # (*.lock, *.tmp, logs/ gitignored)
+.agent/                                # repo root — agent state (see runtime README)
+├── HANDOFF.md                         # local copy of the newest handoff (gitignored)
+├── sessions/*.md                      # committed session records
+├── state/                             # committed, append-only: runs/, claims/, handoffs/
+└── local/                             # gitignored: active-task pointer, clone id, route cache
 ```
 
 Never put generated or per-project content in the kit folders above `data/`; never put skill/template/config source in `data/`. See `agentic/data/README.md` for what goes in each data subfolder.
@@ -366,6 +366,8 @@ Examples:
 | Emergency hotfix | Task(s) | Expedited planning |
 
 Sprint Planning is useful when work needs meaningful sequencing, multiple teams/modules, coordinated dependencies, capacity decisions, or a UAT target. It should not be forced for every request.
+
+The harness enforces the decision instead of leaving it to memory: a run cannot leave its technical stage without the `work-item-level-classifier` verdict (hierarchy, sprint handling, work item id), the verdict decides whether a PLANNING stage runs, and PLANNING cannot finish until the matching `EPIC.md`, `stories/STORY-*.md`, `tasks/TASK-*.md`, and `sprints/SPRINT-*.md` exist (see `kit/workflows/sprint-planning.md`).
 
 ---
 

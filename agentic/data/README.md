@@ -9,10 +9,7 @@ generated docs or state in the kit folders above this one.
 
 ```text
 data/
-├── project-context/     tracked   discovery cache + generated feature/CR docs (BRD, SRS, ...)
-├── work-items/           tracked   freeform task docs about the project itself (not the
-│                                   templated per-feature artifacts — those live under
-│                                   project-context/features/<id>/)
+└── project-context/     tracked   discovery cache + every work item's folder (features/<id>/)
 ```
 
 Runtime state is not here: it lives with the handoff notes under the repo-root `.agent/`
@@ -34,30 +31,31 @@ All of this is tracked in git — it's the project's accumulated context, not a 
 lose. Refresh only the affected module/feature scope when it goes stale; don't re-discover the
 whole repository for every task.
 
-## work-items/
+## Work items
 
-Freeform task docs for work on the project/kit itself that doesn't go through the
-BRD -> SRS -> architecture -> tasks pipeline (e.g. a bounded engineering task written directly
-with `agentic/kit/templates/task.md`). Per-feature tasks produced by `task-breakdown-agent` go under
-`project-context/features/<id>/tasks/` instead, not here.
+Every work item -- feature, CR, bug, hotfix, technical change, or a small task -- lives in
+one folder, `project-context/features/<WORK-ITEM-ID>/`: the canonical item
+(`WORK-ITEM.md` for prompt-first intake; a document-first item keeps its source file and
+records its path), then whatever the lifecycle derives (requirements, design, `EPIC.md`,
+`stories/`, `tasks/`). There is no separate work-items folder.
 
-## Runtime state (`.agent/runtime/`)
+## Runtime state (`.agent/`)
 
 The runtime's operating state lives outside `agentic/data/`, beside the cross-agent handoff notes:
 
 ```text
 .agent/
-├── HANDOFF.md              tracked   latest handoff note
-├── sessions/*.md           tracked   one record per session, incl. a full `## Runtime` section
-└── runtime/
-    ├── active-task.json    tracked   active-task pointer (store path relative to itself)
-    ├── route-cache.json    tracked   routing-decision cache
-    ├── runs/<run_id>.json  tracked   run ledger (`metadata.repo` stored relative)
-    ├── **/*.lock, *.tmp    gitignored
-    └── logs/               gitignored
+├── HANDOFF.md                       local      copy of the newest handoff note
+├── sessions/*.md                    committed  one record per session
+├── state/                           committed  append-only (added, never edited)
+│   ├── runs/<run_id>/events/*.json            run ledger; state = replay of events
+│   ├── claims/<run_id>/*.json                 which clone holds the run
+│   └── handoffs/*.md                          handoff notes
+└── local/                           ignored    active-task pointer, clone id, route cache
+(each runs/<run_id>/ also holds an ignored .lock and .cache.json beside events/)
 ```
 
-All of it is committed so a run started on one machine resumes on another after `git pull`; the
-`SessionStart` hook checks `.agent/runtime/active-task.json` and the run store to detect anything
-left running. Git provides no cross-machine lock: finish and push on one machine before resuming
-on another.
+Committed files travel with the project's normal push/pull and never conflict. The
+`SessionStart` hook checks the local pointer and the run store for anything left running
+-- here or handed off from another machine (`cli.py resume RUN_ID` continues it) -- and
+reports other clones' claims and commits waiting upstream.
