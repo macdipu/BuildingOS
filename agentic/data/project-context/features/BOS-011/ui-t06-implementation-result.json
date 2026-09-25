@@ -1,0 +1,16 @@
+{
+  "status": "READY",
+  "evidence": [
+    "backend/building-service unit/domain/model/{UnitSearch,UnitSort}.java: list criteria value objects",
+    "unit/infrastructure/persistence/JdbcUnitRepositoryAdapter.java: owner EXISTS filter, escaped LIKE on normalized_number, floor display_order / type / number ordering with stable tie-break",
+    "unit/application/listunits/ListUnitsService.java: requested owner filter intersected with UO-D01 read scope (owner naming another user -> empty page)",
+    "unit/presentation/rest/{UnitController,UnitSortParam}.java: ownerUserId, q (<=32), sort params; invalid -> 400",
+    "contracts/openapi/platform.yaml: new optional query params; python3 scripts/check-contracts.py: CONTRACT CHECKS PASSED",
+    "UnitApiIntegrationTest.unitListFiltersByOwnerSearchesNumbersAndSorts + UnitSortParamTest",
+    "mvn -B -f backend/pom.xml -pl building-service -am verify: 118 tests, 0 failures (ArchitectureTest green after moving criteria to domain.model)"
+  ],
+  "blocking_issues": [],
+  "open_questions": [],
+  "recommended_next_step": "UI-T02 splash, UI-T07 unit list UI",
+  "outputs": {"task": "UI-T06", "verdict": "IMPLEMENTED", "api_change": "additive, backward compatible"}
+}

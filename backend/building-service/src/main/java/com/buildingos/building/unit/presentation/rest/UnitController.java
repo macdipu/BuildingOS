@@ -21,6 +21,7 @@ import com.buildingos.building.unit.application.updateunit.UpdateUnitCommand;
 import com.buildingos.building.unit.application.updateunit.UpdateUnitUseCase;
 import com.buildingos.building.unit.domain.model.FloorKind;
 import com.buildingos.building.unit.domain.model.UnitType;
+import com.buildingos.building.unit.domain.model.UnitSearch;
 import com.buildingos.building.unit.presentation.rest.request.FloorRequest;
 import com.buildingos.building.unit.presentation.rest.request.UnitRequest;
 import com.buildingos.building.unit.presentation.rest.response.FloorResponse;
@@ -97,10 +98,13 @@ public class UnitController {
     @GetMapping("/units")
     public ApiEnvelope<List<UnitResponse>> units(@AuthenticationPrincipal Jwt jwt, @PathVariable UUID buildingId,
             @RequestParam(required = false) UUID floorId, @RequestParam(required = false) String type,
+            @RequestParam(required = false) UUID ownerUserId, @RequestParam(required = false) String q,
+            @RequestParam(required = false) String sort,
             @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "20") int size,
             HttpServletRequest request) {
-        var query = new ListUnitsQuery(buildingId, floorId, Enums.parseOptional(UnitType.class, type, "type"), page,
-                size);
+        var search = new UnitSearch(floorId, Enums.parseOptional(UnitType.class, type, "type"), ownerUserId,
+                UnitSortParam.numberQuery(q), UnitSortParam.parse(sort));
+        var query = new ListUnitsQuery(buildingId, search, page, size);
         return paged(listUnits.execute(CurrentActor.from(jwt), query), UnitResponse::of, request);
     }
 

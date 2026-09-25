@@ -186,6 +186,48 @@ class UnitApiIntegrationTest {
     }
 
     @Test
+    void unitListFiltersByOwnerSearchesNumbersAndSorts() throws Exception {
+        String adminToken = token(admin);
+        String low = floor(building, adminToken, "Ground", 0).data().path("id").asString();
+        String high = floor(building, adminToken, "9th", 9).data().path("id").asString();
+        String a1 = unit(building, adminToken, "A1", high).data().path("id").asString();
+        unit(building, adminToken, "B2", low);
+        unit(building, adminToken, "A_3", low);
+        UUID owner = UUID.randomUUID();
+        member(building, owner, "OWNER");
+        jdbc.update("INSERT INTO ownership_period (id, building_id, unit_id, owner_user_id, share, start_at, "
+                + "start_revision, created_by) VALUES (?, ?, ?, ?, 100, now(), 1, ?)", UUID.randomUUID(), building,
+                UUID.fromString(a1), owner, admin);
+
+        var byOwner = send("GET", base(building) + "/units?ownerUserId=" + owner, adminToken, null);
+        assertThat(byOwner.body().path("meta").path("total").asInt()).isEqualTo(1);
+        assertThat(byOwner.body().path("data").get(0).path("number").asString()).isEqualTo("A1");
+
+        assertThat(numbers(send("GET", base(building) + "/units?q=a", adminToken, null))).containsExactly("A1", "A_3");
+        assertThat(numbers(send("GET", base(building) + "/units?q=_", adminToken, null))).containsExactly("A_3");
+        assertThat(numbers(send("GET", base(building) + "/units?sort=unitNumber,desc", adminToken, null)))
+                .containsExactly("B2", "A_3", "A1");
+        assertThat(numbers(send("GET", base(building) + "/units?sort=floor,desc", adminToken, null)))
+                .containsExactly("A1", "A_3", "B2");
+        assertThat(send("GET", base(building) + "/units?sort=area", adminToken, null).status()).isEqualTo(400);
+        assertThat(send("GET", base(building) + "/units?sort=floor,sideways", adminToken, null).status())
+                .isEqualTo(400);
+
+        assertThat(numbers(send("GET", base(building) + "/units?ownerUserId=" + owner, token(owner), null)))
+                .containsExactly("A1");
+        assertThat(send("GET", base(building) + "/units?ownerUserId=" + admin, token(owner), null).body()
+                .path("meta").path("total").asInt()).isZero();
+        assertThat(send("GET", base(building) + "/units", adminToken, null).body().path("meta").path("total")
+                .asInt()).isEqualTo(3);
+    }
+
+    private static List<String> numbers(Reply reply) {
+        List<String> numbers = new ArrayList<>();
+        reply.body().path("data").forEach(unit -> numbers.add(unit.path("number").asString()));
+        return numbers;
+    }
+
+    @Test
     void updatesAreVersionedAndRenamesStayUnique() throws Exception {
         String adminToken = token(admin);
         String floorId = floor(building, adminToken, "Ground", 0).data().path("id").asString();

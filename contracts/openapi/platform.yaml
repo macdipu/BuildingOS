@@ -1949,6 +1949,21 @@ paths:
           in: query
           required: false
           schema: { type: string }
+        - name: ownerUserId
+          in: query
+          required: false
+          description: "Units with a current ownership by this user; an OWNER caller naming someone else gets an empty page"
+          schema: { type: string, format: uuid }
+        - name: q
+          in: query
+          required: false
+          description: "Case-insensitive unit-number contains match"
+          schema: { type: string, maxLength: 32 }
+        - name: sort
+          in: query
+          required: false
+          description: "unitNumber|floor|type, optional ,asc|,desc; default unitNumber,asc"
+          schema: { type: string, pattern: "^(unitNumber|floor|type)(,(asc|desc))?$" }
         - name: page
           in: query
           required: false

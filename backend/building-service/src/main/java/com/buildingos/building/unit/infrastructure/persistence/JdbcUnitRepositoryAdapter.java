@@ -4,6 +4,9 @@ import com.buildingos.building.unit.domain.model.Unit;
 import com.buildingos.building.unit.domain.model.UnitDetails;
 import com.buildingos.building.unit.domain.model.UnitType;
 import com.buildingos.building.unit.domain.repository.UnitRepository;
+import com.buildingos.building.unit.domain.model.UnitSearch;
+import com.buildingos.building.unit.domain.model.UnitSort;
+import java.util.Locale;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
@@ -57,19 +60,18 @@ public class JdbcUnitRepositoryAdapter implements UnitRepository {
     }
 
     @Override
-    public List<Unit> findByBuilding(UUID buildingId, UUID floorId, UnitType type, UUID ownerUserId, int page,
-            int size) {
-        var args = filterArgs(buildingId, floorId, type, ownerUserId);
+    public List<Unit> search(UUID buildingId, UnitSearch search, int page, int size) {
+        var args = filterArgs(buildingId, search);
         args.add(size);
         args.add((long) page * size);
-        return jdbc.query("SELECT " + COLUMNS + " FROM building_unit" + filter(floorId, type, ownerUserId)
-                + " ORDER BY normalized_number, id LIMIT ? OFFSET ?", this::map, args.toArray());
+        return jdbc.query("SELECT " + COLUMNS + " FROM building_unit" + filter(search) + orderBy(search.sort())
+                + " LIMIT ? OFFSET ?", this::map, args.toArray());
     }
 
     @Override
-    public long count(UUID buildingId, UUID floorId, UnitType type, UUID ownerUserId) {
-        return jdbc.queryForObject("SELECT count(*) FROM building_unit" + filter(floorId, type, ownerUserId), Long.class,
-                filterArgs(buildingId, floorId, type, ownerUserId).toArray());
+    public long count(UUID buildingId, UnitSearch search) {
+        return jdbc.queryForObject("SELECT count(*) FROM building_unit" + filter(search), Long.class,
+                filterArgs(buildingId, search).toArray());
     }
 
     @Override
@@ -109,26 +111,46 @@ public class JdbcUnitRepositoryAdapter implements UnitRepository {
 
     Unit mapRow(ResultSet rs, int row) throws SQLException { return map(rs, row); }
 
-    private static String filter(UUID floorId, UnitType type, UUID ownerUserId) {
-        return " WHERE building_id = ?" + (floorId == null ? "" : " AND floor_id = ?")
-                + (type == null ? "" : " AND unit_type = ?")
-                + (ownerUserId == null ? "" : " AND EXISTS (SELECT 1 FROM ownership_period p WHERE p.unit_id = "
-                        + "building_unit.id AND p.owner_user_id = ? AND p.end_revision IS NULL)");
+    private static String filter(UnitSearch s) {
+        return " WHERE building_id = ?" + (s.floorId() == null ? "" : " AND floor_id = ?")
+                + (s.type() == null ? "" : " AND unit_type = ?")
+                + (s.ownerUserId() == null ? "" : " AND EXISTS (SELECT 1 FROM ownership_period p WHERE p.unit_id = "
+                        + "building_unit.id AND p.owner_user_id = ? AND p.end_revision IS NULL)")
+                + (s.numberContains() == null ? "" : " AND normalized_number LIKE ? ESCAPE '\\'");
     }
 
-    private static List<Object> filterArgs(UUID buildingId, UUID floorId, UnitType type, UUID ownerUserId) {
+    private static List<Object> filterArgs(UUID buildingId, UnitSearch s) {
         List<Object> args = new ArrayList<>();
         args.add(buildingId);
-        if (floorId != null) {
-            args.add(floorId);
+        if (s.floorId() != null) {
+            args.add(s.floorId());
         }
-        if (type != null) {
-            args.add(type.name());
+        if (s.type() != null) {
+            args.add(s.type().name());
         }
-        if (ownerUserId != null) {
-            args.add(ownerUserId);
+        if (s.ownerUserId() != null) {
+            args.add(s.ownerUserId());
+        }
+        if (s.numberContains() != null) {
+            args.add("%" + likeEscape(s.numberContains().toUpperCase(Locale.ROOT)) + "%");
         }
         return args;
+    }
+
+    private static String likeEscape(String value) {
+        return value.replace("\\", "\\\\").replace("%", "\\%").replace("_", "\\_");
+    }
+
+    private static String orderBy(UnitSort sort) {
+        String direction = sort.descending() ? " DESC" : " ASC";
+        String key = switch (sort.field()) {
+            case UNIT_NUMBER -> "";
+            case FLOOR -> "(SELECT f.display_order FROM building_floor f WHERE f.id = building_unit.floor_id)"
+                    + direction + ", ";
+            case TYPE -> "unit_type" + direction + ", ";
+        };
+        String numberDirection = sort.field() == UnitSort.Field.UNIT_NUMBER ? direction : " ASC";
+        return " ORDER BY " + key + "normalized_number" + numberDirection + ", id";
     }
 
     private Unit map(ResultSet rs, int row) throws SQLException {

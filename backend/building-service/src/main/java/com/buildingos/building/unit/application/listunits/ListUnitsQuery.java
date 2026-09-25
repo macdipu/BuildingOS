@@ -1,7 +1,7 @@
 package com.buildingos.building.unit.application.listunits;
 
-import com.buildingos.building.unit.domain.model.UnitType;
+import com.buildingos.building.unit.domain.model.UnitSearch;
 import java.util.UUID;
 
-/** {@code floorId}/{@code type} null = any. */
-public record ListUnitsQuery(UUID buildingId, UUID floorId, UnitType type, int page, int size) {}
+/** {@code search.ownerUserId} is the requested owner filter; the caller's read scope still applies. */
+public record ListUnitsQuery(UUID buildingId, UnitSearch search, int page, int size) {}
