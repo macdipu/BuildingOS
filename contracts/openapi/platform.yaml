@@ -3368,6 +3368,50 @@ paths:
           content:
             application/json:
               schema: { $ref: "#/components/schemas/ApiError" }
+  /internal/audit:
+    get:
+      summary: "auth-service: platform-role audit rows (service-to-service, F6-T5b, D-37)"
+      description: >
+        Common internal audit read contract. Called by back-office-service with the caller's relayed token; never
+        routed by the gateway. SUPER_ADMIN only. Returns platform-role grant/revoke rows (entityType PLATFORM_ROLE,
+        entityId = target user), newest first. An entityType other than PLATFORM_ROLE returns an empty list.
+        before/after payloads are never returned.
+      security:
+        - bearerAuth: []
+      parameters:
+        - { name: since, in: query, required: false, schema: { type: string, format: date-time }, description: "Inclusive lower bound (ISO-8601 instant)" }
+        - { name: until, in: query, required: false, schema: { type: string, format: date-time }, description: "Exclusive upper bound (ISO-8601 instant)" }
+        - { name: entityType, in: query, required: false, schema: { type: string, example: PLATFORM_ROLE } }
+        - { name: actorUserId, in: query, required: false, schema: { type: string, format: uuid } }
+        - { name: limit, in: query, required: false, schema: { type: integer, minimum: 1, maximum: 200, default: 50 } }
+      responses:
+        "200":
+          description: "Success envelope; data is an array of InternalAuditEvent"
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - { $ref: "#/components/schemas/ApiEnvelope" }
+                  - type: object
+                    properties:
+                      data:
+                        type: array
+                        items: { $ref: "#/components/schemas/InternalAuditEvent" }
+        "400":
+          description: "INVALID_REQUEST (limit outside 1-200, malformed since/until/actorUserId)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "401":
+          description: "Missing or invalid token"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "403":
+          description: "ACCESS_DENIED (relayed token lacks SUPER_ADMIN)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
   /internal/platform/info:
     get:
       summary: Service metadata (direct, auth-service or building-service)
@@ -3402,6 +3446,21 @@ components:
         data: {}
         meta: { type: object }
         traceId: { type: string }
+    InternalAuditEvent:
+      type: object
+      description: "Common internal audit read item (F6-T5b); no before/after payloads."
+      required: [id, source, occurredAt, action, entityType, entityId]
+      properties:
+        id: { type: string, format: uuid }
+        source: { type: string, example: auth-service }
+        occurredAt: { type: string, format: date-time }
+        actorUserId: { type: string, format: uuid, nullable: true, description: "null = system" }
+        action: { type: string, example: PLATFORM_ROLE_GRANTED, description: "auth-service: PLATFORM_ROLE_GRANTED | PLATFORM_ROLE_REVOKED" }
+        entityType: { type: string, example: PLATFORM_ROLE }
+        entityId: { type: string }
+        buildingId: { type: string, format: uuid, nullable: true }
+        reason: { type: string, nullable: true }
+        role: { type: string, description: "auth-service only: the platform role granted/revoked" }
     ApiEnvelopeMetadata:
       type: object
       required: [success, data, meta, traceId]

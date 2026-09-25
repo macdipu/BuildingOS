@@ -67,7 +67,7 @@ class OtpChallengeFlowTest {
         @Override public User findOrCreateByPhone(String phone) {
             return users.computeIfAbsent(phone, p -> new User(UUID.randomUUID(), p, now.get(), Set.of()));
         }
-        @Override public void grantPlatformRole(UUID userId, PlatformRole role) {
+        @Override public boolean grantPlatformRole(UUID userId, PlatformRole role) {
             throw new UnsupportedOperationException();
         }
         @Override public Optional<User> findById(UUID id) { throw new UnsupportedOperationException(); }
@@ -75,7 +75,7 @@ class OtpChallengeFlowTest {
             throw new UnsupportedOperationException();
         }
         @Override public long count(String query, PlatformRole role) { throw new UnsupportedOperationException(); }
-        @Override public void revokePlatformRole(UUID userId, PlatformRole role) {
+        @Override public boolean revokePlatformRole(UUID userId, PlatformRole role) {
             throw new UnsupportedOperationException();
         }
     };

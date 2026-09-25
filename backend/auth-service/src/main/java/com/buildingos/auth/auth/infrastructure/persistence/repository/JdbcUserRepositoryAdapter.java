@@ -80,16 +80,16 @@ public class JdbcUserRepositoryAdapter implements UserRepository {
     }
 
     @Override
-    public void grantPlatformRole(UUID userId, PlatformRole role) {
-        jdbc.update("""
+    public boolean grantPlatformRole(UUID userId, PlatformRole role) {
+        return jdbc.update("""
                 INSERT INTO platform_user_role (user_id, role) VALUES (?, ?)
                 ON CONFLICT (user_id, role) DO NOTHING
-                """, userId, role.name());
+                """, userId, role.name()) > 0;
     }
 
     @Override
-    public void revokePlatformRole(UUID userId, PlatformRole role) {
-        jdbc.update("DELETE FROM platform_user_role WHERE user_id = ? AND role = ?", userId, role.name());
+    public boolean revokePlatformRole(UUID userId, PlatformRole role) {
+        return jdbc.update("DELETE FROM platform_user_role WHERE user_id = ? AND role = ?", userId, role.name()) > 0;
     }
 
     private User load(UUID id, String phone) {

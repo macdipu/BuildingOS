@@ -39,4 +39,4 @@ Backfill of pre-F6-T5b role changes; audit writing changes in other services; UI
 ../TECH-SPEC.md; REQUIREMENTS.md BOC-05, BOC-08; DECISIONS D-37; AU-01.
 
 ## Status
-PLANNED (T5b → T5c → T5d, after F6-T5a).
+F6-T5b DONE (auth-service 93 tests green, contract check passed): V4 platform_role_audit, row only on real state change, same transaction as grant/revoke; action PLATFORM_ROLE_GRANTED/REVOKED; bad since/until/limit → 400; since>until → empty. F6-T5c, F6-T5d PLANNED.

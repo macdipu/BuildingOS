@@ -23,9 +23,9 @@ public interface UserRepository {
     /** Total matching {@link #list} for the same filters, ignoring page/size. */
     long count(String query, PlatformRole role);
 
-    /** Grants the platform role to the user; a no-op if the user already holds it. */
-    void grantPlatformRole(UUID userId, PlatformRole role);
+    /** Grants the platform role to the user; a no-op (returns false) if the user already holds it. */
+    boolean grantPlatformRole(UUID userId, PlatformRole role);
 
-    /** Revokes the platform role from the user; a no-op if the user does not hold it. */
-    void revokePlatformRole(UUID userId, PlatformRole role);
+    /** Revokes the platform role from the user; a no-op (returns false) if the user does not hold it. */
+    boolean revokePlatformRole(UUID userId, PlatformRole role);
 }

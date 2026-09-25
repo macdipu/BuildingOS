@@ -17,6 +17,8 @@ class AuthStartupTest {
                 .withInitializer(context -> { if (local) context.getEnvironment().setActiveProfiles("test"); })
                 .withBean(OtpChallengeRepository.class, () -> mock(OtpChallengeRepository.class))
                 .withBean(UserRepository.class, () -> mock(UserRepository.class))
+                .withBean(PlatformRoleAuditRepository.class, () -> mock(PlatformRoleAuditRepository.class))
+                .withBean(UnitOfWork.class, () -> mock(UnitOfWork.class))
                 .withBean(SecuritySettings.class, () -> new SecuritySettings("https://auth.example", "app",
                         "https://auth.example/.well-known/jwks.json", List.of(), List.of()));
     }

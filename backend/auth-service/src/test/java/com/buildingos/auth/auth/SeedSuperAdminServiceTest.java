@@ -31,15 +31,15 @@ class SeedSuperAdminServiceTest {
             ids.computeIfAbsent(phone, p -> UUID.randomUUID());
             return findByPhone(phone).orElseThrow();
         }
-        @Override public void grantPlatformRole(UUID userId, PlatformRole role) {
-            roles.computeIfAbsent(userId, id -> EnumSet.noneOf(PlatformRole.class)).add(role);
+        @Override public boolean grantPlatformRole(UUID userId, PlatformRole role) {
+            return roles.computeIfAbsent(userId, id -> EnumSet.noneOf(PlatformRole.class)).add(role);
         }
         @Override public Optional<User> findById(UUID id) { throw new UnsupportedOperationException(); }
         @Override public List<User> list(String query, PlatformRole role, int page, int size) {
             throw new UnsupportedOperationException();
         }
         @Override public long count(String query, PlatformRole role) { throw new UnsupportedOperationException(); }
-        @Override public void revokePlatformRole(UUID userId, PlatformRole role) {
+        @Override public boolean revokePlatformRole(UUID userId, PlatformRole role) {
             throw new UnsupportedOperationException();
         }
     };

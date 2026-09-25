@@ -6,12 +6,15 @@ import com.buildingos.auth.auth.application.getpublickeys.GetPublicSigningKeysSe
 import com.buildingos.auth.auth.application.getpublickeys.GetPublicSigningKeysUseCase;
 import com.buildingos.auth.auth.application.getuser.GetUserService;
 import com.buildingos.auth.auth.application.getuser.GetUserUseCase;
+import com.buildingos.auth.auth.application.listauditevents.ListAuditEventsService;
+import com.buildingos.auth.auth.application.listauditevents.ListAuditEventsUseCase;
 import com.buildingos.auth.auth.application.listusers.ListUsersService;
 import com.buildingos.auth.auth.application.listusers.ListUsersUseCase;
 import com.buildingos.auth.auth.application.port.out.OtpProvider;
 import com.buildingos.auth.auth.application.port.out.SigningKeyProvider;
 import com.buildingos.auth.auth.application.port.out.SmsSender;
 import com.buildingos.auth.auth.application.port.out.TokenIssuer;
+import com.buildingos.auth.auth.application.port.out.UnitOfWork;
 import com.buildingos.auth.auth.application.seedsuperadmin.SeedSuperAdminService;
 import com.buildingos.auth.auth.application.seedsuperadmin.SeedSuperAdminUseCase;
 import com.buildingos.auth.auth.application.provisionuser.ProvisionUserService;
@@ -23,6 +26,7 @@ import com.buildingos.auth.auth.application.startotp.StartOtpUseCase;
 import com.buildingos.auth.auth.application.verifyotp.VerifyOtpService;
 import com.buildingos.auth.auth.application.verifyotp.VerifyOtpUseCase;
 import com.buildingos.auth.auth.domain.repository.OtpChallengeRepository;
+import com.buildingos.auth.auth.domain.repository.PlatformRoleAuditRepository;
 import com.buildingos.auth.auth.domain.repository.UserRepository;
 import com.buildingos.auth.auth.infrastructure.security.DevelopmentOtpProvider;
 import com.buildingos.auth.auth.infrastructure.security.HashedCodeOtpProvider;
@@ -80,13 +84,20 @@ public class AuthConfiguration {
     }
 
     @Bean
-    AssignPlatformRoleUseCase assignPlatformRole(UserRepository users) {
-        return new AssignPlatformRoleService(users);
+    AssignPlatformRoleUseCase assignPlatformRole(UserRepository users, PlatformRoleAuditRepository audits,
+            UnitOfWork uow, Clock clock) {
+        return new AssignPlatformRoleService(users, audits, uow, clock);
     }
 
     @Bean
-    RevokePlatformRoleUseCase revokePlatformRole(UserRepository users) {
-        return new RevokePlatformRoleService(users);
+    RevokePlatformRoleUseCase revokePlatformRole(UserRepository users, PlatformRoleAuditRepository audits,
+            UnitOfWork uow, Clock clock) {
+        return new RevokePlatformRoleService(users, audits, uow, clock);
+    }
+
+    @Bean
+    ListAuditEventsUseCase listAuditEvents(PlatformRoleAuditRepository audits) {
+        return new ListAuditEventsService(audits);
     }
 
     @Bean
