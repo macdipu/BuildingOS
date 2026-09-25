@@ -52,6 +52,9 @@ buildingos:
     max-duration: ${ONBOARDING_MAX_DURATION:P30D}
   support:
     max-duration: ${SUPPORT_MAX_DURATION:PT8H}
+  audit:
+    # F6-T5d audit fan-out: per-source timeout; a slower source is listed in unavailableSources.
+    timeout: ${AUDIT_SOURCE_TIMEOUT:PT3S}
   health:
     # BOC-08 System Health: services whose /actuator/health/readiness is aggregated. No url = this service.
     timeout: ${HEALTH_PROBE_TIMEOUT:PT2S}

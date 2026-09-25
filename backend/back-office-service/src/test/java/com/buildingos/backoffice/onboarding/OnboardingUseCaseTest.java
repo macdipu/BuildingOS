@@ -79,6 +79,10 @@ class OnboardingUseCaseTest {
             @Override public List<LifecycleTransition> findFor(EntityType type, UUID id) {
                 return audit.stream().filter(t -> t.entityId().equals(id)).toList();
             }
+            @Override public List<LifecycleTransition> list(Instant since, Instant until, EntityType type,
+                    UUID actorUserId, int limit) {
+                return List.of();
+            }
         };
         UnitOfWork uow = new UnitOfWork() {
             @Override public <T> T inTransaction(Supplier<T> work) { return work.get(); }

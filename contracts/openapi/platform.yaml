@@ -3335,6 +3335,54 @@ paths:
           content:
             application/json:
               schema: { $ref: "#/components/schemas/ApiError" }
+  /api/v1/platform/backoffice/audit:
+    get:
+      summary: "SUPER_ADMIN: merged audit log across BuildingOS services (BOC-05, D-37, F6-T5d)"
+      description: >
+        back-office-service fans out to GET /internal/audit on auth-service, building-service and
+        subscription-service (caller's token relayed; each checks SUPER_ADMIN itself) and reads its own
+        lifecycle_transition rows (entityType ASSISTED_ONBOARDING_SESSION | SUPPORT_SESSION |
+        ELEVATED_APPROVAL_REQUEST, action "FROM<U+2192>TO" with FROM = NONE on creation, buildingId null).
+        Every selected source gets the same filters and limit; results are merged newest first (occurredAt,
+        then id, both descending) and truncated to limit. nextUntil is the oldest returned occurredAt when
+        the page is full (pass it as until for the next page), else null. A source that errors or exceeds
+        buildingos.audit.timeout (default PT3S) is listed in unavailableSources; the others are still
+        returned and the endpoint still answers 200.
+      security:
+        - bearerAuth: []
+      parameters:
+        - { name: since, in: query, required: false, schema: { type: string, format: date-time }, description: "Inclusive lower bound (ISO-8601 instant)" }
+        - { name: until, in: query, required: false, schema: { type: string, format: date-time }, description: "Exclusive upper bound (ISO-8601 instant); use nextUntil to page" }
+        - { name: source, in: query, required: false, schema: { type: string, enum: [auth-service, building-service, subscription-service, back-office-service] }, description: "Query only this source" }
+        - { name: entityType, in: query, required: false, schema: { type: string, example: SUPPORT_SESSION } }
+        - { name: actorUserId, in: query, required: false, schema: { type: string, format: uuid } }
+        - { name: limit, in: query, required: false, schema: { type: integer, minimum: 1, maximum: 200, default: 50 } }
+      responses:
+        "200":
+          description: "Success envelope (data: AuditLogPage)"
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - { $ref: "#/components/schemas/ApiEnvelope" }
+                  - type: object
+                    properties:
+                      data: { $ref: "#/components/schemas/AuditLogPage" }
+        "400":
+          description: "INVALID_REQUEST (limit outside 1-200 or not an integer, malformed since/until/actorUserId, unknown source)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "401":
+          description: "Missing or invalid token"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "403":
+          description: "ACCESS_DENIED (caller is not SUPER_ADMIN)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
   /internal/users/provision:
     post:
       summary: "auth-service: find or create a user by phone (service-to-service, D-29)"
@@ -3468,6 +3516,33 @@ components:
         buildingId: { type: string, format: uuid, nullable: true }
         reason: { type: string, nullable: true }
         role: { type: string, description: "auth-service only (absent elsewhere): the platform role granted/revoked" }
+    AuditLogPage:
+      type: object
+      description: "Merged back-office audit view (F6-T5d)."
+      required: [items, nextUntil, unavailableSources]
+      properties:
+        items:
+          type: array
+          items: { $ref: "#/components/schemas/AuditLogEvent" }
+        nextUntil: { type: string, format: date-time, nullable: true, description: "Oldest occurredAt in items when items.length == limit, else null" }
+        unavailableSources:
+          type: array
+          items: { type: string, enum: [auth-service, building-service, subscription-service, back-office-service] }
+    AuditLogEvent:
+      type: object
+      description: "InternalAuditEvent shape, plus back-office-service as a source."
+      required: [id, source, occurredAt, action, entityType, entityId]
+      properties:
+        id: { type: string, format: uuid }
+        source: { type: string, enum: [auth-service, building-service, subscription-service, back-office-service] }
+        occurredAt: { type: string, format: date-time }
+        actorUserId: { type: string, format: uuid, nullable: true, description: "null = system" }
+        action: { type: string, example: "NONE<U+2192>ACTIVE" }
+        entityType: { type: string, example: SUPPORT_SESSION }
+        entityId: { type: string }
+        buildingId: { type: string, format: uuid, nullable: true }
+        reason: { type: string, nullable: true }
+        role: { type: string, description: "auth-service rows only (absent elsewhere)" }
     ApiEnvelopeMetadata:
       type: object
       required: [success, data, meta, traceId]
