@@ -10,6 +10,7 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.nio.charset.StandardCharsets;
+import java.time.Duration;
 import java.util.List;
 import java.util.UUID;
 import org.junit.jupiter.api.AfterAll;
@@ -49,12 +50,17 @@ class DocumentApiIntegrationTest {
 
     // quay.io/minio/minio and docker.io/minio/minio now deny anonymous pulls (upstream
     // MinIO registry restriction). bitnamilegacy/minio is a frozen but pullable,
-    // drop-in-compatible build; MinIOContainer's command override (`server /data`)
-    // still works against its entrypoint.
+    // drop-in-compatible build. Unlike the official image (root, any data dir works),
+    // bitnami's runs as non-root USER 1001 with only /bitnami/minio/data pre-provisioned
+    // with correct ownership; MinIOContainer's default command points at /data, which
+    // 1001 cannot create at the filesystem root ("Unable to initialize backend: file
+    // access denied") -- override the command to use bitnami's own data directory.
     @Container
     static final MinIOContainer MINIO = new MinIOContainer(DockerImageName.parse(
             "bitnamilegacy/minio@sha256:451fe6858cb770cc9d0e77ba811ce287420f781c7c1b806a386f6896471a349c")
-            .asCompatibleSubstituteFor("minio/minio"));
+            .asCompatibleSubstituteFor("minio/minio"))
+            .withCommand("server", "--console-address", ":9001", "/bitnami/minio/data")
+            .withStartupTimeout(Duration.ofMinutes(2));
 
     @LocalServerPort
     private int port;
