@@ -1,10 +1,13 @@
+import 'package:customer/app/shell/nav_sets.dart';
+import 'package:customer/app/shell/shell_tabs.dart';
+import 'package:customer/features/units_ownership/presentation/pages/building_units_page.dart';
+import 'package:customer/features/units_ownership/presentation/pages/property_home_page.dart';
 import 'package:customer/features/units_ownership/presentation/property_pages.dart';
 import 'package:flutter/material.dart';
-import 'package:customer/features/building_application/presentation/building_application_pages.dart';
-import 'package:customer/res/strings/string_enum.dart';
 import 'package:get/get.dart';
 import 'app_shell_controller.dart';
 
+/// BRD §37 per-role bottom navigation (BOS-011 D-02), styled after the Stitch mobile bar.
 class AppShell extends StatelessWidget {
   const AppShell({super.key});
 
@@ -12,85 +15,47 @@ class AppShell extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = Get.find<AppShellController>();
 
-    return Scaffold(
-      body: Obx(() => _buildBody(controller.currentIndex.value)),
-      bottomNavigationBar: Obx(
-        () => BottomNavigationBar(
-          currentIndex: controller.currentIndex.value,
-          onTap: controller.changeTab,
-          type: BottomNavigationBarType.fixed,
-          backgroundColor: Theme.of(context).colorScheme.surface,
-          selectedItemColor: Theme.of(context).colorScheme.primary,
-          unselectedItemColor: Theme.of(context).colorScheme.onSurfaceVariant,
-          selectedLabelStyle: const TextStyle(fontWeight: FontWeight.w600),
-          unselectedLabelStyle: const TextStyle(fontWeight: FontWeight.w500),
-          items: const [
-            BottomNavigationBarItem(
-              icon: Icon(Icons.home_outlined),
-              activeIcon: Icon(Icons.home),
-              label: 'Home',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.explore_outlined),
-              activeIcon: Icon(Icons.explore),
-              label: 'Explore',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.account_circle_outlined),
-              activeIcon: Icon(Icons.account_circle),
-              label: 'Account',
-            ),
-          ],
+    return Obx(() {
+      final building = controller.activeBuilding.building.value;
+      final tabs = controller.tabs.toList();
+      if (building == null || tabs.isEmpty) {
+        // No active building (e.g. deep link): pick one first.
+        WidgetsBinding.instance.addPostFrameCallback((_) => Get.offAllNamed(PropertyPages.home));
+        return const Scaffold(body: Center(child: CircularProgressIndicator()));
+      }
+      final index = controller.currentIndex.value.clamp(0, tabs.length - 1);
+      return Scaffold(
+        body: IndexedStack(
+          index: index,
+          children: [for (final tab in tabs) _body(tab, building.id, building.name)],
         ),
-      ),
-    );
+        bottomNavigationBar: DecoratedBox(
+          decoration: BoxDecoration(
+            border: Border(top: BorderSide(color: Theme.of(context).colorScheme.outlineVariant)),
+          ),
+          child: NavigationBar(
+            selectedIndex: index,
+            onDestinationSelected: controller.changeTab,
+            destinations: [
+              for (final tab in tabs)
+                NavigationDestination(
+                  key: ValueKey('nav-${tab.name}'),
+                  icon: Icon(shellTabIcon(tab)),
+                  selectedIcon: Icon(shellTabSelectedIcon(tab)),
+                  label: shellTabLabel(tab),
+                ),
+            ],
+          ),
+        ),
+      );
+    });
   }
 
-  Widget _buildBody(int index) {
-    switch (index) {
-      case 0:
-        return const _HomeTab();
-      case 1:
-        return const _PlaceholderScreen(label: 'Explore');
-      case 2:
-        return const _PlaceholderScreen(label: 'Account');
-      default:
-        return const _PlaceholderScreen(label: 'Home');
-    }
-  }
-}
-
-class _PlaceholderScreen extends StatelessWidget {
-  const _PlaceholderScreen({required this.label});
-
-  final String label;
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Text(
-        label,
-        style: Theme.of(context).textTheme.headlineMedium,
-      ),
-    );
-  }
-}
-
-class _HomeTab extends StatelessWidget {
-  const _HomeTab();
-
-  @override
-  Widget build(BuildContext context) {
-    return SafeArea(
-      child: Center(
-        child: Column(mainAxisSize: MainAxisSize.min, children: [
-          FilledButton.icon(onPressed: () => Get.toNamed(PropertyPages.home),
-            icon: const Icon(Icons.domain_outlined), label: Text(TextEnum.uoBuildings.tr)),
-          const SizedBox(height: 16),
-          OutlinedButton.icon(onPressed: () => Get.toNamed(BuildingApplicationPages.list),
-            icon: const Icon(Icons.apartment_outlined), label: Text(TextEnum.buildingApplications.tr)),
-        ]),
-      ),
-    );
-  }
+  Widget _body(ShellTab tab, String buildingId, String buildingName) => switch (tab) {
+        ShellTab.dashboard || ShellTab.home => DashboardTab(buildingName: buildingName),
+        ShellTab.units => BuildingUnitsPage(buildingId: buildingId),
+        ShellTab.properties => const PropertyHomePage(),
+        ShellTab.more => const MoreTab(),
+        _ => ComingSoonTab(title: shellTabLabel(tab)),
+      };
 }

@@ -351,7 +351,23 @@ enum TextEnum {
     en: "Property & Community Operating System",
     bn: "সম্পত্তি ও কমিউনিটি অপারেটিং সিস্টেম",
   ),
-  splashLoading(en: "Loading your buildings…", bn: "আপনার ভবনগুলো লোড হচ্ছে…")
+  splashLoading(en: "Loading your buildings…", bn: "আপনার ভবনগুলো লোড হচ্ছে…"),
+  navDashboard(en: "Dashboard", bn: "ড্যাশবোর্ড"),
+  navHome(en: "Home", bn: "হোম"),
+  navFinance(en: "Finance", bn: "আর্থিক"),
+  navUnits(en: "Units", bn: "ইউনিট"),
+  navWork(en: "Work", bn: "কাজ"),
+  navCommunity(en: "Community", bn: "কমিউনিটি"),
+  navPayments(en: "Payments", bn: "পেমেন্ট"),
+  navProperties(en: "Properties", bn: "সম্পত্তি"),
+  navProfile(en: "Profile", bn: "প্রোফাইল"),
+  navMore(en: "More", bn: "আরও"),
+  comingSoonTitle(en: "Coming soon", bn: "শীঘ্রই আসছে"),
+  comingSoonBody(
+    en: "This section is not available yet.",
+    bn: "এই অংশটি এখনো চালু হয়নি।",
+  ),
+  switchBuilding(en: "Switch building", bn: "ভবন পরিবর্তন করুন")
   // Add more entries as required
   ;
 

@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:customer/res/strings/string_enum.dart';
 import '../../domain/entities/property_models.dart';
 import '../../domain/usecases/property_use_cases.dart';
+import '../building_opener.dart';
 import '../property_text.dart';
 import '../widgets/property_widgets.dart';
 import 'building_units_page.dart';
@@ -58,6 +59,10 @@ class _PropertyHomePageState extends State<PropertyHomePage> {
                 ),
                 trailing: const Icon(Icons.chevron_right),
                 onTap: () async {
+                  if (Get.isRegistered<BuildingOpener>()) {
+                    await Get.find<BuildingOpener>().open(b);
+                    return;
+                  }
                   await Navigator.push(
                     context,
                     MaterialPageRoute<void>(

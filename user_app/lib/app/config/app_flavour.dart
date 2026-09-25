@@ -3,11 +3,13 @@ import 'dart:developer';
 
 import 'package:customer/app/config/app_config.dart';
 import 'package:customer/app/session/active_building_service.dart';
+import 'package:customer/app/session/shell_building_opener.dart';
 import 'package:customer/core/auth/session_expiry_notifier.dart';
 import 'package:customer/core/database/client/preference_cache.dart';
 import 'package:customer/core/network/client/api_client.dart';
 import 'package:customer/core/network/urls/api_urls.dart';
 import 'package:customer/core/services/push_notification/notification_service.dart';
+import 'package:customer/features/units_ownership/presentation/building_opener.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -43,5 +45,6 @@ void _initialize() {
     permanent: true,
   );
   Get.put<ActiveBuildingService>(ActiveBuildingService(), permanent: true);
+  Get.put<BuildingOpener>(ShellBuildingOpener(Get.find<ActiveBuildingService>()), permanent: true);
   Get.lazyPut<NotificationService>(() => NotificationService(), fenix: true);
 }
