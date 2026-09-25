@@ -7448,6 +7448,19 @@
       "event": "STAGE_CHANGED",
       "payload": {},
       "created_at": "2026-09-25T06:02:04.240892+00:00"
+    },
+    {
+      "run_id": "RUN-13923DE4E9D64BECBEE263998E681BEE",
+      "event": "COMMIT_RECORDED",
+      "payload": {
+        "sha": "2a4db94",
+        "subject": "docs(bos-011): record BOS-011 QA evidence and release",
+        "work_item": "BOS-011",
+        "task": "UI-T10",
+        "run": "RUN-13923DE4E9D64BECBEE263998E681BEE",
+        "commit_trigger": "task-finish"
+      },
+      "created_at": "2026-09-25T06:02:30.413673+00:00"
     }
   ],
   "tool_calls": {}
