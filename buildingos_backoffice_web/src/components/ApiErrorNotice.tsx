@@ -1,12 +1,23 @@
 import { feeMessage, isStaleConflict, type ApiFailure } from "@/lib/buildingApplications";
 
 /**
- * Failed call: always shows the backend error code; a stale-state 409 offers a
- * refresh, fee preconditions get a plain-language explanation.
+ * Failed call: always shows the backend error code. For building applications
+ * (default), a stale-state 409 offers a refresh and fee preconditions get a
+ * plain-language explanation. `context="plain"` is for endpoints without a
+ * version check, where a 409 is a business-rule conflict, not stale state.
  */
-export function ApiErrorNotice({ failure, onRefresh }: { failure: ApiFailure; onRefresh?: () => void }) {
-  const stale = isStaleConflict(failure);
-  const fee = feeMessage(failure);
+export function ApiErrorNotice({
+  failure,
+  onRefresh,
+  context = "application",
+}: {
+  failure: ApiFailure;
+  onRefresh?: () => void;
+  context?: "application" | "plain";
+}) {
+  const application = context === "application";
+  const stale = application && isStaleConflict(failure);
+  const fee = application ? feeMessage(failure) : null;
   return (
     <div role="alert" className="rounded-card border border-error/30 bg-error-container px-4 py-3 text-sm text-on-surface">
       <p className="font-semibold">
