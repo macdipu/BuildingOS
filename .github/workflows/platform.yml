@@ -36,8 +36,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Local-only compose env
-        run: cp infra/docker/.env.example infra/docker/.env
-      - run: docker compose -f infra/docker/compose.yaml config --quiet
+        run: cp infra/local/.env.example infra/local/.env
+      - run: docker compose -f infra/local/compose.yaml config --quiet
       - uses: actions/setup-java@v4
         with:
           distribution: temurin

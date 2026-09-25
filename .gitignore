@@ -5,7 +5,9 @@
 /agentic-backups/
 __pycache__/
 *.py[cod]
-/infra/docker/.env
+/infra/local/.env
+/infra/dev/.env
+/infra/prod/.env
 target/
 .DS_Store
 /.agent/runtime/**/*.lock

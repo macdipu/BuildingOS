@@ -42,7 +42,7 @@ BuildingOS/
 ├── contracts/
 │   ├── openapi/             HTTP contracts
 │   └── kafka/               event envelope schemas
-├── infra/docker/            compose.yaml, postgres init
+├── infra/{local,dev}/       compose.yaml (infra + app services), postgres init
 ├── scripts/                 verify-platform.sh, verify-flutter.sh, check-contracts.py
 └── docs/                    this file, LOCAL_DEVELOPMENT.md, AUTH_CONFIGURATION.md, REVENUE_MODEL.md
 ```

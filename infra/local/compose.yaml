@@ -1,0 +1,199 @@
+name: buildingos-local
+
+services:
+  postgres:
+    container_name: buildingos-local-postgres
+    image: postgres:17
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ${POSTGRES_SUPERUSER_PASSWORD:?set in infra/local/.env}
+      POSTGRES_DB: postgres
+      AUTH_DB_PASSWORD: ${AUTH_DB_PASSWORD:?set in infra/local/.env}
+      BUILDING_DB_PASSWORD: ${BUILDING_DB_PASSWORD:?set in infra/local/.env}
+      SUBSCRIPTION_DB_PASSWORD: ${SUBSCRIPTION_DB_PASSWORD:?set in infra/local/.env}
+    ports:
+      - "127.0.0.1:5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./postgres/init:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+
+  kafka:
+    container_name: buildingos-local-kafka
+    image: apache/kafka:latest
+    environment:
+      KAFKA_LOG_DIRS: /var/lib/kafka/data
+      KAFKA_NODE_ID: 1
+      KAFKA_PROCESS_ROLES: broker,controller
+      KAFKA_LISTENERS: PLAINTEXT://:9092,CONTROLLER://:9093
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092
+      KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT
+      KAFKA_CONTROLLER_QUORUM_VOTERS: 1@localhost:9093
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: "false"
+    ports:
+      - "127.0.0.1:9092:9092"
+    volumes:
+      - kafka_data:/var/lib/kafka/data
+    healthcheck:
+      test: ["CMD-SHELL", "/opt/kafka/bin/kafka-broker-api-versions.sh --bootstrap-server localhost:9092 >/dev/null 2>&1"]
+      interval: 10s
+      timeout: 10s
+      retries: 10
+      start_period: 20s
+
+  minio:
+    container_name: buildingos-local-minio
+    image: bitnamilegacy/minio:latest
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER:?set in infra/local/.env}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD:?set in infra/local/.env}
+      MINIO_DEFAULT_BUCKETS: ${DOCUMENTS_S3_BUCKET:-building-documents}
+    ports:
+      - "127.0.0.1:9000:9000"
+      - "127.0.0.1:9001:9001"
+    volumes:
+      - minio_data:/bitnami/minio/data
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 5s
+
+  auth-service:
+    container_name: buildingos-local-auth-service
+    image: buildingos/auth-service:local
+    build:
+      context: ../../backend/auth-service
+    environment:
+      SPRING_PROFILES_ACTIVE: local
+      SERVER_PORT: 8080
+      DB_URL: jdbc:postgresql://postgres:5432/auth_db
+      DB_USERNAME: auth_app
+      DB_PASSWORD: ${AUTH_DB_PASSWORD:?set in infra/local/.env}
+      JWT_ISSUER: http://auth-service:8080
+      JWT_JWK_SET_URI: http://auth-service:8080/.well-known/jwks.json
+      JWT_AUDIENCE: buildingos-local
+    ports:
+      - "127.0.0.1:8081:8080"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health/readiness"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+      start_period: 15s
+
+  subscription-service:
+    container_name: buildingos-local-subscription-service
+    image: buildingos/subscription-service:local
+    build:
+      context: ../../backend/subscription-service
+    environment:
+      SPRING_PROFILES_ACTIVE: local
+      SERVER_PORT: 8080
+      DB_URL: jdbc:postgresql://postgres:5432/subscription_db
+      DB_USERNAME: subscription_app
+      DB_PASSWORD: ${SUBSCRIPTION_DB_PASSWORD:?set in infra/local/.env}
+      JWT_ISSUER: http://auth-service:8080
+      JWT_JWK_SET_URI: http://auth-service:8080/.well-known/jwks.json
+      JWT_AUDIENCE: buildingos-local
+    ports:
+      - "127.0.0.1:8083:8080"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      auth-service:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health/readiness"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+      start_period: 15s
+
+  building-service:
+    container_name: buildingos-local-building-service
+    image: buildingos/building-service:local
+    build:
+      context: ../../backend/building-service
+    environment:
+      SPRING_PROFILES_ACTIVE: local
+      SERVER_PORT: 8080
+      DB_URL: jdbc:postgresql://postgres:5432/building_db
+      DB_USERNAME: building_app
+      DB_PASSWORD: ${BUILDING_DB_PASSWORD:?set in infra/local/.env}
+      JWT_ISSUER: http://auth-service:8080
+      JWT_JWK_SET_URI: http://auth-service:8080/.well-known/jwks.json
+      JWT_AUDIENCE: buildingos-local
+      AUTH_SERVICE_URL: http://auth-service:8080
+      SUBSCRIPTION_SERVICE_URL: http://subscription-service:8080
+      KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+      DOCUMENTS_S3_ENDPOINT: http://minio:9000
+      DOCUMENTS_S3_PATH_STYLE: "true"
+      DOCUMENTS_S3_ACCESS_KEY: ${MINIO_ROOT_USER:?set in infra/local/.env}
+      DOCUMENTS_S3_SECRET_KEY: ${MINIO_ROOT_PASSWORD:?set in infra/local/.env}
+      DOCUMENTS_S3_BUCKET: ${DOCUMENTS_S3_BUCKET:-building-documents}
+    ports:
+      - "127.0.0.1:8082:8080"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      kafka:
+        condition: service_healthy
+      minio:
+        condition: service_healthy
+      auth-service:
+        condition: service_healthy
+      subscription-service:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health/readiness"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+      start_period: 15s
+
+  api-gateway:
+    container_name: buildingos-local-api-gateway
+    image: buildingos/api-gateway:local
+    build:
+      context: ../../backend/api-gateway
+    environment:
+      SPRING_PROFILES_ACTIVE: local
+      SERVER_PORT: 8080
+      JWT_ISSUER: http://auth-service:8080
+      JWT_JWK_SET_URI: http://auth-service:8080/.well-known/jwks.json
+      JWT_AUDIENCE: buildingos-local
+      AUTH_SERVICE_URL: http://auth-service:8080
+      BUILDING_SERVICE_URL: http://building-service:8080
+      SUBSCRIPTION_SERVICE_URL: http://subscription-service:8080
+    ports:
+      - "127.0.0.1:8080:8080"
+    depends_on:
+      auth-service:
+        condition: service_healthy
+      building-service:
+        condition: service_healthy
+      subscription-service:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health/readiness"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+      start_period: 15s
+
+volumes:
+  postgres_data:
+  kafka_data:
+  minio_data:

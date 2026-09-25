@@ -3,28 +3,33 @@
 # Nonzero exit on any missing prerequisite or failing check. No business data is created.
 set -eu
 
+# Git-bash/MSYS on Windows silently mangles /c/... paths passed as `docker run -v`
+# arguments (e.g. rewrites them so the bind mount resolves empty); this disables that
+# conversion. A no-op everywhere else (Linux CI, macOS, real POSIX shells).
+export MSYS_NO_PATHCONV=1
+
 ROOT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$ROOT_DIR"
 
-COMPOSE="docker compose -f infra/docker/compose.yaml"
-ENV_FILE="infra/docker/.env"
+COMPOSE="docker compose -f infra/local/compose.yaml"
+ENV_FILE="infra/local/.env"
 
 fail() { echo "VERIFY FAILED: $1" >&2; exit 1; }
 
 command -v docker >/dev/null 2>&1 || fail "docker is required"
 command -v mvn >/dev/null 2>&1 || fail "mvn is required"
-[ -f "$ENV_FILE" ] || fail "$ENV_FILE is missing; copy infra/docker/.env.example and set local passwords"
+[ -f "$ENV_FILE" ] || fail "$ENV_FILE is missing; copy infra/local/.env.example and set local passwords"
 
 # shellcheck disable=SC1090
 . "$ENV_FILE"
-[ -n "${SUBSCRIPTION_DB_PASSWORD:-}" ] || fail "SUBSCRIPTION_DB_PASSWORD missing from $ENV_FILE (see infra/docker/.env.example)"
+[ -n "${SUBSCRIPTION_DB_PASSWORD:-}" ] || fail "SUBSCRIPTION_DB_PASSWORD missing from $ENV_FILE (see infra/local/.env.example)"
 [ -n "${MINIO_ROOT_USER:-}" ] && [ -n "${MINIO_ROOT_PASSWORD:-}" ] \
-    || fail "MINIO_ROOT_USER/MINIO_ROOT_PASSWORD missing from $ENV_FILE (see infra/docker/.env.example)"
+    || fail "MINIO_ROOT_USER/MINIO_ROOT_PASSWORD missing from $ENV_FILE (see infra/local/.env.example)"
 export POSTGRES_SUPERUSER_PASSWORD AUTH_DB_PASSWORD BUILDING_DB_PASSWORD SUBSCRIPTION_DB_PASSWORD \
     MINIO_ROOT_USER MINIO_ROOT_PASSWORD
 
 echo "==> Starting Postgres, Kafka and MinIO"
-$COMPOSE up -d postgres kafka minio minio-init
+$COMPOSE up -d postgres kafka minio
 
 wait_healthy() {
     service="$1"
@@ -42,15 +47,9 @@ wait_healthy kafka
 wait_healthy minio
 
 echo "==> Checking the verification-document bucket exists and is private"
-init_exit=""
-tries=30
-while [ "$tries" -gt 0 ]; do
-    init_exit=$($COMPOSE ps -a --format '{{.State}} {{.ExitCode}}' minio-init 2>/dev/null || echo "")
-    case "$init_exit" in exited*) break ;; esac
-    tries=$((tries - 1))
-    sleep 2
-done
-[ "$init_exit" = "exited 0" ] || fail "minio-init did not create the document bucket ($init_exit)"
+bucket="${DOCUMENTS_S3_BUCKET:-building-documents}"
+policy=$($COMPOSE exec -T minio mc anonymous get "local/$bucket" 2>/dev/null || echo "")
+case "$policy" in *private*) : ;; *) fail "bucket $bucket is missing or not private ($policy)" ;; esac
 echo "==> Postgres and Kafka are healthy"
 
 # Init scripts run only when the data volume is first created. Add databases introduced
@@ -75,7 +74,7 @@ docker run -d --name "$BOOTSTRAP_CONTAINER" --network none \
     -e POSTGRES_PASSWORD=bootstrap-test-only \
     -e "AUTH_DB_PASSWORD=$TEST_PASSWORD" -e "BUILDING_DB_PASSWORD=$TEST_PASSWORD" \
     -e "SUBSCRIPTION_DB_PASSWORD=$TEST_PASSWORD" \
-    -v "$ROOT_DIR/infra/docker/postgres/init:/docker-entrypoint-initdb.d:ro" \
+    -v "$ROOT_DIR/infra/local/postgres/init:/docker-entrypoint-initdb.d:ro" \
     "$POSTGRES_IMAGE" >/dev/null
 tries=30
 while ! docker exec "$BOOTSTRAP_CONTAINER" pg_isready -h localhost -U postgres >/dev/null 2>&1; do

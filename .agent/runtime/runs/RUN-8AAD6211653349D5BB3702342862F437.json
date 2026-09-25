@@ -4,11 +4,11 @@
     "project": "BuildingOS",
     "work_type": "new_feature",
     "title": "BOS-010 F6: back-office console (buildingos_backoffice_web)",
-    "stage": "TECHNICAL",
+    "stage": "IMPLEMENTATION",
     "status": "RUNNING",
     "dry_run": false,
     "created_at": "2026-09-24T23:14:12.332365+00:00",
-    "updated_at": "2026-09-24T23:38:15.675055+00:00",
+    "updated_at": "2026-09-24T23:38:50.065363+00:00",
     "metadata": {
       "runtime_version": 2,
       "repo": "..\\..\\..",
@@ -873,6 +873,13 @@
       "status": "RUNNING",
       "payload": {},
       "created_at": "2026-09-24T23:38:15.675055+00:00"
+    },
+    {
+      "run_id": "RUN-8AAD6211653349D5BB3702342862F437",
+      "stage": "IMPLEMENTATION",
+      "status": "RUNNING",
+      "payload": {},
+      "created_at": "2026-09-24T23:38:50.065363+00:00"
     }
   ],
   "approvals": [
@@ -1243,6 +1250,25 @@
         "by": "macdipu <c.dipu0@gmail.com>"
       },
       "created_at": "2026-09-24T23:38:15.675055+00:00"
+    },
+    {
+      "run_id": "RUN-8AAD6211653349D5BB3702342862F437",
+      "event": "COMMIT_RECORDED",
+      "payload": {
+        "sha": "ef74067",
+        "subject": "docs(bos-010-f6): add technical design for the back-office console",
+        "work_item": "BOS-010-F6",
+        "task": "",
+        "run": "RUN-8AAD6211653349D5BB3702342862F437",
+        "commit_trigger": "task-finish"
+      },
+      "created_at": "2026-09-24T23:38:49.789924+00:00"
+    },
+    {
+      "run_id": "RUN-8AAD6211653349D5BB3702342862F437",
+      "event": "STAGE_CHANGED",
+      "payload": {},
+      "created_at": "2026-09-24T23:38:50.065363+00:00"
     }
   ],
   "tool_calls": {}

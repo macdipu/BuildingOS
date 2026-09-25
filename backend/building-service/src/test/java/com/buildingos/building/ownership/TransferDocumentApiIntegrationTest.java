@@ -55,9 +55,13 @@ class TransferDocumentApiIntegrationTest {
                     .asCompatibleSubstituteFor("postgres"))
             .withDatabaseName("building_db").withUsername("building_app").withPassword("test-only-password");
 
+    // quay.io/minio/minio and docker.io/minio/minio now deny anonymous pulls (upstream
+    // MinIO registry restriction). bitnamilegacy/minio is a frozen but pullable,
+    // drop-in-compatible build; MinIOContainer's command override (`server /data`)
+    // still works against its entrypoint.
     @Container
     static final MinIOContainer MINIO = new MinIOContainer(DockerImageName.parse(
-            "quay.io/minio/minio@sha256:14cea493d9a34af32f524e538b8346cf79f3321eff8e708c1e2960462bd8936e")
+            "bitnamilegacy/minio@sha256:451fe6858cb770cc9d0e77ba811ce287420f781c7c1b806a386f6896471a349c")
             .asCompatibleSubstituteFor("minio/minio"));
 
     @LocalServerPort
