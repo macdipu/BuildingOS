@@ -4,10 +4,10 @@
 **Product:** BuildingOS – Building & Rental Management System  
 **Target Market:** Multi-flat residential buildings in Bangladesh  
 **Primary Clients:** Android/iOS/Web-ready Flutter application  
-**Frontend Stack:** Flutter, GetX, Clean Architecture, Drift  
+**Frontend Stack:** Flutter, GetX, Clean Architecture  
 **Backend Stack:** Java + Spring Boot Microservices, API Gateway, Kafka, PostgreSQL/Supabase-compatible infrastructure  
 **Architecture Style:** Microservices + Clean Architecture + Repository Pattern + Use Case Pattern + Feature-First Package Structure  
-**Document Purpose:** Product, UX, backend, data, API, event, security, offline-sync, and agentic-development source of truth.
+**Document Purpose:** Product, UX, backend, data, API, event, security, and agentic-development source of truth.
 
 ---
 
@@ -33,7 +33,6 @@ The system centralizes:
 - Assets
 - Notifications
 - Audit history
-- Offline-first mobile operations
 
 The platform must support buildings where one owner can own multiple units, one manager can collect money on behalf of owners, a tenant may change over time, flats may become vacant, and the committee separately manages common building finances.
 
@@ -47,10 +46,9 @@ The platform must support buildings where one owner can own multiple units, one 
 4. Give tenants clear due/payment information.
 5. Create structured building-management workflows.
 6. Maintain historical ownership, tenancy, rent, and expense data.
-7. Support offline field usage and safe later synchronization.
-8. Operate as a SaaS platform supporting many independently managed buildings, building-level subscriptions, and users who participate in or own units across multiple buildings.
-9. Establish reliable auditability for financial and administrative actions.
-10. Keep backend services independently deployable and independently scalable.
+7. Operate as a SaaS platform supporting many independently managed buildings, building-level subscriptions, and users who participate in or own units across multiple buildings.
+8. Establish reliable auditability for financial and administrative actions.
+9. Keep backend services independently deployable and independently scalable.
 
 ---
 
@@ -86,8 +84,6 @@ The platform must support buildings where one owner can own multiple units, one 
 - Reports
 - Assets
 - Contact directory
-- Offline operation
-- Sync engine
 - Audit trail
 - Multi-building SaaS tenancy and subscription enforcement
 
@@ -803,24 +799,6 @@ Audit records must not be editable by ordinary application users.
 
 ---
 
-## 8.11 Sync Service
-
-Recommended for offline-first behavior.
-
-Responsibilities:
-
-- Device sync cursors
-- Mutation ingestion
-- Idempotency keys
-- Delta synchronization
-- Conflict policies
-- Device acknowledgment
-
-Alternative:
-Each domain service can expose `/sync`, but a dedicated sync orchestration service provides a cleaner mobile contract.
-
----
-
 ## 8.12 Subscription & Entitlement Service
 
 BuildingOS is a SaaS product. Subscription state is a platform concern and must not be embedded in rental or finance-domain entities.
@@ -893,7 +871,6 @@ Publishes:
 | Document metadata | Document | document_db |
 | Read models | Reporting | reporting_db |
 | Audit records | Audit | audit_db |
-| Sync metadata | Sync | sync_db |
 | Plans / subscriptions / entitlements | Subscription | subscription_db |
 
 Database-per-service is mandatory.
@@ -1173,7 +1150,6 @@ Critical APIs:
 - Reverse payment
 - Create expense
 - Generate invoice
-- Sync mutation
 - Lease activation
 
 Repeated identical request must not create duplicate transaction.
@@ -1652,144 +1628,6 @@ next_service_date
 
 ---
 
-# 31. Offline-First Architecture
-
-Flutter local DB:
-
-```text
-Drift
-```
-
-Server remains source of truth.
-
-Device stores:
-
-- Cached building data
-- Units
-- Tenant records needed by role
-- Invoices
-- Payment history
-- Announcements
-- Chat channels and recent messages (§150.6)
-- Work orders
-- Pending offline mutations
-- Sync cursor
-
----
-
-# 32. Offline Mutation Queue
-
-Every offline write creates:
-
-```text
-local_mutation
-- mutation_id
-- entity_type
-- entity_id
-- operation
-- payload
-- created_at
-- retry_count
-- sync_status
-- idempotency_key
-```
-
-Statuses:
-
-```text
-PENDING
-SYNCING
-SYNCED
-FAILED
-CONFLICT
-```
-
----
-
-# 33. Offline Financial Restrictions
-
-For financial safety:
-
-Offline recording may be allowed for authorized managers, but:
-
-- Generate local temporary receipt number.
-- Mark as `PENDING_SYNC`.
-- Prevent editing after sync submission.
-- Backend idempotency key prevents duplicates.
-- Final server receipt replaces provisional receipt reference.
-- Never silently resolve amount conflicts.
-
----
-
-# 34. Sync API
-
-Example:
-
-```text
-POST /api/v1/sync/push
-GET  /api/v1/sync/pull?cursor=<cursor>
-```
-
-Push:
-
-```json
-{
-  "deviceId": "uuid",
-  "mutations": [
-    {
-      "mutationId": "uuid",
-      "idempotencyKey": "uuid",
-      "entityType": "PAYMENT",
-      "operation": "CREATE",
-      "payload": {}
-    }
-  ]
-}
-```
-
-Pull:
-
-```json
-{
-  "cursor": "next-cursor",
-  "changes": [],
-  "deleted": []
-}
-```
-
----
-
-# 35. Conflict Resolution
-
-Use entity-specific policy.
-
-Examples:
-
-### Announcement
-Last-write-wins may be acceptable.
-
-### Tenant contact
-Server version comparison + user conflict resolution.
-
-### Lease
-Reject conflicting concurrent mutation.
-
-### Payment
-Never auto-merge.
-
-### Ownership
-Reject conflict and require refresh.
-
-Use optimistic locking:
-
-```text
-version
-```
-
-or ETag.
-
----
-
 # 36. Flutter App Architecture
 
 Recommended:
@@ -1804,7 +1642,6 @@ lib/
 ├─ core/
 │  ├─ network/
 │  ├─ database/
-│  ├─ sync/
 │  ├─ auth/
 │  ├─ widgets/
 │  ├─ utils/
@@ -1919,9 +1756,7 @@ Initialize app.
 
 Actions:
 - Check auth token
-- Initialize Drift
 - Load cached user
-- Attempt sync
 - Resolve active building
 
 UI:
@@ -2076,7 +1911,6 @@ Cards:
 - Due today
 - Overdue
 - Today's collections
-- Pending sync payments
 
 Sections:
 - Collection queue
@@ -2089,7 +1923,6 @@ Buttons:
 - `Add Tenant`
 - `Create Lease`
 - `Record Move-Out`
-- `Sync Now`
 
 ---
 
@@ -2540,7 +2373,6 @@ Displays:
 - Time
 - Collector
 - Invoice allocations
-- Sync status
 - Audit reference
 
 Buttons:
@@ -3057,11 +2889,6 @@ Sections:
 - Receipt numbering
 - Approval rules
 
-### Sync
-- Last sync
-- Device info
-- Retry failed items
-
 ---
 
 # 90. Audit Log Screen
@@ -3111,7 +2938,6 @@ Financial audit records cannot be deleted from UI.
 | Files | Document |
 | Dashboards | Reporting |
 | Audit | Audit |
-| Offline sync | Sync |
 
 ---
 
@@ -3249,7 +3075,6 @@ finance.events.dlq
 - Widget tests
 - Golden tests for key receipts/reports
 - Integration flows
-- Offline-sync tests
 
 ---
 
@@ -3299,7 +3124,6 @@ buildingos/
 │  ├─ document-service/
 │  ├─ reporting-service/
 │  ├─ audit-service/
-│  ├─ sync-service/
 │  └─ subscription-service/
 ├─ contracts/
 │  ├─ openapi/
@@ -3414,7 +3238,6 @@ Do not use Redis as system of record.
 /api/v1/documents/**       -> document-service
 /api/v1/reports/**         -> reporting-service
 /api/v1/audit/**           -> audit-service
-/api/v1/sync/**            -> sync-service
 ```
 
 ---
@@ -3465,14 +3288,6 @@ Components:
 - Payment category
 - Year/month
 - Sequence
-
-Offline receipt:
-```text
-TEMP-<device>-<sequence>
-```
-
-After sync:
-- Map temp receipt to official receipt.
 
 ---
 
@@ -3796,7 +3611,7 @@ Response meta:
 }
 ```
 
-Cursor pagination may be used for event feeds or sync.
+Cursor pagination may be used for event feeds.
 
 ---
 
@@ -3851,7 +3666,6 @@ Kafka produced:
 Kafka consumed:
 Permissions:
 Validation:
-Offline behavior:
 Tests:
 Acceptance criteria:
 Out of scope:
@@ -3886,7 +3700,6 @@ A Flutter feature is done only when:
 - Repository abstraction
 - Data models
 - Remote data source
-- Drift cache/offline model when needed
 - Use case
 - GetX controller
 - Screen
@@ -3894,7 +3707,6 @@ A Flutter feature is done only when:
 - Empty state
 - Error state
 - Permission state
-- Offline state
 - Tests
 - Navigation
 
@@ -3958,35 +3770,27 @@ A Flutter feature is done only when:
 - Expenses
 - Advance ledger
 
-## Phase 4 – Offline Sync
-
-- Drift
-- Mutation queue
-- Sync service
-- Idempotency
-- Conflict handling
-
-## Phase 5 – Operations
+## Phase 4 – Operations
 
 - Work orders
 - Contractors
 - Assets
 
-## Phase 6 – Communication
+## Phase 5 – Communication
 
 - Announcements / Notice Board
 - Meetings
 - Notifications, FCM push, device registry, preferences
 - Community chat (§150)
 
-## Phase 7 – Reporting
+## Phase 6 – Reporting
 
 - Kafka projections
 - Dashboards
 - PDF
 - Excel
 
-## Phase 8 – Hardening
+## Phase 7 – Hardening
 
 - Security
 - Load testing
@@ -4026,9 +3830,8 @@ MVP must include:
 23. Tenant dashboard
 24. Committee dashboard
 25. Announcement
-26. Offline-safe payment entry
-27. Basic reports
-28. Audit for financial and platform-administration operations
+26. Basic reports
+27. Audit for financial and platform-administration operations
 
 ---
 
@@ -4070,9 +3873,8 @@ Steps:
 4. Select method.
 5. App proposes allocation.
 6. User confirms.
-7. If online, API request.
-8. If offline, mutation queued.
-9. Receipt shown.
+7. API request.
+8. Receipt shown.
 
 ## API Gateway
 
@@ -4118,10 +3920,6 @@ Notification:
 Audit:
 - Appends audit record.
 
-## Offline
-
-Same use case request carries unique idempotency key after reconnect.
-
 ---
 
 # 127. Example End-to-End Feature: Transfer Ownership
@@ -4166,7 +3964,6 @@ INVOICE_ALREADY_PAID
 PAYMENT_ALLOCATION_EXCEEDS_AMOUNT
 PAYMENT_ALREADY_REVERSED
 DUPLICATE_IDEMPOTENCY_KEY
-SYNC_CONFLICT
 VERSION_CONFLICT
 FILE_UPLOAD_FAILED
 ```
@@ -4275,7 +4072,6 @@ MVP target under normal load:
 - Typical API P95 < 500 ms excluding file/report generation.
 - Dashboard P95 < 1 s using read models.
 - Mobile list first cached render immediate/near-immediate.
-- Sync handles interrupted retries safely.
 - No duplicate financial transaction after retry.
 - Chat delivery to online members P95 < 1 s; push dispatch P95 < 10 s (§150.12).
 
@@ -4475,10 +4271,7 @@ Requirements:
 - Auto-allocation oldest invoice first.
 - Allow manual allocation.
 - Show remaining/advance preview.
-- If online, submit.
-- If offline, store pending mutation.
-- Display provisional receipt for offline.
-- Display server receipt after sync.
+- Submit.
 - Prevent double submission.
 - Show loading/error/success states.
 - Permission guard.
@@ -4486,7 +4279,6 @@ Requirements:
 Tests:
 - form validation
 - partial payment UI
-- offline queue
 - duplicate tap prevention
 - allocation validation
 ```
@@ -4501,12 +4293,11 @@ Create Architecture Decision Records for:
 2. Database-per-service
 3. Kafka + Outbox
 4. API Gateway
-5. Offline sync strategy
-6. Payment allocation model
-7. Reporting projections
-8. Authentication model
-9. File storage approach
-10. Multi-tenancy/building context
+5. Payment allocation model
+6. Reporting projections
+7. Authentication model
+8. File storage approach
+9. Multi-tenancy/building context
 
 ---
 
@@ -4529,9 +4320,6 @@ Feature-first Clean Architecture.
 
 ## Auditability
 Critical changes traceable.
-
-## Offline
-Core collection workflow functional without continuous internet.
 
 ## Localization
 Bangla/English-ready.
@@ -4579,21 +4367,6 @@ System:
 - invoice -> PAID
 - advance ledger -> 30,000
 - receipt -> 50,000
-
----
-
-## Scenario D – Offline Manager
-
-Manager receives cash while offline.
-
-System:
-- creates pending local payment
-- generates provisional receipt
-- stores idempotency key
-- syncs later
-- backend processes once
-- official receipt returned
-- local record reconciled
 
 ---
 
@@ -4681,7 +4454,6 @@ Do not:
 - Calculate outstanding purely from payment sum without allocation.
 - Publish Kafka before DB transaction is durable.
 - Use Kafka consumer logic without idempotency.
-- Auto-resolve financial sync conflicts.
 - Use generic global `controller/service/repository` package structure.
 - Couple reporting screens to many live cross-service joins.
 - Duplicate the same human User record per building.
@@ -4709,7 +4481,6 @@ notification-service
 document-service
 reporting-service
 audit-service
-sync-service
 subscription-service
 ```
 
@@ -4742,11 +4513,9 @@ BuildingOS MVP is successful when the SaaS platform can:
 19. Create and track building work.
 20. Publish announcements and maintain meeting decisions.
 21. Give owner/manager/tenant/committee role-specific dashboards.
-22. Operate basic rent collection offline.
-23. Synchronize safely without duplicate payment.
-24. Export core financial reports.
-25. Preserve financial, ownership, subscription, and administrative history.
-26. Produce complete audit trace for critical financial and platform-admin actions.
+22. Export core financial reports.
+23. Preserve financial, ownership, subscription, and administrative history.
+24. Produce complete audit trace for critical financial and platform-admin actions.
 
 ---
 
@@ -4781,10 +4550,9 @@ For Flutter:
 - Feature-first Clean Architecture.
 - Global My Buildings / My Properties context before building-scoped navigation where applicable.
 - GetX for controller/state/DI.
-- Drift for offline cache and pending mutations.
 - Repository + use case.
 - Never couple screen directly to HTTP client.
-- Implement loading, empty, error, offline, conflict, and permission states.
+- Implement loading, empty, error, and permission states.
 
 Do not implement cross-service database access.
 Do not place business logic in controllers.
@@ -4812,17 +4580,16 @@ After this BRD, create:
 4. `DATABASE_SCHEMA.md` per service
 5. `API_CONTRACTS.md`
 6. `KAFKA_EVENT_CATALOG.md`
-7. `OFFLINE_SYNC_SPEC.md`
-8. `FINANCE_DOMAIN_RULES.md`
-9. `FLUTTER_SCREEN_FLOW.md`
-10. `AGENT_TASK_BACKLOG.md`
-11. `DOCKER_LOCAL_SETUP.md`
-12. `DEPLOYMENT_ARCHITECTURE.md`
-13. `TEST_STRATEGY.md`
-14. `ADMIN_BACKOFFICE_SPEC.md`
-15. `SUBSCRIPTION_DOMAIN.md`
-16. `ONBOARDING_FLOW.md`
-17. `ADRs/`
+7. `FINANCE_DOMAIN_RULES.md`
+8. `FLUTTER_SCREEN_FLOW.md`
+9. `AGENT_TASK_BACKLOG.md`
+10. `DOCKER_LOCAL_SETUP.md`
+11. `DEPLOYMENT_ARCHITECTURE.md`
+12. `TEST_STRATEGY.md`
+13. `ADMIN_BACKOFFICE_SPEC.md`
+14. `SUBSCRIPTION_DOMAIN.md`
+15. `ONBOARDING_FLOW.md`
+16. `ADRs/`
 
 These should reference this BRD and must not redefine domain rules inconsistently.
 
@@ -5398,7 +5165,6 @@ maintenance.enabled
 work_orders.enabled
 reports.pdf_export
 reports.excel_export
-offline_sync.enabled
 max_units
 max_users
 storage_limit_mb
@@ -5752,7 +5518,7 @@ Push sources:
 
 ## 150.6 Offline Behaviour
 
-- Channels, recent messages and notices are cached in Drift (§31).
+- Channels, recent messages and notices are cached locally.
 - A message composed offline is stored locally with `client_message_id` and status `PENDING`, shown to the sender as "sending", and sent on reconnect. Duplicate sends are rejected idempotently.
 - Messages are displayed in server order once synced; the local pending message is replaced by the server copy.
 - Moderator actions, reports and notice publishing require connectivity.
