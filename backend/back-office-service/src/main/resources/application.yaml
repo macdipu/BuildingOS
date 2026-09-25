@@ -41,3 +41,11 @@ spring:
     enabled: true
     clean-disabled: true
     validate-on-migrate: true
+buildingos:
+  services:
+    auth-url: ${AUTH_SERVICE_URL}
+    building-url: ${BUILDING_SERVICE_URL}
+    connect-timeout: ${SERVICE_CONNECT_TIMEOUT:PT2S}
+    read-timeout: ${SERVICE_READ_TIMEOUT:PT5S}
+  onboarding:
+    max-duration: ${ONBOARDING_MAX_DURATION:P30D}

@@ -1,0 +1,16 @@
+{
+  "status": "READY",
+  "evidence": [
+    "backend/back-office-service onboarding/{domain,application(7 use-case packages),infrastructure,presentation} + shared/ (Actor, errors, UnitOfWork, token relay, lifecycle_transition repo)",
+    "V3__lifecycle_transition.sql: generic audited transition table (nullable actor for system expiry) + due-expiry partial index",
+    "REST /api/v1/platform/backoffice/onboarding-sessions (create, list filters, detail, start-work/await-customer/complete/cancel); OpenAPI updated, check-contracts PASSED",
+    "Outbound token-relay clients: auth-service GET /internal/users/{id} (ONBOARDING_AGENT check), building-service GET /api/v1/platform/buildings/{id}; AUTH_SERVICE_URL/BUILDING_SERVICE_URL in infra/local + infra/dev compose; buildingos.onboarding.max-duration P30D",
+    "mvn -B -f backend/pom.xml -pl back-office-service -am verify: BUILD SUCCESS, 49 tests 0 failures (Architecture 7, domain 13, use case 10, integration 9) - rerun independently by orchestrator",
+    "Reviewed: OnboardingAccess matches D-33; SQL parameterized (only enum constants concatenated)",
+    "Unspecified points resolved restrictively (see task report): complete/cancel from any active state; optional transition reason <=1000; distinct scopes; inclusive max duration; auth 404 -> 422, other dependency failures -> 503; agent list always self-scoped"
+  ],
+  "blocking_issues": [],
+  "open_questions": ["Relayed back-office token to building-service requires shared JWT audience; true in local/dev (buildingos-<env>); deployed environments with separate audiences need a decision"],
+  "recommended_next_step": "F6-T4 support sessions, or F6-T7a/T7b after technical re-approval",
+  "outputs": {"task": "F6-T3", "verdict": "IMPLEMENTED"}
+}

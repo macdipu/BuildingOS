@@ -2584,6 +2584,326 @@ paths:
           content:
             application/json:
               schema: { $ref: "#/components/schemas/ApiError" }
+  /api/v1/platform/backoffice/onboarding-sessions:
+    post:
+      summary: "Assign an ONBOARDING_AGENT to a building (BOC-06, D-33): created ASSIGNED, started now"
+      description: >
+        back-office-service checks the assignee with auth-service GET /internal/users/{id} and the building with
+        building-service GET /api/v1/platform/buildings/{id}, relaying the caller's token. Nothing is stored
+        unless both answer. The creation is recorded as a lifecycle_transition row.
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/StartOnboardingSessionRequest" }
+      responses:
+        "201":
+          description: "Success envelope (data: OnboardingSession)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiEnvelope" }
+        "400":
+          description: "INVALID_REQUEST (no/unknown/duplicate scope, reason missing, expiresAt not in the future or beyond max duration)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "401":
+          description: "Missing or invalid token"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "403":
+          description: "ACCESS_DENIED (requires SUPER_ADMIN or PLATFORM_ADMIN)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "422":
+          description: "ASSIGNEE_NOT_ONBOARDING_AGENT or BUILDING_NOT_FOUND"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "503":
+          description: "DEPENDENCY_UNAVAILABLE (auth-service or building-service down; nothing stored)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+    get:
+      summary: "List onboarding sessions (operators: all; ONBOARDING_AGENT: own only)"
+      description: >
+        meta carries page, size, total. Newest started first. Due sessions are persisted EXPIRED first.
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: status
+          in: query
+          required: false
+          schema: { type: string, enum: [REQUESTED, ASSIGNED, IN_PROGRESS, WAITING_FOR_CUSTOMER, COMPLETED, CANCELLED, EXPIRED] }
+        - name: buildingId
+          in: query
+          required: false
+          schema: { type: string, format: uuid }
+        - name: agentUserId
+          in: query
+          required: false
+          schema: { type: string, format: uuid }
+        - name: page
+          in: query
+          required: false
+          schema: { type: integer, minimum: 0, default: 0 }
+        - name: size
+          in: query
+          required: false
+          schema: { type: integer, minimum: 1, maximum: 100, default: 20 }
+      responses:
+        "200":
+          description: "Success envelope (data: OnboardingSession[])"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiEnvelope" }
+        "400":
+          description: "INVALID_REQUEST (unknown status, page < 0, size outside 1-100)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "401":
+          description: "Missing or invalid token"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "403":
+          description: "ACCESS_DENIED (caller is neither SUPER_ADMIN/PLATFORM_ADMIN nor ONBOARDING_AGENT)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+  /api/v1/platform/backoffice/onboarding-sessions/{sessionId}:
+    get:
+      summary: "Onboarding session detail (reports EXPIRED once past expires_at)"
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: sessionId
+          in: path
+          required: true
+          schema: { type: string, format: uuid }
+      responses:
+        "200":
+          description: "Success envelope (data: OnboardingSession)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiEnvelope" }
+        "401":
+          description: "Missing or invalid token"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "403":
+          description: "ACCESS_DENIED (caller is neither SUPER_ADMIN/PLATFORM_ADMIN nor ONBOARDING_AGENT)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "404":
+          description: "ONBOARDING_SESSION_NOT_FOUND (also for sessions assigned to another agent)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+  /api/v1/platform/backoffice/onboarding-sessions/{sessionId}/start-work:
+    post:
+      summary: "Assigned agent: ASSIGNED or WAITING_FOR_CUSTOMER to IN_PROGRESS"
+      description: >
+        A session past expires_at is first persisted as EXPIRED (system transition), then rejected with 409.
+        Appends a lifecycle_transition row with the acting user.
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: sessionId
+          in: path
+          required: true
+          schema: { type: string, format: uuid }
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/OnboardingTransitionRequest" }
+      responses:
+        "200":
+          description: "Success envelope (data: OnboardingSession)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiEnvelope" }
+        "400":
+          description: "INVALID_REQUEST (reason longer than 1000)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "401":
+          description: "Missing or invalid token"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "403":
+          description: "ACCESS_DENIED (only the assigned ONBOARDING_AGENT; operators included)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "404":
+          description: "ONBOARDING_SESSION_NOT_FOUND (also for sessions assigned to another agent)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "409":
+          description: "SESSION_ENDED or INVALID_TRANSITION"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+  /api/v1/platform/backoffice/onboarding-sessions/{sessionId}/await-customer:
+    post:
+      summary: "Assigned agent: IN_PROGRESS to WAITING_FOR_CUSTOMER"
+      description: >
+        A session past expires_at is first persisted as EXPIRED (system transition), then rejected with 409.
+        Appends a lifecycle_transition row with the acting user.
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: sessionId
+          in: path
+          required: true
+          schema: { type: string, format: uuid }
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/OnboardingTransitionRequest" }
+      responses:
+        "200":
+          description: "Success envelope (data: OnboardingSession)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiEnvelope" }
+        "400":
+          description: "INVALID_REQUEST (reason longer than 1000)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "401":
+          description: "Missing or invalid token"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "403":
+          description: "ACCESS_DENIED (only the assigned ONBOARDING_AGENT; operators included)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "404":
+          description: "ONBOARDING_SESSION_NOT_FOUND (also for sessions assigned to another agent)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "409":
+          description: "SESSION_ENDED or INVALID_TRANSITION"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+  /api/v1/platform/backoffice/onboarding-sessions/{sessionId}/complete:
+    post:
+      summary: "Assigned agent or SUPER_ADMIN/PLATFORM_ADMIN: to COMPLETED"
+      description: >
+        A session past expires_at is first persisted as EXPIRED (system transition), then rejected with 409.
+        Appends a lifecycle_transition row with the acting user.
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: sessionId
+          in: path
+          required: true
+          schema: { type: string, format: uuid }
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/OnboardingTransitionRequest" }
+      responses:
+        "200":
+          description: "Success envelope (data: OnboardingSession)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiEnvelope" }
+        "400":
+          description: "INVALID_REQUEST (reason longer than 1000)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "401":
+          description: "Missing or invalid token"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "403":
+          description: "ACCESS_DENIED (neither assigned agent nor operator)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "404":
+          description: "ONBOARDING_SESSION_NOT_FOUND (also for sessions assigned to another agent)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "409":
+          description: "SESSION_ENDED"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+  /api/v1/platform/backoffice/onboarding-sessions/{sessionId}/cancel:
+    post:
+      summary: "SUPER_ADMIN/PLATFORM_ADMIN: to CANCELLED"
+      description: >
+        A session past expires_at is first persisted as EXPIRED (system transition), then rejected with 409.
+        Appends a lifecycle_transition row with the acting user.
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: sessionId
+          in: path
+          required: true
+          schema: { type: string, format: uuid }
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/OnboardingTransitionRequest" }
+      responses:
+        "200":
+          description: "Success envelope (data: OnboardingSession)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiEnvelope" }
+        "400":
+          description: "INVALID_REQUEST (reason longer than 1000)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "401":
+          description: "Missing or invalid token"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "403":
+          description: "ACCESS_DENIED (requires SUPER_ADMIN or PLATFORM_ADMIN)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "404":
+          description: "ONBOARDING_SESSION_NOT_FOUND (also for sessions assigned to another agent)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "409":
+          description: "SESSION_ENDED"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
   /internal/users/provision:
     post:
       summary: "auth-service: find or create a user by phone (service-to-service, D-29)"
@@ -2829,6 +3149,42 @@ components:
       properties:
         file: { type: string, format: binary }
         reason: { type: string, maxLength: 1000 }
+    StartOnboardingSessionRequest:
+      type: object
+      required: [buildingId, assignedAgentUserId, accessScope, reason, expiresAt]
+      properties:
+        buildingId: { type: string, format: uuid, description: Must exist in building-service }
+        assignedAgentUserId: { type: string, format: uuid, description: Must currently hold ONBOARDING_AGENT }
+        accessScope:
+          type: array
+          minItems: 1
+          uniqueItems: true
+          description: D-10 onboarding scopes
+          items: { type: string, enum: [ONBOARDING_VIEW_BUILDING, ONBOARDING_EDIT_BUILDING_INFO, ONBOARDING_MANAGE_FLOORS_UNITS, ONBOARDING_MANAGE_COMMITTEE_STAFF, ONBOARDING_CONFIGURE_MAINTENANCE, ONBOARDING_CONFIGURE_RENT_MANAGEMENT, ONBOARDING_CONFIGURE_PAYMENT_METHODS, ONBOARDING_SEND_INVITATIONS, ONBOARDING_ACTIVATE_BUILDING] }
+        reason: { type: string, maxLength: 1000 }
+        notes: { type: string, maxLength: 2000 }
+        expiresAt: { type: string, format: date-time, description: "In the future and at most buildingos.onboarding.max-duration (default P30D) after start" }
+    OnboardingTransitionRequest:
+      type: object
+      properties:
+        reason: { type: string, maxLength: 1000, description: Optional audit reason recorded on the transition }
+    OnboardingSession:
+      type: object
+      required: [id, buildingId, assignedAgentUserId, status, accessScope, reason, startedAt, expiresAt]
+      properties:
+        id: { type: string, format: uuid }
+        buildingId: { type: string, format: uuid }
+        assignedAgentUserId: { type: string, format: uuid }
+        requestedByUserId: { type: string, format: uuid, nullable: true }
+        status: { type: string, enum: [REQUESTED, ASSIGNED, IN_PROGRESS, WAITING_FOR_CUSTOMER, COMPLETED, CANCELLED, EXPIRED] }
+        accessScope:
+          type: array
+          items: { type: string, enum: [ONBOARDING_VIEW_BUILDING, ONBOARDING_EDIT_BUILDING_INFO, ONBOARDING_MANAGE_FLOORS_UNITS, ONBOARDING_MANAGE_COMMITTEE_STAFF, ONBOARDING_CONFIGURE_MAINTENANCE, ONBOARDING_CONFIGURE_RENT_MANAGEMENT, ONBOARDING_CONFIGURE_PAYMENT_METHODS, ONBOARDING_SEND_INVITATIONS, ONBOARDING_ACTIVATE_BUILDING] }
+        reason: { type: string }
+        startedAt: { type: string, format: date-time }
+        expiresAt: { type: string, format: date-time }
+        completedAt: { type: string, format: date-time, nullable: true }
+        notes: { type: string, nullable: true }
     ApiError:
       type: object
       required: [success, code, message, traceId]
