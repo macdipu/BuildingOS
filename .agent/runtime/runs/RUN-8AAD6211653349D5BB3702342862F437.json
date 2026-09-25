@@ -1637,6 +1637,32 @@
         }
       },
       "created_at": "2026-09-25T01:08:20.375856+00:00"
+    },
+    {
+      "run_id": "RUN-8AAD6211653349D5BB3702342862F437",
+      "event": "COMMIT_RECORDED",
+      "payload": {
+        "sha": "97d489a",
+        "subject": "feat(bos-010-f6): add back-office-service scaffold (F6-T1)",
+        "work_item": "BOS-010-F6",
+        "task": "F6-T1",
+        "run": "RUN-8AAD6211653349D5BB3702342862F437",
+        "commit_trigger": "task-finish"
+      },
+      "created_at": "2026-09-25T01:09:14.064979+00:00"
+    },
+    {
+      "run_id": "RUN-8AAD6211653349D5BB3702342862F437",
+      "event": "COMMIT_RECORDED",
+      "payload": {
+        "sha": "5293c16",
+        "subject": "chore(infra): restore executable bit on 04-backoffice-db.sh",
+        "work_item": "BOS-010-F6",
+        "task": "F6-T1",
+        "run": "RUN-8AAD6211653349D5BB3702342862F437",
+        "commit_trigger": "task-finish"
+      },
+      "created_at": "2026-09-25T01:09:14.335681+00:00"
     }
   ],
   "tool_calls": {}
