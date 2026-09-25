@@ -1,0 +1,2607 @@
+{
+  "run": {
+    "run_id": "RUN-7652B6312F634C099BE4140386DC7DB8",
+    "project": "BuildingOS",
+    "work_type": "change_request",
+    "title": "Drop Sync Service/offline sync per updated BRD",
+    "stage": "COMPLETED",
+    "status": "COMPLETED",
+    "dry_run": false,
+    "created_at": "2026-09-25T01:54:19.770971+00:00",
+    "updated_at": "2026-09-25T02:16:59.452530+00:00",
+    "metadata": {
+      "runtime_version": 2,
+      "repo": "..\\..\\..",
+      "route": [
+        "INTAKE",
+        "CONTEXT",
+        "IMPACT",
+        "TECHNICAL",
+        "IMPLEMENTATION",
+        "REVIEW",
+        "QA",
+        "RELEASE",
+        "COMPLETED"
+      ],
+      "planning": "NO_REPLAN",
+      "scope_revision": 0,
+      "config_hash": "3a0b0673798e83461886528541ff80fd5b8d9582b2cca5e38cb85edeb17dae1f",
+      "skill_pins": {
+        "adr-generator": "742cc210cdd22964e6d823378a89d6e630a6000319f4a8d2a2b0973a4ae420bb",
+        "agentic-sdlc-orchestrator": "05ce25acdf686b678d1893cc34deed6b6ad6c1d79faee7877d07727b8fddf4b6",
+        "api-contract-discovery-agent": "3b5593507717b53eb0ad4c66e18052077c399ff3019839787ba01634c5c19337",
+        "architecture-reverse-engineer": "16e770d92110245d9c55d2eab2c8685712f1d9da87bdad334e16130d92c856a2",
+        "automated-qa-agent": "31d2f37c11079ceaec12b4969d102dddccb8489d26bde7473724e75d9c4b5483",
+        "baseline-verifier": "09967c308503f92239b649748680b529eb9de98dc3b3a836291ea5a81298fe5d",
+        "brownfield-risk-analyzer": "53eb12f898bc8d59e3c27cd1ccadc9ddf9b40719de621a2810d06bc57aab2398",
+        "business-requirement-analyzer": "13b4e4463cf0fde130e1c6522b27aabdc899fbfad69708a4493544b88a8159f2",
+        "change-impact-analyzer": "28acf241710fa43d1e0da99b7efa1dd9888abcdee3b33e708bf183951e0f8cee",
+        "code-review-agent": "7e3e4b222b16cf695bedd43150b6776e97eeab6bde67277902ce6259870e3539",
+        "database-discovery-agent": "d23c76dc0065f5f6faf60af2d18bac6ff36e8c27576f2b1da0a50faeb59b909e",
+        "device-preview-agent": "c49d336463cc88bd4940f4471c9a121ef9c80cb872215552805f904e5f098284",
+        "document-intake-adapter": "f8b7a37db3c51a9902d5f13738db410d0e43ca66815c60eb1bdc93a346259e69",
+        "effort-estimation-agent": "5d371ca46bdfed0181065e89c66e423254100e124fc02b954af304f3a3229153",
+        "epic-verifier": "eb6b5996efd8882155f6f6d8fa7ce0cc5ff7b8c531fc0dfb9f70bf90fda423ea",
+        "history-analysis-agent": "69aec69cb6ea8c1696f6fdcfcf39a49ef88c54f445fbeff772fa86058c24043e",
+        "implementation-agent": "8c81959c35f3b0a772c9e54f89ada87a95caaae54dc9eddfedba8166a16c5d9a",
+        "intake-change-classifier": "ab14f89a9a4af61a8cbee12f8f3c94aaa48781bf8e4bb35ad8c49059ebbebb89",
+        "project-discovery-agent": "cd523d39240c59429708ae17adc2a2526fff85fcb975b58edb7fd208e1863058",
+        "prompt-intake-adapter": "1ef01655b3a3dd4790a1b5db4e92f8d553a5eb702843e0e30fdf5604754be3ad",
+        "release-readiness-agent": "7c5c1dcf27fa9f7e4cd1a0ac5741a7f0aafa212ef2212092c825ca4eb4cce501",
+        "requirement-reconstruction-agent": "256b66ab33118a220ea0c64167ec9def3aa19b532c62d37e9fa165f3f670cd9a",
+        "requirement-ui-verifier": "19e00ecf599305b091d29eae551d9ae0b7f8913fe9beabb51cbd3795490b3470",
+        "runtime-discovery-agent": "5c77399120e0430a1570a534fc9a4df7f13ef7567838bb3e6db050f2f7486ce4",
+        "sprint-planner": "b0419f126ac4ff2fab967afcf5bd71b3c7ddbf374a8d94eeff872c50e0fd7f4e",
+        "sprint-readiness-verifier": "3b6b87d9982c1dec2b4b3a040a4cfe604d021377df5bef0e9e1db00cbe0a2fce",
+        "srs-generator": "a4236d4f59b4897ce121d3d8e5c2a159e1babf314bddf653bbd9ad5a3ddc1888",
+        "task-breakdown-agent": "23c4f21dc2c5cfd68eb5fc62283b26f427960325a0f60ec6f5da43168da43ccb",
+        "technical-architecture-planner": "78c383f7684388a6a6780f22a91dc95f0a9b3be30bf9f93fe4777f6a7c599ec2",
+        "technical-readiness-verifier": "b7efbfe168c155fdbd16282c4382e95e0335a7f5f35fd13e1f590c187f77b606",
+        "technical-spec-generator": "fb14f8ea7de9cbbf3679e50c0d8fb542bc77d44290e9fc1d1b3edbf4c60d57c1",
+        "test-baseline-agent": "d3ba1d3013723ced4a3948f99db6415a8bba5a83d89174fa9ee7ce7127c759f5",
+        "user-flow-discovery-agent": "288ee9a1dade977457b1f9c3efa9df0736d5ea3dea0796507781fb53113eacd9",
+        "web-preview-agent": "ddace5477921b2d4a85c924312ce607192b318f8f73de8965c07c5b939ebcaf9",
+        "work-item-level-classifier": "4ffbccdf1339bd9193c70f6dd3b30cb58772ca45878ff86b33d4f438162482d8"
+      },
+      "results": {
+        "INTAKE": {
+          "status": "READY",
+          "evidence": [
+            "agentic/data/project-context/BuildingOS_BRD_Agentic_Development.md",
+            "agentic/data/project-context/features/BOS-001/BACKLOG.md"
+          ],
+          "blocking_issues": [],
+          "open_questions": [],
+          "recommended_next_step": "Baseline context: reconcile affected scope docs (BOS-001/002/010 + subscription plans) against dropped Sync Service.",
+          "outputs": {
+            "work_item": "Drop Sync Service and offline-sync requirements from BRD and dependent scope",
+            "work_type": "change_request",
+            "project_type": "brownfield",
+            "hierarchy": "TASK_ONLY",
+            "planning": "NO_REPLAN",
+            "module": "backend/subscription-service, agentic/data/project-context",
+            "source": "Operator BRD edit 2026-09-25: removed Sync Service/Sync API/offline-first from BuildingOS_BRD_Agentic_Development.md",
+            "affected_scope": [
+              "subscription-service feature catalog (offline_sync.enabled)",
+              "BOS-001 BACKLOG/BASELINE Drift guidance",
+              "BOS-002 FEATURE offline sync ref",
+              "BOS-010 FEATURE/REQUIREMENTS offline sync ref",
+              "BOS-010 subscription-plans REQUIREMENTS RV-02",
+              "BOS-001 adr ADR-001 offline sync scope"
+            ]
+          }
+        },
+        "CONTEXT": {
+          "status": "READY",
+          "evidence": [
+            "agentic/data/project-context/BuildingOS_BRD_Agentic_Development.md",
+            "agentic/data/project-context/features/BOS-001/BACKLOG.md",
+            "agentic/data/project-context/features/BOS-010/subscription-plans/REQUIREMENTS.md",
+            "backend/subscription-service/src/main/java/com/buildingos/subscription/catalog/domain/model/Feature.java"
+          ],
+          "blocking_issues": [],
+          "open_questions": [],
+          "recommended_next_step": "Impact analysis across subscription-service catalog and affected scope docs.",
+          "outputs": {
+            "verdict": "CONTEXT_READY",
+            "revision": "operator BRD edit 2026-09-25 (Sync Service dropped); BRD now has no sync/offline requirements",
+            "confirmed_scope": [
+              "BRD: all Sync Service/Drift/offline requirements removed",
+              "BOS-001 BACKLOG BOS-005 (Drift/outbox/offline collection) contradicts updated BRD",
+              "BOS-001 SRS FIN-03 offline replay contradicts updated BRD",
+              "BOS-001 BASELINE Drift guidance stale",
+              "BOS-001 README 'money and offline sync' stale",
+              "BOS-001 adr ADR-001 'offline sync later' stale",
+              "BOS-002 FEATURE offline financial sync (BOS-005) stale",
+              "BOS-010 FEATURE/REQUIREMENTS offline sync (BOS-005) ref stale",
+              "BOS-010 subscription-plans REQUIREMENTS RV-02 offline_sync.enabled stale",
+              "BOS-010 units-ownership BASELINE offline flags row stale",
+              "subscription-service Feature.java OFFLINE_SYNC flag + RevenueApiIntegrationTest stale vs BRD"
+            ],
+            "rejected_claims": [],
+            "not_in_scope": [
+              "Async REST/Kafka propagation (kept)",
+              "Chat offline behavior \u00c2\u00a7150.6 / Scenario L (distinct feature, kept)",
+              "D-24 manual offline fee recording (unrelated to Sync Service)"
+            ],
+            "refresh_tasks": []
+          }
+        },
+        "IMPACT": {
+          "status": "READY",
+          "evidence": [
+            "backend/subscription-service/src/main/java/com/buildingos/subscription/catalog/domain/model/Feature.java",
+            "backend/subscription-service/src/test/java/com/buildingos/subscription/revenue/RevenueApiIntegrationTest.java"
+          ],
+          "blocking_issues": [],
+          "open_questions": [],
+          "recommended_next_step": "Technical readiness: single-flag removal + doc purge, no DB/API contract change.",
+          "outputs": {
+            "impact": "LOW",
+            "modules": [
+              "subscription-service feature catalog"
+            ],
+            "api_change": false,
+            "db_change": false,
+            "flutter_change": false,
+            "delta": "Remove OFFLINE_SYNC entitlement flag (Feature.java), replace flag in RevenueApiIntegrationTest selfSubscribeRules, purge stale sync/offline refs from BOS-001/002/010 scope docs",
+            "affected_artifacts": [
+              "backend/subscription-service/src/main/java/com/buildingos/subscription/catalog/domain/model/Feature.java",
+              "backend/subscription-service/src/test/java/com/buildingos/subscription/revenue/RevenueApiIntegrationTest.java",
+              "agentic/data/project-context/features/BOS-001/BACKLOG.md",
+              "agentic/data/project-context/features/BOS-001/SRS.md",
+              "agentic/data/project-context/features/BOS-001/BASELINE.md",
+              "agentic/data/project-context/features/BOS-001/README.md",
+              "agentic/data/project-context/features/BOS-001/FEATURE.md",
+              "agentic/data/project-context/features/BOS-001/adr/ADR-001-platform-boundaries.md",
+              "agentic/data/project-context/features/BOS-002/FEATURE.md",
+              "agentic/data/project-context/features/BOS-010/FEATURE.md",
+              "agentic/data/project-context/features/BOS-010/REQUIREMENTS.md",
+              "agentic/data/project-context/features/BOS-010/subscription-plans/REQUIREMENTS.md",
+              "agentic/data/project-context/features/BOS-010/units-ownership/BASELINE.md"
+            ],
+            "regression_targets": [
+              "mvn verify subscription-service"
+            ],
+            "consumers_note": "No consumer enforcement yet (baseline-confirmed); flag removal breaks no runtime callers.",
+            "compat_risk": "NONE"
+          }
+        },
+        "TECHNICAL": {
+          "status": "READY",
+          "evidence": [
+            "agentic/data/project-context/BuildingOS_BRD_Agentic_Development.md",
+            "backend/subscription-service/src/main/java/com/buildingos/subscription/catalog/domain/model/Feature.java",
+            "backend/subscription-service/src/test/java/com/buildingos/subscription/revenue/RevenueApiIntegrationTest.java"
+          ],
+          "blocking_issues": [],
+          "open_questions": [],
+          "recommended_next_step": "Implementation: remove OFFLINE_SYNC enum, swap test flag to work_orders.enabled, purge stale doc refs.",
+          "outputs": {
+            "verdict": "TECHNICAL_READY",
+            "approval": "pending operator",
+            "checklist": {
+              "behavior": "BRD authoritatively drops offline_sync entitlement; backend feature catalog reflects it",
+              "boundaries": "subscription-service catalog only; no consumer enforcement exists",
+              "contracts": "effectiveEntitlements shape unchanged; one key removed, permissive catalog",
+              "db": "none",
+              "test_strategy": "RevenueApiIntegrationTest selfSubscribeRules uses a remaining FLAG (work_orders.enabled); mvn verify subscription-service",
+              "doc_scope": "BOS-001/002/010 + subscription-plans purge of sync/offline refs"
+            }
+          }
+        },
+        "IMPLEMENTATION": {
+          "status": "READY",
+          "evidence": [
+            "backend/subscription-service/src/main/java/com/buildingos/subscription/catalog/domain/model/Feature.java",
+            "backend/subscription-service/src/test/java/com/buildingos/subscription/revenue/RevenueApiIntegrationTest.java",
+            "backend/subscription-service/target/surefire-reports"
+          ],
+          "blocking_issues": [],
+          "open_questions": [],
+          "recommended_next_step": "Review the diff, then QA gate.",
+          "outputs": {
+            "changed_paths": [
+              "backend/subscription-service/src/main/java/com/buildingos/subscription/catalog/domain/model/Feature.java",
+              "backend/subscription-service/src/test/java/com/buildingos/subscription/revenue/RevenueApiIntegrationTest.java",
+              "agentic/data/project-context/features/BOS-001/BACKLOG.md",
+              "agentic/data/project-context/features/BOS-001/SRS.md",
+              "agentic/data/project-context/features/BOS-001/BASELINE.md",
+              "agentic/data/project-context/features/BOS-001/README.md",
+              "agentic/data/project-context/features/BOS-001/ARCHITECTURE.md",
+              "agentic/data/project-context/features/BOS-001/FEATURE.md",
+              "agentic/data/project-context/features/BOS-001/QA-ACCEPTANCE.md",
+              "agentic/data/project-context/features/BOS-001/adr/ADR-001-platform-boundaries.md",
+              "agentic/data/project-context/features/BOS-002/FEATURE.md",
+              "agentic/data/project-context/features/BOS-010/FEATURE.md",
+              "agentic/data/project-context/features/BOS-010/REQUIREMENTS.md",
+              "agentic/data/project-context/features/BOS-010/subscription-plans/REQUIREMENTS.md",
+              "agentic/data/project-context/features/BOS-010/units-ownership/BASELINE.md"
+            ],
+            "acceptance_coverage": {
+              "RV-02": "offline_sync.enabled removed from feature catalog list",
+              "SUB-02": "offline_sync.enabled removed from entitlements list",
+              "Selection_purge": "BOS-005 and all offline/Drift/outbox-collection refs removed from affected scope; only intentional keeps (D-24 offline fee, outbox, contract-drift term) remain",
+              "code": "OFFLINE_SYNC enum removed; test selfSubscribeRules now asserts work_orders.enabled"
+            },
+            "check_evidence": {
+              "build": "mvn -B -f backend/pom.xml -pl subscription-service verify: BUILD SUCCESS",
+              "tests": "Tests run: 31, Failures: 0, Errors: 0, Skipped: 0 (RevenueApiIntegrationTest 8/8)"
+            },
+            "risks": [
+              "Effective entitlements payload for legacy plan records could shrink by one key; no consumer enforcement exists so no runtime break."
+            ]
+          }
+        },
+        "REVIEW": {
+          "status": "READY",
+          "evidence": [
+            "git diff: 15 files, 22 insertions, 26 deletions; Feature.java -1 line; RevenueApiIntegrationTest.swap to work_orders.enabled",
+            "mvn -B -f backend/pom.xml -pl subscription-service verify: BUILD SUCCESS, 31 tests 0 failures",
+            "grep offline_sync/OFFLINE_SYNC across agentic/ + backend/: 0 matches; only intentional keeps remain (chat offline S150.6, D-24 offline fee)"
+          ],
+          "blocking_issues": [],
+          "open_questions": [],
+          "recommended_next_step": "QA: rerun subscription-service verification as release evidence.",
+          "outputs": {
+            "verdict": "APPROVED",
+            "reviewer": "agent review, not human approval",
+            "findings": [
+              "No defects; diff bounded to offline-sync removal",
+              "INFO: BOS-001/README.md rewrap 'money/follows with its correctness tests' cosmetic, harmless"
+            ],
+            "checked": {
+              "requirements": "RV-02, SUB-02, BRD test selfSubscribeRules exercise effectiveEntitlements with a remaining FLAG",
+              "unintended_changes": "all 15 changed paths are in declared scope; no consumer enforcement touched; chat/outbox/D-24 keeps intact",
+              "regression": "31/31 tests green; compile clean"
+            }
+          }
+        },
+        "QA": {
+          "status": "READY",
+          "evidence": [
+            "mvn -B -f backend/pom.xml -pl subscription-service verify: BUILD SUCCESS",
+            "backend/subscription-service/target/surefire-reports: Tests run 31, Failures 0, Errors 0, Skipped 0",
+            "RevenueApiIntegrationTest#selfSubscribeRules (8/8): effectiveEntitlements asserts work_orders.enabled=true, still exercising admin-only/open/self-subscribe paths"
+          ],
+          "blocking_issues": [],
+          "open_questions": [
+            "Manual QA/UAT N/A: no UI change; revocation/behavioral verification of non-changed entitlements outside this delta"
+          ],
+          "recommended_next_step": "Release readiness: confirm rollback (revert flag + re-add doc refs) and commit.",
+          "outputs": {
+            "verdict": "QA_PASS",
+            "check_matrix": {
+              "unit+integration": "PASS \u00e2\u20ac\u201d mvn verify subscription-service, 31/31",
+              "static/compile": "PASS \u00e2\u20ac\u201d javac release 17, test-compile clean",
+              "contract": "N/A \u00e2\u20ac\u201d no API contract file changed; permissive Entitlements view gains/loses one key without schema change",
+              "db": "N/A \u00e2\u20ac\u201d no migrations",
+              "flutter": "N/A \u00e2\u20ac\u201d flutter_change=false",
+              "manual_uat": "NOT REQUIRED \u00e2\u20ac\u201d doc + catalog change only"
+            },
+            "acceptance_coverage": {
+              "RV-02": "catalog no longer lists offline_sync.enabled",
+              "SUB-02": "entitlements list no longer includes offline_sync.enabled",
+              "code": "OFFLINE_SYNC removed; test updated and green",
+              "docs": "all affected scope purged of BOS-005/offline/drift outbox-collection refs"
+            }
+          }
+        },
+        "RELEASE": {
+          "status": "READY",
+          "evidence": [
+            "approvals: gate technical (macdipu, 2026-09-25), gate release (macdipu, 2026-09-25)",
+            "review: code-review-agent APPROVED",
+            "qa: automated-qa-agent QA_PASS; mvn verify 31/31",
+            "git status: 15 modified files, no untracked code"
+          ],
+          "blocking_issues": [],
+          "open_questions": [],
+          "recommended_next_step": "Commit the 15-file diff (task-finish trigger) then close run as COMPLETED.",
+          "outputs": {
+            "verdict": "RELEASE_READY",
+            "checklist": {
+              "review_current_scope": "yes; diff reviewed against RV-02/SUB-02 acceptance",
+              "compat": "no API contract schema or DB migration changed; permissive entitlements view",
+              "config": "none changed",
+              "migration": "none",
+              "rollback": "revert 15-file diff; BRD stays committed at b846639",
+              "monitoring": "none applicable locally; no deploy in this change_request",
+              "approvals": "technical + release recorded"
+            },
+            "residual_risks": [
+              "Legacy plan records (if any persisted) would no longer emit offline_sync.enabled; no enforcement existed so no runtime break"
+            ],
+            "gate": "RELEASE_READY"
+          }
+        }
+      },
+      "attempts": {
+        "0:INTAKE:prompt-intake-adapter": 1,
+        "0:CONTEXT:baseline-verifier": 1,
+        "0:IMPACT:change-impact-analyzer": 1,
+        "0:TECHNICAL:technical-readiness-verifier": 1,
+        "0:IMPLEMENTATION:implementation-agent": 1,
+        "0:REVIEW:code-review-agent": 1,
+        "0:QA:automated-qa-agent": 1,
+        "0:RELEASE:release-readiness-agent": 1
+      },
+      "active_task": null,
+      "context": {
+        "files": {
+          "agentic\\data\\project-context\\BuildingOS_BRD_Agentic_Development.md": "1115822561de001f8aba6647782e047fb8844eb3295b2e227e38714250e324de",
+          "agentic\\data\\project-context\\features\\BOS-001\\BACKLOG.md": "4aff24722698d392909053be9bcfa709069314c2989bebfcc619aa77b3e3a87c",
+          "agentic\\data\\project-context\\features\\BOS-001\\SRS.md": "7e62a0b4b6aa0242bab71901c724f3402c84adbf6ee30d4c41b2f51a49dfa6f2",
+          "agentic\\data\\project-context\\features\\BOS-001\\BASELINE.md": "1d1b51651f22c9d0def5ac10493d4053d9d5366b7acf1bcddd645f72ec48c413",
+          "agentic\\data\\project-context\\features\\BOS-001\\README.md": "f49a3f69e497a0ad5a3c8064231865d5db5a239ab81be8ba67bdb015f4d9db14",
+          "agentic\\data\\project-context\\features\\BOS-001\\adr\\ADR-001-platform-boundaries.md": "13b1786eb168c3b9635b4e5ce7abaa6a1de95bd3993c344d83c763767310ea0b",
+          "agentic\\data\\project-context\\features\\BOS-002\\FEATURE.md": "287bc13a8360e97cb8502e9c0e4f9462a1702aa0df13f6786512567cf7470e9e",
+          "agentic\\data\\project-context\\features\\BOS-010\\FEATURE.md": "e56eb71228cc0854519dad1887cecd91e5c140ab32e7cb86e86025c58673513c",
+          "agentic\\data\\project-context\\features\\BOS-010\\REQUIREMENTS.md": "f57c40b7be7b757dc2429dfdf60a34c4b62ffe5f35f7cde935bdcde16ce5f36f",
+          "agentic\\data\\project-context\\features\\BOS-010\\subscription-plans\\REQUIREMENTS.md": "5847d86cd745487eaaca1a7fbf065da0e855fa244c43226dc7464d7aecd75d50",
+          "agentic\\data\\project-context\\features\\BOS-010\\units-ownership\\BASELINE.md": "9f9688afcdf08491925effe33a4bfef90777c6be75b4941fc8664e644fd5260a",
+          "backend\\subscription-service\\src\\main\\java\\com\\buildingos\\subscription\\catalog\\domain\\model\\Feature.java": "82235cb6e5c007062d540a62ff78e6734ea61114f3f5437fd17df1694cdd5667",
+          "backend\\subscription-service\\src\\test\\java\\com\\buildingos\\subscription\\revenue\\RevenueApiIntegrationTest.java": "2424e60b7537b68760d58f832f00bc05c2bdcea2ffd35bf577b9ad3765cdd9a5"
+        }
+      }
+    }
+  },
+  "checkpoints": [
+    {
+      "run_id": "RUN-7652B6312F634C099BE4140386DC7DB8",
+      "stage": "INTAKE",
+      "status": "RUNNING",
+      "payload": {
+        "runtime_version": 2,
+        "repo": "..\\..\\..",
+        "route": [
+          "INTAKE",
+          "CONTEXT",
+          "IMPACT",
+          "TECHNICAL",
+          "IMPLEMENTATION",
+          "REVIEW",
+          "QA",
+          "RELEASE",
+          "COMPLETED"
+        ],
+        "planning": "NO_REPLAN",
+        "scope_revision": 0,
+        "config_hash": "3a0b0673798e83461886528541ff80fd5b8d9582b2cca5e38cb85edeb17dae1f",
+        "skill_pins": {
+          "adr-generator": "742cc210cdd22964e6d823378a89d6e630a6000319f4a8d2a2b0973a4ae420bb",
+          "agentic-sdlc-orchestrator": "05ce25acdf686b678d1893cc34deed6b6ad6c1d79faee7877d07727b8fddf4b6",
+          "api-contract-discovery-agent": "3b5593507717b53eb0ad4c66e18052077c399ff3019839787ba01634c5c19337",
+          "architecture-reverse-engineer": "16e770d92110245d9c55d2eab2c8685712f1d9da87bdad334e16130d92c856a2",
+          "automated-qa-agent": "31d2f37c11079ceaec12b4969d102dddccb8489d26bde7473724e75d9c4b5483",
+          "baseline-verifier": "09967c308503f92239b649748680b529eb9de98dc3b3a836291ea5a81298fe5d",
+          "brownfield-risk-analyzer": "53eb12f898bc8d59e3c27cd1ccadc9ddf9b40719de621a2810d06bc57aab2398",
+          "business-requirement-analyzer": "13b4e4463cf0fde130e1c6522b27aabdc899fbfad69708a4493544b88a8159f2",
+          "change-impact-analyzer": "28acf241710fa43d1e0da99b7efa1dd9888abcdee3b33e708bf183951e0f8cee",
+          "code-review-agent": "7e3e4b222b16cf695bedd43150b6776e97eeab6bde67277902ce6259870e3539",
+          "database-discovery-agent": "d23c76dc0065f5f6faf60af2d18bac6ff36e8c27576f2b1da0a50faeb59b909e",
+          "device-preview-agent": "c49d336463cc88bd4940f4471c9a121ef9c80cb872215552805f904e5f098284",
+          "document-intake-adapter": "f8b7a37db3c51a9902d5f13738db410d0e43ca66815c60eb1bdc93a346259e69",
+          "effort-estimation-agent": "5d371ca46bdfed0181065e89c66e423254100e124fc02b954af304f3a3229153",
+          "epic-verifier": "eb6b5996efd8882155f6f6d8fa7ce0cc5ff7b8c531fc0dfb9f70bf90fda423ea",
+          "history-analysis-agent": "69aec69cb6ea8c1696f6fdcfcf39a49ef88c54f445fbeff772fa86058c24043e",
+          "implementation-agent": "8c81959c35f3b0a772c9e54f89ada87a95caaae54dc9eddfedba8166a16c5d9a",
+          "intake-change-classifier": "ab14f89a9a4af61a8cbee12f8f3c94aaa48781bf8e4bb35ad8c49059ebbebb89",
+          "project-discovery-agent": "cd523d39240c59429708ae17adc2a2526fff85fcb975b58edb7fd208e1863058",
+          "prompt-intake-adapter": "1ef01655b3a3dd4790a1b5db4e92f8d553a5eb702843e0e30fdf5604754be3ad",
+          "release-readiness-agent": "7c5c1dcf27fa9f7e4cd1a0ac5741a7f0aafa212ef2212092c825ca4eb4cce501",
+          "requirement-reconstruction-agent": "256b66ab33118a220ea0c64167ec9def3aa19b532c62d37e9fa165f3f670cd9a",
+          "requirement-ui-verifier": "19e00ecf599305b091d29eae551d9ae0b7f8913fe9beabb51cbd3795490b3470",
+          "runtime-discovery-agent": "5c77399120e0430a1570a534fc9a4df7f13ef7567838bb3e6db050f2f7486ce4",
+          "sprint-planner": "b0419f126ac4ff2fab967afcf5bd71b3c7ddbf374a8d94eeff872c50e0fd7f4e",
+          "sprint-readiness-verifier": "3b6b87d9982c1dec2b4b3a040a4cfe604d021377df5bef0e9e1db00cbe0a2fce",
+          "srs-generator": "a4236d4f59b4897ce121d3d8e5c2a159e1babf314bddf653bbd9ad5a3ddc1888",
+          "task-breakdown-agent": "23c4f21dc2c5cfd68eb5fc62283b26f427960325a0f60ec6f5da43168da43ccb",
+          "technical-architecture-planner": "78c383f7684388a6a6780f22a91dc95f0a9b3be30bf9f93fe4777f6a7c599ec2",
+          "technical-readiness-verifier": "b7efbfe168c155fdbd16282c4382e95e0335a7f5f35fd13e1f590c187f77b606",
+          "technical-spec-generator": "fb14f8ea7de9cbbf3679e50c0d8fb542bc77d44290e9fc1d1b3edbf4c60d57c1",
+          "test-baseline-agent": "d3ba1d3013723ced4a3948f99db6415a8bba5a83d89174fa9ee7ce7127c759f5",
+          "user-flow-discovery-agent": "288ee9a1dade977457b1f9c3efa9df0736d5ea3dea0796507781fb53113eacd9",
+          "web-preview-agent": "ddace5477921b2d4a85c924312ce607192b318f8f73de8965c07c5b939ebcaf9",
+          "work-item-level-classifier": "4ffbccdf1339bd9193c70f6dd3b30cb58772ca45878ff86b33d4f438162482d8"
+        },
+        "results": {},
+        "attempts": {},
+        "active_task": null
+      },
+      "created_at": "2026-09-25T01:54:19.789331+00:00"
+    },
+    {
+      "run_id": "RUN-7652B6312F634C099BE4140386DC7DB8",
+      "stage": "INTAKE",
+      "status": "RUNNING",
+      "payload": {
+        "attempts": {
+          "0:INTAKE:prompt-intake-adapter": 1
+        },
+        "active_task": {
+          "id": "48a0d3c1393345f585ce4ba2e2283dd7",
+          "skill": "prompt-intake-adapter",
+          "started_at": "2026-09-25T01:55:04.597843+00:00",
+          "tool_calls": 0
+        }
+      },
+      "created_at": "2026-09-25T01:55:04.598529+00:00"
+    },
+    {
+      "run_id": "RUN-7652B6312F634C099BE4140386DC7DB8",
+      "stage": "INTAKE",
+      "status": "RUNNING",
+      "payload": {
+        "results": {
+          "INTAKE": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/BuildingOS_BRD_Agentic_Development.md",
+              "agentic/data/project-context/features/BOS-001/BACKLOG.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Baseline context: reconcile affected scope docs (BOS-001/002/010 + subscription plans) against dropped Sync Service.",
+            "outputs": {
+              "work_item": "Drop Sync Service and offline-sync requirements from BRD and dependent scope",
+              "work_type": "change_request",
+              "project_type": "brownfield",
+              "hierarchy": "TASK_ONLY",
+              "planning": "NO_REPLAN",
+              "module": "backend/subscription-service, agentic/data/project-context",
+              "source": "Operator BRD edit 2026-09-25: removed Sync Service/Sync API/offline-first from BuildingOS_BRD_Agentic_Development.md",
+              "affected_scope": [
+                "subscription-service feature catalog (offline_sync.enabled)",
+                "BOS-001 BACKLOG/BASELINE Drift guidance",
+                "BOS-002 FEATURE offline sync ref",
+                "BOS-010 FEATURE/REQUIREMENTS offline sync ref",
+                "BOS-010 subscription-plans REQUIREMENTS RV-02",
+                "BOS-001 adr ADR-001 offline sync scope"
+              ]
+            }
+          }
+        },
+        "active_task": null
+      },
+      "created_at": "2026-09-25T01:55:04.648022+00:00"
+    },
+    {
+      "run_id": "RUN-7652B6312F634C099BE4140386DC7DB8",
+      "stage": "CONTEXT",
+      "status": "RUNNING",
+      "payload": {},
+      "created_at": "2026-09-25T01:55:04.862869+00:00"
+    },
+    {
+      "run_id": "RUN-7652B6312F634C099BE4140386DC7DB8",
+      "stage": "CONTEXT",
+      "status": "RUNNING",
+      "payload": {
+        "attempts": {
+          "0:INTAKE:prompt-intake-adapter": 1,
+          "0:CONTEXT:baseline-verifier": 1
+        },
+        "active_task": {
+          "id": "7077e40e2c714855938fc7e6bdf97468",
+          "skill": "baseline-verifier",
+          "started_at": "2026-09-25T01:55:23.910239+00:00",
+          "tool_calls": 0
+        }
+      },
+      "created_at": "2026-09-25T01:55:23.912585+00:00"
+    },
+    {
+      "run_id": "RUN-7652B6312F634C099BE4140386DC7DB8",
+      "stage": "CONTEXT",
+      "status": "RUNNING",
+      "payload": {
+        "results": {
+          "INTAKE": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/BuildingOS_BRD_Agentic_Development.md",
+              "agentic/data/project-context/features/BOS-001/BACKLOG.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Baseline context: reconcile affected scope docs (BOS-001/002/010 + subscription plans) against dropped Sync Service.",
+            "outputs": {
+              "work_item": "Drop Sync Service and offline-sync requirements from BRD and dependent scope",
+              "work_type": "change_request",
+              "project_type": "brownfield",
+              "hierarchy": "TASK_ONLY",
+              "planning": "NO_REPLAN",
+              "module": "backend/subscription-service, agentic/data/project-context",
+              "source": "Operator BRD edit 2026-09-25: removed Sync Service/Sync API/offline-first from BuildingOS_BRD_Agentic_Development.md",
+              "affected_scope": [
+                "subscription-service feature catalog (offline_sync.enabled)",
+                "BOS-001 BACKLOG/BASELINE Drift guidance",
+                "BOS-002 FEATURE offline sync ref",
+                "BOS-010 FEATURE/REQUIREMENTS offline sync ref",
+                "BOS-010 subscription-plans REQUIREMENTS RV-02",
+                "BOS-001 adr ADR-001 offline sync scope"
+              ]
+            }
+          },
+          "CONTEXT": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/BuildingOS_BRD_Agentic_Development.md",
+              "agentic/data/project-context/features/BOS-001/BACKLOG.md",
+              "agentic/data/project-context/features/BOS-010/subscription-plans/REQUIREMENTS.md",
+              "backend/subscription-service/src/main/java/com/buildingos/subscription/catalog/domain/model/Feature.java"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Impact analysis across subscription-service catalog and affected scope docs.",
+            "outputs": {
+              "verdict": "CONTEXT_READY",
+              "revision": "operator BRD edit 2026-09-25 (Sync Service dropped); BRD now has no sync/offline requirements",
+              "confirmed_scope": [
+                "BRD: all Sync Service/Drift/offline requirements removed",
+                "BOS-001 BACKLOG BOS-005 (Drift/outbox/offline collection) contradicts updated BRD",
+                "BOS-001 SRS FIN-03 offline replay contradicts updated BRD",
+                "BOS-001 BASELINE Drift guidance stale",
+                "BOS-001 README 'money and offline sync' stale",
+                "BOS-001 adr ADR-001 'offline sync later' stale",
+                "BOS-002 FEATURE offline financial sync (BOS-005) stale",
+                "BOS-010 FEATURE/REQUIREMENTS offline sync (BOS-005) ref stale",
+                "BOS-010 subscription-plans REQUIREMENTS RV-02 offline_sync.enabled stale",
+                "BOS-010 units-ownership BASELINE offline flags row stale",
+                "subscription-service Feature.java OFFLINE_SYNC flag + RevenueApiIntegrationTest stale vs BRD"
+              ],
+              "rejected_claims": [],
+              "not_in_scope": [
+                "Async REST/Kafka propagation (kept)",
+                "Chat offline behavior \u00c2\u00a7150.6 / Scenario L (distinct feature, kept)",
+                "D-24 manual offline fee recording (unrelated to Sync Service)"
+              ],
+              "refresh_tasks": []
+            }
+          }
+        },
+        "active_task": null
+      },
+      "created_at": "2026-09-25T01:55:23.960592+00:00"
+    },
+    {
+      "run_id": "RUN-7652B6312F634C099BE4140386DC7DB8",
+      "stage": "CONTEXT",
+      "status": "RUNNING",
+      "payload": {
+        "context": {
+          "files": {
+            "agentic\\data\\project-context\\BuildingOS_BRD_Agentic_Development.md": "1115822561de001f8aba6647782e047fb8844eb3295b2e227e38714250e324de",
+            "agentic\\data\\project-context\\features\\BOS-001\\BACKLOG.md": "a1b87ee14f5b43a97280142503e1fa18497f244b1df2b66ef5c0d615186796d4",
+            "agentic\\data\\project-context\\features\\BOS-001\\SRS.md": "76cf45c9fa37ad4cf7ff5833bf04ca068f16ad8848606b72b5d25eb025b49998",
+            "agentic\\data\\project-context\\features\\BOS-001\\BASELINE.md": "490e89839891d682d13eeb367f12d83a9e3f938482a7c1f682082ad35303a34a",
+            "agentic\\data\\project-context\\features\\BOS-001\\README.md": "1e6b79ee9b6efea77825b8e428758d649d41427e63d929185b972100850c4b43",
+            "agentic\\data\\project-context\\features\\BOS-001\\adr\\ADR-001-platform-boundaries.md": "660f4e2f94fbb5aaa115c1072a1d1e578c1f9b4fafb82b551956e250714c72a9",
+            "agentic\\data\\project-context\\features\\BOS-002\\FEATURE.md": "42ce7e392e14e73044f8c0a6f0123353f3cba91323f099ca49737ec55cef2afb",
+            "agentic\\data\\project-context\\features\\BOS-010\\FEATURE.md": "27aa6b0fb98c44b531822d98c980192575c5dfdf74febb088b964f8a124eaa66",
+            "agentic\\data\\project-context\\features\\BOS-010\\REQUIREMENTS.md": "e66d1e3b05e6aba85a8449c6a637b22a04e4edaf29963c165cd8bb6234e5aa34",
+            "agentic\\data\\project-context\\features\\BOS-010\\subscription-plans\\REQUIREMENTS.md": "d463855fc0f12d27c2dad82cf228962475000006c341a717045edce08d93562e",
+            "agentic\\data\\project-context\\features\\BOS-010\\units-ownership\\BASELINE.md": "2a16ff3e9794e702e6ea3269a1e901c9e70e3d42d505dde47825fabf588eafb4",
+            "backend\\subscription-service\\src\\main\\java\\com\\buildingos\\subscription\\catalog\\domain\\model\\Feature.java": "8f941f73f4b9af4f7ac4571930af5b933d93d2a423b1e1ce90a14b8ecfa842cd",
+            "backend\\subscription-service\\src\\test\\java\\com\\buildingos\\subscription\\revenue\\RevenueApiIntegrationTest.java": "f162aadb5e6beecfe8b97d87a5e9dae7bfb3212904de7ad930ebb61f31e99a1f"
+          }
+        }
+      },
+      "created_at": "2026-09-25T01:55:32.369210+00:00"
+    },
+    {
+      "run_id": "RUN-7652B6312F634C099BE4140386DC7DB8",
+      "stage": "IMPACT",
+      "status": "RUNNING",
+      "payload": {},
+      "created_at": "2026-09-25T01:55:32.597059+00:00"
+    },
+    {
+      "run_id": "RUN-7652B6312F634C099BE4140386DC7DB8",
+      "stage": "IMPACT",
+      "status": "RUNNING",
+      "payload": {
+        "attempts": {
+          "0:INTAKE:prompt-intake-adapter": 1,
+          "0:CONTEXT:baseline-verifier": 1,
+          "0:IMPACT:change-impact-analyzer": 1
+        },
+        "active_task": {
+          "id": "96694a3886814d42a3205eebf2ccd344",
+          "skill": "change-impact-analyzer",
+          "started_at": "2026-09-25T01:55:56.167454+00:00",
+          "tool_calls": 0
+        }
+      },
+      "created_at": "2026-09-25T01:55:56.168237+00:00"
+    },
+    {
+      "run_id": "RUN-7652B6312F634C099BE4140386DC7DB8",
+      "stage": "IMPACT",
+      "status": "RUNNING",
+      "payload": {
+        "results": {
+          "INTAKE": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/BuildingOS_BRD_Agentic_Development.md",
+              "agentic/data/project-context/features/BOS-001/BACKLOG.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Baseline context: reconcile affected scope docs (BOS-001/002/010 + subscription plans) against dropped Sync Service.",
+            "outputs": {
+              "work_item": "Drop Sync Service and offline-sync requirements from BRD and dependent scope",
+              "work_type": "change_request",
+              "project_type": "brownfield",
+              "hierarchy": "TASK_ONLY",
+              "planning": "NO_REPLAN",
+              "module": "backend/subscription-service, agentic/data/project-context",
+              "source": "Operator BRD edit 2026-09-25: removed Sync Service/Sync API/offline-first from BuildingOS_BRD_Agentic_Development.md",
+              "affected_scope": [
+                "subscription-service feature catalog (offline_sync.enabled)",
+                "BOS-001 BACKLOG/BASELINE Drift guidance",
+                "BOS-002 FEATURE offline sync ref",
+                "BOS-010 FEATURE/REQUIREMENTS offline sync ref",
+                "BOS-010 subscription-plans REQUIREMENTS RV-02",
+                "BOS-001 adr ADR-001 offline sync scope"
+              ]
+            }
+          },
+          "CONTEXT": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/BuildingOS_BRD_Agentic_Development.md",
+              "agentic/data/project-context/features/BOS-001/BACKLOG.md",
+              "agentic/data/project-context/features/BOS-010/subscription-plans/REQUIREMENTS.md",
+              "backend/subscription-service/src/main/java/com/buildingos/subscription/catalog/domain/model/Feature.java"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Impact analysis across subscription-service catalog and affected scope docs.",
+            "outputs": {
+              "verdict": "CONTEXT_READY",
+              "revision": "operator BRD edit 2026-09-25 (Sync Service dropped); BRD now has no sync/offline requirements",
+              "confirmed_scope": [
+                "BRD: all Sync Service/Drift/offline requirements removed",
+                "BOS-001 BACKLOG BOS-005 (Drift/outbox/offline collection) contradicts updated BRD",
+                "BOS-001 SRS FIN-03 offline replay contradicts updated BRD",
+                "BOS-001 BASELINE Drift guidance stale",
+                "BOS-001 README 'money and offline sync' stale",
+                "BOS-001 adr ADR-001 'offline sync later' stale",
+                "BOS-002 FEATURE offline financial sync (BOS-005) stale",
+                "BOS-010 FEATURE/REQUIREMENTS offline sync (BOS-005) ref stale",
+                "BOS-010 subscription-plans REQUIREMENTS RV-02 offline_sync.enabled stale",
+                "BOS-010 units-ownership BASELINE offline flags row stale",
+                "subscription-service Feature.java OFFLINE_SYNC flag + RevenueApiIntegrationTest stale vs BRD"
+              ],
+              "rejected_claims": [],
+              "not_in_scope": [
+                "Async REST/Kafka propagation (kept)",
+                "Chat offline behavior \u00c2\u00a7150.6 / Scenario L (distinct feature, kept)",
+                "D-24 manual offline fee recording (unrelated to Sync Service)"
+              ],
+              "refresh_tasks": []
+            }
+          },
+          "IMPACT": {
+            "status": "READY",
+            "evidence": [
+              "backend/subscription-service/src/main/java/com/buildingos/subscription/catalog/domain/model/Feature.java",
+              "backend/subscription-service/src/test/java/com/buildingos/subscription/revenue/RevenueApiIntegrationTest.java"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Technical readiness: single-flag removal + doc purge, no DB/API contract change.",
+            "outputs": {
+              "impact": "LOW",
+              "modules": [
+                "subscription-service feature catalog"
+              ],
+              "api_change": false,
+              "db_change": false,
+              "flutter_change": false,
+              "delta": "Remove OFFLINE_SYNC entitlement flag (Feature.java), replace flag in RevenueApiIntegrationTest selfSubscribeRules, purge stale sync/offline refs from BOS-001/002/010 scope docs",
+              "affected_artifacts": [
+                "backend/subscription-service/src/main/java/com/buildingos/subscription/catalog/domain/model/Feature.java",
+                "backend/subscription-service/src/test/java/com/buildingos/subscription/revenue/RevenueApiIntegrationTest.java",
+                "agentic/data/project-context/features/BOS-001/BACKLOG.md",
+                "agentic/data/project-context/features/BOS-001/SRS.md",
+                "agentic/data/project-context/features/BOS-001/BASELINE.md",
+                "agentic/data/project-context/features/BOS-001/README.md",
+                "agentic/data/project-context/features/BOS-001/FEATURE.md",
+                "agentic/data/project-context/features/BOS-001/adr/ADR-001-platform-boundaries.md",
+                "agentic/data/project-context/features/BOS-002/FEATURE.md",
+                "agentic/data/project-context/features/BOS-010/FEATURE.md",
+                "agentic/data/project-context/features/BOS-010/REQUIREMENTS.md",
+                "agentic/data/project-context/features/BOS-010/subscription-plans/REQUIREMENTS.md",
+                "agentic/data/project-context/features/BOS-010/units-ownership/BASELINE.md"
+              ],
+              "regression_targets": [
+                "mvn verify subscription-service"
+              ],
+              "consumers_note": "No consumer enforcement yet (baseline-confirmed); flag removal breaks no runtime callers.",
+              "compat_risk": "NONE"
+            }
+          }
+        },
+        "active_task": null
+      },
+      "created_at": "2026-09-25T01:55:56.234721+00:00"
+    },
+    {
+      "run_id": "RUN-7652B6312F634C099BE4140386DC7DB8",
+      "stage": "TECHNICAL",
+      "status": "RUNNING",
+      "payload": {},
+      "created_at": "2026-09-25T01:55:56.457727+00:00"
+    },
+    {
+      "run_id": "RUN-7652B6312F634C099BE4140386DC7DB8",
+      "stage": "TECHNICAL",
+      "status": "RUNNING",
+      "payload": {
+        "attempts": {
+          "0:INTAKE:prompt-intake-adapter": 1,
+          "0:CONTEXT:baseline-verifier": 1,
+          "0:IMPACT:change-impact-analyzer": 1,
+          "0:TECHNICAL:technical-readiness-verifier": 1
+        },
+        "active_task": {
+          "id": "33e9750c681447fcbc783b6234d4f64c",
+          "skill": "technical-readiness-verifier",
+          "started_at": "2026-09-25T01:56:12.482769+00:00",
+          "tool_calls": 0
+        }
+      },
+      "created_at": "2026-09-25T01:56:12.485987+00:00"
+    },
+    {
+      "run_id": "RUN-7652B6312F634C099BE4140386DC7DB8",
+      "stage": "TECHNICAL",
+      "status": "RUNNING",
+      "payload": {
+        "results": {
+          "INTAKE": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/BuildingOS_BRD_Agentic_Development.md",
+              "agentic/data/project-context/features/BOS-001/BACKLOG.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Baseline context: reconcile affected scope docs (BOS-001/002/010 + subscription plans) against dropped Sync Service.",
+            "outputs": {
+              "work_item": "Drop Sync Service and offline-sync requirements from BRD and dependent scope",
+              "work_type": "change_request",
+              "project_type": "brownfield",
+              "hierarchy": "TASK_ONLY",
+              "planning": "NO_REPLAN",
+              "module": "backend/subscription-service, agentic/data/project-context",
+              "source": "Operator BRD edit 2026-09-25: removed Sync Service/Sync API/offline-first from BuildingOS_BRD_Agentic_Development.md",
+              "affected_scope": [
+                "subscription-service feature catalog (offline_sync.enabled)",
+                "BOS-001 BACKLOG/BASELINE Drift guidance",
+                "BOS-002 FEATURE offline sync ref",
+                "BOS-010 FEATURE/REQUIREMENTS offline sync ref",
+                "BOS-010 subscription-plans REQUIREMENTS RV-02",
+                "BOS-001 adr ADR-001 offline sync scope"
+              ]
+            }
+          },
+          "CONTEXT": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/BuildingOS_BRD_Agentic_Development.md",
+              "agentic/data/project-context/features/BOS-001/BACKLOG.md",
+              "agentic/data/project-context/features/BOS-010/subscription-plans/REQUIREMENTS.md",
+              "backend/subscription-service/src/main/java/com/buildingos/subscription/catalog/domain/model/Feature.java"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Impact analysis across subscription-service catalog and affected scope docs.",
+            "outputs": {
+              "verdict": "CONTEXT_READY",
+              "revision": "operator BRD edit 2026-09-25 (Sync Service dropped); BRD now has no sync/offline requirements",
+              "confirmed_scope": [
+                "BRD: all Sync Service/Drift/offline requirements removed",
+                "BOS-001 BACKLOG BOS-005 (Drift/outbox/offline collection) contradicts updated BRD",
+                "BOS-001 SRS FIN-03 offline replay contradicts updated BRD",
+                "BOS-001 BASELINE Drift guidance stale",
+                "BOS-001 README 'money and offline sync' stale",
+                "BOS-001 adr ADR-001 'offline sync later' stale",
+                "BOS-002 FEATURE offline financial sync (BOS-005) stale",
+                "BOS-010 FEATURE/REQUIREMENTS offline sync (BOS-005) ref stale",
+                "BOS-010 subscription-plans REQUIREMENTS RV-02 offline_sync.enabled stale",
+                "BOS-010 units-ownership BASELINE offline flags row stale",
+                "subscription-service Feature.java OFFLINE_SYNC flag + RevenueApiIntegrationTest stale vs BRD"
+              ],
+              "rejected_claims": [],
+              "not_in_scope": [
+                "Async REST/Kafka propagation (kept)",
+                "Chat offline behavior \u00c2\u00a7150.6 / Scenario L (distinct feature, kept)",
+                "D-24 manual offline fee recording (unrelated to Sync Service)"
+              ],
+              "refresh_tasks": []
+            }
+          },
+          "IMPACT": {
+            "status": "READY",
+            "evidence": [
+              "backend/subscription-service/src/main/java/com/buildingos/subscription/catalog/domain/model/Feature.java",
+              "backend/subscription-service/src/test/java/com/buildingos/subscription/revenue/RevenueApiIntegrationTest.java"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Technical readiness: single-flag removal + doc purge, no DB/API contract change.",
+            "outputs": {
+              "impact": "LOW",
+              "modules": [
+                "subscription-service feature catalog"
+              ],
+              "api_change": false,
+              "db_change": false,
+              "flutter_change": false,
+              "delta": "Remove OFFLINE_SYNC entitlement flag (Feature.java), replace flag in RevenueApiIntegrationTest selfSubscribeRules, purge stale sync/offline refs from BOS-001/002/010 scope docs",
+              "affected_artifacts": [
+                "backend/subscription-service/src/main/java/com/buildingos/subscription/catalog/domain/model/Feature.java",
+                "backend/subscription-service/src/test/java/com/buildingos/subscription/revenue/RevenueApiIntegrationTest.java",
+                "agentic/data/project-context/features/BOS-001/BACKLOG.md",
+                "agentic/data/project-context/features/BOS-001/SRS.md",
+                "agentic/data/project-context/features/BOS-001/BASELINE.md",
+                "agentic/data/project-context/features/BOS-001/README.md",
+                "agentic/data/project-context/features/BOS-001/FEATURE.md",
+                "agentic/data/project-context/features/BOS-001/adr/ADR-001-platform-boundaries.md",
+                "agentic/data/project-context/features/BOS-002/FEATURE.md",
+                "agentic/data/project-context/features/BOS-010/FEATURE.md",
+                "agentic/data/project-context/features/BOS-010/REQUIREMENTS.md",
+                "agentic/data/project-context/features/BOS-010/subscription-plans/REQUIREMENTS.md",
+                "agentic/data/project-context/features/BOS-010/units-ownership/BASELINE.md"
+              ],
+              "regression_targets": [
+                "mvn verify subscription-service"
+              ],
+              "consumers_note": "No consumer enforcement yet (baseline-confirmed); flag removal breaks no runtime callers.",
+              "compat_risk": "NONE"
+            }
+          },
+          "TECHNICAL": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/BuildingOS_BRD_Agentic_Development.md",
+              "backend/subscription-service/src/main/java/com/buildingos/subscription/catalog/domain/model/Feature.java",
+              "backend/subscription-service/src/test/java/com/buildingos/subscription/revenue/RevenueApiIntegrationTest.java"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Implementation: remove OFFLINE_SYNC enum, swap test flag to work_orders.enabled, purge stale doc refs.",
+            "outputs": {
+              "verdict": "TECHNICAL_READY",
+              "approval": "pending operator",
+              "checklist": {
+                "behavior": "BRD authoritatively drops offline_sync entitlement; backend feature catalog reflects it",
+                "boundaries": "subscription-service catalog only; no consumer enforcement exists",
+                "contracts": "effectiveEntitlements shape unchanged; one key removed, permissive catalog",
+                "db": "none",
+                "test_strategy": "RevenueApiIntegrationTest selfSubscribeRules uses a remaining FLAG (work_orders.enabled); mvn verify subscription-service",
+                "doc_scope": "BOS-001/002/010 + subscription-plans purge of sync/offline refs"
+              }
+            }
+          }
+        },
+        "active_task": null
+      },
+      "created_at": "2026-09-25T01:56:12.556520+00:00"
+    },
+    {
+      "run_id": "RUN-7652B6312F634C099BE4140386DC7DB8",
+      "stage": "TECHNICAL",
+      "status": "RUNNING",
+      "payload": {},
+      "created_at": "2026-09-25T02:10:14.918704+00:00"
+    },
+    {
+      "run_id": "RUN-7652B6312F634C099BE4140386DC7DB8",
+      "stage": "IMPLEMENTATION",
+      "status": "RUNNING",
+      "payload": {},
+      "created_at": "2026-09-25T02:10:15.169862+00:00"
+    },
+    {
+      "run_id": "RUN-7652B6312F634C099BE4140386DC7DB8",
+      "stage": "IMPLEMENTATION",
+      "status": "RUNNING",
+      "payload": {
+        "attempts": {
+          "0:INTAKE:prompt-intake-adapter": 1,
+          "0:CONTEXT:baseline-verifier": 1,
+          "0:IMPACT:change-impact-analyzer": 1,
+          "0:TECHNICAL:technical-readiness-verifier": 1,
+          "0:IMPLEMENTATION:implementation-agent": 1
+        },
+        "active_task": {
+          "id": "0aaa18e3676141369a6684929e5da3b6",
+          "skill": "implementation-agent",
+          "started_at": "2026-09-25T02:11:42.665707+00:00",
+          "tool_calls": 0
+        }
+      },
+      "created_at": "2026-09-25T02:11:42.668994+00:00"
+    },
+    {
+      "run_id": "RUN-7652B6312F634C099BE4140386DC7DB8",
+      "stage": "IMPLEMENTATION",
+      "status": "RUNNING",
+      "payload": {
+        "results": {
+          "INTAKE": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/BuildingOS_BRD_Agentic_Development.md",
+              "agentic/data/project-context/features/BOS-001/BACKLOG.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Baseline context: reconcile affected scope docs (BOS-001/002/010 + subscription plans) against dropped Sync Service.",
+            "outputs": {
+              "work_item": "Drop Sync Service and offline-sync requirements from BRD and dependent scope",
+              "work_type": "change_request",
+              "project_type": "brownfield",
+              "hierarchy": "TASK_ONLY",
+              "planning": "NO_REPLAN",
+              "module": "backend/subscription-service, agentic/data/project-context",
+              "source": "Operator BRD edit 2026-09-25: removed Sync Service/Sync API/offline-first from BuildingOS_BRD_Agentic_Development.md",
+              "affected_scope": [
+                "subscription-service feature catalog (offline_sync.enabled)",
+                "BOS-001 BACKLOG/BASELINE Drift guidance",
+                "BOS-002 FEATURE offline sync ref",
+                "BOS-010 FEATURE/REQUIREMENTS offline sync ref",
+                "BOS-010 subscription-plans REQUIREMENTS RV-02",
+                "BOS-001 adr ADR-001 offline sync scope"
+              ]
+            }
+          },
+          "CONTEXT": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/BuildingOS_BRD_Agentic_Development.md",
+              "agentic/data/project-context/features/BOS-001/BACKLOG.md",
+              "agentic/data/project-context/features/BOS-010/subscription-plans/REQUIREMENTS.md",
+              "backend/subscription-service/src/main/java/com/buildingos/subscription/catalog/domain/model/Feature.java"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Impact analysis across subscription-service catalog and affected scope docs.",
+            "outputs": {
+              "verdict": "CONTEXT_READY",
+              "revision": "operator BRD edit 2026-09-25 (Sync Service dropped); BRD now has no sync/offline requirements",
+              "confirmed_scope": [
+                "BRD: all Sync Service/Drift/offline requirements removed",
+                "BOS-001 BACKLOG BOS-005 (Drift/outbox/offline collection) contradicts updated BRD",
+                "BOS-001 SRS FIN-03 offline replay contradicts updated BRD",
+                "BOS-001 BASELINE Drift guidance stale",
+                "BOS-001 README 'money and offline sync' stale",
+                "BOS-001 adr ADR-001 'offline sync later' stale",
+                "BOS-002 FEATURE offline financial sync (BOS-005) stale",
+                "BOS-010 FEATURE/REQUIREMENTS offline sync (BOS-005) ref stale",
+                "BOS-010 subscription-plans REQUIREMENTS RV-02 offline_sync.enabled stale",
+                "BOS-010 units-ownership BASELINE offline flags row stale",
+                "subscription-service Feature.java OFFLINE_SYNC flag + RevenueApiIntegrationTest stale vs BRD"
+              ],
+              "rejected_claims": [],
+              "not_in_scope": [
+                "Async REST/Kafka propagation (kept)",
+                "Chat offline behavior \u00c2\u00a7150.6 / Scenario L (distinct feature, kept)",
+                "D-24 manual offline fee recording (unrelated to Sync Service)"
+              ],
+              "refresh_tasks": []
+            }
+          },
+          "IMPACT": {
+            "status": "READY",
+            "evidence": [
+              "backend/subscription-service/src/main/java/com/buildingos/subscription/catalog/domain/model/Feature.java",
+              "backend/subscription-service/src/test/java/com/buildingos/subscription/revenue/RevenueApiIntegrationTest.java"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Technical readiness: single-flag removal + doc purge, no DB/API contract change.",
+            "outputs": {
+              "impact": "LOW",
+              "modules": [
+                "subscription-service feature catalog"
+              ],
+              "api_change": false,
+              "db_change": false,
+              "flutter_change": false,
+              "delta": "Remove OFFLINE_SYNC entitlement flag (Feature.java), replace flag in RevenueApiIntegrationTest selfSubscribeRules, purge stale sync/offline refs from BOS-001/002/010 scope docs",
+              "affected_artifacts": [
+                "backend/subscription-service/src/main/java/com/buildingos/subscription/catalog/domain/model/Feature.java",
+                "backend/subscription-service/src/test/java/com/buildingos/subscription/revenue/RevenueApiIntegrationTest.java",
+                "agentic/data/project-context/features/BOS-001/BACKLOG.md",
+                "agentic/data/project-context/features/BOS-001/SRS.md",
+                "agentic/data/project-context/features/BOS-001/BASELINE.md",
+                "agentic/data/project-context/features/BOS-001/README.md",
+                "agentic/data/project-context/features/BOS-001/FEATURE.md",
+                "agentic/data/project-context/features/BOS-001/adr/ADR-001-platform-boundaries.md",
+                "agentic/data/project-context/features/BOS-002/FEATURE.md",
+                "agentic/data/project-context/features/BOS-010/FEATURE.md",
+                "agentic/data/project-context/features/BOS-010/REQUIREMENTS.md",
+                "agentic/data/project-context/features/BOS-010/subscription-plans/REQUIREMENTS.md",
+                "agentic/data/project-context/features/BOS-010/units-ownership/BASELINE.md"
+              ],
+              "regression_targets": [
+                "mvn verify subscription-service"
+              ],
+              "consumers_note": "No consumer enforcement yet (baseline-confirmed); flag removal breaks no runtime callers.",
+              "compat_risk": "NONE"
+            }
+          },
+          "TECHNICAL": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/BuildingOS_BRD_Agentic_Development.md",
+              "backend/subscription-service/src/main/java/com/buildingos/subscription/catalog/domain/model/Feature.java",
+              "backend/subscription-service/src/test/java/com/buildingos/subscription/revenue/RevenueApiIntegrationTest.java"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Implementation: remove OFFLINE_SYNC enum, swap test flag to work_orders.enabled, purge stale doc refs.",
+            "outputs": {
+              "verdict": "TECHNICAL_READY",
+              "approval": "pending operator",
+              "checklist": {
+                "behavior": "BRD authoritatively drops offline_sync entitlement; backend feature catalog reflects it",
+                "boundaries": "subscription-service catalog only; no consumer enforcement exists",
+                "contracts": "effectiveEntitlements shape unchanged; one key removed, permissive catalog",
+                "db": "none",
+                "test_strategy": "RevenueApiIntegrationTest selfSubscribeRules uses a remaining FLAG (work_orders.enabled); mvn verify subscription-service",
+                "doc_scope": "BOS-001/002/010 + subscription-plans purge of sync/offline refs"
+              }
+            }
+          },
+          "IMPLEMENTATION": {
+            "status": "READY",
+            "evidence": [
+              "backend/subscription-service/src/main/java/com/buildingos/subscription/catalog/domain/model/Feature.java",
+              "backend/subscription-service/src/test/java/com/buildingos/subscription/revenue/RevenueApiIntegrationTest.java",
+              "backend/subscription-service/target/surefire-reports"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Review the diff, then QA gate.",
+            "outputs": {
+              "changed_paths": [
+                "backend/subscription-service/src/main/java/com/buildingos/subscription/catalog/domain/model/Feature.java",
+                "backend/subscription-service/src/test/java/com/buildingos/subscription/revenue/RevenueApiIntegrationTest.java",
+                "agentic/data/project-context/features/BOS-001/BACKLOG.md",
+                "agentic/data/project-context/features/BOS-001/SRS.md",
+                "agentic/data/project-context/features/BOS-001/BASELINE.md",
+                "agentic/data/project-context/features/BOS-001/README.md",
+                "agentic/data/project-context/features/BOS-001/ARCHITECTURE.md",
+                "agentic/data/project-context/features/BOS-001/FEATURE.md",
+                "agentic/data/project-context/features/BOS-001/QA-ACCEPTANCE.md",
+                "agentic/data/project-context/features/BOS-001/adr/ADR-001-platform-boundaries.md",
+                "agentic/data/project-context/features/BOS-002/FEATURE.md",
+                "agentic/data/project-context/features/BOS-010/FEATURE.md",
+                "agentic/data/project-context/features/BOS-010/REQUIREMENTS.md",
+                "agentic/data/project-context/features/BOS-010/subscription-plans/REQUIREMENTS.md",
+                "agentic/data/project-context/features/BOS-010/units-ownership/BASELINE.md"
+              ],
+              "acceptance_coverage": {
+                "RV-02": "offline_sync.enabled removed from feature catalog list",
+                "SUB-02": "offline_sync.enabled removed from entitlements list",
+                "Selection_purge": "BOS-005 and all offline/Drift/outbox-collection refs removed from affected scope; only intentional keeps (D-24 offline fee, outbox, contract-drift term) remain",
+                "code": "OFFLINE_SYNC enum removed; test selfSubscribeRules now asserts work_orders.enabled"
+              },
+              "check_evidence": {
+                "build": "mvn -B -f backend/pom.xml -pl subscription-service verify: BUILD SUCCESS",
+                "tests": "Tests run: 31, Failures: 0, Errors: 0, Skipped: 0 (RevenueApiIntegrationTest 8/8)"
+              },
+              "risks": [
+                "Effective entitlements payload for legacy plan records could shrink by one key; no consumer enforcement exists so no runtime break."
+              ]
+            }
+          }
+        },
+        "active_task": null,
+        "context": {
+          "files": {
+            "agentic\\data\\project-context\\BuildingOS_BRD_Agentic_Development.md": "1115822561de001f8aba6647782e047fb8844eb3295b2e227e38714250e324de",
+            "agentic\\data\\project-context\\features\\BOS-001\\BACKLOG.md": "4aff24722698d392909053be9bcfa709069314c2989bebfcc619aa77b3e3a87c",
+            "agentic\\data\\project-context\\features\\BOS-001\\SRS.md": "7e62a0b4b6aa0242bab71901c724f3402c84adbf6ee30d4c41b2f51a49dfa6f2",
+            "agentic\\data\\project-context\\features\\BOS-001\\BASELINE.md": "1d1b51651f22c9d0def5ac10493d4053d9d5366b7acf1bcddd645f72ec48c413",
+            "agentic\\data\\project-context\\features\\BOS-001\\README.md": "f49a3f69e497a0ad5a3c8064231865d5db5a239ab81be8ba67bdb015f4d9db14",
+            "agentic\\data\\project-context\\features\\BOS-001\\adr\\ADR-001-platform-boundaries.md": "13b1786eb168c3b9635b4e5ce7abaa6a1de95bd3993c344d83c763767310ea0b",
+            "agentic\\data\\project-context\\features\\BOS-002\\FEATURE.md": "287bc13a8360e97cb8502e9c0e4f9462a1702aa0df13f6786512567cf7470e9e",
+            "agentic\\data\\project-context\\features\\BOS-010\\FEATURE.md": "e56eb71228cc0854519dad1887cecd91e5c140ab32e7cb86e86025c58673513c",
+            "agentic\\data\\project-context\\features\\BOS-010\\REQUIREMENTS.md": "f57c40b7be7b757dc2429dfdf60a34c4b62ffe5f35f7cde935bdcde16ce5f36f",
+            "agentic\\data\\project-context\\features\\BOS-010\\subscription-plans\\REQUIREMENTS.md": "5847d86cd745487eaaca1a7fbf065da0e855fa244c43226dc7464d7aecd75d50",
+            "agentic\\data\\project-context\\features\\BOS-010\\units-ownership\\BASELINE.md": "9f9688afcdf08491925effe33a4bfef90777c6be75b4941fc8664e644fd5260a",
+            "backend\\subscription-service\\src\\main\\java\\com\\buildingos\\subscription\\catalog\\domain\\model\\Feature.java": "82235cb6e5c007062d540a62ff78e6734ea61114f3f5437fd17df1694cdd5667",
+            "backend\\subscription-service\\src\\test\\java\\com\\buildingos\\subscription\\revenue\\RevenueApiIntegrationTest.java": "2424e60b7537b68760d58f832f00bc05c2bdcea2ffd35bf577b9ad3765cdd9a5"
+          }
+        }
+      },
+      "created_at": "2026-09-25T02:15:46.661822+00:00"
+    },
+    {
+      "run_id": "RUN-7652B6312F634C099BE4140386DC7DB8",
+      "stage": "REVIEW",
+      "status": "RUNNING",
+      "payload": {},
+      "created_at": "2026-09-25T02:15:49.490057+00:00"
+    },
+    {
+      "run_id": "RUN-7652B6312F634C099BE4140386DC7DB8",
+      "stage": "REVIEW",
+      "status": "RUNNING",
+      "payload": {
+        "attempts": {
+          "0:INTAKE:prompt-intake-adapter": 1,
+          "0:CONTEXT:baseline-verifier": 1,
+          "0:IMPACT:change-impact-analyzer": 1,
+          "0:TECHNICAL:technical-readiness-verifier": 1,
+          "0:IMPLEMENTATION:implementation-agent": 1,
+          "0:REVIEW:code-review-agent": 1
+        },
+        "active_task": {
+          "id": "2512b7dba42a46f8afe92c34991e88e5",
+          "skill": "code-review-agent",
+          "started_at": "2026-09-25T02:16:13.573731+00:00",
+          "tool_calls": 0
+        }
+      },
+      "created_at": "2026-09-25T02:16:13.574771+00:00"
+    },
+    {
+      "run_id": "RUN-7652B6312F634C099BE4140386DC7DB8",
+      "stage": "REVIEW",
+      "status": "RUNNING",
+      "payload": {
+        "results": {
+          "INTAKE": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/BuildingOS_BRD_Agentic_Development.md",
+              "agentic/data/project-context/features/BOS-001/BACKLOG.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Baseline context: reconcile affected scope docs (BOS-001/002/010 + subscription plans) against dropped Sync Service.",
+            "outputs": {
+              "work_item": "Drop Sync Service and offline-sync requirements from BRD and dependent scope",
+              "work_type": "change_request",
+              "project_type": "brownfield",
+              "hierarchy": "TASK_ONLY",
+              "planning": "NO_REPLAN",
+              "module": "backend/subscription-service, agentic/data/project-context",
+              "source": "Operator BRD edit 2026-09-25: removed Sync Service/Sync API/offline-first from BuildingOS_BRD_Agentic_Development.md",
+              "affected_scope": [
+                "subscription-service feature catalog (offline_sync.enabled)",
+                "BOS-001 BACKLOG/BASELINE Drift guidance",
+                "BOS-002 FEATURE offline sync ref",
+                "BOS-010 FEATURE/REQUIREMENTS offline sync ref",
+                "BOS-010 subscription-plans REQUIREMENTS RV-02",
+                "BOS-001 adr ADR-001 offline sync scope"
+              ]
+            }
+          },
+          "CONTEXT": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/BuildingOS_BRD_Agentic_Development.md",
+              "agentic/data/project-context/features/BOS-001/BACKLOG.md",
+              "agentic/data/project-context/features/BOS-010/subscription-plans/REQUIREMENTS.md",
+              "backend/subscription-service/src/main/java/com/buildingos/subscription/catalog/domain/model/Feature.java"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Impact analysis across subscription-service catalog and affected scope docs.",
+            "outputs": {
+              "verdict": "CONTEXT_READY",
+              "revision": "operator BRD edit 2026-09-25 (Sync Service dropped); BRD now has no sync/offline requirements",
+              "confirmed_scope": [
+                "BRD: all Sync Service/Drift/offline requirements removed",
+                "BOS-001 BACKLOG BOS-005 (Drift/outbox/offline collection) contradicts updated BRD",
+                "BOS-001 SRS FIN-03 offline replay contradicts updated BRD",
+                "BOS-001 BASELINE Drift guidance stale",
+                "BOS-001 README 'money and offline sync' stale",
+                "BOS-001 adr ADR-001 'offline sync later' stale",
+                "BOS-002 FEATURE offline financial sync (BOS-005) stale",
+                "BOS-010 FEATURE/REQUIREMENTS offline sync (BOS-005) ref stale",
+                "BOS-010 subscription-plans REQUIREMENTS RV-02 offline_sync.enabled stale",
+                "BOS-010 units-ownership BASELINE offline flags row stale",
+                "subscription-service Feature.java OFFLINE_SYNC flag + RevenueApiIntegrationTest stale vs BRD"
+              ],
+              "rejected_claims": [],
+              "not_in_scope": [
+                "Async REST/Kafka propagation (kept)",
+                "Chat offline behavior \u00c2\u00a7150.6 / Scenario L (distinct feature, kept)",
+                "D-24 manual offline fee recording (unrelated to Sync Service)"
+              ],
+              "refresh_tasks": []
+            }
+          },
+          "IMPACT": {
+            "status": "READY",
+            "evidence": [
+              "backend/subscription-service/src/main/java/com/buildingos/subscription/catalog/domain/model/Feature.java",
+              "backend/subscription-service/src/test/java/com/buildingos/subscription/revenue/RevenueApiIntegrationTest.java"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Technical readiness: single-flag removal + doc purge, no DB/API contract change.",
+            "outputs": {
+              "impact": "LOW",
+              "modules": [
+                "subscription-service feature catalog"
+              ],
+              "api_change": false,
+              "db_change": false,
+              "flutter_change": false,
+              "delta": "Remove OFFLINE_SYNC entitlement flag (Feature.java), replace flag in RevenueApiIntegrationTest selfSubscribeRules, purge stale sync/offline refs from BOS-001/002/010 scope docs",
+              "affected_artifacts": [
+                "backend/subscription-service/src/main/java/com/buildingos/subscription/catalog/domain/model/Feature.java",
+                "backend/subscription-service/src/test/java/com/buildingos/subscription/revenue/RevenueApiIntegrationTest.java",
+                "agentic/data/project-context/features/BOS-001/BACKLOG.md",
+                "agentic/data/project-context/features/BOS-001/SRS.md",
+                "agentic/data/project-context/features/BOS-001/BASELINE.md",
+                "agentic/data/project-context/features/BOS-001/README.md",
+                "agentic/data/project-context/features/BOS-001/FEATURE.md",
+                "agentic/data/project-context/features/BOS-001/adr/ADR-001-platform-boundaries.md",
+                "agentic/data/project-context/features/BOS-002/FEATURE.md",
+                "agentic/data/project-context/features/BOS-010/FEATURE.md",
+                "agentic/data/project-context/features/BOS-010/REQUIREMENTS.md",
+                "agentic/data/project-context/features/BOS-010/subscription-plans/REQUIREMENTS.md",
+                "agentic/data/project-context/features/BOS-010/units-ownership/BASELINE.md"
+              ],
+              "regression_targets": [
+                "mvn verify subscription-service"
+              ],
+              "consumers_note": "No consumer enforcement yet (baseline-confirmed); flag removal breaks no runtime callers.",
+              "compat_risk": "NONE"
+            }
+          },
+          "TECHNICAL": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/BuildingOS_BRD_Agentic_Development.md",
+              "backend/subscription-service/src/main/java/com/buildingos/subscription/catalog/domain/model/Feature.java",
+              "backend/subscription-service/src/test/java/com/buildingos/subscription/revenue/RevenueApiIntegrationTest.java"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Implementation: remove OFFLINE_SYNC enum, swap test flag to work_orders.enabled, purge stale doc refs.",
+            "outputs": {
+              "verdict": "TECHNICAL_READY",
+              "approval": "pending operator",
+              "checklist": {
+                "behavior": "BRD authoritatively drops offline_sync entitlement; backend feature catalog reflects it",
+                "boundaries": "subscription-service catalog only; no consumer enforcement exists",
+                "contracts": "effectiveEntitlements shape unchanged; one key removed, permissive catalog",
+                "db": "none",
+                "test_strategy": "RevenueApiIntegrationTest selfSubscribeRules uses a remaining FLAG (work_orders.enabled); mvn verify subscription-service",
+                "doc_scope": "BOS-001/002/010 + subscription-plans purge of sync/offline refs"
+              }
+            }
+          },
+          "IMPLEMENTATION": {
+            "status": "READY",
+            "evidence": [
+              "backend/subscription-service/src/main/java/com/buildingos/subscription/catalog/domain/model/Feature.java",
+              "backend/subscription-service/src/test/java/com/buildingos/subscription/revenue/RevenueApiIntegrationTest.java",
+              "backend/subscription-service/target/surefire-reports"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Review the diff, then QA gate.",
+            "outputs": {
+              "changed_paths": [
+                "backend/subscription-service/src/main/java/com/buildingos/subscription/catalog/domain/model/Feature.java",
+                "backend/subscription-service/src/test/java/com/buildingos/subscription/revenue/RevenueApiIntegrationTest.java",
+                "agentic/data/project-context/features/BOS-001/BACKLOG.md",
+                "agentic/data/project-context/features/BOS-001/SRS.md",
+                "agentic/data/project-context/features/BOS-001/BASELINE.md",
+                "agentic/data/project-context/features/BOS-001/README.md",
+                "agentic/data/project-context/features/BOS-001/ARCHITECTURE.md",
+                "agentic/data/project-context/features/BOS-001/FEATURE.md",
+                "agentic/data/project-context/features/BOS-001/QA-ACCEPTANCE.md",
+                "agentic/data/project-context/features/BOS-001/adr/ADR-001-platform-boundaries.md",
+                "agentic/data/project-context/features/BOS-002/FEATURE.md",
+                "agentic/data/project-context/features/BOS-010/FEATURE.md",
+                "agentic/data/project-context/features/BOS-010/REQUIREMENTS.md",
+                "agentic/data/project-context/features/BOS-010/subscription-plans/REQUIREMENTS.md",
+                "agentic/data/project-context/features/BOS-010/units-ownership/BASELINE.md"
+              ],
+              "acceptance_coverage": {
+                "RV-02": "offline_sync.enabled removed from feature catalog list",
+                "SUB-02": "offline_sync.enabled removed from entitlements list",
+                "Selection_purge": "BOS-005 and all offline/Drift/outbox-collection refs removed from affected scope; only intentional keeps (D-24 offline fee, outbox, contract-drift term) remain",
+                "code": "OFFLINE_SYNC enum removed; test selfSubscribeRules now asserts work_orders.enabled"
+              },
+              "check_evidence": {
+                "build": "mvn -B -f backend/pom.xml -pl subscription-service verify: BUILD SUCCESS",
+                "tests": "Tests run: 31, Failures: 0, Errors: 0, Skipped: 0 (RevenueApiIntegrationTest 8/8)"
+              },
+              "risks": [
+                "Effective entitlements payload for legacy plan records could shrink by one key; no consumer enforcement exists so no runtime break."
+              ]
+            }
+          },
+          "REVIEW": {
+            "status": "READY",
+            "evidence": [
+              "git diff: 15 files, 22 insertions, 26 deletions; Feature.java -1 line; RevenueApiIntegrationTest.swap to work_orders.enabled",
+              "mvn -B -f backend/pom.xml -pl subscription-service verify: BUILD SUCCESS, 31 tests 0 failures",
+              "grep offline_sync/OFFLINE_SYNC across agentic/ + backend/: 0 matches; only intentional keeps remain (chat offline S150.6, D-24 offline fee)"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "QA: rerun subscription-service verification as release evidence.",
+            "outputs": {
+              "verdict": "APPROVED",
+              "reviewer": "agent review, not human approval",
+              "findings": [
+                "No defects; diff bounded to offline-sync removal",
+                "INFO: BOS-001/README.md rewrap 'money/follows with its correctness tests' cosmetic, harmless"
+              ],
+              "checked": {
+                "requirements": "RV-02, SUB-02, BRD test selfSubscribeRules exercise effectiveEntitlements with a remaining FLAG",
+                "unintended_changes": "all 15 changed paths are in declared scope; no consumer enforcement touched; chat/outbox/D-24 keeps intact",
+                "regression": "31/31 tests green; compile clean"
+              }
+            }
+          }
+        },
+        "active_task": null
+      },
+      "created_at": "2026-09-25T02:16:13.647343+00:00"
+    },
+    {
+      "run_id": "RUN-7652B6312F634C099BE4140386DC7DB8",
+      "stage": "QA",
+      "status": "RUNNING",
+      "payload": {},
+      "created_at": "2026-09-25T02:16:13.863154+00:00"
+    },
+    {
+      "run_id": "RUN-7652B6312F634C099BE4140386DC7DB8",
+      "stage": "QA",
+      "status": "RUNNING",
+      "payload": {
+        "attempts": {
+          "0:INTAKE:prompt-intake-adapter": 1,
+          "0:CONTEXT:baseline-verifier": 1,
+          "0:IMPACT:change-impact-analyzer": 1,
+          "0:TECHNICAL:technical-readiness-verifier": 1,
+          "0:IMPLEMENTATION:implementation-agent": 1,
+          "0:REVIEW:code-review-agent": 1,
+          "0:QA:automated-qa-agent": 1
+        },
+        "active_task": {
+          "id": "9b40b142ad4f45e29803b7d5f95c0207",
+          "skill": "automated-qa-agent",
+          "started_at": "2026-09-25T02:16:25.270989+00:00",
+          "tool_calls": 0
+        }
+      },
+      "created_at": "2026-09-25T02:16:25.274563+00:00"
+    },
+    {
+      "run_id": "RUN-7652B6312F634C099BE4140386DC7DB8",
+      "stage": "QA",
+      "status": "RUNNING",
+      "payload": {
+        "results": {
+          "INTAKE": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/BuildingOS_BRD_Agentic_Development.md",
+              "agentic/data/project-context/features/BOS-001/BACKLOG.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Baseline context: reconcile affected scope docs (BOS-001/002/010 + subscription plans) against dropped Sync Service.",
+            "outputs": {
+              "work_item": "Drop Sync Service and offline-sync requirements from BRD and dependent scope",
+              "work_type": "change_request",
+              "project_type": "brownfield",
+              "hierarchy": "TASK_ONLY",
+              "planning": "NO_REPLAN",
+              "module": "backend/subscription-service, agentic/data/project-context",
+              "source": "Operator BRD edit 2026-09-25: removed Sync Service/Sync API/offline-first from BuildingOS_BRD_Agentic_Development.md",
+              "affected_scope": [
+                "subscription-service feature catalog (offline_sync.enabled)",
+                "BOS-001 BACKLOG/BASELINE Drift guidance",
+                "BOS-002 FEATURE offline sync ref",
+                "BOS-010 FEATURE/REQUIREMENTS offline sync ref",
+                "BOS-010 subscription-plans REQUIREMENTS RV-02",
+                "BOS-001 adr ADR-001 offline sync scope"
+              ]
+            }
+          },
+          "CONTEXT": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/BuildingOS_BRD_Agentic_Development.md",
+              "agentic/data/project-context/features/BOS-001/BACKLOG.md",
+              "agentic/data/project-context/features/BOS-010/subscription-plans/REQUIREMENTS.md",
+              "backend/subscription-service/src/main/java/com/buildingos/subscription/catalog/domain/model/Feature.java"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Impact analysis across subscription-service catalog and affected scope docs.",
+            "outputs": {
+              "verdict": "CONTEXT_READY",
+              "revision": "operator BRD edit 2026-09-25 (Sync Service dropped); BRD now has no sync/offline requirements",
+              "confirmed_scope": [
+                "BRD: all Sync Service/Drift/offline requirements removed",
+                "BOS-001 BACKLOG BOS-005 (Drift/outbox/offline collection) contradicts updated BRD",
+                "BOS-001 SRS FIN-03 offline replay contradicts updated BRD",
+                "BOS-001 BASELINE Drift guidance stale",
+                "BOS-001 README 'money and offline sync' stale",
+                "BOS-001 adr ADR-001 'offline sync later' stale",
+                "BOS-002 FEATURE offline financial sync (BOS-005) stale",
+                "BOS-010 FEATURE/REQUIREMENTS offline sync (BOS-005) ref stale",
+                "BOS-010 subscription-plans REQUIREMENTS RV-02 offline_sync.enabled stale",
+                "BOS-010 units-ownership BASELINE offline flags row stale",
+                "subscription-service Feature.java OFFLINE_SYNC flag + RevenueApiIntegrationTest stale vs BRD"
+              ],
+              "rejected_claims": [],
+              "not_in_scope": [
+                "Async REST/Kafka propagation (kept)",
+                "Chat offline behavior \u00c2\u00a7150.6 / Scenario L (distinct feature, kept)",
+                "D-24 manual offline fee recording (unrelated to Sync Service)"
+              ],
+              "refresh_tasks": []
+            }
+          },
+          "IMPACT": {
+            "status": "READY",
+            "evidence": [
+              "backend/subscription-service/src/main/java/com/buildingos/subscription/catalog/domain/model/Feature.java",
+              "backend/subscription-service/src/test/java/com/buildingos/subscription/revenue/RevenueApiIntegrationTest.java"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Technical readiness: single-flag removal + doc purge, no DB/API contract change.",
+            "outputs": {
+              "impact": "LOW",
+              "modules": [
+                "subscription-service feature catalog"
+              ],
+              "api_change": false,
+              "db_change": false,
+              "flutter_change": false,
+              "delta": "Remove OFFLINE_SYNC entitlement flag (Feature.java), replace flag in RevenueApiIntegrationTest selfSubscribeRules, purge stale sync/offline refs from BOS-001/002/010 scope docs",
+              "affected_artifacts": [
+                "backend/subscription-service/src/main/java/com/buildingos/subscription/catalog/domain/model/Feature.java",
+                "backend/subscription-service/src/test/java/com/buildingos/subscription/revenue/RevenueApiIntegrationTest.java",
+                "agentic/data/project-context/features/BOS-001/BACKLOG.md",
+                "agentic/data/project-context/features/BOS-001/SRS.md",
+                "agentic/data/project-context/features/BOS-001/BASELINE.md",
+                "agentic/data/project-context/features/BOS-001/README.md",
+                "agentic/data/project-context/features/BOS-001/FEATURE.md",
+                "agentic/data/project-context/features/BOS-001/adr/ADR-001-platform-boundaries.md",
+                "agentic/data/project-context/features/BOS-002/FEATURE.md",
+                "agentic/data/project-context/features/BOS-010/FEATURE.md",
+                "agentic/data/project-context/features/BOS-010/REQUIREMENTS.md",
+                "agentic/data/project-context/features/BOS-010/subscription-plans/REQUIREMENTS.md",
+                "agentic/data/project-context/features/BOS-010/units-ownership/BASELINE.md"
+              ],
+              "regression_targets": [
+                "mvn verify subscription-service"
+              ],
+              "consumers_note": "No consumer enforcement yet (baseline-confirmed); flag removal breaks no runtime callers.",
+              "compat_risk": "NONE"
+            }
+          },
+          "TECHNICAL": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/BuildingOS_BRD_Agentic_Development.md",
+              "backend/subscription-service/src/main/java/com/buildingos/subscription/catalog/domain/model/Feature.java",
+              "backend/subscription-service/src/test/java/com/buildingos/subscription/revenue/RevenueApiIntegrationTest.java"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Implementation: remove OFFLINE_SYNC enum, swap test flag to work_orders.enabled, purge stale doc refs.",
+            "outputs": {
+              "verdict": "TECHNICAL_READY",
+              "approval": "pending operator",
+              "checklist": {
+                "behavior": "BRD authoritatively drops offline_sync entitlement; backend feature catalog reflects it",
+                "boundaries": "subscription-service catalog only; no consumer enforcement exists",
+                "contracts": "effectiveEntitlements shape unchanged; one key removed, permissive catalog",
+                "db": "none",
+                "test_strategy": "RevenueApiIntegrationTest selfSubscribeRules uses a remaining FLAG (work_orders.enabled); mvn verify subscription-service",
+                "doc_scope": "BOS-001/002/010 + subscription-plans purge of sync/offline refs"
+              }
+            }
+          },
+          "IMPLEMENTATION": {
+            "status": "READY",
+            "evidence": [
+              "backend/subscription-service/src/main/java/com/buildingos/subscription/catalog/domain/model/Feature.java",
+              "backend/subscription-service/src/test/java/com/buildingos/subscription/revenue/RevenueApiIntegrationTest.java",
+              "backend/subscription-service/target/surefire-reports"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Review the diff, then QA gate.",
+            "outputs": {
+              "changed_paths": [
+                "backend/subscription-service/src/main/java/com/buildingos/subscription/catalog/domain/model/Feature.java",
+                "backend/subscription-service/src/test/java/com/buildingos/subscription/revenue/RevenueApiIntegrationTest.java",
+                "agentic/data/project-context/features/BOS-001/BACKLOG.md",
+                "agentic/data/project-context/features/BOS-001/SRS.md",
+                "agentic/data/project-context/features/BOS-001/BASELINE.md",
+                "agentic/data/project-context/features/BOS-001/README.md",
+                "agentic/data/project-context/features/BOS-001/ARCHITECTURE.md",
+                "agentic/data/project-context/features/BOS-001/FEATURE.md",
+                "agentic/data/project-context/features/BOS-001/QA-ACCEPTANCE.md",
+                "agentic/data/project-context/features/BOS-001/adr/ADR-001-platform-boundaries.md",
+                "agentic/data/project-context/features/BOS-002/FEATURE.md",
+                "agentic/data/project-context/features/BOS-010/FEATURE.md",
+                "agentic/data/project-context/features/BOS-010/REQUIREMENTS.md",
+                "agentic/data/project-context/features/BOS-010/subscription-plans/REQUIREMENTS.md",
+                "agentic/data/project-context/features/BOS-010/units-ownership/BASELINE.md"
+              ],
+              "acceptance_coverage": {
+                "RV-02": "offline_sync.enabled removed from feature catalog list",
+                "SUB-02": "offline_sync.enabled removed from entitlements list",
+                "Selection_purge": "BOS-005 and all offline/Drift/outbox-collection refs removed from affected scope; only intentional keeps (D-24 offline fee, outbox, contract-drift term) remain",
+                "code": "OFFLINE_SYNC enum removed; test selfSubscribeRules now asserts work_orders.enabled"
+              },
+              "check_evidence": {
+                "build": "mvn -B -f backend/pom.xml -pl subscription-service verify: BUILD SUCCESS",
+                "tests": "Tests run: 31, Failures: 0, Errors: 0, Skipped: 0 (RevenueApiIntegrationTest 8/8)"
+              },
+              "risks": [
+                "Effective entitlements payload for legacy plan records could shrink by one key; no consumer enforcement exists so no runtime break."
+              ]
+            }
+          },
+          "REVIEW": {
+            "status": "READY",
+            "evidence": [
+              "git diff: 15 files, 22 insertions, 26 deletions; Feature.java -1 line; RevenueApiIntegrationTest.swap to work_orders.enabled",
+              "mvn -B -f backend/pom.xml -pl subscription-service verify: BUILD SUCCESS, 31 tests 0 failures",
+              "grep offline_sync/OFFLINE_SYNC across agentic/ + backend/: 0 matches; only intentional keeps remain (chat offline S150.6, D-24 offline fee)"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "QA: rerun subscription-service verification as release evidence.",
+            "outputs": {
+              "verdict": "APPROVED",
+              "reviewer": "agent review, not human approval",
+              "findings": [
+                "No defects; diff bounded to offline-sync removal",
+                "INFO: BOS-001/README.md rewrap 'money/follows with its correctness tests' cosmetic, harmless"
+              ],
+              "checked": {
+                "requirements": "RV-02, SUB-02, BRD test selfSubscribeRules exercise effectiveEntitlements with a remaining FLAG",
+                "unintended_changes": "all 15 changed paths are in declared scope; no consumer enforcement touched; chat/outbox/D-24 keeps intact",
+                "regression": "31/31 tests green; compile clean"
+              }
+            }
+          },
+          "QA": {
+            "status": "READY",
+            "evidence": [
+              "mvn -B -f backend/pom.xml -pl subscription-service verify: BUILD SUCCESS",
+              "backend/subscription-service/target/surefire-reports: Tests run 31, Failures 0, Errors 0, Skipped 0",
+              "RevenueApiIntegrationTest#selfSubscribeRules (8/8): effectiveEntitlements asserts work_orders.enabled=true, still exercising admin-only/open/self-subscribe paths"
+            ],
+            "blocking_issues": [],
+            "open_questions": [
+              "Manual QA/UAT N/A: no UI change; revocation/behavioral verification of non-changed entitlements outside this delta"
+            ],
+            "recommended_next_step": "Release readiness: confirm rollback (revert flag + re-add doc refs) and commit.",
+            "outputs": {
+              "verdict": "QA_PASS",
+              "check_matrix": {
+                "unit+integration": "PASS \u00e2\u20ac\u201d mvn verify subscription-service, 31/31",
+                "static/compile": "PASS \u00e2\u20ac\u201d javac release 17, test-compile clean",
+                "contract": "N/A \u00e2\u20ac\u201d no API contract file changed; permissive Entitlements view gains/loses one key without schema change",
+                "db": "N/A \u00e2\u20ac\u201d no migrations",
+                "flutter": "N/A \u00e2\u20ac\u201d flutter_change=false",
+                "manual_uat": "NOT REQUIRED \u00e2\u20ac\u201d doc + catalog change only"
+              },
+              "acceptance_coverage": {
+                "RV-02": "catalog no longer lists offline_sync.enabled",
+                "SUB-02": "entitlements list no longer includes offline_sync.enabled",
+                "code": "OFFLINE_SYNC removed; test updated and green",
+                "docs": "all affected scope purged of BOS-005/offline/drift outbox-collection refs"
+              }
+            }
+          }
+        },
+        "active_task": null
+      },
+      "created_at": "2026-09-25T02:16:25.348003+00:00"
+    },
+    {
+      "run_id": "RUN-7652B6312F634C099BE4140386DC7DB8",
+      "stage": "QA",
+      "status": "RUNNING",
+      "payload": {},
+      "created_at": "2026-09-25T02:16:48.019118+00:00"
+    },
+    {
+      "run_id": "RUN-7652B6312F634C099BE4140386DC7DB8",
+      "stage": "RELEASE",
+      "status": "RUNNING",
+      "payload": {},
+      "created_at": "2026-09-25T02:16:48.238729+00:00"
+    },
+    {
+      "run_id": "RUN-7652B6312F634C099BE4140386DC7DB8",
+      "stage": "RELEASE",
+      "status": "RUNNING",
+      "payload": {
+        "attempts": {
+          "0:INTAKE:prompt-intake-adapter": 1,
+          "0:CONTEXT:baseline-verifier": 1,
+          "0:IMPACT:change-impact-analyzer": 1,
+          "0:TECHNICAL:technical-readiness-verifier": 1,
+          "0:IMPLEMENTATION:implementation-agent": 1,
+          "0:REVIEW:code-review-agent": 1,
+          "0:QA:automated-qa-agent": 1,
+          "0:RELEASE:release-readiness-agent": 1
+        },
+        "active_task": {
+          "id": "59b16ecf73684b388d862dbdcd888928",
+          "skill": "release-readiness-agent",
+          "started_at": "2026-09-25T02:16:59.159742+00:00",
+          "tool_calls": 0
+        }
+      },
+      "created_at": "2026-09-25T02:16:59.160871+00:00"
+    },
+    {
+      "run_id": "RUN-7652B6312F634C099BE4140386DC7DB8",
+      "stage": "RELEASE",
+      "status": "RUNNING",
+      "payload": {
+        "results": {
+          "INTAKE": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/BuildingOS_BRD_Agentic_Development.md",
+              "agentic/data/project-context/features/BOS-001/BACKLOG.md"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Baseline context: reconcile affected scope docs (BOS-001/002/010 + subscription plans) against dropped Sync Service.",
+            "outputs": {
+              "work_item": "Drop Sync Service and offline-sync requirements from BRD and dependent scope",
+              "work_type": "change_request",
+              "project_type": "brownfield",
+              "hierarchy": "TASK_ONLY",
+              "planning": "NO_REPLAN",
+              "module": "backend/subscription-service, agentic/data/project-context",
+              "source": "Operator BRD edit 2026-09-25: removed Sync Service/Sync API/offline-first from BuildingOS_BRD_Agentic_Development.md",
+              "affected_scope": [
+                "subscription-service feature catalog (offline_sync.enabled)",
+                "BOS-001 BACKLOG/BASELINE Drift guidance",
+                "BOS-002 FEATURE offline sync ref",
+                "BOS-010 FEATURE/REQUIREMENTS offline sync ref",
+                "BOS-010 subscription-plans REQUIREMENTS RV-02",
+                "BOS-001 adr ADR-001 offline sync scope"
+              ]
+            }
+          },
+          "CONTEXT": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/BuildingOS_BRD_Agentic_Development.md",
+              "agentic/data/project-context/features/BOS-001/BACKLOG.md",
+              "agentic/data/project-context/features/BOS-010/subscription-plans/REQUIREMENTS.md",
+              "backend/subscription-service/src/main/java/com/buildingos/subscription/catalog/domain/model/Feature.java"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Impact analysis across subscription-service catalog and affected scope docs.",
+            "outputs": {
+              "verdict": "CONTEXT_READY",
+              "revision": "operator BRD edit 2026-09-25 (Sync Service dropped); BRD now has no sync/offline requirements",
+              "confirmed_scope": [
+                "BRD: all Sync Service/Drift/offline requirements removed",
+                "BOS-001 BACKLOG BOS-005 (Drift/outbox/offline collection) contradicts updated BRD",
+                "BOS-001 SRS FIN-03 offline replay contradicts updated BRD",
+                "BOS-001 BASELINE Drift guidance stale",
+                "BOS-001 README 'money and offline sync' stale",
+                "BOS-001 adr ADR-001 'offline sync later' stale",
+                "BOS-002 FEATURE offline financial sync (BOS-005) stale",
+                "BOS-010 FEATURE/REQUIREMENTS offline sync (BOS-005) ref stale",
+                "BOS-010 subscription-plans REQUIREMENTS RV-02 offline_sync.enabled stale",
+                "BOS-010 units-ownership BASELINE offline flags row stale",
+                "subscription-service Feature.java OFFLINE_SYNC flag + RevenueApiIntegrationTest stale vs BRD"
+              ],
+              "rejected_claims": [],
+              "not_in_scope": [
+                "Async REST/Kafka propagation (kept)",
+                "Chat offline behavior \u00c2\u00a7150.6 / Scenario L (distinct feature, kept)",
+                "D-24 manual offline fee recording (unrelated to Sync Service)"
+              ],
+              "refresh_tasks": []
+            }
+          },
+          "IMPACT": {
+            "status": "READY",
+            "evidence": [
+              "backend/subscription-service/src/main/java/com/buildingos/subscription/catalog/domain/model/Feature.java",
+              "backend/subscription-service/src/test/java/com/buildingos/subscription/revenue/RevenueApiIntegrationTest.java"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Technical readiness: single-flag removal + doc purge, no DB/API contract change.",
+            "outputs": {
+              "impact": "LOW",
+              "modules": [
+                "subscription-service feature catalog"
+              ],
+              "api_change": false,
+              "db_change": false,
+              "flutter_change": false,
+              "delta": "Remove OFFLINE_SYNC entitlement flag (Feature.java), replace flag in RevenueApiIntegrationTest selfSubscribeRules, purge stale sync/offline refs from BOS-001/002/010 scope docs",
+              "affected_artifacts": [
+                "backend/subscription-service/src/main/java/com/buildingos/subscription/catalog/domain/model/Feature.java",
+                "backend/subscription-service/src/test/java/com/buildingos/subscription/revenue/RevenueApiIntegrationTest.java",
+                "agentic/data/project-context/features/BOS-001/BACKLOG.md",
+                "agentic/data/project-context/features/BOS-001/SRS.md",
+                "agentic/data/project-context/features/BOS-001/BASELINE.md",
+                "agentic/data/project-context/features/BOS-001/README.md",
+                "agentic/data/project-context/features/BOS-001/FEATURE.md",
+                "agentic/data/project-context/features/BOS-001/adr/ADR-001-platform-boundaries.md",
+                "agentic/data/project-context/features/BOS-002/FEATURE.md",
+                "agentic/data/project-context/features/BOS-010/FEATURE.md",
+                "agentic/data/project-context/features/BOS-010/REQUIREMENTS.md",
+                "agentic/data/project-context/features/BOS-010/subscription-plans/REQUIREMENTS.md",
+                "agentic/data/project-context/features/BOS-010/units-ownership/BASELINE.md"
+              ],
+              "regression_targets": [
+                "mvn verify subscription-service"
+              ],
+              "consumers_note": "No consumer enforcement yet (baseline-confirmed); flag removal breaks no runtime callers.",
+              "compat_risk": "NONE"
+            }
+          },
+          "TECHNICAL": {
+            "status": "READY",
+            "evidence": [
+              "agentic/data/project-context/BuildingOS_BRD_Agentic_Development.md",
+              "backend/subscription-service/src/main/java/com/buildingos/subscription/catalog/domain/model/Feature.java",
+              "backend/subscription-service/src/test/java/com/buildingos/subscription/revenue/RevenueApiIntegrationTest.java"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Implementation: remove OFFLINE_SYNC enum, swap test flag to work_orders.enabled, purge stale doc refs.",
+            "outputs": {
+              "verdict": "TECHNICAL_READY",
+              "approval": "pending operator",
+              "checklist": {
+                "behavior": "BRD authoritatively drops offline_sync entitlement; backend feature catalog reflects it",
+                "boundaries": "subscription-service catalog only; no consumer enforcement exists",
+                "contracts": "effectiveEntitlements shape unchanged; one key removed, permissive catalog",
+                "db": "none",
+                "test_strategy": "RevenueApiIntegrationTest selfSubscribeRules uses a remaining FLAG (work_orders.enabled); mvn verify subscription-service",
+                "doc_scope": "BOS-001/002/010 + subscription-plans purge of sync/offline refs"
+              }
+            }
+          },
+          "IMPLEMENTATION": {
+            "status": "READY",
+            "evidence": [
+              "backend/subscription-service/src/main/java/com/buildingos/subscription/catalog/domain/model/Feature.java",
+              "backend/subscription-service/src/test/java/com/buildingos/subscription/revenue/RevenueApiIntegrationTest.java",
+              "backend/subscription-service/target/surefire-reports"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Review the diff, then QA gate.",
+            "outputs": {
+              "changed_paths": [
+                "backend/subscription-service/src/main/java/com/buildingos/subscription/catalog/domain/model/Feature.java",
+                "backend/subscription-service/src/test/java/com/buildingos/subscription/revenue/RevenueApiIntegrationTest.java",
+                "agentic/data/project-context/features/BOS-001/BACKLOG.md",
+                "agentic/data/project-context/features/BOS-001/SRS.md",
+                "agentic/data/project-context/features/BOS-001/BASELINE.md",
+                "agentic/data/project-context/features/BOS-001/README.md",
+                "agentic/data/project-context/features/BOS-001/ARCHITECTURE.md",
+                "agentic/data/project-context/features/BOS-001/FEATURE.md",
+                "agentic/data/project-context/features/BOS-001/QA-ACCEPTANCE.md",
+                "agentic/data/project-context/features/BOS-001/adr/ADR-001-platform-boundaries.md",
+                "agentic/data/project-context/features/BOS-002/FEATURE.md",
+                "agentic/data/project-context/features/BOS-010/FEATURE.md",
+                "agentic/data/project-context/features/BOS-010/REQUIREMENTS.md",
+                "agentic/data/project-context/features/BOS-010/subscription-plans/REQUIREMENTS.md",
+                "agentic/data/project-context/features/BOS-010/units-ownership/BASELINE.md"
+              ],
+              "acceptance_coverage": {
+                "RV-02": "offline_sync.enabled removed from feature catalog list",
+                "SUB-02": "offline_sync.enabled removed from entitlements list",
+                "Selection_purge": "BOS-005 and all offline/Drift/outbox-collection refs removed from affected scope; only intentional keeps (D-24 offline fee, outbox, contract-drift term) remain",
+                "code": "OFFLINE_SYNC enum removed; test selfSubscribeRules now asserts work_orders.enabled"
+              },
+              "check_evidence": {
+                "build": "mvn -B -f backend/pom.xml -pl subscription-service verify: BUILD SUCCESS",
+                "tests": "Tests run: 31, Failures: 0, Errors: 0, Skipped: 0 (RevenueApiIntegrationTest 8/8)"
+              },
+              "risks": [
+                "Effective entitlements payload for legacy plan records could shrink by one key; no consumer enforcement exists so no runtime break."
+              ]
+            }
+          },
+          "REVIEW": {
+            "status": "READY",
+            "evidence": [
+              "git diff: 15 files, 22 insertions, 26 deletions; Feature.java -1 line; RevenueApiIntegrationTest.swap to work_orders.enabled",
+              "mvn -B -f backend/pom.xml -pl subscription-service verify: BUILD SUCCESS, 31 tests 0 failures",
+              "grep offline_sync/OFFLINE_SYNC across agentic/ + backend/: 0 matches; only intentional keeps remain (chat offline S150.6, D-24 offline fee)"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "QA: rerun subscription-service verification as release evidence.",
+            "outputs": {
+              "verdict": "APPROVED",
+              "reviewer": "agent review, not human approval",
+              "findings": [
+                "No defects; diff bounded to offline-sync removal",
+                "INFO: BOS-001/README.md rewrap 'money/follows with its correctness tests' cosmetic, harmless"
+              ],
+              "checked": {
+                "requirements": "RV-02, SUB-02, BRD test selfSubscribeRules exercise effectiveEntitlements with a remaining FLAG",
+                "unintended_changes": "all 15 changed paths are in declared scope; no consumer enforcement touched; chat/outbox/D-24 keeps intact",
+                "regression": "31/31 tests green; compile clean"
+              }
+            }
+          },
+          "QA": {
+            "status": "READY",
+            "evidence": [
+              "mvn -B -f backend/pom.xml -pl subscription-service verify: BUILD SUCCESS",
+              "backend/subscription-service/target/surefire-reports: Tests run 31, Failures 0, Errors 0, Skipped 0",
+              "RevenueApiIntegrationTest#selfSubscribeRules (8/8): effectiveEntitlements asserts work_orders.enabled=true, still exercising admin-only/open/self-subscribe paths"
+            ],
+            "blocking_issues": [],
+            "open_questions": [
+              "Manual QA/UAT N/A: no UI change; revocation/behavioral verification of non-changed entitlements outside this delta"
+            ],
+            "recommended_next_step": "Release readiness: confirm rollback (revert flag + re-add doc refs) and commit.",
+            "outputs": {
+              "verdict": "QA_PASS",
+              "check_matrix": {
+                "unit+integration": "PASS \u00e2\u20ac\u201d mvn verify subscription-service, 31/31",
+                "static/compile": "PASS \u00e2\u20ac\u201d javac release 17, test-compile clean",
+                "contract": "N/A \u00e2\u20ac\u201d no API contract file changed; permissive Entitlements view gains/loses one key without schema change",
+                "db": "N/A \u00e2\u20ac\u201d no migrations",
+                "flutter": "N/A \u00e2\u20ac\u201d flutter_change=false",
+                "manual_uat": "NOT REQUIRED \u00e2\u20ac\u201d doc + catalog change only"
+              },
+              "acceptance_coverage": {
+                "RV-02": "catalog no longer lists offline_sync.enabled",
+                "SUB-02": "entitlements list no longer includes offline_sync.enabled",
+                "code": "OFFLINE_SYNC removed; test updated and green",
+                "docs": "all affected scope purged of BOS-005/offline/drift outbox-collection refs"
+              }
+            }
+          },
+          "RELEASE": {
+            "status": "READY",
+            "evidence": [
+              "approvals: gate technical (macdipu, 2026-09-25), gate release (macdipu, 2026-09-25)",
+              "review: code-review-agent APPROVED",
+              "qa: automated-qa-agent QA_PASS; mvn verify 31/31",
+              "git status: 15 modified files, no untracked code"
+            ],
+            "blocking_issues": [],
+            "open_questions": [],
+            "recommended_next_step": "Commit the 15-file diff (task-finish trigger) then close run as COMPLETED.",
+            "outputs": {
+              "verdict": "RELEASE_READY",
+              "checklist": {
+                "review_current_scope": "yes; diff reviewed against RV-02/SUB-02 acceptance",
+                "compat": "no API contract schema or DB migration changed; permissive entitlements view",
+                "config": "none changed",
+                "migration": "none",
+                "rollback": "revert 15-file diff; BRD stays committed at b846639",
+                "monitoring": "none applicable locally; no deploy in this change_request",
+                "approvals": "technical + release recorded"
+              },
+              "residual_risks": [
+                "Legacy plan records (if any persisted) would no longer emit offline_sync.enabled; no enforcement existed so no runtime break"
+              ],
+              "gate": "RELEASE_READY"
+            }
+          }
+        },
+        "active_task": null
+      },
+      "created_at": "2026-09-25T02:16:59.233520+00:00"
+    },
+    {
+      "run_id": "RUN-7652B6312F634C099BE4140386DC7DB8",
+      "stage": "COMPLETED",
+      "status": "COMPLETED",
+      "payload": {},
+      "created_at": "2026-09-25T02:16:59.452530+00:00"
+    }
+  ],
+  "approvals": [
+    {
+      "run_id": "RUN-7652B6312F634C099BE4140386DC7DB8",
+      "gate": "technical",
+      "approver": "macdipu",
+      "decision": "APPROVED",
+      "comment": "Operator approved dropping offline_sync.enabled flag + doc purge, 2026-09-25",
+      "created_at": "2026-09-25T02:10:14.916255+00:00",
+      "scope_revision": 0
+    },
+    {
+      "run_id": "RUN-7652B6312F634C099BE4140386DC7DB8",
+      "gate": "release",
+      "approver": "macdipu",
+      "decision": "APPROVED",
+      "comment": "Operator approved release + commit, 2026-09-25",
+      "created_at": "2026-09-25T02:16:48.017047+00:00",
+      "scope_revision": 0
+    }
+  ],
+  "timing_events": [
+    {
+      "run_id": "RUN-7652B6312F634C099BE4140386DC7DB8",
+      "task": "48a0d3c1393345f585ce4ba2e2283dd7",
+      "event": "STARTED",
+      "ts": "2026-09-25T01:55:04.597843+00:00",
+      "metadata": {
+        "skill": "prompt-intake-adapter",
+        "retry_count": 0
+      }
+    },
+    {
+      "run_id": "RUN-7652B6312F634C099BE4140386DC7DB8",
+      "task": "48a0d3c1393345f585ce4ba2e2283dd7",
+      "event": "COMPLETED",
+      "ts": "2026-09-25T01:55:04.647491+00:00",
+      "metadata": {
+        "duration_ms": 49,
+        "result_status": "READY"
+      }
+    },
+    {
+      "run_id": "RUN-7652B6312F634C099BE4140386DC7DB8",
+      "task": "7077e40e2c714855938fc7e6bdf97468",
+      "event": "STARTED",
+      "ts": "2026-09-25T01:55:23.910239+00:00",
+      "metadata": {
+        "skill": "baseline-verifier",
+        "retry_count": 0
+      }
+    },
+    {
+      "run_id": "RUN-7652B6312F634C099BE4140386DC7DB8",
+      "task": "7077e40e2c714855938fc7e6bdf97468",
+      "event": "COMPLETED",
+      "ts": "2026-09-25T01:55:23.960017+00:00",
+      "metadata": {
+        "duration_ms": 49,
+        "result_status": "READY"
+      }
+    },
+    {
+      "run_id": "RUN-7652B6312F634C099BE4140386DC7DB8",
+      "task": "96694a3886814d42a3205eebf2ccd344",
+      "event": "STARTED",
+      "ts": "2026-09-25T01:55:56.167454+00:00",
+      "metadata": {
+        "skill": "change-impact-analyzer",
+        "retry_count": 0
+      }
+    },
+    {
+      "run_id": "RUN-7652B6312F634C099BE4140386DC7DB8",
+      "task": "96694a3886814d42a3205eebf2ccd344",
+      "event": "COMPLETED",
+      "ts": "2026-09-25T01:55:56.234064+00:00",
+      "metadata": {
+        "duration_ms": 66,
+        "result_status": "READY"
+      }
+    },
+    {
+      "run_id": "RUN-7652B6312F634C099BE4140386DC7DB8",
+      "task": "33e9750c681447fcbc783b6234d4f64c",
+      "event": "STARTED",
+      "ts": "2026-09-25T01:56:12.482769+00:00",
+      "metadata": {
+        "skill": "technical-readiness-verifier",
+        "retry_count": 0
+      }
+    },
+    {
+      "run_id": "RUN-7652B6312F634C099BE4140386DC7DB8",
+      "task": "33e9750c681447fcbc783b6234d4f64c",
+      "event": "COMPLETED",
+      "ts": "2026-09-25T01:56:12.555711+00:00",
+      "metadata": {
+        "duration_ms": 72,
+        "result_status": "READY"
+      }
+    },
+    {
+      "run_id": "RUN-7652B6312F634C099BE4140386DC7DB8",
+      "task": "0aaa18e3676141369a6684929e5da3b6",
+      "event": "STARTED",
+      "ts": "2026-09-25T02:11:42.665707+00:00",
+      "metadata": {
+        "skill": "implementation-agent",
+        "retry_count": 0
+      }
+    },
+    {
+      "run_id": "RUN-7652B6312F634C099BE4140386DC7DB8",
+      "task": "0aaa18e3676141369a6684929e5da3b6",
+      "event": "COMPLETED",
+      "ts": "2026-09-25T02:15:46.660997+00:00",
+      "metadata": {
+        "duration_ms": 243995,
+        "result_status": "READY"
+      }
+    },
+    {
+      "run_id": "RUN-7652B6312F634C099BE4140386DC7DB8",
+      "task": "2512b7dba42a46f8afe92c34991e88e5",
+      "event": "STARTED",
+      "ts": "2026-09-25T02:16:13.573731+00:00",
+      "metadata": {
+        "skill": "code-review-agent",
+        "retry_count": 0
+      }
+    },
+    {
+      "run_id": "RUN-7652B6312F634C099BE4140386DC7DB8",
+      "task": "2512b7dba42a46f8afe92c34991e88e5",
+      "event": "COMPLETED",
+      "ts": "2026-09-25T02:16:13.646432+00:00",
+      "metadata": {
+        "duration_ms": 72,
+        "result_status": "READY"
+      }
+    },
+    {
+      "run_id": "RUN-7652B6312F634C099BE4140386DC7DB8",
+      "task": "9b40b142ad4f45e29803b7d5f95c0207",
+      "event": "STARTED",
+      "ts": "2026-09-25T02:16:25.270989+00:00",
+      "metadata": {
+        "skill": "automated-qa-agent",
+        "retry_count": 0
+      }
+    },
+    {
+      "run_id": "RUN-7652B6312F634C099BE4140386DC7DB8",
+      "task": "9b40b142ad4f45e29803b7d5f95c0207",
+      "event": "COMPLETED",
+      "ts": "2026-09-25T02:16:25.346984+00:00",
+      "metadata": {
+        "duration_ms": 75,
+        "result_status": "READY"
+      }
+    },
+    {
+      "run_id": "RUN-7652B6312F634C099BE4140386DC7DB8",
+      "task": "59b16ecf73684b388d862dbdcd888928",
+      "event": "STARTED",
+      "ts": "2026-09-25T02:16:59.159742+00:00",
+      "metadata": {
+        "skill": "release-readiness-agent",
+        "retry_count": 0
+      }
+    },
+    {
+      "run_id": "RUN-7652B6312F634C099BE4140386DC7DB8",
+      "task": "59b16ecf73684b388d862dbdcd888928",
+      "event": "COMPLETED",
+      "ts": "2026-09-25T02:16:59.232262+00:00",
+      "metadata": {
+        "duration_ms": 72,
+        "result_status": "READY"
+      }
+    }
+  ],
+  "audit_events": [
+    {
+      "run_id": "RUN-7652B6312F634C099BE4140386DC7DB8",
+      "event": "RUN_STARTED",
+      "payload": {},
+      "created_at": "2026-09-25T01:54:19.789331+00:00"
+    },
+    {
+      "run_id": "RUN-7652B6312F634C099BE4140386DC7DB8",
+      "event": "TASK_STARTED",
+      "payload": {
+        "skill": "prompt-intake-adapter"
+      },
+      "created_at": "2026-09-25T01:55:04.598529+00:00"
+    },
+    {
+      "run_id": "RUN-7652B6312F634C099BE4140386DC7DB8",
+      "event": "RESULT_RECORDED",
+      "payload": {
+        "skill": "prompt-intake-adapter",
+        "result": {
+          "status": "READY",
+          "evidence": [
+            "agentic/data/project-context/BuildingOS_BRD_Agentic_Development.md",
+            "agentic/data/project-context/features/BOS-001/BACKLOG.md"
+          ],
+          "blocking_issues": [],
+          "open_questions": [],
+          "recommended_next_step": "Baseline context: reconcile affected scope docs (BOS-001/002/010 + subscription plans) against dropped Sync Service.",
+          "outputs": {
+            "work_item": "Drop Sync Service and offline-sync requirements from BRD and dependent scope",
+            "work_type": "change_request",
+            "project_type": "brownfield",
+            "hierarchy": "TASK_ONLY",
+            "planning": "NO_REPLAN",
+            "module": "backend/subscription-service, agentic/data/project-context",
+            "source": "Operator BRD edit 2026-09-25: removed Sync Service/Sync API/offline-first from BuildingOS_BRD_Agentic_Development.md",
+            "affected_scope": [
+              "subscription-service feature catalog (offline_sync.enabled)",
+              "BOS-001 BACKLOG/BASELINE Drift guidance",
+              "BOS-002 FEATURE offline sync ref",
+              "BOS-010 FEATURE/REQUIREMENTS offline sync ref",
+              "BOS-010 subscription-plans REQUIREMENTS RV-02",
+              "BOS-001 adr ADR-001 offline sync scope"
+            ]
+          }
+        }
+      },
+      "created_at": "2026-09-25T01:55:04.648022+00:00"
+    },
+    {
+      "run_id": "RUN-7652B6312F634C099BE4140386DC7DB8",
+      "event": "STAGE_CHANGED",
+      "payload": {},
+      "created_at": "2026-09-25T01:55:04.862869+00:00"
+    },
+    {
+      "run_id": "RUN-7652B6312F634C099BE4140386DC7DB8",
+      "event": "TASK_STARTED",
+      "payload": {
+        "skill": "baseline-verifier"
+      },
+      "created_at": "2026-09-25T01:55:23.912585+00:00"
+    },
+    {
+      "run_id": "RUN-7652B6312F634C099BE4140386DC7DB8",
+      "event": "RESULT_RECORDED",
+      "payload": {
+        "skill": "baseline-verifier",
+        "result": {
+          "status": "READY",
+          "evidence": [
+            "agentic/data/project-context/BuildingOS_BRD_Agentic_Development.md",
+            "agentic/data/project-context/features/BOS-001/BACKLOG.md",
+            "agentic/data/project-context/features/BOS-010/subscription-plans/REQUIREMENTS.md",
+            "backend/subscription-service/src/main/java/com/buildingos/subscription/catalog/domain/model/Feature.java"
+          ],
+          "blocking_issues": [],
+          "open_questions": [],
+          "recommended_next_step": "Impact analysis across subscription-service catalog and affected scope docs.",
+          "outputs": {
+            "verdict": "CONTEXT_READY",
+            "revision": "operator BRD edit 2026-09-25 (Sync Service dropped); BRD now has no sync/offline requirements",
+            "confirmed_scope": [
+              "BRD: all Sync Service/Drift/offline requirements removed",
+              "BOS-001 BACKLOG BOS-005 (Drift/outbox/offline collection) contradicts updated BRD",
+              "BOS-001 SRS FIN-03 offline replay contradicts updated BRD",
+              "BOS-001 BASELINE Drift guidance stale",
+              "BOS-001 README 'money and offline sync' stale",
+              "BOS-001 adr ADR-001 'offline sync later' stale",
+              "BOS-002 FEATURE offline financial sync (BOS-005) stale",
+              "BOS-010 FEATURE/REQUIREMENTS offline sync (BOS-005) ref stale",
+              "BOS-010 subscription-plans REQUIREMENTS RV-02 offline_sync.enabled stale",
+              "BOS-010 units-ownership BASELINE offline flags row stale",
+              "subscription-service Feature.java OFFLINE_SYNC flag + RevenueApiIntegrationTest stale vs BRD"
+            ],
+            "rejected_claims": [],
+            "not_in_scope": [
+              "Async REST/Kafka propagation (kept)",
+              "Chat offline behavior \u00c2\u00a7150.6 / Scenario L (distinct feature, kept)",
+              "D-24 manual offline fee recording (unrelated to Sync Service)"
+            ],
+            "refresh_tasks": []
+          }
+        }
+      },
+      "created_at": "2026-09-25T01:55:23.960592+00:00"
+    },
+    {
+      "run_id": "RUN-7652B6312F634C099BE4140386DC7DB8",
+      "event": "CONTEXT_REFRESHED",
+      "payload": {
+        "paths": [
+          "agentic/data/project-context/BuildingOS_BRD_Agentic_Development.md",
+          "agentic/data/project-context/features/BOS-001/BACKLOG.md",
+          "agentic/data/project-context/features/BOS-001/SRS.md",
+          "agentic/data/project-context/features/BOS-001/BASELINE.md",
+          "agentic/data/project-context/features/BOS-001/README.md",
+          "agentic/data/project-context/features/BOS-001/adr/ADR-001-platform-boundaries.md",
+          "agentic/data/project-context/features/BOS-002/FEATURE.md",
+          "agentic/data/project-context/features/BOS-010/FEATURE.md",
+          "agentic/data/project-context/features/BOS-010/REQUIREMENTS.md",
+          "agentic/data/project-context/features/BOS-010/subscription-plans/REQUIREMENTS.md",
+          "agentic/data/project-context/features/BOS-010/units-ownership/BASELINE.md",
+          "backend/subscription-service/src/main/java/com/buildingos/subscription/catalog/domain/model/Feature.java",
+          "backend/subscription-service/src/test/java/com/buildingos/subscription/revenue/RevenueApiIntegrationTest.java"
+        ]
+      },
+      "created_at": "2026-09-25T01:55:32.369210+00:00"
+    },
+    {
+      "run_id": "RUN-7652B6312F634C099BE4140386DC7DB8",
+      "event": "STAGE_CHANGED",
+      "payload": {},
+      "created_at": "2026-09-25T01:55:32.597059+00:00"
+    },
+    {
+      "run_id": "RUN-7652B6312F634C099BE4140386DC7DB8",
+      "event": "TASK_STARTED",
+      "payload": {
+        "skill": "change-impact-analyzer"
+      },
+      "created_at": "2026-09-25T01:55:56.168237+00:00"
+    },
+    {
+      "run_id": "RUN-7652B6312F634C099BE4140386DC7DB8",
+      "event": "RESULT_RECORDED",
+      "payload": {
+        "skill": "change-impact-analyzer",
+        "result": {
+          "status": "READY",
+          "evidence": [
+            "backend/subscription-service/src/main/java/com/buildingos/subscription/catalog/domain/model/Feature.java",
+            "backend/subscription-service/src/test/java/com/buildingos/subscription/revenue/RevenueApiIntegrationTest.java"
+          ],
+          "blocking_issues": [],
+          "open_questions": [],
+          "recommended_next_step": "Technical readiness: single-flag removal + doc purge, no DB/API contract change.",
+          "outputs": {
+            "impact": "LOW",
+            "modules": [
+              "subscription-service feature catalog"
+            ],
+            "api_change": false,
+            "db_change": false,
+            "flutter_change": false,
+            "delta": "Remove OFFLINE_SYNC entitlement flag (Feature.java), replace flag in RevenueApiIntegrationTest selfSubscribeRules, purge stale sync/offline refs from BOS-001/002/010 scope docs",
+            "affected_artifacts": [
+              "backend/subscription-service/src/main/java/com/buildingos/subscription/catalog/domain/model/Feature.java",
+              "backend/subscription-service/src/test/java/com/buildingos/subscription/revenue/RevenueApiIntegrationTest.java",
+              "agentic/data/project-context/features/BOS-001/BACKLOG.md",
+              "agentic/data/project-context/features/BOS-001/SRS.md",
+              "agentic/data/project-context/features/BOS-001/BASELINE.md",
+              "agentic/data/project-context/features/BOS-001/README.md",
+              "agentic/data/project-context/features/BOS-001/FEATURE.md",
+              "agentic/data/project-context/features/BOS-001/adr/ADR-001-platform-boundaries.md",
+              "agentic/data/project-context/features/BOS-002/FEATURE.md",
+              "agentic/data/project-context/features/BOS-010/FEATURE.md",
+              "agentic/data/project-context/features/BOS-010/REQUIREMENTS.md",
+              "agentic/data/project-context/features/BOS-010/subscription-plans/REQUIREMENTS.md",
+              "agentic/data/project-context/features/BOS-010/units-ownership/BASELINE.md"
+            ],
+            "regression_targets": [
+              "mvn verify subscription-service"
+            ],
+            "consumers_note": "No consumer enforcement yet (baseline-confirmed); flag removal breaks no runtime callers.",
+            "compat_risk": "NONE"
+          }
+        }
+      },
+      "created_at": "2026-09-25T01:55:56.234721+00:00"
+    },
+    {
+      "run_id": "RUN-7652B6312F634C099BE4140386DC7DB8",
+      "event": "STAGE_CHANGED",
+      "payload": {},
+      "created_at": "2026-09-25T01:55:56.457727+00:00"
+    },
+    {
+      "run_id": "RUN-7652B6312F634C099BE4140386DC7DB8",
+      "event": "TASK_STARTED",
+      "payload": {
+        "skill": "technical-readiness-verifier"
+      },
+      "created_at": "2026-09-25T01:56:12.485987+00:00"
+    },
+    {
+      "run_id": "RUN-7652B6312F634C099BE4140386DC7DB8",
+      "event": "RESULT_RECORDED",
+      "payload": {
+        "skill": "technical-readiness-verifier",
+        "result": {
+          "status": "READY",
+          "evidence": [
+            "agentic/data/project-context/BuildingOS_BRD_Agentic_Development.md",
+            "backend/subscription-service/src/main/java/com/buildingos/subscription/catalog/domain/model/Feature.java",
+            "backend/subscription-service/src/test/java/com/buildingos/subscription/revenue/RevenueApiIntegrationTest.java"
+          ],
+          "blocking_issues": [],
+          "open_questions": [],
+          "recommended_next_step": "Implementation: remove OFFLINE_SYNC enum, swap test flag to work_orders.enabled, purge stale doc refs.",
+          "outputs": {
+            "verdict": "TECHNICAL_READY",
+            "approval": "pending operator",
+            "checklist": {
+              "behavior": "BRD authoritatively drops offline_sync entitlement; backend feature catalog reflects it",
+              "boundaries": "subscription-service catalog only; no consumer enforcement exists",
+              "contracts": "effectiveEntitlements shape unchanged; one key removed, permissive catalog",
+              "db": "none",
+              "test_strategy": "RevenueApiIntegrationTest selfSubscribeRules uses a remaining FLAG (work_orders.enabled); mvn verify subscription-service",
+              "doc_scope": "BOS-001/002/010 + subscription-plans purge of sync/offline refs"
+            }
+          }
+        }
+      },
+      "created_at": "2026-09-25T01:56:12.556520+00:00"
+    },
+    {
+      "run_id": "RUN-7652B6312F634C099BE4140386DC7DB8",
+      "event": "APPROVAL_RECORDED",
+      "payload": {
+        "gate": "technical",
+        "decision": "APPROVED",
+        "by": "macdipu"
+      },
+      "created_at": "2026-09-25T02:10:14.918704+00:00"
+    },
+    {
+      "run_id": "RUN-7652B6312F634C099BE4140386DC7DB8",
+      "event": "STAGE_CHANGED",
+      "payload": {},
+      "created_at": "2026-09-25T02:10:15.169862+00:00"
+    },
+    {
+      "run_id": "RUN-7652B6312F634C099BE4140386DC7DB8",
+      "event": "TASK_STARTED",
+      "payload": {
+        "skill": "implementation-agent"
+      },
+      "created_at": "2026-09-25T02:11:42.668994+00:00"
+    },
+    {
+      "run_id": "RUN-7652B6312F634C099BE4140386DC7DB8",
+      "event": "RESULT_RECORDED",
+      "payload": {
+        "skill": "implementation-agent",
+        "result": {
+          "status": "READY",
+          "evidence": [
+            "backend/subscription-service/src/main/java/com/buildingos/subscription/catalog/domain/model/Feature.java",
+            "backend/subscription-service/src/test/java/com/buildingos/subscription/revenue/RevenueApiIntegrationTest.java",
+            "backend/subscription-service/target/surefire-reports"
+          ],
+          "blocking_issues": [],
+          "open_questions": [],
+          "recommended_next_step": "Review the diff, then QA gate.",
+          "outputs": {
+            "changed_paths": [
+              "backend/subscription-service/src/main/java/com/buildingos/subscription/catalog/domain/model/Feature.java",
+              "backend/subscription-service/src/test/java/com/buildingos/subscription/revenue/RevenueApiIntegrationTest.java",
+              "agentic/data/project-context/features/BOS-001/BACKLOG.md",
+              "agentic/data/project-context/features/BOS-001/SRS.md",
+              "agentic/data/project-context/features/BOS-001/BASELINE.md",
+              "agentic/data/project-context/features/BOS-001/README.md",
+              "agentic/data/project-context/features/BOS-001/ARCHITECTURE.md",
+              "agentic/data/project-context/features/BOS-001/FEATURE.md",
+              "agentic/data/project-context/features/BOS-001/QA-ACCEPTANCE.md",
+              "agentic/data/project-context/features/BOS-001/adr/ADR-001-platform-boundaries.md",
+              "agentic/data/project-context/features/BOS-002/FEATURE.md",
+              "agentic/data/project-context/features/BOS-010/FEATURE.md",
+              "agentic/data/project-context/features/BOS-010/REQUIREMENTS.md",
+              "agentic/data/project-context/features/BOS-010/subscription-plans/REQUIREMENTS.md",
+              "agentic/data/project-context/features/BOS-010/units-ownership/BASELINE.md"
+            ],
+            "acceptance_coverage": {
+              "RV-02": "offline_sync.enabled removed from feature catalog list",
+              "SUB-02": "offline_sync.enabled removed from entitlements list",
+              "Selection_purge": "BOS-005 and all offline/Drift/outbox-collection refs removed from affected scope; only intentional keeps (D-24 offline fee, outbox, contract-drift term) remain",
+              "code": "OFFLINE_SYNC enum removed; test selfSubscribeRules now asserts work_orders.enabled"
+            },
+            "check_evidence": {
+              "build": "mvn -B -f backend/pom.xml -pl subscription-service verify: BUILD SUCCESS",
+              "tests": "Tests run: 31, Failures: 0, Errors: 0, Skipped: 0 (RevenueApiIntegrationTest 8/8)"
+            },
+            "risks": [
+              "Effective entitlements payload for legacy plan records could shrink by one key; no consumer enforcement exists so no runtime break."
+            ]
+          }
+        }
+      },
+      "created_at": "2026-09-25T02:15:46.661822+00:00"
+    },
+    {
+      "run_id": "RUN-7652B6312F634C099BE4140386DC7DB8",
+      "event": "STAGE_CHANGED",
+      "payload": {},
+      "created_at": "2026-09-25T02:15:49.490057+00:00"
+    },
+    {
+      "run_id": "RUN-7652B6312F634C099BE4140386DC7DB8",
+      "event": "TASK_STARTED",
+      "payload": {
+        "skill": "code-review-agent"
+      },
+      "created_at": "2026-09-25T02:16:13.574771+00:00"
+    },
+    {
+      "run_id": "RUN-7652B6312F634C099BE4140386DC7DB8",
+      "event": "RESULT_RECORDED",
+      "payload": {
+        "skill": "code-review-agent",
+        "result": {
+          "status": "READY",
+          "evidence": [
+            "git diff: 15 files, 22 insertions, 26 deletions; Feature.java -1 line; RevenueApiIntegrationTest.swap to work_orders.enabled",
+            "mvn -B -f backend/pom.xml -pl subscription-service verify: BUILD SUCCESS, 31 tests 0 failures",
+            "grep offline_sync/OFFLINE_SYNC across agentic/ + backend/: 0 matches; only intentional keeps remain (chat offline S150.6, D-24 offline fee)"
+          ],
+          "blocking_issues": [],
+          "open_questions": [],
+          "recommended_next_step": "QA: rerun subscription-service verification as release evidence.",
+          "outputs": {
+            "verdict": "APPROVED",
+            "reviewer": "agent review, not human approval",
+            "findings": [
+              "No defects; diff bounded to offline-sync removal",
+              "INFO: BOS-001/README.md rewrap 'money/follows with its correctness tests' cosmetic, harmless"
+            ],
+            "checked": {
+              "requirements": "RV-02, SUB-02, BRD test selfSubscribeRules exercise effectiveEntitlements with a remaining FLAG",
+              "unintended_changes": "all 15 changed paths are in declared scope; no consumer enforcement touched; chat/outbox/D-24 keeps intact",
+              "regression": "31/31 tests green; compile clean"
+            }
+          }
+        }
+      },
+      "created_at": "2026-09-25T02:16:13.647343+00:00"
+    },
+    {
+      "run_id": "RUN-7652B6312F634C099BE4140386DC7DB8",
+      "event": "STAGE_CHANGED",
+      "payload": {},
+      "created_at": "2026-09-25T02:16:13.863154+00:00"
+    },
+    {
+      "run_id": "RUN-7652B6312F634C099BE4140386DC7DB8",
+      "event": "TASK_STARTED",
+      "payload": {
+        "skill": "automated-qa-agent"
+      },
+      "created_at": "2026-09-25T02:16:25.274563+00:00"
+    },
+    {
+      "run_id": "RUN-7652B6312F634C099BE4140386DC7DB8",
+      "event": "RESULT_RECORDED",
+      "payload": {
+        "skill": "automated-qa-agent",
+        "result": {
+          "status": "READY",
+          "evidence": [
+            "mvn -B -f backend/pom.xml -pl subscription-service verify: BUILD SUCCESS",
+            "backend/subscription-service/target/surefire-reports: Tests run 31, Failures 0, Errors 0, Skipped 0",
+            "RevenueApiIntegrationTest#selfSubscribeRules (8/8): effectiveEntitlements asserts work_orders.enabled=true, still exercising admin-only/open/self-subscribe paths"
+          ],
+          "blocking_issues": [],
+          "open_questions": [
+            "Manual QA/UAT N/A: no UI change; revocation/behavioral verification of non-changed entitlements outside this delta"
+          ],
+          "recommended_next_step": "Release readiness: confirm rollback (revert flag + re-add doc refs) and commit.",
+          "outputs": {
+            "verdict": "QA_PASS",
+            "check_matrix": {
+              "unit+integration": "PASS \u00e2\u20ac\u201d mvn verify subscription-service, 31/31",
+              "static/compile": "PASS \u00e2\u20ac\u201d javac release 17, test-compile clean",
+              "contract": "N/A \u00e2\u20ac\u201d no API contract file changed; permissive Entitlements view gains/loses one key without schema change",
+              "db": "N/A \u00e2\u20ac\u201d no migrations",
+              "flutter": "N/A \u00e2\u20ac\u201d flutter_change=false",
+              "manual_uat": "NOT REQUIRED \u00e2\u20ac\u201d doc + catalog change only"
+            },
+            "acceptance_coverage": {
+              "RV-02": "catalog no longer lists offline_sync.enabled",
+              "SUB-02": "entitlements list no longer includes offline_sync.enabled",
+              "code": "OFFLINE_SYNC removed; test updated and green",
+              "docs": "all affected scope purged of BOS-005/offline/drift outbox-collection refs"
+            }
+          }
+        }
+      },
+      "created_at": "2026-09-25T02:16:25.348003+00:00"
+    },
+    {
+      "run_id": "RUN-7652B6312F634C099BE4140386DC7DB8",
+      "event": "APPROVAL_RECORDED",
+      "payload": {
+        "gate": "release",
+        "decision": "APPROVED",
+        "by": "macdipu"
+      },
+      "created_at": "2026-09-25T02:16:48.019118+00:00"
+    },
+    {
+      "run_id": "RUN-7652B6312F634C099BE4140386DC7DB8",
+      "event": "STAGE_CHANGED",
+      "payload": {},
+      "created_at": "2026-09-25T02:16:48.238729+00:00"
+    },
+    {
+      "run_id": "RUN-7652B6312F634C099BE4140386DC7DB8",
+      "event": "TASK_STARTED",
+      "payload": {
+        "skill": "release-readiness-agent"
+      },
+      "created_at": "2026-09-25T02:16:59.160871+00:00"
+    },
+    {
+      "run_id": "RUN-7652B6312F634C099BE4140386DC7DB8",
+      "event": "RESULT_RECORDED",
+      "payload": {
+        "skill": "release-readiness-agent",
+        "result": {
+          "status": "READY",
+          "evidence": [
+            "approvals: gate technical (macdipu, 2026-09-25), gate release (macdipu, 2026-09-25)",
+            "review: code-review-agent APPROVED",
+            "qa: automated-qa-agent QA_PASS; mvn verify 31/31",
+            "git status: 15 modified files, no untracked code"
+          ],
+          "blocking_issues": [],
+          "open_questions": [],
+          "recommended_next_step": "Commit the 15-file diff (task-finish trigger) then close run as COMPLETED.",
+          "outputs": {
+            "verdict": "RELEASE_READY",
+            "checklist": {
+              "review_current_scope": "yes; diff reviewed against RV-02/SUB-02 acceptance",
+              "compat": "no API contract schema or DB migration changed; permissive entitlements view",
+              "config": "none changed",
+              "migration": "none",
+              "rollback": "revert 15-file diff; BRD stays committed at b846639",
+              "monitoring": "none applicable locally; no deploy in this change_request",
+              "approvals": "technical + release recorded"
+            },
+            "residual_risks": [
+              "Legacy plan records (if any persisted) would no longer emit offline_sync.enabled; no enforcement existed so no runtime break"
+            ],
+            "gate": "RELEASE_READY"
+          }
+        }
+      },
+      "created_at": "2026-09-25T02:16:59.233520+00:00"
+    },
+    {
+      "run_id": "RUN-7652B6312F634C099BE4140386DC7DB8",
+      "event": "STAGE_CHANGED",
+      "payload": {},
+      "created_at": "2026-09-25T02:16:59.452530+00:00"
+    },
+    {
+      "run_id": "RUN-7652B6312F634C099BE4140386DC7DB8",
+      "event": "COMMIT_RECORDED",
+      "payload": {
+        "sha": "f0e441c",
+        "subject": "docs(bug): purge offline-sync from scope and subscription catalog",
+        "work_item": "change_request drop-sync-service",
+        "task": "Remove OFFLINE_SYNC entitlement flag + purge stale sync/offline refs per BRD",
+        "run": "RUN-7652B6312F634C099BE4140386DC7DB8",
+        "commit_trigger": "task-finish"
+      },
+      "created_at": "2026-09-25T02:17:26.895660+00:00"
+    }
+  ],
+  "tool_calls": {}
+}

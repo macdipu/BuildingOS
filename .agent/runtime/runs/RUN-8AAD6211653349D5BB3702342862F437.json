@@ -1663,6 +1663,19 @@
         "commit_trigger": "task-finish"
       },
       "created_at": "2026-09-25T01:09:14.335681+00:00"
+    },
+    {
+      "run_id": "RUN-8AAD6211653349D5BB3702342862F437",
+      "event": "COMMIT_RECORDED",
+      "payload": {
+        "sha": "975ea8d",
+        "subject": "fix(auth-service): wire platform-user use cases and add tests",
+        "work_item": "BOS-010-F6",
+        "task": "F6-T2",
+        "run": "RUN-8AAD6211653349D5BB3702342862F437",
+        "commit_trigger": "task-finish"
+      },
+      "created_at": "2026-09-25T02:50:48.480202+00:00"
     }
   ],
   "tool_calls": {}

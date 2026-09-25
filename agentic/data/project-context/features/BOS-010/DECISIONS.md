@@ -2,7 +2,7 @@
 
 Status: RESOLVED at REQUIREMENTS level. D-01/D-02 carry forward from BOS-002 as
 pre-confirmed candidates. D-07..D-32 are resolved by the operator (D-15/D-19/D-21 superseded by
-D-22..D-27; D-09/D-10 resolved 2026-09-25).
+D-22..D-27; D-09/D-10 resolved 2026-09-25; D-33 resolved 2026-09-25).
 
 | ID | Decision needed | Known source constraint | Needed before |
 |---|---|---|---|
@@ -34,5 +34,6 @@ D-22..D-27; D-09/D-10 resolved 2026-09-25).
 | D-30 | RESOLVED (interim): until the onboarding/units slices land, a platform admin `Activate` action moves `ONBOARDING → ACTIVE` when the building has an assigned `BUILDING_ADMIN`; the ≥1-unit prerequisite (§149.9 step 11, ON-02) is added with the units slice. | Operator decision, 2026-09-24 | F2 activate use case; later ON-02 |
 | D-31 | RESOLVED: `applicant_relationship` ∈ `OWNER, COMMITTEE_MEMBER, PROPERTY_MANAGER, DEVELOPER, OTHER` (OTHER carries a free-text note). | Operator decision, 2026-09-24 | F2 application model |
 | D-32 | RESOLVED: optional `management_type` ∈ `SELF_MANAGED, OWNERS_COMMITTEE, MANAGEMENT_COMPANY, DEVELOPER_MANAGED`. | Operator decision, 2026-09-24 | F2 application model |
+| D-33 | RESOLVED: `AssistedOnboardingSession` rules (F6-T3). (a) Create/assign: `SUPER_ADMIN` or `PLATFORM_ADMIN`, checked identically. (b) Assignee must currently hold the `ONBOARDING_AGENT` platform role (verified against auth-service at create time). (c) Created directly as `ASSIGNED` (customer-initiated `REQUESTED` not built in F6). The assigned agent may move `ASSIGNED → IN_PROGRESS ⇄ WAITING_FOR_CUSTOMER` and complete; `SUPER_ADMIN`/`PLATFORM_ADMIN` may complete or cancel. (d) Maximum duration 30 days, configurable; an active session past `expires_at` becomes `EXPIRED`. | Operator decision, 2026-09-25; §149.11, Scenario G | F6-T3 AssistedOnboardingSession API |
 
 No credentials are recorded in this document.
