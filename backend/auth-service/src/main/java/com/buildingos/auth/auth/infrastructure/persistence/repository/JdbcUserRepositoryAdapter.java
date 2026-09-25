@@ -31,6 +31,15 @@ public class JdbcUserRepositoryAdapter implements UserRepository {
     }
 
     @Override
+    public Optional<User> findById(UUID id) {
+        List<String> phones = jdbc.query("SELECT phone FROM app_user WHERE id = ?", UserRowMapper.PHONE, id);
+        if (phones.isEmpty()) {
+            return Optional.empty();
+        }
+        return Optional.of(load(id, phones.get(0)));
+    }
+
+    @Override
     public User findOrCreateByPhone(String phone) {
         return findByPhone(phone).orElseGet(() -> {
             try {
@@ -44,11 +53,43 @@ public class JdbcUserRepositoryAdapter implements UserRepository {
     }
 
     @Override
+    public List<User> list(String query, PlatformRole role, int page, int size) {
+        String like = query == null || query.isBlank() ? null : "%" + query.trim() + "%";
+        List<UUID> ids = jdbc.query("""
+                SELECT u.id FROM app_user u
+                WHERE (? IS NULL OR u.phone ILIKE ?)
+                  AND (? IS NULL OR EXISTS (
+                        SELECT 1 FROM platform_user_role r WHERE r.user_id = u.id AND r.role = ?))
+                ORDER BY u.created_at DESC
+                LIMIT ? OFFSET ?
+                """, UserRowMapper.ID, like, like, role == null ? null : role.name(), role == null ? null : role.name(),
+                size, page * size);
+        return ids.stream().map(this::loadById).toList();
+    }
+
+    @Override
+    public long count(String query, PlatformRole role) {
+        String like = query == null || query.isBlank() ? null : "%" + query.trim() + "%";
+        Long total = jdbc.queryForObject("""
+                SELECT count(*) FROM app_user u
+                WHERE (? IS NULL OR u.phone ILIKE ?)
+                  AND (? IS NULL OR EXISTS (
+                        SELECT 1 FROM platform_user_role r WHERE r.user_id = u.id AND r.role = ?))
+                """, Long.class, like, like, role == null ? null : role.name(), role == null ? null : role.name());
+        return total == null ? 0 : total;
+    }
+
+    @Override
     public void grantPlatformRole(UUID userId, PlatformRole role) {
         jdbc.update("""
                 INSERT INTO platform_user_role (user_id, role) VALUES (?, ?)
                 ON CONFLICT (user_id, role) DO NOTHING
                 """, userId, role.name());
+    }
+
+    @Override
+    public void revokePlatformRole(UUID userId, PlatformRole role) {
+        jdbc.update("DELETE FROM platform_user_role WHERE user_id = ? AND role = ?", userId, role.name());
     }
 
     private User load(UUID id, String phone) {
@@ -58,5 +99,10 @@ public class JdbcUserRepositoryAdapter implements UserRepository {
                 UserRowMapper.PLATFORM_ROLE, id)
                 .stream().collect(Collectors.toUnmodifiableSet());
         return new User(id, phone, createdAt, roles);
+    }
+
+    private User loadById(UUID id) {
+        String phone = jdbc.queryForObject("SELECT phone FROM app_user WHERE id = ?", UserRowMapper.PHONE, id);
+        return load(id, phone);
     }
 }

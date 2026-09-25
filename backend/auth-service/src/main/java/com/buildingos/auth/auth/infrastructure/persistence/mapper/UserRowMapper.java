@@ -11,6 +11,7 @@ import org.springframework.jdbc.core.RowMapper;
  */
 public final class UserRowMapper {
     public static final RowMapper<UUID> ID = (rs, rowNum) -> rs.getObject("id", UUID.class);
+    public static final RowMapper<String> PHONE = (rs, rowNum) -> rs.getString("phone");
     public static final RowMapper<Instant> CREATED_AT = (rs, rowNum) -> rs.getTimestamp("created_at").toInstant();
     public static final RowMapper<PlatformRole> PLATFORM_ROLE =
             (rs, rowNum) -> PlatformRole.valueOf(rs.getString("role"));
