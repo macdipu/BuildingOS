@@ -79,8 +79,9 @@ The platform must support buildings where one owner can own multiple units, one 
 - Work orders
 - Contractor management
 - Meeting records
-- Announcements
-- Notifications
+- Announcements / Notice Board (§150)
+- Community chat within a building (§150)
+- Notifications, including FCM push and notification inbox (§150)
 - Receipts
 - Reports
 - Assets
@@ -104,7 +105,8 @@ The platform must support buildings where one owner can own multiple units, one 
 - AI financial assistant
 - Predictive maintenance
 - Vendor marketplace
-- Tenant issue chat
+- Voice/video calling and end-to-end encrypted chat
+- Cross-building / neighbourhood community chat
 - Service marketplace
 
 ---
@@ -199,6 +201,7 @@ Permissions:
 - Contractor management
 - Meetings
 - Announcements
+- Community chat moderation (§150)
 - Reports
 
 ### OWNER
@@ -213,6 +216,7 @@ Permissions:
 - View maintenance dues
 - View selected building reports
 - Receive notices
+- Participate in building community chat (§150)
 
 ### PROPERTY_MANAGER / RENT_MANAGER
 Operates rental collection.
@@ -237,6 +241,7 @@ Permissions:
 - Download receipt
 - Receive announcements
 - View permitted contacts
+- Participate in building community chat (§150)
 
 ### ACCOUNTANT
 Optional finance role.
@@ -663,6 +668,9 @@ Responsibilities:
 - Audience targeting
 - Read acknowledgment
 - Optional comments
+- Notice pinning
+- Community chat: channels, messages, membership sync, moderation, reports, blocks (§150.3)
+- Real-time chat delivery over WebSocket (§150.5)
 
 Entities:
 
@@ -674,13 +682,28 @@ Entities:
 - MeetingDecision
 - MeetingParticipant
 - Comment
+- ChatChannel
+- ChatChannelMember
+- ChatMessage
+- ChatMessageReport
+- UserBlock
 
 Publishes:
 
 - `announcement.published`
+- `announcement.pinned`
+- `announcement.expired`
 - `meeting.created`
 - `meeting.updated`
 - `meeting.decision.recorded`
+- `chat.channel.created`
+- `chat.message.posted`
+- `chat.message.edited`
+- `chat.message.deleted`
+- `chat.message.reported`
+- `chat.moderation.action`
+
+Full specification: §150.
 
 ---
 
@@ -688,8 +711,9 @@ Publishes:
 
 Responsibilities:
 
-- FCM notification
-- Notification preference
+- FCM push notification
+- Device registration / push token lifecycle (§150.4)
+- Notification preference (per user, per building)
 - Scheduled reminders
 - Notification inbox
 - Email/SMS future adapters
@@ -705,6 +729,7 @@ Consumes events:
 - `meeting.created`
 - `work.assigned`
 - `work.overdue`
+- `chat.message.posted`
 
 Entities:
 
@@ -712,6 +737,9 @@ Entities:
 - NotificationTemplate
 - NotificationPreference
 - NotificationDelivery
+- DeviceRegistration
+
+Full specification: §150.4.
 
 ---
 
@@ -860,8 +888,8 @@ Publishes:
 | Tenants / leases / rent invoice | Rental | rental_db |
 | Payments / expenses / maintenance | Finance | finance_db |
 | Work / contractors | Work | work_db |
-| Announcements / meetings | Communication | communication_db |
-| Notification state | Notification | notification_db |
+| Announcements / meetings / community chat | Communication | communication_db |
+| Notification state / devices / preferences | Notification | notification_db |
 | Document metadata | Document | document_db |
 | Read models | Reporting | reporting_db |
 | Audit records | Audit | audit_db |
@@ -1558,7 +1586,11 @@ priority
 publish_at
 expires_at
 requires_acknowledgement
+pinned
+allow_comments
 ```
+
+Priority `EMERGENCY` always pushes and bypasses preferences. Pinning, audit and board rules: §150.2.
 
 ---
 
@@ -1638,6 +1670,7 @@ Device stores:
 - Invoices
 - Payment history
 - Announcements
+- Chat channels and recent messages (§150.6)
 - Work orders
 - Pending offline mutations
 - Sync cursor
@@ -1837,7 +1870,7 @@ Tenant:
 ```text
 Home
 Payments
-Notices
+Community
 Profile
 ```
 
@@ -1847,7 +1880,7 @@ Owner:
 Dashboard
 Properties
 Payments
-Notices
+Community
 More
 ```
 
@@ -1857,9 +1890,11 @@ Committee:
 Dashboard
 Finance
 Work
-Notices
+Community
 More
 ```
+
+`Community` holds the Notice Board and Community Chat (§150.9).
 
 ---
 
@@ -2917,7 +2952,9 @@ Tabs:
 Actions:
 - Mark read
 - Mark all read
-- Open destination
+- Open destination (deep link; switches active building if needed, §150.4)
+
+Chat messages are not listed here; chat unread state lives in Community Chat (§150.9).
 
 ---
 
@@ -3067,9 +3104,10 @@ Financial audit records cannot be deleted from UI.
 | Expense | Finance |
 | Work order | Work |
 | Contractor | Work |
-| Announcement | Communication |
+| Announcement / Notice Board | Communication |
+| Community chat | Communication |
 | Meeting | Communication |
-| Notification | Notification |
+| Notification / push devices / preferences | Notification |
 | Files | Document |
 | Dashboards | Reporting |
 | Audit | Audit |
@@ -3607,6 +3645,9 @@ Required scheduled functions:
 - Work overdue detection
 - Asset maintenance reminder
 - Notification scheduling
+- Scheduled notice publish and notice expiry
+- Push token cleanup (invalid/stale devices)
+- Chat retention purge (once retention is decided, §150.3)
 
 For horizontally scaled services, ensure jobs are single-execution or safely idempotent.
 
@@ -3672,6 +3713,13 @@ Examples:
 Users can configure non-critical notifications.
 
 Emergency announcement bypasses ordinary preference except platform limitations.
+
+### Notices & Chat
+- Notice push per `notices` preference; EMERGENCY always
+- Chat push per channel mute / `chat_community` / `chat_direct` preference; @mentions notify under `MENTIONS_ONLY`
+- Chat pushes collapsed per channel and suppressed while channel is open
+
+Full preference model: §150.4.
 
 ---
 
@@ -3926,9 +3974,10 @@ A Flutter feature is done only when:
 
 ## Phase 6 – Communication
 
-- Announcements
+- Announcements / Notice Board
 - Meetings
-- Notifications
+- Notifications, FCM push, device registry, preferences
+- Community chat (§150)
 
 ## Phase 7 – Reporting
 
@@ -3991,7 +4040,7 @@ Can defer:
 - Organization-level consolidated billing
 - Promotional campaign management
 - Advanced support ticketing/CRM
-- Chat
+- Community chat (specified in §150; MVP inclusion is OPEN, default deferred to Phase 6)
 - Full accounting double-entry ledger
 - Direct payment gateway
 - Visitor access
@@ -4228,6 +4277,7 @@ MVP target under normal load:
 - Mobile list first cached render immediate/near-immediate.
 - Sync handles interrupted retries safely.
 - No duplicate financial transaction after retry.
+- Chat delivery to online members P95 < 1 s; push dispatch P95 < 10 s (§150.12).
 
 ---
 
@@ -4254,6 +4304,7 @@ Recommended:
 - Financial records retained long-term.
 - Audit records retained long-term.
 - Session/security records use shorter configurable retention.
+- Chat messages: retention period OPEN (§150.3); reported messages kept until report resolution.
 - Deleted personal data must consider legal/business obligations.
 
 Retention rules must be configurable before production scale.
@@ -4297,6 +4348,15 @@ work.complete
 
 announcement.read
 announcement.create
+announcement.pin
+
+chat.read
+chat.post
+chat.direct
+chat.group.create
+chat.moderate
+
+notification.preference.update
 
 meeting.read
 meeting.create
@@ -4320,6 +4380,7 @@ rent.read: owned units
 maintenance.read: owned units
 report.read: owner reports
 announcement.read
+chat.read, chat.post, chat.direct
 ```
 
 ## TENANT
@@ -4329,6 +4390,7 @@ lease.read: own active lease
 rent.read: own invoices
 payment.read: own payments
 announcement.read: targeted
+chat.read, chat.post
 ```
 
 ## MANAGER
@@ -5341,6 +5403,9 @@ max_units
 max_users
 storage_limit_mb
 support_tier
+community_chat.enabled
+community_chat.attachments.enabled
+push_notifications.enabled
 ```
 
 Rules:
@@ -5527,5 +5592,353 @@ MVP does **not** require:
 - organization-level consolidated billing
 
 These can be integrated later without redesigning building tenancy or subscription state.
+
+---
+
+# 150. Building Community Communication — Notice Board, Community Chat & Push Notifications
+
+Added 2026-09-25. Consolidates and extends §8.6, §8.7, §28, §77–79, §85 and §115 into one
+community-communication capability. Items marked **OPEN** are business decisions that have
+not been made; agents must not implement a default for them without explicit human decision.
+
+## 150.1 Capability Overview
+
+| Capability | Purpose | Direction | Owning service |
+|---|---|---|---|
+| Notice Board | Official, auditable building notices (the "Notices" UI label for Announcements, §28) | One-to-many, authorized publishers only | Communication |
+| Community Chat | Conversation between members of one building community | Many-to-many and one-to-one | Communication |
+| Push Notifications | Deliver notices, chat messages and domain reminders to devices | System-to-user | Notification |
+| Notification Inbox | Persistent in-app list of delivered notifications (§85) | System-to-user | Notification |
+
+Terminology: "Notice" in the community UI means an Announcement. The lease termination
+notice (`POST /api/v1/leases/{leaseId}/notice`, §20) is a separate Rental concept and must not
+share entities, endpoints or screens with the Notice Board.
+
+## 150.2 Notice Board (Announcements)
+
+Extends §28 and §77–79.
+
+Additional rules:
+
+- Only roles holding `announcement.create` may publish (default: BUILDING_ADMIN, COMMITTEE, PROPERTY_MANAGER).
+- A notice may be **pinned**; pinned notices sort first on the board until unpinned or expired.
+- Priority `EMERGENCY` sends push immediately and bypasses ordinary notification preference (§115).
+- Publishing, editing, expiring, pinning and deleting a notice are audited.
+- Editing a published notice keeps the prior version; readers see an "edited" marker.
+- Read and acknowledgement state are tracked per user (`AnnouncementRead`); Read % (§77) is computed against the resolved audience at publish time.
+- A scheduled notice (`publish_at` in the future) is not visible and not pushed until published.
+- Expired notices remain readable in history but leave the active board.
+- Notice audience resolution uses current building membership; users who join later see notices still active for their audience.
+- Comments on notices remain optional (§8.6); enabling them per notice is a publisher choice.
+
+Additional fields:
+
+```text
+pinned
+category        -- OPEN: category list (e.g. GENERAL, MAINTENANCE, EMERGENCY, MEETING, FINANCE) not yet decided
+allow_comments
+```
+
+## 150.3 Community Chat
+
+### Channel types
+
+```text
+BUILDING_COMMUNITY   -- one per building, all active members
+AUDIENCE_GROUP       -- scoped to an audience: OWNERS, TENANTS, COMMITTEE, MANAGERS
+CUSTOM_GROUP         -- created by an authorized member with selected participants
+DIRECT               -- one-to-one between two members of the same building
+```
+
+Rules:
+
+- A chat channel belongs to exactly one building. Cross-building chat is not allowed, even for a user who is a member of several buildings (§149.13).
+- `BUILDING_COMMUNITY` and `AUDIENCE_GROUP` membership is derived from building membership and role; it is kept in sync by consuming identity/building/rental events (membership granted/revoked, ownership transferred, lease ended). Users cannot leave derived channels but may mute them.
+- When a user loses building membership (move-out, ownership transfer, role revocation), they lose access to that building's channels immediately; message history they authored stays, attributed to their display name.
+- Users are shown by display name + role + unit label (e.g. "Rahim — Owner, 4B"). Phone number, email and NID are never exposed through chat (§94).
+- Messages support text, emoji, reply-to, @mentions and attachments (images, PDF) stored through Document Service with signed URLs (§131). Size/type limits follow §131.
+- Authors may edit or delete their own message; edits are marked, deletes leave a "message deleted" tombstone.
+- Read receipts per channel are tracked as a per-member "last read message" cursor, not per-message rows.
+- Typing indicators and online presence are ephemeral (Redis), never persisted.
+- Chat messages are not financial records and may be created offline (see 150.6).
+
+**OPEN** decisions:
+
+- Whether tenants may start `DIRECT` chats with owners/tenants other than their own landlord and the building management.
+- Who may create `CUSTOM_GROUP` channels (all members vs. committee/admin only).
+- Whether `BUILDING_COMMUNITY` is created automatically on building activation or enabled by Building Admin.
+- Chat message retention period (see §136).
+- Whether an edit window applies to own messages.
+- Whether chat is part of MVP (§124/§125) and which subscription plans include it (§149.16).
+- Behaviour during subscription grace/suspension (read-only vs. disabled).
+
+### Moderation
+
+- Roles holding `chat.moderate` (default: BUILDING_ADMIN, COMMITTEE) may delete any message in group channels of their building, mute a member in a channel for a period, and lock a channel.
+- Moderators cannot read `DIRECT` channels they are not part of.
+- Any member may **report** a message; reports go to building moderators. Reported content is retained for review even if the author deletes it.
+- Any member may **block** another member; a block hides the blocked user's messages to the blocker and prevents `DIRECT` chat between them.
+- Every moderation action (delete-by-moderator, mute, lock, report resolution) is audited with actor, reason and target.
+- Platform support staff have no chat access by default; any access follows §149.12 controlled, reason-bound, audited support access.
+
+### Entities
+
+```text
+ChatChannel(id, building_id, type, name, audience, locked, created_by, created_at, version)
+ChatChannelMember(channel_id, user_id, role_label, unit_label, muted_until, notification_level, last_read_message_id, joined_at, left_at)
+ChatMessage(id, channel_id, building_id, sender_user_id, client_message_id, body, reply_to_id, mentions, attachment_refs, edited_at, deleted_at, deleted_by, created_at)
+ChatMessageReport(id, message_id, reporter_user_id, reason, status, resolved_by, resolved_at)
+UserBlock(building_id, blocker_user_id, blocked_user_id, created_at)
+```
+
+`client_message_id` is unique per sender and makes message send idempotent (§16).
+
+## 150.4 Push Notifications
+
+Extends §8.7 and §115.
+
+Device registry:
+
+```text
+DeviceRegistration(id, user_id, platform[ANDROID|IOS|WEB], push_token, app_version, locale, last_seen_at, revoked_at)
+```
+
+Rules:
+
+- The app registers/refreshes its FCM token after login and on token rotation; logout revokes the device registration.
+- Tokens rejected by FCM as invalid are revoked automatically.
+- A user may have multiple devices; notifications fan out to all active devices.
+- Push payloads carry minimal data: title, short body, `building_id`, destination deep link and notification id. No NID, no phone numbers, no data beyond what the notification text already shows.
+- When the recipient holds several buildings, the push shows the building name and opening it switches `activeBuildingId` to that building after membership re-check.
+- Every push also creates a Notification Inbox entry (§85) so it is not lost if the push is dismissed or undelivered. Chat pushes are the exception: they are not duplicated into the inbox; the chat unread count is their persistent state.
+- Delivery attempts, failures and retries are tracked in `NotificationDelivery`; retry uses backoff and a DLQ (§96).
+- Chat push is suppressed while the user is actively viewing that channel.
+- Chat pushes to one user are collapsed per channel (e.g. "5 new messages in Community") to avoid floods.
+
+Preferences (per user, per building):
+
+```text
+notices:        ALL | IMPORTANT_ONLY
+chat_community: ALL | MENTIONS_ONLY | OFF
+chat_direct:    ALL | OFF
+finance:        ON | OFF          -- rent/maintenance reminders, payment recorded
+work:           ON | OFF
+meetings:       ON | OFF
+quiet_hours:    OPEN -- whether supported and default window not yet decided
+```
+
+`EMERGENCY` notices bypass preferences and quiet hours except platform limitations (§115).
+
+Push sources:
+
+| Event | Recipient | Default |
+|---|---|---|
+| `announcement.published` | resolved audience | on |
+| `announcement.published` (EMERGENCY) | resolved audience | always |
+| `chat.message.posted` | channel members except sender, respecting mute/preference/block | on |
+| `chat.message.posted` with @mention | mentioned member | on |
+| `meeting.created` | participants | on |
+| `rent.invoice.overdue`, `maintenance.invoice.overdue` | payer | on |
+| `payment.recorded` | payer / owner | on |
+| `work.assigned`, `work.overdue` | assignee | on |
+
+## 150.5 Real-Time Delivery
+
+- Chat uses a WebSocket connection (STOMP over WebSocket) routed through the API Gateway with the same JWT authentication and building-membership checks as REST.
+- The server is the source of truth; WebSocket carries new/edited/deleted message events and channel read cursors. Clients that miss events recover through the paginated history API.
+- Users without an open connection receive push (150.4).
+- Horizontal scaling of WebSocket nodes uses Redis pub/sub or Kafka fan-out; no sticky-session-only design.
+- If WebSocket is unavailable, the client falls back to periodic history polling.
+
+## 150.6 Offline Behaviour
+
+- Channels, recent messages and notices are cached in Drift (§31).
+- A message composed offline is stored locally with `client_message_id` and status `PENDING`, shown to the sender as "sending", and sent on reconnect. Duplicate sends are rejected idempotently.
+- Messages are displayed in server order once synced; the local pending message is replaced by the server copy.
+- Moderator actions, reports and notice publishing require connectivity.
+
+## 150.7 API Requirements
+
+```text
+# Notice board (extends existing announcement API)
+GET    /api/v1/buildings/{buildingId}/announcements?status=ACTIVE|SCHEDULED|EXPIRED
+POST   /api/v1/buildings/{buildingId}/announcements
+PATCH  /api/v1/announcements/{id}
+POST   /api/v1/announcements/{id}/publish
+POST   /api/v1/announcements/{id}/pin
+POST   /api/v1/announcements/{id}/unpin
+POST   /api/v1/announcements/{id}/expire
+POST   /api/v1/announcements/{id}/acknowledge
+
+# Community chat
+GET    /api/v1/buildings/{buildingId}/chat/channels
+POST   /api/v1/buildings/{buildingId}/chat/channels                 # CUSTOM_GROUP / DIRECT
+GET    /api/v1/chat/channels/{channelId}
+GET    /api/v1/chat/channels/{channelId}/members
+GET    /api/v1/chat/channels/{channelId}/messages?before=&limit=
+POST   /api/v1/chat/channels/{channelId}/messages                   # idempotent via client_message_id
+PATCH  /api/v1/chat/messages/{messageId}
+DELETE /api/v1/chat/messages/{messageId}
+POST   /api/v1/chat/channels/{channelId}/read                       # advance read cursor
+PATCH  /api/v1/chat/channels/{channelId}/membership                 # mute / notification level
+POST   /api/v1/chat/messages/{messageId}/reports
+POST   /api/v1/chat/channels/{channelId}/moderation/mute
+POST   /api/v1/chat/channels/{channelId}/moderation/lock
+GET    /api/v1/buildings/{buildingId}/chat/reports                  # moderators
+POST   /api/v1/chat/reports/{reportId}/resolve
+POST   /api/v1/buildings/{buildingId}/blocks
+DELETE /api/v1/buildings/{buildingId}/blocks/{userId}
+WS     /ws/chat                                                     # STOMP; subscribe /topic/chat.{channelId}
+
+# Push / notifications
+POST   /api/v1/me/devices
+DELETE /api/v1/me/devices/{deviceId}
+GET    /api/v1/me/notification-preferences?buildingId=
+PUT    /api/v1/me/notification-preferences
+GET    /api/v1/me/notifications?buildingId=&category=&cursor=
+POST   /api/v1/me/notifications/{id}/read
+POST   /api/v1/me/notifications/read-all
+```
+
+All endpoints follow §18 API standards, §118 pagination (cursor-based for chat history) and §128 error codes. New error codes:
+
+```text
+CHAT_CHANNEL_NOT_FOUND
+CHAT_CHANNEL_LOCKED
+CHAT_MEMBER_MUTED
+CHAT_DIRECT_NOT_ALLOWED
+CHAT_USER_BLOCKED
+FEATURE_NOT_ENTITLED
+```
+
+## 150.8 Event Requirements
+
+Published by Communication Service (`communication.events`, via outbox §15):
+
+```text
+announcement.published
+announcement.updated
+announcement.pinned
+announcement.expired
+chat.channel.created
+chat.member.joined
+chat.member.left
+chat.message.posted
+chat.message.edited
+chat.message.deleted
+chat.message.reported
+chat.moderation.action
+```
+
+Consumed by Communication Service:
+
+```text
+identity:     membership granted / revoked, role changed
+building:     ownership assigned / transferred, building activated
+rental:       lease activated / ended
+subscription: entitlement changed, building suspended
+```
+
+Consumed by Notification Service: see 150.4 push sources. Notification Service also publishes
+`notification.delivered` / `notification.failed` for observability.
+
+High-volume `chat.message.*` events may move to a dedicated `chat.events` topic (§14.2).
+Chat message bodies must not be copied into Reporting or Audit read models; only metadata
+(counts, moderation actions) may be projected.
+
+## 150.9 Screens
+
+**Community Home** (tab "Community", replaces "Notices" tab in §37):
+- Segments: `Notices` (§77) and `Chat`
+- Pinned and emergency notices on top
+- Unread badges per segment
+
+**Chat List Screen:**
+- Channels grouped: Community, Groups, Direct
+- Row: name, last message preview, time, unread count, muted icon
+- Buttons: `+ New Chat` (if permitted), Search
+
+**Chat Conversation Screen:**
+- Message list with day separators, reply preview, attachment preview, "edited"/"deleted" markers, pending/failed send state
+- Composer: text, emoji, attach image/PDF, @mention
+- Long-press actions: Reply, Copy, Edit/Delete (own), Report, Delete (moderator)
+- Locked-channel and muted-member banners
+
+**Channel Info Screen:**
+- Members list (display name, role, unit)
+- Mute / notification level
+- Moderator actions: Lock channel, Mute member
+- Block member (from a member's profile)
+
+**Moderation Reports Screen** (moderators): open reports, message context, `Delete Message`, `Dismiss`, `Mute Member`.
+
+**Notification Settings** (extends §89 Notification): preferences from 150.4 per building.
+
+Backend: Communication (notices, chat), Notification (push, inbox, preferences, devices), Document (attachments).
+
+## 150.10 Permissions
+
+```text
+announcement.read
+announcement.create
+announcement.pin
+chat.read
+chat.post
+chat.direct
+chat.group.create
+chat.moderate
+notification.preference.update
+```
+
+Default mapping (building-scoped; OPEN items in 150.3 may narrow these):
+
+| Role | Permissions |
+|---|---|
+| BUILDING_ADMIN | all above |
+| COMMITTEE | all above |
+| PROPERTY_MANAGER | announcement.read/create, chat.read/post/direct |
+| OWNER | announcement.read, chat.read/post/direct |
+| TENANT | announcement.read (targeted), chat.read/post, chat.direct (OPEN scope) |
+| ACCOUNTANT | announcement.read, chat.read/post |
+| VIEWER / AUDITOR | announcement.read |
+
+Every user holds `notification.preference.update` for their own preferences.
+
+## 150.11 Entitlements
+
+```text
+community_chat.enabled
+community_chat.attachments.enabled
+push_notifications.enabled   -- OPEN: expected on for all plans
+```
+
+Backend rejects chat APIs with `FEATURE_NOT_ENTITLED` when the building is not entitled (§149.16).
+Notices and critical push remain available on every plan.
+
+## 150.12 Non-Functional Requirements
+
+- Chat message delivery to online members P95 < 1 s.
+- Push dispatched P95 < 10 s after the triggering event.
+- Chat history page P95 < 500 ms.
+- Chat encrypted in transit (TLS) and at rest (database/storage encryption); end-to-end encryption is out of scope.
+- Per-user rate limiting on message send and channel creation (Redis, §104).
+- Building data isolation (§110) applies: every chat query is filtered by `building_id` and membership.
+
+## 150.13 Acceptance Scenarios
+
+**Scenario J – Emergency Notice**
+Committee publishes an EMERGENCY notice "Water supply off 10am–2pm". All building members get a push within seconds regardless of preference; the notice is pinned on the board; Read % updates as members open it.
+
+**Scenario K – Building Community Chat**
+Owner of 4B posts in Community chat. All current members see it in real time or get a push; the owner's phone number is not visible; a tenant who moved out last month cannot see the channel.
+
+**Scenario L – Offline Chat Message**
+Tenant writes a message without connectivity. It shows as "sending", is delivered once on reconnect, and a retry does not create a duplicate.
+
+**Scenario M – Moderation**
+A member reports an abusive message. Committee reviews it, deletes the message and mutes the author for 24h. Both actions appear in the audit log.
+
+**Scenario N – Multi-Building Push**
+A user who owns flats in two buildings taps a chat push from Building B while Building A is active; the app switches to Building B after membership check and opens the channel.
 
 ---

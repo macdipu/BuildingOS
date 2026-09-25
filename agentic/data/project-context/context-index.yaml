@@ -33,6 +33,12 @@ project_docs:
       BOS-010; identity, revenue foundation and F2 delivered for local/test;
       F4 units/ownership approved; implementation in progress. Fixed an unclosed 4-backtick fence at
       line 1 (paste artifact) that broke markdown rendering of the whole file.
+      Revised 2026-09-25: adds building community communication (§150) --
+      notice board rules, in-building community chat (channels, DMs,
+      moderation, offline send), FCM push device registry/preferences; chat
+      moved from future scope (§3.2) to in-scope Phase 6, MVP inclusion OPEN
+      (§125); cross-refs in §3,4,8.6,8.7,9,28,31,37,85,91,112,115,123,134-138,
+      149.16. Tracked by BOS-007 in BOS-001/BACKLOG.md.
 features:
   BOS-001:
     status: SUPERSEDED
