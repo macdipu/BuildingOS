@@ -29,13 +29,13 @@ Progress: F6-T1 97d489a, F6-T2 975ea8d, F6-T6 f79e6d9, F6-T3 a28b792; F6-T4 done
 F6-T4b relay planned; F6-T7 split into F6-T7.1 (application review, done) and F6-T7.2 (subscriptions, done). F6-T5 split: F6-T5a health (done), F6-T5b/c/d audit done (paging-edge gap noted in tasks/F6-T5b.md) (D-37).
 F6-T7a/T7b done (e740842, d3dc815); F6-T7 list screens done (aa019cb; Playwright review-to-approve still open).
 F6-T8 split: F6-T8a Assisted Onboarding screens (built, uncommitted); F6-T8b Support sessions + elevated approval screens
-(committed 14b55ca; no audit-trail row links yet); F6-T8c-BE users proxy built and verified, uncommitted (back-office-service `/api/v1/platform/backoffice/users*`, token relay to auth-service F6-T2); F6-T8c Users screens now unblocked. (Was: BLOCKED: F6-T2 role list/assign/revoke exist only as internal auth-service endpoints and
+(committed 14b55ca; no audit-trail row links yet); F6-T8c-BE users proxy committed (7a16fa4) (back-office-service `/api/v1/platform/backoffice/users*`, token relay to auth-service F6-T2); F6-T8c Users screens built (Platform Users, Onboarding Agents, Support Agents; role assign/revoke SUPER_ADMIN only, with confirmation, none on own account). Gaps: Building Admins has no API (building-service memberships); no reason field on role changes (API has none); no per-user subscription/membership summary. (Was: BLOCKED: F6-T2 role list/assign/revoke exist only as internal auth-service endpoints and
 back-office-service has no user proxy, so a BE task (F6-T8c-BE: `/api/v1/platform/backoffice/users*` relaying auth-service) was needed first.)
 F6-T8a/T8b committed (77071e0, 14b55ca). F6-T9 screens built, uncommitted: Dashboard (list-total cards), Audit Logs (server-side filters, nextUntil paging),
 System Health, Entitlement Config (free tier), Platform Settings (not available). Gaps: audit sources record no before/after values (rows show action/actor/reason);
 no entityId audit filter, so session rows do not deep-link to a single entity's trail; plans card is total plans, not by status; no Playwright yet.
-Gaps in F6-T8a: no onboarding-session history endpoint (detail shows current state only); "Assign Onboarding Agent" entry on the
-application review page not wired yet (StartOnboardingForm accepts `initialBuildingId`).
+Gaps in F6-T8a: no onboarding-session history endpoint (detail shows current state only); "Assign Onboarding Agent" now links from an onboarding building's detail and from a just-approved application to the assisted-onboarding form, prefilled with the building id (an application record carries no building id, so a past approved application has no link).
+F6-T5c verified: building-service and subscription-service `/internal/audit` shipped in 057b318 with integration tests (commit title was mangled). F6-T4b stays PLANNED: it needs a technical decision first (owning services authorize building members, not platform support users).
 
 - **Q-F6-3 (RESOLVED D-36):** `SupportSession` lifecycle rules are not decided by D-10/BRD
   §149.12: (a) who may start a session and for whom (SUPPORT_AGENT self-start? admins?);
