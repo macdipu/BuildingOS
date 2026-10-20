@@ -26,6 +26,13 @@ function gateway(grant: () => Response) {
   return vi.fn(async (url: string, init?: RequestInit) => {
     const path = new URL(url, "http://localhost").pathname;
     if (path === "/api/gateway/platform/subscription-plans") return json(200, { success: true, data: plans });
+    if (path === "/api/gateway/platform/subscriptions") {
+      return json(200, {
+        success: true,
+        data: [{ ...subscription, planCode: "PREMIUM", planName: "Premium" }],
+        meta: { page: 0, size: 20, total: 1 },
+      });
+    }
     if (path === `/api/gateway/platform/users/${USER}/subscription`) {
       if (init?.method === "POST") return grant();
       return json(404, { success: false, code: "SUBSCRIPTION_NOT_FOUND", message: "No active subscription" });
@@ -99,5 +106,18 @@ describe("UserSubscriptionScreen", () => {
     expect(alert).toHaveTextContent("An active subscription already exists");
     expect(alert).toHaveTextContent("Error code: ALREADY_SUBSCRIBED");
     expect(within(assign).queryByRole("button", { name: /Refresh/ })).toBeNull();
+  });
+
+  it("lists platform subscriptions and looks a user up from the list", async () => {
+    const fetchMock = gateway(() => json(201, {}));
+    vi.stubGlobal("fetch", fetchMock);
+    const user = userEvent.setup();
+    render(<UserSubscriptionScreen title="Subscriptions · User Subscriptions" />);
+
+    const list = await screen.findByRole("region", { name: "User subscriptions" });
+    expect(within(list).getByText("Premium")).toBeInTheDocument();
+    await user.click(within(list).getByRole("button", { name: USER }));
+    expect(await screen.findByRole("region", { name: "Assign plan" })).toBeInTheDocument();
+    expect(screen.getByLabelText("User id")).toHaveValue(USER);
   });
 });

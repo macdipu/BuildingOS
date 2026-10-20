@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { ApiErrorNotice } from "@/components/ApiErrorNotice";
-import { formatDate, label } from "@/lib/buildingApplications";
+import { formatDate, label, pageMeta } from "@/lib/buildingApplications";
 import {
   ENTITLEMENTS,
   UUID_PATTERN,
@@ -10,9 +10,11 @@ import {
   entitlementValue,
   getUserSubscription,
   listPlans,
+  listPlatformSubscriptions,
   type ApiFailure,
   type ApiResult,
   type Plan,
+  type PlatformSubscription,
   type UserSubscription,
 } from "@/lib/subscriptions";
 import { fieldClass, fieldError, panelClass, primaryButton, secondaryButton, successClass } from "./formStyles";
@@ -22,7 +24,7 @@ const LABEL = new Map<string, string>(ENTITLEMENTS.map((e) => [e.key, e.label]))
 
 /**
  * BOC-04 Subscriptions > User Subscriptions: look up one user's subscription by
- * user id and assign a plan. The platform-wide list waits for F6-T7b (D-35).
+ * user id and assign a plan, plus the platform-wide list (D-35).
  */
 export function UserSubscriptionScreen({ title }: { title: string }) {
   const [plans, setPlans] = useState<ApiResult<Plan[]> | null>(null);
@@ -30,6 +32,18 @@ export function UserSubscriptionScreen({ title }: { title: string }) {
   const [inputError, setInputError] = useState<string | null>(null);
   const [lookup, setLookup] = useState<{ userId: string; result: ApiResult<UserSubscription> } | null>(null);
   const [busy, setBusy] = useState(false);
+  const [page, setPage] = useState(0);
+  const [list, setList] = useState<{ page: number; result: ApiResult<PlatformSubscription[]> } | null>(null);
+
+  useEffect(() => {
+    let cancelled = false;
+    listPlatformSubscriptions(page).then((result) => {
+      if (!cancelled) setList({ page, result });
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [page]);
 
   useEffect(() => {
     let cancelled = false;
@@ -43,7 +57,10 @@ export function UserSubscriptionScreen({ title }: { title: string }) {
 
   async function find(e: React.FormEvent) {
     e.preventDefault();
-    const id = userId.trim();
+    await lookUp(userId.trim());
+  }
+
+  async function lookUp(id: string) {
     if (!UUID_PATTERN.test(id)) {
       setInputError("Enter a user id (UUID).");
       return;
@@ -74,9 +91,16 @@ export function UserSubscriptionScreen({ title }: { title: string }) {
           Look up
         </button>
       </form>
-      <p className="text-xs text-on-surface-variant">
-        A platform-wide subscription list is not available yet (F6-T7b); look up one user at a time.
-      </p>
+
+      <SubscriptionList
+        state={list && list.page === page ? list.result : null}
+        page={page}
+        setPage={setPage}
+        onPick={(id) => {
+          setUserId(id);
+          void lookUp(id);
+        }}
+      />
 
       {lookup ? (
         <div className="grid gap-6 xl:grid-cols-2">
@@ -226,6 +250,76 @@ function AssignPlan({
           </button>
         </form>
       )}
+    </section>
+  );
+}
+
+function SubscriptionList({
+  state,
+  page,
+  setPage,
+  onPick,
+}: {
+  state: ApiResult<PlatformSubscription[]> | null;
+  page: number;
+  setPage: (fn: (p: number) => number) => void;
+  onPick: (userId: string) => void;
+}) {
+  const meta = state?.ok ? pageMeta(state.meta) : null;
+  const lastPage = meta ? Math.max(0, Math.ceil(meta.total / meta.size) - 1) : 0;
+  return (
+    <section aria-label="User subscriptions" className="rounded-panel border border-outline-variant bg-surface-lowest shadow-tier1">
+      {!state ? (
+        <p className="p-6 text-sm text-on-surface-variant">Loading subscriptions…</p>
+      ) : !state.ok ? (
+        <div className="p-4">
+          <ApiErrorNotice failure={state} context="plain" />
+        </div>
+      ) : state.data.length === 0 ? (
+        <p className="p-6 text-sm text-on-surface-variant">No user subscriptions yet.</p>
+      ) : (
+        <table className="w-full text-left text-sm">
+          <thead className="bg-surface-low text-[11px] uppercase tracking-[0.04em] text-on-surface-variant">
+            <tr>
+              <th className="px-4 py-3 font-semibold">User</th>
+              <th className="px-4 py-3 font-semibold">Plan</th>
+              <th className="px-4 py-3 font-semibold">Status</th>
+              <th className="px-4 py-3 font-semibold">Cycle</th>
+              <th className="px-4 py-3 font-semibold">Started</th>
+            </tr>
+          </thead>
+          <tbody>
+            {state.data.map((s) => (
+              <tr key={s.id} className="border-t border-outline-variant hover:bg-surface-low">
+                <td className="px-4 py-3">
+                  <button type="button" onClick={() => onPick(s.userId)} className="font-mono text-xs font-semibold text-primary hover:underline">
+                    {s.userId}
+                  </button>
+                </td>
+                <td className="px-4 py-3">{s.planName}</td>
+                <td className="px-4 py-3">{label(s.status)}</td>
+                <td className="px-4 py-3">{label(s.billingCycle)}</td>
+                <td className="px-4 py-3 text-on-surface-variant">{formatDate(s.startedAt)}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      )}
+      {meta && meta.total > meta.size ? (
+        <div className="flex items-center justify-between border-t border-outline-variant px-4 py-3 text-sm">
+          <span className="text-on-surface-variant">
+            Page {meta.page + 1} of {lastPage + 1} · {meta.total} subscriptions
+          </span>
+          <div className="flex gap-2">
+            <button type="button" disabled={page === 0} onClick={() => setPage((p) => p - 1)} className="h-8 rounded-control border border-outline-variant px-3 text-xs font-semibold disabled:opacity-50">
+              Previous
+            </button>
+            <button type="button" disabled={page >= lastPage} onClick={() => setPage((p) => p + 1)} className="h-8 rounded-control border border-outline-variant px-3 text-xs font-semibold disabled:opacity-50">
+              Next
+            </button>
+          </div>
+        </div>
+      ) : null}
     </section>
   );
 }

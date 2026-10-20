@@ -1,8 +1,10 @@
 import { notFound, redirect } from "next/navigation";
+import { BuildingsScreen } from "@/components/BuildingsScreen";
 import { ApplicationsScreen } from "@/components/ApplicationsScreen";
 import { NotAvailable } from "@/components/NotAvailable";
 import { PlansScreen } from "@/components/PlansScreen";
 import { UserSubscriptionScreen } from "@/components/UserSubscriptionScreen";
+import type { BuildingStatus } from "@/lib/buildings";
 import type { ReviewStatus } from "@/lib/buildingApplications";
 import { findNavEntry, hrefOf } from "@/lib/nav";
 import { currentSession } from "@/lib/session";
@@ -13,11 +15,17 @@ const APPLICATION_TABS: Record<string, ReviewStatus> = {
   "buildings/under-review": "UNDER_REVIEW",
 };
 
+const BUILDING_LISTS: Record<string, BuildingStatus> = {
+  "buildings/onboarding": "ONBOARDING",
+  "buildings/active": "ACTIVE",
+  "buildings/suspended": "SUSPENDED",
+};
+
 /** Placeholder notes for items that stay NotAvailable for a known reason. */
 const NOTES: Record<string, string> = {
   "buildings/archived": "Archived buildings have no backend state yet (BRD §149.2, BOC-03).",
   "subscriptions/suspended-cancelled":
-    "Needs the platform-wide subscription list, which lands with F6-T7b (D-35).",
+    "Subscriptions have only an active state today; suspended and cancelled states do not exist yet (D-35).",
 };
 
 /** Section item screens; items whose F6 task has not landed render the NotAvailable placeholder. */
@@ -36,6 +44,8 @@ export default async function SectionPage({ params }: PageProps<"/[section]/[[..
   const screen = `${entry.section.slug}/${entry.item.slug}`;
   const tab = APPLICATION_TABS[screen];
   if (tab) return <ApplicationsScreen key={tab} title={title} initialStatus={tab} />;
+  const buildingStatus = BUILDING_LISTS[screen];
+  if (buildingStatus) return <BuildingsScreen key={buildingStatus} title={title} status={buildingStatus} />;
   if (screen === "subscriptions/plans") return <PlansScreen title={title} />;
   if (screen === "subscriptions/user-subscriptions") return <UserSubscriptionScreen title={title} />;
   const note = NOTES[screen];

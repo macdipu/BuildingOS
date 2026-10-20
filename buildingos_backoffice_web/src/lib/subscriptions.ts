@@ -130,6 +130,22 @@ export const getUserSubscription = (userId: string) => call<UserSubscription>(us
 export const assignPlan = (userId: string, planId: string, billingCycle: string) =>
   call<UserSubscription>(userSubscription(userId), { method: "POST", body: { planId, billingCycle } });
 
+export interface PlatformSubscription {
+  id: string;
+  userId: string;
+  planId: string;
+  planCode: string;
+  planName: string;
+  status: string;
+  billingCycle: string;
+  grantedBy: string;
+  startedAt: string;
+}
+
+/** Platform-wide user subscription list (D-35), newest first. */
+export const listPlatformSubscriptions = (page = 0) =>
+  call<PlatformSubscription[]>(`platform/subscriptions?page=${page}`);
+
 export const getFeeSchedule = (code: string) => call<FeeSchedule>(fee(code));
 export const updateFeeSchedule = (code: string, input: FeeScheduleInput) =>
   call<FeeSchedule>(fee(code), { method: "PUT", body: input });
