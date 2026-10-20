@@ -1,10 +1,13 @@
 import { notFound, redirect } from "next/navigation";
 import { BuildingsScreen } from "@/components/BuildingsScreen";
+import { AuditLogScreen } from "@/components/AuditLogScreen";
 import { ApplicationsScreen } from "@/components/ApplicationsScreen";
+import { EntitlementConfigScreen } from "@/components/EntitlementConfigScreen";
 import { NotAvailable } from "@/components/NotAvailable";
 import { OnboardingSessionsScreen } from "@/components/OnboardingSessionsScreen";
 import { PlansScreen } from "@/components/PlansScreen";
 import { SupportSessionsScreen } from "@/components/SupportSessionsScreen";
+import { SystemHealthScreen } from "@/components/SystemHealthScreen";
 import { UserSubscriptionScreen } from "@/components/UserSubscriptionScreen";
 import type { BuildingStatus } from "@/lib/buildings";
 import type { ReviewStatus } from "@/lib/buildingApplications";
@@ -26,13 +29,15 @@ const BUILDING_LISTS: Record<string, BuildingStatus> = {
 /** Placeholder notes for items that stay NotAvailable for a known reason. */
 const NOTES: Record<string, string> = {
   "buildings/archived": "Archived buildings have no backend state yet (BRD §149.2, BOC-03).",
+  "system/settings": "No platform settings are stored or editable yet; there are no existing configuration surfaces to list.",
   "subscriptions/suspended-cancelled":
     "Subscriptions have only an active state today; suspended and cancelled states do not exist yet (D-35).",
 };
 
 /** Section item screens; items whose F6 task has not landed render the NotAvailable placeholder. */
-export default async function SectionPage({ params }: PageProps<"/[section]/[[...item]]">) {
+export default async function SectionPage({ params, searchParams }: PageProps<"/[section]/[[...item]]">) {
   const { section, item } = await params;
+  const query = await searchParams;
   const session = await currentSession();
   if (!session) redirect("/login");
   const entry = findNavEntry(session.roles, section, item?.[0]);
@@ -55,6 +60,12 @@ export default async function SectionPage({ params }: PageProps<"/[section]/[[..
     const mode = screen === "support/history" ? "history" : "active";
     return <SupportSessionsScreen title={title} mode={mode} userId={session.userId} roles={session.roles} />;
   }
+  if (screen === "system/audit-logs") {
+    const entityType = typeof query.entityType === "string" ? query.entityType : "";
+    return <AuditLogScreen title={title} initialEntityType={entityType} />;
+  }
+  if (screen === "system/health") return <SystemHealthScreen title={title} />;
+  if (screen === "system/entitlements") return <EntitlementConfigScreen title={title} />;
   if (screen === "subscriptions/plans") return <PlansScreen title={title} />;
   if (screen === "subscriptions/user-subscriptions") return <UserSubscriptionScreen title={title} />;
   const note = NOTES[screen];

@@ -31,6 +31,9 @@ F6-T7a/T7b done (e740842, d3dc815); F6-T7 list screens done (aa019cb; Playwright
 F6-T8 split: F6-T8a Assisted Onboarding screens (built, uncommitted); F6-T8b Support sessions + elevated approval screens
 (built, uncommitted; no audit-trail row links until F6-T9); F6-T8c Users screens BLOCKED: F6-T2 role list/assign/revoke exist only as internal auth-service endpoints and
 back-office-service has no user proxy, so a BE task (F6-T8c-BE: `/api/v1/platform/backoffice/users*` relaying auth-service) is needed first.
+F6-T8a/T8b committed (77071e0, 14b55ca). F6-T9 screens built, uncommitted: Dashboard (list-total cards), Audit Logs (server-side filters, nextUntil paging),
+System Health, Entitlement Config (free tier), Platform Settings (not available). Gaps: audit sources record no before/after values (rows show action/actor/reason);
+no entityId audit filter, so session rows do not deep-link to a single entity's trail; plans card is total plans, not by status; no Playwright yet.
 Gaps in F6-T8a: no onboarding-session history endpoint (detail shows current state only); "Assign Onboarding Agent" entry on the
 application review page not wired yet (StartOnboardingForm accepts `initialBuildingId`).
 

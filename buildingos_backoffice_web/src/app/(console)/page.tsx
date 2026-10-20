@@ -1,5 +1,9 @@
-import { NotAvailable } from "@/components/NotAvailable";
+import { redirect } from "next/navigation";
+import { DashboardScreen } from "@/components/DashboardScreen";
+import { currentSession } from "@/lib/session";
 
-export default function DashboardPage() {
-  return <NotAvailable title="Dashboard" note="Operational counts (BRD §149.18) arrive with F6-T9." />;
+export default async function DashboardPage() {
+  const session = await currentSession();
+  if (!session) redirect("/login");
+  return <DashboardScreen roles={session.roles} />;
 }
