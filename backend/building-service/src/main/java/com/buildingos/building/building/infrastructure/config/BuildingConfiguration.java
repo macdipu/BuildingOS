@@ -5,6 +5,8 @@ import com.buildingos.building.building.application.activatebuilding.ActivateBui
 import com.buildingos.building.building.application.activatebuilding.ActivateBuildingUseCase;
 import com.buildingos.building.building.application.getbuilding.GetBuildingService;
 import com.buildingos.building.building.application.getbuilding.GetBuildingUseCase;
+import com.buildingos.building.building.application.listplatformbuildings.ListPlatformBuildingsService;
+import com.buildingos.building.building.application.listplatformbuildings.ListPlatformBuildingsUseCase;
 import com.buildingos.building.building.application.reactivatebuilding.ReactivateBuildingService;
 import com.buildingos.building.building.application.reactivatebuilding.ReactivateBuildingUseCase;
 import com.buildingos.building.building.application.suspendbuilding.SuspendBuildingService;
@@ -44,5 +46,10 @@ public class BuildingConfiguration {
     @Bean
     GetBuildingUseCase getBuilding(BuildingRepository buildings, BuildingMembershipRepository memberships) {
         return new GetBuildingService(buildings, memberships);
+    }
+
+    @Bean
+    ListPlatformBuildingsUseCase listPlatformBuildings(BuildingRepository buildings) {
+        return new ListPlatformBuildingsService(buildings);
     }
 }

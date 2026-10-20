@@ -10,6 +10,7 @@ import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -19,6 +20,8 @@ import org.springframework.stereotype.Repository;
 public class JdbcBuildingRepositoryAdapter implements BuildingRepository {
     private static final String COLUMNS = "id, application_id, name, building_type, address, area, district, "
             + "postal_code, latitude, longitude, contact_phone, status, version, created_at, updated_at";
+    private static final String FILTER = "(?::text IS NULL OR status = ?) "
+            + "AND (?::text IS NULL OR name ILIKE ?)";
     private final JdbcTemplate jdbc;
 
     public JdbcBuildingRepositoryAdapter(JdbcTemplate jdbc) { this.jdbc = jdbc; }
@@ -60,6 +63,28 @@ public class JdbcBuildingRepositoryAdapter implements BuildingRepository {
     public Optional<Building> findByApplication(UUID applicationId) {
         return jdbc.query("SELECT " + COLUMNS + " FROM building WHERE application_id = ?", this::map, applicationId)
                 .stream().findFirst();
+    }
+
+    @Override
+    public List<Building> findPage(BuildingStatus status, String nameContains, int offset, int limit) {
+        return jdbc.query("SELECT " + COLUMNS + " FROM building WHERE " + FILTER + " ORDER BY name, id LIMIT ? OFFSET ?",
+                this::map, name(status), name(status), pattern(nameContains), pattern(nameContains), limit, offset);
+    }
+
+    @Override
+    public long count(BuildingStatus status, String nameContains) {
+        return jdbc.queryForObject("SELECT count(*) FROM building WHERE " + FILTER, Long.class, name(status),
+                name(status), pattern(nameContains), pattern(nameContains));
+    }
+
+    private static String name(BuildingStatus status) { return status == null ? null : status.name(); }
+
+    /** Escapes LIKE wildcards so user input matches literally. */
+    private static String pattern(String contains) {
+        if (contains == null) {
+            return null;
+        }
+        return "%" + contains.replace("\\", "\\\\").replace("%", "\\%").replace("_", "\\_") + "%";
     }
 
     private Building map(ResultSet rs, int row) throws SQLException {

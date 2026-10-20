@@ -149,7 +149,7 @@ class GatewayRoutingTest {
     @ValueSource(strings = {"/api/v1/building-applications", "/api/v1/building-applications/abc/submit",
             "/api/v1/building-applications/abc/documents/def", "/api/v1/me/building-applications",
             "/api/v1/platform/building-applications", "/api/v1/platform/building-applications/abc/duplicates",
-            "/api/v1/platform/buildings/abc", "/api/v1/platform/buildings/abc/activate"})
+            "/api/v1/platform/buildings", "/api/v1/platform/buildings/abc", "/api/v1/platform/buildings/abc/activate"})
     void buildingApiPathsForwardUnchangedWithBearerToken(String path) throws Exception {
         String token = validToken();
         var response = call(path, token, null, null);

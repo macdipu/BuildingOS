@@ -1286,6 +1286,50 @@ paths:
       requestBody:
         required: true
         content:
+  /api/v1/platform/buildings:
+    get:
+      summary: "Platform building list by lifecycle status (D-34), name ascending"
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: status
+          in: query
+          required: false
+          schema: { type: string, enum: [ONBOARDING, ACTIVE, SUSPENDED] }
+        - name: q
+          in: query
+          required: false
+          description: "Case-insensitive name contains"
+          schema: { type: string }
+        - name: page
+          in: query
+          required: false
+          schema: { type: integer, minimum: 0, default: 0 }
+        - name: size
+          in: query
+          required: false
+          schema: { type: integer, minimum: 1, maximum: 100, default: 20 }
+      responses:
+        "200":
+          description: "Success envelope; data is a list of building summaries, meta has page, size, total"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiEnvelope" }
+        "400":
+          description: "INVALID_REQUEST (unknown status, bad paging)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "401":
+          description: "Missing or invalid token"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "403":
+          description: "ACCESS_DENIED (requires SUPER_ADMIN or PLATFORM_ADMIN)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
           application/json:
             schema: { $ref: "#/components/schemas/ReasonRequest" }
       responses:

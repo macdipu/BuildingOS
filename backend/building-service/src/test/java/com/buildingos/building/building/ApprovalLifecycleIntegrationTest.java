@@ -322,4 +322,26 @@ class ApprovalLifecycleIntegrationTest {
         assertThat(send("GET", "/api/v1/platform/building-applications/" + subject + "/duplicates", token(applicant),
                 null).status()).isEqualTo(403);
     }
+
+    @Test
+    void platformListFiltersByStatusAndNameAndIsAdminOnly() throws Exception {
+        String unique = UUID.randomUUID().toString().substring(0, 8);
+        String id = underReview("Zeta_" + unique + " Tower", "Plot " + unique, "01911" + (100000 + (int) (Math.random() * 899999)));
+        String buildingId = approve(id, APPROVE).data().path("buildingId").asString();
+
+        var hit = send("GET", "/api/v1/platform/buildings?status=onboarding&q=zeta_" + unique, reviewerToken(), null);
+        assertThat(hit.status()).isEqualTo(200);
+        assertThat(hit.data()).hasSize(1);
+        assertThat(hit.data().get(0).path("id").asString()).isEqualTo(buildingId);
+        assertThat(hit.body().path("meta").path("total").asInt()).isEqualTo(1);
+
+        // "_" is literal, not a LIKE wildcard
+        assertThat(send("GET", "/api/v1/platform/buildings?q=Zeta" + "X" + unique, reviewerToken(), null).data()).isEmpty();
+        assertThat(send("GET", "/api/v1/platform/buildings?status=ACTIVE&q=" + unique, reviewerToken(), null).data())
+                .isEmpty();
+
+        assertThat(send("GET", "/api/v1/platform/buildings?status=NOPE", reviewerToken(), null).status()).isEqualTo(400);
+        assertThat(send("GET", "/api/v1/platform/buildings?size=101", reviewerToken(), null).status()).isEqualTo(400);
+        assertThat(send("GET", "/api/v1/platform/buildings", token(applicant), null).status()).isEqualTo(403);
+    }
 }
