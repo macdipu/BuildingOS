@@ -111,7 +111,8 @@ class GatewayRoutingTest {
 
     @ParameterizedTest
     @ValueSource(strings = {"/api/v1/platform/backoffice/support-sessions",
-            "/api/v1/platform/backoffice/onboarding-sessions/abc"})
+            "/api/v1/platform/backoffice/onboarding-sessions/abc", "/api/v1/platform/backoffice/users",
+            "/api/v1/platform/backoffice/users/abc/platform-roles"})
     void backOfficeApiPathsForwardUnchangedWithBearerToken(String path) throws Exception {
         String token = validToken();
         var response = call(path, token, null, null);

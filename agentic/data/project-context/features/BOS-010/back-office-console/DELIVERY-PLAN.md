@@ -29,8 +29,8 @@ Progress: F6-T1 97d489a, F6-T2 975ea8d, F6-T6 f79e6d9, F6-T3 a28b792; F6-T4 done
 F6-T4b relay planned; F6-T7 split into F6-T7.1 (application review, done) and F6-T7.2 (subscriptions, done). F6-T5 split: F6-T5a health (done), F6-T5b/c/d audit done (paging-edge gap noted in tasks/F6-T5b.md) (D-37).
 F6-T7a/T7b done (e740842, d3dc815); F6-T7 list screens done (aa019cb; Playwright review-to-approve still open).
 F6-T8 split: F6-T8a Assisted Onboarding screens (built, uncommitted); F6-T8b Support sessions + elevated approval screens
-(built, uncommitted; no audit-trail row links until F6-T9); F6-T8c Users screens BLOCKED: F6-T2 role list/assign/revoke exist only as internal auth-service endpoints and
-back-office-service has no user proxy, so a BE task (F6-T8c-BE: `/api/v1/platform/backoffice/users*` relaying auth-service) is needed first.
+(committed 14b55ca; no audit-trail row links yet); F6-T8c-BE users proxy built and verified, uncommitted (back-office-service `/api/v1/platform/backoffice/users*`, token relay to auth-service F6-T2); F6-T8c Users screens now unblocked. (Was: BLOCKED: F6-T2 role list/assign/revoke exist only as internal auth-service endpoints and
+back-office-service has no user proxy, so a BE task (F6-T8c-BE: `/api/v1/platform/backoffice/users*` relaying auth-service) was needed first.)
 F6-T8a/T8b committed (77071e0, 14b55ca). F6-T9 screens built, uncommitted: Dashboard (list-total cards), Audit Logs (server-side filters, nextUntil paging),
 System Health, Entitlement Config (free tier), Platform Settings (not available). Gaps: audit sources record no before/after values (rows show action/actor/reason);
 no entityId audit filter, so session rows do not deep-link to a single entity's trail; plans card is total plans, not by status; no Playwright yet.

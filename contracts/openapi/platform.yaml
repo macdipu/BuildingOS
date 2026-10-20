@@ -3397,6 +3397,163 @@ paths:
           content:
             application/json:
               schema: { $ref: "#/components/schemas/ApiError" }
+  /api/v1/platform/backoffice/users:
+    get:
+      summary: "SUPER_ADMIN/PLATFORM_ADMIN: list platform users (BOC-05), relayed to auth-service GET /internal/users"
+      description: "Token-relaying proxy: auth-service owns users and re-checks the caller. meta carries page, size, total."
+      security:
+        - bearerAuth: []
+      parameters:
+        - { name: query, in: query, required: false, schema: { type: string }, description: "Phone contains" }
+        - { name: role, in: query, required: false, schema: { type: string, enum: [SUPER_ADMIN, PLATFORM_ADMIN, ONBOARDING_AGENT, SUPPORT_AGENT, SUBSCRIPTION_ADMIN] } }
+        - { name: page, in: query, required: false, schema: { type: integer, minimum: 0, default: 0 } }
+        - { name: size, in: query, required: false, schema: { type: integer, minimum: 1, maximum: 100, default: 20 } }
+      responses:
+        "200":
+          description: "Success envelope (data: PlatformUser[])"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiEnvelope" }
+        "400":
+          description: "INVALID_REQUEST (unknown role, bad paging)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "401":
+          description: "Missing or invalid token"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "403":
+          description: "ACCESS_DENIED (requires SUPER_ADMIN or PLATFORM_ADMIN)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "503":
+          description: "DEPENDENCY_UNAVAILABLE (auth-service down)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+  /api/v1/platform/backoffice/users/{userId}:
+    get:
+      summary: "SUPER_ADMIN/PLATFORM_ADMIN: one platform user with current platform roles"
+      security:
+        - bearerAuth: []
+      parameters:
+        - { name: userId, in: path, required: true, schema: { type: string, format: uuid } }
+      responses:
+        "200":
+          description: "Success envelope (data: PlatformUser)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiEnvelope" }
+        "401":
+          description: "Missing or invalid token"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "403":
+          description: "ACCESS_DENIED"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "404":
+          description: "USER_NOT_FOUND"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "503":
+          description: "DEPENDENCY_UNAVAILABLE"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+  /api/v1/platform/backoffice/users/{userId}/platform-roles:
+    post:
+      summary: "SUPER_ADMIN: assign a platform role (idempotent); returns the updated user"
+      description: "auth-service re-checks SUPER_ADMIN, refuses a user changing their own roles (403) and records the audit row (D-37)."
+      security:
+        - bearerAuth: []
+      parameters:
+        - { name: userId, in: path, required: true, schema: { type: string, format: uuid } }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [role]
+              properties:
+                role: { type: string, enum: [SUPER_ADMIN, PLATFORM_ADMIN, ONBOARDING_AGENT, SUPPORT_AGENT, SUBSCRIPTION_ADMIN] }
+      responses:
+        "200":
+          description: "Success envelope (data: PlatformUser)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiEnvelope" }
+        "400":
+          description: "INVALID_REQUEST (role missing or unknown)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "401":
+          description: "Missing or invalid token"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "403":
+          description: "ACCESS_DENIED (not SUPER_ADMIN, or changing own roles)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "404":
+          description: "USER_NOT_FOUND"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "503":
+          description: "DEPENDENCY_UNAVAILABLE"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+  /api/v1/platform/backoffice/users/{userId}/platform-roles/{role}:
+    delete:
+      summary: "SUPER_ADMIN: revoke a platform role (idempotent); returns the updated user"
+      security:
+        - bearerAuth: []
+      parameters:
+        - { name: userId, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: role, in: path, required: true, schema: { type: string, enum: [SUPER_ADMIN, PLATFORM_ADMIN, ONBOARDING_AGENT, SUPPORT_AGENT, SUBSCRIPTION_ADMIN] } }
+      responses:
+        "200":
+          description: "Success envelope (data: PlatformUser)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiEnvelope" }
+        "400":
+          description: "INVALID_REQUEST (unknown role)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "401":
+          description: "Missing or invalid token"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "403":
+          description: "ACCESS_DENIED (not SUPER_ADMIN, or changing own roles)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "404":
+          description: "USER_NOT_FOUND"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "503":
+          description: "DEPENDENCY_UNAVAILABLE"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
   /api/v1/platform/backoffice/system-health:
     get:
       summary: "SUPER_ADMIN: readiness of every BuildingOS backend service in one call (BOC-08)"
@@ -3877,6 +4034,16 @@ components:
         status: { type: string, enum: [UP, DOWN, UNKNOWN] }
         httpStatus: { type: integer, description: "Readiness HTTP status; absent when the service was unreachable or timed out" }
         latencyMs: { type: integer, format: int64, minimum: 0 }
+    PlatformUser:
+      type: object
+      required: [id, phone, createdAt, platformRoles]
+      properties:
+        id: { type: string, format: uuid }
+        phone: { type: string }
+        createdAt: { type: string, format: date-time }
+        platformRoles:
+          type: array
+          items: { type: string, enum: [SUPER_ADMIN, PLATFORM_ADMIN, ONBOARDING_AGENT, SUPPORT_AGENT, SUBSCRIPTION_ADMIN] }
     SupportReasonRequest:
       type: object
       properties:
