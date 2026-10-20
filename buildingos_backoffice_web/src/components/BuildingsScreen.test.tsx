@@ -68,6 +68,10 @@ describe("BuildingsScreen", () => {
     render(<BuildingsScreen title="Buildings · Onboarding" status="ONBOARDING" />);
 
     await user.click(await screen.findByRole("button", { name: "Lake View" }));
+    expect(await screen.findByRole("link", { name: "Assign onboarding agent" })).toHaveAttribute(
+      "href",
+      "/support/assisted-onboarding?buildingId=b1",
+    );
     await user.click(await screen.findByRole("button", { name: "Activate" }));
     await user.click(screen.getByRole("button", { name: "Confirm activate" }));
     expect(screen.getByText("A reason is required.")).toBeInTheDocument();

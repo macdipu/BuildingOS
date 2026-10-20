@@ -83,6 +83,10 @@ describe("ReviewActions", () => {
     expect(JSON.parse(init.body)).toEqual({ adminPhone: "01711111111", reason: "Documents verified" });
     expect(await screen.findByRole("status")).toHaveTextContent("Building b-9 created in Onboarding");
     expect(onChanged).toHaveBeenCalledOnce();
+    expect(screen.getByRole("link", { name: "Assign onboarding agent" })).toHaveAttribute(
+      "href",
+      "/support/assisted-onboarding?buildingId=b-9",
+    );
   });
 
   it("shows the backend error code when a mutation fails", async () => {

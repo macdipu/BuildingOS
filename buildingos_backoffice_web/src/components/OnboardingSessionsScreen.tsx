@@ -20,10 +20,13 @@ export function OnboardingSessionsScreen({
   title,
   userId,
   roles,
+  initialBuildingId = "",
 }: {
   title: string;
   userId: string;
   roles: PlatformRole[];
+  /** From "Assign onboarding agent" on a building or an approved application: opens the form prefilled. */
+  initialBuildingId?: string;
 }) {
   const [status, setStatus] = useState("");
   const [buildingId, setBuildingId] = useState("");
@@ -31,7 +34,7 @@ export function OnboardingSessionsScreen({
   const [page, setPage] = useState(0);
   const [version, setVersion] = useState(0);
   const [selected, setSelected] = useState<string | null>(null);
-  const [starting, setStarting] = useState(false);
+  const [starting, setStarting] = useState(initialBuildingId !== "" && canStartSession(roles));
   const [loaded, setLoaded] = useState<{ key: string; result: ApiResult<OnboardingSession[]> } | null>(null);
   const key = `${status}#${buildingId}#${agentUserId}#${page}#${version}`;
 
@@ -73,6 +76,7 @@ export function OnboardingSessionsScreen({
 
       {starting ? (
         <StartOnboardingForm
+          initialBuildingId={initialBuildingId}
           onStarted={(s) => {
             setStarting(false);
             setSelected(s.id);

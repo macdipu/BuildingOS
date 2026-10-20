@@ -90,4 +90,18 @@ describe("OnboardingSessionsScreen", () => {
       expect.objectContaining({ method: "POST" }),
     );
   });
+
+  it("opens the start form prefilled when arriving with a building id, for operators only", async () => {
+    vi.stubGlobal("fetch", gateway(() => json(200, {})));
+    const { unmount } = render(
+      <OnboardingSessionsScreen title="t" userId="op" roles={["PLATFORM_ADMIN"]} initialBuildingId={BUILDING} />,
+    );
+    const form = await screen.findByRole("form", { name: "Assign onboarding agent" });
+    expect(form.querySelectorAll("input")[0]).toHaveValue(BUILDING);
+    unmount();
+
+    render(<OnboardingSessionsScreen title="t" userId={AGENT} roles={["ONBOARDING_AGENT"]} initialBuildingId={BUILDING} />);
+    await screen.findByRole("button", { name: BUILDING });
+    expect(screen.queryByRole("form", { name: "Assign onboarding agent" })).not.toBeInTheDocument();
+  });
 });

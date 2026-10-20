@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 import { ApiErrorNotice } from "@/components/ApiErrorNotice";
 import {
@@ -42,6 +43,7 @@ export function ReviewActions({
   const [busy, setBusy] = useState(false);
   const [failure, setFailure] = useState<ApiFailure | null>(null);
   const [done, setDone] = useState<string | null>(null);
+  const [approvedBuilding, setApprovedBuilding] = useState<string | null>(null);
 
   const id = application.id;
 
@@ -95,6 +97,7 @@ export function ReviewActions({
     } else if (form === "approve") {
       run(async () => {
         const r = await approveApplication(id, adminPhone.trim(), value);
+        if (r.ok) setApprovedBuilding(r.data.buildingId);
         return r.ok
           ? {
               ok: true,
@@ -178,6 +181,14 @@ export function ReviewActions({
         <p role="status" className="rounded-card bg-success-container px-4 py-3 text-sm text-on-success-container">
           {done}
         </p>
+      ) : null}
+      {approvedBuilding ? (
+        <Link
+          href={`/support/assisted-onboarding?buildingId=${encodeURIComponent(approvedBuilding)}`}
+          className="inline-block text-sm font-semibold text-primary hover:underline"
+        >
+          Assign onboarding agent
+        </Link>
       ) : null}
     </section>
   );

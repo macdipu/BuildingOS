@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import { ApiErrorNotice } from "@/components/ApiErrorNotice";
 import { dangerButton, fieldClass, fieldError, panelClass, primaryButton, secondaryButton, successClass } from "@/components/formStyles";
@@ -194,6 +195,15 @@ function Details({
             </button>
           ) : null}
         </div>
+      ) : null}
+
+      {b.status === "ONBOARDING" ? (
+        <Link
+          href={`/support/assisted-onboarding?buildingId=${encodeURIComponent(b.id)}`}
+          className="inline-block font-semibold text-primary hover:underline"
+        >
+          Assign onboarding agent
+        </Link>
       ) : null}
 
       {action ? (
