@@ -2,6 +2,7 @@ import { notFound, redirect } from "next/navigation";
 import { BuildingsScreen } from "@/components/BuildingsScreen";
 import { ApplicationsScreen } from "@/components/ApplicationsScreen";
 import { NotAvailable } from "@/components/NotAvailable";
+import { OnboardingSessionsScreen } from "@/components/OnboardingSessionsScreen";
 import { PlansScreen } from "@/components/PlansScreen";
 import { UserSubscriptionScreen } from "@/components/UserSubscriptionScreen";
 import type { BuildingStatus } from "@/lib/buildings";
@@ -47,6 +48,9 @@ export default async function SectionPage({ params }: PageProps<"/[section]/[[..
   const buildingStatus = BUILDING_LISTS[screen];
   if (buildingStatus) return <BuildingsScreen key={buildingStatus} title={title} status={buildingStatus} />;
   if (screen === "subscriptions/plans") return <PlansScreen title={title} />;
+  if (screen === "support/assisted-onboarding") {
+    return <OnboardingSessionsScreen title={title} userId={session.userId} roles={session.roles} />;
+  }
   if (screen === "subscriptions/user-subscriptions") return <UserSubscriptionScreen title={title} />;
   const note = NOTES[screen];
   return <NotAvailable title={title} note={note} />;
