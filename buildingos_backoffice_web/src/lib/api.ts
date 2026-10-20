@@ -9,7 +9,7 @@ export type ApiResult<T> = { ok: true; data: T; meta?: Record<string, unknown> }
 
 export async function call<T>(
   path: string,
-  init?: { method: "POST" | "PUT"; body?: unknown },
+  init?: { method: "POST" | "PUT" | "DELETE"; body?: unknown },
 ): Promise<ApiResult<T>> {
   let res: Response;
   try {
