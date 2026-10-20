@@ -1,6 +1,7 @@
 package com.buildingos.subscription.subscription.infrastructure.persistence;
 
 import com.buildingos.subscription.catalog.domain.model.BillingCycle;
+import com.buildingos.subscription.subscription.domain.model.PlatformSubscriptionRow;
 import com.buildingos.subscription.subscription.domain.model.GrantSource;
 import com.buildingos.subscription.subscription.domain.model.SubjectType;
 import com.buildingos.subscription.subscription.domain.model.Subscription;
@@ -10,6 +11,7 @@ import com.buildingos.subscription.subscription.domain.repository.SubscriptionRe
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -17,6 +19,8 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class JdbcSubscriptionRepositoryAdapter implements SubscriptionRepository {
+    private static final String FILTER = "(?::varchar IS NULL OR s.status = ?) "
+            + "AND (?::varchar IS NULL OR p.code = ?)";
     private final JdbcTemplate jdbc;
 
     public JdbcSubscriptionRepositoryAdapter(JdbcTemplate jdbc) { this.jdbc = jdbc; }
@@ -38,6 +42,25 @@ public class JdbcSubscriptionRepositoryAdapter implements SubscriptionRepository
                 subscription.planId(), subscription.status().name(), subscription.billingCycle().name(),
                 subscription.grantedBy().name(), Timestamp.from(subscription.startedAt())) == 1;
     }
+
+    @Override
+    public List<PlatformSubscriptionRow> findPage(SubscriptionStatus status, String planCode, int offset, int limit) {
+        return jdbc.query("SELECT s.id, s.subject_type, s.subject_id, s.plan_id, s.status, s.billing_cycle, "
+                + "s.granted_by, s.started_at, p.code AS plan_code, p.name AS plan_name FROM subscription s "
+                + "JOIN subscription_plan p ON p.id = s.plan_id WHERE " + FILTER
+                + " ORDER BY s.started_at DESC, s.id LIMIT ? OFFSET ?",
+                (rs, row) -> new PlatformSubscriptionRow(map(rs, row), rs.getString("plan_code"),
+                        rs.getString("plan_name")),
+                name(status), name(status), planCode, planCode, limit, offset);
+    }
+
+    @Override
+    public long count(SubscriptionStatus status, String planCode) {
+        return jdbc.queryForObject("SELECT count(*) FROM subscription s JOIN subscription_plan p ON p.id = s.plan_id "
+                + "WHERE " + FILTER, Long.class, name(status), name(status), planCode, planCode);
+    }
+
+    private static String name(SubscriptionStatus status) { return status == null ? null : status.name(); }
 
     private Subscription map(ResultSet rs, int row) throws SQLException {
         return new Subscription(rs.getObject("id", UUID.class),

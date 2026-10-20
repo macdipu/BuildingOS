@@ -122,7 +122,7 @@ class GatewayRoutingTest {
 
     @ParameterizedTest
     @ValueSource(strings = {"/api/v1/platform/subscription-plans", "/api/v1/platform/subscription-plans/abc",
-            "/api/v1/platform/free-tier", "/api/v1/platform/users/abc/subscription",
+            "/api/v1/platform/free-tier", "/api/v1/platform/users/abc/subscription", "/api/v1/platform/subscriptions",
             "/api/v1/platform/fees/BUILDING_CREATION/status", "/api/v1/me/plans", "/api/v1/me/entitlements"})
     void revenueApiPathsForwardUnchangedWithBearerToken(String path) throws Exception {
         String token = validToken();

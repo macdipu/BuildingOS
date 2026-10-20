@@ -27,7 +27,7 @@ public class GatewayRouteConfig {
                 .and(metadataRoute("backoffice", backOfficeUrl))
                 .and(passThroughRoute("subscription-api", subscriptionUrl,
                         "/api/v1/platform/subscription-plans", "/api/v1/platform/subscription-plans/**",
-                        "/api/v1/platform/free-tier", "/api/v1/platform/users/*/subscription",
+                        "/api/v1/platform/free-tier", "/api/v1/platform/users/*/subscription", "/api/v1/platform/subscriptions",
                         "/api/v1/platform/fees/**", "/api/v1/me/plans", "/api/v1/me/subscription",
                         "/api/v1/me/entitlements"))
                 .and(passThroughRoute("building-api", buildingUrl,

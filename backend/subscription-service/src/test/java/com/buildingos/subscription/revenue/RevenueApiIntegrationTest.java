@@ -347,4 +347,26 @@ class RevenueApiIntegrationTest {
         return "{\"referenceType\":\"BUILDING_APPLICATION\",\"referenceId\":\"" + application + "\",\"amount\":" + amount
                 + ",\"currency\":\"" + currency + "\",\"externalReference\":\"bank-slip-42\",\"paidOn\":\"2026-09-23\"}";
     }
+
+    @Test
+    void platformSubscriptionListFiltersByPlanAndIsAdminOnly() throws Exception {
+        var planId = createPlan(false, "{}");
+        String planCode = send("GET", "/api/v1/platform/subscription-plans/" + planId, adminToken(), null)
+                .data().path("code").asString();
+        var user = UUID.randomUUID();
+        send("POST", "/api/v1/platform/users/" + user + "/subscription", adminToken(), subscribeJson(planId, "MONTHLY"));
+
+        var hit = send("GET", "/api/v1/platform/subscriptions?status=active&plan=" + planCode, adminToken(), null);
+        assertThat(hit.status()).isEqualTo(200);
+        assertThat(hit.data()).hasSize(1);
+        assertThat(hit.data().get(0).path("userId").asString()).isEqualTo(user.toString());
+        assertThat(hit.data().get(0).path("planCode").asString()).isEqualTo(planCode);
+        assertThat(hit.body().path("meta").path("total").asInt()).isEqualTo(1);
+
+        assertThat(send("GET", "/api/v1/platform/subscriptions?plan=NO_SUCH_PLAN", adminToken(), null).data()).isEmpty();
+        assertThat(send("GET", "/api/v1/platform/subscriptions?status=NOPE", adminToken(), null).status()).isEqualTo(400);
+        assertThat(send("GET", "/api/v1/platform/subscriptions?size=0", adminToken(), null).status()).isEqualTo(400);
+        assertThat(send("GET", "/api/v1/platform/subscriptions", token(user), null).status()).isEqualTo(403);
+        assertThat(send("GET", "/api/v1/platform/subscriptions", null, null).status()).isEqualTo(401);
+    }
 }

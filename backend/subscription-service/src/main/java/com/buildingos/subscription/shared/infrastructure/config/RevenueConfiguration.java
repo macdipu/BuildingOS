@@ -38,6 +38,8 @@ import com.buildingos.subscription.subscription.application.getmyentitlements.Ge
 import com.buildingos.subscription.subscription.application.getusersubscription.GetUserSubscriptionService;
 import com.buildingos.subscription.subscription.application.getusersubscription.GetUserSubscriptionUseCase;
 import com.buildingos.subscription.subscription.application.grantsubscription.GrantSubscriptionService;
+import com.buildingos.subscription.subscription.application.listplatformsubscriptions.ListPlatformSubscriptionsService;
+import com.buildingos.subscription.subscription.application.listplatformsubscriptions.ListPlatformSubscriptionsUseCase;
 import com.buildingos.subscription.subscription.application.grantsubscription.GrantSubscriptionUseCase;
 import com.buildingos.subscription.subscription.application.selfsubscribe.SelfSubscribeService;
 import com.buildingos.subscription.subscription.application.selfsubscribe.SelfSubscribeUseCase;
@@ -107,6 +109,11 @@ public class RevenueConfiguration {
     @Bean
     GetUserSubscriptionUseCase getUserSubscription(SubscriptionRepository subscriptions, EntitlementResolver resolver) {
         return new GetUserSubscriptionService(subscriptions, resolver);
+    }
+
+    @Bean
+    ListPlatformSubscriptionsUseCase listPlatformSubscriptions(SubscriptionRepository subscriptions) {
+        return new ListPlatformSubscriptionsService(subscriptions);
     }
 
     @Bean
