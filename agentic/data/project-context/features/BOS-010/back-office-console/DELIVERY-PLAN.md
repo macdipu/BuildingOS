@@ -27,6 +27,12 @@ billing) and C-3 (kanban vs §149.4 states) are excluded from scope pending oper
 
 Progress: F6-T1 97d489a, F6-T2 975ea8d, F6-T6 f79e6d9, F6-T3 a28b792; F6-T4 done (D-36),
 F6-T4b relay planned; F6-T7 split into F6-T7.1 (application review, done) and F6-T7.2 (subscriptions, done). F6-T5 split: F6-T5a health (done), F6-T5b/c/d audit done (paging-edge gap noted in tasks/F6-T5b.md) (D-37).
+F6-T7a/T7b done (e740842, d3dc815); F6-T7 list screens done (aa019cb; Playwright review-to-approve still open).
+F6-T8 split: F6-T8a Assisted Onboarding screens (built, uncommitted); F6-T8b Support sessions + elevated approval screens
+(built, uncommitted; no audit-trail row links until F6-T9); F6-T8c Users screens BLOCKED: F6-T2 role list/assign/revoke exist only as internal auth-service endpoints and
+back-office-service has no user proxy, so a BE task (F6-T8c-BE: `/api/v1/platform/backoffice/users*` relaying auth-service) is needed first.
+Gaps in F6-T8a: no onboarding-session history endpoint (detail shows current state only); "Assign Onboarding Agent" entry on the
+application review page not wired yet (StartOnboardingForm accepts `initialBuildingId`).
 
 - **Q-F6-3 (RESOLVED D-36):** `SupportSession` lifecycle rules are not decided by D-10/BRD
   §149.12: (a) who may start a session and for whom (SUPPORT_AGENT self-start? admins?);

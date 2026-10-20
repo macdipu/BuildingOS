@@ -4,6 +4,7 @@ import { ApplicationsScreen } from "@/components/ApplicationsScreen";
 import { NotAvailable } from "@/components/NotAvailable";
 import { OnboardingSessionsScreen } from "@/components/OnboardingSessionsScreen";
 import { PlansScreen } from "@/components/PlansScreen";
+import { SupportSessionsScreen } from "@/components/SupportSessionsScreen";
 import { UserSubscriptionScreen } from "@/components/UserSubscriptionScreen";
 import type { BuildingStatus } from "@/lib/buildings";
 import type { ReviewStatus } from "@/lib/buildingApplications";
@@ -47,10 +48,14 @@ export default async function SectionPage({ params }: PageProps<"/[section]/[[..
   if (tab) return <ApplicationsScreen key={tab} title={title} initialStatus={tab} />;
   const buildingStatus = BUILDING_LISTS[screen];
   if (buildingStatus) return <BuildingsScreen key={buildingStatus} title={title} status={buildingStatus} />;
-  if (screen === "subscriptions/plans") return <PlansScreen title={title} />;
   if (screen === "support/assisted-onboarding") {
     return <OnboardingSessionsScreen title={title} userId={session.userId} roles={session.roles} />;
   }
+  if (screen === "support/active-sessions" || screen === "support/history") {
+    const mode = screen === "support/history" ? "history" : "active";
+    return <SupportSessionsScreen title={title} mode={mode} userId={session.userId} roles={session.roles} />;
+  }
+  if (screen === "subscriptions/plans") return <PlansScreen title={title} />;
   if (screen === "subscriptions/user-subscriptions") return <UserSubscriptionScreen title={title} />;
   const note = NOTES[screen];
   return <NotAvailable title={title} note={note} />;
