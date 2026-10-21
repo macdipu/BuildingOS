@@ -15,3 +15,8 @@ target/
 /.agent/runtime/**/.active-task-*
 /.agent/runtime/logs/
 /.agent/runtime/active-task.recovered-*.json
+/.agent/local/
+/.agent/HANDOFF.md
+/.agent/state/**/.lock
+/.agent/state/**/.cache.json
+/.agent/state/**/*.tmp
