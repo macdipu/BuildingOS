@@ -1,0 +1,1 @@
+{"ops":[{"entry":{"created_at":"2026-10-21T16:15:30.217268+00:00","event":"COMMIT_RECORDED","payload":{"commit_trigger":"user-request","run":"RUN-E75BB02D414A4AEFB153A1BF408C41F6","sha":"8668da5","subject":"docs(bos-010-f6): record F6 review and D-38 decision","task":"","work_item":"BOS-010"},"run_id":"RUN-E75BB02D414A4AEFB153A1BF408C41F6"},"op":"audit"}]}

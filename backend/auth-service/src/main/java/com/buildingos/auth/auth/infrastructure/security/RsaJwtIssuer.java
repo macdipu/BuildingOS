@@ -1,9 +1,11 @@
 package com.buildingos.auth.auth.infrastructure.security;
 
+import com.buildingos.auth.auth.application.port.out.ServiceTokenIssuer;
 import com.buildingos.auth.auth.application.port.out.SigningKeyProvider;
 import com.buildingos.auth.auth.application.port.out.TokenIssuer;
 import com.buildingos.auth.auth.domain.model.PlatformRole;
 import com.buildingos.platform.web.security.SecuritySettings;
+import com.buildingos.platform.web.security.ServicePrincipal;
 import com.nimbusds.jose.JWSAlgorithm;
 import com.nimbusds.jose.JWSHeader;
 import com.nimbusds.jose.crypto.RSASSASigner;
@@ -31,7 +33,7 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 /** Signs using a validated active key; publishes only public parts of the retained set. */
-public final class RsaJwtIssuer implements TokenIssuer, SigningKeyProvider {
+public final class RsaJwtIssuer implements TokenIssuer, ServiceTokenIssuer, SigningKeyProvider {
     private final Duration accessTokenTtl;
     private final List<RSAKey> keys;
     private final RSAKey signingKey;
@@ -105,11 +107,31 @@ public final class RsaJwtIssuer implements TokenIssuer, SigningKeyProvider {
                 .issueTime(Date.from(now))
                 .expirationTime(Date.from(expiry))
                 .build();
+        return new IssuedToken(sign(claims), accessTokenTtl.toSeconds());
+    }
+
+    @Override
+    public IssuedToken issueService(String clientId, Set<String> scopes, Duration ttl) {
+        if (ttl == null || ttl.toSeconds() < 1) throw new IllegalArgumentException("Token TTL must be positive");
+        Instant now = clock.instant();
+        JWTClaimsSet claims = new JWTClaimsSet.Builder()
+                .issuer(settings.issuer())
+                .audience(settings.audience())
+                .subject(ServicePrincipal.SUBJECT_PREFIX + clientId)
+                .claim("client_id", clientId)
+                .claim("scope", String.join(" ", scopes.stream().sorted().toList()))
+                .issueTime(Date.from(now))
+                .expirationTime(Date.from(now.plus(ttl)))
+                .build();
+        return new IssuedToken(sign(claims), ttl.toSeconds());
+    }
+
+    private String sign(JWTClaimsSet claims) {
         try {
             SignedJWT jwt = new SignedJWT(
                     new JWSHeader.Builder(JWSAlgorithm.RS256).keyID(signingKey.getKeyID()).build(), claims);
             jwt.sign(new RSASSASigner(signingKey));
-            return new IssuedToken(jwt.serialize(), accessTokenTtl.toSeconds());
+            return jwt.serialize();
         } catch (Exception signingFailure) {
             throw new IllegalStateException("Failed to sign access token", signingFailure);
         }

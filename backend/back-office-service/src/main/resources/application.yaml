@@ -48,6 +48,10 @@ buildingos:
     subscription-url: ${SUBSCRIPTION_SERVICE_URL}
     connect-timeout: ${SERVICE_CONNECT_TIMEOUT:PT2S}
     read-timeout: ${SERVICE_READ_TIMEOUT:PT5S}
+  # D-38: this service's own credentials for directory lookups (auth-service POST /internal/service-tokens).
+  service-credential:
+    client-id: back-office-service
+    client-secret: ${BACKOFFICE_SERVICE_CLIENT_SECRET}
   onboarding:
     max-duration: ${ONBOARDING_MAX_DURATION:P30D}
   support:

@@ -2,6 +2,7 @@ package com.buildingos.backoffice.supportsession;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import com.buildingos.backoffice.shared.infrastructure.client.ServiceTokenProvider;
 import com.buildingos.backoffice.support.DownstreamStubs;
 import com.buildingos.backoffice.support.JwtFixtures;
 import java.net.URI;
@@ -53,6 +54,9 @@ class SupportSessionApiIntegrationTest {
 
     @LocalServerPort
     private int port;
+
+    @Autowired
+    private ServiceTokenProvider serviceTokens;
 
     @Autowired
     private JdbcTemplate jdbc;
@@ -166,7 +170,7 @@ class SupportSessionApiIntegrationTest {
     }
 
     @Test
-    void agentStartsSessionWithRelayedTokenAndAuditRow() throws Exception {
+    void supportAgentStartsSessionWithServiceTokenLookupsAndAuditRow() throws Exception {
         String token = agentToken();
         var reply = start(token, "[\"SUPPORT_VIEW_UNITS\",\"SUPPORT_VIEW_MEMBERS\"]");
         assertThat(reply.status()).isEqualTo(201);
@@ -176,8 +180,8 @@ class SupportSessionApiIntegrationTest {
         assertThat(data.path("targetUserId").asString()).isEqualTo(customer.toString());
         assertThat(data.path("permissionScope").size()).isEqualTo(2);
         assertThat(data.path("elevatedApprovals").size()).isZero();
-        assertThat(stubs.authAuthorizations).containsExactly("Bearer " + token);
-        assertThat(stubs.buildingAuthorizations).containsExactly("Bearer " + token);
+        assertThat(stubs.authAuthorizations).containsExactly("Bearer " + DownstreamStubs.SERVICE_TOKEN);
+        assertThat(stubs.buildingAuthorizations).containsExactly("Bearer " + DownstreamStubs.SERVICE_TOKEN);
         UUID id = UUID.fromString(data.path("id").asString());
         assertThat(transitions("SUPPORT_SESSION", id)).singleElement().satisfies(row -> {
             assertThat(row.get("from_status")).isNull();
@@ -217,6 +221,12 @@ class SupportSessionApiIntegrationTest {
         stubs.buildingDown = true;
         assertThat(start(agentToken(), scopes).status()).isEqualTo(503);
         stubs.buildingDown = false;
+        stubs.rejectClient = true;
+        serviceTokens.invalidate();
+        var rejected = start(agentToken(), scopes);
+        assertThat(rejected.status()).isEqualTo(503);
+        assertThat(rejected.code()).isEqualTo("DEPENDENCY_UNAVAILABLE");
+        stubs.rejectClient = false;
 
         assertThat(start(token(UUID.randomUUID(), "ONBOARDING_AGENT"), scopes).status()).isEqualTo(403);
         assertThat(start(token(UUID.randomUUID()), scopes).status()).isEqualTo(403);

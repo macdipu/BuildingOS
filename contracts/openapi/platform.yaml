@@ -2676,9 +2676,9 @@ paths:
     post:
       summary: "Assign an ONBOARDING_AGENT to a building (BOC-06, D-33): created ASSIGNED, started now"
       description: >
-        back-office-service checks the assignee with auth-service GET /internal/users/{id} and the building with
-        building-service GET /api/v1/platform/buildings/{id}, relaying the caller's token. Nothing is stored
-        unless both answer. The creation is recorded as a lifecycle_transition row.
+        back-office-service checks the assignee with auth-service GET /internal/directory/users/{id} and the
+        building with building-service GET /internal/directory/buildings/{id}, using its own service token (D-38).
+        Nothing is stored unless both answer. The creation is recorded as a lifecycle_transition row.
       security:
         - bearerAuth: []
       requestBody:
@@ -2997,8 +2997,9 @@ paths:
       summary: "Open a support session for the caller (BOC-07, D-36): SUPPORT_AGENT, PLATFORM_ADMIN or SUPER_ADMIN"
       description: >
         platformUserId is always the caller. back-office-service checks the target user with auth-service
-        GET /internal/users/{id} and the building with building-service GET /api/v1/platform/buildings/{id},
-        relaying the caller's token; nothing is stored unless both answer. Ordinary scopes are granted; each
+        GET /internal/directory/users/{id} and the building with building-service
+        GET /internal/directory/buildings/{id}, using its own service token (D-38); nothing is stored unless both
+        answer. Ordinary scopes are granted; each
         high-risk scope creates a PENDING elevated approval request. The start and each request are recorded as
         lifecycle_transition rows.
       security:
@@ -3712,6 +3713,111 @@ paths:
           content:
             application/json:
               schema: { $ref: "#/components/schemas/ApiError" }
+  /internal/service-tokens:
+    post:
+      summary: "auth-service: exchange service client credentials for a service token (service-to-service, D-38)"
+      description: >
+        Never routed by the gateway. Unauthenticated by bearer token; the body carries the client credentials,
+        compared in constant time. The token's sub is service:<clientId>, its scope lists the client's configured
+        scopes (back-office-service: directory.read), and it carries no platform roles. Default lifetime 5 minutes.
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/ServiceTokenRequest" }
+      responses:
+        "200":
+          description: "Success envelope; data is a ServiceTokenResponse"
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - { $ref: "#/components/schemas/ApiEnvelope" }
+                  - type: object
+                    properties:
+                      data: { $ref: "#/components/schemas/ServiceTokenResponse" }
+        "400":
+          description: "INVALID_REQUEST (clientId or clientSecret missing)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "401":
+          description: "INVALID_CLIENT (unknown client, wrong secret or disabled client)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+  /internal/directory/users/{id}:
+    get:
+      summary: "auth-service: does a user exist, and with which platform roles (service-to-service, D-38)"
+      description: >
+        Never routed by the gateway. Requires a service token with scope directory.read; user tokens are refused.
+        Returns no phone or other personal data.
+      security:
+        - bearerAuth: []
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: string, format: uuid } }
+      responses:
+        "200":
+          description: "Success envelope; data is a DirectoryUser"
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - { $ref: "#/components/schemas/ApiEnvelope" }
+                  - type: object
+                    properties:
+                      data: { $ref: "#/components/schemas/DirectoryUser" }
+        "401":
+          description: "Missing or invalid token"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "403":
+          description: "ACCESS_DENIED (not a service token with directory.read)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "404":
+          description: "USER_NOT_FOUND"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+  /internal/directory/buildings/{buildingId}:
+    get:
+      summary: "building-service: does a building exist, and in which lifecycle status (service-to-service, D-38)"
+      description: >
+        Never routed by the gateway. Requires a service token with scope directory.read; user tokens are refused.
+      security:
+        - bearerAuth: []
+      parameters:
+        - { name: buildingId, in: path, required: true, schema: { type: string, format: uuid } }
+      responses:
+        "200":
+          description: "Success envelope; data is a DirectoryBuilding"
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - { $ref: "#/components/schemas/ApiEnvelope" }
+                  - type: object
+                    properties:
+                      data: { $ref: "#/components/schemas/DirectoryBuilding" }
+        "401":
+          description: "Missing or invalid token"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "403":
+          description: "ACCESS_DENIED (not a service token with directory.read)"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "404":
+          description: "BUILDING_NOT_FOUND"
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
   /internal/platform/info:
     get:
       summary: Service metadata (direct, auth-service or building-service)
@@ -3746,6 +3852,31 @@ components:
         data: {}
         meta: { type: object }
         traceId: { type: string }
+    ServiceTokenRequest:
+      type: object
+      required: [clientId, clientSecret]
+      properties:
+        clientId: { type: string, example: back-office-service }
+        clientSecret: { type: string, format: password, writeOnly: true }
+    ServiceTokenResponse:
+      type: object
+      required: [accessToken, tokenType, expiresIn]
+      properties:
+        accessToken: { type: string }
+        tokenType: { type: string, enum: [Bearer] }
+        expiresIn: { type: integer, description: "Seconds until expiry" }
+    DirectoryUser:
+      type: object
+      required: [id, platformRoles]
+      properties:
+        id: { type: string, format: uuid }
+        platformRoles: { type: array, items: { type: string } }
+    DirectoryBuilding:
+      type: object
+      required: [id, status]
+      properties:
+        id: { type: string, format: uuid }
+        status: { type: string, example: ONBOARDING }
     InternalAuditEvent:
       type: object
       description: "Common internal audit read item (F6-T5b, F6-T5c); no before/after payloads."

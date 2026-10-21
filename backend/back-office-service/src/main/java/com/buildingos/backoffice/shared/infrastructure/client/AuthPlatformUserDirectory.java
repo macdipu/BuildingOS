@@ -13,13 +13,13 @@ import org.springframework.web.client.RestClient;
 import org.springframework.web.client.RestClientException;
 import tools.jackson.databind.JsonNode;
 
-/** auth-service {@code GET /internal/users/{id}} with the caller's relayed token (PlatformUserResponse). */
+/** auth-service {@code GET /internal/directory/users/{id}} with this service's own token (D-38). */
 @Component
 public class AuthPlatformUserDirectory implements PlatformUserDirectory {
     private static final String DEPENDENCY = "auth-service";
     private final RestClient client;
 
-    public AuthPlatformUserDirectory(@Qualifier("authServiceClient") RestClient client) {
+    public AuthPlatformUserDirectory(@Qualifier("authDirectoryClient") RestClient client) {
         this.client = client;
     }
 
@@ -27,7 +27,7 @@ public class AuthPlatformUserDirectory implements PlatformUserDirectory {
     public Optional<Set<String>> platformRolesOf(UUID userId) {
         JsonNode body;
         try {
-            body = client.get().uri("/internal/users/{id}", userId).retrieve().body(JsonNode.class);
+            body = client.get().uri("/internal/directory/users/{id}", userId).retrieve().body(JsonNode.class);
         } catch (HttpClientErrorException.NotFound unknownUser) {
             return Optional.empty();
         } catch (RestClientException failed) {

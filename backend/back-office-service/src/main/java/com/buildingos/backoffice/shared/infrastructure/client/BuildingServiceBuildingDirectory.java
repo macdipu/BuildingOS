@@ -9,20 +9,20 @@ import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestClient;
 import org.springframework.web.client.RestClientException;
 
-/** building-service {@code GET /api/v1/platform/buildings/{id}} with the caller's relayed token. */
+/** building-service {@code GET /internal/directory/buildings/{id}} with this service's own token (D-38). */
 @Component
 public class BuildingServiceBuildingDirectory implements BuildingDirectory {
     private static final String DEPENDENCY = "building-service";
     private final RestClient client;
 
-    public BuildingServiceBuildingDirectory(@Qualifier("buildingServiceClient") RestClient client) {
+    public BuildingServiceBuildingDirectory(@Qualifier("buildingDirectoryClient") RestClient client) {
         this.client = client;
     }
 
     @Override
     public boolean exists(UUID buildingId) {
         try {
-            client.get().uri("/api/v1/platform/buildings/{id}", buildingId).retrieve().toBodilessEntity();
+            client.get().uri("/internal/directory/buildings/{id}", buildingId).retrieve().toBodilessEntity();
             return true;
         } catch (HttpClientErrorException.NotFound unknownBuilding) {
             return false;

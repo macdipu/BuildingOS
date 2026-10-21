@@ -66,6 +66,21 @@ public final class JwtFixtures implements AutoCloseable {
         return jwt.serialize();
     }
 
+    /** Token shaped like a D-38 service token: {@code sub} (e.g. {@code service:back-office-service}) plus {@code scope}. */
+    public String serviceToken(String audience, String subject, String scope) throws Exception {
+        JWTClaimsSet claims = new JWTClaimsSet.Builder()
+                .issuer(issuer())
+                .audience(audience)
+                .subject(subject)
+                .claim("scope", scope)
+                .issueTime(Date.from(Instant.now().minusSeconds(10)))
+                .expirationTime(Date.from(Instant.now().plusSeconds(300)))
+                .build();
+        SignedJWT jwt = new SignedJWT(new JWSHeader.Builder(JWSAlgorithm.RS256).keyID(rsaJwk.getKeyID()).build(), claims);
+        jwt.sign(new RSASSASigner(rsaJwk));
+        return jwt.serialize();
+    }
+
     public String tokenSignedByOtherKey(String issuer, String audience) throws Exception {
         return sign(generateKey(), issuer, audience, Instant.now().plusSeconds(300));
     }

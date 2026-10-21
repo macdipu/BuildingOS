@@ -4,8 +4,12 @@ import com.buildingos.auth.auth.application.assignplatformrole.AssignPlatformRol
 import com.buildingos.auth.auth.application.assignplatformrole.AssignPlatformRoleUseCase;
 import com.buildingos.auth.auth.application.getpublickeys.GetPublicSigningKeysService;
 import com.buildingos.auth.auth.application.getpublickeys.GetPublicSigningKeysUseCase;
+import com.buildingos.auth.auth.application.getdirectoryuser.GetDirectoryUserService;
+import com.buildingos.auth.auth.application.getdirectoryuser.GetDirectoryUserUseCase;
 import com.buildingos.auth.auth.application.getuser.GetUserService;
 import com.buildingos.auth.auth.application.getuser.GetUserUseCase;
+import com.buildingos.auth.auth.application.issueservicetoken.IssueServiceTokenService;
+import com.buildingos.auth.auth.application.issueservicetoken.IssueServiceTokenUseCase;
 import com.buildingos.auth.auth.application.listauditevents.ListAuditEventsService;
 import com.buildingos.auth.auth.application.listauditevents.ListAuditEventsUseCase;
 import com.buildingos.auth.auth.application.listusers.ListUsersService;
@@ -28,6 +32,7 @@ import com.buildingos.auth.auth.application.verifyotp.VerifyOtpUseCase;
 import com.buildingos.auth.auth.domain.repository.OtpChallengeRepository;
 import com.buildingos.auth.auth.domain.repository.PlatformRoleAuditRepository;
 import com.buildingos.auth.auth.domain.repository.UserRepository;
+import com.buildingos.auth.auth.infrastructure.security.ConfiguredServiceClientRegistry;
 import com.buildingos.auth.auth.infrastructure.security.DevelopmentOtpProvider;
 import com.buildingos.auth.auth.infrastructure.security.HashedCodeOtpProvider;
 import com.buildingos.auth.auth.infrastructure.security.RsaJwtIssuer;
@@ -35,6 +40,7 @@ import com.buildingos.platform.web.security.SecuritySettings;
 import java.time.Clock;
 import java.time.Duration;
 import org.springframework.beans.factory.ObjectProvider;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -43,6 +49,7 @@ import org.springframework.core.env.Profiles;
 
 /** Wires auth only after validating provider and signing configuration. */
 @Configuration(proxyBeanMethods = false)
+@EnableConfigurationProperties(ServiceClientProperties.class)
 public class AuthConfiguration {
     @Bean
     Clock clock() {
@@ -81,6 +88,17 @@ public class AuthConfiguration {
     @Bean
     GetUserUseCase getUser(UserRepository users) {
         return new GetUserService(users);
+    }
+
+    @Bean
+    GetDirectoryUserUseCase getDirectoryUser(UserRepository users) {
+        return new GetDirectoryUserService(users);
+    }
+
+    @Bean
+    IssueServiceTokenUseCase issueServiceToken(ServiceClientProperties properties, RsaJwtIssuer tokenIssuer) {
+        return new IssueServiceTokenService(new ConfiguredServiceClientRegistry(properties.clients()), tokenIssuer,
+                properties.tokenTtl());
     }
 
     @Bean

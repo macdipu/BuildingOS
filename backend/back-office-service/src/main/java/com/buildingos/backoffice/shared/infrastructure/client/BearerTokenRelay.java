@@ -11,7 +11,7 @@ import org.springframework.security.oauth2.server.resource.authentication.JwtAut
 
 /**
  * Forwards the current caller's access token to another BuildingOS service, which re-validates it and applies its
- * own role checks (TECH-SPEC token relay). No service credentials exist yet.
+ * own role checks (TECH-SPEC token relay). Directory lookups use ServiceTokenAuthorization instead (D-38).
  */
 public final class BearerTokenRelay implements ClientHttpRequestInterceptor {
     @Override

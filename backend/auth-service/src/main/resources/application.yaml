@@ -13,6 +13,8 @@ platform:
       - /api/v1/auth/otp/start
       - /api/v1/auth/otp/verify
       - /.well-known/jwks.json
+      # D-38 client-credentials exchange; the gateway does not route /internal/**.
+      - /internal/service-tokens
 management:
   endpoints:
     web:
@@ -55,3 +57,10 @@ buildingos:
     signing-jwks-path: ${AUTH_SIGNING_JWKS_PATH:}
     signing-active-kid: ${AUTH_SIGNING_ACTIVE_KID:}
     access-token-ttl: ${AUTH_ACCESS_TOKEN_TTL:PT15M}
+    # D-38 service clients: a blank secret disables the client.
+    service:
+      token-ttl: ${AUTH_SERVICE_TOKEN_TTL:PT5M}
+      clients:
+        back-office-service:
+          secret: ${BACKOFFICE_SERVICE_CLIENT_SECRET:}
+          scopes: [directory.read]

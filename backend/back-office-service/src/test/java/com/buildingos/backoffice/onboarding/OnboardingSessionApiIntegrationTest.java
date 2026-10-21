@@ -156,7 +156,7 @@ class OnboardingSessionApiIntegrationTest {
     }
 
     @Test
-    void operatorCreatesAssignedSessionWithRelayedTokenAndAuditRow() throws Exception {
+    void operatorCreatesAssignedSessionWithServiceTokenLookupsAndAuditRow() throws Exception {
         String token = operatorToken();
         var reply = create(token, agent);
         assertThat(reply.status()).isEqualTo(201);
@@ -166,8 +166,8 @@ class OnboardingSessionApiIntegrationTest {
         assertThat(data.path("assignedAgentUserId").asString()).isEqualTo(agent.toString());
         assertThat(data.path("accessScope").size()).isEqualTo(2);
         assertThat(data.path("startedAt").asString()).isNotBlank();
-        assertThat(stubs.authAuthorizations).containsExactly("Bearer " + token);
-        assertThat(stubs.buildingAuthorizations).containsExactly("Bearer " + token);
+        assertThat(stubs.authAuthorizations).containsExactly("Bearer " + DownstreamStubs.SERVICE_TOKEN);
+        assertThat(stubs.buildingAuthorizations).containsExactly("Bearer " + DownstreamStubs.SERVICE_TOKEN);
         var rows = transitions(UUID.fromString(data.path("id").asString()));
         assertThat(rows).singleElement().satisfies(row -> {
             assertThat(row.get("from_status")).isNull();

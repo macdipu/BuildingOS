@@ -4,6 +4,8 @@ import com.buildingos.building.building.application.BuildingChanges;
 import com.buildingos.building.building.application.activatebuilding.ActivateBuildingService;
 import com.buildingos.building.building.application.activatebuilding.ActivateBuildingUseCase;
 import com.buildingos.building.building.application.getbuilding.GetBuildingService;
+import com.buildingos.building.building.application.getdirectorybuilding.GetDirectoryBuildingService;
+import com.buildingos.building.building.application.getdirectorybuilding.GetDirectoryBuildingUseCase;
 import com.buildingos.building.building.application.getbuilding.GetBuildingUseCase;
 import com.buildingos.building.building.application.listplatformbuildings.ListPlatformBuildingsService;
 import com.buildingos.building.building.application.listplatformbuildings.ListPlatformBuildingsUseCase;
@@ -46,6 +48,11 @@ public class BuildingConfiguration {
     @Bean
     GetBuildingUseCase getBuilding(BuildingRepository buildings, BuildingMembershipRepository memberships) {
         return new GetBuildingService(buildings, memberships);
+    }
+
+    @Bean
+    GetDirectoryBuildingUseCase getDirectoryBuilding(BuildingRepository buildings) {
+        return new GetDirectoryBuildingService(buildings);
     }
 
     @Bean
