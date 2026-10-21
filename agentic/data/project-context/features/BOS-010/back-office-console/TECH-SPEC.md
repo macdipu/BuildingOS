@@ -55,6 +55,16 @@ duplicate them elsewhere).
   `/internal/users/provision` (relayed bearer token, target service's own JWT/role
   check — `SUPER_ADMIN`/`PLATFORM_ADMIN` only, per ID-04).
 - `GET /internal/users/{id}` — one user's detail.
+- **Amendment D-38 (2026-10-21, review R-1):** `POST /internal/service-tokens` — client-credentials
+  exchange (client id + secret from env, constant-time compare) returning a short-lived RS256 service
+  token: `sub` = `service:<clientId>`, `scope` = `directory.read`, no platform roles, same
+  issuer/audience/JWKS. `GET /internal/directory/users/{id}` — id + platform roles only (no phone),
+  service tokens with `directory.read` only. building-service mirrors it with
+  `GET /internal/directory/buildings/{id}` (id + status). `back-office-service` uses its own service
+  token for these existence/role lookups (onboarding assignee + building, support-session target
+  user + building) so a `SUPPORT_AGENT` can start a session; every other cross-service call still
+  relays the caller's token. Config: `BACKOFFICE_SERVICE_CLIENT_SECRET` (auth-service and
+  back-office-service, ≥ 32 chars; blank disables the client), `AUTH_SERVICE_TOKEN_TTL` (default 5 min).
 - `POST /internal/users/{id}/platform-roles` / `DELETE .../platform-roles/{role}` —
   assign/revoke, `SUPER_ADMIN` only (ID-04: a building admin cannot self-grant a
   platform role; this extends the same rule — no platform role can self-grant another).
