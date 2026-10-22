@@ -28,3 +28,7 @@ explicit operator approval (AGENTS.md rule 6).
   service set (§145) and current architecture diverge for this epic.
 - Production deployment, SMS go-live and any production-readiness claim stay behind explicit
   operator approval regardless of story completion.
+
+## Answered
+
+- **Q-BOS-009-05: ANSWERED 2026-10-22** — (a) self-hosted OTel Collector + Prometheus + Grafana + Loki + Tempo in local/dev compose; production hosting follows Q-BOS-009-08. Operator, AskUserQuestion: "Self-hosted OSS (Recommended)".

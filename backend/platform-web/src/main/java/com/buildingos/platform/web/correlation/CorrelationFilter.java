@@ -14,6 +14,8 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 public final class CorrelationFilter extends OncePerRequestFilter {
     public static final String HEADER = "X-Correlation-Id";
+    /** MDC key (and structured-log member) carrying the request correlation id; {@code traceId} is the OTel trace. */
+    public static final String MDC_KEY = "correlationId";
     private static final Pattern UUID_TEXT = Pattern.compile("[0-9a-fA-F]{8}(-[0-9a-fA-F]{4}){3}-[0-9a-fA-F]{12}");
     private static final Logger LOG = LoggerFactory.getLogger(CorrelationFilter.class);
 
@@ -30,7 +32,7 @@ public final class CorrelationFilter extends OncePerRequestFilter {
                 ? supplied.toLowerCase(java.util.Locale.ROOT) : UUID.randomUUID().toString();
         request.setAttribute(HEADER, trace);
         response.setHeader(HEADER, trace);
-        try (MDC.MDCCloseable ignored = MDC.putCloseable("traceId", trace)) {
+        try (MDC.MDCCloseable ignored = MDC.putCloseable(MDC_KEY, trace)) {
             chain.doFilter(request, response);
             LOG.info("http_request method={} status={}", request.getMethod(), response.getStatus());
         }

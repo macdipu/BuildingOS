@@ -203,6 +203,26 @@ direct service `/internal/platform/info`, must return 401. A bearer token signed
 your configured issuer with the configured audience is required for metadata; metrics
 also require `platform.observe` scope. Stop each application with Ctrl-C.
 
+## Reading logs (JSON)
+
+Every backend service writes one JSON object per line to the console (Spring Boot structured
+logging, `logstash` format; STORY-004). Members: `@timestamp`, `level`, `logger`, `message`,
+`service`, `correlationId`, and `traceId`/`spanId` once tracing is enabled. `correlationId` is the
+request id: the `X-Correlation-Id` header echoed on every response and the `traceId` field of
+`ApiError` bodies. Grep by it, not by the old plain-text format:
+
+```sh
+docker compose -f infra/local/compose.yaml logs --no-log-prefix -f building-service | jq .
+docker compose -f infra/local/compose.yaml logs --no-log-prefix auth-service \
+  | jq -c 'select(.correlationId == "<id from X-Correlation-Id>")'
+docker compose -f infra/local/compose.yaml logs --no-log-prefix api-gateway \
+  | jq -r '"\(.["@timestamp"]) \(.level) \(.service) \(.message)"'   # plain-ish view
+```
+
+Log text is redacted before it is written: BD mobile numbers become `01*******NN`, JWTs `[jwt]`,
+values of `otp`/`code`/`password`/`secret`/`token`/`refreshToken`/`nid`/`nationalId` `[redacted]`,
+and presigned S3 URLs lose their query string. Tests (`test` profile) keep plain-text logs.
+
 ## Check
 
 ```sh

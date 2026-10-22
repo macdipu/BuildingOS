@@ -32,8 +32,14 @@ management:
           include: readinessState,db
 logging:
   structured:
+    # STORY-004: one JSON object per line; redaction is applied by platform-web (spring.factories customizer).
     format:
       console: logstash
+    json:
+      add:
+        service: ${spring.application.name}
+      rename:
+        logger_name: logger
 spring:
   application:
     name: auth-service
@@ -64,3 +70,13 @@ buildingos:
         back-office-service:
           secret: ${BACKOFFICE_SERVICE_CLIENT_SECRET:}
           scopes: [directory.read]
+---
+# Plain-text console logs under the test profile keep test output readable.
+spring:
+  config:
+    activate:
+      on-profile: test
+logging:
+  structured:
+    format:
+      console: ""

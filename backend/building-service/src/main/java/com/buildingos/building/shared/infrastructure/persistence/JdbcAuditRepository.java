@@ -2,6 +2,7 @@ package com.buildingos.building.shared.infrastructure.persistence;
 
 import com.buildingos.building.shared.domain.model.AuditEntry;
 import com.buildingos.building.shared.domain.repository.AuditRepository;
+import com.buildingos.platform.web.correlation.CorrelationFilter;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
@@ -15,7 +16,7 @@ import org.springframework.stereotype.Repository;
 import tools.jackson.core.type.TypeReference;
 import tools.jackson.databind.json.JsonMapper;
 
-/** Append-only; the request trace id comes from platform-web's correlation MDC. */
+/** Append-only; the request correlation id comes from platform-web's correlation MDC. */
 @Repository
 public class JdbcAuditRepository implements AuditRepository {
     private static final JsonMapper JSON = JsonMapper.builder().build();
@@ -30,7 +31,8 @@ public class JdbcAuditRepository implements AuditRepository {
                         + "reason, before_data, after_data, trace_id, occurred_at) "
                         + "VALUES (?, ?, ?, ?, ?, ?, ?, ?::jsonb, ?::jsonb, ?, ?)",
                 e.id(), e.buildingId(), e.actorUserId(), e.action(), e.entityType(), e.entityId(), e.reason(),
-                JSON.writeValueAsString(e.before()), JSON.writeValueAsString(e.after()), MDC.get("traceId"),
+                JSON.writeValueAsString(e.before()), JSON.writeValueAsString(e.after()),
+                MDC.get(CorrelationFilter.MDC_KEY),
                 Timestamp.from(e.occurredAt()));
     }
 

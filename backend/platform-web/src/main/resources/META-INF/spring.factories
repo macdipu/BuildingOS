@@ -1,0 +1,2 @@
+org.springframework.boot.logging.structured.StructuredLoggingJsonMembersCustomizer=\
+com.buildingos.platform.web.logging.RedactingJsonMembersCustomizer

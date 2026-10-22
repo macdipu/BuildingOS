@@ -4,6 +4,7 @@ import com.buildingos.building.shared.domain.model.OutboxBacklog;
 import com.buildingos.building.shared.domain.model.OutboxEvent;
 import com.buildingos.building.shared.domain.model.PendingOutboxEvent;
 import com.buildingos.building.shared.domain.repository.OutboxRepository;
+import com.buildingos.platform.web.correlation.CorrelationFilter;
 import java.sql.Timestamp;
 import java.time.Instant;
 import java.util.List;
@@ -17,7 +18,7 @@ import tools.jackson.core.type.TypeReference;
 import tools.jackson.databind.DeserializationFeature;
 import tools.jackson.databind.json.JsonMapper;
 
-/** Pending rows are due immediately; the correlation id is the request trace id from platform-web's MDC. */
+/** Pending rows are due immediately; the correlation id is the request correlation id from platform-web's MDC. */
 @Repository
 public class JdbcOutboxRepository implements OutboxRepository {
     private static final JsonMapper JSON = JsonMapper.builder()
@@ -34,7 +35,7 @@ public class JdbcOutboxRepository implements OutboxRepository {
                         + "aggregate_id, aggregate_revision, correlation_id, payload, occurred_at, next_attempt_at) "
                         + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?::jsonb, ?, ?)",
                 e.eventId(), e.eventType(), e.eventVersion(), e.buildingId(), e.aggregateType(), e.aggregateId(),
-                e.aggregateRevision(), MDC.get("traceId"), JSON.writeValueAsString(e.data()),
+                e.aggregateRevision(), MDC.get(CorrelationFilter.MDC_KEY), JSON.writeValueAsString(e.data()),
                 Timestamp.from(e.occurredAt()), Timestamp.from(e.occurredAt()));
     }
 

@@ -39,7 +39,7 @@ public class PlatformErrorHandler {
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ApiError> unexpected(HttpServletRequest request, Exception exception) {
         String traceId = CorrelationFilter.traceId(request);
-        log.error("Unhandled exception for traceId={}", traceId, exception);
+        log.error("Unhandled exception for correlationId={}", traceId, exception);
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .body(ApiError.of("INTERNAL_ERROR", "An unexpected error occurred", traceId));
     }
