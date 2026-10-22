@@ -232,6 +232,12 @@ class SupportSessionApiIntegrationTest {
         assertThat(refused.status()).isEqualTo(403);
         assertThat(refused.code()).isEqualTo("ACCESS_DENIED");
         stubs.denyDirectory = false;
+        stubs.tokenEndpointMissing = true;
+        serviceTokens.invalidate();
+        var noExchange = start(agentToken(), scopes);
+        assertThat(noExchange.status()).isEqualTo(503);
+        assertThat(noExchange.code()).isEqualTo("DEPENDENCY_UNAVAILABLE");
+        stubs.tokenEndpointMissing = false;
 
         assertThat(start(token(UUID.randomUUID(), "ONBOARDING_AGENT"), scopes).status()).isEqualTo(403);
         assertThat(start(token(UUID.randomUUID()), scopes).status()).isEqualTo(403);

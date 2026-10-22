@@ -29,6 +29,8 @@ public final class DownstreamStubs implements AutoCloseable {
     public volatile boolean rejectClient;
     /** Directory refuses even the service token, e.g. a scope misconfiguration. */
     public volatile boolean denyDirectory;
+    /** Token exchange answers 404, as an auth-service without the endpoint would. */
+    public volatile boolean tokenEndpointMissing;
     public final List<String> tokenExchanges = new CopyOnWriteArrayList<>();
     public final List<String> authAuthorizations = new CopyOnWriteArrayList<>();
     public final List<String> buildingAuthorizations = new CopyOnWriteArrayList<>();
@@ -40,6 +42,10 @@ public final class DownstreamStubs implements AutoCloseable {
             tokenExchanges.add(body);
             if (authDown) {
                 send(exchange, 500, "{\"success\":false,\"code\":\"INTERNAL_ERROR\",\"message\":\"x\"}");
+                return;
+            }
+            if (tokenEndpointMissing) {
+                send(exchange, 404, "{\"success\":false,\"code\":\"NOT_FOUND\",\"message\":\"x\"}");
                 return;
             }
             if (rejectClient || !body.contains("\"clientId\":\"back-office-service\"")
@@ -101,6 +107,7 @@ public final class DownstreamStubs implements AutoCloseable {
         buildingDown = false;
         rejectClient = false;
         denyDirectory = false;
+        tokenEndpointMissing = false;
         tokenExchanges.clear();
         authAuthorizations.clear();
         buildingAuthorizations.clear();

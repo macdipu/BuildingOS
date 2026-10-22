@@ -46,6 +46,13 @@ Verdict: **BLOCKED** — one HIGH defect breaks D-36a; two MEDIUM defects fail s
   Evidence: web lint 0 / typecheck 0 / vitest 18 files 68 tests passed (one earlier full run had 3 timeouts
   in long-typing PlanForm/OnboardingSessionsScreen tests, passing alone and on two reruns — flaky under load);
   `mvn verify` building 128/0, subscription 38/0, back-office 92/0.
+- **Re-review 2026-10-22 (agent, read-only): READY.** R-1, R-2, R-3, R-5, R-6, R-7 RESOLVED. New:
+  N-1 MEDIUM service-token exchange failure (e.g. 404 from an older auth-service) surfaced as
+  "target not found" — **FIXED**: `ServiceTokenAuthorization` wraps exchange failures so they map to 503
+  (test `tokenEndpointMissing`). N-2 LOW D-38 text allowed admin user tokens on directory endpoints while
+  TECH-SPEC/code allow `directory.read` only — **FIXED** (DECISIONS.md aligned to the code). N-3 LOW auth-service
+  `Page.validate` lacked the overflow guard — **FIXED**. N-4 LOW a downstream 401 is not retried with a fresh
+  token (one request 503s after key rotation) — accepted, no change. Evidence: auth 98/0, back-office 92/0.
 - R-4 open: contract change (composite `(occurredAt, id)` cursor), needs technical approval.
 
 ## Questions (not defects)

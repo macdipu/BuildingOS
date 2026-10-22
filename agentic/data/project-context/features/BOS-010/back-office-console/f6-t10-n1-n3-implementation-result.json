@@ -1,0 +1,15 @@
+{
+  "status": "READY",
+  "evidence": [
+    "Re-review READY: R-1,R-2,R-3,R-5,R-6,R-7 resolved (agent read-only review 2026-10-22)",
+    "N-1 back-office ServiceTokenAuthorization wraps token-exchange RestClientException so directory callers map it to 503, not 404/403; SupportSessionApiIntegrationTest asserts 503 with tokenEndpointMissing",
+    "N-2 BOS-010 DECISIONS.md D-38 aligned with TECH-SPEC and code: directory endpoints accept directory.read service tokens only",
+    "N-3 auth-service Page.validate overflow guard (page*size > Integer.MAX_VALUE -> 400)",
+    "N-4 accepted without change (single 503 after signing-key rotation)",
+    "mvn verify auth-service 98/0, back-office-service 92/0 BUILD SUCCESS"
+  ],
+  "blocking_issues": [],
+  "open_questions": ["R-4 audit paging contract change awaits operator technical approval"],
+  "recommended_next_step": "R-4 decision, then live-stack QA (Playwright + walkthrough incl. SUPPORT_AGENT session start)",
+  "outputs": {"task": "F6-T10 re-review fixes N-1..N-3", "verdict": "IMPLEMENTED"}
+}
