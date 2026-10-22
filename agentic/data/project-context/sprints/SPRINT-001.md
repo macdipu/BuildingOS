@@ -40,4 +40,4 @@ Back-office console on the local stack: SUPER_ADMIN, PLATFORM_ADMIN, SUPPORT_AGE
 Committed by macdipu (operator) 2026-10-22 via AskUserQuestion in the Claude Code session: "Commit SPRINT-001 + start (Recommended)". Same session approved R-4, the six new services and all BOS-013 defaults.
 
 ## Changes
-(none)
+- 2026-10-22 F6-R4 DONE (b607dbd); F6-QA DONE QA_PASS (3ee2503); F6-REL DONE — release approved "Approve release (Recommended)". BOS-009-S04 approved and in IMPLEMENTATION (RUN-3B8D3AA4). HK not started.
