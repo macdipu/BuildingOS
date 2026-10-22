@@ -104,4 +104,22 @@ describe("OnboardingSessionsScreen", () => {
     await screen.findByRole("button", { name: BUILDING });
     expect(screen.queryByRole("form", { name: "Assign onboarding agent" })).not.toBeInTheDocument();
   });
+
+  it("preselects a valid initial status and lists with it; ignores an invalid one", async () => {
+    const fetchMock = gateway(() => json(200, {}));
+    vi.stubGlobal("fetch", fetchMock);
+    const { unmount } = render(<OnboardingSessionsScreen title="t" userId="op" roles={["PLATFORM_ADMIN"]} initialStatus="ASSIGNED" />);
+    await screen.findByRole("button", { name: BUILDING });
+    expect(screen.getByRole("combobox", { name: "Status" })).toHaveValue("ASSIGNED");
+    const listed = new URL(String(fetchMock.mock.calls[0][0]), "http://localhost");
+    expect(listed.searchParams.get("status")).toBe("ASSIGNED");
+    unmount();
+
+    fetchMock.mockClear();
+    render(<OnboardingSessionsScreen title="t" userId="op" roles={["PLATFORM_ADMIN"]} initialStatus="BOGUS" />);
+    await screen.findByRole("button", { name: BUILDING });
+    expect(screen.getByRole("combobox", { name: "Status" })).toHaveValue("");
+    const all = new URL(String(fetchMock.mock.calls[0][0]), "http://localhost");
+    expect(all.searchParams.has("status")).toBe(false);
+  });
 });

@@ -17,6 +17,9 @@ public final class ListPlatformSubscriptionsService implements ListPlatformSubsc
         if (query.page() < 0 || query.size() < 1 || query.size() > PlatformSubscriptionPage.MAX_SIZE) {
             throw new IllegalArgumentException("page must be >= 0 and size 1-" + PlatformSubscriptionPage.MAX_SIZE);
         }
+        if ((long) query.page() * query.size() > Integer.MAX_VALUE) {
+            throw new IllegalArgumentException("page is too large");
+        }
         String plan = query.planCode() == null || query.planCode().isBlank() ? null : query.planCode().trim();
         var items = subscriptions.findPage(query.status(), plan, query.page() * query.size(), query.size());
         return new PlatformSubscriptionPage(items, query.page(), query.size(), subscriptions.count(query.status(), plan));

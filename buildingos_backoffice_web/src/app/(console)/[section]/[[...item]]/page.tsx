@@ -65,7 +65,17 @@ export default async function SectionPage({ params, searchParams }: PageProps<"/
   if (buildingStatus) return <BuildingsScreen key={buildingStatus} title={title} status={buildingStatus} />;
   if (screen === "support/assisted-onboarding") {
     const buildingId = typeof query.buildingId === "string" ? query.buildingId : "";
-    return <OnboardingSessionsScreen title={title} userId={session.userId} roles={session.roles} initialBuildingId={buildingId} />;
+    const status = typeof query.status === "string" ? query.status : "";
+    return (
+      <OnboardingSessionsScreen
+        key={status}
+        title={title}
+        userId={session.userId}
+        roles={session.roles}
+        initialBuildingId={buildingId}
+        initialStatus={status}
+      />
+    );
   }
   if (screen === "support/active-sessions" || screen === "support/history") {
     const mode = screen === "support/history" ? "history" : "active";

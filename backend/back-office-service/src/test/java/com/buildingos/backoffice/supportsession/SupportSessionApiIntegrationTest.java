@@ -325,6 +325,7 @@ class SupportSessionApiIntegrationTest {
         assertThat(agentView.data().size()).isEqualTo(2);
         assertThat(send("GET", APPROVALS, otherAgentToken(), null).data().size()).isZero();
         assertThat(send("GET", APPROVALS, token(UUID.randomUUID()), null).status()).isEqualTo(403);
+        assertThat(send("GET", APPROVALS + "?page=2147483647&size=100", superToken(), null).status()).isEqualTo(400);
     }
 
     @Test
@@ -338,6 +339,7 @@ class SupportSessionApiIntegrationTest {
         assertThat(send("GET", SESSIONS + "?platformUserId=" + otherAgent, agentToken(), null).data().size())
                 .isZero();
         assertThat(send("GET", SESSIONS, superToken(), null).data().size()).isEqualTo(2);
+        assertThat(send("GET", SESSIONS + "?page=2147483647&size=100", superToken(), null).status()).isEqualTo(400);
         assertThat(send("GET", SESSIONS + "?platformUserId=" + agent + "&active=true", superToken(), null)
                 .data().size()).isEqualTo(1);
         assertThat(send("GET", SESSIONS, token(UUID.randomUUID(), "ONBOARDING_AGENT"), null).status())

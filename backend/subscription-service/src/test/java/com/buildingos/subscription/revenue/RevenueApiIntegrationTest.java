@@ -366,6 +366,8 @@ class RevenueApiIntegrationTest {
         assertThat(send("GET", "/api/v1/platform/subscriptions?plan=NO_SUCH_PLAN", adminToken(), null).data()).isEmpty();
         assertThat(send("GET", "/api/v1/platform/subscriptions?status=NOPE", adminToken(), null).status()).isEqualTo(400);
         assertThat(send("GET", "/api/v1/platform/subscriptions?size=0", adminToken(), null).status()).isEqualTo(400);
+        assertThat(send("GET", "/api/v1/platform/subscriptions?page=2147483647&size=100", adminToken(), null).status())
+                .isEqualTo(400);
         assertThat(send("GET", "/api/v1/platform/subscriptions", token(user), null).status()).isEqualTo(403);
         assertThat(send("GET", "/api/v1/platform/subscriptions", null, null).status()).isEqualTo(401);
     }

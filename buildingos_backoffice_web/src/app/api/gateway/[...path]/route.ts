@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { gatewayUrl, isAllowedPath, upstreamHeaders } from "@/lib/gateway";
+import { gatewayUrl, isAllowedUpstream, safeJoin, upstreamHeaders } from "@/lib/gateway";
 import { apiBaseUrl, currentSession, sessionToken } from "@/lib/session";
 
 type Ctx = { params: Promise<{ path: string[] }> };
@@ -7,8 +7,9 @@ type Ctx = { params: Promise<{ path: string[] }> };
 /** Same-origin proxy: attaches the session token server-side and forwards to the API Gateway. */
 async function forward(request: Request, ctx: Ctx) {
   const { path } = await ctx.params;
-  const joined = path.join("/");
-  if (!isAllowedPath(joined)) {
+  const joined = safeJoin(path);
+  const url = joined === null ? null : gatewayUrl(apiBaseUrl(), joined, new URL(request.url).search);
+  if (url === null || !isAllowedUpstream(apiBaseUrl(), url)) {
     return NextResponse.json({ success: false, code: "NOT_FOUND" }, { status: 404 });
   }
   const token = await sessionToken();
@@ -16,7 +17,7 @@ async function forward(request: Request, ctx: Ctx) {
     return NextResponse.json({ success: false, code: "UNAUTHENTICATED" }, { status: 401 });
   }
   const method = request.method;
-  const upstream = await fetch(gatewayUrl(apiBaseUrl(), joined, new URL(request.url).search), {
+  const upstream = await fetch(url, {
     method,
     headers: upstreamHeaders(token, request.headers),
     body: method === "GET" || method === "HEAD" ? undefined : await request.text(),

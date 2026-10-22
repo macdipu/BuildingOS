@@ -37,7 +37,16 @@ Verdict: **BLOCKED** — one HIGH defect breaks D-36a; two MEDIUM defects fail s
   Config `BACKOFFICE_SERVICE_CLIENT_SECRET` wired into `infra/{local,dev}` compose and `.env.example`.
   Evidence: `mvn -B -f backend/pom.xml verify` BUILD SUCCESS, 414 tests 0 failures; back-office after
   the 403 mapping 92/0. Live-stack check of a SUPPORT_AGENT session start not yet run.
-- R-2..R-7 open.
+- **R-2, R-3, R-5, R-6, R-7 — FIXED (2026-10-22), pending re-review.**
+  R-2: proxy `safeJoin` rejects empty/`.`/`..` segments and any with `%`/`?`/`#`/`\`/`/`, re-encodes each
+  segment, and `isAllowedUpstream` re-checks the normalized upstream pathname (the `%252e%252e` exploit now
+  404s at the proxy). R-3: Dashboard links `/support/assisted-onboarding?status=ASSIGNED`; the screen takes
+  `initialStatus`. R-5: `page*size` beyond int range → 400 INVALID_REQUEST (building/back-office `Page.validate`,
+  subscription inline). R-6: `call()` sends a 401 to `/login`. R-7: no-role redirect clears `bos_session`.
+  Evidence: web lint 0 / typecheck 0 / vitest 18 files 68 tests passed (one earlier full run had 3 timeouts
+  in long-typing PlanForm/OnboardingSessionsScreen tests, passing alone and on two reruns — flaky under load);
+  `mvn verify` building 128/0, subscription 38/0, back-office 92/0.
+- R-4 open: contract change (composite `(occurredAt, id)` cursor), needs technical approval.
 
 ## Questions (not defects)
 

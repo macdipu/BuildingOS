@@ -313,6 +313,7 @@ class OnboardingSessionApiIntegrationTest {
                 null).data().size()).isEqualTo(1);
         assertThat(send("GET", BASE + "?status=NOPE", operatorToken(), null).status()).isEqualTo(400);
         assertThat(send("GET", BASE + "?size=101", operatorToken(), null).status()).isEqualTo(400);
+        assertThat(send("GET", BASE + "?page=2147483647&size=100", operatorToken(), null).status()).isEqualTo(400);
         assertThat(send("GET", BASE, token(UUID.randomUUID()), null).status()).isEqualTo(403);
     }
 

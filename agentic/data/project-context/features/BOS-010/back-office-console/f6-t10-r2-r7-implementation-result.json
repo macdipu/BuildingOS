@@ -1,0 +1,16 @@
+{
+  "status": "READY",
+  "evidence": [
+    "R-2 buildingos_backoffice_web src/lib/gateway.ts safeJoin + isAllowedUpstream; route.ts returns 404 for unsafe or non-allowlisted upstream; tests in gateway.test.ts incl. %2e%2e exploit",
+    "R-3 DashboardScreen onboarding card -> ?status=ASSIGNED; OnboardingSessionsScreen initialStatus (validated against SESSION_STATUSES); page.tsx passes query.status; test added",
+    "R-5 page*size overflow -> 400 INVALID_REQUEST: building-service and back-office-service Page.validate, subscription-service ListPlatformSubscriptionsService; tests with page=2147483647 in four integration tests",
+    "R-6 src/lib/api.ts call(): 401 -> window.location.assign('/login'); api.test.ts",
+    "R-7 src/proxy.ts no-role redirect deletes bos_session; proxy.test.ts",
+    "web: npm run lint 0, typecheck 0, vitest 18 files 68 tests passed (one earlier run had 3 load-related timeouts, green alone and on two reruns)",
+    "mvn verify building-service 128/0, subscription-service 38/0, back-office-service 92/0: BUILD SUCCESS"
+  ],
+  "blocking_issues": [],
+  "open_questions": ["R-4 audit paging composite cursor is a contract change awaiting operator technical approval"],
+  "recommended_next_step": "Operator decision on R-4; re-review R-1..R-7; then Playwright QA on the local stack",
+  "outputs": {"task": "F6-T10 R-2,R-3,R-5,R-6,R-7", "verdict": "IMPLEMENTED"}
+}

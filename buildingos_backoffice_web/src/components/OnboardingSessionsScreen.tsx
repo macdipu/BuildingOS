@@ -21,14 +21,19 @@ export function OnboardingSessionsScreen({
   userId,
   roles,
   initialBuildingId = "",
+  initialStatus = "",
 }: {
   title: string;
   userId: string;
   roles: PlatformRole[];
   /** From "Assign onboarding agent" on a building or an approved application: opens the form prefilled. */
   initialBuildingId?: string;
+  /** From the Dashboard card, so its count equals this list's total (review R-3). */
+  initialStatus?: string;
 }) {
-  const [status, setStatus] = useState("");
+  const [status, setStatus] = useState(
+    (SESSION_STATUSES as readonly string[]).includes(initialStatus) ? initialStatus : "",
+  );
   const [buildingId, setBuildingId] = useState("");
   const [agentUserId, setAgentUserId] = useState("");
   const [page, setPage] = useState(0);

@@ -35,7 +35,7 @@ const CARDS: Card[] = [
   { id: "onboarding", label: "Buildings onboarding", href: "/buildings/onboarding", roles: ADMIN, load: () => listBuildings("ONBOARDING", ""), total: metaTotal },
   { id: "active", label: "Active buildings", href: "/buildings/active", roles: ADMIN, load: () => listBuildings("ACTIVE", ""), total: metaTotal },
   { id: "suspended", label: "Suspended buildings", href: "/buildings/suspended", roles: ADMIN, load: () => listBuildings("SUSPENDED", ""), total: metaTotal },
-  { id: "assigned", label: "Onboarding sessions awaiting start", href: "/support/assisted-onboarding", roles: ["SUPER_ADMIN", "PLATFORM_ADMIN", "ONBOARDING_AGENT"], load: () => listSessions({ status: "ASSIGNED" }), total: metaTotal },
+  { id: "assigned", label: "Onboarding sessions awaiting start", href: "/support/assisted-onboarding?status=ASSIGNED", roles: ["SUPER_ADMIN", "PLATFORM_ADMIN", "ONBOARDING_AGENT"], load: () => listSessions({ status: "ASSIGNED" }), total: metaTotal },
   { id: "support", label: "Active support sessions", href: "/support/active-sessions", roles: SUPPORT, load: () => listSupportSessions({ active: true }), total: metaTotal },
   { id: "subscriptions", label: "User subscriptions", href: "/subscriptions/user-subscriptions", roles: SUB, load: () => listPlatformSubscriptions(), total: metaTotal },
   { id: "plans", label: "Plans", href: "/subscriptions/plans", roles: SUB, load: () => listPlans(), total: (r) => (Array.isArray(r.data) ? r.data.length : null) },

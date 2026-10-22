@@ -13,5 +13,9 @@ public record Page<T>(List<T> items, int page, int size, long total) {
         if (page < 0 || size < 1 || size > MAX_SIZE) {
             throw new IllegalArgumentException("page must be >= 0 and size 1-" + MAX_SIZE);
         }
+        // callers compute the SQL offset as page * size in int
+        if ((long) page * size > Integer.MAX_VALUE) {
+            throw new IllegalArgumentException("page is too large");
+        }
     }
 }

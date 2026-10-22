@@ -342,6 +342,8 @@ class ApprovalLifecycleIntegrationTest {
 
         assertThat(send("GET", "/api/v1/platform/buildings?status=NOPE", reviewerToken(), null).status()).isEqualTo(400);
         assertThat(send("GET", "/api/v1/platform/buildings?size=101", reviewerToken(), null).status()).isEqualTo(400);
+        assertThat(send("GET", "/api/v1/platform/buildings?page=2147483647&size=100", reviewerToken(), null).status())
+                .isEqualTo(400);
         assertThat(send("GET", "/api/v1/platform/buildings", token(applicant), null).status()).isEqualTo(403);
     }
 }

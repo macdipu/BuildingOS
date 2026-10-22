@@ -12,7 +12,10 @@ export function proxy(request: NextRequest) {
     return response;
   }
   if (claims.roles.length === 0) {
-    return NextResponse.redirect(new URL("/denied", request.url));
+    // Denied and signed out (F6-T6 AC, review R-7).
+    const response = NextResponse.redirect(new URL("/denied", request.url));
+    response.cookies.delete(SESSION_COOKIE);
+    return response;
   }
   return NextResponse.next();
 }
