@@ -30,14 +30,16 @@ public class AuditLogController {
     public ApiEnvelope<AuditLogResponse> audit(@AuthenticationPrincipal Jwt jwt,
             @RequestParam(required = false) String since,
             @RequestParam(required = false) String until,
+            @RequestParam(required = false) String untilId,
             @RequestParam(required = false) String source,
             @RequestParam(required = false) String entityType,
             @RequestParam(required = false) String actorUserId,
             @RequestParam(required = false) String limit,
             HttpServletRequest request) {
         var query = new ListAuditEventsQuery(instant("since", since), instant("until", until),
+                uuid("untilId", untilId),
                 blankToNull(source) == null ? null : AuditSource.fromWireName(source.trim()),
-                blankToNull(entityType), uuid(actorUserId), integer(limit));
+                blankToNull(entityType), uuid("actorUserId", actorUserId), integer(limit));
         return ApiEnvelope.of(AuditLogResponse.of(list.execute(CurrentActor.from(jwt), query)),
                 CorrelationFilter.traceId(request));
     }
@@ -57,14 +59,14 @@ public class AuditLogController {
         }
     }
 
-    private static UUID uuid(String value) {
+    private static UUID uuid(String name, String value) {
         if (blankToNull(value) == null) {
             return null;
         }
         try {
             return UUID.fromString(value);
         } catch (IllegalArgumentException invalid) {
-            throw new IllegalArgumentException("actorUserId must be a UUID");
+            throw new IllegalArgumentException(name + " must be a UUID");
         }
     }
 

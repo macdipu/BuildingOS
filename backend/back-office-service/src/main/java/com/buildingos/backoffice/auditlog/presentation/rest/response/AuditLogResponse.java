@@ -8,8 +8,9 @@ import java.time.Instant;
 import java.util.List;
 import java.util.UUID;
 
-/** {@code nextUntil} is null when fewer than {@code limit} items were returned. */
-public record AuditLogResponse(List<Item> items, Instant nextUntil, List<String> unavailableSources) {
+/** {@code nextUntil}/{@code nextUntilId} are null when fewer than {@code limit} items were returned. */
+public record AuditLogResponse(List<Item> items, Instant nextUntil, UUID nextUntilId,
+        List<String> unavailableSources) {
     /** InternalAuditEvent shape; {@code role} is omitted unless the row carries one (auth-service). */
     public record Item(UUID id, String source, Instant occurredAt, UUID actorUserId, String action,
             String entityType, String entityId, UUID buildingId, String reason,
@@ -23,6 +24,6 @@ public record AuditLogResponse(List<Item> items, Instant nextUntil, List<String>
 
     public static AuditLogResponse of(AuditPage page) {
         return new AuditLogResponse(page.items().stream().map(Item::of).toList(), page.nextUntil(),
-                page.unavailableSources().stream().map(AuditSource::wireName).toList());
+                page.nextUntilId(), page.unavailableSources().stream().map(AuditSource::wireName).toList());
     }
 }

@@ -38,15 +38,18 @@ public class JdbcPlatformRoleAuditRepositoryAdapter implements PlatformRoleAudit
     }
 
     @Override
-    public List<PlatformRoleAuditEntry> list(Instant since, Instant until, UUID actorUserId, int limit) {
+    public List<PlatformRoleAuditEntry> list(Instant since, Instant until, UUID untilId, UUID actorUserId,
+            int limit) {
         return jdbc.query("""
                 SELECT id, actor_user_id, target_user_id, role, action, occurred_at FROM platform_role_audit
                 WHERE (CAST(? AS timestamptz) IS NULL OR occurred_at >= CAST(? AS timestamptz))
-                  AND (CAST(? AS timestamptz) IS NULL OR occurred_at < CAST(? AS timestamptz))
+                  AND (CAST(? AS timestamptz) IS NULL OR occurred_at < CAST(? AS timestamptz)
+                       OR (occurred_at = CAST(? AS timestamptz) AND id < CAST(? AS uuid)))
                   AND (CAST(? AS uuid) IS NULL OR actor_user_id = CAST(? AS uuid))
                 ORDER BY occurred_at DESC, id DESC
                 LIMIT ?
-                """, ROW, ts(since), ts(since), ts(until), ts(until), actorUserId, actorUserId, limit);
+                """, ROW, ts(since), ts(since), ts(until), ts(until), ts(until), untilId, actorUserId, actorUserId,
+                limit);
     }
 
     private static Timestamp ts(Instant instant) {

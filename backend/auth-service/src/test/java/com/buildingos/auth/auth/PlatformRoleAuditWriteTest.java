@@ -57,7 +57,8 @@ class PlatformRoleAuditWriteTest {
             assertThat(inTransaction).as("audit row written inside the role-change transaction").isTrue();
             appended.add(entry);
         }
-        @Override public List<PlatformRoleAuditEntry> list(Instant since, Instant until, UUID actorUserId, int limit) {
+        @Override public List<PlatformRoleAuditEntry> list(Instant since, Instant until, UUID untilId,
+                UUID actorUserId, int limit) {
             throw new UnsupportedOperationException();
         }
     };

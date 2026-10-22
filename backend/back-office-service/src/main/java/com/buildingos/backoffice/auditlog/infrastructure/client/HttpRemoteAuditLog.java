@@ -70,6 +70,9 @@ public class HttpRemoteAuditLog implements RemoteAuditLog {
         if (filter.until() != null) {
             builder.queryParam("until", filter.until().toString());
         }
+        if (filter.untilId() != null) {
+            builder.queryParam("untilId", filter.untilId());
+        }
         if (filter.entityType() != null) {
             builder.queryParam("entityType", filter.entityType());
         }

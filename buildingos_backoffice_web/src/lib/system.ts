@@ -40,13 +40,17 @@ export interface AuditEvent {
 
 export interface AuditLogPage {
   items: AuditEvent[];
+  /** Keyset cursor (last item's occurredAt and id) when the page is full, else both null. */
   nextUntil: string | null;
+  nextUntilId: string | null;
   unavailableSources: string[];
 }
 
 export interface AuditFilters {
   since?: string;
   until?: string;
+  /** With until, the keyset tie-breaker: rows strictly before (until, untilId). */
+  untilId?: string;
   source?: string;
   entityType?: string;
   actorUserId?: string;

@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.UUID;
 import org.junit.jupiter.api.Test;
 
-/** F6-T5d: merge newest first, truncate to limit, cursor = oldest returned occurredAt only when full. */
+/** F6-T5d: merge newest first, truncate to limit, cursor = last returned (occurredAt, id) only when full. */
 class AuditPageTest {
     private static AuditEvent event(AuditSource source, String id, String at) {
         return new AuditEvent(UUID.fromString(id), source, Instant.parse(at), null, "A", "X", "e", null, null, null);
@@ -40,6 +40,7 @@ class AuditPageTest {
                 List.of(AuditSource.SUBSCRIPTION_SERVICE));
         assertThat(page.items()).containsExactly(AUTH_1, OWN_1);
         assertThat(page.nextUntil()).isEqualTo(OWN_1.occurredAt());
+        assertThat(page.nextUntilId()).isEqualTo(OWN_1.id());
         assertThat(page.unavailableSources()).containsExactly(AuditSource.SUBSCRIPTION_SERVICE);
     }
 
@@ -50,5 +51,6 @@ class AuditPageTest {
         var empty = AuditPage.merge(List.of(), 5, List.of());
         assertThat(empty.items()).isEmpty();
         assertThat(empty.nextUntil()).isNull();
+        assertThat(empty.nextUntilId()).isNull();
     }
 }

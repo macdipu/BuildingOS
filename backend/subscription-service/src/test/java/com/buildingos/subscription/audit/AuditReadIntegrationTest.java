@@ -70,10 +70,41 @@ class AuditReadIntegrationTest {
         registry.add("spring.datasource.password", POSTGRES::getPassword);
     }
 
-    private void row(UUID actor, String action, String entityType, String entityId, String occurredAt) {
+    private UUID row(UUID actor, String action, String entityType, String entityId, String occurredAt) {
+        UUID id = UUID.randomUUID();
         jdbc.update("INSERT INTO audit_event (id, actor_user_id, action, entity_type, entity_id, before, after, "
                         + "occurred_at) VALUES (?, ?, ?, ?, ?, '{\"a\":1}'::jsonb, '{\"b\":2}'::jsonb, ?)",
-                UUID.randomUUID(), actor, action, entityType, entityId, Timestamp.from(Instant.parse(occurredAt)));
+                id, actor, action, entityType, entityId, Timestamp.from(Instant.parse(occurredAt)));
+        return id;
+    }
+
+    @Test
+    void keysetCursorPagesRowsSharingOneInstantExactlyOnce() throws Exception {
+        UUID actor = UUID.randomUUID();
+        List<UUID> expected = new java.util.ArrayList<>();
+        for (int i = 0; i < 5; i++) {
+            expected.add(row(actor, "PLAN_UPDATED", "SUBSCRIPTION_PLAN", "PREMIUM", "2026-03-01T10:00:00Z"));
+        }
+        expected.add(row(actor, "PLAN_CREATED", "SUBSCRIPTION_PLAN", "PREMIUM", "2026-03-01T09:00:00Z"));
+
+        List<String> seen = new java.util.ArrayList<>();
+        String cursor = "";
+        for (int page = 0; page < 10; page++) {
+            JsonNode items = read("?actorUserId=" + actor + "&limit=2" + cursor);
+            items.forEach(item -> seen.add(item.path("id").asString()));
+            if (items.size() < 2) {
+                break;
+            }
+            JsonNode last = items.get(items.size() - 1);
+            cursor = "&until=" + last.path("occurredAt").asString() + "&untilId=" + last.path("id").asString();
+        }
+        assertThat(seen).doesNotHaveDuplicates()
+                .containsExactlyInAnyOrderElementsOf(expected.stream().map(UUID::toString).toList());
+        assertThat(seen.subList(0, 5)).isSortedAccordingTo(java.util.Comparator.reverseOrder());
+
+        String token = superAdmin();
+        assertThat(get("?until=2026-03-01T10:00:00Z&untilId=nope", token).statusCode()).isEqualTo(400);
+        assertThat(get("?untilId=" + UUID.randomUUID(), token).statusCode()).isEqualTo(400);
     }
 
     private HttpResponse<String> get(String query, String token) throws Exception {

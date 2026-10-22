@@ -53,7 +53,13 @@ Verdict: **BLOCKED** — one HIGH defect breaks D-36a; two MEDIUM defects fail s
   TECH-SPEC/code allow `directory.read` only — **FIXED** (DECISIONS.md aligned to the code). N-3 LOW auth-service
   `Page.validate` lacked the overflow guard — **FIXED**. N-4 LOW a downstream 401 is not retried with a fresh
   token (one request 503s after key rotation) — accepted, no change. Evidence: auth 98/0, back-office 92/0.
-- R-4 open: contract change (composite `(occurredAt, id)` cursor), needs technical approval.
+- **R-4 — FIXED (2026-10-22, D-39 approved).** Keyset `(occurredAt, id)` cursor: new optional `untilId`
+  on every `/internal/audit` source and on `/api/v1/platform/backoffice/audit`; `AuditPage` returns
+  `nextUntil` + `nextUntilId`; merges order by occurredAt DESC then id (lowercase UUID text = Postgres uuid
+  order); web passes both back. `until` alone keeps the old exclusive behaviour. Same-instant paging tests per
+  source and for the aggregate (13 rows, limit 5, each exactly once). Evidence: `mvn verify` 5/100/129/40/93/53,
+  0 failures; web lint/typecheck 0, vitest 68/68. Not in scope: `lifecycle_transition.occurred_at` index;
+  `AuditLogScreen.older()` not clearing a previous error.
 
 ## Questions (not defects)
 

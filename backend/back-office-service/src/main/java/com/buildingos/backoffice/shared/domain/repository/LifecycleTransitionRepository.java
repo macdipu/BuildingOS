@@ -12,7 +12,9 @@ public interface LifecycleTransitionRepository {
     List<LifecycleTransition> findFor(EntityType type, UUID entityId);
     /**
      * Audit read (F6-T5d): newest first (occurredAt, then id), at most {@code limit}. Every filter is optional (null);
-     * {@code since} inclusive, {@code until} exclusive.
+     * {@code since} inclusive, {@code until} exclusive; a non-null {@code untilId} widens the upper bound to the keyset
+     * {@code (occurredAt, id) < (until, untilId)}.
      */
-    List<LifecycleTransition> list(Instant since, Instant until, EntityType type, UUID actorUserId, int limit);
+    List<LifecycleTransition> list(Instant since, Instant until, UUID untilId, EntityType type, UUID actorUserId,
+            int limit);
 }

@@ -93,11 +93,45 @@ class AuditReadIntegrationTest {
         return JSON.readTree(response.body()).path("data");
     }
 
-    private void row(UUID actor, UUID target, String role, String action, String occurredAt) {
+    private UUID row(UUID actor, UUID target, String role, String action, String occurredAt) {
+        UUID id = UUID.randomUUID();
         jdbc.update("""
                 INSERT INTO platform_role_audit (id, actor_user_id, target_user_id, role, action, occurred_at)
                 VALUES (?, ?, ?, ?, ?, ?)
-                """, UUID.randomUUID(), actor, target, role, action, Timestamp.from(Instant.parse(occurredAt)));
+                """, id, actor, target, role, action, Timestamp.from(Instant.parse(occurredAt)));
+        return id;
+    }
+
+    @Test
+    void keysetCursorPagesRowsSharingOneInstantExactlyOnce() throws Exception {
+        UUID actor = UUID.randomUUID();
+        UUID target = UUID.randomUUID();
+        List<UUID> expected = new java.util.ArrayList<>();
+        for (int i = 0; i < 5; i++) {
+            expected.add(row(actor, target, "SUPPORT_AGENT", "GRANT", "2026-03-01T10:00:00Z"));
+        }
+        expected.add(row(actor, target, "SUPPORT_AGENT", "REVOKE", "2026-03-01T09:00:00Z"));
+        String superAdmin = fixtures.userToken(AUDIENCE, UUID.randomUUID(), List.of("SUPER_ADMIN"));
+
+        List<String> seen = new java.util.ArrayList<>();
+        String cursor = "";
+        for (int page = 0; page < 10; page++) {
+            JsonNode items = audit(superAdmin, "?actorUserId=" + actor + "&limit=2" + cursor);
+            items.forEach(item -> seen.add(item.path("id").asString()));
+            if (items.size() < 2) {
+                break;
+            }
+            JsonNode last = items.get(items.size() - 1);
+            cursor = "&until=" + last.path("occurredAt").asString() + "&untilId=" + last.path("id").asString();
+        }
+        assertThat(seen).doesNotHaveDuplicates()
+                .containsExactlyInAnyOrderElementsOf(expected.stream().map(UUID::toString).toList());
+        assertThat(seen.subList(0, 5)).isSortedAccordingTo(java.util.Comparator.reverseOrder());
+
+        assertThat(send("GET", "/internal/audit?until=2026-03-01T10:00:00Z&untilId=nope", superAdmin, null)
+                .statusCode()).isEqualTo(400);
+        assertThat(send("GET", "/internal/audit?untilId=" + UUID.randomUUID(), superAdmin, null).statusCode())
+                .isEqualTo(400);
     }
 
     @Test

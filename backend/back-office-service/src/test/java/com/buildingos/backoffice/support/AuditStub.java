@@ -3,14 +3,29 @@ package com.buildingos.backoffice.support;
 import com.sun.net.httpserver.HttpServer;
 import java.io.IOException;
 import java.net.InetSocketAddress;
+import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
+import java.time.Instant;
+import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import tools.jackson.databind.JsonNode;
+import tools.jackson.databind.json.JsonMapper;
 
-/** Local-only stand-in for one service's {@code GET /internal/audit}. Tests only. */
+/**
+ * Local-only stand-in for one service's {@code GET /internal/audit}. Tests only. Like the real sources it returns
+ * {@code events} newest first ({@code occurredAt}, then id), honouring {@code until}/{@code untilId} and {@code limit}.
+ */
 public final class AuditStub implements AutoCloseable {
+    private static final JsonMapper JSON = JsonMapper.builder().build();
+    private static final Comparator<JsonNode> NEWEST_FIRST = Comparator
+            .comparing((JsonNode e) -> Instant.parse(e.path("occurredAt").asString()))
+            .thenComparing(e -> e.path("id").asString())
+            .reversed();
     private final HttpServer server;
     private final ExecutorService executor = Executors.newCachedThreadPool();
     private final String source;
@@ -36,7 +51,8 @@ public final class AuditStub implements AutoCloseable {
                 }
             }
             String body = status == 200
-                    ? "{\"success\":true,\"data\":[" + String.join(",", events) + "],\"meta\":{}}"
+                    ? "{\"success\":true,\"data\":[" + String.join(",", page(exchange.getRequestURI().getRawQuery()))
+                            + "],\"meta\":{}}"
                     : "{\"success\":false,\"code\":\"SERVICE_UNAVAILABLE\",\"message\":\"x\"}";
             byte[] bytes = body.getBytes(StandardCharsets.UTF_8);
             exchange.getResponseHeaders().add("Content-Type", "application/json");
@@ -46,6 +62,29 @@ public final class AuditStub implements AutoCloseable {
             }
         });
         server.start();
+    }
+
+    private List<String> page(String rawQuery) {
+        Map<String, String> params = new HashMap<>();
+        if (rawQuery != null) {
+            for (String pair : rawQuery.split("&")) {
+                int eq = pair.indexOf('=');
+                if (eq > 0) {
+                    params.put(pair.substring(0, eq),
+                            URLDecoder.decode(pair.substring(eq + 1), StandardCharsets.UTF_8));
+                }
+            }
+        }
+        Instant until = params.containsKey("until") ? Instant.parse(params.get("until")) : null;
+        String untilId = params.get("untilId");
+        int limit = params.containsKey("limit") ? Integer.parseInt(params.get("limit")) : Integer.MAX_VALUE;
+        return events.stream().map(JSON::readTree).sorted(NEWEST_FIRST).filter(e -> {
+            if (until == null) {
+                return true;
+            }
+            int byTime = Instant.parse(e.path("occurredAt").asString()).compareTo(until);
+            return byTime < 0 || byTime == 0 && untilId != null && e.path("id").asString().compareTo(untilId) < 0;
+        }).limit(limit).map(JsonNode::toString).toList();
     }
 
     /** One InternalAuditEvent row of this stub's source. */

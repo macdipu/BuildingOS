@@ -3589,16 +3589,21 @@ paths:
         subscription-service (caller's token relayed; each checks SUPER_ADMIN itself) and reads its own
         lifecycle_transition rows (entityType ASSISTED_ONBOARDING_SESSION | SUPPORT_SESSION |
         ELEVATED_APPROVAL_REQUEST, action "FROM<U+2192>TO" with FROM = NONE on creation, buildingId null).
-        Every selected source gets the same filters and limit; results are merged newest first (occurredAt,
-        then id, both descending) and truncated to limit. nextUntil is the oldest returned occurredAt when
-        the page is full (pass it as until for the next page), else null. A source that errors or exceeds
-        buildingos.audit.timeout (default PT3S) is listed in unavailableSources; the others are still
-        returned and the endpoint still answers 200.
+        Every selected source gets the same filters, keyset cursor and limit; results are merged newest first
+        (occurredAt, then id, both descending; id compared as PostgreSQL uuid order, i.e. lowercase text order)
+        and truncated to limit. Paging is a composite keyset (D-39): when the page is full, nextUntil and
+        nextUntilId are the last item's occurredAt and id (pass them as until and untilId for the next page),
+        else both null. Every source orders by the same (occurredAt, id) key and ids are random UUIDs unique
+        across sources, so rows sharing an occurredAt are never dropped or repeated across pages or sources.
+        until without untilId keeps the plain exclusive bound (rows at exactly until are skipped).
+        A source that errors or exceeds buildingos.audit.timeout (default PT3S) is listed in unavailableSources;
+        the others are still returned and the endpoint still answers 200.
       security:
         - bearerAuth: []
       parameters:
         - { name: since, in: query, required: false, schema: { type: string, format: date-time }, description: "Inclusive lower bound (ISO-8601 instant)" }
         - { name: until, in: query, required: false, schema: { type: string, format: date-time }, description: "Exclusive upper bound (ISO-8601 instant); use nextUntil to page" }
+        - { name: untilId, in: query, required: false, schema: { type: string, format: uuid }, description: "Keyset tie-breaker; requires until. Returns rows with (occurredAt, id) < (until, untilId); use nextUntilId to page" }
         - { name: source, in: query, required: false, schema: { type: string, enum: [auth-service, building-service, subscription-service, back-office-service] }, description: "Query only this source" }
         - { name: entityType, in: query, required: false, schema: { type: string, example: SUPPORT_SESSION } }
         - { name: actorUserId, in: query, required: false, schema: { type: string, format: uuid } }
@@ -3615,7 +3620,7 @@ paths:
                     properties:
                       data: { $ref: "#/components/schemas/AuditLogPage" }
         "400":
-          description: "INVALID_REQUEST (limit outside 1-200 or not an integer, malformed since/until/actorUserId, unknown source)"
+          description: "INVALID_REQUEST (limit outside 1-200 or not an integer, malformed since/until/untilId/actorUserId, untilId without until, unknown source)"
           content:
             application/json:
               schema: { $ref: "#/components/schemas/ApiError" }
@@ -3668,8 +3673,10 @@ paths:
       description: >
         Common internal audit read contract, served identically by auth-service, building-service and
         subscription-service. Called by back-office-service with the caller's relayed token; never routed by the
-        gateway. SUPER_ADMIN only. Newest first (occurredAt, then id); since inclusive, until exclusive; entityType
-        and actorUserId filter exactly. before/after payloads are never returned.
+        gateway. SUPER_ADMIN only. Newest first (occurredAt DESC, id DESC); since inclusive, until exclusive; with
+        untilId the upper bound is the keyset (occurredAt, id) < (until, untilId), so a caller can page past rows
+        sharing one occurredAt (D-39). entityType and actorUserId filter exactly. before/after payloads are never
+        returned.
         auth-service: platform-role grant/revoke rows (entityType PLATFORM_ROLE, entityId = target user); any other
         entityType returns an empty list.
         building-service: lifecycle_transition rows (entityType BUILDING_APPLICATION | BUILDING, action
@@ -3682,6 +3689,7 @@ paths:
       parameters:
         - { name: since, in: query, required: false, schema: { type: string, format: date-time }, description: "Inclusive lower bound (ISO-8601 instant)" }
         - { name: until, in: query, required: false, schema: { type: string, format: date-time }, description: "Exclusive upper bound (ISO-8601 instant)" }
+        - { name: untilId, in: query, required: false, schema: { type: string, format: uuid }, description: "Keyset tie-breaker; requires until. Returns rows with (occurredAt, id) < (until, untilId)" }
         - { name: entityType, in: query, required: false, schema: { type: string, example: PLATFORM_ROLE } }
         - { name: actorUserId, in: query, required: false, schema: { type: string, format: uuid } }
         - { name: limit, in: query, required: false, schema: { type: integer, minimum: 1, maximum: 200, default: 50 } }
@@ -3699,7 +3707,7 @@ paths:
                         type: array
                         items: { $ref: "#/components/schemas/InternalAuditEvent" }
         "400":
-          description: "INVALID_REQUEST (limit outside 1-200, malformed since/until/actorUserId)"
+          description: "INVALID_REQUEST (limit outside 1-200, malformed since/until/untilId/actorUserId, untilId without until)"
           content:
             application/json:
               schema: { $ref: "#/components/schemas/ApiError" }
@@ -3895,12 +3903,13 @@ components:
     AuditLogPage:
       type: object
       description: "Merged back-office audit view (F6-T5d)."
-      required: [items, nextUntil, unavailableSources]
+      required: [items, nextUntil, nextUntilId, unavailableSources]
       properties:
         items:
           type: array
           items: { $ref: "#/components/schemas/AuditLogEvent" }
-        nextUntil: { type: string, format: date-time, nullable: true, description: "Oldest occurredAt in items when items.length == limit, else null" }
+        nextUntil: { type: string, format: date-time, nullable: true, description: "Last item's occurredAt when items.length == limit, else null; pass as until" }
+        nextUntilId: { type: string, format: uuid, nullable: true, description: "Last item's id when items.length == limit, else null; pass as untilId" }
         unavailableSources:
           type: array
           items: { type: string, enum: [auth-service, building-service, subscription-service, back-office-service] }

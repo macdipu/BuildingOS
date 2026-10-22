@@ -13,6 +13,7 @@ import {
   type ApiFailure,
   type AuditEvent,
   type AuditFilters,
+  type AuditLogPage,
 } from "@/lib/system";
 
 interface Draft {
@@ -24,11 +25,15 @@ interface Draft {
   limit: string;
 }
 
+function cursor(page: AuditLogPage) {
+  return page.nextUntil ? { until: page.nextUntil, untilId: page.nextUntilId ?? undefined } : null;
+}
+
 const EMPTY: Draft = { since: "", until: "", source: "", entityType: "", actorUserId: "", limit: "50" };
 
 /**
  * BOC-08 Audit Logs (read-only): filters narrow the merged log server-side. Older pages are
- * fetched with the API's nextUntil cursor. Sources that did not answer are named, never hidden.
+ * fetched with the API's (nextUntil, nextUntilId) keyset cursor. Sources that did not answer are named, never hidden.
  */
 export function AuditLogScreen({ title, initialEntityType = "" }: { title: string; initialEntityType?: string }) {
   const [draft, setDraft] = useState<Draft>({ ...EMPTY, entityType: initialEntityType });
@@ -36,7 +41,7 @@ export function AuditLogScreen({ title, initialEntityType = "" }: { title: strin
   const [actorError, setActorError] = useState<string | null>(null);
   const [events, setEvents] = useState<AuditEvent[] | null>(null);
   const [unavailable, setUnavailable] = useState<string[]>([]);
-  const [next, setNext] = useState<string | null>(null);
+  const [next, setNext] = useState<{ until: string; untilId: string | undefined } | null>(null);
   const [failure, setFailure] = useState<ApiFailure | null>(null);
   const [loading, setLoading] = useState(false);
   const [appliedKey, setAppliedKey] = useState(0);
@@ -49,7 +54,7 @@ export function AuditLogScreen({ title, initialEntityType = "" }: { title: strin
       if (r.ok) {
         setEvents(r.data.items);
         setUnavailable(r.data.unavailableSources);
-        setNext(r.data.nextUntil);
+        setNext(cursor(r.data));
         setFailure(null);
       } else {
         setFailure(r);
@@ -85,12 +90,12 @@ export function AuditLogScreen({ title, initialEntityType = "" }: { title: strin
   async function older() {
     if (!next) return;
     setLoading(true);
-    const r = await listAudit({ ...applied, until: next });
+    const r = await listAudit({ ...applied, ...next });
     setLoading(false);
     if (r.ok) {
       setEvents((cur) => [...(cur ?? []), ...r.data.items]);
       setUnavailable((cur) => [...new Set([...cur, ...r.data.unavailableSources])]);
-      setNext(r.data.nextUntil);
+      setNext(cursor(r.data));
     } else setFailure(r);
   }
 

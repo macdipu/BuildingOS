@@ -35,7 +35,8 @@ public class JdbcLifecycleTransitionRepository implements LifecycleTransitionRep
     }
 
     @Override
-    public List<LifecycleTransition> list(Instant since, Instant until, EntityType type, UUID actorUserId, int limit) {
+    public List<LifecycleTransition> list(Instant since, Instant until, UUID untilId, EntityType type,
+            UUID actorUserId, int limit) {
         StringBuilder sql = new StringBuilder("SELECT id, entity_type, entity_id, from_status, to_status, actor_user_id, "
                 + "reason, occurred_at FROM lifecycle_transition WHERE 1 = 1");
         List<Object> args = new ArrayList<>();
@@ -43,7 +44,11 @@ public class JdbcLifecycleTransitionRepository implements LifecycleTransitionRep
             sql.append(" AND occurred_at >= ?");
             args.add(Timestamp.from(since));
         }
-        if (until != null) {
+        if (until != null && untilId != null) {
+            sql.append(" AND (occurred_at, id) < (?, ?)");
+            args.add(Timestamp.from(until));
+            args.add(untilId);
+        } else if (until != null) {
             sql.append(" AND occurred_at < ?");
             args.add(Timestamp.from(until));
         }

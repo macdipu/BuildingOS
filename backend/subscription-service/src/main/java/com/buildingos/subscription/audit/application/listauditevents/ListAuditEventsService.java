@@ -27,9 +27,11 @@ public final class ListAuditEventsService implements ListAuditEventsUseCase {
         if (limit < 1 || limit > MAX_LIMIT) {
             throw new IllegalArgumentException("limit must be 1-" + MAX_LIMIT);
         }
-        return audits.list(query.since(), query.until(), query.entityType(), query.actorUserId(), limit).stream()
-                .map(ListAuditEventsService::toEvent)
-                .toList();
+        if (query.untilId() != null && query.until() == null) {
+            throw new IllegalArgumentException("untilId requires until");
+        }
+        return audits.list(query.since(), query.until(), query.untilId(), query.entityType(), query.actorUserId(),
+                limit).stream().map(ListAuditEventsService::toEvent).toList();
     }
 
     private static AuditEvent toEvent(AuditRecord r) {

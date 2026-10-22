@@ -52,12 +52,17 @@ describe("AuditLogScreen", () => {
     const fetchMock = vi.fn(async (url: string) => {
       const u = new URL(url, "http://localhost");
       const until = u.searchParams.get("until");
-      if (until === "2026-10-20T09:00:00.000Z" || until === "2026-10-20T09:00:00Z") {
-        return json(200, { success: true, data: { items: [ev("e2")], nextUntil: null, unavailableSources: [] } });
+      if (until === "2026-10-20T09:00:00Z" && u.searchParams.get("untilId") === "e1") {
+        return json(200, { success: true, data: { items: [ev("e2")], nextUntil: null, nextUntilId: null, unavailableSources: [] } });
       }
       return json(200, {
         success: true,
-        data: { items: [ev("e1", { actorUserId: null, role: "SUPER_ADMIN" })], nextUntil: "2026-10-20T09:00:00Z", unavailableSources: ["auth-service"] },
+        data: {
+          items: [ev("e1", { actorUserId: null, role: "SUPER_ADMIN" })],
+          nextUntil: "2026-10-20T09:00:00Z",
+          nextUntilId: "e1",
+          unavailableSources: ["auth-service"],
+        },
       });
     });
     vi.stubGlobal("fetch", fetchMock);
@@ -77,11 +82,15 @@ describe("AuditLogScreen", () => {
 
     await user.click(screen.getByRole("button", { name: "Load older events" }));
     expect(await screen.findAllByText("NONE→ACTIVE")).toHaveLength(2);
+    const older = new URL(String(fetchMock.mock.calls.at(-1)![0]), "http://localhost");
+    expect(older.searchParams.get("until")).toBe("2026-10-20T09:00:00Z");
+    expect(older.searchParams.get("untilId")).toBe("e1");
+    expect(older.searchParams.get("source")).toBe("building-service");
     expect(screen.queryByRole("button", { name: "Load older events" })).not.toBeInTheDocument();
   });
 
   it("rejects a malformed user id without calling the API again", async () => {
-    const fetchMock = vi.fn(async () => json(200, { success: true, data: { items: [], nextUntil: null, unavailableSources: [] } }));
+    const fetchMock = vi.fn(async () => json(200, { success: true, data: { items: [], nextUntil: null, nextUntilId: null, unavailableSources: [] } }));
     vi.stubGlobal("fetch", fetchMock);
     const user = userEvent.setup();
     render(<AuditLogScreen title="t" />);

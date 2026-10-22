@@ -51,8 +51,8 @@ class ListAuditEventsTest {
     private final LifecycleTransitionRepository transitions = new LifecycleTransitionRepository() {
         @Override public void append(LifecycleTransition transition) { }
         @Override public List<LifecycleTransition> findFor(EntityType type, UUID entityId) { return List.of(); }
-        @Override public List<LifecycleTransition> list(Instant since, Instant until, EntityType type,
-                UUID actorUserId, int limit) {
+        @Override public List<LifecycleTransition> list(Instant since, Instant until, UUID untilId,
+                EntityType type, UUID actorUserId, int limit) {
             called.add(AuditSource.BACK_OFFICE_SERVICE);
             ownTypeFilter.set(type);
             return List.of(created);
@@ -67,7 +67,7 @@ class ListAuditEventsTest {
     }
 
     private static ListAuditEventsQuery query(AuditSource source, String entityType, Integer limit) {
-        return new ListAuditEventsQuery(null, null, source, entityType, null, limit);
+        return new ListAuditEventsQuery(null, null, null, source, entityType, null, limit);
     }
 
     @Test
@@ -95,6 +95,7 @@ class ListAuditEventsTest {
         assertThat(page.items()).extracting(AuditEvent::source).containsExactly(AuditSource.BACK_OFFICE_SERVICE,
                 AuditSource.SUBSCRIPTION_SERVICE);
         assertThat(page.nextUntil()).isEqualTo(T0.plusSeconds(AuditSource.SUBSCRIPTION_SERVICE.ordinal()));
+        assertThat(page.nextUntilId()).isEqualTo(page.items().get(1).id());
     }
 
     @Test
@@ -121,6 +122,9 @@ class ListAuditEventsTest {
             assertThatThrownBy(() -> service.execute(actor("SUPER_ADMIN"), query(null, null, bad)))
                     .isInstanceOf(IllegalArgumentException.class);
         }
+        assertThatThrownBy(() -> service.execute(actor("SUPER_ADMIN"),
+                new ListAuditEventsQuery(null, null, UUID.randomUUID(), null, null, null, null)))
+                .isInstanceOf(IllegalArgumentException.class);
         assertThat(called).isEmpty();
     }
 }

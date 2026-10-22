@@ -91,17 +91,21 @@ class AuditReadIntegrationTest {
                 building, application, Timestamp.from(now), Timestamp.from(now));
     }
 
-    private void transition(String type, UUID entity, String from, String to, UUID by, String reason, String at) {
+    private UUID transition(String type, UUID entity, String from, String to, UUID by, String reason, String at) {
+        UUID id = UUID.randomUUID();
         jdbc.update("INSERT INTO lifecycle_transition (id, entity_type, entity_id, from_status, to_status, "
                         + "actor_user_id, reason, occurred_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
-                UUID.randomUUID(), type, entity, from, to, by, reason, Timestamp.from(Instant.parse(at)));
+                id, type, entity, from, to, by, reason, Timestamp.from(Instant.parse(at)));
+        return id;
     }
 
-    private void audit(String action, String type, UUID by, String at) {
+    private UUID audit(String action, String type, UUID by, String at) {
+        UUID id = UUID.randomUUID();
         jdbc.update("INSERT INTO building_audit (id, building_id, actor_user_id, action, entity_type, entity_id, "
                         + "reason, before_data, after_data, occurred_at) "
                         + "VALUES (?, ?, ?, ?, ?, ?, 'Audited', '{\"a\":\"1\"}'::jsonb, '{\"b\":\"2\"}'::jsonb, ?)",
-                UUID.randomUUID(), building, by, action, type, UUID.randomUUID(), Timestamp.from(Instant.parse(at)));
+                id, building, by, action, type, UUID.randomUUID(), Timestamp.from(Instant.parse(at)));
+        return id;
     }
 
     private HttpResponse<String> get(String query, String token) throws Exception {
@@ -182,6 +186,36 @@ class AuditReadIntegrationTest {
         assertThat(get("?since=yesterday", token).statusCode()).isEqualTo(400);
         assertThat(get("?actorUserId=nobody", token).statusCode()).isEqualTo(400);
         assertThat(get("?limit=200", token).statusCode()).isEqualTo(200);
+    }
+
+    @Test
+    void keysetCursorPagesRowsSharingOneInstantAcrossBothTablesExactlyOnce() throws Exception {
+        String at = "2026-03-01T10:00:00Z";
+        List<UUID> expected = new java.util.ArrayList<>();
+        for (int i = 0; i < 3; i++) {
+            expected.add(transition("BUILDING", building, "ACTIVE", "SUSPENDED", actor, null, at));
+            expected.add(audit("UNIT_CREATED", "BUILDING", actor, at));
+        }
+        expected.add(audit("UNIT_CREATED", "BUILDING", actor, "2026-03-01T09:00:00Z"));
+
+        List<String> seen = new java.util.ArrayList<>();
+        String cursor = "";
+        for (int page = 0; page < 10; page++) {
+            JsonNode items = read("?actorUserId=" + actor + "&limit=2" + cursor);
+            items.forEach(item -> seen.add(item.path("id").asString()));
+            if (items.size() < 2) {
+                break;
+            }
+            JsonNode last = items.get(items.size() - 1);
+            cursor = "&until=" + last.path("occurredAt").asString() + "&untilId=" + last.path("id").asString();
+        }
+        assertThat(seen).doesNotHaveDuplicates()
+                .containsExactlyInAnyOrderElementsOf(expected.stream().map(UUID::toString).toList());
+        assertThat(seen.subList(0, 6)).isSortedAccordingTo(java.util.Comparator.reverseOrder());
+
+        String token = superAdmin();
+        assertThat(get("?until=" + at + "&untilId=nope", token).statusCode()).isEqualTo(400);
+        assertThat(get("?untilId=" + UUID.randomUUID(), token).statusCode()).isEqualTo(400);
     }
 
     @Test

@@ -23,8 +23,8 @@ import java.util.concurrent.TimeUnit;
 import java.util.function.UnaryOperator;
 
 /**
- * SUPER_ADMIN only (F6-T5d, BOC-05, D-37). Queries every selected source in parallel with the same filters and
- * limit, merges newest first and truncates to {@code limit}. A source that fails or exceeds {@code timeout} is
+ * SUPER_ADMIN only (F6-T5d, BOC-05, D-37). Queries every selected source in parallel with the same filters,
+ * keyset cursor and limit, merges newest first and truncates to {@code limit}. A source that fails or exceeds {@code timeout} is
  * reported in {@code unavailableSources}; the others are still returned.
  */
 public final class ListAuditEventsService implements ListAuditEventsUseCase {
@@ -60,7 +60,11 @@ public final class ListAuditEventsService implements ListAuditEventsUseCase {
         if (limit < 1 || limit > MAX_LIMIT) {
             throw new IllegalArgumentException("limit must be 1-" + MAX_LIMIT);
         }
-        var filter = new AuditFilter(query.since(), query.until(), query.entityType(), query.actorUserId(), limit);
+        if (query.untilId() != null && query.until() == null) {
+            throw new IllegalArgumentException("untilId requires until");
+        }
+        var filter = new AuditFilter(query.since(), query.until(), query.untilId(), query.entityType(),
+                query.actorUserId(), limit);
         List<AuditSource> sources = query.source() == null ? List.of(AuditSource.values()) : List.of(query.source());
 
         ExecutorService pool = Executors.newFixedThreadPool(sources.size());
@@ -101,8 +105,8 @@ public final class ListAuditEventsService implements ListAuditEventsUseCase {
                 return List.of();
             }
         }
-        return transitions.list(filter.since(), filter.until(), type, filter.actorUserId(), filter.limit()).stream()
-                .map(ListAuditEventsService::toEvent).toList();
+        return transitions.list(filter.since(), filter.until(), filter.untilId(), type, filter.actorUserId(),
+                filter.limit()).stream().map(ListAuditEventsService::toEvent).toList();
     }
 
     private static AuditEvent toEvent(LifecycleTransition t) {

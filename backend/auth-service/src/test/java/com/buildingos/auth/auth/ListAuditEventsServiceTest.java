@@ -30,15 +30,16 @@ class ListAuditEventsServiceTest {
                     PlatformRoleAuditAction.GRANT, Instant.parse("2026-09-25T09:00:00Z")));
     private final PlatformRoleAuditRepository audits = new PlatformRoleAuditRepository() {
         @Override public void append(PlatformRoleAuditEntry entry) { throw new UnsupportedOperationException(); }
-        @Override public List<PlatformRoleAuditEntry> list(Instant since, Instant until, UUID actorUserId, int limit) {
-            calls.add(new Object[] {since, until, actorUserId, limit});
+        @Override public List<PlatformRoleAuditEntry> list(Instant since, Instant until, UUID untilId,
+                UUID actorUserId, int limit) {
+            calls.add(new Object[] {since, until, untilId, actorUserId, limit});
             return rows;
         }
     };
     private final ListAuditEventsService service = new ListAuditEventsService(audits);
 
     private List<AuditEvent> run(Set<String> roles, String entityType, Integer limit) {
-        return service.execute(new ListAuditEventsQuery(roles, null, null, entityType, null, limit));
+        return service.execute(new ListAuditEventsQuery(roles, null, null, null, entityType, null, limit));
     }
 
     @Test
@@ -62,11 +63,19 @@ class ListAuditEventsServiceTest {
     void passesFiltersAndDefaultsLimitTo50() {
         Instant since = Instant.parse("2026-09-01T00:00:00Z");
         Instant until = Instant.parse("2026-10-01T00:00:00Z");
-        service.execute(new ListAuditEventsQuery(SUPER, since, until, "PLATFORM_ROLE", actor, null));
+        UUID untilId = UUID.randomUUID();
+        service.execute(new ListAuditEventsQuery(SUPER, since, until, untilId, "PLATFORM_ROLE", actor, null));
         assertThat(calls).hasSize(1);
-        assertThat(calls.get(0)).containsExactly(since, until, actor, 50);
+        assertThat(calls.get(0)).containsExactly(since, until, untilId, actor, 50);
         run(SUPER, null, 200);
-        assertThat(calls.get(1)[3]).isEqualTo(200);
+        assertThat(calls.get(1)[4]).isEqualTo(200);
+    }
+
+    @Test
+    void untilIdWithoutUntilIsRejected() {
+        assertThatThrownBy(() -> service.execute(new ListAuditEventsQuery(SUPER, null, null, UUID.randomUUID(), null,
+                null, null))).isInstanceOf(IllegalArgumentException.class);
+        assertThat(calls).isEmpty();
     }
 
     @Test

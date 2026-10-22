@@ -159,6 +159,7 @@ class AuditLogApiIntegrationTest {
         assertThat(unavailable(data)).isEmpty();
         assertThat(data.has("nextUntil")).isTrue();
         assertThat(data.path("nextUntil").isNull()).isTrue();
+        assertThat(data.path("nextUntilId").isNull()).isTrue();
         for (AuditStub stub : List.of(auth, building, subscription)) {
             assertThat(stub.authorizations).containsExactly("Bearer " + token);
             assertThat(stub.queries.get(0)).contains("limit=10").contains("entityType=X")
@@ -169,12 +170,49 @@ class AuditLogApiIntegrationTest {
         assertThat(ids(all)).containsExactly("00000000-0000-0000-0000-00000000000a",
                 "00000000-0000-0000-0000-00000000000c", "00000000-0000-0000-0000-00000000000e");
         assertThat(all.path("nextUntil").asString()).isEqualTo("2026-09-25T10:00:03Z");
+        assertThat(all.path("nextUntilId").asString()).isEqualTo("00000000-0000-0000-0000-00000000000e");
         JsonNode own = all.path("items").get(2);
         assertThat(own.path("source").asString()).isEqualTo("back-office-service");
         assertThat(own.path("action").asString()).isEqualTo("NONE→ACTIVE");
         assertThat(own.path("entityType").asString()).isEqualTo("SUPPORT_SESSION");
         assertThat(own.path("reason").asString()).isEqualTo("ticket 42");
         assertThat(own.path("actorUserId").isNull()).isTrue();
+    }
+
+    @Test
+    void keysetCursorPagesRowsSharingOneInstantAcrossAllSourcesExactlyOnce() throws Exception {
+        String at = "2026-09-26T08:00:00Z";
+        List<String> expected = new ArrayList<>();
+        for (AuditStub stub : List.of(auth, building, subscription)) {
+            for (int i = 0; i < 3; i++) {
+                String id = UUID.randomUUID().toString();
+                stub.events.add(stub.event(id, at, "A"));
+                expected.add(id);
+            }
+        }
+        for (int i = 0; i < 3; i++) {
+            String id = UUID.randomUUID().toString();
+            ownTransition(id, at, null, "ACTIVE", null);
+            expected.add(id);
+        }
+        String older = UUID.randomUUID().toString();
+        building.events.add(building.event(older, "2026-09-26T07:59:59Z", "A"));
+        expected.add(older);
+
+        List<String> seen = new ArrayList<>();
+        String cursor = "";
+        for (int page = 0; page < 20; page++) {
+            JsonNode data = okData("?limit=5" + cursor);
+            seen.addAll(ids(data));
+            if (data.path("nextUntil").isNull()) {
+                break;
+            }
+            cursor = "&until=" + data.path("nextUntil").asString() + "&untilId=" + data.path("nextUntilId").asString();
+        }
+        assertThat(seen).doesNotHaveDuplicates().containsExactlyInAnyOrderElementsOf(expected);
+        assertThat(seen.subList(0, 12)).isSortedAccordingTo(java.util.Comparator.reverseOrder());
+        assertThat(seen.get(12)).isEqualTo(older);
+        assertThat(auth.queries.get(1)).contains("until=").contains("untilId=");
     }
 
     @Test
@@ -206,7 +244,8 @@ class AuditLogApiIntegrationTest {
     void invalidParametersAreBadRequest() throws Exception {
         String token = superAdmin();
         for (String query : List.of("?limit=0", "?limit=201", "?limit=abc", "?since=yesterday", "?until=x",
-                "?actorUserId=not-a-uuid", "?source=payment-service")) {
+                "?actorUserId=not-a-uuid", "?source=payment-service",
+                "?until=2026-09-25T10:00:00Z&untilId=not-a-uuid", "?untilId=" + UUID.randomUUID())) {
             var response = get(token, query);
             assertThat(response.statusCode()).as(query).isEqualTo(400);
             assertThat(JSON.readTree(response.body()).path("code").asString()).isEqualTo("INVALID_REQUEST");

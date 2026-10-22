@@ -45,10 +45,13 @@ public final class ListAuditEventsService implements ListAuditEventsUseCase {
         if (limit < 1 || limit > MAX_LIMIT) {
             throw new IllegalArgumentException("limit must be 1-" + MAX_LIMIT);
         }
-        var fromTransitions = transitions.list(query.since(), query.until(), query.entityType(), query.actorUserId(),
-                limit).stream().map(ListAuditEventsService::toEvent);
-        var fromAudit = audits.list(query.since(), query.until(), query.entityType(), query.actorUserId(), limit)
-                .stream().map(ListAuditEventsService::toEvent);
+        if (query.untilId() != null && query.until() == null) {
+            throw new IllegalArgumentException("untilId requires until");
+        }
+        var fromTransitions = transitions.list(query.since(), query.until(), query.untilId(), query.entityType(),
+                query.actorUserId(), limit).stream().map(ListAuditEventsService::toEvent);
+        var fromAudit = audits.list(query.since(), query.until(), query.untilId(), query.entityType(),
+                query.actorUserId(), limit).stream().map(ListAuditEventsService::toEvent);
         return Stream.concat(fromTransitions, fromAudit).sorted(NEWEST_FIRST).limit(limit).toList();
     }
 

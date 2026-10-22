@@ -9,7 +9,9 @@ import java.util.UUID;
 public interface AuditEventRepository {
     /**
      * Rows with {@code since <= occurredAt < until}, of {@code entityType}, by {@code actorUserId} (each filter ignored
-     * if null), newest first ({@code occurredAt}, then id), at most {@code limit}.
+     * if null), newest first ({@code occurredAt}, then id), at most {@code limit}. A non-null {@code untilId} widens
+     * the upper bound to the keyset {@code (occurredAt, id) < (until, untilId)}.
      */
-    List<AuditRecord> list(Instant since, Instant until, String entityType, UUID actorUserId, int limit);
+    List<AuditRecord> list(Instant since, Instant until, UUID untilId, String entityType, UUID actorUserId,
+            int limit);
 }

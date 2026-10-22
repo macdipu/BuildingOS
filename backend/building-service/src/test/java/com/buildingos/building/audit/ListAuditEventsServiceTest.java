@@ -41,9 +41,9 @@ class ListAuditEventsServiceTest {
         @Override public List<LifecycleTransition> findFor(EntityType type, UUID id) {
             throw new UnsupportedOperationException();
         }
-        @Override public List<LifecycleTransition> list(Instant since, Instant until, String entityType, UUID by,
-                int limit) {
-            calls.add(new Object[] {"transition", since, until, entityType, by, limit});
+        @Override public List<LifecycleTransition> list(Instant since, Instant until, UUID untilId,
+                String entityType, UUID by, int limit) {
+            calls.add(new Object[] {"transition", since, until, untilId, entityType, by, limit});
             return transitionRows;
         }
     };
@@ -52,15 +52,16 @@ class ListAuditEventsServiceTest {
         @Override public List<AuditEntry> findByEntity(UUID b, String type, UUID id) {
             throw new UnsupportedOperationException();
         }
-        @Override public List<AuditEntry> list(Instant since, Instant until, String entityType, UUID by, int limit) {
-            calls.add(new Object[] {"audit", since, until, entityType, by, limit});
+        @Override public List<AuditEntry> list(Instant since, Instant until, UUID untilId, String entityType,
+                UUID by, int limit) {
+            calls.add(new Object[] {"audit", since, until, untilId, entityType, by, limit});
             return auditRows;
         }
     };
     private final ListAuditEventsService service = new ListAuditEventsService(transitions, audits);
 
     private List<AuditEvent> run(Actor caller, Integer limit) {
-        return service.execute(caller, new ListAuditEventsQuery(null, null, null, null, limit));
+        return service.execute(caller, new ListAuditEventsQuery(null, null, null, null, null, limit));
     }
 
     @Test
@@ -96,23 +97,26 @@ class ListAuditEventsServiceTest {
     void truncatesMergedResultToLimitAndPassesFiltersToBothSources() {
         Instant since = Instant.parse("2026-09-01T00:00:00Z");
         Instant until = Instant.parse("2026-10-01T00:00:00Z");
-        var events = service.execute(SUPER, new ListAuditEventsQuery(since, until, "BUILDING", actor, 2));
+        UUID untilId = UUID.randomUUID();
+        var events = service.execute(SUPER, new ListAuditEventsQuery(since, until, untilId, "BUILDING", actor, 2));
         assertThat(events).extracting(AuditEvent::occurredAt).containsExactly(
                 Instant.parse("2026-09-25T12:00:00Z"), Instant.parse("2026-09-25T10:00:00Z"));
         assertThat(calls).hasSize(2);
-        assertThat(calls.get(0)).containsExactly("transition", since, until, "BUILDING", actor, 2);
-        assertThat(calls.get(1)).containsExactly("audit", since, until, "BUILDING", actor, 2);
+        assertThat(calls.get(0)).containsExactly("transition", since, until, untilId, "BUILDING", actor, 2);
+        assertThat(calls.get(1)).containsExactly("audit", since, until, untilId, "BUILDING", actor, 2);
     }
 
     @Test
     void defaultsLimitTo50AndRejectsOutOfRange() {
         run(SUPER, null);
-        assertThat(calls.get(0)[5]).isEqualTo(50);
+        assertThat(calls.get(0)[6]).isEqualTo(50);
         run(SUPER, 200);
-        assertThat(calls.get(2)[5]).isEqualTo(200);
+        assertThat(calls.get(2)[6]).isEqualTo(200);
         calls.clear();
         assertThatThrownBy(() -> run(SUPER, 201)).isInstanceOf(IllegalArgumentException.class);
         assertThatThrownBy(() -> run(SUPER, 0)).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> service.execute(SUPER, new ListAuditEventsQuery(null, null, UUID.randomUUID(), null,
+                null, null))).isInstanceOf(IllegalArgumentException.class);
         assertThat(calls).isEmpty();
     }
 

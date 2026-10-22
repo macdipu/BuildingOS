@@ -24,13 +24,13 @@ class ListAuditEventsServiceTest {
             new AuditRecord(UUID.randomUUID(), actor, "PLAN_CREATED", "SUBSCRIPTION_PLAN", "PREMIUM",
                     Instant.parse("2026-09-25T10:00:00Z")));
     private final ListAuditEventsService service = new ListAuditEventsService(
-            (since, until, entityType, by, limit) -> {
-                calls.add(new Object[] {since, until, entityType, by, limit});
+            (since, until, untilId, entityType, by, limit) -> {
+                calls.add(new Object[] {since, until, untilId, entityType, by, limit});
                 return rows;
             });
 
     private List<AuditEvent> run(Actor caller, Integer limit) {
-        return service.execute(caller, new ListAuditEventsQuery(null, null, null, null, limit));
+        return service.execute(caller, new ListAuditEventsQuery(null, null, null, null, null, limit));
     }
 
     @Test
@@ -50,10 +50,18 @@ class ListAuditEventsServiceTest {
     void passesFiltersAndDefaultsLimitTo50() {
         Instant since = Instant.parse("2026-09-01T00:00:00Z");
         Instant until = Instant.parse("2026-10-01T00:00:00Z");
-        service.execute(SUPER, new ListAuditEventsQuery(since, until, "SUBSCRIPTION_PLAN", actor, null));
-        assertThat(calls.get(0)).containsExactly(since, until, "SUBSCRIPTION_PLAN", actor, 50);
+        UUID untilId = UUID.randomUUID();
+        service.execute(SUPER, new ListAuditEventsQuery(since, until, untilId, "SUBSCRIPTION_PLAN", actor, null));
+        assertThat(calls.get(0)).containsExactly(since, until, untilId, "SUBSCRIPTION_PLAN", actor, 50);
         run(SUPER, 200);
-        assertThat(calls.get(1)[4]).isEqualTo(200);
+        assertThat(calls.get(1)[5]).isEqualTo(200);
+    }
+
+    @Test
+    void untilIdWithoutUntilIsRejected() {
+        assertThatThrownBy(() -> service.execute(SUPER, new ListAuditEventsQuery(null, null, UUID.randomUUID(), null,
+                null, null))).isInstanceOf(IllegalArgumentException.class);
+        assertThat(calls).isEmpty();
     }
 
     @Test
