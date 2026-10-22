@@ -55,7 +55,8 @@ interfaces without importing another feature's internals.
 | api-gateway | Explicit external routes, independent token validation, correlation | F4 public routes |
 | platform-web | Shared response/error/security/correlation kernel | Shared transport conventions only |
 | user_app | Authentication and application submission | F4 portfolio/unit/ownership flows |
-| back-office web / rental / finance / reporting | Not asserted implemented by this scope | Separate feature delivery |
+| back-office-service + buildingos_backoffice_web | F6 console: assisted onboarding, support sessions + elevated approvals, audit aggregation (keyset cursor D-39), system health; service JWT directory lookups (D-38). Released local/test 2026-10-22 | F6-T4b support action relay (post-MVP) |
+| rental / finance / work / communication / notification / reporting | Not implemented | New services approved 2026-10-22; see [ROADMAP](ROADMAP.md) BOS-003/004/006/007/008 |
 
 ## Data Architecture
 

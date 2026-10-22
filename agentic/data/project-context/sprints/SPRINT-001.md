@@ -41,3 +41,4 @@ Committed by macdipu (operator) 2026-10-22 via AskUserQuestion in the Claude Cod
 
 ## Changes
 - 2026-10-22 F6-R4 DONE (b607dbd); F6-QA DONE QA_PASS (3ee2503); F6-REL DONE — release approved "Approve release (Recommended)". BOS-009-S04 approved and in IMPLEMENTATION (RUN-3B8D3AA4). HK not started.
+- 2026-10-22 TASK-S004-1 DONE (339681a, JSON logs + redaction, verify 448/0); TASK-S004-2 in progress (tracing + outbox trace context + gauges); S004-3, S004-4 pending.

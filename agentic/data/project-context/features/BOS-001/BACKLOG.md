@@ -1,4 +1,6 @@
 # BuildingOS delivery backlog
+
+> Superseded for sequencing by [ROADMAP.md](../../ROADMAP.md) and `sprints/` (2026-10-22); epic plans live in `features/BOS-003..009, BOS-013`. UI conflicts C-1..C-13 were decided 2026-09-25.
 Source: BRD §123; work starts with BOS-001. No sprint dates, capacity promises, or approvals implied.
 
 | Work item | Outcome | Dependencies | Main BRD references |
