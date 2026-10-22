@@ -227,6 +227,11 @@ class SupportSessionApiIntegrationTest {
         assertThat(rejected.status()).isEqualTo(503);
         assertThat(rejected.code()).isEqualTo("DEPENDENCY_UNAVAILABLE");
         stubs.rejectClient = false;
+        stubs.denyDirectory = true;
+        var refused = start(agentToken(), scopes);
+        assertThat(refused.status()).isEqualTo(403);
+        assertThat(refused.code()).isEqualTo("ACCESS_DENIED");
+        stubs.denyDirectory = false;
 
         assertThat(start(token(UUID.randomUUID(), "ONBOARDING_AGENT"), scopes).status()).isEqualTo(403);
         assertThat(start(token(UUID.randomUUID()), scopes).status()).isEqualTo(403);

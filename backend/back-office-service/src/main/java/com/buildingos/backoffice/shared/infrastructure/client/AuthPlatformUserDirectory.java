@@ -2,6 +2,7 @@ package com.buildingos.backoffice.shared.infrastructure.client;
 
 import com.buildingos.backoffice.shared.application.port.out.PlatformUserDirectory;
 import com.buildingos.backoffice.shared.application.DependencyUnavailableException;
+import com.buildingos.backoffice.shared.application.NotPermittedException;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
@@ -30,6 +31,9 @@ public class AuthPlatformUserDirectory implements PlatformUserDirectory {
             body = client.get().uri("/internal/directory/users/{id}", userId).retrieve().body(JsonNode.class);
         } catch (HttpClientErrorException.NotFound unknownUser) {
             return Optional.empty();
+        } catch (HttpClientErrorException.Forbidden denied) {
+            // D-38: a refused lookup is a 403, not an outage.
+            throw new NotPermittedException();
         } catch (RestClientException failed) {
             throw new DependencyUnavailableException(DEPENDENCY, failed);
         }

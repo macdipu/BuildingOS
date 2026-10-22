@@ -2,6 +2,7 @@ package com.buildingos.backoffice.shared.infrastructure.client;
 
 import com.buildingos.backoffice.shared.application.port.out.BuildingDirectory;
 import com.buildingos.backoffice.shared.application.DependencyUnavailableException;
+import com.buildingos.backoffice.shared.application.NotPermittedException;
 import java.util.UUID;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
@@ -26,6 +27,9 @@ public class BuildingServiceBuildingDirectory implements BuildingDirectory {
             return true;
         } catch (HttpClientErrorException.NotFound unknownBuilding) {
             return false;
+        } catch (HttpClientErrorException.Forbidden denied) {
+            // D-38: a refused lookup is a 403, not an outage.
+            throw new NotPermittedException();
         } catch (RestClientException failed) {
             throw new DependencyUnavailableException(DEPENDENCY, failed);
         }

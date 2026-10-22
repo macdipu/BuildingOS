@@ -27,6 +27,8 @@ public final class DownstreamStubs implements AutoCloseable {
     public volatile boolean authDown;
     public volatile boolean buildingDown;
     public volatile boolean rejectClient;
+    /** Directory refuses even the service token, e.g. a scope misconfiguration. */
+    public volatile boolean denyDirectory;
     public final List<String> tokenExchanges = new CopyOnWriteArrayList<>();
     public final List<String> authAuthorizations = new CopyOnWriteArrayList<>();
     public final List<String> buildingAuthorizations = new CopyOnWriteArrayList<>();
@@ -50,7 +52,7 @@ public final class DownstreamStubs implements AutoCloseable {
         });
         server.createContext("/internal/directory/users/", exchange -> {
             authAuthorizations.add(exchange.getRequestHeaders().getFirst("Authorization"));
-            if (!serviceTokenPresented(exchange)) {
+            if (denyDirectory || !serviceTokenPresented(exchange)) {
                 send(exchange, 403, "{\"success\":false,\"code\":\"ACCESS_DENIED\",\"message\":\"x\"}");
                 return;
             }
@@ -70,7 +72,7 @@ public final class DownstreamStubs implements AutoCloseable {
         });
         server.createContext("/internal/directory/buildings/", exchange -> {
             buildingAuthorizations.add(exchange.getRequestHeaders().getFirst("Authorization"));
-            if (!serviceTokenPresented(exchange)) {
+            if (denyDirectory || !serviceTokenPresented(exchange)) {
                 send(exchange, 403, "{\"success\":false,\"code\":\"ACCESS_DENIED\",\"message\":\"x\"}");
                 return;
             }
@@ -98,6 +100,7 @@ public final class DownstreamStubs implements AutoCloseable {
         authDown = false;
         buildingDown = false;
         rejectClient = false;
+        denyDirectory = false;
         tokenExchanges.clear();
         authAuthorizations.clear();
         buildingAuthorizations.clear();

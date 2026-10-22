@@ -27,6 +27,10 @@ Existing checkouts: add `SUBSCRIPTION_DB_PASSWORD=...` to your `infra/local/.env
 BOS-010 F5a). Postgres init scripts only run on a fresh volume; `scripts/verify-platform.sh`
 creates `subscription_db` in an existing volume if it is missing.
 
+Also add `BACKOFFICE_SERVICE_CLIENT_SECRET=...` (at least 32 characters, new in BOS-010 F6 D-38):
+auth-service and back-office-service share it so back-office can look up users and buildings
+with its own service token.
+
 ## Build
 
 ```sh

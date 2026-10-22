@@ -27,6 +27,18 @@ Verdict: **BLOCKED** — one HIGH defect breaks D-36a; two MEDIUM defects fail s
 | R-6 | LOW | `buildingos_backoffice_web/src/proxy.ts:22`, `src/lib/api.ts` | Session expiring mid-use shows "Error code: UNAUTHENTICATED" instead of redirecting to sign-in (F6-T6 AC). | On 401 in `call()`, navigate to `/login`. |
 | R-7 | LOW | `buildingos_backoffice_web/src/proxy.ts:14-16` | No-role path redirects to `/denied` without clearing the cookie (F6-T6 "is denied and is signed out"); near-unreachable. | Delete the session cookie on that redirect. |
 
+## Fix status
+
+- **R-1 — FIXED (2026-10-22, D-38), pending re-review.** auth-service `POST /internal/service-tokens`
+  (client credentials, `directory.read`, no platform roles) and `GET /internal/directory/users/{id}`;
+  building-service `GET /internal/directory/buildings/{id}`; back-office-service uses its own cached
+  service token for these lookups only and maps a downstream 403 to 403 `ACCESS_DENIED` (not 503).
+  `DownstreamStubs` now accept only the service token, so a relayed caller token fails the test.
+  Config `BACKOFFICE_SERVICE_CLIENT_SECRET` wired into `infra/{local,dev}` compose and `.env.example`.
+  Evidence: `mvn -B -f backend/pom.xml verify` BUILD SUCCESS, 414 tests 0 failures; back-office after
+  the 403 mapping 92/0. Live-stack check of a SUPPORT_AGENT session start not yet run.
+- R-2..R-7 open.
+
 ## Questions (not defects)
 
 - Any SUPER_ADMIN may revoke another; the last two can strip each other. Last-SUPER_ADMIN guard intended?

@@ -1,0 +1,15 @@
+{
+  "status": "READY",
+  "evidence": [
+    "D-38 service JWT (WIP edabf64): auth-service POST /internal/service-tokens (client credentials, constant-time compare, directory.read, no platform roles) + GET /internal/directory/users/{id}; building-service GET /internal/directory/buildings/{id}; both require directory.read",
+    "back-office-service: authDirectoryClient/buildingDirectoryClient send its own cached service token (ServiceTokenProvider, invalidated on 401); all other calls still relay the caller token",
+    "Downstream 403 on directory lookups now maps to NotPermittedException -> 403 ACCESS_DENIED (was 503); test SupportSessionApiIntegrationTest asserts it via DownstreamStubs.denyDirectory",
+    "BACKOFFICE_SERVICE_CLIENT_SECRET wired into infra/{local,dev}/compose.yaml (auth-service, back-office-service) and .env.example; docs/LOCAL_DEVELOPMENT.md note; docker compose config valid for both",
+    "mvn -B -f backend/pom.xml verify: BUILD SUCCESS, 414 tests 0 failures (platform-web 5, auth 98, building 128, subscription 38, back-office 92, gateway 53); back-office re-verified 92/0 after the 403 mapping",
+    "auth ArchitectureTest passes (7/7); the failure noted in edabf64 no longer reproduces"
+  ],
+  "blocking_issues": [],
+  "open_questions": ["Live-stack SUPPORT_AGENT session start not yet exercised; operator's infra/local/.env needs BACKOFFICE_SERVICE_CLIENT_SECRET"],
+  "recommended_next_step": "Re-review R-1, then fix R-2..R-7 and continue F6-T10 QA on the local stack",
+  "outputs": {"task": "F6-T10 R-1", "verdict": "IMPLEMENTED"}
+}
